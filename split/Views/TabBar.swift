@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabBar: View {
     @Binding var tabSelection: Int
+    let halfLeft = -UIScreen.main.bounds.width/2
     var body: some View {
         ZStack {
             VStack {
@@ -23,19 +24,20 @@ struct TabBar: View {
                     .fill(Color("AccentGray"))
                     .frame(width: UIScreen.main.bounds.width, height: 100, alignment: .bottom)
                     .overlay(
-                        HStack(spacing: 36) {
-                            Image(systemName: "rectangle.grid.1x2")
-                            Image(systemName: "person.2")
-                            Image(systemName: "dollarsign.square")
-                            Image(systemName: "person.crop.square")
+                        HStack(spacing: 60) {
+                            TabButton(tabSelection: $tabSelection, index: 0, name: "rectangle.grid.1x2")
+                            TabButton(tabSelection: $tabSelection, index: 1, name: "person.2")
+                            TabButton(tabSelection: $tabSelection, index: 2, name: "dollarsign.square")
+                            TabButton(tabSelection: $tabSelection, index: 3, name: "person.crop.square")
                         }
-                        .scaleEffect(1.6)
+//                        .scaleEffect(1.6)
                         .foregroundColor(.white)
                         .overlay(
                             Circle()
                                 .fill(Color.white)
                                 .frame(width: 10)
-                                .offset(x: -139 + 99 * CGFloat(tabSelection), y:30)
+                                .offset(x: -45 * 2 * (1.5 - CGFloat(tabSelection)), y:30)
+                                .animation(Animation.easeOut.speed(1.4))
                         )
                     )
             }
@@ -51,5 +53,21 @@ struct TabBar_Previews: PreviewProvider {
                 .edgesIgnoringSafeArea(.all)
             TabBar(tabSelection: .constant(0))
         }
+    }
+}
+
+struct TabButton: View {
+    @Binding var tabSelection: Int
+    let index: Int
+    let name: String
+    var body: some View {
+        Image(systemName: "\(name)\(tabSelection == index ? ".fill" : "")")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 30, height: 30)
+            .onTapGesture {
+                tabSelection = index
+                print(tabSelection)
+            }
     }
 }
