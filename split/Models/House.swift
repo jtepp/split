@@ -12,4 +12,5 @@ struct House: Identifiable {
     var name: String
     var members: [String]
     var password: String
+    static let empty = House(id: "", name: "", members: [""], password: "")
 }

@@ -9,15 +9,14 @@ import SwiftUI
 
 struct Main: View {
     @ObservedObject var fetch = Fetch()
-    @State var houses = [House]()
+    @State var h = House.empty
+    @State var id = "TlRWEGz9GWrKBXqI9T8L"
     var body: some View {
         ScrollView {
-            ForEach(houses){ h in
                 Text(h.name)
-            }
         }
         .onAppear{
-            fetch.updateHouses(h: $houses)
+            fetch.getHouse(h: $h, id: id)
         }
     }
 }
