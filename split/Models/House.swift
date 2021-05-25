@@ -13,4 +13,5 @@ struct House: Identifiable {
     var members: [Member]
     var password: String
     static let empty = House(id: "", name: "", members: [Member(id: "", name: "", balance: 0, image: "")], password: "")
+    static let placeholder = House(id: "00000", name: "Home", members: [Member.placeholder], password: "")
 }

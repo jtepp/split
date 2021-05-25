@@ -67,7 +67,6 @@ struct TabButton: View {
             .frame(width: 30, height: 30)
             .onTapGesture {
                 tabSelection = index
-                print(tabSelection)
             }
     }
 }

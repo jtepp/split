@@ -9,12 +9,13 @@ import SwiftUI
 
 struct TabsView: View {
     @Binding var tabSelection: Int
+    @Binding var house: House
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
                     ActivityView()
                         .tag(0)
-                    MembersView()
+                    MembersView(house: $house)
                         .tag(1)
                     PaymentView()
                         .tag(2)

@@ -15,7 +15,7 @@ struct Main: View {
     @State var test = 0
     var body: some View {
         ZStack {
-            TabsView(tabSelection: $tabSelection)
+            TabsView(tabSelection: $tabSelection, house: $h)
                 .animation(.easeOut)
             TabBar(tabSelection: $tabSelection)
         }
