@@ -14,6 +14,10 @@
 		0C2A0597265CB08E002BD46D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C2A0596265CB08E002BD46D /* GoogleService-Info.plist */; };
 		0C2A059D265CB123002BD46D /* Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A059C265CB123002BD46D /* Fetch.swift */; };
 		0C2A05A0265CB17D002BD46D /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A059F265CB17D002BD46D /* House.swift */; };
+		0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F3265D8F140016CA92 /* ActivityView.swift */; };
+		0CBF09F7265D8F370016CA92 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F6265D8F370016CA92 /* MembersView.swift */; };
+		0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F9265D8F510016CA92 /* ProfileView.swift */; };
+		0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09FC265D8F730016CA92 /* PaymentView.swift */; };
 		132F49AA823DFC8AA083EE3B /* Pods_split.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E100A50CE241C4E840D427C /* Pods_split.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +31,10 @@
 		0C2A0596265CB08E002BD46D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0C2A059C265CB123002BD46D /* Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch.swift; sourceTree = "<group>"; };
 		0C2A059F265CB17D002BD46D /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
+		0CBF09F3265D8F140016CA92 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		0CBF09F6265D8F370016CA92 /* MembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersView.swift; sourceTree = "<group>"; };
+		0CBF09F9265D8F510016CA92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		0CBF09FC265D8F730016CA92 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		37CF35A79FC800A57BDBA14D /* Pods-split.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-split.debug.xcconfig"; path = "Target Support Files/Pods-split/Pods-split.debug.xcconfig"; sourceTree = "<group>"; };
 		7E100A50CE241C4E840D427C /* Pods_split.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_split.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7229B8DBEBC89A2484287EE /* Pods-split.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-split.release.xcconfig"; path = "Target Support Files/Pods-split/Pods-split.release.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +96,10 @@
 			isa = PBXGroup;
 			children = (
 				0C2A0588265CAA44002BD46D /* Main.swift */,
+				0CBF09F3265D8F140016CA92 /* ActivityView.swift */,
+				0CBF09F6265D8F370016CA92 /* MembersView.swift */,
+				0CBF09F9265D8F510016CA92 /* ProfileView.swift */,
+				0CBF09FC265D8F730016CA92 /* PaymentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -234,7 +246,11 @@
 			files = (
 				0C2A059D265CB123002BD46D /* Fetch.swift in Sources */,
 				0C2A0589265CAA44002BD46D /* Main.swift in Sources */,
+				0CBF09F7265D8F370016CA92 /* MembersView.swift in Sources */,
 				0C2A05A0265CB17D002BD46D /* House.swift in Sources */,
+				0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */,
+				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,
+				0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */,
 				0C2A0587265CAA44002BD46D /* splitApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
