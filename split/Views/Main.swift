@@ -17,9 +17,6 @@ struct Main: View {
         ZStack {
             TabsView(tabSelection: $tabSelection)
                 .animation(.easeOut)
-                .onChange(of: tabSelection, perform: { _ in
-                    print(test)
-                })
             TabBar(tabSelection: $tabSelection)
         }
         .onAppear{

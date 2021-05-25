@@ -12,3 +12,9 @@ struct MembersView: View {
         Text("mem")
     }
 }
+
+struct MembersView_Previews: PreviewProvider {
+    static var previews: some View {
+        MembersView()
+    }
+}

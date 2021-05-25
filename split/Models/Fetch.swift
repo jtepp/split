@@ -13,25 +13,6 @@ class Fetch: ObservableObject {
     @Published var houses = [House]()
     private var db = Firestore.firestore()
     
-    func fetchData() {
-        db.collection("houses").addSnapshotListener{ (querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
-                print("no documents")
-                return
-            }
-            self.houses = documents.map { queryDocumentSnapshot -> House in
-                let data = queryDocumentSnapshot.data()
-                
-                let id = queryDocumentSnapshot.documentID
-                let name = data["name"] as? String ?? ""
-                let members = data["members"] as? [String] ?? [String]()
-                let password = data["password"] as? String ?? ""
-                
-                return House(id: id, name: name, members: members, password: password)
-            }
-        }
-    }
-    
     func getHouse (h: Binding<House>, id: String) {
         db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
             guard let doc = querySnapshot else {
@@ -40,31 +21,33 @@ class Fetch: ObservableObject {
             }
             let data = doc.data()
             let name = data?["name"] as? String ?? ""
-            let members = data?["members"] as? [String] ?? [String]()
+            
             let password = data?["password"] as? String ?? ""
             
-            h.wrappedValue = House(id: id, name: name, members: members, password: password)
-        
+            self.getMembers(h: h, id: id)
+            
+            h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, password: password)
+            print(h)
         }
     }
     
-    func updateHouses(h: Binding<[House]>) {
-        db.collection("houses").addSnapshotListener{ (querySnapshot, error) in
+    func getMembers(h: Binding<House>, id: String) {
+        db.collection("houses/"+id+"/members").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
-                print("no documents")
+                print("no house by id %s, or maybe no members..?", id)
                 return
             }
-            print(querySnapshot!.documents.first!.data())
-            h.wrappedValue = documents.map { queryDocumentSnapshot -> House in
-                let data = queryDocumentSnapshot.data()
+            
+            h.wrappedValue.members = documents.map({ q -> Member in
+                let data = q.data()
                 
-                let id = queryDocumentSnapshot.documentID
                 let name = data["name"] as? String ?? ""
-                let members = data["members"] as? [String] ?? [String]()
-                let password = data["password"] as? String ?? ""
+                let balance = data["balance"] as? Float ?? 0.00
+                let image = data["image"] as? String ?? ""
                 
-                return House(id: id, name: name, members: members, password: password)
-            }
+                return Member(id: q.documentID, name: name, balance: balance, image: image)
+            })
         }
     }
+    
 }

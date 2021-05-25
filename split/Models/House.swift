@@ -10,7 +10,7 @@ import Foundation
 struct House: Identifiable {
     var id: String
     var name: String
-    var members: [String]
+    var members: [Member]
     var password: String
-    static let empty = House(id: "", name: "", members: [""], password: "")
+    static let empty = House(id: "", name: "", members: [Member(id: "", name: "", balance: 0, image: "")], password: "")
 }
