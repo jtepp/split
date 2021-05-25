@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct Main: View {
+    @ObservedObject var fetch = Fetch()
+    @State var houses = [House]()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ScrollView {
+            ForEach(houses){ h in
+                Text(h.name)
+            }
+        }
+        .onAppear{
+            fetch.updateHouses(h: $houses)
+        }
     }
 }
 

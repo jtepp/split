@@ -16,7 +16,7 @@ struct splitApp: App {
     var body: some Scene {
        
         WindowGroup {
-            ContentView()
+            Main()
         }
     }
 }
