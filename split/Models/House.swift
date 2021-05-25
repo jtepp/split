@@ -11,4 +11,5 @@ struct House: Identifiable {
     var id: String
     var name: String
     var members: [String]
+    var password: String
 }

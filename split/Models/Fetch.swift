@@ -44,8 +44,9 @@ class Fetch: ObservableObject {
                 let id = queryDocumentSnapshot.documentID
                 let name = data["name"] as? String ?? ""
                 let members = data["members"] as? [String] ?? [String]()
+                let password = data["password"] as? String ?? ""
                 
-                return House(id: id, name: name, members: members)
+                return House(id: id, name: name, members: members, password: password)
             }
         }
     }
