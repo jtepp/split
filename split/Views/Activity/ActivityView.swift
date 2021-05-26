@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ActivityView: View {
     var body: some View {
-        Text("act")
-            .foregroundColor(.white)
+        ScrollView {
+            Text("Activity")
+                .font(.largeTitle)
+                .bold()
+        }
+        .foregroundColor(.white)
     }
 }
