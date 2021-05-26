@@ -15,8 +15,13 @@ struct ActivityView: View {
             ForEach(house.payments.sorted(by: { a, b in
                 return a.time > b.time
             })) { payment in
-                ActivityPaymentCell(payment: .constant(payment))
-                    .padding(.bottom, -20)
+                if payment.isRequest {
+                    ActivityRequestCell(payment: .constant(payment))
+                        .padding(.bottom, -20)
+                } else {
+                    ActivityPaymentCell(payment: .constant(payment))
+                        .padding(.bottom, -20)
+                }
             }
             .padding()
         }
