@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct MembersView: View {
-    @Binding var house: House
+    @Binding var members: [Member]
     var body: some View {
-        ForEach(house.members) { member in
+        ForEach(members) { member in
             MemberCell(m: .constant(member))
         }
     }
@@ -18,7 +18,7 @@ struct MembersView: View {
 
 struct MembersView_Previews: PreviewProvider {
     static var previews: some View {
-        MembersView(house: .constant(House.empty))
+        MembersView(members: .constant([Member.placeholder]))
     }
 }
 
