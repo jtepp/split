@@ -12,10 +12,13 @@ struct ActivityPaymentCell: View {
     @State var showMemo = false
     var body: some View {
         VStack {
-            TimeBar(unix: payment.time)
-                .padding(.bottom, 2)
             GeneralPaymentCell(payment: $payment)
             ScrollView {
+                HStack {
+                    Text("Payment")
+                        .font(Font.caption.smallCaps().weight(Font.Weight.black))
+                    Spacer()
+                }
                 HStack {
                     Text(payment.memo)
                     Spacer()
@@ -28,6 +31,7 @@ struct ActivityPaymentCell: View {
         }
         .foregroundColor(.black)
         .padding()
+        .padding(.bottom, 10)
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(
@@ -43,8 +47,13 @@ struct ActivityPaymentCell: View {
                         .rotationEffect(.degrees(showMemo ? 180 : 0))
                         .padding()
                         .foregroundColor(.black)
+                    //                        .padding(.top, -10)
                     Spacer()
                 }
+                .overlay(
+                    TimeBar(unix: payment.time)
+                        .padding(.horizontal)
+                )
             }
         )
         .onTapGesture {
