@@ -42,9 +42,11 @@ struct MemberCell: View {
 func b64toimg(b64: String) -> Image {
     let data = Data(base64Encoded: b64)
     var img = Image(systemName: "gear")
-    if let data = data {
-        img = Image(uiImage: (UIImage(data: data) ?? UIImage(systemName: "person.crop.circle"))!)
+    guard let d = data else {
+        print(data ?? "uh oh")
+        return img
     }
+    img = Image(uiImage: (UIImage(data: d) ?? UIImage(systemName: "person.crop.circle"))!)
     return img
 }
 
