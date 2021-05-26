@@ -42,12 +42,13 @@ struct GeneralRequestCell: View {
             }
             Spacer()
             moneyText(b: (minimal && payment.to != m.name) ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .padding(6)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .fill(
-                            Color.black.opacity(0.5)
+//                            Color.black.opacity(0.5)
+                            Color.white
                         )
                 )
         }
