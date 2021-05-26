@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Binding var house: House
     @Binding var m: Member
     @State var showSignOut = false
     var body: some View {
@@ -27,7 +28,7 @@ struct ProfileView: View {
                     Text("House admin")
                 }
                 Spacer()
-                MemberPaymentInfoView(member: $m)
+                MemberPaymentInfoView(member: $m, payments: $house.payments)
                 Spacer()
                 Button(action: {
                     showSignOut = true

@@ -26,7 +26,7 @@ struct MembersView: View {
                 tappedMember = house.members.first ?? Member.placeholder
             }
             .sheet(isPresented: $showDetails, content: {
-                MemberDetailsView(member: $tappedMember)
+                MemberDetailsView(house: $house, member: $tappedMember)
             })
     }
 }

@@ -20,7 +20,7 @@ struct TabsView: View {
                         .tag(1)
                     PaymentView()
                         .tag(2)
-                    ProfileView(m: .constant(house.members.first(where: { (m) -> Bool in
+                    ProfileView(house: $house, m: .constant(house.members.first(where: { (m) -> Bool in
                         return m.id == myId
                     }) ?? Member.empty))
                         .tag(3)

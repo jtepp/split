@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MemberDetailsView: View {
+    @Binding var house: House
     @Binding var member: Member
     var body: some View {
         ZStack {
@@ -27,7 +28,7 @@ struct MemberDetailsView: View {
                     Text("House admin")
                 }
                 Spacer()
-                MemberPaymentInfoView(member: $member)
+                MemberPaymentInfoView(member: $member, payments: $house.payments)
                 Spacer()
                 Text("ID: \(member.id)")
                     .font(.caption)
@@ -44,7 +45,7 @@ struct MemberDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         Text("")
             .sheet(isPresented: .constant(true), content: {
-                MemberDetailsView(member: .constant(Member.placeholder))
+                MemberDetailsView(house: .constant(.placeholder), member: .constant(Member.placeholder))
                     .preferredColorScheme(.dark)
             })
         

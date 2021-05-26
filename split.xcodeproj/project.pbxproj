@@ -17,6 +17,7 @@
 		0C625972265EA868002E58A3 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C625971265EA868002E58A3 /* Payment.swift */; };
 		0C625979265EAF07002E58A3 /* ActivityPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */; };
 		0C625991265EB440002E58A3 /* HeaderText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C625990265EB440002E58A3 /* HeaderText.swift */; };
+		0C64FECD265EC57F009B0C3C /* GeneralPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */; };
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
 		0C95131E265DB7C0005398CF /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C95131D265DB7C0005398CF /* MemberCell.swift */; };
 		0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F3265D8F140016CA92 /* ActivityView.swift */; };
@@ -43,6 +44,7 @@
 		0C625971265EA868002E58A3 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPaymentCell.swift; sourceTree = "<group>"; };
 		0C625990265EB440002E58A3 /* HeaderText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderText.swift; sourceTree = "<group>"; };
+		0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPaymentCell.swift; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		0C95131D265DB7C0005398CF /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		0CBF09F3265D8F140016CA92 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				0CBF09FC265D8F730016CA92 /* PaymentView.swift */,
+				0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */,
 			);
 			path = Payments;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				0C2A0587265CAA44002BD46D /* splitApp.swift in Sources */,
 				0CBF0A03265D91B00016CA92 /* TabBar.swift in Sources */,
 				0C951305265DAE6D005398CF /* Member.swift in Sources */,
+				0C64FECD265EC57F009B0C3C /* GeneralPaymentCell.swift in Sources */,
 				0CEE382E265E1CE00013BB12 /* MemberPaymentInfoView.swift in Sources */,
 				0C625979265EAF07002E58A3 /* ActivityPaymentCell.swift in Sources */,
 			);

@@ -62,6 +62,6 @@ func imgtob64(img: UIImage) -> String {
     return data!.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
 }
 
-func moneyText(b: Binding<Float>) -> Text {
-    return Text("\(b.wrappedValue < 0 ? "-" : "")$\(abs(b.wrappedValue), specifier: "%.2f")")
+func moneyText(b: Binding<Float>, pre: String = "") -> Text {
+    return Text("\(pre)\(b.wrappedValue < 0 ? "-" : "")$\(abs(b.wrappedValue), specifier: "%.2f")")
 }
