@@ -10,7 +10,10 @@ import SwiftUI
 struct ActivityPaymentCell: View {
     @Binding var payment: Payment
     var body: some View {
-        GeneralPaymentCell(payment: $payment)
+        VStack {
+            Text(unixtodate(unix: payment.time))
+            GeneralPaymentCell(payment: $payment)
+        }
         .foregroundColor(.black)
         .padding()
         .background(
@@ -18,7 +21,7 @@ struct ActivityPaymentCell: View {
                 .fill(
                     Color.white.opacity(0.5)
                 )
-        )
+    )
     }
 }
 
