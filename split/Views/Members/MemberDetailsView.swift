@@ -31,6 +31,8 @@ struct MemberDetailsView: View {
             }
             .padding(.vertical, 40)
         }
+        .foregroundColor(.white)
+        .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }
 
