@@ -26,7 +26,7 @@ func b64toimg(b64: String) -> Image {
     let data = Data(base64Encoded: b64)
     var img = Image(systemName: "gear")
     if let data = data {
-        img = Image(uiImage: UIImage(data: data)!)
+        img = Image(uiImage: (UIImage(data: data) ?? UIImage(systemName: "person.crop.circle"))!)
     }
     return img
 }
