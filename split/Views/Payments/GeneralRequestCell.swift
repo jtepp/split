@@ -14,13 +14,13 @@ struct GeneralRequestCell: View {
             HStack {
                 Text(payment.to)
                     .font(.headline)
-                if payment.reqfrom.count > 1 {
-                    Image(systemName: "arrow.triangle.merge")
-                        .rotationEffect(.degrees(-90))
-                } else {
+//                if payment.reqfrom.count > 1 {
+//                    Image(systemName: "arrow.triangle.merge")
+//                        .rotationEffect(.degrees(-90))
+//                } else {
                     Image(systemName: "arrow.left")
-                }
-                VStack {
+//                }
+                VStack(alignment: .leading) {
                     ForEach(payment.reqfrom, id: \.self) { member in
                         Text(member)
                             .font(.headline)
