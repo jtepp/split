@@ -28,7 +28,7 @@ struct MemberCell: View {
             VStack(alignment: .trailing) {
                 Text(m.name)
                     .bold()
-                Text("\(m.balance < 0 ? "-" : "")$\(abs(m.balance), specifier: "%.2f")")
+                moneyText(b: $m.balance)
             }
 //          Image(systemName: "chevron.right")
         }
@@ -60,4 +60,8 @@ func b64toimg(b64: String) -> Image {
 func imgtob64(img: UIImage) -> String {
     let data = img.jpegData(compressionQuality: 1)
     return data!.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
+}
+
+func moneyText(b: Binding<Float>) -> Text {
+    return Text("\(b.wrappedValue < 0 ? "-" : "")$\(abs(b.wrappedValue), specifier: "%.2f")")
 }

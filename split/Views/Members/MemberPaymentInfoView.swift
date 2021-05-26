@@ -13,7 +13,7 @@ struct MemberPaymentInfoView: View {
         ScrollView {
             VStack {
                 HStack {
-                    Text("Balance: \(member.balance < 0 ? "-" : "")$\(abs(member.balance), specifier: "%.2f")")
+                    moneyText(b: $member.balance)
                         .font(.headline)
                     Spacer()
                 }
