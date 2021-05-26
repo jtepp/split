@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HeaderText: View {
     let text: String
-    var body: some view {
+    var body: some View {
         HStack {
                             Text(text)
                                 .foregroundColor(.white)
