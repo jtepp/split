@@ -12,7 +12,7 @@ struct ActivityRequestCell: View {
     @State var showMemo = false
     var body: some View {
         VStack {
-            GeneralRequestCell(payment: $payment)
+            GeneralRequestCell(payment: $payment, m: .constant(.empty))
             ScrollView {
                 HStack {
                     Text("Request")

@@ -28,7 +28,7 @@ struct MemberPaymentInfoView: View {
                     return a.time > b.time
                 })){ payment in
                     if payment.isRequest {
-                        GeneralRequestCell(payment: .constant(payment))
+                        GeneralRequestCell(payment: .constant(payment), minimal: true, m: $member)
                             .padding(.horizontal)
                             .padding(.vertical, 5)
                     } else {

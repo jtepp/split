@@ -60,6 +60,10 @@ struct ProfileView: View {
             .padding(.vertical, 40)
             .foregroundColor(.white)
             .background(Color.black.edgesIgnoringSafeArea(.all))
+//            .onAppear{
+//                UserDefaults.standard.set(m.name, forKey: "name")
+//                UserDefaults.standard.set(m.id, forKey: "myId")
+//            }
         }
     }
 }

@@ -41,7 +41,6 @@ struct MemberCell: View {
                     Color.white.opacity(0.5)
                 )
         )
-        .padding()
     }
 }
 

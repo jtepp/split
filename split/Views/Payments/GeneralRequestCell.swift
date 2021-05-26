@@ -9,26 +9,33 @@ import SwiftUI
 
 struct GeneralRequestCell: View {
     @Binding var payment: Payment
+    var minimal: Bool = false
+    @Binding var m: Member
     var body: some View {
         HStack {
             HStack {
                 Text(payment.to)
                     .font(.headline)
-//                if payment.reqfrom.count > 1 {
-//                    Image(systemName: "arrow.triangle.merge")
-//                        .rotationEffect(.degrees(-90))
-//                } else {
-                    Image(systemName: "arrow.left")
-//                }
-                VStack(alignment: .leading) {
-                    ForEach(payment.reqfrom, id: \.self) { member in
-                        Text(member)
-                            .font(.headline)
+                //                if payment.reqfrom.count > 1 {
+                //                    Image(systemName: "arrow.triangle.merge")
+                //                        .rotationEffect(.degrees(-90))
+                //                } else {
+                Image(systemName: "arrow.left")
+                //                }
+                if minimal {
+                    Text(m.name)
+                        .font(.headline)
+                } else {
+                    VStack(alignment: .leading) {
+                        ForEach(payment.reqfrom, id: \.self) { member in
+                            Text(member)
+                                .font(.headline)
+                        }
                     }
                 }
             }
             Spacer()
-            moneyText(b: $payment.amount)
+            moneyText(b: minimal ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
                 .foregroundColor(.white)
                 .padding(6)
                 .background(

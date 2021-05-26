@@ -16,6 +16,8 @@ struct MembersView: View {
                 HeaderText(text: "Members")
                 ForEach(house.members) { member in
                         MemberCell(m: .constant(member))
+                            .padding(.horizontal)
+                            .padding(.top, 10)
                             .onTapGesture {
                                 tappedMember = member
                                 showDetails = true
@@ -33,7 +35,7 @@ struct MembersView: View {
 
 struct MembersView_Previews: PreviewProvider {
     static var previews: some View {
-        MembersView(house: .constant(House.empty))
+        MembersView(house: .constant(House.placeholder))
                     .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }
