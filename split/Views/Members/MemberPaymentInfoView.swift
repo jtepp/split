@@ -45,6 +45,7 @@ struct MemberPaymentInfoView: View {
                         )
                 )
             }
+            .frame(maxHeight: 160)
         }
         
         .padding()

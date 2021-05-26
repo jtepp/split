@@ -24,6 +24,7 @@ struct ActivityView: View {
                 }
             }
             .padding()
+            Spacer(minLength: 80)
         }
         .foregroundColor(.white)
     }
