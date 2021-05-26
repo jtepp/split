@@ -58,7 +58,8 @@ func b64toimg(b64: String) -> Image {
 
 func imgtob64(img: UIImage) -> String {
     let data = img.jpegData(compressionQuality: 1)
-    return data!.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
+    print(data!.base64EncodedString())
+    return data!.base64EncodedString()
 }
 
 func moneyText(b: Binding<Float>, pre: String = "") -> Text {

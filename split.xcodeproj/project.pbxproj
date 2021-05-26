@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0CA77A265EF4D20062FDDD /* UIImage+resized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */; };
 		0C2A0587265CAA44002BD46D /* splitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A0586265CAA44002BD46D /* splitApp.swift */; };
 		0C2A0589265CAA44002BD46D /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A0588265CAA44002BD46D /* Main.swift */; };
 		0C2A058B265CAA44002BD46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2A058A265CAA44002BD46D /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resized.swift"; sourceTree = "<group>"; };
 		0C2A0583265CAA44002BD46D /* split.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = split.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C2A0586265CAA44002BD46D /* splitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splitApp.swift; sourceTree = "<group>"; };
 		0C2A0588265CAA44002BD46D /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
@@ -80,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C0CA778265EF4BF0062FDDD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0C2A057A265CAA44002BD46D = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2A0586265CAA44002BD46D /* splitApp.swift */,
+				0C0CA778265EF4BF0062FDDD /* Extensions */,
 				0C2A059B265CB0FB002BD46D /* Models */,
 				0C2A059A265CB0F7002BD46D /* Views */,
 				0C2A058A265CAA44002BD46D /* Assets.xcassets */,
@@ -326,6 +337,7 @@
 				0C625972265EA868002E58A3 /* Payment.swift in Sources */,
 				0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */,
 				0C64FEDA265EED43009B0C3C /* ImagePicker.swift in Sources */,
+				0C0CA77A265EF4D20062FDDD /* UIImage+resized.swift in Sources */,
 				0C625991265EB440002E58A3 /* HeaderText.swift in Sources */,
 				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,
 				0CEE3827265E16700013BB12 /* MemberDetailsView.swift in Sources */,
