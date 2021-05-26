@@ -22,16 +22,3 @@ struct MembersView_Previews: PreviewProvider {
     }
 }
 
-func b64toimg(b64: String) -> Image {
-    let data = Data(base64Encoded: b64)
-    var img = Image(systemName: "gear")
-    if let data = data {
-        img = Image(uiImage: (UIImage(data: data) ?? UIImage(systemName: "person.crop.circle"))!)
-    }
-    return img
-}
-
-func imgtob64(img: UIImage) -> String {
-    let data = img.jpegData(compressionQuality: 1)
-    return data!.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
-}

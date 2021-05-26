@@ -11,12 +11,12 @@ struct MemberCell: View {
     @Binding var m: Member
     var body: some View {
         HStack {
-//            b64toimg(b64: m.image)
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: 50)
-//                .clipShape(Circle())
-//                .shadow(radius: 4)
+            b64toimg(b64: m.image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 50)
+                .clipShape(Circle())
+                .shadow(radius: 4)
             Spacer()
             VStack(alignment: .trailing) {
                 Text(m.name)
@@ -36,4 +36,19 @@ struct MemberCell: View {
         )
         .padding()
     }
+}
+
+
+func b64toimg(b64: String) -> Image {
+    let data = Data(base64Encoded: b64)
+    var img = Image(systemName: "gear")
+    if let data = data {
+        img = Image(uiImage: (UIImage(data: data) ?? UIImage(systemName: "person.crop.circle"))!)
+    }
+    return img
+}
+
+func imgtob64(img: UIImage) -> String {
+    let data = img.jpegData(compressionQuality: 1)
+    return data!.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
 }
