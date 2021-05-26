@@ -14,7 +14,7 @@ struct MemberCell: View {
             b64toimg(b64: m.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 50, height: 50)
+                .frame(width: 40, height: 40)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(radius: 4)
             Spacer()
