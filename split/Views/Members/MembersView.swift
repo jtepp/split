@@ -22,7 +22,7 @@ struct MembersView: View {
                 }
             }
             .onAppear(){
-                tappedMember = house.members.first? ?? Member.placeholder
+                tappedMember = house.members.first ?? Member.placeholder
             }
             .sheet(isPresented: $showDetails, content: {
                 MemberDetailsView(member: $tappedMember)

@@ -13,3 +13,9 @@ struct MemberDetailsView: View {
         Text(member.name)
     }
 }
+
+struct MemberDetailsView_Previews: PreviewProvider {
+    static var previews: some View {
+        MemberDetailsView(member: .constant(Member.placeholder))
+    }
+}

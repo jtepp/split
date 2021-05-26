@@ -23,7 +23,7 @@ struct MemberCell: View {
                     .bold()
                 Text("\(m.balance < 0 ? "-" : "")$\(abs(m.balance), specifier: "%.2f")")
             }
-            Image(systemName: "chevron.right")
+//          Image(systemName: "chevron.right")
         }
         .foregroundColor(.black)
         .padding(.horizontal)
