@@ -68,8 +68,9 @@ class Fetch: ObservableObject {
                 let reqfrom = data["reqfrom"] as? [String] ?? [""]
                 let amount = data["amount"] as? NSNumber ?? 0
                 let memo = data["memo"] as? String ?? ""
+                let isRequest = data["isRequest"] as? Bool ?? false
                 
-                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo)
+                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest)
             })
         }
     }
