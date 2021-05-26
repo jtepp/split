@@ -38,7 +38,7 @@ struct MemberCell: View {
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(
-                    Color.white.opacity(0.4)
+                    Color.white.opacity(0.5)
                 )
         )
         .padding()

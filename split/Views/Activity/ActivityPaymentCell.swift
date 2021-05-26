@@ -21,5 +21,22 @@ struct ActivityPaymentCell: View {
             moneyText(b: $payment.amount)
         }
         .foregroundColor(.black)
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(
+                    Color.white.opacity(0.5)
+                )
+        )
+    }
+}
+
+struct ActivityPaymentCell_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            ActivityPaymentCell(payment: .constant(.placeholder))
+        }
+            
     }
 }
