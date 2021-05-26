@@ -66,8 +66,9 @@ class Fetch: ObservableObject {
                 let time = data["time"] as? NSNumber ?? 0
                 let from = data["from"] as? String ?? ""
                 let amount = data["amount"] as? NSNumber ?? 0
+                let memo = data["memo"] as? String ?? ""
                 
-                return Payment(id: q.documentID, to: to, from: from, amount: Float(truncating: amount), time: Int(truncating: time))
+                return Payment(id: q.documentID, to: to, from: from, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo)
             })
         }
     }

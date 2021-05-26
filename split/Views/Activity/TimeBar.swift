@@ -12,11 +12,28 @@ struct TimeBar: View {
     var body: some View {
         HStack {
             Text(unixtotime(unix: unix))
+                .font(.callout)
+                .bold()
             Spacer()
             Text(unixtodate(unix: unix))
+                .font(.callout)
+                .bold()
         }
+        .foregroundColor(Color.black.opacity(0.4))
     }
 }
+
+struct TimeBar_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            ActivityPaymentCell(payment: .constant(.placeholder))
+        }
+            
+    }
+}
+
+
 
 func unixtodate(unix: Int) -> String {
     let date = Date(timeIntervalSince1970: Double(unix))
