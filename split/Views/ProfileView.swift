@@ -89,6 +89,7 @@ struct ProfileView: View {
                 Text("ID: \(m.id)")
                     .font(.caption)
                     .foregroundColor(Color("Secondary"))
+                Spacer(minLength: 80)
             }
             .padding(.vertical, 40)
             .foregroundColor(.white)
