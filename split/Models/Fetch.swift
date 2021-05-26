@@ -10,7 +10,6 @@ import SwiftUI
 import FirebaseFirestore
 
 class Fetch: ObservableObject {
-    @Published var houses = [House]()
     private var db = Firestore.firestore()
     
     func getHouse (h: Binding<House>, id: String) {
@@ -26,13 +25,35 @@ class Fetch: ObservableObject {
             
             self.getMembers(h: h, id: id)
             
-            h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, password: password)
+            self.getPayments(h: h, id: id)
+            
+            h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, payments: h.wrappedValue.payments, password: password)
             print(h)
         }
     }
     
     func getMembers(h: Binding<House>, id: String) {
         db.collection("houses/"+id+"/members").addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("no house by id %s, or maybe no members..?", id)
+                return
+            }
+            
+            h.wrappedValue.members = documents.map({ q -> Member in
+                let data = q.data()
+                
+                let name = data["name"] as? String ?? ""
+                let balance = data["balance"] as? NSNumber ?? 0
+                let image = data["image"] as? String ?? ""
+                let admin = data["admin"] as? Bool ?? false
+                
+                return Member(id: q.documentID, name: name, balance: Float(truncating: balance), image: image, admin: admin)
+            })
+        }
+    }
+    
+    func getPayments(h: Binding<House>, id: String) {
+        db.collection("houses/"+id+"/history").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("no house by id %s, or maybe no members..?", id)
                 return
