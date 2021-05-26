@@ -10,13 +10,12 @@ import SwiftUI
 struct TabsView: View {
     @Binding var tabSelection: Int
     @Binding var house: House
-    @Binding var members: [Member]
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
                     ActivityView()
                         .tag(0)
-                    MembersView(members: $members)
+                    MembersView(house: $house)
                         .tag(1)
                     PaymentView()
                         .tag(2)

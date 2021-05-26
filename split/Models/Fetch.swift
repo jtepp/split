@@ -24,23 +24,27 @@ class Fetch: ObservableObject {
             
             let password = data?["password"] as? String ?? ""
             
+            self.getMembers(h: h, id: id)
+            
             h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, password: password)
             print(h)
         }
     }
     
-    func getMembers(m: Binding<[Member]>, id: String) {
+    func getMembers(h: Binding<House>, id: String) {
         db.collection("houses/"+id+"/members").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("no house by id %s, or maybe no members..?", id)
                 return
             }
-            m.wrappedValue = documents.map({ q -> Member in
+            
+            h.wrappedValue.members = documents.map({ q -> Member in
                 let data = q.data()
+                
                 let name = data["name"] as? String ?? ""
                 let balance = data["balance"] as? NSNumber ?? 0
                 let image = data["image"] as? String ?? ""
-
+                
                 return Member(id: q.documentID, name: name, balance: Float(truncating: balance), image: image)
             })
         }
