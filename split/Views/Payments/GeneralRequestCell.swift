@@ -22,7 +22,7 @@ struct GeneralRequestCell: View {
                 //                } else {
                 Image(systemName: "arrow.left")
                 //                }
-                if minimal {
+                if minimal && payment.to != m.name {
                     Text(m.name)
                         .font(.headline)
                 } else {
@@ -35,7 +35,7 @@ struct GeneralRequestCell: View {
                 }
             }
             Spacer()
-            moneyText(b: minimal ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
+            moneyText(b: (minimal && payment.to != m.name) ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
                 .foregroundColor(.white)
                 .padding(6)
                 .background(
