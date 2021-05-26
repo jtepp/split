@@ -11,10 +11,11 @@ struct Main: View {
     @ObservedObject var fetch = Fetch()
     @State var h = House.empty
     @State var id = "TlRWEGz9GWrKBXqI9T8L"
+    @State var myId = "S7KrRDGkGGnbIqHZZkTk"
     @State var tabSelection = 0
     var body: some View {
         ZStack {
-            TabsView(tabSelection: $tabSelection, house: $h)
+            TabsView(tabSelection: $tabSelection, house: $h, myId: $myId)
                 .animation(.easeOut)
             TabBar(tabSelection: $tabSelection)
         }

@@ -28,6 +28,10 @@ struct MemberDetailsView: View {
                 }
                 Spacer()
                 MemberPaymentInfoView(member: $member)
+                Spacer()
+                Text("ID: \(member.id)")
+                    .font(.caption)
+                    .foregroundColor(Color("Secondary"))
             }
             .padding(.vertical, 40)
         }

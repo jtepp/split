@@ -10,6 +10,7 @@ import SwiftUI
 struct TabsView: View {
     @Binding var tabSelection: Int
     @Binding var house: House
+    @Binding var myId: String
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
@@ -19,7 +20,9 @@ struct TabsView: View {
                         .tag(1)
                     PaymentView()
                         .tag(2)
-                    ProfileView()
+                    ProfileView(m: .constant(house.members.first(where: { (m) -> Bool in
+                        return m.id == myId
+                    }) ?? Member.empty))
                         .tag(3)
                 })
             .tabViewStyle(PageTabViewStyle())
