@@ -15,7 +15,7 @@ struct MemberCell: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 50, height: 50)
-                .clipShape(Circle())
+                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(radius: 4)
             Spacer()
             VStack(alignment: .trailing) {

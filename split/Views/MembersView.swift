@@ -10,13 +10,13 @@ import SwiftUI
 struct MembersView: View {
     @Binding var house: House
     var body: some View {
-        NavigationView {
+//        NavigationView {
             ScrollView {
                 ForEach(house.members) { member in
                     MemberCell(m: .constant(member))
                 }
             }
-        }
+//        }
     }
 }
 
