@@ -13,14 +13,7 @@ struct MembersView: View {
     @State var tappedMember = Member.placeholder
     var body: some View {
             ScrollView {
-                HStack {
-                    Text("Members")
-                        .foregroundColor(.white)
-                        .font(.largeTitle)
-                        .bold()
-                    Spacer()
-                }
-                .padding()
+                HeaderText(text: "Members")
                 ForEach(house.members) { member in
                         MemberCell(m: .constant(member))
                             .onTapGesture {
