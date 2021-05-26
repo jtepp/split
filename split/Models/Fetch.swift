@@ -53,21 +53,21 @@ class Fetch: ObservableObject {
     }
     
     func getPayments(h: Binding<House>, id: String) {
-        db.collection("houses/"+id+"/history").addSnapshotListener { (querySnapshot, error) in
+        db.collection("houses/"+id+"/payments").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
-                print("no house by id %s, or maybe no members..?", id)
+                print("no house by id %s, or maybe no payments..?", id)
                 return
             }
             
-            h.wrappedValue.members = documents.map({ q -> Member in
+            h.wrappedValue.payments = documents.map({ q -> Payment in
                 let data = q.data()
                 
-                let name = data["name"] as? String ?? ""
-                let balance = data["balance"] as? NSNumber ?? 0
-                let image = data["image"] as? String ?? ""
-                let admin = data["admin"] as? Bool ?? false
+                let to = data["to"] as? String ?? ""
+                let time = data["time"] as? NSNumber ?? 0
+                let from = data["from"] as? String ?? ""
+                let amount = data["amount"] as? NSNumber ?? 0
                 
-                return Member(id: q.documentID, name: name, balance: Float(truncating: balance), image: image, admin: admin)
+                return Payment(id: q.documentID, to: to, from: from, amount: Float(truncating: amount), time: Int(truncating: time))
             })
         }
     }
