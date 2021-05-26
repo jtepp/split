@@ -14,5 +14,5 @@ struct House: Identifiable {
     var payments: [Payment]
     var password: String
     static let empty = House(id: "", name: "", members: [Member](), payments: [Payment](), password: "")
-    static let placeholder = House(id: "00000", name: "Home", members: [Member.placeholder, Member.placeholder2, Member.placeholder3], payments: [Payment.placeholder], password: "p")
+    static let placeholder = House(id: "00000", name: "Home", members: [Member.placeholder, Member.placeholder2, Member.empty], payments: [Payment.placeholder], password: "p")
 }
