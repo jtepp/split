@@ -21,7 +21,7 @@ struct MemberCell: View {
             VStack(alignment: .trailing) {
                 Text(m.name)
                     .bold()
-                Text("$\(m.balance, specifier: "%.2f")")
+                Text("\(m.balance < 0 ? "-" : "")$\(abs(m.balance), specifier: "%.2f")")
             }
             Image(systemName: "chevron.right")
         }
