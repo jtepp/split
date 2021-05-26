@@ -20,12 +20,12 @@ struct MemberCell: View {
             Spacer()
             VStack(alignment: .trailing) {
                 Text(m.name)
-                    .foregroundColor(.black)
                     .bold()
                 Text("$\(m.balance, specifier: "%.2f")")
-                    .foregroundColor(.black)
             }
+            Image(systemName: "chevron.right")
         }
+        .foregroundColor(.black)
         .padding(.horizontal)
         .padding(.vertical, 10)
         .background(

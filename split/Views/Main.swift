@@ -11,8 +11,7 @@ struct Main: View {
     @ObservedObject var fetch = Fetch()
     @State var h = House.empty
     @State var id = "TlRWEGz9GWrKBXqI9T8L"
-    @State var tabSelection = 0
-    @State var test = 0
+    @State var tabSelection = 1
     var body: some View {
         ZStack {
             TabsView(tabSelection: $tabSelection, house: $h)
