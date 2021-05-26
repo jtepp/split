@@ -25,6 +25,13 @@ struct PaymentView: View {
                     )
             )
             .padding()
+            
+            if typeSelection == 0 {
+                PaymentPaymentView(house: $house)
+            } else {
+                RequestPaymentView(house: $house)
+            }
+            
         }
     }
 }

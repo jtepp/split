@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0C0CA77A265EF4D20062FDDD /* UIImage+resized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */; };
+		0C0CA77E265F01BE0062FDDD /* PaymentPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */; };
+		0C0CA781265F01F10062FDDD /* RequestPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */; };
 		0C2A0587265CAA44002BD46D /* splitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A0586265CAA44002BD46D /* splitApp.swift */; };
 		0C2A0589265CAA44002BD46D /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A0588265CAA44002BD46D /* Main.swift */; };
 		0C2A058B265CAA44002BD46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2A058A265CAA44002BD46D /* Assets.xcassets */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resized.swift"; sourceTree = "<group>"; };
+		0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPaymentView.swift; sourceTree = "<group>"; };
+		0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPaymentView.swift; sourceTree = "<group>"; };
 		0C2A0583265CAA44002BD46D /* split.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = split.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C2A0586265CAA44002BD46D /* splitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splitApp.swift; sourceTree = "<group>"; };
 		0C2A0588265CAA44002BD46D /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				0CBF09FC265D8F730016CA92 /* PaymentView.swift */,
+				0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */,
+				0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */,
 				0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */,
 				0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */,
 			);
@@ -339,9 +345,11 @@
 				0C64FEDA265EED43009B0C3C /* ImagePicker.swift in Sources */,
 				0C0CA77A265EF4D20062FDDD /* UIImage+resized.swift in Sources */,
 				0C625991265EB440002E58A3 /* HeaderText.swift in Sources */,
+				0C0CA77E265F01BE0062FDDD /* PaymentPaymentView.swift in Sources */,
 				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,
 				0CEE3827265E16700013BB12 /* MemberDetailsView.swift in Sources */,
 				0CBF0A00265D91640016CA92 /* TabsView.swift in Sources */,
+				0C0CA781265F01F10062FDDD /* RequestPaymentView.swift in Sources */,
 				0C64FED3265ED9F4009B0C3C /* ActivityRequestCell.swift in Sources */,
 				0C95131E265DB7C0005398CF /* MemberCell.swift in Sources */,
 				0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */,
