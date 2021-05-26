@@ -42,10 +42,10 @@ class Fetch: ObservableObject {
                 let data = q.data()
                 
                 let name = data["name"] as? String ?? ""
-                let balance = data["balance"] as? Float ?? 0.00
+                let balance = data["balance"] as! NSNumber
                 let image = data["image"] as? String ?? ""
                 
-                return Member(id: q.documentID, name: name, balance: balance, image: image)
+                return Member(id: q.documentID, name: name, balance: Float(truncating: balance), image: image)
             })
         }
     }
