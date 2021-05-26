@@ -46,10 +46,10 @@ struct ProfileView: View {
                                 .padding(10)
                                 .foregroundColor(.black)
                                 .background(
-                                        Circle()
-                                            .fill(
-                                                Color.gray
-                                            )
+                                    Circle()
+                                        .fill(
+                                            Color.gray
+                                        )
                                 )
                         })
                         .offset(y: 100)
@@ -96,12 +96,17 @@ struct ProfileView: View {
             .sheet(isPresented: $showImagePicker, content: {
                 ImagePicker(img: $img, isShown: $showImagePicker, sourceType: sourceType)
             })
+            .onChange(of: img, perform: { _ in
+                if img != nil {
+                    Fetch().updateImg(img: img!, hId: house.id, myId: m.id)
+                }
+            })
             
             
-//            .onAppear{
-//                UserDefaults.standard.set(m.name, forKey: "name")
-//                UserDefaults.standard.set(m.id, forKey: "myId")
-//            }
+            //            .onAppear{
+            //                UserDefaults.standard.set(m.name, forKey: "name")
+            //                UserDefaults.standard.set(m.id, forKey: "myId")
+            //            }
         }
     }
 }

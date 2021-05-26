@@ -124,7 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2A0588265CAA44002BD46D /* Main.swift */,
-				0C64FED8265EED39009B0C3C /* Images */,
+				0C64FED9265EED43009B0C3C /* ImagePicker.swift */,
 				0C625990265EB440002E58A3 /* HeaderText.swift */,
 				0C625970265EA855002E58A3 /* Payments */,
 				0CEE3829265E167C0013BB12 /* Members */,
@@ -165,14 +165,6 @@
 				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
 			);
 			path = Activity;
-			sourceTree = "<group>";
-		};
-		0C64FED8265EED39009B0C3C /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				0C64FED9265EED43009B0C3C /* ImagePicker.swift */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		0CEE3829265E167C0013BB12 /* Members */ = {

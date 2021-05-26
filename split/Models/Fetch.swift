@@ -75,4 +75,8 @@ class Fetch: ObservableObject {
         }
     }
     
+    func updateImg(img: UIImage, hId: String, myId: String) {
+        db.document("houses/\(hId)/members/\(myId)").updateData(["image":imgtob64(img: img)])
+    }
+    
 }
