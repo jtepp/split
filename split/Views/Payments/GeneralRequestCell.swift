@@ -16,6 +16,8 @@ struct GeneralRequestCell: View {
             HStack {
                 Text(payment.to)
                     .font(.headline)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.1)
                 //                if payment.reqfrom.count > 1 {
                 //                    Image(systemName: "arrow.triangle.merge")
                 //                        .rotationEffect(.degrees(-90))
@@ -25,11 +27,15 @@ struct GeneralRequestCell: View {
                 if minimal && payment.to != m.name {
                     Text(m.name)
                         .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.1)
                 } else {
                     VStack(alignment: .leading) {
                         ForEach(payment.reqfrom, id: \.self) { member in
                             Text(member)
                                 .font(.headline)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.1)
                         }
                     }
                 }

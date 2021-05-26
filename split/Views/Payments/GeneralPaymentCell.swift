@@ -14,9 +14,13 @@ struct GeneralPaymentCell: View {
             HStack {
                 Text(payment.from)
                     .font(.headline)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.1)
                 Image(systemName: "arrow.right")
                 Text(payment.to)
                     .font(.headline)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.1)
             }
             Spacer()
             moneyText(b: $payment.amount)
