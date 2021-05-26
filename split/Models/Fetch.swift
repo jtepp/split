@@ -44,8 +44,9 @@ class Fetch: ObservableObject {
                 let name = data["name"] as? String ?? ""
                 let balance = data["balance"] as? NSNumber ?? 0
                 let image = data["image"] as? String ?? ""
+                let admin = data["admin"] as? Bool ?? false
                 
-                return Member(id: q.documentID, name: name, balance: Float(truncating: balance), image: image)
+                return Member(id: q.documentID, name: name, balance: Float(truncating: balance), image: image, admin: admin)
             })
         }
     }

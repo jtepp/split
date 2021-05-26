@@ -17,6 +17,13 @@ struct MemberCell: View {
                 .frame(width: 40, height: 40)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(radius: 4)
+                .overlay(
+                    Image(systemName: m.admin ? "crown.fill" : "")
+                        .offset(x: -3, y: -30)
+                        .scaleEffect(x: 1.2)
+                        .rotationEffect(.degrees(-30))
+                        .foregroundColor(.white)
+                )
             Spacer()
             VStack(alignment: .trailing) {
                 Text(m.name)
