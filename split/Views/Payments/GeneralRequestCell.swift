@@ -14,9 +14,18 @@ struct GeneralRequestCell: View {
             HStack {
                 Text(payment.to)
                     .font(.headline)
-                Image(systemName: "arrow.right")
-                Text(payment.from)
-                    .font(.headline)
+                if payment.reqfrom.count > 1 {
+                    Image(systemName: "arrow.triangle.merge")
+                        .rotationEffect(.degrees(-90))
+                } else {
+                    Image(systemName: "arrow.left")
+                }
+                VStack {
+                    ForEach(payment.reqfrom, id: \.self) { member in
+                        Text(member)
+                            .font(.headline)
+                    }
+                }
             }
             Spacer()
             moneyText(b: $payment.amount)
