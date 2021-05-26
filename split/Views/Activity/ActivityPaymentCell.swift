@@ -23,7 +23,7 @@ struct ActivityPaymentCell: View {
             }
             .padding(.bottom, showMemo ? 20 : 0)
             .animation(.easeIn)
-            .frame(maxHeight: showMemo ? nil : 0)
+            .frame(maxHeight: showMemo ? 10000 : 0)
             .foregroundColor(showMemo ? .black : .clear)
         }
         .foregroundColor(.black)
