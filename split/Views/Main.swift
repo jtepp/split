@@ -18,6 +18,7 @@ struct Main: View {
                 .animation(.easeOut)
             TabBar(tabSelection: $tabSelection)
         }
+        .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
             fetch.getHouse(h: $h, id: id)
         }

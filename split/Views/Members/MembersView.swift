@@ -13,6 +13,14 @@ struct MembersView: View {
     @State var tappedMember = Member.placeholder
     var body: some View {
             ScrollView {
+                HStack {
+                    Text("Members")
+                        .foregroundColor(.white)
+                        .font(.largeTitle)
+                        .bold()
+                    Spacer()
+                }
+                .padding()
                 ForEach(house.members) { member in
                         MemberCell(m: .constant(member))
                             .onTapGesture {
@@ -33,6 +41,7 @@ struct MembersView: View {
 struct MembersView_Previews: PreviewProvider {
     static var previews: some View {
         MembersView(house: .constant(House.empty))
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }
 
