@@ -11,6 +11,7 @@ struct MembersView: View {
     @Binding var house: House
     @State var showDetails = false
     @State var tappedMember = Member.placeholder
+    @Binding var tabSelection: Int
     var body: some View {
             ScrollView {
                 HeaderText(text: "Members")
@@ -20,7 +21,11 @@ struct MembersView: View {
                             .padding(.top, 10)
                             .onTapGesture {
                                 tappedMember = member
-                                showDetails = true
+                                if tappedMember.id == UserDefaults.standard.string(forKey: "myId")  {
+                                    tabSelection = 3
+                                } else {
+                                    showDetails = true
+                                }
                             }
                 }
             }
@@ -35,7 +40,7 @@ struct MembersView: View {
 
 struct MembersView_Previews: PreviewProvider {
     static var previews: some View {
-        MembersView(house: .constant(House.placeholder))
+        MembersView(house: .constant(House.placeholder), tabSelection: .constant(0))
                     .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

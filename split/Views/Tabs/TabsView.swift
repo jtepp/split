@@ -16,7 +16,7 @@ struct TabsView: View {
                 content:  {
                     ActivityView(house: $house)
                         .tag(0)
-                    MembersView(house: $house)
+                    MembersView(house: $house, tabSelection: $tabSelection)
                         .tag(1)
                     PaymentView(house: $house, tabSelection: $tabSelection)
                         .tag(2)
