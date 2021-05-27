@@ -30,11 +30,14 @@ struct TabsView: View {
             .tabViewStyle(PageTabViewStyle())
             .sheet(isPresented: $noProf) {
 //                ModalView(title: "Sign in") { //in waiting room with id
-                    NoProfileView(show: $noProf)
+                NoProfileView(myId: $myId, show: $noProf, house: $house)
                         .background(Color.black.edgesIgnoringSafeArea(.all))
                         .allowAutoDismiss(false)
 //                }
             }
             .background(Color.black.edgesIgnoringSafeArea(.all))
+            .onAppear(){
+                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+            }
     }
 }

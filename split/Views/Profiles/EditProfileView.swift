@@ -10,8 +10,8 @@ import SwiftUI
 struct EditProfileView: View {
     @Binding var show: Bool
     @Binding var m: Member
-    @State var img: UIImage?
-    @State var name = String()
+    @Binding var img: UIImage?
+    @Binding var name: String
     @State var showImagePicker = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     var body: some View {
@@ -64,30 +64,9 @@ struct EditProfileView: View {
                     .foregroundColor(.black)
                     .padding()
                     .padding(.top)
-                Spacer()
-                Button(action: {
-                    if name.replacingOccurrences(of: " ", with: "") != "" {
-                        show = false
-                        Fetch().addToWR(m:m)
-                    }
-                }, label: {
-                    HStack {
-                        Spacer()
-                        Text("Save")
-                            .foregroundColor(.white)
-                        Spacer()
-                    }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(
-                                name.replacingOccurrences(of: " ", with: "") == "" ? Color.gray : Color.blue
-                            )
-                    )
-                    .padding()
-                })
-                .disabled(name.replacingOccurrences(of: " ", with: "") == "")
-                Spacer(minLength: 80)
+                    .onChange(of: name, perform: { value in
+                        m.name = name
+                    })
             }
             .padding(.vertical, 40)
             .foregroundColor(.white)
@@ -97,7 +76,7 @@ struct EditProfileView: View {
             })
             .onChange(of: img, perform: { _ in
                 if img != nil {
-                    m.image = imgtob64(img: img!)
+                    m.image = imgtob64(img: img!.resized(toWidth: 400)!)
                 }
             })
         }

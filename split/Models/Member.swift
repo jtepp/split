@@ -8,8 +8,8 @@
 import Foundation
 
 struct Member: Identifiable {
-    let id: String
-    let name: String
+    var id: String
+    var name: String
     var owesMe: [String : Float] = [String : Float]()
     var iOwe: [String : Float] = [String : Float]()
     var image: String

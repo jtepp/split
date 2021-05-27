@@ -225,16 +225,27 @@ class Fetch: ObservableObject {
             }
         }
     }
-    func addToWR(m:Member){
-        let id = db.collection("waitingRoom").addDocument(data: ["name":m.name, "image":m.image])
+    func addToWR(m:Member, myId: Binding<String>, h: Binding<House>){
+        db.collection("waitingRoom").addDocument(data: ["name":m.name, "image":m.image]).getDocument { (documentSnapshot, err) in
+            guard let doc = documentSnapshot?.data() else {
+                print("wr add to err")
+                return
+            }
+            UserDefaults.standard.set(documentSnapshot?.documentID ?? "", forKey: "myId")
+            myId.wrappedValue = documentSnapshot?.documentID ?? ""
+            var e = Member.empty
+            e.id = documentSnapshot?.documentID ?? ""
+            h.members.wrappedValue.append(e)
             
-            UserDefaults.standard.set("waitingRoom", forKey: "houseId")
-        UserDefaults.standard.set(id, forKey: "myId")
-    }
-}
+        }
+        UserDefaults.standard.set("waitingRoom", forKey: "houseId")
+        
+        
+                }
+            }
 
-func idfromnamehouse(name: String, house: House) -> String {
-    return house.members.first { (m) -> Bool in
-        return m.name == name
-    }?.id ?? ""
-}
+            func idfromnamehouse(name: String, house: House) -> String {
+                return house.members.first { (m) -> Bool in
+                    return m.name == name
+                }?.id ?? ""
+            }
