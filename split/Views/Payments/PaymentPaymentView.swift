@@ -35,7 +35,7 @@ struct PaymentPaymentView: View {
         }
         .padding()
         .sheet(isPresented: $showPicker, content: {
-            MemberPicker(house: $house, choice: $chosenTo, multiple: false)
+            MemberPicker(show: $showPicker, house: $house, choice: $chosenTo, multiple: false)
         })
     }
 }

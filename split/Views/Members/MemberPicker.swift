@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MemberPicker: View {
+    @Binding var show: Bool
     @Binding var house: House
     @Binding var choice: [Member]
     var multiple: Bool = false
@@ -17,8 +18,24 @@ struct MemberPicker: View {
             ScrollView {
                 HeaderText(text: "Choose \(multiple ? "members" : "a member")")
                 ForEach (house.members) { member in
-                    imgButton(member: .constant(member), choice: $choice, multiple: multiple)
+                    imgButton(show: $show, member: .constant(member), choice: $choice, multiple: multiple)
                 }
+                Spacer()
+                Button(action: {show = false}, label: {
+                    HStack {
+                        Spacer()
+                        Text("Done")
+                            .foregroundColor(choice.isEmpty ? .clear : .white)
+                        Spacer()
+                    }
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(choice.isEmpty ? .clear : Color.blue)
+                        )
+                        .padding()
+                })
+                .allowsHitTesting(!choice.isEmpty)
             }
         }
     }
@@ -34,6 +51,7 @@ struct MemberPicker_Previews: PreviewProvider {
 }
 
 struct imgButton: View {
+    @Binding var show: Bool
     @Binding var member: Member
     @State var selected: Bool = false
     @Binding var choice: [Member]
@@ -55,6 +73,7 @@ struct imgButton: View {
                                 .foregroundColor(selected ? Color.white : Color.clear)
                         )
                 )
+            
             Spacer()
             VStack(alignment: .trailing) {
                 Text(member.name)
@@ -82,8 +101,12 @@ struct imgButton: View {
                 } else {
                     selected = true
                     choice.append(member)
+                    if !multiple {
+                        choice = [member]
+                    }
                 }
             }
         }
+        
     }
 }
