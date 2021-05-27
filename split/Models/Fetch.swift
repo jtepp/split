@@ -12,12 +12,13 @@ import FirebaseFirestore
 class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
-    func getHouse (h: Binding<House>, inWR: Binding<Bool>) {
+    func getHouse (h: Binding<House>, inWR: Binding<Bool>, noProf: Binding<Bool>) {
         let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
         let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
         
         if id != "" && id != "waitingRoom" { // has real house id
             inWR.wrappedValue = false
+            noProf.wrappedValue = false
             db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
                 guard let doc = querySnapshot else {
                     print("no house by id %s", id)
@@ -40,14 +41,18 @@ class Fetch: ObservableObject {
                     //if ur an alien, go to void, otherwise get waitingRoomed
                     if myId == "" {
                         UserDefaults.standard.set("", forKey: "houseId")
+                        noProf.wrappedValue = true
                     } else {
                         UserDefaults.standard.set("waitingRoom", forKey: "houseId")
-                        inWR.wrappedValue = true
+                        noProf.wrappedValue = false
                     }
+                    inWR.wrappedValue = true
                 }
                 
             }
-        } else if id == "waitingRoom" && inWR.wrappedValue && myId != "" { //in waiting room and account exists
+        } else if id == "waitingRoom" && myId != "" { //in waiting room and account exists
+            inWR.wrappedValue = true
+            noProf.wrappedValue = false
             db.document("waitingRoom/"+myId).addSnapshotListener { (querySnapshot, error) in
                 guard let doc = querySnapshot?.data() else {
                     print(error ?? "inwr uh oh")
@@ -61,8 +66,14 @@ class Fetch: ObservableObject {
                 h.wrappedValue = e //empty house
                 
             }
+        } else if id == "waitingRoom" && myId == "" {
+            inWR.wrappedValue = true
+            noProf.wrappedValue = true
+            UserDefaults.standard.set("", forKey: "houseId") //get out of waiting room alien
         } else if id == "" {
-            
+            UserDefaults.standard.set("", forKey: "houseId")
+            inWR.wrappedValue = true
+            noProf.wrappedValue = true
         }
     }
     

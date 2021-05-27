@@ -11,6 +11,7 @@ struct Main: View {
     @ObservedObject var fetch = Fetch()
     @State var h = House.empty
     @State var inWR = true
+    @State var noProf = true
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
     @State var tabSelection = 0
     var body: some View {
@@ -21,7 +22,7 @@ struct Main: View {
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
-            fetch.getHouse(h: $h, inWR: $inWR)
+            fetch.getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         }
     }
 }
