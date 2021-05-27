@@ -79,4 +79,10 @@ class Fetch: ObservableObject {
         db.document("houses/\(hId)/members/\(myId)").updateData(["image":imgtob64(img: img.resized(toWidth: 400)!)])
     }
     
+    func sendPayment(p: Payment, h: House) {
+        db.collection("houses/\(h.id)/payments").addDocument(data:
+                                                                ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo]
+        )
+    }
+    
 }
