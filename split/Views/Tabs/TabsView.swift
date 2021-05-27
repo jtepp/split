@@ -29,10 +29,11 @@ struct TabsView: View {
                 })
             .tabViewStyle(PageTabViewStyle())
             .sheet(isPresented: $noProf) {
-                ModalView(title: "Sign in") { //in waiting room with id
+//                ModalView(title: "Sign in") { //in waiting room with id
                     NoProfileView(show: $noProf)
                         .background(Color.black.edgesIgnoringSafeArea(.all))
-                }
+                        .allowAutoDismiss(false)
+//                }
             }
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }
