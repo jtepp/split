@@ -130,6 +130,11 @@ struct imgButton: View {
                 }
             }
         }
+        .onAppear(){
+            selected = choice.contains(where: { (m) -> Bool in
+                return m.name == member.name
+            })
+        }
         
     }
 }
