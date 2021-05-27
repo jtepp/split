@@ -79,6 +79,7 @@ struct RequestPaymentView: View {
                     )
                     .padding()
             })
+            .allowsHitTesting(!(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric))
         }
     }
 }

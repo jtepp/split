@@ -26,26 +26,22 @@ struct MemberPaymentInfoView: View {
                     return (-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0)) != 0
                 })) { m in
                     HStack {
-                        //if member is myId
-                        if member.id == UserDefaults.standard.string(forKey: "myId") {
-                            Text((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0)) > 0 ? "You owe \(m.name):" : "\(m.name) owes you:")
-                            Spacer()
-                            Text("$\(abs((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0))), specifier: "%.2f")")
-                        } else {
-                            //if member is not myId but m is myId
-                            if m.id == UserDefaults.standard.string(forKey: "myId") {
-                                Text((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0)) > 0 ? "\(member.name) owes you:" : "You owe \(member.name):")
-                                Spacer()
-                                Text("$\(abs((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0))), specifier: "%.2f")")
-                            } else {
-                                //if member is not myId^ and m is not myId
-                                Text((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0)) > 0 ? "\(member.name) owes \(m.name):" : "\(m.name) owes \(member.name):")
-                                Spacer()
-                                Text("$\(abs((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0))), specifier: "%.2f")")
-                            }
-                            
-
-                        }
+//                        //if member is myId
+//                        if member.id == UserDefaults.standard.string(forKey: "myId") {
+//                            Text((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0)) > 0 ? "You owe \(m.name):" : "\(m.name) owes you:")
+//                        } else {
+//                            //if member is not myId but m is myId
+//                            if m.id == UserDefaults.standard.string(forKey: "myId") {
+//                                Text((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0)) > 0 ? "\(member.name) owes you:" : "You owe \(member.name):")
+//                            } else {
+//                                //if member is not myId^ and m is not myId
+//                                Text((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0)) > 0 ? "\(member.name) owes \(m.name):" : "\(m.name) owes \(member.name):")
+//                            }
+//                            
+//
+//                        }
+                        Spacer()
+                        Text("$\(abs((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0))), specifier: "%.2f")")
                     }
                     .padding(.horizontal)
                     .padding(.top, 10)
