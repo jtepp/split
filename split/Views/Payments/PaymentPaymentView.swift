@@ -59,7 +59,7 @@ struct PaymentPaymentView: View {
             Button(action: {}, label: {
                 HStack {
                     Spacer()
-                    Text("Done")
+                    Text("Post")
                         .foregroundColor(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric ? .clear : .white)
                     Spacer()
                 }

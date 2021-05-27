@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 extension String {
     var isNumeric: Bool {
