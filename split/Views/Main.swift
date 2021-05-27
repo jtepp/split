@@ -23,6 +23,8 @@ struct Main: View {
                     ModalView(title: "Sign in") { //in waiting room with id
                         if !noProf && myId != "" {
                             WaitingRoomView(show: $inWR)
+                        } else if noProf && myId == "" {
+                            NoProfileView(show: $inWR)
                         }
                     }
                     .background(Color.black.edgesIgnoringSafeArea(.all))

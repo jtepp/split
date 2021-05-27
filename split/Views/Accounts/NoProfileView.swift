@@ -1,24 +1,18 @@
 //
-//  ProfileView.swift
+//  NoProfileView.swift
 //  split
 //
-//  Created by Jacob Tepperman on 2021-05-25.
+//  Created by Jacob Tepperman on 2021-05-27.
 //
 
 import SwiftUI
 
-struct ProfileView: View {
-    @Binding var house: House
-    @Binding var m: Member
-    @State var showSignOut = false
-    @State var showImagePicker = false
-    @State var showAdminPicker = false
-    @State var sourceType: UIImagePickerController.SourceType = .camera
-    @State var adminChoice = [Member]()
-    @State var img: UIImage?
+struct NoProfileView: View {
+    @Binding var show: Bool
+    @State var m = Member.empty
     var body: some View {
         ScrollView {
-            HeaderText(text: "Profile")
+            HeaderText(text: "Create your profile")
             VStack {
                 b64toimg(b64: m.image)
                     .resizable()
@@ -26,10 +20,6 @@ struct ProfileView: View {
                     .frame(width: 200, height: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .shadow(radius: 4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(Color.white.opacity(0.5))
-                    )
                     .overlay(
                         Menu(content: {
                             Button(action: {
@@ -125,11 +115,5 @@ struct ProfileView: View {
                 MemberPicker(show: $showAdminPicker, house: $house, choice: $adminChoice)
             }
         }
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder))
     }
 }
