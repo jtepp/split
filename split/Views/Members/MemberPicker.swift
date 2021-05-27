@@ -73,7 +73,7 @@ struct imgButton: View {
                                 .foregroundColor(selected ? Color.white : Color.clear)
                         )
                 )
-                .onChange(of: choice.first?.name ?? "", perform: { _ in
+                .onChange(of: choice.first?.name, perform: { _ in
                     selected = choice.contains(where: { (m) -> Bool in
                         return m.name == member.name
                     })

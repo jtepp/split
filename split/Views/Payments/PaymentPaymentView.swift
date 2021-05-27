@@ -10,7 +10,7 @@ import SwiftUI
 struct PaymentPaymentView: View {
     @Binding var house: House
     @State var showPicker = false
-    @State var chosenTo: [Member] = [Member]()
+    @State var choice: [Member] = [Member]()
     var body: some View {
         HStack {
             Text("To:")
@@ -35,7 +35,7 @@ struct PaymentPaymentView: View {
         }
         .padding()
         .sheet(isPresented: $showPicker, content: {
-            MemberPicker(show: $showPicker, house: $house, choice: $chosenTo, multiple: false)
+            MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: false)
         })
     }
 }
