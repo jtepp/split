@@ -16,7 +16,7 @@ struct RequestPaymentView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("To:")
+                Text("From:")
                     .font(.title)
                     .bold()
                     .foregroundColor(.white)
@@ -38,7 +38,7 @@ struct RequestPaymentView: View {
             }
             .padding()
             .sheet(isPresented: $showPicker, content: {
-                MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: false)
+                MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: true)
             })
 //            Spacer()
             InputField(name: "Amount", text: $amountText)

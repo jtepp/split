@@ -12,7 +12,7 @@ struct PaymentView: View {
     @State var typeSelection = 0
     var body: some View {
         ScrollView {
-            HeaderText(text: "Create")
+            HeaderText(text: typeSelection == 1 ? "Request" : "Payment")
             Picker(selection: $typeSelection, label: Text("Picker"), content: {
                 Text("Payment").tag(0)
                 Text("Request").tag(1)
