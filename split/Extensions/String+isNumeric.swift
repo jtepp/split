@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension String {
     var isNumeric: Bool {
-        guard self.characters.count > 0 else { return false }
+        guard self.count > 0 else { return false }
         let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
-        return Set(self.characters).isSubset(of: nums)
+        return Set(self).isSubset(of: nums)
     }
 }
