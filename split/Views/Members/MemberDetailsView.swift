@@ -12,8 +12,11 @@ struct MemberDetailsView: View {
     @Binding var member: Member
     var body: some View {
         ZStack {
-            MenuButton(member: $member) //only if current profile is admin
-
+            if house.members.first(where: { (m) -> Bool in
+                return m.id == UserDefaults.standard.string(forKey: "myId")
+            })!.admin {
+                MenuButton(member: $member)
+            }
             VStack {
                 b64toimg(b64: member.image)
                     .resizable()
