@@ -33,11 +33,11 @@ struct PaymentView: View {
                 RequestPaymentView(house: $house, tabSelection: $tabSelection)
             }
             
-        }.gesture(
-            DragGesture().onChanged { _ in
+        }.onTapGesture {
+            if UIApplication.shared.isKeyboardPresented {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
-         )
+        }
         
     }
 }
@@ -48,6 +48,18 @@ struct PaymentView_Previews: PreviewProvider {
         ZStack {
             Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
+        }
+    }
+}
+
+extension UIApplication {
+    /// Checks if view hierarchy of application contains `UIRemoteKeyboardWindow` if it does, keyboard is presented
+    var isKeyboardPresented: Bool {
+        if let keyboardWindowClass = NSClassFromString("UIRemoteKeyboardWindow"),
+            self.windows.contains(where: { $0.isKind(of: keyboardWindowClass) }) {
+            return true
+        } else {
+            return false
         }
     }
 }

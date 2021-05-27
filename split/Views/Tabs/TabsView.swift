@@ -26,5 +26,10 @@ struct TabsView: View {
                         .tag(3)
                 })
             .tabViewStyle(PageTabViewStyle())
+            .onChange(of: tabSelection) { (_) in
+                if UIApplication.shared.isKeyboardPresented {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+            }
     }
 }
