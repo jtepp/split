@@ -50,6 +50,9 @@ class Fetch: ObservableObject {
                 
                 return Member(id: q.documentID, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin)
             })
+            for member in h.wrappedValue.members {
+                self.updateBalances(h: h.wrappedValue, m: member)
+            }
         }
     }
     
@@ -74,6 +77,9 @@ class Fetch: ObservableObject {
                 
                 return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, by: by)
             })
+            for member in h.wrappedValue.members {
+                self.updateBalances(h: h.wrappedValue, m: member)
+            }
         }
     }
     
@@ -82,12 +88,14 @@ class Fetch: ObservableObject {
     }
     
     func sendPayment(p: Payment, h: House) {
-//        let pId =
-            db.collection("houses/\(h.id)/payments").addDocument(data:
-                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID"]
+        //        let pId =
+        db.collection("houses/\(h.id)/payments").addDocument(data:
+                                                                ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID"]
         )
-//            .documentID
-        
+        //            .documentID
+        for member in h.members {
+            self.updateBalances(h: h, m: member)
+        }
         
     }
     
@@ -112,12 +120,26 @@ class Fetch: ObservableObject {
         for payment in h.payments {
             if payment.isRequest {
                 if payment.to == m.name {
-                    
+                    for member in payment.reqfrom {
+                        //they owe me from my request
+                        owesMe[member] = owesMe[member] ?? 0 + payment.amount / Float(payment.reqfrom.count)
+                    }
+                } else if payment.reqfrom.contains(m.name) {
+                    //i owe them from their request
+                    iOwe[payment.to] = iOwe[payment.to] ?? 0 + payment.amount / Float(payment.reqfrom.count)
                 }
-            } else {
-                
+            } else { //its a payment
+                if payment.to == m.name {
+                    //paid to me
+                    owesMe[payment.from] = owesMe[payment.from] ?? 0 - payment.amount //they owe me less now
+                } else if payment.from == m.name {
+                    //i paid them
+                    iOwe[payment.to] = iOwe[payment.to] ?? 0 - payment.amount//i owe them less now
+                }
             }
         }
+        
+        db.document("houses/\(h.id)/members/\(m.id)").updateData(["owesMe":owesMe, "iOwe":iOwe])
         
         
     }
@@ -125,6 +147,9 @@ class Fetch: ObservableObject {
     
     func deletePayment(p: Payment, h: House) {
         db.document("houses/\(h.id)/payments/\(p.id!)").delete()
+        for member in h.members {
+            self.updateBalances(h: h, m: member)
+        }
     }
     
 }
