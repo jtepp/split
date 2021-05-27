@@ -16,7 +16,7 @@ struct MemberDetailsView: View {
             if house.members.first(where: { (m) -> Bool in
                 return m.id == UserDefaults.standard.string(forKey: "myId")
             })!.admin {
-                MenuButton(member: $member)
+                MenuButton(member: $member, showRemove: $showRemove)
             }
             VStack {
                 b64toimg(b64: member.image)
@@ -40,7 +40,7 @@ struct MemberDetailsView: View {
             }
             .padding(.vertical, 40)
             .alert(isPresented: $showRemove, content: {
-                Alert(title: Text("Remove member"), message: Text("Are you sure you want to remove \(member.name) from this house?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                Alert(title: Text("Remove \(member.name)"), message: Text("Are you sure you want to remove \(member.name) from this house?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
                     //remove
                 }), secondaryButton: Alert.Button.cancel())
             })
@@ -63,13 +63,16 @@ struct MemberDetailsView_Previews: PreviewProvider {
 
 struct MenuButton: View {
     @Binding var member: Member
+    @Binding var showRemove: Bool
     //attach to house
     var body: some View {
         VStack {
             HStack {
                 Spacer()
                 Menu(content: {
-                    Button("Remove from house", action: {})
+                    Button("Remove from house", action: {
+                        showRemove = true
+                    })
                 }, label: {
                     Image(systemName: "ellipsis")
                         .foregroundColor(.white)
