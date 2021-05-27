@@ -41,7 +41,13 @@ struct RequestPaymentView: View {
                 MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: true)
             })
 //            Spacer()
-            InputField(name: "Amount", text: $amountText)
+            VStack {
+                InputField(name: "Amount", text: $amountText)
+                Text("Total amount will be split equally between members")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .opacity(0.5)
+            }
             .padding()
             InputField(name: "Memo", text: $memoText)
                 .padding()
