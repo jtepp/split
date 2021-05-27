@@ -28,7 +28,7 @@ struct MemberDetailsView: View {
                     Text("House admin")
                 }
                 Spacer()
-                MemberPaymentInfoView(member: $member, payments: $house.payments)
+                MemberPaymentInfoView(member: $member, house: $house)
                 Spacer()
                 Text("ID: \(member.id)")
                     .font(.caption)

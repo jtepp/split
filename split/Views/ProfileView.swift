@@ -61,7 +61,7 @@ struct ProfileView: View {
                     Text("House admin")
                 }
                 Spacer()
-                MemberPaymentInfoView(member: $m, payments: $house.payments)
+                MemberPaymentInfoView(member: $m, house: $house)
                 Spacer()
                 Button(action: {
                     showSignOut = true
