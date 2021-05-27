@@ -30,6 +30,7 @@
 		0C95131E265DB7C0005398CF /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C95131D265DB7C0005398CF /* MemberCell.swift */; };
 		0C9D26CF265F263E006A7AF6 /* String+isNumeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9D26CE265F263E006A7AF6 /* String+isNumeric.swift */; };
 		0CA0E9BD2660369D002876CF /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0E9BC2660369D002876CF /* ModalView.swift */; };
+		0CA0E9C126603809002876CF /* WaitingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0E9C026603809002876CF /* WaitingRoomView.swift */; };
 		0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F3265D8F140016CA92 /* ActivityView.swift */; };
 		0CBF09F7265D8F370016CA92 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F6265D8F370016CA92 /* MembersView.swift */; };
 		0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F9265D8F510016CA92 /* ProfileView.swift */; };
@@ -67,6 +68,7 @@
 		0C95131D265DB7C0005398CF /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		0C9D26CE265F263E006A7AF6 /* String+isNumeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNumeric.swift"; sourceTree = "<group>"; };
 		0CA0E9BC2660369D002876CF /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
+		0CA0E9C026603809002876CF /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
 		0CBF09F3265D8F140016CA92 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		0CBF09F6265D8F370016CA92 /* MembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersView.swift; sourceTree = "<group>"; };
 		0CBF09F9265D8F510016CA92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			children = (
 				0C2A0588265CAA44002BD46D /* Main.swift */,
 				0CA0E9BC2660369D002876CF /* ModalView.swift */,
+				0CA0E9BF266037FE002876CF /* Accounts */,
 				0C64FED9265EED43009B0C3C /* ImagePicker.swift */,
 				0C625990265EB440002E58A3 /* HeaderText.swift */,
 				0C625970265EA855002E58A3 /* Payments */,
@@ -190,6 +193,14 @@
 				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
 			);
 			path = Activity;
+			sourceTree = "<group>";
+		};
+		0CA0E9BF266037FE002876CF /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				0CA0E9C026603809002876CF /* WaitingRoomView.swift */,
+			);
+			path = Accounts;
 			sourceTree = "<group>";
 		};
 		0CEE3829265E167C0013BB12 /* Members */ = {
@@ -355,6 +366,7 @@
 				0C9D26CF265F263E006A7AF6 /* String+isNumeric.swift in Sources */,
 				0C0CA77A265EF4D20062FDDD /* UIImage+resized.swift in Sources */,
 				0C625991265EB440002E58A3 /* HeaderText.swift in Sources */,
+				0CA0E9C126603809002876CF /* WaitingRoomView.swift in Sources */,
 				0C0CA77E265F01BE0062FDDD /* PaymentPaymentView.swift in Sources */,
 				0C0CA784265F08CD0062FDDD /* MemberPicker.swift in Sources */,
 				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,

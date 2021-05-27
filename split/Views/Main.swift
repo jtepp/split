@@ -20,9 +20,12 @@ struct Main: View {
                 .animation(.easeOut)
             TabBar(tabSelection: $tabSelection)
                 .sheet(isPresented: $inWR) {
-                    ModalView(title: "Sign in") {
-                        
+                    ModalView(title: "Sign in") { //in waiting room with id
+                        if !noProf && myId != "" {
+                            WaitingRoomView(show: $inWR)
+                        }
                     }
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
                 }
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
