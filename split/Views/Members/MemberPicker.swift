@@ -17,7 +17,9 @@ struct MemberPicker: View {
             Color.black.edgesIgnoringSafeArea(.all)
             ScrollView {
                 HeaderText(text: "Choose \(multiple ? "members" : "a member")")
-                ForEach (house.members) { member in
+                ForEach (house.members.filter({ (m) -> Bool in
+                    return m.id != UserDefaults.standard.string(forKey: "myId")
+                })) { member in
                     imgButton(show: $show, member: .constant(member), choice: $choice, multiple: multiple)
                 }
                 Spacer()
