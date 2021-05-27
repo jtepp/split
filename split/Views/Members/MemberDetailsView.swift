@@ -11,6 +11,7 @@ struct MemberDetailsView: View {
     @Binding var house: House
     @Binding var member: Member
     @State var showRemove = false
+    @Binding var showView: Bool
     var body: some View {
         ZStack {
             if house.members.first(where: { (m) -> Bool in
@@ -45,7 +46,8 @@ struct MemberDetailsView: View {
             .padding(.vertical, 40)
             .alert(isPresented: $showRemove, content: {
                 Alert(title: Text("Remove \(member.name)"), message: Text("Are you sure you want to remove \(member.name) from this house?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                    //remove
+                    Fetch().removeMember(m: member, h: house)
+                    showView = false
                 }), secondaryButton: Alert.Button.cancel())
             })
         }
@@ -58,7 +60,7 @@ struct MemberDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         Text("")
             .sheet(isPresented: .constant(true), content: {
-                MemberDetailsView(house: .constant(.placeholder), member: .constant(Member.placeholder))
+                MemberDetailsView(house: .constant(.placeholder), member: .constant(Member.placeholder), showView: .constant(true))
                     .preferredColorScheme(.dark)
             })
         

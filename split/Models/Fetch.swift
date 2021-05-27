@@ -151,7 +151,10 @@ class Fetch: ObservableObject {
             self.updateBalances(h: h, m: member)
         }
     }
-    
+ 
+    func removeMember(m: Member, h: House) {
+        db.document("houses/\(h.id)/members/\(m.id)").delete()
+    }
 }
 
 func idfromnamehouse(name: String, house: House) -> String {
