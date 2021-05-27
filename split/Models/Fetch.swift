@@ -36,8 +36,14 @@ class Fetch: ObservableObject {
                 
                 if h.wrappedValue.members.first(where: { (m) -> Bool in
                     return m.id == UserDefaults.standard.string(forKey: "myId")
-                }) == nil && !h.wrappedValue.members.isEmpty {
-                    UserDefaults.standard.set("", forKey: "houseId")
+                }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
+                    //if ur an alien, go to void, otherwise get waitingRoomed
+                    if myId == "" {
+                        UserDefaults.standard.set("", forKey: "houseId")
+                    } else {
+                        UserDefaults.standard.set("waitingRoom", forKey: "houseId")
+                        inWR.wrappedValue = true
+                    }
                 }
                 
             }
@@ -51,12 +57,8 @@ class Fetch: ObservableObject {
                 print(data)
                 var e = House.empty
                 let newMember = Member(id: myId, name: (data["name"] ?? "") as! String, image: (data["image"] ?? "") as! String)
-                
-                if h.wrappedValue.members.first(where: { (m) -> Bool in
-                    return m.id == UserDefaults.standard.string(forKey: "myId")
-                }) == nil {
-                    UserDefaults.standard.set("", forKey: "houseId")
-                }
+                e.members = [newMember]
+                h.wrappedValue = e //empty house
                 
             }
         } else if id == "" {
