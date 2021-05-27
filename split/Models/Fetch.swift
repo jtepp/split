@@ -86,4 +86,8 @@ class Fetch: ObservableObject {
         )
     }
     
+    func deletePayment(p: Payment, h: House) {
+        db.document("houses\(h.id)/payments/\(p.id!)").delete()
+    }
+    
 }
