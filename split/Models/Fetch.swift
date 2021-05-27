@@ -100,19 +100,6 @@ class Fetch: ObservableObject {
     }
     
     
-    //iterate through every member
-    //if in reqfrom, balance goes down (u owe)
-    //if in from, balance goes up (u sent)
-    
-    //array for owe, array for sent - each member by index
-    //if indices dont cancel, you owe
-    
-    
-    //array for to in isRequest (u asked)
-    //array for to in payment (u were paid)
-    //if indices dont cancel, you are owed
-    
-    
     func updateBalances(h: House, m: Member) {
         var owesMe = [String:Float]()
         var iOwe = [String:Float]()
@@ -151,7 +138,7 @@ class Fetch: ObservableObject {
             self.updateBalances(h: h, m: member)
         }
     }
- 
+    
     func removeMember(m: Member, h: House) {
         let docRef = db.document("houses/\(h.id)/members/\(m.id)")
         docRef.getDocument { (documentSnapshot, err) in
@@ -159,12 +146,24 @@ class Fetch: ObservableObject {
                 print("couldn't get doc \(String(describing: err))")
                 return
             }
-            let wr = self.db.collection("waitingRoom").addDocument(data: doc.data()!).documentID
-            self.db.document("waitingRoom/\(wr)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
+            self.db.document("waitingRoom/\(m.id)").setData(doc.data()!)
+            self.db.document("waitingRoom/\(m.id)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
                 docRef.delete()
             })
         }
         
+    }
+    func swapAdmin(m:Member, h:House){
+        db.collection("houses/"+h.id+"/members").addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("no house by id %s, or maybe no members..?", h.id)
+                return
+            }
+            documents.forEach { (doc) in
+                let id = doc.documentID
+                self.db.document("houses/\(h.id)/members/\(id)").updateData(["admin": id == m.id ? true : false])
+            }
+        }
     }
 }
 
