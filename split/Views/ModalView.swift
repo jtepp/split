@@ -31,7 +31,7 @@ struct ModalView<Content: View>: View
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .principal, content: {
-                    Text("Sign in")
+                    Text(title)
                 })
                 
                 ToolbarItem(placement: .navigationBarTrailing, content: {

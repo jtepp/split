@@ -19,6 +19,11 @@ struct Main: View {
             TabsView(tabSelection: $tabSelection, house: $h, myId: $myId)
                 .animation(.easeOut)
             TabBar(tabSelection: $tabSelection)
+                .sheet(isPresented: $inWR) {
+                    ModalView(title: "Sign in") {
+                        
+                    }
+                }
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
