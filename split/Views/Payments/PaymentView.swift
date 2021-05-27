@@ -26,6 +26,16 @@ struct PaymentView: View {
                     )
             )
             .padding()
+            .onTapGesture {
+                if UIApplication.shared.isKeyboardPresented {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+                if typeSelection == 0 {
+                    typeSelection = 1
+                } else {
+                    typeSelection = 0
+                }
+            }
             
             if typeSelection == 0 {
                 PaymentPaymentView(house: $house, tabSelection: $tabSelection)
@@ -56,7 +66,7 @@ extension UIApplication {
     /// Checks if view hierarchy of application contains `UIRemoteKeyboardWindow` if it does, keyboard is presented
     var isKeyboardPresented: Bool {
         if let keyboardWindowClass = NSClassFromString("UIRemoteKeyboardWindow"),
-            self.windows.contains(where: { $0.isKind(of: keyboardWindowClass) }) {
+           self.windows.contains(where: { $0.isKind(of: keyboardWindowClass) }) {
             return true
         } else {
             return false
