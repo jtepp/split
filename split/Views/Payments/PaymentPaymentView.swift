@@ -14,6 +14,7 @@ struct PaymentPaymentView: View {
     @State var choice: [Member] = [Member]()
     @State var amountText = String()
     @State var memoText = String()
+    @Binding var tabSelection: Int
     var body: some View {
         VStack {
             HStack {
@@ -56,7 +57,7 @@ struct PaymentPaymentView: View {
                 choice = [Member]()
                 amountText = ""
                 memoText = ""
-                
+                tabSelection = 0
             }, label: {
                 HStack {
                     Spacer()

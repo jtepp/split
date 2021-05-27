@@ -10,6 +10,7 @@ import SwiftUI
 struct PaymentView: View {
     @Binding var house: House
     @State var typeSelection = 0
+    @Binding var tabSelection: Int
     var body: some View {
         ScrollView {
             HeaderText(text: typeSelection == 1 ? "Request" : "Payment")
@@ -27,9 +28,9 @@ struct PaymentView: View {
             .padding()
             
             if typeSelection == 0 {
-                PaymentPaymentView(house: $house)
+                PaymentPaymentView(house: $house, tabSelection: $tabSelection)
             } else {
-                RequestPaymentView(house: $house)
+                RequestPaymentView(house: $house, tabSelection: $tabSelection)
             }
             
         }
