@@ -25,6 +25,10 @@ struct MemberDetailsView: View {
                     .frame(width: 200, height: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .shadow(radius: 4)
+                    .background(
+                        RoundedRectangle(cornerRadius: 25)
+                            .fill(Color.white.opacity(0.5))
+                    )
                 Text(member.name)
                     .font(.largeTitle)
                     .bold()
