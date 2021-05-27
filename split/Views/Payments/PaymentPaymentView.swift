@@ -53,6 +53,9 @@ struct PaymentPaymentView: View {
                 })?.name ?? "unknown sender", amount: Float(amountText)!, time: Int(NSDate().timeIntervalSince1970), memo: memoText, isRequest: false), h: house)
                 
                 //clear
+                choice = [Member]()
+                amountText = ""
+                memoText = ""
                 
             }, label: {
                 HStack {
