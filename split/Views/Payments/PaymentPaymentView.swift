@@ -9,10 +9,6 @@ import SwiftUI
 
 struct PaymentPaymentView: View {
     
-//    init() {
-//        UITextView.appearance().backgroundColor = .clear
-//    }
-    
     @Binding var house: House
     @State var showPicker = false
     @State var choice: [Member] = [Member]()
@@ -46,35 +42,10 @@ struct PaymentPaymentView: View {
                 MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: false)
             })
 //            Spacer()
-            HStack {
-                Text("Amount:")
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(.white)
-                Spacer()
-                TextField("Amount", text: $amountText)
-                    .opacity(0.5)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
-                    
-                Spacer()
-            }
+            InputField(name: "Amount", text: $amountText)
             .padding()
-            //memo
-            HStack {
-                Text("Memo:")
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(.white)
-                Spacer()
-                TextField("Memo", text: $memoText)
-                    .opacity(0.5)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
-                    
-                Spacer()
-            }
-            .padding()
+            InputField(name: "Memo", text: $memoText)
+                .padding()
             Spacer()
             Button(action: {}, label: {
                 HStack {
@@ -90,6 +61,27 @@ struct PaymentPaymentView: View {
                     )
                     .padding()
             })
+        }
+    }
+}
+
+
+struct InputField: View {
+    var name: String
+    @Binding var text: String
+    var body: some View {
+        HStack {
+            Text("\(name):")
+                .font(.title)
+                .bold()
+                .foregroundColor(.white)
+            Spacer()
+            TextField(name, text: $text)
+                .opacity(0.5)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(.numberPad)
+                
+            Spacer()
         }
     }
 }
