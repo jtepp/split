@@ -153,7 +153,16 @@ class Fetch: ObservableObject {
     }
  
     func removeMember(m: Member, h: House) {
-        db.document("houses/\(h.id)/members/\(m.id)").delete()
+        let docRef = db.document("houses/\(h.id)/members/\(m.id)")
+        docRef.getDocument { (documentSnapshot, err) in
+            guard let doc = documentSnapshot else {
+                print("couldn't get doc \(String(describing: err))")
+                return
+            }
+            let wr = self.db.collection("WaitingRoom").addDocument(data: doc.data()!).documentID
+            self.db.document("WaitingRoom/\(wr)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()])
+        }
+//        docRef.delete()
     }
 }
 
