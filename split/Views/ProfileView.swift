@@ -12,6 +12,7 @@ struct ProfileView: View {
     @Binding var m: Member
     @State var showSignOut = false
     @State var showImagePicker = false
+    @State var showAdminPicker = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
     @State var img: UIImage?
     var body: some View {
@@ -82,9 +83,15 @@ struct ProfileView: View {
                     .padding()
                 })
                 .alert(isPresented: $showSignOut, content: {
-                    Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                        //signout
-                    }), secondaryButton: Alert.Button.cancel())
+                    if m.admin {
+                        Alert(title: Text("Leave House"), message: Text("You have to choose a new House admin before you can leave this house"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
+                            showAdminPicker = true
+                        }), secondaryButton: Alert.Button.cancel())
+                    } else {
+                        Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                            //signout
+                        }), secondaryButton: Alert.Button.cancel())
+                    }
                 })
                 Text("ID: \(m.id)")
                     .font(.caption)
@@ -102,9 +109,9 @@ struct ProfileView: View {
                     Fetch().updateImg(img: img!, hId: house.id, myId: m.id)
                 }
             })
-                        .onAppear{
-                            UserDefaults.standard.set(m.id, forKey: "myId")
-                        }
+            .onAppear{
+                UserDefaults.standard.set(m.id, forKey: "myId")
+            }
         }
     }
 }
