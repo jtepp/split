@@ -225,6 +225,12 @@ class Fetch: ObservableObject {
             }
         }
     }
+    func addToWR(m:Member){
+        let id = db.collection("waitingRoom").addDocument(data: ["name":m.name, "image":m.image])
+            
+            UserDefaults.standard.set("waitingRoom", forKey: "houseId")
+        UserDefaults.standard.set(id, forKey: "myId")
+    }
 }
 
 func idfromnamehouse(name: String, house: House) -> String {

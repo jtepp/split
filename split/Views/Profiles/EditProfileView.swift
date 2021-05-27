@@ -13,7 +13,7 @@ struct EditProfileView: View {
     @State var img: UIImage?
     @State var name = String()
     @State var showImagePicker = false
-    @State var sourceType: UIImagePickerController.SourceType = .camera
+    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     var body: some View {
         ScrollView {
             HeaderText(text: "Edit your profile")
@@ -65,10 +65,10 @@ struct EditProfileView: View {
                     .padding()
                     .padding(.top)
                 Spacer()
-                Button(action: { /*************************************                                                     ONLY IF FIELDS ARE FILLED                                                                                                   *******************************************/
-                    //save profile
+                Button(action: {
                     if name.replacingOccurrences(of: " ", with: "") != "" {
                         show = false
+                        Fetch().addToWR(m:m)
                     }
                 }, label: {
                     HStack {
