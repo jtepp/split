@@ -12,9 +12,12 @@ import FirebaseFirestore
 class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
-    func getHouse (h: Binding<House>) {
-        var id = UserDefaults.standard.string(forKey: "houseId") ?? ""
-        if id != "" {
+    func getHouse (h: Binding<House>, inWR: Binding<Bool>) {
+        let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
+        let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
+        
+        if id != "" && id != "waitingRoom" { // has real house id
+            inWR.wrappedValue = false
             db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
                 guard let doc = querySnapshot else {
                     print("no house by id %s", id)
@@ -33,11 +36,31 @@ class Fetch: ObservableObject {
                 
                 if h.wrappedValue.members.first(where: { (m) -> Bool in
                     return m.id == UserDefaults.standard.string(forKey: "myId")
+                }) == nil && !h.wrappedValue.members.isEmpty {
+                    UserDefaults.standard.set("", forKey: "houseId")
+                }
+                
+            }
+        } else if id == "waitingRoom" && inWR.wrappedValue && myId != "" { //in waiting room and account exists
+            db.document("waitingRoom/"+myId).addSnapshotListener { (querySnapshot, error) in
+                guard let doc = querySnapshot?.data() else {
+                    print(error ?? "inwr uh oh")
+                    return
+                }
+                let data = doc
+                print(data)
+                var e = House.empty
+                let newMember = Member(id: myId, name: (data["name"] ?? "") as! String, image: (data["image"] ?? "") as! String)
+                
+                if h.wrappedValue.members.first(where: { (m) -> Bool in
+                    return m.id == UserDefaults.standard.string(forKey: "myId")
                 }) == nil {
                     UserDefaults.standard.set("", forKey: "houseId")
                 }
                 
             }
+        } else if id == "" {
+            
         }
     }
     
