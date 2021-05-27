@@ -9,9 +9,28 @@ import SwiftUI
 
 struct ActivityView: View {
     @Binding var house: House
+    @Binding var tabSelection: Int
     var body: some View {
         ScrollView {
             HeaderText(text: "Activity")
+            if house.payments.isEmpty {
+                VStack {
+                    Spacer()
+                    Text("No payments have been made or requested yet")
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white.opacity(0.2))
+                        )
+                        .onTapGesture {
+                            tabSelection = 2
+                        }
+                        .padding()
+                    
+                }
+            }
             ForEach(house.payments.sorted(by: { a, b in
                 return a.time > b.time
             })) { payment in
