@@ -23,12 +23,12 @@ class Fetch: ObservableObject {
             
             let password = data?["password"] as? String ?? ""
             
+            h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, payments: h.wrappedValue.payments, password: password)
+            
             self.getMembers(h: h, id: id)
             
             self.getPayments(h: h, id: id)
-            
-            h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, payments: h.wrappedValue.payments, password: password)
-            print(h)
+
         }
     }
     
@@ -69,8 +69,9 @@ class Fetch: ObservableObject {
                 let amount = data["amount"] as? NSNumber ?? 0
                 let memo = data["memo"] as? String ?? ""
                 let isRequest = data["isRequest"] as? Bool ?? false
+                let by = data["by"] as? String ?? ""
                 
-                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest)
+                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, by: by)
             })
         }
     }
@@ -81,7 +82,7 @@ class Fetch: ObservableObject {
     
     func sendPayment(p: Payment, h: House) {
         db.collection("houses/\(h.id)/payments").addDocument(data:
-                                                                ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo]
+                                                                ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID"]
         )
     }
     
