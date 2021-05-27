@@ -102,12 +102,9 @@ struct ProfileView: View {
                     Fetch().updateImg(img: img!, hId: house.id, myId: m.id)
                 }
             })
-            
-            
-            //            .onAppear{
-            //                UserDefaults.standard.set(m.name, forKey: "name")
-            //                UserDefaults.standard.set(m.id, forKey: "myId")
-            //            }
+                        .onAppear{
+                            UserDefaults.standard.set(m.id, forKey: "myId")
+                        }
         }
     }
 }
