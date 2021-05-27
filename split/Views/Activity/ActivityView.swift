@@ -16,13 +16,54 @@ struct ActivityView: View {
                 return a.time > b.time
             })) { payment in
                 if payment.isRequest {
-                    ActivityRequestCell(payment: .constant(payment))
-                        .padding(.bottom, -20)
+                    
+                    if payment.by == UserDefaults.standard.string(forKey: "myId") || house.members.first(where: { (m) -> Bool in
+                        return m.id == UserDefaults.standard.string(forKey: "myId")
+                    })!.admin {
+                        ActivityRequestCell(payment: .constant(payment))
+                            .contextMenu(menuItems: {
+                                Button(action: {
+                                    Fetch().deletePayment(p: payment, h: house)
+                                }, label: {
+                                    Text("Delete")
+                                        .foregroundColor(.red)
+                                    Image(systemName: "trash.fill")
+                                        .foregroundColor(.red)
+                                    
+                                }
+                                )
+                            })
+                            .padding(.bottom, -20)
+                    } else {
+                        ActivityRequestCell(payment: .constant(payment))
+                            .padding(.bottom, -20)
+                    }
                 } else {
-                    ActivityPaymentCell(payment: .constant(payment))
-                        .padding(.bottom, -20)
+                    
+                    if payment.by == UserDefaults.standard.string(forKey: "myId") || house.members.first(where: { (m) -> Bool in
+                        return m.id == UserDefaults.standard.string(forKey: "myId")
+                    })!.admin {
+                        
+                        ActivityPaymentCell(payment: .constant(payment))
+                            .contextMenu(menuItems: {
+                                Button(action: {
+                                    Fetch().deletePayment(p: payment, h: house)
+                                }, label: {
+                                    Text("Delete")
+                                    Image(systemName: "trash.fill")
+                                }
+                                )
+                            })
+                            .padding(.bottom, -20)
+                        
+                    } else {
+                        ActivityPaymentCell(payment: .constant(payment))
+                            .padding(.bottom, -20)
+                        
+                    }
                 }
             }
+            
             .padding()
             Spacer(minLength: 80)
         }
