@@ -11,6 +11,8 @@ struct TabsView: View {
     @Binding var tabSelection: Int
     @Binding var house: House
     @Binding var myId: String
+    @Binding var inWR: Bool
+    @Binding var noProf: Bool
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
@@ -26,5 +28,12 @@ struct TabsView: View {
                         .tag(3)
                 })
             .tabViewStyle(PageTabViewStyle())
+            .sheet(isPresented: $noProf) {
+                ModalView(title: "Sign in") { //in waiting room with id
+                    NoProfileView(show: $noProf)
+                        .background(Color.black.edgesIgnoringSafeArea(.all))
+                }
+            }
+            .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

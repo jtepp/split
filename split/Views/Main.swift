@@ -16,20 +16,9 @@ struct Main: View {
     @State var tabSelection = 0
     var body: some View {
         ZStack {
-            TabsView(tabSelection: $tabSelection, house: $h, myId: $myId)
+            TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
                 .animation(.easeOut)
             TabBar(tabSelection: $tabSelection)
-                .sheet(isPresented: $inWR) {
-                    ModalView(title: "Sign in") { //in waiting room with id
-                        if !noProf && myId != "" {
-                            WaitingRoomView(show: $inWR)
-                        } else if noProf && myId == "" {
-                            NoProfileView(show: $inWR)
-                                .background(Color.black.edgesIgnoringSafeArea(.all))
-                        }
-                    }
-                }
-                .background(Color.black.edgesIgnoringSafeArea(.all))
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{

@@ -11,6 +11,7 @@ struct EditProfileView: View {
     @Binding var show: Bool
     @Binding var m: Member
     @State var img: UIImage?
+    @State var name = String()
     @State var showImagePicker = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
     var body: some View {
@@ -57,13 +58,17 @@ struct EditProfileView: View {
                         })
                         .offset(y: 100)
                     )
+                    .padding(.top, -40)
                 Spacer()
-                InputField(name: "Name", text: .constant($m.wrappedValue.name))
+                InputField(name: "Name", text: $name)
                     .padding()
+                    .padding(.top)
                 Spacer()
                 Button(action: { /*************************************                                                     ONLY IF FIELDS ARE FILLED                                                                                                   *******************************************/
                     //save profile
-                    show = false
+                    if name.replacingOccurrences(of: " ", with: "") != "" {
+                        show = false
+                    }
                 }, label: {
                     HStack {
                         Spacer()
@@ -80,6 +85,7 @@ struct EditProfileView: View {
                     )
                     .padding()
                 })
+                .disabled(name.replacingOccurrences(of: " ", with: "") == "")
                 Spacer(minLength: 80)
             }
             .padding(.vertical, 40)
