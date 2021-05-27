@@ -1,5 +1,5 @@
 //
-//  NoProfileView.swift
+//  EditProfileView.swift
 //  split
 //
 //  Created by Jacob Tepperman on 2021-05-27.
@@ -7,12 +7,15 @@
 
 import SwiftUI
 
-struct NoProfileView: View {
+struct EditProfileView: View {
     @Binding var show: Bool
-    @State var m = Member.empty
+    @Binding var m: Member
+    @State var img: UIImage?
+    @State var showImagePicker = false
+    @State var sourceType: UIImagePickerController.SourceType = .camera
     var body: some View {
         ScrollView {
-            HeaderText(text: "Create your profile")
+            HeaderText(text: "Profile")
             VStack {
                 b64toimg(b64: m.image)
                     .resizable()
@@ -20,6 +23,10 @@ struct NoProfileView: View {
                     .frame(width: 200, height: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .shadow(radius: 4)
+                    .background(
+                        RoundedRectangle(cornerRadius: 25)
+                            .fill(Color.white.opacity(0.5))
+                    )
                     .overlay(
                         Menu(content: {
                             Button(action: {
@@ -50,47 +57,27 @@ struct NoProfileView: View {
                         })
                         .offset(y: 100)
                     )
-                Text(m.name)
-                    .font(.largeTitle)
-                    .bold()
-                if m.admin {
-                    Text("House admin")
-                }
                 Spacer()
-                MemberPaymentInfoView(member: $m, house: $house)
                 Spacer()
-                Button(action: {
-                    showSignOut = true
+                Button(action: { /*************************************                                                     ONLY IF FIELDS ARE FILLED                                                                                                   *******************************************/
+                    //save profile
+                    show = false
                 }, label: {
                     HStack {
                         Spacer()
-                        Text("Leave House")
-                            .foregroundColor(.red)
+                        Text("Save")
+                            .foregroundColor(.white)
                         Spacer()
                     }
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 20)
                             .fill(
-                                Color.white.opacity(0.2)
+                                Color.blue
                             )
                     )
                     .padding()
                 })
-                .alert(isPresented: $showSignOut, content: {
-                    if m.admin {
-                        return Alert(title: Text("Leave House"), message: Text("You have to choose a new House admin before you can leave this house"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
-                            showAdminPicker = true
-                        }), secondaryButton: Alert.Button.cancel())
-                    } else {
-                        return Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                            //signout
-                        }), secondaryButton: Alert.Button.cancel())
-                    }
-                })
-                Text("ID: \(m.id)")
-                    .font(.caption)
-                    .foregroundColor(Color("Secondary"))
                 Spacer(minLength: 80)
             }
             .padding(.vertical, 40)
@@ -101,19 +88,9 @@ struct NoProfileView: View {
             })
             .onChange(of: img, perform: { _ in
                 if img != nil {
-                    Fetch().updateImg(img: img!, hId: house.id, myId: m.id)
+                    m.image = imgtob64(img: img!)
                 }
             })
-            .onAppear{
-                UserDefaults.standard.set(m.id, forKey: "myId")
-            }
-            .sheet(isPresented: $showAdminPicker, onDismiss: {
-                if !adminChoice.isEmpty {
-                    Fetch().swapAdmin(m: adminChoice.first!, h: house)
-                }
-            }) {
-                MemberPicker(show: $showAdminPicker, house: $house, choice: $adminChoice)
-            }
         }
     }
 }
