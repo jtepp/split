@@ -47,6 +47,7 @@ struct PickerButton: View {
     var body: some View {
         if choice.isEmpty {
             Text(text)
+                .foregroundColor(.black)
         } else {
             VStack (alignment: .leading) {
                 ForEach(choice) { m in
