@@ -68,7 +68,7 @@ struct ProfileView: View {
                 }, label: {
                     HStack {
                         Spacer()
-                        Text("Sign Out")
+                        Text("Leave House")
                             .foregroundColor(.red)
                         Spacer()
                     }
@@ -82,7 +82,7 @@ struct ProfileView: View {
                     .padding()
                 })
                 .alert(isPresented: $showSignOut, content: {
-                    Alert(title: Text("Sign Out"), message: Text("Please confirm you want to sign out of this account"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                    Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
                         //signout
                     }), secondaryButton: Alert.Button.cancel())
                 })
