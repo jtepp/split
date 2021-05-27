@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct PaymentPaymentView: View {
+    
+//    init() {
+//        UITextView.appearance().backgroundColor = .clear
+//    }
+    
     @Binding var house: House
     @State var showPicker = false
     @State var choice: [Member] = [Member]()
     @State var amountText = String()
+    @State var memoText = String()
     var body: some View {
         VStack {
             HStack {
@@ -55,6 +61,20 @@ struct PaymentPaymentView: View {
             }
             .padding()
             //memo
+            HStack {
+                Text("Memo:")
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(.white)
+                Spacer()
+                TextField("Memo", text: $memoText)
+                    .opacity(0.5)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                    
+                Spacer()
+            }
+            .padding()
             Spacer()
             Button(action: {}, label: {
                 HStack {
