@@ -13,7 +13,7 @@ struct EditProfileView: View {
     @Binding var img: UIImage?
     @Binding var name: String
     @State var showImagePicker = false
-    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State var sourceType: UIImagePickerController.SourceType = .camera
     var body: some View {
         ScrollView {
             HeaderText(text: "Edit your profile")

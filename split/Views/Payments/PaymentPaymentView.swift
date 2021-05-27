@@ -91,7 +91,7 @@ struct InputField: View {
             TextField(name, text: $text)
                 .opacity(0.5)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.decimalPad)
+                .keyboardType(name.lowercased() == "amount" ? .decimalPad : .default)
                 
             Spacer()
         }

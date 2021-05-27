@@ -233,8 +233,7 @@ class Fetch: ObservableObject {
             }
             UserDefaults.standard.set(documentSnapshot?.documentID ?? "", forKey: "myId")
             myId.wrappedValue = documentSnapshot?.documentID ?? ""
-            var e = Member.empty
-            e.id = documentSnapshot?.documentID ?? ""
+            var e = Member(id: documentSnapshot?.documentID ?? "", name: (doc["name"] ?? "") as! String, image: (doc["image"] ?? "") as! String)
             h.members.wrappedValue.append(e)
             
         }
