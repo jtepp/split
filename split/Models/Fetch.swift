@@ -12,23 +12,32 @@ import FirebaseFirestore
 class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
-    func getHouse (h: Binding<House>, id: String) {
-        db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
-            guard let doc = querySnapshot else {
-                print("no house by id %s", id)
-                return
+    func getHouse (h: Binding<House>) {
+        var id = UserDefaults.standard.string(forKey: "houseId") ?? ""
+        if id != "" {
+            db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
+                guard let doc = querySnapshot else {
+                    print("no house by id %s", id)
+                    return
+                }
+                let data = doc.data()
+                let name = data?["name"] as? String ?? ""
+                
+                let password = data?["password"] as? String ?? ""
+                
+                h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, payments: h.wrappedValue.payments, password: password)
+                
+                self.getMembers(h: h, id: id)
+                
+                self.getPayments(h: h, id: id)
+                
+                if h.wrappedValue.members.first(where: { (m) -> Bool in
+                    return m.id == UserDefaults.standard.string(forKey: "myId")
+                }) == nil {
+                    UserDefaults.standard.set("", forKey: "houseId")
+                }
+                
             }
-            let data = doc.data()
-            let name = data?["name"] as? String ?? ""
-            
-            let password = data?["password"] as? String ?? ""
-            
-            h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, payments: h.wrappedValue.payments, password: password)
-            
-            self.getMembers(h: h, id: id)
-            
-            self.getPayments(h: h, id: id)
-            
         }
     }
     

@@ -10,7 +10,6 @@ import SwiftUI
 struct Main: View {
     @ObservedObject var fetch = Fetch()
     @State var h = House.empty
-    @State var id = "TlRWEGz9GWrKBXqI9T8L"
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? "S7KrRDGkGGnbIqHZZkTk"
     @State var tabSelection = 0
     var body: some View {
@@ -21,7 +20,7 @@ struct Main: View {
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
-            fetch.getHouse(h: $h, id: id)
+            fetch.getHouse(h: $h)
         }
     }
 }
