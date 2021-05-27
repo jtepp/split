@@ -15,7 +15,6 @@ class Fetch: ObservableObject {
     func getHouse (h: Binding<House>, inWR: Binding<Bool>) {
         let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
         let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
-        UserDefaults.standard.set("S7KrRDGkGGnbIqHZZkTk", forKey: "myId")
         
         if id != "" && id != "waitingRoom" { // has real house id
             inWR.wrappedValue = false

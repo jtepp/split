@@ -11,7 +11,7 @@ struct Main: View {
     @ObservedObject var fetch = Fetch()
     @State var h = House.empty
     @State var inWR = true
-    @State var myId = UserDefaults.standard.string(forKey: "myId") ?? "S7KrRDGkGGnbIqHZZkTk"
+    @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
     @State var tabSelection = 0
     var body: some View {
         ZStack {
