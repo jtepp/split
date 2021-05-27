@@ -23,12 +23,12 @@ struct MemberPaymentInfoView: View {
             
             ScrollView {
                 ForEach(house.members.filter({ (m) -> Bool in
-                    return ((member.owesMe[m.name] ?? 0) - (member.iOwe[m.name] ?? 0)) != 0
+                    return (-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0)) != 0
                 })) { m in
                     HStack {
-                        Text(((member.owesMe[m.name] ?? 0) - (member.iOwe[m.name] ?? 0)) < 0 ? "You owe \(m.name):" : "\(m.name) owes you:")
+                        Text((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0)) > 0 ? "You owe \(m.name):" : "\(m.name) owes you:")
                         Spacer()
-                        Text("$\(abs(((member.owesMe[m.name] ?? 0) - (member.iOwe[m.name] ?? 0))), specifier: "%.2f")")
+                        Text("$\(abs((-(member.owesMe[m.name] ?? 0) + (member.iOwe[m.name] ?? 0))), specifier: "%.2f")")
                     }
                     .padding(.horizontal)
                     .padding(.top, 10)
