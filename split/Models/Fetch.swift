@@ -148,13 +148,28 @@ class Fetch: ObservableObject {
             }
             self.db.document("waitingRoom/\(m.id)").setData(doc.data()!)
             self.db.document("waitingRoom/\(m.id)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
+                self.db.collection("houses/\(h.id)/payments").getDocuments { (querySnapshot, err) in
+                    guard let documents = querySnapshot?.documents else {
+                        print("remove member no payments or something")
+                        return
+                    }
+                    for doc in documents.filter({ (doc) -> Bool in
+                        let d = doc.data()
+                        let to = (d["to"] ?? "") as! String
+                        let from = (d["from"] ?? "") as! String
+                        let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
+                        return to.contains(m.name) || from.contains(m.name) || reqfrom.contains(m.name)
+                    }) {
+                        self.db.document("houses/\(h.id)/payments/\(doc.documentID)").delete()
+                    }
+                }
                 docRef.delete()
             })
         }
         
     }
     func swapAdmin(m:Member, h:House){
-        db.collection("houses/"+h.id+"/members").addSnapshotListener { (querySnapshot, error) in
+        db.collection("houses/"+h.id+"/members").getDocuments{ (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("no house by id %s, or maybe no members..?", h.id)
                 return

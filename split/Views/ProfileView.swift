@@ -14,6 +14,7 @@ struct ProfileView: View {
     @State var showImagePicker = false
     @State var showAdminPicker = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
+    @State var adminChoice = [Member]()
     @State var img: UIImage?
     var body: some View {
         ScrollView {
@@ -84,11 +85,11 @@ struct ProfileView: View {
                 })
                 .alert(isPresented: $showSignOut, content: {
                     if m.admin {
-                        Alert(title: Text("Leave House"), message: Text("You have to choose a new House admin before you can leave this house"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
+                        return Alert(title: Text("Leave House"), message: Text("You have to choose a new House admin before you can leave this house"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
                             showAdminPicker = true
                         }), secondaryButton: Alert.Button.cancel())
                     } else {
-                        Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                        return Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
                             //signout
                         }), secondaryButton: Alert.Button.cancel())
                     }
@@ -111,6 +112,13 @@ struct ProfileView: View {
             })
             .onAppear{
                 UserDefaults.standard.set(m.id, forKey: "myId")
+            }
+            .sheet(isPresented: $showAdminPicker, onDismiss: {
+                if !adminChoice.isEmpty {
+                    Fetch().swapAdmin(m: adminChoice.first!, h: house)
+                }
+            }) {
+                MemberPicker(show: $showAdminPicker, house: $house, choice: $adminChoice)
             }
         }
     }
