@@ -81,13 +81,14 @@ class Fetch: ObservableObject {
     }
     
     func sendPayment(p: Payment, h: House) {
-        db.collection("houses/\(h.id)/payments").addDocument(data:
+        let pId = db.collection("houses/\(h.id)/payments").addDocument(data:
                                                                 ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID"]
-        )
+        ).documentID
+        print(pId)
     }
     
     func deletePayment(p: Payment, h: House) {
-        db.document("houses\(h.id)/payments/\(p.id!)").delete()
+        db.document("houses/\(h.id)/payments/\(p.id!)").delete()
     }
     
 }
