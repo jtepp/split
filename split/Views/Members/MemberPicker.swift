@@ -17,38 +17,7 @@ struct MemberPicker: View {
             ScrollView {
                 HeaderText(text: "Choose \(multiple ? "members" : "a member")")
                 ForEach (house.members) { member in
-                    HStack {
-                        b64toimg(b64: member.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 40, height: 40)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
-                            .shadow(radius: 4)
-                            .overlay(
-//                                Image(systemName: m.admin ? "crown.fill" : "")
-//                                    .offset(x: -3, y: -30)
-//                                    .scaleEffect(x: 1.2)
-//                                    .rotationEffect(.degrees(-30))
-//                                    .foregroundColor(.white)
-                                EmptyView()
-                            )
-                        Spacer()
-                        VStack(alignment: .trailing) {
-                            Text(member.name)
-                                .bold()
-                        }
-                    }
-                    .foregroundColor(.black)
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(
-                                Color.white.opacity(0.5)
-                            )
-                    )
-                    .padding(.horizontal)
-                    .padding(.top, 10)
+                    imgButton(member: .constant(member), choice: $choice, multiple: multiple)
                 }
             }
         }
@@ -67,12 +36,41 @@ struct MemberPicker_Previews: PreviewProvider {
 struct imgButton: View {
     @Binding var member: Member
     @State var selected: Bool = false
+    @Binding var choice: [Member]
+    var multiple: Bool
     var body: some View {
-        b64toimg(b64: member.image)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 40, height: 40)
-            .clipShape(RoundedRectangle(cornerRadius: 5))
-            .shadow(radius: 4)
+        HStack {
+            b64toimg(b64: member.image)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 40, height: 40)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
+                .shadow(radius: 4)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(Color.blue)
+                        .frame(width: 40, height: 40)
+                        .overlay(
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.white)
+                        )
+                )
+            Spacer()
+            VStack(alignment: .trailing) {
+                Text(member.name)
+                    .bold()
+            }
+        }
+        .foregroundColor(.black)
+        .padding(.horizontal)
+        .padding(.vertical, 10)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(
+                    Color.white.opacity(0.5)
+                )
+        )
+        .padding(.horizontal)
+        .padding(.top, 10)
     }
 }
