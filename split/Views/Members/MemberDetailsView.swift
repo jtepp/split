@@ -19,6 +19,12 @@ struct MemberDetailsView: View {
                 return m.id == UserDefaults.standard.string(forKey: "myId")
             })!.admin {
                 MenuButton(member: $member, showRemove: $showRemove, showAdminAlert: $showAdminAlert)
+                    .alert(isPresented: $showAdminAlert, content: {
+                        Alert(title: Text("Set \(member.name) as House admin"), message: Text("Are you sure you want to set \(member.name) as the new House admin? This change can only be reverted by the new admin"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                            Fetch().swapAdmin(m: member, h: house)
+                            showView = false
+                        }), secondaryButton: Alert.Button.cancel())
+                    })
             }
             VStack {
                 b64toimg(b64: member.image)
@@ -51,12 +57,6 @@ struct MemberDetailsView: View {
                     showView = false
                 }), secondaryButton: Alert.Button.cancel())
             })
-//            .alert(isPresented: $showAdminAlert, content: {
-//                Alert(title: Text("Set \(member.name) as House admin"), message: Text("Are you sure you want to set \(member.name) as the new House admin? This change can only be reverted by the new admin"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-//                    Fetch().swapAdmin(m: member, h: house)
-//                    showView = false
-//                }), secondaryButton: Alert.Button.cancel())
-//            })
         }
         .foregroundColor(.white)
         .background(Color.black.edgesIgnoringSafeArea(.all))
