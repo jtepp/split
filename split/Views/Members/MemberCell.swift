@@ -28,7 +28,7 @@ struct MemberCell: View {
             VStack(alignment: .trailing) {
                 Text(m.name)
                     .bold()
-                moneyText(b: $m.balance)
+                moneyText(b: .constant(0.0))//$m.balance)
             }
 //          Image(systemName: "chevron.right")
         }

@@ -13,7 +13,7 @@ struct MemberPaymentInfoView: View {
     var body: some View {
         VStack {
             HStack {
-                moneyText(b: $member.balance, pre: "Balance: ")
+                moneyText(b: .constant(0.0), pre: "Balance: ")
                     .font(.headline)
                 Spacer()
             }

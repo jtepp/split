@@ -28,7 +28,7 @@ class Fetch: ObservableObject {
             self.getMembers(h: h, id: id)
             
             self.getPayments(h: h, id: id)
-
+            
         }
     }
     
@@ -43,11 +43,12 @@ class Fetch: ObservableObject {
                 let data = q.data()
                 
                 let name = data["name"] as? String ?? ""
-                let balance = data["balance"] as? NSNumber ?? 0
+                let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
+                let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
                 let image = data["image"] as? String ?? ""
                 let admin = data["admin"] as? Bool ?? false
                 
-                return Member(id: q.documentID, name: name, balance: Float(truncating: balance), image: image, admin: admin)
+                return Member(id: q.documentID, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin)
             })
         }
     }
@@ -81,40 +82,55 @@ class Fetch: ObservableObject {
     }
     
     func sendPayment(p: Payment, h: House) {
-        let pId = db.collection("houses/\(h.id)/payments").addDocument(data:
-                                                                ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID"]
-        ).documentID
+//        let pId =
+            db.collection("houses/\(h.id)/payments").addDocument(data:
+                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID"]
+        )
+//            .documentID
         
-        if p.isRequest {
-            //set owed from in self
-            db.document("houses/\(h.id)/members/\(UserDefaults.standard.string(forKey: "myId")!)").updateData(["owesMe" : p.reqfrom.map({ (String) -> [AnyHashable : Any] in
-                <#code#>
-            })])
-            
-            //set owed to thru reqfrom
-            
-            
-            
-        }
+        
     }
     
-            
-            //iterate through every member
-            //if in reqfrom, balance goes down (u owe)
-            //if in from, balance goes up (u sent)
-            
-            //array for owe, array for sent - each member by index
-            //if indices dont cancel, you owe
-            
-            
-            //array for to in isRequest (u asked)
-            //array for to in payment (u were paid)
-            //if indices dont cancel, you are owed
-
-
+    
+    //iterate through every member
+    //if in reqfrom, balance goes down (u owe)
+    //if in from, balance goes up (u sent)
+    
+    //array for owe, array for sent - each member by index
+    //if indices dont cancel, you owe
+    
+    
+    //array for to in isRequest (u asked)
+    //array for to in payment (u were paid)
+    //if indices dont cancel, you are owed
+    
+    
+    func updateBalances(h: House, m: Member) {
+        var owesMe = [String:Float]()
+        var iOwe = [String:Float]()
+        
+        for payment in h.payments {
+            if payment.isRequest {
+                if payment.to == m.name {
+                    
+                }
+            } else {
+                
+            }
+        }
+        
+        
+    }
+    
     
     func deletePayment(p: Payment, h: House) {
         db.document("houses/\(h.id)/payments/\(p.id!)").delete()
     }
     
+}
+
+func idfromnamehouse(name: String, house: House) -> String {
+    return house.members.first { (m) -> Bool in
+        return m.name == name
+    }?.id ?? ""
 }
