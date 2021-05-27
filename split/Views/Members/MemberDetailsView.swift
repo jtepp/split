@@ -17,7 +17,7 @@ struct MemberDetailsView: View {
         ZStack {
             if house.members.first(where: { (m) -> Bool in
                 return m.id == UserDefaults.standard.string(forKey: "myId")
-            })!.admin {
+            })?.admin ?? false {
                 MenuButton(member: $member, showRemove: $showRemove, showAdminAlert: $showAdminAlert)
                     .alert(isPresented: $showAdminAlert, content: {
                         Alert(title: Text("Set \(member.name) as House admin"), message: Text("Are you sure you want to set \(member.name) as the new House admin? This change can only be reverted by the new admin"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
