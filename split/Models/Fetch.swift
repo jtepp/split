@@ -84,8 +84,34 @@ class Fetch: ObservableObject {
         let pId = db.collection("houses/\(h.id)/payments").addDocument(data:
                                                                 ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID"]
         ).documentID
-        print(pId)
+        
+        if p.isRequest {
+            //set owed from in self
+            db.document("houses/\(h.id)/members/\(UserDefaults.standard.string(forKey: "myId")!)").updateData(["owesMe" : p.reqfrom.map({ (String) -> [AnyHashable : Any] in
+                <#code#>
+            })])
+            
+            //set owed to thru reqfrom
+            
+            
+            
+        }
     }
+    
+            
+            //iterate through every member
+            //if in reqfrom, balance goes down (u owe)
+            //if in from, balance goes up (u sent)
+            
+            //array for owe, array for sent - each member by index
+            //if indices dont cancel, you owe
+            
+            
+            //array for to in isRequest (u asked)
+            //array for to in payment (u were paid)
+            //if indices dont cancel, you are owed
+
+
     
     func deletePayment(p: Payment, h: House) {
         db.document("houses/\(h.id)/payments/\(p.id!)").delete()
