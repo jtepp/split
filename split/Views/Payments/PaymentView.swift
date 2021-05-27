@@ -42,7 +42,7 @@ struct PaymentView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            PaymentView(house: .constant(.placeholder))
+            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
         }
     }
 }
