@@ -48,11 +48,11 @@ struct imgButton: View {
                 .shadow(radius: 4)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .fill(Color.blue)
+                        .fill(selected ? Color.blue : Color.clear)
                         .frame(width: 40, height: 40)
                         .overlay(
                             Image(systemName: "checkmark")
-                                .foregroundColor(.white)
+                                .foregroundColor(selected ? Color.white : Color.clear)
                         )
                 )
             Spacer()
@@ -72,5 +72,18 @@ struct imgButton: View {
         )
         .padding(.horizontal)
         .padding(.top, 10)
+        .onTapGesture {
+            withAnimation(Animation.easeOut.speed(3)) {
+                if selected {
+                    selected = false
+                    choice.removeAll { (m) -> Bool in
+                        m.name == member.name
+                    }
+                } else {
+                    selected = true
+                    choice.append(member)
+                }
+            }
+        }
     }
 }
