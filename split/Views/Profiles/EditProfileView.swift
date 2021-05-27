@@ -15,7 +15,7 @@ struct EditProfileView: View {
     @State var sourceType: UIImagePickerController.SourceType = .camera
     var body: some View {
         ScrollView {
-            HeaderText(text: "Profile")
+            HeaderText(text: "Edit your profile")
             VStack {
                 b64toimg(b64: m.image)
                     .resizable()
@@ -58,6 +58,8 @@ struct EditProfileView: View {
                         .offset(y: 100)
                     )
                 Spacer()
+                InputField(name: "Name", text: .constant($m.wrappedValue.name))
+                    .padding()
                 Spacer()
                 Button(action: { /*************************************                                                     ONLY IF FIELDS ARE FILLED                                                                                                   *******************************************/
                     //save profile

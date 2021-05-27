@@ -11,6 +11,6 @@ struct NoProfileView: View {
     @Binding var show: Bool
     @State var newMember = Member.empty
     var body: some View {
-        EditProfileView(m: $newMember)
+        EditProfileView(show: $show, m: $newMember)
     }
 }

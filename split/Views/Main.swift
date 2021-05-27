@@ -25,10 +25,11 @@ struct Main: View {
                             WaitingRoomView(show: $inWR)
                         } else if noProf && myId == "" {
                             NoProfileView(show: $inWR)
+                                .background(Color.black.edgesIgnoringSafeArea(.all))
                         }
                     }
-                    .background(Color.black.edgesIgnoringSafeArea(.all))
                 }
+                .background(Color.black.edgesIgnoringSafeArea(.all))
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
