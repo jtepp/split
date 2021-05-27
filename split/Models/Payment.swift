@@ -8,7 +8,7 @@
 import Foundation
 
 struct Payment: Identifiable {
-    let id: String
+    var id: String?
     let to: String
     var from: String = String()
     var reqfrom: [String] = [String]()
