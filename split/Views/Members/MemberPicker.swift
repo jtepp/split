@@ -41,14 +41,32 @@ struct MemberPicker: View {
     }
 }
 
-struct MemberPicker_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-            PaymentView(house: .constant(.placeholder))
+struct PickerButton: View {
+    var text: String
+    @Binding var choice: [Member]
+    var body: some View {
+        if choice.isEmpty {
+            Text(text)
+        } else {
+            VStack (alignment: .leading) {
+                ForEach(choice) { m in
+                    HStack {
+                        b64toimg(b64: m.image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 40, height: 40)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .shadow(radius: 4)
+                        Text(m.name)
+                    }
+                    .foregroundColor(.black)
+                }
+            }
         }
     }
 }
+
+
 
 struct imgButton: View {
     @Binding var show: Bool
@@ -112,5 +130,14 @@ struct imgButton: View {
             }
         }
         
+    }
+}
+
+struct MemberPicker_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            PaymentView(house: .constant(.placeholder))
+        }
     }
 }

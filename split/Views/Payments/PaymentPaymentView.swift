@@ -21,7 +21,7 @@ struct PaymentPaymentView: View {
             Button(action: {
                 showPicker = true
             }, label: {
-                Text("Tap to Select")
+                PickerButton(text: "Tap to Select", choice: $choice)
                     .padding(10)
                     .foregroundColor(.white)
                     .background(
@@ -39,6 +39,7 @@ struct PaymentPaymentView: View {
         })
     }
 }
+
 
 struct PaymentPaymentView_Previews: PreviewProvider {
     static var previews: some View {
