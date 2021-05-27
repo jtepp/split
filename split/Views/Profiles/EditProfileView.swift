@@ -61,6 +61,7 @@ struct EditProfileView: View {
                     .padding(.top, -40)
                 Spacer()
                 InputField(name: "Name", text: $name)
+                    .foregroundColor(.black)
                     .padding()
                     .padding(.top)
                 Spacer()
@@ -80,7 +81,7 @@ struct EditProfileView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 20)
                             .fill(
-                                Color.blue
+                                name.replacingOccurrences(of: " ", with: "") == "" ? Color.gray : Color.blue
                             )
                     )
                     .padding()
