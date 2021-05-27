@@ -11,16 +11,16 @@ struct MemberPaymentInfoView: View {
     @Binding var member: Member
     @Binding var payments: [Payment]
     var body: some View {
-        VStack {
-            HStack {
-                moneyText(b: .constant(0.0), pre: "Balance: ")
-                    .font(.headline)
-                Spacer()
-            }
-            Rectangle()
-                .fill(Color.black.opacity(0.5))
-                .frame(height:2)
-            
+//        VStack {
+//            HStack {
+//                moneyText(b: .constant(0.0), pre: "Balance: ")
+//                    .font(.headline)
+//                Spacer()
+//            }
+//            Rectangle()
+//                .fill(Color.black.opacity(0.5))
+//                .frame(height:2)
+//
             ScrollView {
                 ForEach(payments.filter{ p in
                     return (p.to == member.name) || (p.from == member.name) || (p.reqfrom.contains(member.name))
@@ -46,7 +46,7 @@ struct MemberPaymentInfoView: View {
                 )
             }
             .frame(maxHeight: 160)
-        }
+//        }
         
         .padding()
         .background(
