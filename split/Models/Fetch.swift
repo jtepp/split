@@ -159,10 +159,12 @@ class Fetch: ObservableObject {
                 print("couldn't get doc \(String(describing: err))")
                 return
             }
-            let wr = self.db.collection("WaitingRoom").addDocument(data: doc.data()!).documentID
-            self.db.document("WaitingRoom/\(wr)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()])
+            let wr = self.db.collection("waitingRoom").addDocument(data: doc.data()!).documentID
+            self.db.document("waitingRoom/\(wr)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
+                docRef.delete()
+            })
         }
-//        docRef.delete()
+        
     }
 }
 
