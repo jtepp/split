@@ -66,7 +66,7 @@ struct PaymentPaymentView: View {
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(choice.isEmpty || amountText.isEmpty ? .clear : Color.blue)
+                            .fill(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric ? .clear : Color.blue)
                     )
                     .padding()
             })
