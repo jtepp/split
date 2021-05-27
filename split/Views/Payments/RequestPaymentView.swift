@@ -52,7 +52,19 @@ struct RequestPaymentView: View {
             InputField(name: "Memo", text: $memoText)
                 .padding()
             Spacer()
-            Button(action: {}, label: {
+            Button(action: {
+                Fetch().sendPayment(p: Payment(to: house.members.first(where: { (m) -> Bool in
+                    return m.id == UserDefaults.standard.string(forKey: "myId")
+                })?.name ?? "unknown recipient", reqfrom: choice.map({ (m) -> String in
+                    return m.name
+                }), amount: Float(amountText)!, time: Int(NSDate().timeIntervalSince1970), memo: memoText, isRequest: true), h: house)
+                
+                //clear
+                choice = [Member]()
+                amountText = ""
+                memoText = ""
+                
+            }, label: {
                 HStack {
                     Spacer()
                     Text("Post")
