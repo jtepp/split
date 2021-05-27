@@ -10,6 +10,7 @@ import SwiftUI
 struct MemberDetailsView: View {
     @Binding var house: House
     @Binding var member: Member
+    @State var showRemove = false
     var body: some View {
         ZStack {
             if house.members.first(where: { (m) -> Bool in
@@ -38,6 +39,11 @@ struct MemberDetailsView: View {
                     .foregroundColor(Color("Secondary"))
             }
             .padding(.vertical, 40)
+            .alert(isPresented: $showRemove, content: {
+                Alert(title: Text("Remove member"), message: Text("Are you sure you want to remove \(member.name) from this house?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                    //remove
+                }), secondaryButton: Alert.Button.cancel())
+            })
         }
         .foregroundColor(.white)
         .background(Color.black.edgesIgnoringSafeArea(.all))
