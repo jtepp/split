@@ -90,7 +90,7 @@ struct InputField: View {
             TextField(name, text: $text)
                 .opacity(0.5)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
+                .keyboardType(.decimalPad)
                 
             Spacer()
         }
