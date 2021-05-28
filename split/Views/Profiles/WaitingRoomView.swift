@@ -9,8 +9,9 @@ import SwiftUI
 
 struct WaitingRoomView: View {
     @Binding var member: Member
-    @State var showJoin = false
+    @State var showPanel = 0
     @State var hId = ""
+    @State var hNm = ""
     @State var hPw = ""
     @State var showWrongPassAlert = false
     var body: some View {
@@ -23,9 +24,13 @@ struct WaitingRoomView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 400)
-                                .opacity(showJoin ? 0 : 1)
+                                .opacity(showPanel == 0 ? 1 : 0)
                             VStack {
-                                InputField(name: "House ID", text: $hId)
+                                if showPanel == 1 {
+                                    InputField(name: "House ID", text: $hId)
+                                } else if showPanel == 2 {
+                                    InputField(name: "House Name", text: $hNm)
+                                }
                                 InputField(name: "Password", text: $hPw)
                                 Button(action: {
 //                                    showJoin.toggle()
@@ -44,14 +49,21 @@ struct WaitingRoomView: View {
                                     .padding()
                                 })
                             }
-                            .opacity(showJoin ? 1 : 0)
-                            .allowsHitTesting(showJoin)
+                            .opacity(showPanel != 0 ? 1 : 0)
+                            .allowsHitTesting(showPanel != 0)
                         }
                         .animation(Animation.easeIn.speed(3))
                     )
             }
             Button(action: {
-                showJoin.toggle()
+                if showPanel == 1 {
+                    showPanel = 0
+                } else {
+                    showPanel = 1
+                }
+                hNm = ""
+                hId = ""
+                hPw = ""
             }, label: {
                 HStack {
                     Spacer()
