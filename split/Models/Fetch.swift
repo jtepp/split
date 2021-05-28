@@ -210,7 +210,9 @@ class Fetch: ObservableObject {
         var owesMe = [String:Float]()
         var iOwe = [String:Float]()
         
-        for payment in h.payments {
+        for payment in h.payments.filter({ (p) -> Bool in
+            return !p.isAn
+        }) {
             if payment.isRequest {
                 if payment.to == m.name {
                     for member in payment.reqfrom {
