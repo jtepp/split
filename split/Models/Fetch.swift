@@ -43,15 +43,9 @@ class Fetch: ObservableObject {
                 
                 self.getPayments(h: h, id: id)
                 
-                if h.wrappedValue.name == "" && h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" {
-                    h.wrappedValue = House.empty
-                    UserDefaults.standard.set("", forKey: "houseId")
-                    UserDefaults.standard.set("", forKey: "myId")
-                }
-                
                 if h.wrappedValue.members.first(where: { (m) -> Bool in
                     return m.id == UserDefaults.standard.string(forKey: "myId")
-                }) == nil && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
+                }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
                     //if ur an alien, go to void, otherwise get waitingRoomed
                     if myId == "" {
                         print("gotovoid")
@@ -299,7 +293,7 @@ class Fetch: ObservableObject {
                 return
             }
             UserDefaults.standard.set(documentSnapshot?.documentID ?? "", forKey: "myId")
-            myId.wrappedValue = documentSnapshot?.documentID ?? "AAAAAAAAAAA"
+            myId.wrappedValue = documentSnapshot?.documentID ?? ""
             let e = Member(id: documentSnapshot?.documentID ?? "", home: "waitingRoom", name: (doc["name"] ?? "") as! String, image: (doc["image"] ?? "") as! String)
             h.members.wrappedValue.append(e)
             

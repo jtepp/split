@@ -17,7 +17,7 @@ struct Main: View {
         ZStack {
             TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
                 .animation(.easeOut)
-            TabBar(tabSelection: $tabSelection, house: $h, inWR: $inWR, noProf: $noProf)
+            TabBar(tabSelection: $tabSelection)
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{

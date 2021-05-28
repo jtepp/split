@@ -50,9 +50,6 @@ struct TabsView: View {
             }
             .onChange(of: tabSelection) { (_) in
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
-                if (UserDefaults.standard.string(forKey: "myId") ?? "") == "" || myId == "" {
-                    Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
-                }
             }
 
     }

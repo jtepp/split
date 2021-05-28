@@ -9,9 +9,6 @@ import SwiftUI
 
 struct TabBar: View {
     @Binding var tabSelection: Int
-    @Binding var house: House
-    @Binding var inWR: Bool
-    @Binding var noProf: Bool
     let halfLeft = -UIScreen.main.bounds.width/2
     var body: some View {
         ZStack {
@@ -28,10 +25,10 @@ struct TabBar: View {
                     .frame(width: UIScreen.main.bounds.width, height: 100, alignment: .bottom)
                     .overlay(
                         HStack(spacing: 60) {
-                            TabButton(tabSelection: $tabSelection, index: 0, name: "rectangle.grid.1x2", house: $house, inWR: $inWR, noProf: $noProf)
-                            TabButton(tabSelection: $tabSelection, index: 1, name: "person.2", house: $house, inWR: $inWR, noProf: $noProf)
-                            TabButton(tabSelection: $tabSelection, index: 2, name: "dollarsign.square", house: $house, inWR: $inWR, noProf: $noProf)
-                            TabButton(tabSelection: $tabSelection, index: 3, name: "person.crop.square", house: $house, inWR: $inWR, noProf: $noProf)
+                            TabButton(tabSelection: $tabSelection, index: 0, name: "rectangle.grid.1x2")
+                            TabButton(tabSelection: $tabSelection, index: 1, name: "person.2")
+                            TabButton(tabSelection: $tabSelection, index: 2, name: "dollarsign.square")
+                            TabButton(tabSelection: $tabSelection, index: 3, name: "person.crop.square")
                         }
 //                        .scaleEffect(1.6)
                         .foregroundColor(.white)
@@ -49,23 +46,20 @@ struct TabBar: View {
     }
 }
 
-//struct TabBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ZStack {
-//            Color.black
-//                .edgesIgnoringSafeArea(.all)
-//            TabBar(tabSelection: .constant(0))
-//        }
-//    }
-//}
+struct TabBar_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.black
+                .edgesIgnoringSafeArea(.all)
+            TabBar(tabSelection: .constant(0))
+        }
+    }
+}
 
 struct TabButton: View {
     @Binding var tabSelection: Int
     let index: Int
     let name: String
-    @Binding var house: House
-    @Binding var inWR: Bool
-    @Binding var noProf: Bool
     var body: some View {
         Image(systemName: "\(name)\(tabSelection == index ? ".fill" : "")")
             .resizable()
@@ -73,7 +67,6 @@ struct TabButton: View {
             .frame(width: 30, height: 30)
             .onTapGesture {
                 tabSelection = index
-                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
             }
     }
 }
