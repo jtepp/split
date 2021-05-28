@@ -50,13 +50,14 @@ class Fetch: ObservableObject {
                     if myId == "" {
                         print("gotovoid")
                         UserDefaults.standard.set("", forKey: "houseId")
-//                        noProf.wrappedValue = true
+                        noProf.wrappedValue = true
+                        inWR.wrappedValue = true
                     } else {
                         print("wred")
                         UserDefaults.standard.set("waitingRoom", forKey: "houseId")
                         noProf.wrappedValue = false
                     }
-//                    inWR.wrappedValue = true
+                    inWR.wrappedValue = true
                 }
                 
             }
@@ -148,7 +149,7 @@ class Fetch: ObservableObject {
 //            let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
 //            let image = data["image"] as? String ?? ""
 //            let admin = data["admin"] as? Bool ?? false
-//            
+//
 //            m.wrappedValue.name = name
 //            m.wrappedValue.home = home
 //            m.wrappedValue.owesMe = owesMe
@@ -157,7 +158,7 @@ class Fetch: ObservableObject {
 //            m.wrappedValue.admin = admin
 //        }
 //    }
-//    
+//
     
     func getPayments(h: Binding<House>, id: String) {
         db.collection("houses/"+id+"/payments").addSnapshotListener { (querySnapshot, error) in
