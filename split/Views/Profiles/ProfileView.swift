@@ -13,6 +13,7 @@ struct ProfileView: View {
     @State var showSignOut = false
     @State var showImagePicker = false
     @State var showAdminPicker = false
+    @State var showSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
     @State var adminChoice = [Member]()
     @State var img: UIImage?
@@ -33,14 +34,16 @@ struct ProfileView: View {
                     .overlay(
                         Menu(content: {
                             Button(action: {
-                                showImagePicker = true
                                 sourceType = .camera
+                                showImagePicker = true
+                                showSheet = true
                             }, label: {
                                 Text("Take Picture")
                             })
                             Button(action: {
-                                showImagePicker = true
                                 sourceType = .photoLibrary
+                                showImagePicker = true
+                                showSheet = true
                                 
                                 
                             }, label: {
@@ -92,6 +95,7 @@ struct ProfileView: View {
                         if m.admin {
                             return Alert(title: Text("Leave House"), message: Text("You have to choose a new House admin before you can leave this house"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
                                 showAdminPicker = true
+                                showSheet = true
                             }), secondaryButton: Alert.Button.cancel())
                         } else {
                             return Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
@@ -117,15 +121,19 @@ struct ProfileView: View {
                 UserDefaults.standard.set(m.id, forKey: "myId")
 //                Fetch().updateMember(m: $m)
             }
-            .sheet(isPresented: $showAdminPicker, onDismiss: {
+            .sheet(isPresented: $showSheet, onDismiss: {
                 if !adminChoice.isEmpty {
                     Fetch().swapAdmin(m: adminChoice.first!, h: house)
                 }
-            }) {
-                MemberPicker(show: $showAdminPicker, house: $house, choice: $adminChoice)
-            }
-            .sheet(isPresented: $showImagePicker, content: {
-                ImagePicker(img: $img, isShown: $showImagePicker, sourceType: sourceType)
+                showImagePicker = false
+                showAdminPicker = false
+            }, content: {
+                if showImagePicker {
+                    ImagePicker(img: $img, isShown: $showSheet, sourceType: sourceType)
+                }
+                if showAdminPicker {
+                    MemberPicker(show: $showSheet, house: $house, choice: $adminChoice)
+                }
             })
         }
     }
