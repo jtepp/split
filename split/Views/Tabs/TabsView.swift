@@ -18,6 +18,9 @@ struct TabsView: View {
         TabView(selection: $tabSelection,
                 content:  {
                     ActivityView(house: $house, tabSelection: $tabSelection)
+                        .onTapGesture {
+                            Fetch().sendPayment(p: Payment(time: 1622232900, memo: "Test", isAn: true, by: member.id), h: house)
+                        }
                         .tag(0)
                     MembersView(house: $house, tabSelection: $tabSelection)
                         .tag(1)
