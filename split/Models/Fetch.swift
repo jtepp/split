@@ -232,7 +232,6 @@ class Fetch: ObservableObject {
             }
         }
         //        let id = UserDefaults.standard.string(forKey: "myId")
-        print("UPDATEBAL")
         db.document("houses/\(h.id)/members/\(m.id)").updateData(["owesMe":owesMe, "iOwe":iOwe])
         
         

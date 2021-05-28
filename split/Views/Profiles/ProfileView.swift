@@ -93,10 +93,16 @@ struct ProfileView: View {
                     })
                     .alert(isPresented: $showSignOut, content: {
                         if m.admin {
-                            return Alert(title: Text("Leave House"), message: Text("You have to choose a new House admin before you can leave this house"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
-                                showAdminPicker = true
-                                showSheet = true
-                            }), secondaryButton: Alert.Button.cancel())
+                            if house.members.count > 1 {
+                                return Alert(title: Text("Leave House"), message: Text("You have to choose a new House admin before you can leave this house"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
+                                    showAdminPicker = true
+                                    showSheet = true
+                                }), secondaryButton: Alert.Button.cancel())
+                            } else {
+                                return Alert(title: Text("Erase House"), message: Text("Leaving this house will erase it from the database"), primaryButton: Alert.Button.destructive(Text("Erase"), action: {
+                                    //leave house and delete doc
+                                }), secondaryButton: Alert.Button.cancel())
+                            }
                         } else {
                             return Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
                                 //signout
@@ -119,7 +125,7 @@ struct ProfileView: View {
             })
             .onAppear{
                 UserDefaults.standard.set(m.id, forKey: "myId")
-//                Fetch().updateMember(m: $m)
+                //                Fetch().updateMember(m: $m)
             }
             .sheet(isPresented: $showSheet, onDismiss: {
                 if !adminChoice.isEmpty {
