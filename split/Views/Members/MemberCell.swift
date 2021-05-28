@@ -52,7 +52,7 @@ func b64toimg(b64: String) -> Image {
         print(data ?? "uh oh")
         return img
     }
-    img = Image(uiImage: (UIImage(data: d) ?? UIImage(systemName: "person.crop.square"))!)
+    img = Image(uiImage: (UIImage(data: d) ?? UIImage(named: "Placeholder"))!)
     return img
 }
 
