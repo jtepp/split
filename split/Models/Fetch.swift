@@ -267,7 +267,8 @@ class Fetch: ObservableObject {
                         let to = (d["to"] ?? "") as! String
                         let from = (d["from"] ?? "") as! String
                         let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
-                        return to.contains(m.name) || from.contains(m.name) || reqfrom.contains(m.name)
+                        let isAn = d["isAn"] as? Bool ?? false
+                        return (to.contains(m.name) || from.contains(m.name) || reqfrom.contains(m.name)) && !isAn
                     }) {
                         self.db.document("houses/\(h.id)/payments/\(doc.documentID)").delete()
                     }
@@ -379,13 +380,7 @@ class Fetch: ObservableObject {
                     print("remove member no payments or something")
                     return
                 }
-                for doc in documents.filter({ (doc) -> Bool in
-                    let d = doc.data()
-                    let to = (d["to"] ?? "") as! String
-                    let from = (d["from"] ?? "") as! String
-                    let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
-                    return to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)
-                }) {
+                for doc in documents {
                     self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
                 }
             }
