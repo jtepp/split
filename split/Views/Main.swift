@@ -18,19 +18,23 @@ struct Main: View {
             TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
                 .animation(.easeOut)
             TabBar(tabSelection: $tabSelection)
+                .onTapGesture {
+                    print(inWR)
+                    inWR.toggle()
+                    print(inWR)
+                }
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
             Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         }
         .onChange(of: h.id, perform: { _ in
-            inWR = false
-            noProf = false
-//            UserDefaults.standard.set(myId, forKey: "myId")
-            UserDefaults.standard.set("SIfrfcT2735XvpRCB714", forKey: "myId")
-            UserDefaults.standard.set("TlRWEGz9GWrKBXqI9T8L", forKey: "houseId")
-            myId = "SIfrfcT2735XvpRCB714"
-            h.id = "TlRWEGz9GWrKBXqI9T8L"
+//            inWR = false
+//            noProf = false
+//            UserDefaults.standard.set("SIfrfcT2735XvpRCB714", forKey: "myId")
+//            UserDefaults.standard.set("TlRWEGz9GWrKBXqI9T8L", forKey: "houseId")
+//            myId = "SIfrfcT2735XvpRCB714"
+//            h.id = "TlRWEGz9GWrKBXqI9T8L"
             Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         })
     }

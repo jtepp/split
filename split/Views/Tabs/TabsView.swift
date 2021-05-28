@@ -46,5 +46,9 @@ struct TabsView: View {
                         .allowAutoDismiss(false)
                 }
             }
+            .onChange(of: inWR) { (_) in
+                inWR.toggle()
+                inWR.toggle()
+            }
     }
 }
