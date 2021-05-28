@@ -304,7 +304,7 @@ class Fetch: ObservableObject {
         
     }
     
-    func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>) {
+    func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false) {
         var house = House.empty.id
         db.collection("houses").getDocuments { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
@@ -325,7 +325,7 @@ class Fetch: ObservableObject {
                         print("house \(house)")
                         print("hid \(h.documentID)")
                         UserDefaults.standard.set(mm.id, forKey: "myId")
-                        self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin":mm.admin]) { _ in
+                        self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin ? true : mm.admin]) { _ in
                             self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
                             self.db.document("waitingRoom/\(mm.id)").delete()
                             UserDefaults.standard.set(mm.id, forKey: "myId")
@@ -357,7 +357,7 @@ class Fetch: ObservableObject {
 //        db.collection("houses/\(id)/members").addDocument(data: ["admin" : true, "name" : m.wrappedValue.name, "home" : id, "image" : m.wrappedValue.id]) { (err) in
             UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
             UserDefaults.standard.set(id, forKey: "houseId")
-            self.joinHouse(hh: hh, m: m, hId: id, password: password, showAlert: .constant(false), tapped: tapped, msg: .constant(""), inWR: inWR)
+        self.joinHouse(hh: hh, m: m, hId: id, password: password, showAlert: .constant(false), tapped: tapped, msg: .constant(""), inWR: inWR, forceAdmin: true)
 //        }
     }
     
