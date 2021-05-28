@@ -390,10 +390,10 @@ class Fetch: ObservableObject {
                 m.wrappedValue = .empty
                 UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
                 UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
-                // inWr.wrappedValue = true
-                //                if erase {
-                //                    self.db.document("houses/\(m.wrappedValue.home)").delete()
-                //                }
+                 inWr.wrappedValue = true
+                                if erase {
+                                    self.db.document("houses/\(m.wrappedValue.home)").delete()
+                                }
             }
         }
     }
