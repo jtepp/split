@@ -12,30 +12,19 @@ struct ActivityAnnouncementCell: View {
     @State var showMemo = false
     var body: some View {
         VStack {
-            GeneralPaymentCell(payment: $payment)
-            ScrollView {
-                HStack {
-                    Text("Payment")
-                        .font(Font.caption.smallCaps().weight(Font.Weight.black))
-                    Spacer()
-                }
-                HStack {
-                    Text(payment.memo)
-                    Spacer()
-                }
+            HStack {
+                Spacer()
+                Text(payment.memo)
+                Spacer()
             }
-            .padding(.bottom, showMemo ? 20 : 0)
-            .animation(.easeIn)
-            .frame(maxHeight: showMemo ? 10000 : 0)
-            .foregroundColor(showMemo ? .black : .clear)
         }
-        .foregroundColor(.black)
+        .foregroundColor(.white)
         .padding()
         .padding(.bottom, 10)
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(
-                    Color.white.opacity(0.5)
+                    Color.gray.opacity(0.2)
                 )
         )
         .overlay(
