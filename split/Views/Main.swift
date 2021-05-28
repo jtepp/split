@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Main: View {
-    @State var member = Member.empty
     @State var h = House.empty
     @State var inWR = ((UserDefaults.standard.value(forKey: "houseId") as? String ?? ""  == "waitingRoom") || (UserDefaults.standard.value(forKey: "houseId") as? String ?? ""  == "")) 
     @State var noProf = true
@@ -16,14 +15,13 @@ struct Main: View {
     @State var tabSelection = 0
     var body: some View {
         ZStack {
-            TabsView(member: $member, tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
+            TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
                 .animation(.easeOut)
             TabBar(tabSelection: $tabSelection)
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
-            member.id = UserDefaults.standard.string(forKey: "myId") ?? ""
-            Fetch().getHouse(m: $member, h: $h, inWR: $inWR, noProf: $noProf)
+            Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         }
         .onChange(of: h.id, perform: { _ in
 //            inWR = false
@@ -32,7 +30,7 @@ struct Main: View {
 //            UserDefaults.standard.set("TlRWEGz9GWrKBXqI9T8L", forKey: "houseId")
 //            myId = "SIfrfcT2735XvpRCB714"
 //            h.id = "TlRWEGz9GWrKBXqI9T8L"
-            Fetch().getHouse(m: $member, h: $h, inWR: $inWR, noProf: $noProf)
+            Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         })
     }
 }
