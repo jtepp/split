@@ -276,11 +276,12 @@ class Fetch: ObservableObject {
                     
                     if password == p {
                         //add this member to house, set userdefaults and call for a refresh
-                        
+                        let mm = m.wrappedValue
+                        self.db.document("houses/\(h.documentID)/members/\(mm.id)").setData(["name" : mm.name, "image" : mm.image])
                     } else {
                         showAlert.wrappedValue = true
                         tapped.wrappedValue = false
-                        msg.wrappedValue = "Incorrect pasword"
+                        msg.wrappedValue = "Incorrect password"
                     }
                     
                 }
