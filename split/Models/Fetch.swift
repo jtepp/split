@@ -331,7 +331,7 @@ class Fetch: ObservableObject {
                             print("\n\n\n\n\(mm)\n\n\n\n")
                         } else {
                             
-                            self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin ? true : mm.admin]) { _ in
+                            self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin]) { _ in
                                 self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
                                 self.db.document("waitingRoom/\(mm.id)").delete()
                                 UserDefaults.standard.set(mm.id, forKey: "myId")
@@ -390,7 +390,7 @@ class Fetch: ObservableObject {
                 m.wrappedValue = .empty
                 UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
                 UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
-                 inWr.wrappedValue = true
+                 inWR.wrappedValue = true
                                 if erase {
                                     self.db.document("houses/\(m.wrappedValue.home)").delete()
                                 }
