@@ -37,7 +37,7 @@ struct WaitingRoomView: View {
                                 }, label: {
                                     HStack {
 //                                        Spacer()
-                                        Text("Join")
+                                        Text(showPanel == 1 ? "Join" : showPanel == 2 ? "Create" : "")
                                             .foregroundColor(.white)
 //                                        Spacer()
                                     }
