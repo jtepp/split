@@ -34,6 +34,10 @@ struct TabsView: View {
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
             }
             .onChange(of: inWR, perform: { (_) in
+//                print("WAITING ROOM CHANGED \n\n\(member)\n\n\n\n\n")
+                if inWR {
+                    member = .empty
+                }
                 noProf = member.id == ""
             })
             .sheet(isPresented: $inWR, onDismiss: {

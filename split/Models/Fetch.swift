@@ -395,6 +395,7 @@ class Fetch: ObservableObject {
                                     self.db.document("houses/\(m.wrappedValue.home)").delete()
                                 }
                 m.wrappedValue.id = ""
+                
             }
         }
     }
