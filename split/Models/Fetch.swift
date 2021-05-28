@@ -268,14 +268,16 @@ class Fetch: ObservableObject {
                 print(err.debugDescription)
                 return
             }
-            print("BEFORE")
             documents.forEach { (h) in
-//                if h.documentID == hId {
-//
-//                }
-                print(h.documentID)
+                //                if h.documentID == hId {
+                //
+                //                }
+                
             }
-            print("AFTER")
+            if house.id == House.empty.id {
+                showAlert.wrappedValue = true
+                tapped.wrappedValue = false
+            }
         }
     }
     

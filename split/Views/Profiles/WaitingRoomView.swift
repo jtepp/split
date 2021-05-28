@@ -36,7 +36,7 @@ struct WaitingRoomView: View {
                                         ///look in houses for id, if not found call error, if found and bad pwd call error, if found and good pwd ->
                                         ///put in update location, refresh house, later add announcement
                                     } else if showPanel == 2 {
-                                        //                                        Fetch().createHouse(m: $member, name: String, password: String)
+                                        //                                        Fetch().createHouse(m: $member, name: hId, password: hPw)
                                         ///put in new location and make admin, refresh house stuff
                                     }
                                 }, label: {
@@ -53,7 +53,7 @@ struct WaitingRoomView: View {
                                     )
                                     .padding()
                                 })
-                                .disabled(tapped)
+                                .disabled(tapped || hId.isEmpty || hPw .isEmpty)
                             }
                             .opacity(showPanel != 0 ? 1 : 0)
                             .allowsHitTesting(showPanel != 0)
