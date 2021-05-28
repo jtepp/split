@@ -29,7 +29,11 @@ struct WaitingRoomView: View {
                                 .opacity(showPanel == 0 ? 1 : 0)
                             VStack {
                                 InputField(name: "House \(showPanel == 1 ? "ID" : "Name")", text: $hId)
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
                                 InputField(name: "Password", text: $hPw)
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
                                 Button(action: {
                                     tapped = true
                                     if showPanel == 1 {

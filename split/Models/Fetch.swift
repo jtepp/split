@@ -269,7 +269,9 @@ class Fetch: ObservableObject {
                 return
             }
             documents.forEach { (h) in
+                print(h.documentID)
                 if h.documentID == hId {
+                    print(true)
                     house = h.documentID
                     let d = h.data()
                     let p = (d["password"] ?? "") as! String
@@ -279,6 +281,8 @@ class Fetch: ObservableObject {
                         let mm = m.wrappedValue
                         self.db.document("houses/\(h.documentID)/members/\(mm.id)").setData(["name" : mm.name, "image" : mm.image]) { _ in
                             self.db.document("waitingRoom/\(mm.id)").delete()
+                            UserDefaults.standard.set(mm.id, forKey: "myId")
+                            UserDefaults.standard.set(h.documentID, forKey: "houseId")
                         }
                     } else {
                         showAlert.wrappedValue = true
