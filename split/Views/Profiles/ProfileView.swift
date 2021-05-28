@@ -105,7 +105,7 @@ struct ProfileView: View {
                             }
                         } else {
                             return Alert(title: Text("Delete account"), message: Text("Are you sure you want to delete this acount?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                                //signout
+                                Fetch().deleteAccount(m: $m)
                             }), secondaryButton: Alert.Button.cancel())
                         }
                     })

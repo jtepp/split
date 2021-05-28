@@ -12,9 +12,9 @@ import FirebaseFirestore
 class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
-    func getHouse (h: Binding<House>, inWR: Binding<Bool>, noProf: Binding<Bool>) {
-        let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
-        let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
+    func getHouse (m: Binding<Member>, h: Binding<House>, inWR: Binding<Bool>, noProf: Binding<Bool>) {
+        var id = m.wrappedValue.home
+        var myId = m.wrappedValue.id
         
         print("ID:    \(id)")
         print("ME:    \(myId)")
@@ -39,25 +39,40 @@ class Fetch: ObservableObject {
                 
                 h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, payments: h.wrappedValue.payments, password: password)
                 
+                
+                if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" && h.wrappedValue.id != "" {
+                    if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
+                
                 self.getMembers(h: h, id: id)
                 
                 self.getPayments(h: h, id: id)
+                    
+                }
+                    
+                } else {
+                    UserDefaults.standard.set("", forKey: "houseId")
+                    UserDefaults.standard.set("", forKey: "myId")
+                    noProf.wrappedValue = true
+                    inWR.wrappedValue = true
+                }
                 
                 if h.wrappedValue.members.first(where: { (m) -> Bool in
                     return m.id == UserDefaults.standard.string(forKey: "myId")
                 }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
                     //if ur an alien, go to void, otherwise get waitingRoomed
                     if myId == "" {
-                        print("gotovoid")
+                        print("gotovoid \(myId) \(id)")
                         UserDefaults.standard.set("", forKey: "houseId")
                         noProf.wrappedValue = true
                         inWR.wrappedValue = true
                     } else {
                         print("wred")
-                        UserDefaults.standard.set("waitingRoom", forKey: "houseId")
-                        noProf.wrappedValue = false
+                        h.wrappedValue = .empty
+                        UserDefaults.standard.set("", forKey: "houseId")
+                        UserDefaults.standard.set("", forKey: "myId")
+                        noProf.wrappedValue = true
+                        inWR.wrappedValue = true
                     }
-                    inWR.wrappedValue = true
                 }
                 
             }
@@ -112,6 +127,7 @@ class Fetch: ObservableObject {
     }
     
     func getMembers(h: Binding<House>, id: String) {
+        if id != "" {
         db.collection("houses/"+id+"/members").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("no house by id %s, or maybe no members..?", id)
@@ -133,6 +149,9 @@ class Fetch: ObservableObject {
             for member in h.wrappedValue.members {
                 self.updateBalances(h: h.wrappedValue, m: member)
             }
+        }
+        } else {
+            h.wrappedValue = .empty
         }
     }
     
@@ -286,14 +305,16 @@ class Fetch: ObservableObject {
             }
         }
     }
-    func addToWR(m:Member, myId: Binding<String>, h: Binding<House>){
-        db.collection("waitingRoom").addDocument(data: ["name":m.name, "image":m.image]).getDocument { (documentSnapshot, err) in
+    func addToWR(m: Binding<Member>, myId: Binding<String>, h: Binding<House>){
+        db.collection("waitingRoom").addDocument(data: ["name":m.wrappedValue.name, "image":m.wrappedValue.image, "home":"waitingRoom"]).getDocument { (documentSnapshot, err) in
             guard let doc = documentSnapshot?.data() else {
                 print("wr add to err")
                 return
             }
+            print(("NEW ID \n\n\n\n NEW ID \(documentSnapshot?.documentID ?? "FK:JHFJKDHSJKL")"))
             UserDefaults.standard.set(documentSnapshot?.documentID ?? "", forKey: "myId")
             myId.wrappedValue = documentSnapshot?.documentID ?? ""
+            m.wrappedValue.id = documentSnapshot?.documentID ?? ""
             let e = Member(id: documentSnapshot?.documentID ?? "", home: "waitingRoom", name: (doc["name"] ?? "") as! String, image: (doc["image"] ?? "") as! String)
             h.members.wrappedValue.append(e)
             
@@ -325,7 +346,7 @@ class Fetch: ObservableObject {
                         print("hid \(h.documentID)")
                         UserDefaults.standard.set(mm.id, forKey: "myId")
                         self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin ? true : mm.admin]) { _ in
-                            self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
+                            self.getHouse(m: m, h: hh, inWR: inWR, noProf: .constant(false))
                             self.db.document("waitingRoom/\(mm.id)").delete()
                             UserDefaults.standard.set(mm.id, forKey: "myId")
                             UserDefaults.standard.set(house, forKey: "houseId")
@@ -358,6 +379,29 @@ class Fetch: ObservableObject {
             UserDefaults.standard.set(id, forKey: "houseId")
         self.joinHouse(hh: hh, m: m, hId: id, password: password, showAlert: .constant(false), tapped: tapped, msg: .constant(""), inWR: inWR, forceAdmin: true)
 //        }
+    }
+    
+    func deleteAccount(m: Binding<Member>) {
+        self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else {
+                print("remove member no payments or something")
+                return
+            }
+            for doc in documents.filter({ (doc) -> Bool in
+                let d = doc.data()
+                let to = (d["to"] ?? "") as! String
+                let from = (d["from"] ?? "") as! String
+                let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
+                return to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)
+            }) {
+                self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+            }
+        }
+        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete { (err) in
+            m.wrappedValue = .empty
+            UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
+            UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
+        }
     }
     
 }

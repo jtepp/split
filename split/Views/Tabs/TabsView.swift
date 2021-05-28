@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TabsView: View {
+    @Binding var member: Member
     @Binding var tabSelection: Int
     @Binding var house: House
     @Binding var myId: String
@@ -22,18 +23,16 @@ struct TabsView: View {
                         .tag(1)
                     PaymentView(house: $house, tabSelection: $tabSelection)
                         .tag(2)
-                    ProfileView(house: $house, m: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
-                        return m.id == myId
-                    }) ?? Member.empty))
+                    ProfileView(house: $house, m: $member)
                         .tag(3)
                 })
             .tabViewStyle(PageTabViewStyle())
             .background(Color.black.edgesIgnoringSafeArea(.all))
             .onAppear(){
-                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+                Fetch().getHouse(m: $member, h: $house, inWR: $inWR, noProf: $noProf)
             }
             .sheet(isPresented: $inWR, onDismiss: {
-                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+                Fetch().getHouse(m: $member, h: $house, inWR: $inWR, noProf: $noProf)
             }) {
                 if (noProf) {
                 NoProfileView(myId: $myId, show: $noProf, house: $house)
@@ -46,7 +45,7 @@ struct TabsView: View {
                 }
             }
             .onChange(of: tabSelection) { (_) in
-                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+                Fetch().getHouse(m: $member, h: $house, inWR: $inWR, noProf: $noProf)
             }
 
     }
