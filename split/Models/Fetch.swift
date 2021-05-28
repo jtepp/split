@@ -324,12 +324,22 @@ class Fetch: ObservableObject {
                         print("house \(house)")
                         print("hid \(h.documentID)")
                         UserDefaults.standard.set(mm.id, forKey: "myId")
+                        
+                        if mm.id == "" {
+                            m.wrappedValue = .empty
+                            UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
+                            UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
+                            inWR.wrappedValue = true
+                        } else {
+                        
                         self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin ? true : mm.admin]) { _ in
                             self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
                             self.db.document("waitingRoom/\(mm.id)").delete()
                             UserDefaults.standard.set(mm.id, forKey: "myId")
                             UserDefaults.standard.set(house, forKey: "houseId")
                             inWR.wrappedValue = false
+                        }
+                            
                         }
                     } else {
                         showAlert.wrappedValue = true
