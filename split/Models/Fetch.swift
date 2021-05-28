@@ -261,22 +261,34 @@ class Fetch: ObservableObject {
         
     }
     
-    func joinHouse(m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>) {
-        var house = House.empty
+    func joinHouse(m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>) {
+        var house = House.empty.id
         db.collection("houses").getDocuments { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
                 print(err.debugDescription)
                 return
             }
             documents.forEach { (h) in
-                //                if h.documentID == hId {
-                //
-                //                }
-                
+                if h.documentID == hId {
+                    house = h.documentID
+                    let d = h.data()
+                    let p = (d["password"] ?? "") as! String
+                    
+                    if password == p {
+                        //add this member to house, set userdefaults and call for a refresh
+                        
+                    } else {
+                        showAlert.wrappedValue = true
+                        tapped.wrappedValue = false
+                        msg.wrappedValue = "Incorrect pasword"
+                    }
+                    
+                }
             }
-            if house.id == House.empty.id {
+            if house == House.empty.id {
                 showAlert.wrappedValue = true
                 tapped.wrappedValue = false
+                msg.wrappedValue = "House not found"
             }
         }
     }

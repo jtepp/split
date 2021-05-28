@@ -13,6 +13,7 @@ struct WaitingRoomView: View {
     @State var hId = ""
     @State var hNm = ""
     @State var hPw = ""
+    @State var msg = "Error joining house"
     @State var showWrongPassAlert = false
     @State var tapped = false
     var body: some View {
@@ -32,7 +33,7 @@ struct WaitingRoomView: View {
                                 Button(action: {
                                     tapped = true
                                     if showPanel == 1 {
-                                        Fetch().joinHouse(m: $member, hId: hId, password: hPw, showAlert: $showWrongPassAlert, tapped: $tapped)
+                                        Fetch().joinHouse(m: $member, hId: hId, password: hPw, showAlert: $showWrongPassAlert, tapped: $tapped, msg: $msg)
                                         ///look in houses for id, if not found call error, if found and bad pwd call error, if found and good pwd ->
                                         ///put in update location, refresh house, later add announcement
                                     } else if showPanel == 2 {
@@ -111,7 +112,7 @@ struct WaitingRoomView: View {
             
             Spacer()
                 .alert(isPresented: $showWrongPassAlert, content: {
-                    Alert(title: Text("Error joining house"), message: Text("Please make sure you put in your information correctly and try again"), dismissButton: Alert.Button.default(Text("Ok")))
+                    Alert(title: Text(msg), message: Text("Please make sure you put in your information correctly and try again"), dismissButton: Alert.Button.default(Text("Ok")))
                 })
         }
     }
