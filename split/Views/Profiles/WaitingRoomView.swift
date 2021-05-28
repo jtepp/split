@@ -30,10 +30,10 @@ struct WaitingRoomView: View {
                                 .frame(width: 400)
                                 .opacity(showPanel == 0 ? 1 : 0)
                             VStack {
-                                InputField(name: "House \(showPanel == 1 ? "ID" : "Name")", text: $hId)
+                                InputField(name: "House \(showPanel == 1 ? "ID" : "Name")", text: $hId, small: true)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
-                                InputField(name: "Password", text: $hPw)
+                                InputField(name: "Password", text: $hPw, small: true)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
                                 Button(action: {
@@ -65,6 +65,7 @@ struct WaitingRoomView: View {
                             .opacity(showPanel != 0 ? 1 : 0)
                             .allowsHitTesting(showPanel != 0)
                         }
+
                         .animation(Animation.easeIn.speed(3))
                     )
             }

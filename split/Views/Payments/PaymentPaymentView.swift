@@ -81,6 +81,7 @@ struct PaymentPaymentView: View {
 struct InputField: View {
     var name: String
     @Binding var text: String
+    var small: Bool = false
     var body: some View {
         HStack {
             Text("\(name):")
@@ -94,7 +95,7 @@ struct InputField: View {
                 .keyboardType(name.lowercased() == "amount" ? .decimalPad : .default)
                 
             Spacer()
-        }
+        }.scaleEffect(small ? 0.8 : 1)
     }
 }
 

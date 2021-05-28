@@ -135,29 +135,29 @@ class Fetch: ObservableObject {
         }
     }
     
-    func updateMember(m: Binding<Member>) {
-        let hid = UserDefaults.standard.string(forKey: "houseId")
-        db.document("houses/\(hid)/members/\(m.wrappedValue.id)").addSnapshotListener { (documentSnapshot, err) in
-            guard let data = documentSnapshot?.data() else {
-                print("dsfasddasfasd;flj")
-                return
-            }
-            let name = data["name"] as? String ?? ""
-            let home = data["home"] as? String ?? ""
-            let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
-            let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
-            let image = data["image"] as? String ?? ""
-            let admin = data["admin"] as? Bool ?? false
-            
-            m.wrappedValue.name = name
-            m.wrappedValue.home = home
-            m.wrappedValue.owesMe = owesMe
-            m.wrappedValue.iOwe = iOwe
-            m.wrappedValue.image = image
-            m.wrappedValue.admin = admin
-        }
-    }
-    
+//    func updateMember(m: Binding<Member>) {
+//        let hid = UserDefaults.standard.string(forKey: "houseId")
+//        db.document("houses/\(hid)/members/\(m.wrappedValue.id)").addSnapshotListener { (documentSnapshot, err) in
+//            guard let data = documentSnapshot?.data() else {
+//                print("dsfasddasfasd;flj")
+//                return
+//            }
+//            let name = data["name"] as? String ?? ""
+//            let home = data["home"] as? String ?? ""
+//            let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
+//            let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
+//            let image = data["image"] as? String ?? ""
+//            let admin = data["admin"] as? Bool ?? false
+//            
+//            m.wrappedValue.name = name
+//            m.wrappedValue.home = home
+//            m.wrappedValue.owesMe = owesMe
+//            m.wrappedValue.iOwe = iOwe
+//            m.wrappedValue.image = image
+//            m.wrappedValue.admin = admin
+//        }
+//    }
+//    
     
     func getPayments(h: Binding<House>, id: String) {
         db.collection("houses/"+id+"/payments").addSnapshotListener { (querySnapshot, error) in

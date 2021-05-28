@@ -45,6 +45,9 @@ struct TabsView: View {
                             .allowAutoDismiss(false)
                 }
             }
+            .onChange(of: tabSelection) { (_) in
+                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+            }
 
     }
 }
