@@ -253,7 +253,7 @@ class Fetch: ObservableObject {
                 return
             }
             self.db.document("waitingRoom/\(m.id)").setData(doc.data()!)
-            self.db.document("waitingRoom/\(m.id)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
+            self.db.document("waitingRoom/\(m.id)").updateData(["home":"waitingRoom", "iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
                 self.db.collection("houses/\(h.id)/payments").getDocuments { (querySnapshot, err) in
                     guard let documents = querySnapshot?.documents else {
                         print("remove member no payments or something")
@@ -361,6 +361,21 @@ class Fetch: ObservableObject {
     }
     
     func leaveHouse(m: Binding<Member>, inWR: Binding<Bool>) {
+        self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else {
+                print("remove member no payments or something")
+                return
+            }
+            for doc in documents.filter({ (doc) -> Bool in
+                let d = doc.data()
+                let to = (d["to"] ?? "") as! String
+                let from = (d["from"] ?? "") as! String
+                let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
+                return to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)
+            }) {
+                self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+            }
+        }
         db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete()
         m.wrappedValue.home = "waitingRoom"
         db.collection("waitingRoom").addDocument(data: ["name" : m.wrappedValue.name, "image" : m.wrappedValue.image, "home" : "waitingRoom", "admin": false]) { (_) in
@@ -369,6 +384,21 @@ class Fetch: ObservableObject {
         
     }
     func eraseHouse(m: Binding<Member>, inWR: Binding<Bool>) {
+        self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else {
+                print("remove member no payments or something")
+                return
+            }
+            for doc in documents.filter({ (doc) -> Bool in
+                let d = doc.data()
+                let to = (d["to"] ?? "") as! String
+                let from = (d["from"] ?? "") as! String
+                let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
+                return to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)
+            }) {
+                self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+            }
+        }
         db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete()
         db.document("houses/\(m.wrappedValue.home)").delete()
         m.wrappedValue.home = "waitingRoom"
