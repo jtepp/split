@@ -49,6 +49,7 @@ struct EditProfileView: View {
                             Image(systemName: "camera.fill")
                                 .padding(10)
                                 .foregroundColor(.black)
+                                .preferredColorScheme(.dark)
                                 .background(
                                     Circle()
                                         .fill(
@@ -61,7 +62,7 @@ struct EditProfileView: View {
                     .padding(.top, -40)
                 Spacer()
                 InputField(name: "Name", text: $name)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .padding()
                     .padding(.top)
                     .onChange(of: name, perform: { value in

@@ -16,7 +16,11 @@ class Fetch: ObservableObject {
         let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
         let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
         
+        print("ID:    \(id)")
+        print("ME:    \(myId)")
+        
         if id != "" && id != "waitingRoom" { // has real house id
+            print("has real hid \(id) \(myId)")
             inWR.wrappedValue = false
             noProf.wrappedValue = false
             db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
@@ -40,9 +44,11 @@ class Fetch: ObservableObject {
                 }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
                     //if ur an alien, go to void, otherwise get waitingRoomed
                     if myId == "" {
+                        print("gotovoid")
                         UserDefaults.standard.set("", forKey: "houseId")
                         noProf.wrappedValue = true
                     } else {
+                        print("wred")
                         UserDefaults.standard.set("waitingRoom", forKey: "houseId")
                         noProf.wrappedValue = false
                     }
@@ -51,6 +57,7 @@ class Fetch: ObservableObject {
                 
             }
         } else if id == "waitingRoom" && myId != "" { //in waiting room and account exists
+            print("in waiting room and account exists")
             inWR.wrappedValue = true
             noProf.wrappedValue = false
             db.document("waitingRoom/"+myId).addSnapshotListener { (querySnapshot, error) in
@@ -86,10 +93,12 @@ class Fetch: ObservableObject {
                 
             }
         } else if id == "waitingRoom" && myId == "" {
+            print("get out of waiting room alien")
             inWR.wrappedValue = true
             noProf.wrappedValue = true
             UserDefaults.standard.set("", forKey: "houseId") //get out of waiting room alien
         } else if id == "" {
+            print("where u belong")
             UserDefaults.standard.set("", forKey: "houseId")
             inWR.wrappedValue = true
             noProf.wrappedValue = true
@@ -268,10 +277,9 @@ class Fetch: ObservableObject {
                 print(err.debugDescription)
                 return
             }
+            
             documents.forEach { (h) in
-                print(h.documentID)
                 if h.documentID == hId {
-                    print(true)
                     house = h.documentID
                     let d = h.data()
                     let p = (d["password"] ?? "") as! String
@@ -279,8 +287,9 @@ class Fetch: ObservableObject {
                     if password == p {
                         //add this member to house, remove from wr set userdefaults and call for a refresh
                         let mm = m.wrappedValue
-                        self.db.document("houses/\(h.documentID)/members/\(mm.id)").setData(["name" : mm.name, "image" : mm.image]) { _ in
-                            self.db.document("waitingRoom/\(mm.id)").delete()
+                        print(mm)
+                        self.db.document("houses/\(h.documentID)/members/\("0jQWd9MYhiXJVBh1rlw3")").setData(["name" : mm.name, "image" : mm.image]) { _ in
+//                            self.db.document("waitingRoom/\(mm.id)").delete()
                             UserDefaults.standard.set(mm.id, forKey: "myId")
                             UserDefaults.standard.set(h.documentID, forKey: "houseId")
                         }
@@ -297,6 +306,7 @@ class Fetch: ObservableObject {
                 tapped.wrappedValue = false
                 msg.wrappedValue = "House not found"
             }
+            tapped.wrappedValue = false
         }
     }
     
