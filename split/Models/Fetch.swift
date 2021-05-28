@@ -275,9 +275,11 @@ class Fetch: ObservableObject {
                     let p = (d["password"] ?? "") as! String
                     
                     if password == p {
-                        //add this member to house, set userdefaults and call for a refresh
+                        //add this member to house, remove from wr set userdefaults and call for a refresh
                         let mm = m.wrappedValue
-                        self.db.document("houses/\(h.documentID)/members/\(mm.id)").setData(["name" : mm.name, "image" : mm.image])
+                        self.db.document("houses/\(h.documentID)/members/\(mm.id)").setData(["name" : mm.name, "image" : mm.image]) { _ in
+                            self.db.document("waitingRoom/\(mm.id)").delete()
+                        }
                     } else {
                         showAlert.wrappedValue = true
                         tapped.wrappedValue = false
