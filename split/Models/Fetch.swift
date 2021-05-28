@@ -360,6 +360,30 @@ class Fetch: ObservableObject {
 //        }
     }
     
+    func deleteAccount(m: Binding<Member>) {
+        self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else {
+                print("remove member no payments or something")
+                return
+            }
+            for doc in documents.filter({ (doc) -> Bool in
+                let d = doc.data()
+                let to = (d["to"] ?? "") as! String
+                let from = (d["from"] ?? "") as! String
+                let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
+                return to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)
+            }) {
+                self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+            }
+        }
+        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete { (err) in
+            m.wrappedValue = .empty
+            UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
+            UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
+        }
+    }
+  
+    
 }
 
 func idfromnamehouse(name: String, house: House) -> String {
