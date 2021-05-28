@@ -19,7 +19,7 @@ struct ActivityAnnouncementCell: View {
             }
         }
         .foregroundColor(.white)
-        .padding()
+//        .padding()
         .padding(.bottom, 10)
         .background(
             RoundedRectangle(cornerRadius: 10)
@@ -30,7 +30,7 @@ struct ActivityAnnouncementCell: View {
         .overlay(
             VStack {
                 Spacer()
-                TimeBar(unix: payment.time)
+                TimeBar(unix: payment.time, white: true)
                     .padding(.horizontal)
             }
         )

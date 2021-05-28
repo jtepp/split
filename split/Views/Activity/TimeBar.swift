@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TimeBar: View {
     var unix: Int
+    var white: Bool = false
     var body: some View {
         HStack {
             Text(unixtotime(unix: unix))
@@ -19,7 +20,7 @@ struct TimeBar: View {
                 .font(.callout)
                 .bold()
         }
-        .foregroundColor(Color.black.opacity(0.4))
+        .foregroundColor(white ? Color.white.opacity(0.5) : Color.black.opacity(0.4))
     }
 }
 
