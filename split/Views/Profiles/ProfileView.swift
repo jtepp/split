@@ -100,7 +100,7 @@ struct ProfileView: View {
                                 }), secondaryButton: Alert.Button.cancel())
                             } else {
                                 return Alert(title: Text("Erase House"), message: Text("Deleting this account will erase this it from the database"), primaryButton: Alert.Button.destructive(Text("Erase"), action: {
-                                    //leave house and delete doc
+                                    Fetch().deleteAccount(m: $m, erase: true)
                                 }), secondaryButton: Alert.Button.cancel())
                             }
                         } else {

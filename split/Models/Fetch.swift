@@ -330,14 +330,14 @@ class Fetch: ObservableObject {
                             inWR.wrappedValue = true
                             print("\n\n\n\n\(mm)\n\n\n\n")
                         } else {
-                        
-                        self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin ? true : mm.admin]) { _ in
-                            self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
-                            self.db.document("waitingRoom/\(mm.id)").delete()
-                            UserDefaults.standard.set(mm.id, forKey: "myId")
-                            UserDefaults.standard.set(house, forKey: "houseId")
-                            inWR.wrappedValue = false
-                        }
+                            
+                            self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin ? true : mm.admin]) { _ in
+                                self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
+                                self.db.document("waitingRoom/\(mm.id)").delete()
+                                UserDefaults.standard.set(mm.id, forKey: "myId")
+                                UserDefaults.standard.set(house, forKey: "houseId")
+                                inWR.wrappedValue = false
+                            }
                             
                         }
                     } else {
@@ -362,36 +362,42 @@ class Fetch: ObservableObject {
         m.wrappedValue.home = id
         m.wrappedValue.admin = true
         hh.wrappedValue.members = [m.wrappedValue]
-//        db.collection("houses/\(id)/members").addDocument(data: ["admin" : true, "name" : m.wrappedValue.name, "home" : id, "image" : m.wrappedValue.id]) { (err) in
-            UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
-            UserDefaults.standard.set(id, forKey: "houseId")
+        //        db.collection("houses/\(id)/members").addDocument(data: ["admin" : true, "name" : m.wrappedValue.name, "home" : id, "image" : m.wrappedValue.id]) { (err) in
+        UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
+        UserDefaults.standard.set(id, forKey: "houseId")
         self.joinHouse(hh: hh, m: m, hId: id, password: password, showAlert: .constant(false), tapped: tapped, msg: .constant(""), inWR: inWR, forceAdmin: true)
-//        }
+        //        }
     }
     
-    func deleteAccount(m: Binding<Member>) {
-        self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
-            guard let documents = querySnapshot?.documents else {
-                print("remove member no payments or something")
-                return
+    func deleteAccount(m: Binding<Member>, erase: Bool = false) {
+        if m.wrappedValue.home != "" {
+            self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
+                guard let documents = querySnapshot?.documents else {
+                    print("remove member no payments or something")
+                    return
+                }
+                for doc in documents.filter({ (doc) -> Bool in
+                    let d = doc.data()
+                    let to = (d["to"] ?? "") as! String
+                    let from = (d["from"] ?? "") as! String
+                    let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
+                    return to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)
+                }) {
+                    self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+                    //                if erase {
+                    //                    self.db.document("houses/\(m.wrappedValue.home)").delete()
+                    //                }
+                }
             }
-            for doc in documents.filter({ (doc) -> Bool in
-                let d = doc.data()
-                let to = (d["to"] ?? "") as! String
-                let from = (d["from"] ?? "") as! String
-                let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
-                return to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)
-            }) {
-                self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+            db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete { (err) in
+                m.wrappedValue = .empty
+                UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
+                UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
             }
-        }
-        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete { (err) in
-            m.wrappedValue = .empty
-            UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
-            UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
         }
     }
-  
+    
+    
     
 }
 
