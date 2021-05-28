@@ -12,6 +12,7 @@ struct WaitingRoomView: View {
     @State var showJoin = false
     @State var hId = ""
     @State var hPw = ""
+    @State var showWrongPassAlert = false
     var body: some View {
         VStack{
             ZStack {
@@ -26,6 +27,22 @@ struct WaitingRoomView: View {
                             VStack {
                                 InputField(name: "House ID", text: $hId)
                                 InputField(name: "Password", text: $hPw)
+                                Button(action: {
+//                                    showJoin.toggle()
+                                }, label: {
+                                    HStack {
+//                                        Spacer()
+                                        Text("Join")
+                                            .foregroundColor(.white)
+//                                        Spacer()
+                                    }
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color.blue)
+                                    )
+                                    .padding()
+                                })
                             }
                             .opacity(showJoin ? 1 : 0)
                             .allowsHitTesting(showJoin)
