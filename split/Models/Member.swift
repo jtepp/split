@@ -9,7 +9,7 @@ import Foundation
 
 struct Member: Identifiable {
     let id: String
-    let home: String
+    var home: String
     var name: String
     var owesMe: [String : Float] = [String : Float]()
     var iOwe: [String : Float] = [String : Float]()

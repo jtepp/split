@@ -115,6 +115,7 @@ struct ProfileView: View {
             })
             .onAppear{
                 UserDefaults.standard.set(m.id, forKey: "myId")
+                Fetch().updateMember(m: $m)
             }
             .sheet(isPresented: $showAdminPicker, onDismiss: {
                 if !adminChoice.isEmpty {

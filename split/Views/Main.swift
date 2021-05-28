@@ -18,11 +18,6 @@ struct Main: View {
             TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
                 .animation(.easeOut)
             TabBar(tabSelection: $tabSelection)
-                .onTapGesture {
-                    print(inWR)
-                    inWR.toggle()
-                    print(inWR)
-                }
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{

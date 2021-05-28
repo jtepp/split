@@ -16,19 +16,12 @@ struct TabsView: View {
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
-                    if inWR {
-                        WaitingRoomView(h: $house, inWR: $inWR, member: .constant(house.members.first ?? Member.empty))
-                            .tag(0)
-                            .tag(1)
-                            .tag(2)
-                    } else {
                     ActivityView(house: $house, tabSelection: $tabSelection)
                         .tag(0)
                     MembersView(house: $house, tabSelection: $tabSelection)
                         .tag(1)
                     PaymentView(house: $house, tabSelection: $tabSelection)
                         .tag(2)
-                }
                     ProfileView(house: $house, m: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
                     }) ?? Member.empty))
@@ -39,16 +32,19 @@ struct TabsView: View {
             .onAppear(){
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
             }
-            .sheet(isPresented: $noProf) {
-                ModalView(title: "Sign in") { //in waiting room with id
+            .sheet(isPresented: $inWR, onDismiss: {
+                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+            }) {
+                if (noProf) {
                 NoProfileView(myId: $myId, show: $noProf, house: $house)
                         .background(Color.black.edgesIgnoringSafeArea(.all))
                         .allowAutoDismiss(false)
+                } else {
+                    WaitingRoomView(h: $house, inWR: $inWR, member: .constant(house.members.first ?? Member.empty))
+                            .background(Color.black.edgesIgnoringSafeArea(.all))
+                            .allowAutoDismiss(false)
                 }
             }
-            .onChange(of: inWR) { (_) in
-                inWR.toggle()
-                inWR.toggle()
-            }
+
     }
 }
