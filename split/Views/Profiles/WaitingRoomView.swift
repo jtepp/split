@@ -8,23 +8,46 @@
 import SwiftUI
 
 struct WaitingRoomView: View {
-    @Binding var show: Bool
+    @Binding var member: Member
+    @State var showJoin = false
+    @State var hId = ""
+    @State var hPw = ""
     var body: some View {
         VStack{
-            Spacer()
-            Button(action: {}, label: {
+            ZStack {
+                Spacer()
+                    .overlay(
+                        ZStack {
+                            Image("Name")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 400)
+                                .opacity(showJoin ? 0 : 1)
+                            VStack {
+                                InputField(name: "House ID", text: $hId)
+                                InputField(name: "Password", text: $hPw)
+                            }
+                            .opacity(showJoin ? 1 : 0)
+                            .allowsHitTesting(showJoin)
+                        }
+                        .animation(Animation.easeIn.speed(3))
+                    )
+            }
+            Button(action: {
+                showJoin.toggle()
+            }, label: {
                 HStack {
                     Spacer()
                     Text("Join a House")
                         .foregroundColor(.white)
                     Spacer()
                 }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.blue)
-                    )
-                    .padding()
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.blue)
+                )
+                .padding()
             })
             .padding()
             
@@ -35,16 +58,23 @@ struct WaitingRoomView: View {
                         .foregroundColor(.white)
                     Spacer()
                 }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.blue)
-                    )
-                    .padding()
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.blue)
+                )
+                .padding()
             })
             .padding()
             
             Spacer()
         }
+    }
+}
+
+struct WaitingRoomView_Previews: PreviewProvider {
+    static var previews: some View {
+        WaitingRoomView(member: .constant(.placeholder))
+            .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

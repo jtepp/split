@@ -16,12 +16,19 @@ struct TabsView: View {
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
+                    if inWR {
+                        WaitingRoomView(member: .constant(house.members.first ?? Member.empty))
+                            .tag(0)
+                            .tag(1)
+                            .tag(2)
+                    } else {
                     ActivityView(house: $house, tabSelection: $tabSelection)
                         .tag(0)
                     MembersView(house: $house, tabSelection: $tabSelection)
                         .tag(1)
                     PaymentView(house: $house, tabSelection: $tabSelection)
                         .tag(2)
+                }
                     ProfileView(house: $house, m: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
                     }) ?? Member.empty))
