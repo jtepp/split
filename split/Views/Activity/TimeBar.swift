@@ -13,14 +13,14 @@ struct TimeBar: View {
     var body: some View {
         HStack {
             Text(unixtotime(unix: unix))
-                .font(.callout)
+                .font(.footnote)
                 .bold()
             Spacer()
             Text(unixtodate(unix: unix))
-                .font(.callout)
+                .font(.footnote)
                 .bold()
         }
-        .foregroundColor(white ? Color.white.opacity(0.5) : Color.black.opacity(0.4))
+        .foregroundColor(white ? Color.white.opacity(0.2) : Color.black.opacity(0.4))
     }
 }
 

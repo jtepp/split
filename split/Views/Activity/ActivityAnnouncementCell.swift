@@ -19,7 +19,8 @@ struct ActivityAnnouncementCell: View {
             }
         }
         .foregroundColor(.white)
-//        .padding()
+        .padding(.vertical, 2)
+        .padding(.top, 6)
         .padding(.bottom, 10)
         .background(
             RoundedRectangle(cornerRadius: 10)
