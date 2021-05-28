@@ -177,9 +177,10 @@ class Fetch: ObservableObject {
                 let amount = data["amount"] as? NSNumber ?? 0
                 let memo = data["memo"] as? String ?? ""
                 let isRequest = data["isRequest"] as? Bool ?? false
+                let isAn = data["isAn"] as? Bool ?? false
                 let by = data["by"] as? String ?? ""
                 
-                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, by: by)
+                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, isAn: isAn, by: by)
             })
             for member in h.wrappedValue.members {
                 self.updateBalances(h: h.wrappedValue, m: member)
@@ -196,7 +197,7 @@ class Fetch: ObservableObject {
     func sendPayment(p: Payment, h: House) {
         //        let pId =
         db.collection("houses/\(h.id)/payments").addDocument(data:
-                                                                ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID"]
+                                                                ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "isAn":p.isAn]
         )
         //            .documentID
         for member in h.members {
