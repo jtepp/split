@@ -28,16 +28,16 @@ struct TabsView: View {
                         .tag(3)
                 })
             .tabViewStyle(PageTabViewStyle())
-            .sheet(isPresented: $noProf) {
-//                ModalView(title: "Sign in") { //in waiting room with id
-                NoProfileView(myId: $myId, show: $noProf, house: $house)
-                        .background(Color.black.edgesIgnoringSafeArea(.all))
-                        .allowAutoDismiss(false)
-//                }
-            }
             .background(Color.black.edgesIgnoringSafeArea(.all))
             .onAppear(){
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+            }
+            .sheet(isPresented: $noProf) {
+                ModalView(title: "Sign in") { //in waiting room with id
+                NoProfileView(myId: $myId, show: $noProf, house: $house)
+                        .background(Color.black.edgesIgnoringSafeArea(.all))
+                        .allowAutoDismiss(false)
+                }
             }
     }
 }

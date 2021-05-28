@@ -106,9 +106,6 @@ struct ProfileView: View {
             .padding(.vertical, 40)
             .foregroundColor(.white)
             .background(Color.black.edgesIgnoringSafeArea(.all))
-            .sheet(isPresented: $showImagePicker, content: {
-                ImagePicker(img: $img, isShown: $showImagePicker, sourceType: sourceType)
-            })
             .onChange(of: img, perform: { _ in
                 if img != nil {
                     Fetch().updateImg(img: img!, hId: house.id, myId: m.id)
@@ -124,6 +121,9 @@ struct ProfileView: View {
             }) {
                 MemberPicker(show: $showAdminPicker, house: $house, choice: $adminChoice)
             }
+            .sheet(isPresented: $showImagePicker, content: {
+                ImagePicker(img: $img, isShown: $showImagePicker, sourceType: sourceType)
+            })
         }
     }
 }
