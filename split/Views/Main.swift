@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Main: View {
-    @ObservedObject var fetch = Fetch()
     @State var h = House.empty
     @State var inWR = true
     @State var noProf = true
@@ -22,8 +21,12 @@ struct Main: View {
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
-            fetch.getHouse(h: $h, inWR: $inWR, noProf: $noProf)
+            Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         }
+        .onChange(of: h.members.count, perform: { _ in
+            UserDefaults.standard.set(myId, forKey: "myId")
+            Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
+        })
     }
 }
 
