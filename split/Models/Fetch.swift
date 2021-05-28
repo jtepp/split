@@ -23,6 +23,9 @@ class Fetch: ObservableObject {
             print("has real hid \(id) \(myId)")
             inWR.wrappedValue = false
             noProf.wrappedValue = false
+            
+            
+            
             db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
                 guard let doc = querySnapshot else {
                     print("no house by id %s", id)
@@ -157,7 +160,9 @@ class Fetch: ObservableObject {
     }
     
     func updateImg(img: UIImage, hId: String, myId: String) {
-        db.document("houses/\(hId)/members/\(myId)").updateData(["image":imgtob64(img: img.resized(toWidth: 400)!)])
+        let id = UserDefaults.standard.string(forKey: "myId")
+        print("UPDATEIMG")
+        db.document("houses/\(hId)/members/\(id ?? "EMPTYIMG")").updateData(["image":imgtob64(img: img.resized(toWidth: 400)!)])
     }
     
     func sendPayment(p: Payment, h: House) {
@@ -198,8 +203,9 @@ class Fetch: ObservableObject {
                 }
             }
         }
-        
-        db.document("houses/\(h.id)/members/\(m.id)").updateData(["owesMe":owesMe, "iOwe":iOwe])
+        let id = UserDefaults.standard.string(forKey: "myId")
+        print("UPDATEBAL")
+        db.document("houses/\(h.id)/members/\(m.id ?? "EMPTYBAL")").updateData(["owesMe":owesMe, "iOwe":iOwe])
         
         
     }
@@ -270,7 +276,7 @@ class Fetch: ObservableObject {
         
     }
     
-    func joinHouse(m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>) {
+    func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>) {
         var house = House.empty.id
         db.collection("houses").getDocuments { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
@@ -287,11 +293,16 @@ class Fetch: ObservableObject {
                     if password == p {
                         //add this member to house, remove from wr set userdefaults and call for a refresh
                         let mm = m.wrappedValue
-                        print(mm)
-                        self.db.document("houses/\(h.documentID)/members/\("0jQWd9MYhiXJVBh1rlw3")").setData(["name" : mm.name, "image" : mm.image]) { _ in
-//                            self.db.document("waitingRoom/\(mm.id)").delete()
+                        print("mm \(mm)")
+                        print("house \(house)")
+                        print("hid \(h.documentID)")
+                        UserDefaults.standard.set(mm.id, forKey: "myId")
+                        self.db.document("houses/\(house)/members/\("\(mm.id ?? "EMPTY")")").setData(["name" : mm.name, "image" : mm.image]) { _ in
+                            self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
+                            self.db.document("waitingRoom/\(mm.id)").delete()
                             UserDefaults.standard.set(mm.id, forKey: "myId")
-                            UserDefaults.standard.set(h.documentID, forKey: "houseId")
+                            UserDefaults.standard.set(house, forKey: "houseId")
+                            inWR.wrappedValue = false
                         }
                     } else {
                         showAlert.wrappedValue = true

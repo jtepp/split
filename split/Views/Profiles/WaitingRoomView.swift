@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WaitingRoomView: View {
+    @Binding var h: House
+    @Binding var inWR: Bool
     @Binding var member: Member
     @State var showPanel = 0
     @State var hId = ""
@@ -37,7 +39,7 @@ struct WaitingRoomView: View {
                                 Button(action: {
                                     tapped = true
                                     if showPanel == 1 {
-                                        Fetch().joinHouse(m: $member, hId: hId, password: hPw, showAlert: $showWrongPassAlert, tapped: $tapped, msg: $msg)
+                                        Fetch().joinHouse(hh: $h, m: $member, hId: hId, password: hPw, showAlert: $showWrongPassAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
                                         ///look in houses for id, if not found call error, if found and bad pwd call error, if found and good pwd ->
                                         ///put in update location, refresh house, later add announcement
                                     } else if showPanel == 2 {
@@ -122,9 +124,9 @@ struct WaitingRoomView: View {
     }
 }
 
-struct WaitingRoomView_Previews: PreviewProvider {
-    static var previews: some View {
-        WaitingRoomView(member: .constant(.placeholder))
-            .background(Color.black.edgesIgnoringSafeArea(.all))
-    }
-}
+//struct WaitingRoomView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WaitingRoomView(member: .constant(.placeholder))
+//            .background(Color.black.edgesIgnoringSafeArea(.all))
+//    }
+//}

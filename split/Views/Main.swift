@@ -23,7 +23,7 @@ struct Main: View {
         .onAppear{
             Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         }
-        .onChange(of: h.members.count, perform: { _ in
+        .onChange(of: h.id, perform: { _ in
             UserDefaults.standard.set(myId, forKey: "myId")
             Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         })

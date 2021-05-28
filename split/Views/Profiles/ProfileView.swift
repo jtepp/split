@@ -69,7 +69,8 @@ struct ProfileView: View {
                 Spacer()
                 MemberPaymentInfoView(member: $m, house: $house)
                 Spacer()
-                Button(action: {
+                if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" && (UserDefaults.standard.string(forKey: "houseId") ?? "") != "waitingRoom" {
+                    Button(action: {
                     showSignOut = true
                 }, label: {
                     HStack {
@@ -98,6 +99,7 @@ struct ProfileView: View {
                         }), secondaryButton: Alert.Button.cancel())
                     }
                 })
+                }
                 Text("ID: \(m.id)")
                     .font(.caption)
                     .foregroundColor(Color("Secondary"))

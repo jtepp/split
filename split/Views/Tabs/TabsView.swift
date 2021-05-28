@@ -17,7 +17,7 @@ struct TabsView: View {
         TabView(selection: $tabSelection,
                 content:  {
                     if inWR {
-                        WaitingRoomView(member: .constant(house.members.first ?? Member.empty))
+                        WaitingRoomView(h: $house, inWR: $inWR, member: .constant(house.members.first ?? Member.empty))
                             .tag(0)
                             .tag(1)
                             .tag(2)
