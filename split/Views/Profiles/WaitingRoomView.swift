@@ -21,7 +21,7 @@ struct WaitingRoomView: View {
     var body: some View {
         VStack{
             ZStack {
-                Spacer(minLength: 200)
+                Spacer(minLength: 260)
                     .overlay(
                         ZStack {
                             Image("Name")
@@ -61,6 +61,7 @@ struct WaitingRoomView: View {
                             }
                             .opacity(showPanel != 0 ? 1 : 0)
                             .allowsHitTesting(showPanel != 0)
+                            .offset(y: 40)
                         }
                         
                         .animation(Animation.easeIn.speed(3))
