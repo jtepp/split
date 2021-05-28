@@ -377,6 +377,7 @@ class Fetch: ObservableObject {
         UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
         UserDefaults.standard.set(id, forKey: "houseId")
         self.joinHouse(hh: hh, m: m, hId: id, password: password, showAlert: .constant(false), tapped: tapped, msg: .constant(""), inWR: inWR, forceAdmin: true)
+        self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "created the house", isAn: true), h: House(id: id, name: "", members: [Member](), payments: [Payment](), password: ""))
         //        }
     }
     
