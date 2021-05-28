@@ -14,6 +14,9 @@ struct ActivityAnnouncementCell: View {
         VStack {
             HStack {
                 Spacer()
+                Text(payment.from)
+                    .font(Font.body.weight(.heavy))
+                    .padding(.trailing, -4)
                 Text(payment.memo)
                 Spacer()
             }
