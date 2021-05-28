@@ -106,7 +106,10 @@ struct ActivityView: View {
             }
             
             .padding()
-            Spacer(minLength: 80)
+            Rectangle()
+                .fill(Color.black)
+                .frame(minHeight:120)
+            
         }
         .foregroundColor(.white)
     }

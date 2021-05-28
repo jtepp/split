@@ -254,8 +254,8 @@ class Fetch: ObservableObject {
         }
     }
     
-    func removeMember(m: Member, h: House) {
-        let docRef = db.document("houses/\(h.id)/members/\(m.id)")
+    func removeMember(m: Member, h: Binding<House>) {
+        let docRef = db.document("houses/\(h.wrappedValue.id)/members/\(m.id)")
         docRef.getDocument { (documentSnapshot, err) in
             guard let doc = documentSnapshot else {
                 print("couldn't get doc \(String(describing: err))")
@@ -263,7 +263,7 @@ class Fetch: ObservableObject {
             }
             self.db.document("waitingRoom/\(m.id)").setData(doc.data()!)
             self.db.document("waitingRoom/\(m.id)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
-                self.db.collection("houses/\(h.id)/payments").getDocuments { (querySnapshot, err) in
+                self.db.collection("houses/\(h.wrappedValue.id)/payments").getDocuments { (querySnapshot, err) in
                     guard let documents = querySnapshot?.documents else {
                         print("remove member no payments or something")
                         return
@@ -276,8 +276,11 @@ class Fetch: ObservableObject {
                         let isAn = d["isAn"] as? Bool ?? false
                         return (to.contains(m.name) || from.contains(m.name) || reqfrom.contains(m.name)) && !isAn
                     }) {
-                        self.db.document("houses/\(h.id)/payments/\(doc.documentID)").delete()
-                        self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the house", isAn: true), h: h)
+                        self.db.document("houses/\(h.wrappedValue.id)/payments/\(doc.documentID)").delete()
+                        h.wrappedValue.members.removeAll { (m) -> Bool in
+                            return m.id == doc.documentID
+                        }
+                        self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the house", isAn: true), h: h.wrappedValue)
                     }
                 }
                 docRef.delete()
