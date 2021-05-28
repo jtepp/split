@@ -393,7 +393,7 @@ class Fetch: ObservableObject {
                 if erase {
                     self.db.document("houses/\(m.wrappedValue.home)").delete()
                 } else {
-                    
+                    self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the house", isAn: true), h: House(id: m.wrappedValue.home, name: "", members: [Member](), payments: [Payment](), password: ""))
                 }
                 m.wrappedValue = .empty
                 UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
