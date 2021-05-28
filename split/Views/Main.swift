@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Main: View {
     @State var h = House.empty
-    @State var inWR = true
+    @State var inWR = ((UserDefaults.standard.value(forKey: "houseId") as? String ?? ""  == "waitingRoom") || (UserDefaults.standard.value(forKey: "houseId") as? String ?? ""  == "")) 
     @State var noProf = true
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
     @State var tabSelection = 0
@@ -24,7 +24,13 @@ struct Main: View {
             Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         }
         .onChange(of: h.id, perform: { _ in
-            UserDefaults.standard.set(myId, forKey: "myId")
+            inWR = false
+            noProf = false
+//            UserDefaults.standard.set(myId, forKey: "myId")
+            UserDefaults.standard.set("SIfrfcT2735XvpRCB714", forKey: "myId")
+            UserDefaults.standard.set("TlRWEGz9GWrKBXqI9T8L", forKey: "houseId")
+            myId = "SIfrfcT2735XvpRCB714"
+            h.id = "TlRWEGz9GWrKBXqI9T8L"
             Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         })
     }

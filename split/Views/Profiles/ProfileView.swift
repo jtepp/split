@@ -67,38 +67,38 @@ struct ProfileView: View {
                     Text("House admin")
                 }
                 Spacer()
-                MemberPaymentInfoView(member: $m, house: $house)
-                Spacer()
                 if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" && (UserDefaults.standard.string(forKey: "houseId") ?? "") != "waitingRoom" {
+                    MemberPaymentInfoView(member: $m, house: $house)
+                    Spacer()
                     Button(action: {
-                    showSignOut = true
-                }, label: {
-                    HStack {
-                        Spacer()
-                        Text("Leave House")
-                            .foregroundColor(.red)
-                        Spacer()
-                    }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(
-                                Color.white.opacity(0.2)
-                            )
-                    )
-                    .padding()
-                })
-                .alert(isPresented: $showSignOut, content: {
-                    if m.admin {
-                        return Alert(title: Text("Leave House"), message: Text("You have to choose a new House admin before you can leave this house"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
-                            showAdminPicker = true
-                        }), secondaryButton: Alert.Button.cancel())
-                    } else {
-                        return Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                            //signout
-                        }), secondaryButton: Alert.Button.cancel())
-                    }
-                })
+                        showSignOut = true
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Text("Leave House")
+                                .foregroundColor(.red)
+                            Spacer()
+                        }
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(
+                                    Color.white.opacity(0.2)
+                                )
+                        )
+                        .padding()
+                    })
+                    .alert(isPresented: $showSignOut, content: {
+                        if m.admin {
+                            return Alert(title: Text("Leave House"), message: Text("You have to choose a new House admin before you can leave this house"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
+                                showAdminPicker = true
+                            }), secondaryButton: Alert.Button.cancel())
+                        } else {
+                            return Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                                //signout
+                            }), secondaryButton: Alert.Button.cancel())
+                        }
+                    })
                 }
                 Text("ID: \(m.id)")
                     .font(.caption)

@@ -18,6 +18,7 @@ class Fetch: ObservableObject {
         
         print("ID:    \(id)")
         print("ME:    \(myId)")
+        print("H:     \(h.wrappedValue)")
         
         if id != "" && id != "waitingRoom" { // has real house id
             print("has real hid \(id) \(myId)")
@@ -55,7 +56,7 @@ class Fetch: ObservableObject {
                         UserDefaults.standard.set("waitingRoom", forKey: "houseId")
                         noProf.wrappedValue = false
                     }
-                    inWR.wrappedValue = true
+//                    inWR.wrappedValue = true
                 }
                 
             }
@@ -90,7 +91,7 @@ class Fetch: ObservableObject {
                 let data = doc
                 print(data)
                 var e = House.empty
-                let newMember = Member(id: myId, name: (data["name"] ?? "") as! String, image: (data["image"] ?? "") as! String)
+                let newMember = Member(id: myId, home: "waitingRoom", name: (data["name"] ?? "") as! String, image: (data["image"] ?? "") as! String)
                 e.members = [newMember]
                 h.wrappedValue = e //empty house
                 
@@ -119,12 +120,13 @@ class Fetch: ObservableObject {
                 let data = q.data()
                 
                 let name = data["name"] as? String ?? ""
+                let home = data["home"] as? String ?? ""
                 let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
                 let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
                 let image = data["image"] as? String ?? ""
                 let admin = data["admin"] as? Bool ?? false
                 
-                return Member(id: q.documentID, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin)
+                return Member(id: q.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin)
             })
             for member in h.wrappedValue.members {
                 self.updateBalances(h: h.wrappedValue, m: member)
@@ -267,7 +269,7 @@ class Fetch: ObservableObject {
             }
             UserDefaults.standard.set(documentSnapshot?.documentID ?? "", forKey: "myId")
             myId.wrappedValue = documentSnapshot?.documentID ?? ""
-            let e = Member(id: documentSnapshot?.documentID ?? "", name: (doc["name"] ?? "") as! String, image: (doc["image"] ?? "") as! String)
+            let e = Member(id: documentSnapshot?.documentID ?? "", home: "waitingRoom", name: (doc["name"] ?? "") as! String, image: (doc["image"] ?? "") as! String)
             h.members.wrappedValue.append(e)
             
         }
@@ -297,7 +299,7 @@ class Fetch: ObservableObject {
                         print("house \(house)")
                         print("hid \(h.documentID)")
                         UserDefaults.standard.set(mm.id, forKey: "myId")
-                        self.db.document("houses/\(house)/members/\("\(mm.id ?? "EMPTY")")").setData(["name" : mm.name, "image" : mm.image]) { _ in
+                        self.db.document("houses/\(house)/members/\("\(mm.id ?? "EMPTY")")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID]) { _ in
                             self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
                             self.db.document("waitingRoom/\(mm.id)").delete()
                             UserDefaults.standard.set(mm.id, forKey: "myId")
