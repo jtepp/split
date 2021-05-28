@@ -13,6 +13,7 @@ struct TabsView: View {
     @Binding var myId: String
     @Binding var inWR: Bool
     @Binding var noProf: Bool
+    @State var member = Member.empty
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
@@ -40,7 +41,7 @@ struct TabsView: View {
                         .background(Color.black.edgesIgnoringSafeArea(.all))
                         .allowAutoDismiss(false)
                 } else {
-                    WaitingRoomView(h: $house, inWR: $inWR, member: .constant(Member.empty))
+                    WaitingRoomView(h: $house, inWR: $inWR, member: $member)
                             .background(Color.black.edgesIgnoringSafeArea(.all))
                             .allowAutoDismiss(false)
                 }
