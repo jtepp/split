@@ -52,7 +52,8 @@ struct ActivityRequestCell: View {
                 }
                 .overlay(
                     TimeBar(unix: payment.time)
-                        .padding(.horizontal)
+                        .padding(.horizontal, 4)
+                        .offset(y: 12)
                 )
             }
         )
