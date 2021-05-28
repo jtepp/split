@@ -49,6 +49,7 @@ struct PaymentPaymentView: View {
                 .padding()
             Spacer()
             Button(action: {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 Fetch().sendPayment(p: Payment(to: choice.first!.name, from: house.members.first(where: { (m) -> Bool in
                     return m.id == UserDefaults.standard.string(forKey: "myId")
                 })?.name ?? "unknown sender", amount: Float(amountText)!, time: Int(NSDate().timeIntervalSince1970), memo: memoText, isRequest: false), h: house)
