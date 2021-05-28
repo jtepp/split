@@ -34,7 +34,29 @@ struct ActivityView: View {
             ForEach(house.payments.sorted(by: { a, b in
                 return a.time > b.time
             })) { payment in
-                if payment.isRequest {
+                if payment.isAn {
+                    if house.members.first(where: { (m) -> Bool in
+                        return m.id == UserDefaults.standard.string(forKey: "myId")
+                    })!.admin {
+                        ActivityAnnouncementCell(payment: .constant(payment))
+                            .contextMenu(menuItems: {
+                                Button(action: {
+                                    Fetch().deletePayment(p: payment, h: house)
+                                }, label: {
+                                    Text("Delete")
+                                        .foregroundColor(.red)
+                                    Image(systemName: "trash.fill")
+                                        .foregroundColor(.red)
+                                    
+                                }
+                                )
+                            })
+                            .padding(.bottom, -20)
+                    } else {
+                        ActivityAnnouncementCell(payment: .constant(payment))
+                            .padding(.bottom, -20)
+                    }
+                } else if payment.isRequest {
                     
                     if payment.by == UserDefaults.standard.string(forKey: "myId") || house.members.first(where: { (m) -> Bool in
                         return m.id == UserDefaults.standard.string(forKey: "myId")
