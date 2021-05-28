@@ -17,7 +17,6 @@ struct ProfileView: View {
     @State var sourceType: UIImagePickerController.SourceType = .camera
     @State var adminChoice = [Member]()
     @State var img: UIImage?
-    @Binding var inWR: Bool
     var body: some View {
         ScrollView {
             HeaderText(text: "Profile")
@@ -102,12 +101,11 @@ struct ProfileView: View {
                             } else {
                                 return Alert(title: Text("Erase House"), message: Text("Leaving this house will erase it from the database"), primaryButton: Alert.Button.destructive(Text("Erase"), action: {
                                     //leave house and delete doc
-                                    Fetch().eraseHouse(m: $m, inWR: $inWR)
                                 }), secondaryButton: Alert.Button.cancel())
                             }
                         } else {
                             return Alert(title: Text("Leave House"), message: Text("Are you sure you want to leave this house? All information connected to you will be deleted."), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                                Fetch().leaveHouse(m: $m, inWR: $inWR)
+                                //signout
                             }), secondaryButton: Alert.Button.cancel())
                         }
                     })
@@ -127,6 +125,7 @@ struct ProfileView: View {
             })
             .onAppear{
                 UserDefaults.standard.set(m.id, forKey: "myId")
+                //                Fetch().updateMember(m: $m)
             }
             .sheet(isPresented: $showSheet, onDismiss: {
                 if !adminChoice.isEmpty {
@@ -146,8 +145,8 @@ struct ProfileView: View {
     }
 }
 
-//struct ProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder))
-//    }
-//}
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder))
+    }
+}
