@@ -35,7 +35,7 @@ struct ActivityAnnouncementCell: View {
             VStack {
                 Spacer()
                 TimeBar(unix: payment.time, white: true)
-                    .padding(.horizontal)
+                    .padding(.horizontal,4)
             }
         )
     }
