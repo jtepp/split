@@ -40,11 +40,8 @@ struct WaitingRoomView: View {
                                     tapped = true
                                     if showPanel == 1 {
                                         Fetch().joinHouse(hh: $h, m: $member, hId: hId, password: hPw, showAlert: $showWrongPassAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
-                                        ///look in houses for id, if not found call error, if found and bad pwd call error, if found and good pwd ->
-                                        ///put in update location, refresh house, later add announcement
                                     } else if showPanel == 2 {
-                                        //                                        Fetch().createHouse(m: $member, name: hId, password: hPw)
-                                        ///put in new location and make admin, refresh house stuff
+                                        Fetch().createHouse(hh: $h, m: $member, name: hId, password: hPw, tapped: $tapped, inWR: $inWR)
                                     }
                                 }, label: {
                                     HStack {
@@ -65,7 +62,7 @@ struct WaitingRoomView: View {
                             .opacity(showPanel != 0 ? 1 : 0)
                             .allowsHitTesting(showPanel != 0)
                         }
-
+                        
                         .animation(Animation.easeIn.speed(3))
                     )
             }
