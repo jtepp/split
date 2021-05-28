@@ -80,7 +80,16 @@ struct WaitingRoomView: View {
             })
             .padding()
             
-            Button(action: {}, label: {
+            Button(action: {
+                if showPanel == 2 {
+                    showPanel = 0
+                } else {
+                    showPanel = 2
+                }
+                hNm = ""
+                hId = ""
+                hPw = ""
+            }, label: {
                 HStack {
                     Spacer()
                     Text("Create a House")
