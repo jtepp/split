@@ -40,7 +40,15 @@ struct NoProfileView: View {
                 .padding()
             })
             .disabled(name.replacingOccurrences(of: " ", with: "") == "")
+            .onChange(of: newMember.id) { (_) in
+                UserDefaults.standard.set(newMember.id, forKey: "myId")
+            }
             Spacer(minLength: 80)
+                .onAppear(){
+                    UserDefaults.standard.set("", forKey: "houseId")
+                    UserDefaults.standard.set("", forKey: "myId")
+                    myId = ""
+                }
         }
         
     }
