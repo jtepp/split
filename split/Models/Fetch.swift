@@ -271,6 +271,7 @@ class Fetch: ObservableObject {
                         return (to.contains(m.name) || from.contains(m.name) || reqfrom.contains(m.name)) && !isAn
                     }) {
                         self.db.document("houses/\(h.id)/payments/\(doc.documentID)").delete()
+                        self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the house", isAn: true), h: h)
                     }
                 }
                 docRef.delete()
