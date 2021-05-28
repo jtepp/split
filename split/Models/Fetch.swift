@@ -368,6 +368,13 @@ class Fetch: ObservableObject {
         }
         
     }
+    func eraseHouse(m: Binding<Member>, inWR: Binding<Bool>) {
+        db.document("houses/\(m.wrappedValue.home)").delete()
+        m.wrappedValue.home = "waitingRoom"
+        db.collection("waitingRoom").addDocument(data: ["name" : m.wrappedValue.name, "image" : m.wrappedValue.image, "home" : "waitingRoom", "admin": false]) { (_) in
+            inWR.wrappedValue = true
+        }
+    }
     
 }
 
