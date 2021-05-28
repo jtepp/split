@@ -21,7 +21,7 @@ struct WaitingRoomView: View {
     var body: some View {
         VStack{
             ZStack {
-                Spacer()
+                Spacer(minLength: 200)
                     .overlay(
                         ZStack {
                             Image("Name")
