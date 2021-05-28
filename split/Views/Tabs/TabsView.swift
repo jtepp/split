@@ -33,6 +33,9 @@ struct TabsView: View {
             .onAppear(){
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
             }
+            .onChange(of: inWR, perform: { (_) in
+                noProf = member.id == ""
+            })
             .sheet(isPresented: $inWR, onDismiss: {
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
             }) {

@@ -394,6 +394,7 @@ class Fetch: ObservableObject {
                                 if erase {
                                     self.db.document("houses/\(m.wrappedValue.home)").delete()
                                 }
+                m.wrappedValue.id = ""
             }
         }
     }
