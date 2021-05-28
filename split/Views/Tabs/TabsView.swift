@@ -40,7 +40,7 @@ struct TabsView: View {
                         .background(Color.black.edgesIgnoringSafeArea(.all))
                         .allowAutoDismiss(false)
                 } else {
-                    WaitingRoomView(h: $house, inWR: $inWR, member: .constant(house.members.first ?? Member.empty))
+                    WaitingRoomView(h: $house, inWR: $inWR, member: .constant(Member.empty))
                             .background(Color.black.edgesIgnoringSafeArea(.all))
                             .allowAutoDismiss(false)
                 }
