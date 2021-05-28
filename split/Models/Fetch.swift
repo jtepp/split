@@ -323,6 +323,7 @@ class Fetch: ObservableObject {
                         print("mm \(mm)")
                         print("house \(house)")
                         print("hid \(h.documentID)")
+                        print("mid \(h.documentID)")
                         UserDefaults.standard.set(mm.id, forKey: "myId")
                         
                         if mm.id == "" {
@@ -330,6 +331,7 @@ class Fetch: ObservableObject {
                             UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
                             UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
                             inWR.wrappedValue = true
+                            print("\n\n\n\n\(mm)\n\n\n\n")
                         } else {
                         
                         self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin ? true : mm.admin]) { _ in
