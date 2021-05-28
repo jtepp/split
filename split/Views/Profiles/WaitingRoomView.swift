@@ -14,6 +14,7 @@ struct WaitingRoomView: View {
     @State var hNm = ""
     @State var hPw = ""
     @State var showWrongPassAlert = false
+    @State var tapped = false
     var body: some View {
         VStack{
             ZStack {
@@ -33,7 +34,17 @@ struct WaitingRoomView: View {
                                 }
                                 InputField(name: "Password", text: $hPw)
                                 Button(action: {
-//                                    showJoin.toggle()
+                                    if !tapped {
+                                        tapped = true
+                                    if showPanel == 1 {
+//                                        Fetch().joinHouse(m: $member, hId: hId, password: hPw, showAlert: $showWrongPassAlert, tapped: $tapped)
+                                        ///look in houses for id, if not found call error, if found and bad pwd call error, if found and good pwd -> 
+                                        ///put in update location, refresh house, later add announcement
+                                    } else if showPanel == 2 {
+//                                        Fetch().createHouse(m: $member, name: String, password: String)
+                                        ///put in new location and make admin, refresh house stuff
+                                    }
+                                    }
                                 }, label: {
                                     HStack {
 //                                        Spacer()
@@ -106,6 +117,9 @@ struct WaitingRoomView: View {
             .padding()
             
             Spacer()
+                .alert(isPresented: $showWrongPassAlert, content: {
+                    Alert(title: Text("Error joining house"), message: Text("Please make sure you put in your information correctly and try again"), dismissButton: Alert.Button.default(Text("Ok")))
+                })
         }
     }
 }
