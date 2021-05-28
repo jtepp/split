@@ -345,7 +345,7 @@ class Fetch: ObservableObject {
                                 UserDefaults.standard.set(mm.id, forKey: "myId")
                                 UserDefaults.standard.set(house, forKey: "houseId")
                                 inWR.wrappedValue = false
-                                self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the house", isAn: true), h: hh.wrappedValue)
+                                self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the house", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                             }
                             
                         }
