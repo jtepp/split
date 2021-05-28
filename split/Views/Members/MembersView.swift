@@ -10,7 +10,7 @@ import SwiftUI
 struct MembersView: View {
     @Binding var house: House
     @State var showDetails = false
-    @State var tappedMember = Member.placeholder
+    @State var tappedMember = Member.empty
     @Binding var tabSelection: Int
     var body: some View {
             ScrollView {
@@ -20,7 +20,9 @@ struct MembersView: View {
                             .padding(.horizontal)
                             .padding(.top, 10)
                             .onTapGesture {
+//                                Fetch().getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
                                 tappedMember = member
+                                print(tappedMember)
                                 if tappedMember.id == UserDefaults.standard.string(forKey: "myId")  {
                                     tabSelection = 3
                                 } else {
@@ -30,7 +32,6 @@ struct MembersView: View {
                 }
             }
             .onAppear(){
-                tappedMember = house.members.first ?? Member.placeholder
             }
             .sheet(isPresented: $showDetails, content: {
                 MemberDetailsView(house: $house, member: $tappedMember, showView: $showDetails)
