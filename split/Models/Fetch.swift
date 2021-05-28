@@ -376,11 +376,10 @@ class Fetch: ObservableObject {
                 self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
             }
         }
-        let h = m.wrappedValue.home
+        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete()
         m.wrappedValue.home = "waitingRoom"
         db.collection("waitingRoom").addDocument(data: ["name" : m.wrappedValue.name, "image" : m.wrappedValue.image, "home" : "waitingRoom", "admin": false]) { (_) in
             inWR.wrappedValue = true
-            self.db.document("houses/\(h)/members/\(m.wrappedValue.id)").delete()
         }
         
     }
