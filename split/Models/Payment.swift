@@ -10,7 +10,7 @@ import Foundation
 struct Payment: Identifiable {
     var id: String?
     var to: String = ""
-    var from: String = ""
+    var from: String = String()
     var reqfrom: [String] = [String]()
     var amount: Float = 0
     let time: Int
