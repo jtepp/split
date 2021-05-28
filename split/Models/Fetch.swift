@@ -369,7 +369,7 @@ class Fetch: ObservableObject {
         //        }
     }
     
-    func deleteAccount(m: Binding<Member>, erase: Bool = false) {
+    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>) {
         if m.wrappedValue.home != "" {
             self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
@@ -384,15 +384,16 @@ class Fetch: ObservableObject {
                     return to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)
                 }) {
                     self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
-                    //                if erase {
-                    //                    self.db.document("houses/\(m.wrappedValue.home)").delete()
-                    //                }
                 }
             }
             db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete { (err) in
                 m.wrappedValue = .empty
                 UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
                 UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
+                // inWr.wrappedValue = true
+                //                if erase {
+                //                    self.db.document("houses/\(m.wrappedValue.home)").delete()
+                //                }
             }
         }
     }

@@ -17,6 +17,7 @@ struct ProfileView: View {
     @State var sourceType: UIImagePickerController.SourceType = .camera
     @State var adminChoice = [Member]()
     @State var img: UIImage?
+    @Binding var inWR: Bool
     var body: some View {
         ScrollView {
             HeaderText(text: "Profile")
@@ -100,12 +101,12 @@ struct ProfileView: View {
                                 }), secondaryButton: Alert.Button.cancel())
                             } else {
                                 return Alert(title: Text("Erase House"), message: Text("Deleting this account will erase this it from the database"), primaryButton: Alert.Button.destructive(Text("Erase"), action: {
-                                    Fetch().deleteAccount(m: $m, erase: true)
+                                    Fetch().deleteAccount(m: $m, erase: true, inWR: $inWR)
                                 }), secondaryButton: Alert.Button.cancel())
                             }
                         } else {
                             return Alert(title: Text("Delete account"), message: Text("Are you sure you want to delete this acount?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                                Fetch().deleteAccount(m: $m)
+                                Fetch().deleteAccount(m: $m, inWR: $inWR)
                             }), secondaryButton: Alert.Button.cancel())
                         }
                     })
@@ -145,8 +146,8 @@ struct ProfileView: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder))
-    }
-}
+//struct ProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder))
+//    }
+//}
