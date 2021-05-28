@@ -37,7 +37,7 @@ struct TabsView: View {
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
             }) {
                 if (noProf) {
-                NoProfileView(myId: $myId, show: $noProf, house: $house)
+                    NoProfileView(m: $member, myId: $myId, show: $noProf, house: $house)
                         .background(Color.black.edgesIgnoringSafeArea(.all))
                         .allowAutoDismiss(false)
                 } else {

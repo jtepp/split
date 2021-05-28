@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct NoProfileView: View {
+    @Binding var m: Member
     @Binding var myId: String
     @Binding var show: Bool
     @Binding var house: House
-    @State var newMember = Member.empty
     @State var name = String()
     @State var img: UIImage?
     var body: some View {
         VStack {
-            EditProfileView(show: $show, m: $newMember, img: $img, name: $name)
+            EditProfileView(show: $show, m: $m, img: $img, name: $name)
             Spacer()
             Button(action: {
                 if name.replacingOccurrences(of: " ", with: "") != "" {
                     show = false
-                    Fetch().addToWR(m:newMember, myId: $myId, h: $house)
+                    Fetch().addToWR(m:m, myId: $myId, h: $house)
                 }
             }, label: {
                 HStack {
@@ -40,8 +40,8 @@ struct NoProfileView: View {
                 .padding()
             })
             .disabled(name.replacingOccurrences(of: " ", with: "") == "")
-            .onChange(of: newMember.id) { (_) in
-                UserDefaults.standard.set(newMember.id, forKey: "myId")
+            .onChange(of: m.id) { (_) in
+                UserDefaults.standard.set(m.id, forKey: "myId")
             }
             Spacer(minLength: 80)
                 .onAppear(){
