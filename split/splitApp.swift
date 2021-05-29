@@ -73,7 +73,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
       completionHandler(UIBackgroundFetchResult.newData)
     }
+    
+    //in orderto recieve notifications, need implenment methods
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        
+    }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+    }
+    
+    
+    
 }
 
 extension AppDelegate: MessagingDelegate {
