@@ -411,7 +411,7 @@ class Fetch: ObservableObject {
                         let isAn = d["isAn"] as? Bool ?? false
                         return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && !isAn
                     }) {
-                        self.db.document("houses/\(h.wrappedValue.id)/payments/\(doc.documentID)").delete()
+                        self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
                     }
                 }
             }
