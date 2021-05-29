@@ -56,6 +56,8 @@ struct TabsView: View {
                 }
                 } else {
                     SplashView(dontSplash: $dontSplash)
+                        .padding()
+                        .allowAutoDismiss(false)
                         .animation(Animation.easeIn.speed(3))
                 }
             }
