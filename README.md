@@ -1,4 +1,4 @@
-# split
+# spllit
 > A simple way to keep track of split bills
 
 The idea behind this app was concieved while I was with my friends and one asked "how are we going to split bills for dinner and groceries when we live together?"
