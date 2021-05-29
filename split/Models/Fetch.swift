@@ -360,7 +360,7 @@ class Fetch: ObservableObject {
                                 if docs.contains(where: { doc in
                                     let data = doc.data()
                                     let name = data["name"] ?? ""
-                                    return name as! String == m.wrappedValue.name
+                                    return name as! String != m.wrappedValue.name
                                     
                                 }) {
                                     //
