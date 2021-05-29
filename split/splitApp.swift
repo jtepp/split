@@ -50,7 +50,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 extension AppDelegate: MessagingDelegate {
-    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        
+      let dataDict:[String: String] = ["token": fcmToken ?? ""]
+        
+        // store token in firestore for sending notificaitons from server
+    }
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
