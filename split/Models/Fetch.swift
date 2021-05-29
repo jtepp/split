@@ -261,8 +261,9 @@ class Fetch: ObservableObject {
                 print("couldn't get doc \(String(describing: err))")
                 return
             }
-            self.db.document("waitingRoom/\(m.id)").setData(doc.data()!)
-            self.db.document("waitingRoom/\(m.id)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
+            self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the house", isAn: true), h: h.wrappedValue)
+//            self.db.document("waitingRoom/\(m.id)").setData(doc.data()!)
+//            self.db.document("waitingRoom/\(m.id)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
                 self.db.collection("houses/\(h.wrappedValue.id)/payments").getDocuments { (querySnapshot, err) in
                     guard let documents = querySnapshot?.documents else {
                         print("remove member no payments or something")
@@ -280,11 +281,10 @@ class Fetch: ObservableObject {
                         h.wrappedValue.members.removeAll { (m) -> Bool in
                             return m.id == doc.documentID
                         }
-                        self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the house", isAn: true), h: h.wrappedValue)
                     }
                 }
                 docRef.delete()
-            })
+            
         }
         
     }
