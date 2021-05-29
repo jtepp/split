@@ -10,6 +10,8 @@ import SwiftUI
 struct ActivityView: View {
     @Binding var house: House
     @Binding var tabSelection: Int
+    @Binding var inWR: Bool
+    @Binding var m: Member
     var body: some View {
         ScrollView {
             HeaderText(text: "Activity")
@@ -37,7 +39,7 @@ struct ActivityView: View {
                 if payment.isAn {
                     if house.members.first(where: { (m) -> Bool in
                         return m.id == UserDefaults.standard.string(forKey: "myId")
-                    })!.admin {
+                    })?.admin ?? returnFalseAndWR(inWR: $inWR, h: $house, m: $m) {
                         ActivityAnnouncementCell(payment: .constant(payment))
                             .contextMenu(menuItems: {
                                 Button(action: {
@@ -113,4 +115,14 @@ struct ActivityView: View {
         }
         .foregroundColor(.white)
     }
+}
+
+
+func returnFalseAndWR(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) -> Bool {
+    inWR.wrappedValue = true
+    var q = House.empty
+    m.wrappedValue = .empty
+    q.members = [m.wrappedValue]
+    h.wrappedValue = q
+    return false
 }

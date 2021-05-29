@@ -224,19 +224,19 @@ class Fetch: ObservableObject {
                 if payment.to == m.name {
                     for member in payment.reqfrom {
                         //they owe me from my request
-                        owesMe[member] = owesMe[member]! + payment.amount / Float(payment.reqfrom.count)
+                        owesMe[member] = owesMe[member] ?? 0 + payment.amount / Float(payment.reqfrom.count)
                     }
                 } else if payment.reqfrom.contains(m.name) {
                     //i owe them from their request
-                    iOwe[payment.to] = iOwe[payment.to]! + payment.amount / Float(payment.reqfrom.count)
+                    iOwe[payment.to] = iOwe[payment.to] ?? 0 + payment.amount / Float(payment.reqfrom.count)
                 }
             } else { //its a payment
                 if payment.to == m.name {
                     //paid to me
-                    owesMe[payment.from] = owesMe[payment.from]! - payment.amount //they owe me less now
+                    owesMe[payment.from] = owesMe[payment.from] ?? 0 - payment.amount //they owe me less now
                 } else if payment.from == m.name {
                     //i paid them
-                    iOwe[payment.to] = iOwe[payment.to]! - payment.amount//i owe them less now
+                    iOwe[payment.to] = iOwe[payment.to] ?? 0 - payment.amount//i owe them less now
                 }
             }
         }
