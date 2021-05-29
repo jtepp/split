@@ -211,12 +211,13 @@ class Fetch: ObservableObject {
     
     func updateBalances(h: House, m: Member) {
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" {
+//            print("\n\n\(UserDefaults.standard.string(forKey: "houseId"))\n\nYAYBAL\n\n\(h.payments)\n")
             var owesMe = [String:Float]()
             var iOwe = [String:Float]()
-            for member in h.members {
-                owesMe[member.name] = 0
-                iOwe[member.name] = 0
-            }
+//            for member in h.members {
+//                owesMe[member.name] = 0
+//                iOwe[member.name] = 0
+//            }
             
             for payment in h.payments
                 .filter({ (p) -> Bool in //iterate thru all payments
@@ -224,6 +225,7 @@ class Fetch: ObservableObject {
                 })
             {
                 if payment.isRequest {
+                    print("WASREQ\(payment)")
                     if payment.to == m.name {
                         for member in payment.reqfrom {
                             //they owe me from my request
@@ -234,6 +236,7 @@ class Fetch: ObservableObject {
                         iOwe[payment.to] = iOwe[payment.to] ?? 0 + payment.amount / Float(payment.reqfrom.count)
                     }
                 } else { //its a payment
+                    print("WASPAY\(payment)")
                     if payment.to == m.name {
                         //paid to me
                         owesMe[payment.from] = owesMe[payment.from] ?? 0 - payment.amount //they owe me less now
@@ -244,8 +247,11 @@ class Fetch: ObservableObject {
                 }
             }
             //        let id = UserDefaults.standard.string(forKey: "myId")
+            print("\n\nowes\(owesMe)\n\n\n\(iOwe)\niown")
             db.document("houses/\(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSEUPDATEBAL")/members/\(m.id)").updateData(["owesMe":owesMe, "iOwe":iOwe])
             
+        } else {
+            print("\n\n\(UserDefaults.standard.string(forKey: "houseId"))\n\nBALBALBALBAL\n")
         }
     }
     
