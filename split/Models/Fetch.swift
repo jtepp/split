@@ -13,7 +13,7 @@ class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
     func getHouse (h: Binding<House>, inWR: Binding<Bool>, noProf: Binding<Bool>) {
-        if h.wrappedValue.id != ""
+        if (UserDefaults.standard.string(forKey: "houseId") ?? "") != ""
         {
         let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
         let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
@@ -210,7 +210,8 @@ class Fetch: ObservableObject {
     
     
     func updateBalances(h: House, m: Member) {
-        var owesMe = [String:Float]()
+         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" {
+            var owesMe = [String:Float]()
         var iOwe = [String:Float]()
         for member in h.members {
             owesMe[member.name] = 0
@@ -243,9 +244,9 @@ class Fetch: ObservableObject {
             }
         }
         //        let id = UserDefaults.standard.string(forKey: "myId")
-        db.document("houses/\(h.id)/members/\(m.id)").updateData(["owesMe":owesMe, "iOwe":iOwe])
+        db.document("houses/\(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSEUPDATEBAL")/members/\(m.id)").updateData(["owesMe":owesMe, "iOwe":iOwe])
         
-        
+        }
     }
     
     
@@ -257,7 +258,8 @@ class Fetch: ObservableObject {
     }
     
     func removeMember(m: Member, h: Binding<House>) {
-        let docRef = db.document("houses/\(h.wrappedValue.id)/members/\(m.id)")
+        if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" {
+        let docRef = db.document("houses/\(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSERMMEMBER")/members/\(m.id)")
         docRef.getDocument { (documentSnapshot, err) in
             guard let doc = documentSnapshot else {
                 print("couldn't get doc \(String(describing: err))")
@@ -289,7 +291,7 @@ class Fetch: ObservableObject {
             })
         }
         
-    }
+    }}
     func swapAdmin(m:Member, h:House){
         db.collection("houses/"+h.id+"/members").getDocuments{ (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
