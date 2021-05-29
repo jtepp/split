@@ -11,7 +11,7 @@ struct SplashView: View {
     @Binding var dontSplash: Bool
     var body: some View {
         VStack {
-            HeaderText(text: "Welcome to split")
+            HeaderText(text: "Welcome to spllit")
                 .padding(.bottom)
             SplashDetailsView(title: "Invite your friends", text: "Long press your house name to copy an invitation on the members page", image: "person.3", color: .blue)
                 .padding(.bottom)

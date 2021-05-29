@@ -31,7 +31,7 @@ struct MembersView: View {
                     .padding()
                     .contextMenu(menuItems: {
                         Button {
-                            UIPasteboard.general.string = "Join my house on split!\nID: \(house.id)\nPassword: \(house.password)"
+                            UIPasteboard.general.string = "Join my house on spllit!\nID: \(house.id)\nPassword: \(house.password)"
                         } label: {
                             Text("Tap to copy house invite")
                         }
