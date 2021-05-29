@@ -16,7 +16,7 @@ struct EditProfileView: View {
     @State var sourceType: UIImagePickerController.SourceType = .camera
     var body: some View {
         ScrollView {
-            HeaderText(text: "Edit your profile")
+            HeaderText(text: "Create your profile")
             VStack {
                 b64toimg(b64: m.image)
                     .resizable()
