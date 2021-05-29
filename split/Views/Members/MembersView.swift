@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct MembersView: View {
     @Binding var house: House
     @State var showDetails = false
@@ -29,6 +30,7 @@ struct MembersView: View {
                     //                        .padding(-10)
                     .padding()
                     .contextMenu(menuItems: {
+                        Text("Tap to copy")
                         Button {
                             
                         } label: {
