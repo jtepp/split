@@ -352,14 +352,36 @@ class Fetch: ObservableObject {
                             print("\n\n\n\n\(mm)\n\n\n\n")
                         } else {
                             
-                            self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin]) { _ in
-                                self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
-                                self.db.document("waitingRoom/\(mm.id)").delete()
-                                UserDefaults.standard.set(mm.id, forKey: "myId")
-                                UserDefaults.standard.set(house, forKey: "houseId")
-                                inWR.wrappedValue = false
-                                self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the house", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+                            self.db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
+                                guard let docs = querySnapshot?.documents else {
+                                    print(err.debugDescription)
+                                    return
+                                }
+                                if docs.contains(where: { doc in
+                                    let data = doc.data()
+                                    let name = data["name"] ?? ""
+                                    return name as! String == m.wrappedValue.name
+                                    
+                                }) {
+                                    //
+                                    self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin]) { _ in
+                                        self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
+                                        self.db.document("waitingRoom/\(mm.id)").delete()
+                                        UserDefaults.standard.set(mm.id, forKey: "myId")
+                                        UserDefaults.standard.set(house, forKey: "houseId")
+                                        inWR.wrappedValue = false
+                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the house", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+                                    }
+                                    //
+                                    
+                                } else {
+                                    showAlert.wrappedValue = true
+                                    tapped.wrappedValue = false
+                                    msg.wrappedValue = "Member already exists by that name"
+                                }
+                                
                             }
+                            
                             
                         }
                     } else {
