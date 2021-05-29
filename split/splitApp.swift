@@ -10,6 +10,7 @@ import Firebase
 
 @main
 struct splitApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
             Main()
