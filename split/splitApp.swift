@@ -21,6 +21,8 @@ struct splitApp: App {
 //initializing firebase
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    
+    let gcmMessageIDKey = "gcm.message_id"
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
         
@@ -46,6 +48,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         return true
     }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        //do something with message data here
+      if let messageID = userInfo[gcmMessageIDKey] {
+        print("Message ID: \(messageID)")
+      }
+
+      // Print full message.
+      print(userInfo)
+
+      completionHandler(UIBackgroundFetchResult.newData)
+    }
 
 }
 
@@ -55,6 +70,8 @@ extension AppDelegate: MessagingDelegate {
       let dataDict:[String: String] = ["token": fcmToken ?? ""]
         
         // store token in firestore for sending notificaitons from server
+        
+        print(dataDict)
     }
 }
 
