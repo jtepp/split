@@ -57,6 +57,7 @@ struct TabsView: View {
                 } else {
                     SplashView(dontSplash: $dontSplash)
                         .padding()
+                        .background(Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
                         .allowAutoDismiss(false)
                         .animation(Animation.easeIn.speed(3))
                 }

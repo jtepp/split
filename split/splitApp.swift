@@ -17,6 +17,7 @@ struct splitApp: App {
        
         WindowGroup {
             Main()
+                .preferredColorScheme(.dark)
         }
     }
 }
