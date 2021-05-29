@@ -13,6 +13,8 @@ class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
     func getHouse (h: Binding<House>, inWR: Binding<Bool>, noProf: Binding<Bool>) {
+        if h.wrappedValue.id != ""
+        {
         let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
         let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
         
@@ -109,7 +111,7 @@ class Fetch: ObservableObject {
         //            inWR.wrappedValue = true
         //            noProf.wrappedValue = true
         //        }
-    }
+    }}
     
     func getMembers(h: Binding<House>, id: String) {
         db.collection("houses/"+id+"/members").addSnapshotListener { (querySnapshot, error) in
