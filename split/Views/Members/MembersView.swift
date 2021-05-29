@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import MobileCoreServices
 
 struct MembersView: View {
     @Binding var house: House
@@ -32,7 +32,7 @@ struct MembersView: View {
                     .contextMenu(menuItems: {
                         Text("Tap to copy")
                         Button {
-                            
+                            UIPasteboard.general.string = "Join my house on split!\nID: \(house.id)\nPassword: \(house.password)"
                         } label: {
                             Text("ID: \(house.id)\nPassword: \(house.password)")
                         }
