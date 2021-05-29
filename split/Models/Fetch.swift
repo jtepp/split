@@ -362,7 +362,7 @@ class Fetch: ObservableObject {
                                     let name = data["name"] ?? ""
                                     return name as! String != m.wrappedValue.name
                                     
-                                }) {
+                                }) || forceAdmin {
                                     //
                                     self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin]) { _ in
                                         self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
