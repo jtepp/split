@@ -10,6 +10,7 @@ import SwiftUI
 struct WaitingRoomView: View {
     @Binding var h: House
     @Binding var inWR: Bool
+    @Binding var noProf: Bool
     @Binding var member: Member
     @State var showPanel = 0
     @State var hId = ""
@@ -117,7 +118,16 @@ struct WaitingRoomView: View {
             
             Spacer()
                 .alert(isPresented: $showWrongPassAlert, content: {
-                    Alert(title: Text(msg), message: Text("Please make sure you put in your information correctly and try again"), dismissButton: Alert.Button.default(Text("Ok")))
+                    Alert(title: Text(msg), message: Text("Please make sure you put in your information correctly and try again"), dismissButton: Alert.Button.default(Text("Ok"), action: {
+                        if msg == "Member already exists by that name" {
+                            UserDefaults.standard.set("", forKey: "myId")
+                            UserDefaults.standard.set("", forKey: "houseId")
+                            member = .empty
+                            h = .empty
+                            inWR = true
+                            noProf = true
+                        }
+                    }))
                 })
         }
     }

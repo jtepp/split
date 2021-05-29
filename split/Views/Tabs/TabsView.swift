@@ -50,7 +50,7 @@ struct TabsView: View {
                         .background(Color.black.edgesIgnoringSafeArea(.all))
                         .allowAutoDismiss(false)
                 } else {
-                    WaitingRoomView(h: $house, inWR: $inWR, member: $member)
+                    WaitingRoomView(h: $house, inWR: $inWR, noProf: $noProf, member: $member)
                             .background(Color.black.edgesIgnoringSafeArea(.all))
                             .allowAutoDismiss(false)
                 }
