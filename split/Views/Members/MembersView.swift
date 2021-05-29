@@ -14,7 +14,7 @@ struct MembersView: View {
     @Binding var tabSelection: Int
     var body: some View {
             ScrollView {
-                HeaderText(text: "Members")
+                HeaderText(text: house.name)
                 ForEach(house.members) { member in
                         MemberCell(m: .constant(member))
                             .padding(.horizontal)
