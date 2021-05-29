@@ -302,7 +302,7 @@ class Fetch: ObservableObject {
                 let id = doc.documentID
                 self.db.document("houses/\(h.id)/members/\(id)").updateData(["admin": id == m.id ? true : false])
                 if m.id == id {
-                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was set as the House Admin", isAn: true), h: h)
+                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was made the House Admin", isAn: true), h: h)
                 }
             }
         }
