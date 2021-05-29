@@ -15,6 +15,25 @@ struct MembersView: View {
     var body: some View {
             ScrollView {
                 HeaderText(text: house.name)
+                    .padding(10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(
+                                Color.gray.opacity(0.2)
+                            )
+                    )
+                    .contextMenu(menuItems: {
+                        Button {
+                            
+                        } label: {
+                            VStack {
+                                Text("ID: \(house.id)")
+                                Text("Password: \(house.password)")
+                            }
+                        }
+
+                    })
+                    .padding(-10)
                 ForEach(house.members) { member in
                         MemberCell(m: .constant(member))
                             .padding(.horizontal)
