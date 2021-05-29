@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TabsView: View {
+    @State var dontSplash = UserDefaults.standard.bool(forKey: "dontSplash")
     @Binding var tabSelection: Int
     @Binding var house: House
     @Binding var myId: String
@@ -43,6 +44,7 @@ struct TabsView: View {
             .sheet(isPresented: $inWR, onDismiss: {
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
             }) {
+                if (dontSplash) {
                 if (noProf) {
                     NoProfileView(m: $member, myId: $myId, show: $noProf, house: $house)
                         .background(Color.black.edgesIgnoringSafeArea(.all))
@@ -51,6 +53,10 @@ struct TabsView: View {
                     WaitingRoomView(h: $house, inWR: $inWR, member: $member)
                             .background(Color.black.edgesIgnoringSafeArea(.all))
                             .allowAutoDismiss(false)
+                }
+                } else {
+                    SplashView(dontSplash: $dontSplash)
+                        .animation(Animation.easeIn.speed(3))
                 }
             }
 //            .onChange(of: tabSelection) { (_) in
