@@ -56,6 +56,9 @@ struct MembersView: View {
                         }
                     }
             }
+            Rectangle()
+                .fill(Color.black)
+                .frame(minHeight:120)
         }
         .onAppear(){
         }
