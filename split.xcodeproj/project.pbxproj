@@ -159,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2A0588265CAA44002BD46D /* Main.swift */,
+				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
 				0CAA803A2661CC4A00A3081B /* SplashView.swift */,
 				0CA0E9BC2660369D002876CF /* ModalView.swift */,
 				0CA0E9BF266037FE002876CF /* Profiles */,
@@ -202,7 +203,6 @@
 				0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */,
 				0CAA80362661860600A3081B /* ActivityAnnouncementCell.swift */,
 				0C64FED2265ED9F4009B0C3C /* ActivityRequestCell.swift */,
-				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -536,6 +536,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"split/Preview Content\"";
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				ENABLE_PREVIEWS = YES;
@@ -615,6 +616,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"split/Preview Content\"";
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				ENABLE_PREVIEWS = YES;
