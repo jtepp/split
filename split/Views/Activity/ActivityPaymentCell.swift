@@ -27,6 +27,7 @@ struct ActivityPaymentCell: View {
             .padding(.bottom, showMemo ? 20 : 0)
             .animation(.easeIn)
             .frame(maxHeight: showMemo ? 10000 : 0)
+            .frame(minHeight: showMemo ? 80 : 0)
             .foregroundColor(showMemo ? .black : .clear)
         }
         .foregroundColor(.black)
@@ -71,7 +72,11 @@ struct ActivityPaymentCell_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            ActivityPaymentCell(payment: .constant(.placeholder))
+            ScrollView {
+                ForEach(Range(0...10)) { _ in
+                    ActivityPaymentCell(payment: .constant(.placeholder))
+                }
+            }
         }
         
     }
