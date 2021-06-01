@@ -136,7 +136,7 @@ struct ProfileView: View {
                 showAdminPicker = false
             }, content: {
                 if showImagePicker {
-                    ImagePicker(img: $img, isShown: $showSheet, sourceType: sourceType)
+                    ImagePicker(img: $img, isShown: $showSheet, sourceType: $sourceType)
                 }
                 if showAdminPicker {
                     MemberPicker(show: $showSheet, house: $house, choice: $adminChoice)
