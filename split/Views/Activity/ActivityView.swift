@@ -12,9 +12,27 @@ struct ActivityView: View {
     @Binding var tabSelection: Int
     @Binding var inWR: Bool
     @Binding var m: Member
+    @State var showSplash = false
     var body: some View {
         ScrollView {
-            HeaderText(text: "Activity")
+            HStack {
+                HeaderText(text: "Activity")
+                Spacer()
+                Button(action: {
+                    showSplash = true
+                }, label:{
+                    Image(systemName: "questionmark")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            Circle()
+                                .fill(
+                                    Color.gray.opacity(0.2)
+                                )
+                        )
+                })
+                .padding()
+            }
             if house.payments.isEmpty {
                 VStack {
                     Spacer()
@@ -120,6 +138,10 @@ struct ActivityView: View {
             
         }
         .foregroundColor(.white)
+        .sheet(isPresented: $showSplash, content: {
+            SplashView(dontSplash: .constant(true), showSplash: $showSplash)
+                .preferredColorScheme(.dark)
+        })
     }
 }
 

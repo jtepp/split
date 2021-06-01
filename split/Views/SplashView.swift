@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SplashView: View {
     @Binding var dontSplash: Bool
+    @Binding var showSplash: Bool
     var body: some View {
         VStack {
             HeaderText(text: "Welcome to spllit")
@@ -27,6 +28,7 @@ struct SplashView: View {
             Button(action: {
                 dontSplash = true
                 UserDefaults.standard.set(true, forKey: "dontSplash")
+                showSplash = false
             }, label: {
                 HStack {
                     Spacer()
@@ -78,7 +80,7 @@ struct SplashDetailsView: View {
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        SplashView(dontSplash: .constant(false))
+        SplashView(dontSplash: .constant(false), showSplash: .constant(false))
             .padding()
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }
