@@ -22,7 +22,7 @@ struct MembersView: View {
                     .bold()
                     .padding(10)
                     .background(
-                        RoundedRectangle(cornerRadius: 25)
+                        RoundedRectangle(cornerRadius: 20)
                             .fill(
                                 Color.gray.opacity(0.2)
                             )
@@ -33,7 +33,7 @@ struct MembersView: View {
                         Button {
                             UIPasteboard.general.string = "Join my house on spllit!\nID: \(house.id)\nPassword: \(house.password)"
                         } label: {
-                            Text("Tap to copy house invite")
+                            Text("Copy house invite")
                         }
                         Text("ID: \(house.id)")
                         Text("Password: \(house.password)")
