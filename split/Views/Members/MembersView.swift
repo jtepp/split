@@ -35,7 +35,12 @@ struct MembersView: View {
                         } label: {
                             Text("Copy house invite")
                         }
-                        Text("ID: \(house.id)")
+                        Button {
+                            UIPasteboard.general.string = "\(house.id)"
+                        } label: {
+                            Text("Copy house ID")
+                        }
+                        
                         Text("Password: \(house.password)")
                         
                     })
