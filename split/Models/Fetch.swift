@@ -264,6 +264,16 @@ class Fetch: ObservableObject {
             }
             //        let id = UserDefaults.standard.string(forKey: "myId")
             print("\n\nowes\(owesMe)\n\n\n\(iOwe)\niown")
+            iOwe.forEach { (key: String, value: Float) in
+                if abs(value) < 0.01 {
+                    iOwe[key] = 0
+                }
+            }
+            owesMe.forEach { (key: String, value: Float) in
+                if abs(value) < 0.01 {
+                    owesMe[key] = 0
+                }
+            }
             db.document("houses/\(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSEUPDATEBAL")/members/\(m.id)").updateData(["owesMe":owesMe, "iOwe":iOwe])
             
         } else {
