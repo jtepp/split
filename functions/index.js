@@ -31,7 +31,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                         doc.get()
                             .then((docSnap) => {
                                 let data = docSnap.data()
-                                console.log("data: " + data)
+                                console.log("data: " + data.toString())
                                 if ((data["FCM"] || "") != "") {
                                     if (reqFrom.includes(data["name"])) { //user name in reqFrom
                                         //send notification
@@ -45,6 +45,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                             token: data["FCM"]
                                         }
                                         admin.messaging().send(message)
+                                        .then((i)=>{
+                                            console.log(i.toString())
+                                        })
                                     }
                                 }
                             })
@@ -75,7 +78,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                         doc.get()
                             .then((docSnap) => {
                                 let data = docSnap.data()
-                                console.log("data: " + data)
+                                console.log("data: " + data.toString())
                                 if ((data["FCM"] || "") != "") {
                                     if (data["name"] == to) {
                                         //send notification
@@ -89,7 +92,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                             token: data["FCM"]
                                         }
                                         admin.messaging().send(message)
-                                        // console.log("response: " + response)
+                                        .then((i)=>{
+                                            console.log(i.toString())
+                                        })
                                     }
                                 }
                             })
@@ -116,7 +121,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                     doc.get()
                         .then((docSnap) => {
                             let data = docSnap.data()
-                            console.log("data: " + data)
+                            console.log("data: " + data.toString())
                             if ((data["FCM"] || "") != "") {
 
                                 //goes to everyone
@@ -133,6 +138,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                     token: data["FCM"]
                                 }
                                 admin.messaging().send(message)
+                                .then((i)=>{
+                                    console.log(i.toString())
+                                })
                                 
                                 // }
                             }

@@ -15,6 +15,12 @@ struct splitApp: App {
         WindowGroup {
             Main()
                 .preferredColorScheme(.dark)
+                .onAppear{
+                    print(true)
+                }
+                .onDisappear{
+                    print(false)
+                }
 //                .onAppear(){
 //                    Messaging.messaging().token { token, error in
 //                      if let error = error {
