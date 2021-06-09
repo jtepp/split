@@ -14,6 +14,45 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         if (isReq) { //is request
             let reqFrom = event.after.get("reqFrom") || []
             console.log("reqFrom: " + reqFrom.toString())
+
+            let to = event.after.get('to') || ""
+            console.log("to: " + to)
+
+            let amount = event.after.get('amount') || 0
+            console.log("amount: " + amount)
+
+            //go thru all names and send notification if they match and have FCM
+            db.collection("houses/" + context.params.houseid + "/payments").listDocuments()
+                .then((documents) => {
+                    documents.forEach((doc) => {
+                        doc.get()
+                            .then((docSnap) => {
+                                let data = docSnap.data()
+                                console.log("data: " + data)
+                                if ((data["FCM"] || "") != "") {
+                                    if (reqFrom.includes(data["name"])) { //user name in reqFrom
+                                        //send notification
+                                        let title = "Request received"
+                                        let content = `${to} has requested $${amount.toFixed(2)}, split between you and ${reqFrom.length - 1} others`
+                                        let message = {
+                                            notification: {
+                                                title: title,
+                                                body: content
+                                            },
+                                            token: data["FCM"]
+                                        }
+                                        let response = await admin.messaging().send(message)
+                                        console.log("response: " + response)
+                                    }
+                                }
+                            })
+                    })
+                })
+
+
+
+
+
         } else { //pray is pay
             let to = event.after.get('to') || ""
             console.log("to: " + to)
@@ -55,6 +94,8 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         }
 
 
+
+    } else { //is announcement 
 
     }
 
