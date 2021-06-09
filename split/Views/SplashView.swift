@@ -14,7 +14,7 @@ struct SplashView: View {
         VStack {
             HeaderText(text: "Welcome to spllit")
                 .padding(.bottom)
-            SplashDetailsView(title: "Invite your friends", text: "Long press your house name to copy an invitation on the members page", image: "person.3", color: .blue)
+            SplashDetailsView(title: "Invite your friends", text: "Long press your group name to copy an invitation on the members page", image: "person.3", color: .blue)
                 .padding(.bottom)
             SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
                 .padding(.bottom)
