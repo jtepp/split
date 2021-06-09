@@ -45,6 +45,12 @@ class Fetch: ObservableObject {
                     
                     self.getPayments(h: h, id: id)
                     
+                    let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
+                    
+                    if t != "" {
+                        self.placeToken(h: h, id: myId, token: t)
+                    }
+                    
                     if h.wrappedValue.members.first(where: { (m) -> Bool in
                         return m.id == UserDefaults.standard.string(forKey: "myId")
                     }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
@@ -211,13 +217,13 @@ class Fetch: ObservableObject {
     
     func updateBalances(h: House, m: Member) {
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" {
-//            print("\n\n\(UserDefaults.standard.string(forKey: "houseId"))\n\nYAYBAL\n\n\(h.payments)\n")
+            //            print("\n\n\(UserDefaults.standard.string(forKey: "houseId"))\n\nYAYBAL\n\n\(h.payments)\n")
             var owesMe = [String:Float]()
             var iOwe = [String:Float]()
-//            for member in h.members {
-//                owesMe[member.name] = 0
-//                iOwe[member.name] = 0
-//            }
+            //            for member in h.members {
+            //                owesMe[member.name] = 0
+            //                iOwe[member.name] = 0
+            //            }
             
             for payment in h.payments
                 .filter({ (p) -> Bool in //iterate thru all payments
@@ -475,7 +481,9 @@ class Fetch: ObservableObject {
         }
     }
     
-    
+    func placeToken(h: Binding<House>, id: String, token: String) {
+        db.document("houses/\(h.wrappedValue.id)/members/\(id)").updateData(["fcm" : token])
+    }
     
 }
 
