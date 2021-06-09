@@ -15,6 +15,7 @@ struct RequestPaymentView: View {
     @State var memoText = String()
     @Binding var tabSelection: Int
     @State var includeSelf = false
+    @State var explainIncludeSelf = false
     var body: some View {
         VStack {
             HStack {
@@ -49,7 +50,22 @@ struct RequestPaymentView: View {
                     .font(.caption)
                     .foregroundColor(.gray)
                     .opacity(0.5)
-                Toggle("Include self", isOn: $includeSelf)
+                Toggle(isOn: $includeSelf, label: {
+                    Button(action: {
+                        explainIncludeSelf = true
+                    }, label: {
+                        Text("i")
+                            .font(.system(size: 10, design: .monospaced))
+                            .padding(4)
+                            .background(
+                                Circle()
+                                    .stroke(lineWidth: 1)
+                                    .foregroundColor(.white)
+                            )
+                    })
+                    Text("Label")
+                })
+                    .foregroundColor(.white)
             }
             .padding()
             InputField(name: "Memo", text: $memoText)
@@ -84,6 +100,9 @@ struct RequestPaymentView: View {
             })
             .allowsHitTesting(!(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric))
         }
+        .alert(isPresented: $explainIncludeSelf, content: {
+            Alert.init(title: Text(""), message: Text(""), dismissButton: Alert.Button.cancel(Text("Ok")))
+        })
     }
 }
 
