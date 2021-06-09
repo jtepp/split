@@ -18,9 +18,9 @@ struct SplashView: View {
                 .padding(.bottom)
             SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
                 .padding(.bottom)
-            SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .yellow)
+            SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .red)
                 .padding(.bottom)
-            SplashDetailsView(title: "Stay updated", text: "Recieve notifications when payments come through and are requested", image: "app.badge", color: .red)
+            SplashDetailsView(title: "Deal yourself in", text: "Automatically include yourself while dividing a request between friends", image: "arrow.triangle.branch", color: .yellow)
                 .padding(10)
                 .background(
                     RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
