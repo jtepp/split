@@ -44,7 +44,7 @@ struct RequestPaymentView: View {
                 MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: true)
             })
 //            Spacer()
-            VStack {
+            VStack(alignment: .leading) {
                 InputField(name: "Amount", text: $amountText)
                 Text("Total amount will be split equally between members")
                     .font(.caption)
@@ -66,6 +66,10 @@ struct RequestPaymentView: View {
                     })
                 })
                     .foregroundColor(.white)
+                if includeSelf && amountText != "" && !choice.isEmpty {
+                    Text("Total request amount to be posted: \(Float(amountText)! * Float(choice.count) / Float(choice.count + 1), specifier: "%.2f")")
+                        .foregroundColor(.white)
+                }
             }
             .padding()
             InputField(name: "Memo", text: $memoText)
@@ -77,7 +81,7 @@ struct RequestPaymentView: View {
                     return m.id == UserDefaults.standard.string(forKey: "myId")
                 })?.name ?? "unknown recipient", reqfrom: choice.map({ (m) -> String in
                     return m.name
-                }), amount: Float(amountText)!, time: Int(NSDate().timeIntervalSince1970), memo: memoText, isRequest: true), h: house)
+                }), amount: includeSelf ? Float(amountText)! * Float(choice.count) / Float(choice.count + 1) : Float(amountText)!, time: Int(NSDate().timeIntervalSince1970), memo: memoText, isRequest: true), h: house)
                 
                 //clear
                 choice = [Member]()
