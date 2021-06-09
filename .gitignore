@@ -80,3 +80,9 @@ iOSInjectionProject/
 GoogleService-Info.plist
 .DS_Store
 extras/AuthKey_F2UBX6K439.p8
+node_modules/
+package-lock.json
+package.json
+.DS_Store
+.firebaserc
+firebase.json
