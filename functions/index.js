@@ -2,7 +2,7 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 
-exports.sendNotificationOnPayment = functions.firestore.document("houses/{houseid}/payments/{paymentid}").onWrite(async (event, context) => {
+exports.sendNotificationOnPayment = functions.firestore.document("houses/{houseid}/payments/{paymentid}").onWrite((event, context) => {
     const db = admin.firestore()
 
     let isAn = event.after.get('isAn') || false
@@ -44,8 +44,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                             },
                                             token: data["FCM"]
                                         }
-                                        let response = await admin.messaging().send(message)
-                                        console.log("response: " + response)
+                                        admin.messaging().send(message)
                                     }
                                 }
                             })
@@ -89,8 +88,8 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                             },
                                             token: data["FCM"]
                                         }
-                                        let response = await admin.messaging().send(message)
-                                        console.log("response: " + response)
+                                        admin.messaging().send(message)
+                                        // console.log("response: " + response)
                                     }
                                 }
                             })
@@ -133,8 +132,8 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                     },
                                     token: data["FCM"]
                                 }
-                                let response = await admin.messaging().send(message)
-                                console.log("response: " + response)
+                                admin.messaging().send(message)
+                                
                                 // }
                             }
                         })
