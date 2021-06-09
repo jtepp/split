@@ -92,7 +92,7 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         
       let dataDict:[String: String] = ["token": fcmToken ?? ""]
-        
+        UserDefaults.standard.setValue(fcmToken, forKey: "fcm")
         // store token in firestore for sending notificaitons from server
         
         print(dataDict)
