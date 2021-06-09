@@ -73,7 +73,7 @@ struct EditProfileView: View {
             .foregroundColor(.white)
             .background(Color.black.edgesIgnoringSafeArea(.all))
             .sheet(isPresented: $showImagePicker, content: {
-                ImagePicker(img: $img, isShown: $showImagePicker, sourceType: sourceType)
+                ImagePicker(img: $img, isShown: $showImagePicker, sourceType: $sourceType)
             })
             .onChange(of: img, perform: { _ in
                 if img != nil {

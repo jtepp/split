@@ -55,7 +55,7 @@ struct TabsView: View {
                             .allowAutoDismiss(false)
                 }
                 } else {
-                    SplashView(dontSplash: $dontSplash)
+                    SplashView(dontSplash: $dontSplash, showSplash: .constant(false))
                         .padding()
                         .background(Color.black.edgesIgnoringSafeArea(.all))
                         .allowAutoDismiss(false)

@@ -34,7 +34,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var img: UIImage?
     @Binding var isShown: Bool
-    var sourceType: UIImagePickerController.SourceType = .camera
+    @Binding var sourceType: UIImagePickerController.SourceType
     
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
     }

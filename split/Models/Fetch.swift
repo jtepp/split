@@ -211,12 +211,13 @@ class Fetch: ObservableObject {
     
     func updateBalances(h: House, m: Member) {
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" {
+//            print("\n\n\(UserDefaults.standard.string(forKey: "houseId"))\n\nYAYBAL\n\n\(h.payments)\n")
             var owesMe = [String:Float]()
             var iOwe = [String:Float]()
-            for member in h.members {
-                owesMe[member.name] = 0
-                iOwe[member.name] = 0
-            }
+//            for member in h.members {
+//                owesMe[member.name] = 0
+//                iOwe[member.name] = 0
+//            }
             
             for payment in h.payments
                 .filter({ (p) -> Bool in //iterate thru all payments
@@ -224,28 +225,49 @@ class Fetch: ObservableObject {
                 })
             {
                 if payment.isRequest {
+                    print("WASREQ\(payment)")
                     if payment.to == m.name {
                         for member in payment.reqfrom {
                             //they owe me from my request
-                            owesMe[member] = owesMe[member] ?? 0 + payment.amount / Float(payment.reqfrom.count)
+                            if (owesMe[member] ?? 0) == 0 {
+                                owesMe[member] = payment.amount / Float(payment.reqfrom.count)
+                            } else {
+                                owesMe[member]! += payment.amount / Float(payment.reqfrom.count)
+                            }
                         }
                     } else if payment.reqfrom.contains(m.name) {
                         //i owe them from their request
-                        iOwe[payment.to] = iOwe[payment.to] ?? 0 + payment.amount / Float(payment.reqfrom.count)
+                        if (iOwe[payment.to] ?? 0) == 0 {
+                            iOwe[payment.to] = payment.amount / Float(payment.reqfrom.count)
+                        } else {
+                            iOwe[payment.to]! += payment.amount / Float(payment.reqfrom.count)
+                        }
                     }
                 } else { //its a payment
+                    print("WASPAY\(payment)")
                     if payment.to == m.name {
                         //paid to me
-                        owesMe[payment.from] = owesMe[payment.from] ?? 0 - payment.amount //they owe me less now
+                        if (owesMe[payment.from] ?? 0) == 0 {
+                            owesMe[payment.from] =  -payment.amount //they owe me less now
+                        } else {
+                            owesMe[payment.from]! -=  payment.amount //they owe me less now
+                        }
                     } else if payment.from == m.name {
                         //i paid them
-                        iOwe[payment.to] = iOwe[payment.to] ?? 0 - payment.amount//i owe them less now
+                        if (iOwe[payment.to] ?? 0) == 0 {
+                            iOwe[payment.to] = -payment.amount//i owe them less now
+                        } else {
+                            iOwe[payment.to]! -= payment.amount//i owe them less now
+                        }
                     }
                 }
             }
             //        let id = UserDefaults.standard.string(forKey: "myId")
+            print("\n\nowes\(owesMe)\n\n\n\(iOwe)\niown")
             db.document("houses/\(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSEUPDATEBAL")/members/\(m.id)").updateData(["owesMe":owesMe, "iOwe":iOwe])
             
+        } else {
+            print("\n\n\(UserDefaults.standard.string(forKey: "houseId"))\n\nBALBALBALBAL\n")
         }
     }
     
@@ -362,7 +384,7 @@ class Fetch: ObservableObject {
                                     let name = data["name"] ?? ""
                                     return name as! String != m.wrappedValue.name
                                     
-                                }) {
+                                }) || forceAdmin {
                                     //
                                     self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin]) { _ in
                                         self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
