@@ -23,21 +23,21 @@ struct SplashView: View {
             SplashDetailsView(title: "Stay updated", text: "Recieve notifications when payments come through and are requested", image: "app.badge", color: .red)
                 .padding(10)
                 .background(
-                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                    .fill(Color.blue.opacity(0.5))
-                    .overlay(
-                        HStack {
-                            VStack {
-                                Text("What's new")
-                                    .font(Font.caption.smallCaps().weight(Font.Weight.black))
-                                    .foregroundColor(Color.white.opacity(0.5))
-                                    .padding(.leading, 16)
-                                    .padding(.top, 4)
+                    RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                        .fill(Color.blue.opacity(0.5))
+                        .overlay(
+                            HStack {
+                                VStack {
+                                    Text("New in version 1.1.2")
+                                        .font(Font.caption.smallCaps().weight(Font.Weight.black))
+                                        .foregroundColor(Color.white.opacity(0.5))
+                                        .padding(.leading, 16)
+                                        .padding(.top, 4)
+                                    Spacer()
+                                }
                                 Spacer()
                             }
-                            Spacer()
-                        }
-                    )
+                        )
                 )
                 .padding(-10)
                 .padding(.bottom)
@@ -64,6 +64,9 @@ struct SplashView: View {
                 )
                 .padding()
             })
+        }
+        .onAppear(){
+            UserDefaults.standard.setValue(true, forKey: "1.1.2")
         }
     }
 }
