@@ -71,6 +71,7 @@
 		0C64FED9265EED43009B0C3C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		0C95131D265DB7C0005398CF /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
+		0C9570C62670A61800831D17 /* split.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = split.entitlements; sourceTree = "<group>"; };
 		0C9D26CE265F263E006A7AF6 /* String+isNumeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNumeric.swift"; sourceTree = "<group>"; };
 		0CA0E9BC2660369D002876CF /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		0CA0E9C026603809002876CF /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
@@ -135,6 +136,7 @@
 		0C2A0585265CAA44002BD46D /* split */ = {
 			isa = PBXGroup;
 			children = (
+				0C9570C62670A61800831D17 /* split.entitlements */,
 				0C2A0586265CAA44002BD46D /* splitApp.swift */,
 				0C0CA778265EF4BF0062FDDD /* Extensions */,
 				0C2A059B265CB0FB002BD46D /* Models */,
@@ -534,6 +536,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = split/split.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -615,6 +618,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = split/split.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

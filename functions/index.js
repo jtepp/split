@@ -35,6 +35,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                 if ((data["FCM"] || "") != "") {
                                     if (reqFrom.includes(data["name"])) { //user name in reqFrom
                                         //send notification
+                                        console.log("sent to " + data["name"])
                                         let title = "Request received"
                                         let content = `${to} has requested $${amount.toFixed(2)}, split between you and ${reqFrom.length - 1} others`
                                         let message = {
@@ -82,6 +83,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                 if ((data["FCM"] || "") != "") {
                                     if (data["name"] == to) {
                                         //send notification
+                                        console.log("sent to " + data["name"])
                                         let title = "Payment received"
                                         let content = `${from} sent you $${amount.toFixed(2)}`
                                         let message = {
@@ -125,7 +127,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                             if ((data["FCM"] || "") != "") {
 
                                 //goes to everyone
-
+                                console.log("sent to " + data["name"])
                                 // if (data["name"] == to) { 
                                 //send notification
                                 let title = "Announcement"
