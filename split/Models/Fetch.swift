@@ -315,7 +315,7 @@ class Fetch: ObservableObject {
                         }
                     }
                     docRef.delete()
-                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the house", isAn: true), h: h.wrappedValue)
+                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the group", isAn: true), h: h.wrappedValue)
                 })
             }
             
@@ -330,7 +330,7 @@ class Fetch: ObservableObject {
                 let id = doc.documentID
                 self.db.document("houses/\(h.id)/members/\(id)").updateData(["admin": id == m.id ? true : false])
                 if m.id == id {
-                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was made the House Admin", isAn: true), h: h)
+                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was made the Group Admin", isAn: true), h: h)
                 }
             }
         }
@@ -398,7 +398,7 @@ class Fetch: ObservableObject {
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.standard.set(house, forKey: "houseId")
                                         inWR.wrappedValue = false
-                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the house", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the group", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                     }
                                     //
                                     
@@ -423,7 +423,7 @@ class Fetch: ObservableObject {
             if house == House.empty.id {
                 showAlert.wrappedValue = true
                 tapped.wrappedValue = false
-                msg.wrappedValue = "House not found"
+                msg.wrappedValue = "Group not found"
             }
             tapped.wrappedValue = false
         }
@@ -469,7 +469,7 @@ class Fetch: ObservableObject {
                 if erase {
                     self.db.document("houses/\(m.wrappedValue.home)").delete()
                 } else {
-                    self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the house", isAn: true), h: House(id: m.wrappedValue.home, name: "", members: [Member](), payments: [Payment](), password: ""))
+                    self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", isAn: true), h: House(id: m.wrappedValue.home, name: "", members: [Member](), payments: [Payment](), password: ""))
                 }
                 m.wrappedValue = .empty
                 UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
