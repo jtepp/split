@@ -51,6 +51,7 @@ struct RequestPaymentView: View {
                     .foregroundColor(.gray)
                     .opacity(0.5)
                 Toggle(isOn: $includeSelf, label: {
+                    Text("Include yourself in amount split")
                     Button(action: {
                         explainIncludeSelf = true
                     }, label: {
@@ -63,7 +64,6 @@ struct RequestPaymentView: View {
                                     .foregroundColor(.white)
                             )
                     })
-                    Text("Label")
                 })
                     .foregroundColor(.white)
             }
@@ -101,7 +101,7 @@ struct RequestPaymentView: View {
             .allowsHitTesting(!(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric))
         }
         .alert(isPresented: $explainIncludeSelf, content: {
-            Alert.init(title: Text(""), message: Text(""), dismissButton: Alert.Button.cancel(Text("Ok")))
+            Alert.init(title: Text("Include yourself in amount split"), message: Text("Total amount posted for the request will remove your share of the payment.\n\nWith this on, posting a $60 request to 2 friends will ask for $20 from each.\n\nWith this off, posting a $60 request to 2 friends will ask for $30 from each."), dismissButton: Alert.Button.cancel(Text("Ok")))
         })
     }
 }
