@@ -18,11 +18,11 @@ struct MemberCell: View {
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(radius: 4)
                 .overlay(
-                    Image(systemName: m.admin ? "crown.fill" : "")
+                    Image(systemName: "crown.fill")
                         .offset(x: -3, y: -30)
                         .scaleEffect(x: 1.2)
                         .rotationEffect(.degrees(-30))
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.white.opacity(m.admin ? 1 : 0))
                 )
             Spacer()
             VStack(alignment: .trailing) {
