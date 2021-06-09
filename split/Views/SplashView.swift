@@ -28,7 +28,7 @@ struct SplashView: View {
                     .overlay(
                         HStack {
                             VStack {
-                                Text("What's new")
+                                Text("new in version 1.2")
                                     .font(Font.caption.smallCaps().weight(Font.Weight.black))
                                     .foregroundColor(Color.white.opacity(0.5))
                                     .padding(.leading, 16)
