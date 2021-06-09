@@ -18,7 +18,9 @@ struct SplashView: View {
                 .padding(.bottom)
             SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
                 .padding(.bottom)
-            SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .red)
+            SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .yellow)
+                .padding(.bottom)
+            SplashDetailsView(title: "Stay updated", text: "Recieve notifications when payments come through and are requested", image: "app.badge", color: .red)
                 .padding(.bottom)
             Spacer()
             Text("Disclaimer: This app does not involve any actual money or payments, it is just a way to keep track of payments in your group")
@@ -36,13 +38,13 @@ struct SplashView: View {
                         .foregroundColor(.white)
                     Spacer()
                 }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.blue)
-                    )
-                    .padding()
-        })
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.blue)
+                )
+                .padding()
+            })
         }
     }
 }
@@ -73,7 +75,7 @@ struct SplashDetailsView: View {
                 Spacer()
             }
             .frame(maxWidth: 250)
-
+            
         }
     }
 }
