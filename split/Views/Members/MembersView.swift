@@ -31,14 +31,14 @@ struct MembersView: View {
                     .padding()
                     .contextMenu(menuItems: {
                         Button {
-                            UIPasteboard.general.string = "Join my house on spllit!\nID: \(house.id)\nPassword: \(house.password)"
+                            UIPasteboard.general.string = "Join my group on spllit!\nID: \(house.id)\nPassword: \(house.password)"
                         } label: {
-                            Text("Copy house invite")
+                            Text("Copy group invite")
                         }
                         Button {
                             UIPasteboard.general.string = "\(house.id)"
                         } label: {
-                            Text("Copy house ID")
+                            Text("Copy group ID")
                         }
                         
                         Text("Password: \(house.password)")
