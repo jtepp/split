@@ -1,6 +1,6 @@
 const functions = require("firebase-functions");
-const admin = require("firebase-admin")
-admin.initializeApp(functions.config().firebase)
+const admin = require("firebase-admin");
+admin.initializeApp(functions.config().firebase);
 
 exports.sendNotificationOnPayment = functions.firestore.document("houses/{houseid}/payments/{paymentid}").onWrite(async (event, context) => {
     const db = admin.firestore()
@@ -12,6 +12,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         console.log("isReq: " + isReq)
 
         if (isReq) { //is request
+
+            console.log("\n\nISREQUEST\n\n")
+
             let reqFrom = event.after.get("reqFrom") || []
             console.log("reqFrom: " + reqFrom.toString())
 
@@ -54,6 +57,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
 
 
         } else { //pray is pay
+
+            console.log("\n\nISPAYMENT\n\n")
+
             let to = event.after.get('to') || ""
             console.log("to: " + to)
 
@@ -96,6 +102,44 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
 
 
     } else { //is announcement 
+
+        console.log("\n\nISANNOUNCEMENT\n\n")
+
+        let from = event.after.get('from') || ""
+        console.log("from: " + from)
+
+        let memo = event.after.get('memo') || ""
+        console.log("memo: " + memo)
+
+        db.collection("houses/" + context.params.houseid + "/payments").listDocuments()
+            .then((documents) => {
+                documents.forEach((doc) => {
+                    doc.get()
+                        .then((docSnap) => {
+                            let data = docSnap.data()
+                            console.log("data: " + data)
+                            if ((data["FCM"] || "") != "") {
+
+                                //goes to everyone
+
+                                // if (data["name"] == to) { 
+                                //send notification
+                                let title = "Announcement"
+                                let content = `${from} ${memo}`
+                                let message = {
+                                    notification: {
+                                        title: title,
+                                        body: content
+                                    },
+                                    token: data["FCM"]
+                                }
+                                let response = await admin.messaging().send(message)
+                                console.log("response: " + response)
+                                // }
+                            }
+                        })
+                })
+            })
 
     }
 
