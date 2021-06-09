@@ -16,7 +16,7 @@ struct WaitingRoomView: View {
     @State var hId = ""
     @State var hNm = ""
     @State var hPw = ""
-    @State var msg = "Error joining house"
+    @State var msg = "Error joining group"
     @State var showWrongPassAlert = false
     @State var tapped = false
     var body: some View {
@@ -31,7 +31,7 @@ struct WaitingRoomView: View {
                                 .frame(width: 400)
                                 .opacity(showPanel == 0 ? 1 : 0)
                             VStack {
-                                InputField(name: "House \(showPanel == 1 ? "ID" : "Name")", text: $hId, small: true)
+                                InputField(name: "Group \(showPanel == 1 ? "ID" : "Name")", text: $hId, small: true)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
                                 InputField(name: "Password", text: $hPw, small: true)
@@ -79,7 +79,7 @@ struct WaitingRoomView: View {
             }, label: {
                 HStack {
                     Spacer()
-                    Text("Join a House")
+                    Text("Join a Group")
                         .foregroundColor(.white)
                     Spacer()
                 }
@@ -103,7 +103,7 @@ struct WaitingRoomView: View {
             }, label: {
                 HStack {
                     Spacer()
-                    Text("Create a House")
+                    Text("Create a Group")
                         .foregroundColor(.white)
                     Spacer()
                 }
