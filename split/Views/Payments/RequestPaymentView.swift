@@ -14,6 +14,7 @@ struct RequestPaymentView: View {
     @State var amountText = String()
     @State var memoText = String()
     @Binding var tabSelection: Int
+    @State var includeSelf = false
     var body: some View {
         VStack {
             HStack {
@@ -48,6 +49,7 @@ struct RequestPaymentView: View {
                     .font(.caption)
                     .foregroundColor(.gray)
                     .opacity(0.5)
+                Toggle("Include self", isOn: $includeSelf)
             }
             .padding()
             InputField(name: "Memo", text: $memoText)
@@ -81,6 +83,15 @@ struct RequestPaymentView: View {
                     .padding()
             })
             .allowsHitTesting(!(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric))
+        }
+    }
+}
+
+struct RequestPaymentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
         }
     }
 }
