@@ -138,6 +138,13 @@ struct ActivityView: View {
             
         }
         .foregroundColor(.white)
+        .onAppear {
+            //show splash for update
+            if UserDefaults.standard.bool(forKey: "1.2") == false {
+                showSplash = true
+                UserDefaults.standard.setValue(true, forKey: "1.2")
+            }
+        }
         .sheet(isPresented: $showSplash, content: {
             SplashView(dontSplash: .constant(true), showSplash: $showSplash)
                 .preferredColorScheme(.dark)

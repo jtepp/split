@@ -65,6 +65,9 @@ struct SplashView: View {
                 .padding()
             })
         }
+        .onAppear(){
+            UserDefaults.standard.setValue(true, forKey: "1.2")
+        }
     }
 }
 
