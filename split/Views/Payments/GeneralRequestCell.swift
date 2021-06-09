@@ -11,6 +11,7 @@ struct GeneralRequestCell: View {
     @Binding var payment: Payment
     var minimal: Bool = false
     @Binding var m: Member
+    @State var showEach = false
     var body: some View {
         HStack {
             HStack {
@@ -41,16 +42,34 @@ struct GeneralRequestCell: View {
                 }
             }
             Spacer()
-            moneyText(b: (minimal && payment.to != m.name) ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
-                .foregroundColor(.black)
-                .padding(6)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(
-//                            Color.black.opacity(0.5)
-                            Color.white
-                        )
-                )
+            HStack {
+                if showEach {
+                    moneyText(b: (minimal && payment.to != m.name) ? .constant(payment.amount / Float(payment.reqfrom.count)) : .constant($payment.wrappedValue.amount / Float($payment.wrappedValue.reqfrom.count)), post: showEach ? " each" : "")
+                        .foregroundColor(.black)
+                        .padding(6)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(
+                                    Color.white
+                                )
+                    )
+                } else {
+                    moneyText(b: (minimal && payment.to != m.name) ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
+                        .foregroundColor(.black)
+                        .padding(6)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(
+                                    Color.white
+                                )
+                    )
+                }
+            }
+            .onTapGesture {
+                if !minimal {
+                    showEach.toggle()
+                }
+        }
         }
     }
 }
