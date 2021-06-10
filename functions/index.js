@@ -32,6 +32,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         let message = {
             notification: {
                 title: title,
+                sound: "default",
                 body: body
             },
             token: tkn
