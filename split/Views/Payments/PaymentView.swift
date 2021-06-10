@@ -42,7 +42,9 @@ struct PaymentView: View {
             } else {
                 RequestPaymentView(house: $house, tabSelection: $tabSelection)
             }
-            
+            Rectangle()
+                .fill(Color.black)
+                .frame(minHeight:120)
         }.onTapGesture {
             if UIApplication.shared.isKeyboardPresented {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
