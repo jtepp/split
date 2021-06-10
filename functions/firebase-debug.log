@@ -1,20 +1,20 @@
-[debug] [2021-06-10T03:11:05.757Z] ----------------------------------------------------------------------
-[debug] [2021-06-10T03:11:05.758Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
-[debug] [2021-06-10T03:11:05.758Z] CLI Version:   9.12.1
-[debug] [2021-06-10T03:11:05.758Z] Platform:      darwin
-[debug] [2021-06-10T03:11:05.758Z] Node Version:  v14.15.4
-[debug] [2021-06-10T03:11:05.759Z] Time:          Wed Jun 09 2021 23:11:05 GMT-0400 (Eastern Daylight Time)
-[debug] [2021-06-10T03:11:05.759Z] ----------------------------------------------------------------------
+[debug] [2021-06-10T03:15:36.860Z] ----------------------------------------------------------------------
+[debug] [2021-06-10T03:15:36.861Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2021-06-10T03:15:36.861Z] CLI Version:   9.12.1
+[debug] [2021-06-10T03:15:36.861Z] Platform:      darwin
+[debug] [2021-06-10T03:15:36.861Z] Node Version:  v14.15.4
+[debug] [2021-06-10T03:15:36.863Z] Time:          Wed Jun 09 2021 23:15:36 GMT-0400 (Eastern Daylight Time)
+[debug] [2021-06-10T03:15:36.863Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2021-06-10T03:11:05.767Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2021-06-10T03:11:05.768Z] > authorizing via signed-in user (jptepp@gmail.com)
-[debug] [2021-06-10T03:11:05.768Z] [iam] checking project split-d526f for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
-[debug] [2021-06-10T03:11:05.769Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/split-d526f:testIamPermissions  
+[debug] [2021-06-10T03:15:36.871Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-06-10T03:15:36.871Z] > authorizing via signed-in user (jptepp@gmail.com)
+[debug] [2021-06-10T03:15:36.871Z] [iam] checking project split-d526f for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2021-06-10T03:15:36.872Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/split-d526f:testIamPermissions  
  {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
-[debug] [2021-06-10T03:11:06.152Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:11:06 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=235","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2021-06-10T03:11:06.154Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/split-d526f/serviceAccounts/split-d526f@appspot.gserviceaccount.com:testIamPermissions  
+[debug] [2021-06-10T03:15:37.306Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:15:37 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=232","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-06-10T03:15:37.309Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/split-d526f/serviceAccounts/split-d526f@appspot.gserviceaccount.com:testIamPermissions  
  {"permissions":["iam.serviceAccounts.actAs"]}
-[debug] [2021-06-10T03:11:06.448Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:11:06 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-06-10T03:15:37.675Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:15:37 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
 [info] 
 [info] === Deploying to 'split-d526f'...
 [info] 
@@ -23,20 +23,57 @@
 [info] ✔  functions: Finished running predeploy script. 
 [info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
 [info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
-[debug] [2021-06-10T03:11:09.653Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/split-d526f/services/cloudfunctions.googleapis.com  
+[debug] [2021-06-10T03:15:40.843Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/split-d526f/services/cloudfunctions.googleapis.com  
  
-[debug] [2021-06-10T03:11:09.654Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/split-d526f/services/runtimeconfig.googleapis.com  
+[debug] [2021-06-10T03:15:40.844Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/split-d526f/services/runtimeconfig.googleapis.com  
  
-[debug] [2021-06-10T03:11:09.654Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/split-d526f/services/cloudbuild.googleapis.com  
+[debug] [2021-06-10T03:15:40.844Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/split-d526f/services/cloudbuild.googleapis.com  
  
-[debug] [2021-06-10T03:11:10.190Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:11:10 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2021-06-10T03:11:10.268Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:11:10 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
-[debug] [2021-06-10T03:11:10.272Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:11:10 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-06-10T03:15:41.485Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:15:41 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-06-10T03:15:41.490Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:15:41 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
 [info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
-[debug] [2021-06-10T03:11:10.274Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/split-d526f/adminSdkConfig  
+[debug] [2021-06-10T03:15:41.516Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:15:41 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2021-06-10T03:15:41.518Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/split-d526f/adminSdkConfig  
  
-[debug] [2021-06-10T03:11:10.539Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:11:10 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-06-10T03:15:41.819Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:15:41 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
 [info] i  functions: preparing functions directory for uploading... 
-[debug] [2021-06-10T03:11:10.543Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/split-d526f/configs  
+[debug] [2021-06-10T03:15:41.823Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/split-d526f/configs  
  
+[debug] [2021-06-10T03:15:42.173Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:15:42 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-06-10T03:15:42.175Z] Analyizing backend with strategy parseJSExports
+[info] i  functions: packaged functions (35.11 KB) for uploading 
+[debug] [2021-06-10T03:15:42.335Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "14"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^9.8.0",
+    "firebase-functions": "^3.14.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2021-06-10T03:15:42.335Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/split-d526f/locations/-/functions  
+ 
+[debug] [2021-06-10T03:15:42.799Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:15:42 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-06-10T03:15:42.805Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/split-d526f/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2021-06-10T03:15:43.330Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 10 Jun 2021 03:15:43 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-06-10T03:15:43.336Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-941a7fbe-649d-4b5c-874a-414264fba751/3caffac6-a6e5-4085-a305-5e91dc44e218.zip?GoogleAccessId=service-914562162036@gcf-admin-robot.iam.gserviceaccount.com&Expires=1623296743&Signature=nCRR5HEi%2F%2FyGOqfJh1t%2FUfXpaK7UMHe8%2BOMxBPm8CQr6jl7qTZ3XVrd9mChEaYVKXKuQnL6JLhddSLPgZm2qrvgR3rsPQtmcaUPQ89NxuDi18I5MBMvzQCaQhG2sQrISf51vVWaqciRb91bXD4a3CXYoWjfsN%2F%2FgqxqVMnPRR7KVQfFqIrlkczE%2BpRrU4J%2BG0FCUIEHgc6NMTXOgGhnFrB2mPiah0LknGfmkN9hrhjflU016j%2FmM%2Bz%2Bo9EzGo1%2FgQBsK%2BRTH4WDRE6NXjGIugdd1QY4rXP3cd0YJ5cebt3OUWo4O4OX%2Bf58HyE8lVrR532oABZ8EgGZRjxUOs606ew%3D%3D  
+ <request body omitted>

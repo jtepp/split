@@ -12,11 +12,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         body = event.after.get("from") + " " + event.after.get("memo")
     } else if (event.after.get("isRequest")) {
         title = "Request received"
-        if (event.after.get("reqFrom").length > 1) {
-            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + ", split you and " + (event.after.get("reqFrom").length - 1) + " other" + (event.after.get("reqFrom").length - 1) > 1 ? "s" : ""
-        } else {
-            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + "from you"
-        }
+        body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2)
     } else {
         title = "Payment received"
         body = event.after.get("from") + " sent you $" + event.after.get("amount").toFixed(2)
