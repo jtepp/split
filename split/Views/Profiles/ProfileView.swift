@@ -20,7 +20,24 @@ struct ProfileView: View {
     @Binding var inWR: Bool
     var body: some View {
         ScrollView {
-            HeaderText(text: "Profile")
+            HStack {
+                HeaderText(text: "Profile")
+                Spacer()
+                Menu {
+                    Toggle(isOn: .constant(false)) {
+                        Text("Show status")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .foregroundColor(.white)
+                }
+                .padding(10)
+                .background(
+                    Circle()
+                        .fill(Color.black.opacity(0.5))
+                )
+                
+            }
             VStack {
                 b64toimg(b64: m.image)
                     .resizable()
@@ -54,6 +71,7 @@ struct ProfileView: View {
                         }, label: {
                             Image(systemName: "camera.fill")
                                 .padding(10)
+                                .shadow(radius: 2)
                                 .foregroundColor(.black)
                                 .background(
                                     Circle()
