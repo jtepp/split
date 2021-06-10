@@ -34,7 +34,7 @@ struct ProfileView: View {
                 .padding(10)
                 .background(
                     Circle()
-                        .fill(Color.black.opacity(0.5))
+                        .fill(Color.white.opacity(0.2))
                 )
                 
             }
