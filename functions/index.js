@@ -2,7 +2,7 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 
-exports.sendNotificationOnPayment = functions.firestore.document("houses/{houseid}/payments/{paymentid}").onWrite((event, context) => {
+exports.sendNotificationOnPayment = functions.firestore.document("houses/{houseid}/payments/{paymentid}").onWrite(async (event, context) => {
     const db = admin.firestore()
 
     let isAn = event.after.get('isAn') || false
@@ -29,7 +29,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                 .then((documents) => {
                     documents.forEach((doc) => {
                         doc.get()
-                            .then((docSnap) => {
+                            .then(async (docSnap) => {
                                 let data = docSnap.data()
                                 console.log("data: " + JSON.stringify(data))
                                 if ((data["FCM"] || "") != "") {
@@ -45,7 +45,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                             },
                                             token: data["FCM"]
                                         }
-                                        return admin.messaging().send(message)
+                                        await admin.messaging().send(message)
                                             .then((i) => {
                                                 console.log("response: " + JSON.stringify(i))
                                             })
@@ -77,7 +77,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                 .then((documents) => {
                     documents.forEach((doc) => {
                         doc.get()
-                            .then((docSnap) => {
+                            .then(async (docSnap) => {
                                 let data = docSnap.data()
                                 console.log("data: " + JSON.stringify(data))
                                 if ((data["FCM"] || "") != "") {
@@ -93,7 +93,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                             },
                                             token: data["FCM"]
                                         }
-                                        return admin.messaging().send(message)
+                                        await admin.messaging().send(message)
                                             .then((i) => {
                                                 console.log("response: " + JSON.stringify(i))
                                             })
@@ -121,7 +121,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             .then((documents) => {
                 documents.forEach((doc) => {
                     doc.get()
-                        .then((docSnap) => {
+                        .then(async (docSnap) => {
                             let data = docSnap.data()
                             console.log("data: " + JSON.stringify(data))
                             if ((data["FCM"] || "") != "") {
@@ -139,7 +139,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                     },
                                     token: data["FCM"]
                                 }
-                                return admin.messaging().send(message)
+                                await admin.messaging().send(message)
                                     .then((i) => {
                                         console.log("response: " + JSON.stringify(i))
                                     })
