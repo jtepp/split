@@ -45,10 +45,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                             },
                                             token: data["FCM"]
                                         }
-                                        await admin.messaging().send(message)
-                                            .then((i) => {
-                                                console.log("response: " + JSON.stringify(i))
-                                            })
+                                        let response = await admin.messaging().send(message)
+                                        console.log(response)
+
                                     }
                                 }
                             })
@@ -93,10 +92,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                             },
                                             token: data["FCM"]
                                         }
-                                        await admin.messaging().send(message)
-                                            .then((i) => {
-                                                console.log("response: " + JSON.stringify(i))
-                                            })
+                                        let response = await admin.messaging().send(message)
+                                        console.log(response)
+
                                     }
                                 }
                             })
@@ -139,10 +137,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                     },
                                     token: data["FCM"]
                                 }
-                                await admin.messaging().send(message)
-                                    .then((i) => {
-                                        console.log("response: " + JSON.stringify(i))
-                                    })
+                                let response = await admin.messaging().send(message)
+                                console.log(response)
+
 
                                 // }
                             }
