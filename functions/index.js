@@ -45,10 +45,10 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                             },
                                             token: data["FCM"]
                                         }
-                                        admin.messaging().send(message)
-                                        .then((i)=>{
-                                            console.log("response: " + JSON.stringify(i))
-                                        })
+                                        return admin.messaging().send(message)
+                                            .then((i) => {
+                                                console.log("response: " + JSON.stringify(i))
+                                            })
                                     }
                                 }
                             })
@@ -93,10 +93,10 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                             },
                                             token: data["FCM"]
                                         }
-                                        admin.messaging().send(message)
-                                        .then((i)=>{
-                                            console.log("response: " + JSON.stringify(i))
-                                        })
+                                        return admin.messaging().send(message)
+                                            .then((i) => {
+                                                console.log("response: " + JSON.stringify(i))
+                                            })
                                     }
                                 }
                             })
@@ -139,11 +139,11 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                                     },
                                     token: data["FCM"]
                                 }
-                                admin.messaging().send(message)
-                                .then((i)=>{
-                                    console.log("response: " + JSON.stringify(i))
-                                })
-                                
+                                return admin.messaging().send(message)
+                                    .then((i) => {
+                                        console.log("response: " + JSON.stringify(i))
+                                    })
+
                                 // }
                             }
                         })
