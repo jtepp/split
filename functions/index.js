@@ -15,10 +15,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         let reqFrom = event.after.get("reqfrom")
         console.log("REQFROM: " + reqFrom.toString())
         if (reqFrom.length > 1) {
-            let lo = (reqFrom.length - 1)
-            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + ", split you and " + lo + " other" + lo > 1 ? "s" : ""
+            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + ", split you and " + (reqFrom.length - 1) + " other" + (reqFrom.length - 1) > 1 ? "s" : ""
         } else {
-            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + "from you"
+            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + " from you"
         }
     } else {
         title = "Payment received"
