@@ -25,7 +25,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             console.log("amount: " + amount)
 
             //go thru all names and send notification if they match and have FCM
-            db.collection("houses/" + context.params.houseid + "/payments").listDocuments()
+            return db.collection("houses/" + context.params.houseid + "/payments").listDocuments()
                 .then((documents) => {
                     documents.forEach((doc) => {
                         doc.get()
@@ -73,7 +73,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             console.log("amount: " + amount)
 
             //go thru all names and send notification if they match and have FCM
-            db.collection("houses/" + context.params.houseid + "/payments").listDocuments()
+            return db.collection("houses/" + context.params.houseid + "/payments").listDocuments()
                 .then((documents) => {
                     documents.forEach((doc) => {
                         doc.get()
@@ -117,7 +117,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         let memo = event.after.get('memo') || ""
         console.log("memo: " + memo)
 
-        db.collection("houses/" + context.params.houseid + "/payments").listDocuments()
+        return db.collection("houses/" + context.params.houseid + "/payments").listDocuments()
             .then((documents) => {
                 documents.forEach((doc) => {
                     doc.get()
