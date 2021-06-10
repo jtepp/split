@@ -28,7 +28,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
     }
 
 
-    event.after.get("fcm").array.forEach(async tkn => {
+    event.after.get("fcm").forEach(async tkn => {
         let message = {
             notification: {
                 title: title,
