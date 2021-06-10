@@ -28,11 +28,15 @@ struct MemberCell: View {
             VStack(alignment: .trailing) {
                 Text(m.name)
                     .bold()
-                //                moneyText(b: .constant(0.0))//$m.balance)
                 if m.showStatus {
                     if !m.online {
-                        Text("Last seen: \(Date(timeIntervalSince1970: TimeInterval(truncating: m.lastSeen)).timeAgo())")
-                            .font(.caption)
+                        if unixtodate(unix: Int(m.lastSeen)) == unixtodate(unix: Int(NSDate().timeIntervalSince1970)) {
+                            Text("Last seen: \(unixtotime(unix: Int(m.lastSeen)))")
+                                .font(.caption)
+                        } else {
+                            Text("Last seen: \(Date(timeIntervalSince1970: TimeInterval(truncating: m.lastSeen)).timeAgo())")
+                                .font(.caption)
+                        }
                     }
                 }
             }
@@ -48,6 +52,7 @@ struct MemberCell: View {
         )
         .overlay(
             HStack(alignment: .center) {
+                if m.showStatus {
                 if m.online {
                     Image(systemName: "circlebadge.fill")
                         .foregroundColor(.green)
@@ -62,6 +67,7 @@ struct MemberCell: View {
                         .foregroundColor(.black)
                 }
                 Spacer()
+                }
             }
             .font(.caption2)
             .padding(.leading, 4)
