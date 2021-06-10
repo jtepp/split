@@ -81,7 +81,39 @@ struct ActivityView: View {
                         }
                     } else if payment.isRequest {
                         
-                        if payment.by == UserDefaults.standard.string(forKey: "myId") || house.members.first(where: { (m) -> Bool in
+                        if payment.reqFrom.contains(house.members.first(where: { (m) -> Bool in
+                            return m.id == UserDefaults.standard.string(forKey: "myId")
+                        })!.name) {
+                            ActivityRequestCell(payment: .constant(payment))
+                                .contextMenu(menuItems: {
+                                    Button(action: {
+//                                        Fetch().deletePayment(p: payment, h: house)
+                                        print("quickpay")
+                                    }, label: {
+                                        Text("Pay")
+                                            .foregroundColor(.red)
+                                        Image(systemName: "arrow.right.circle")
+                                            .foregroundColor(.red)
+                                        
+                                    }
+                                    )
+                                    if house.members.first(where: { (m) -> Bool in
+                                        return m.id == UserDefaults.standard.string(forKey: "myId")
+                                    })!.admin {
+                                        Button(action: {
+                                            Fetch().deletePayment(p: payment, h: house)
+                                        }, label: {
+                                            Text("Delete")
+                                                .foregroundColor(.red)
+                                            Image(systemName: "trash.fill")
+                                                .foregroundColor(.red)
+                                            
+                                        }
+                                        )
+                                    }
+                                })
+                                .padding(.bottom, -20)
+                        } else if payment.by == UserDefaults.standard.string(forKey: "myId") || house.members.first(where: { (m) -> Bool in
                             return m.id == UserDefaults.standard.string(forKey: "myId")
                         })!.admin {
                             ActivityRequestCell(payment: .constant(payment))
@@ -97,8 +129,7 @@ struct ActivityView: View {
                                     }
                                     )
                                 })
-                                .padding(.bottom, -20)
-                        } else {
+                            } else {
                             ActivityRequestCell(payment: .constant(payment))
                                 .padding(.bottom, -20)
                         }
