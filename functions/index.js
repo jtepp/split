@@ -6,7 +6,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
 
     var title;
     var body;
-    console.log("RIGHTHERE " + JSON.stringify(event.after))
+    console.log("RIGHTHERE " + JSON.stringify(event.after.data()))
     if (event.after.get("isAn")) {
         title = "Announcement"
         body = event.after.get("from") + " " + event.after.get("memo")
