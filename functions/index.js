@@ -8,16 +8,16 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
     var body;
     const data = event.after.data()
 
-    console.log("RIGHTHERE " + JSON.stringify(event.after.data()))
+    console.log("RIGHTHERE " + JSON.stringify(data))
     if (data["isAn"]) {
         title = "Announcement"
         body = data["from"] + " " + data["memo"]
     } else if (data["isRequest"]) {
         title = "Request received"
-        body = data["to"] + " requested $" + data["amount"].toFixed(2) / data["reqFrom"].length
+        body = data["to"] + " requested $" + data["amount"].toFixed(2)
     } else {
         title = "Payment received"
-        body = data["from"] + " sent you $" + data["amount"].toFixed(2)
+        body = data["from"] + " sent you $" + data["amount"].toFixed(2) / [...data["reqFrom"]].length || 1
 
     }
 
