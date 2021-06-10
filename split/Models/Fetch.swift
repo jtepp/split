@@ -45,6 +45,12 @@ class Fetch: ObservableObject {
                     
                     self.getPayments(h: h, id: id)
                     
+                    let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
+                    
+                    if t != "" {
+                        self.placeToken(h: h, id: myId, token: t)
+                    }
+                    
                     if h.wrappedValue.members.first(where: { (m) -> Bool in
                         return m.id == UserDefaults.standard.string(forKey: "myId")
                     }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
@@ -197,27 +203,68 @@ class Fetch: ObservableObject {
     }
     
     func sendPayment(p: Payment, h: House) {
-        //        let pId =
-        db.collection("houses/\(h.id)/payments").addDocument(data:
-                                                                ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "isAn":p.isAn]
-        )
-        //            .documentID
-        for member in h.members {
-            self.updateBalances(h: h, m: member)
+        db.collection("houses/\(h.id)/members").getDocuments { querySnapshot, err in
+            guard let docs = querySnapshot?.documents else {
+                print(err.debugDescription)
+                return
+            }
+            var fcms = [String]()
+            if p.isAn {
+                docs.forEach { qds in
+                    let d = qds.data()
+                    let f = d["fcm"] as? String ?? ""
+                    if f != "" {
+                        fcms.append(f)
+                    }
+                }
+                
+            } else if p.isRequest {
+                docs.forEach { qds in
+                    let d = qds.data()
+                    let f = d["fcm"] as? String ?? ""
+                    let n = d["name"] as? String ?? ""
+                    if f != "" && p.reqfrom.contains(n) {
+                        fcms.append(f)
+                    }
+                }
+                
+            } else {
+                docs.forEach { qds in
+                    let d = qds.data()
+                    let f = d["fcm"] as? String ?? ""
+                    let n = d["name"] as? String ?? ""
+                    if f != "" && p.to == n {
+                        fcms.append(f)
+                    }
+                }
+                
+            }
+            
+            
+            
+            
+            self.db.collection("houses/\(h.id)/payments").addDocument(data:
+                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "isAn":p.isAn, "fcm":fcms]
+            )
+            //            .documentID
+            for member in h.members {
+                self.updateBalances(h: h, m: member)
+            }
         }
+        
         
     }
     
     
     func updateBalances(h: House, m: Member) {
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" {
-//            print("\n\n\(UserDefaults.standard.string(forKey: "houseId"))\n\nYAYBAL\n\n\(h.payments)\n")
+            //            print("\n\n\(UserDefaults.standard.string(forKey: "houseId"))\n\nYAYBAL\n\n\(h.payments)\n")
             var owesMe = [String:Float]()
             var iOwe = [String:Float]()
-//            for member in h.members {
-//                owesMe[member.name] = 0
-//                iOwe[member.name] = 0
-//            }
+            //            for member in h.members {
+            //                owesMe[member.name] = 0
+            //                iOwe[member.name] = 0
+            //            }
             
             for payment in h.payments
                 .filter({ (p) -> Bool in //iterate thru all payments
@@ -485,7 +532,9 @@ class Fetch: ObservableObject {
         }
     }
     
-    
+    func placeToken(h: Binding<House>, id: String, token: String) {
+        db.document("houses/\(h.wrappedValue.id)/members/\(id)").updateData(["fcm" : token])
+    }
     
 }
 

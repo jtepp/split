@@ -17,6 +17,12 @@ struct Main: View {
         ZStack {
             TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
                 .animation(.easeOut)
+//                .onAppear{
+//                    print("\n\n\n\n\ntrue\n\n\n\n\n\n")
+//                }
+//                .onDisappear{
+//                    print("\n\n\n\n\nfalse\n\n\n\n\n\n")
+//                }
             TabBar(tabSelection: $tabSelection)
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))

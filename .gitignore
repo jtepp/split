@@ -86,3 +86,4 @@ package.json
 .DS_Store
 .firebaserc
 firebase.json
+functions/firebase-debug.log

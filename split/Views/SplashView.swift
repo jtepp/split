@@ -18,26 +18,26 @@ struct SplashView: View {
                 .padding(.bottom)
             SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
                 .padding(.bottom)
-            SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .red)
+            SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .yellow)
                 .padding(.bottom)
-            SplashDetailsView(title: "Deal yourself in", text: "Automatically include yourself while dividing a request between friends", image: "arrow.triangle.branch", color: .yellow)
+            SplashDetailsView(title: "Stay updated", text: "Recieve notifications when payments come through and are requested", image: "app.badge", color: .red)
                 .padding(10)
                 .background(
-                    RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                        .fill(Color.blue.opacity(0.5))
-                        .overlay(
-                            HStack {
-                                VStack {
-                                    Text("New in version 1.1.2")
-                                        .font(Font.caption.smallCaps().weight(Font.Weight.black))
-                                        .foregroundColor(Color.white.opacity(0.5))
-                                        .padding(.leading, 16)
-                                        .padding(.top, 4)
-                                    Spacer()
-                                }
+                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                    .fill(Color.blue.opacity(0.5))
+                    .overlay(
+                        HStack {
+                            VStack {
+                                Text("new in version 1.2")
+                                    .font(Font.caption.smallCaps().weight(Font.Weight.black))
+                                    .foregroundColor(Color.white.opacity(0.5))
+                                    .padding(.leading, 16)
+                                    .padding(.top, 4)
                                 Spacer()
                             }
-                        )
+                            Spacer()
+                        }
+                    )
                 )
                 .padding(-10)
                 .padding(.bottom)
@@ -66,7 +66,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "1.1.2")
+            UserDefaults.standard.setValue(true, forKey: "1.2")
         }
     }
 }
