@@ -41,7 +41,7 @@ struct Main: View {
         })
         .onChange(of: scenePhase) { newPhase in
 
-            if UserDefaults.standard.bool(forKey: "status") && (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
+            if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
                 if newPhase == .inactive {
                     Fetch().updateStatus(status: false)
                 } else if newPhase == .active {
