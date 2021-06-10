@@ -536,6 +536,13 @@ class Fetch: ObservableObject {
         db.document("houses/\(h.wrappedValue.id)/members/\(id)").updateData(["fcm" : token])
     }
     
+    func updateStatus(status: Bool) {
+        let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
+        let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
+        print("Status: \(id) \(myId)")
+        db.document("houses/\(id)/members/\(myId)/").updateData(["showStatus":true, "online":status, "lastSeen":NSDate().timeIntervalSince1970])
+    }
+    
 }
 
 func idfromnamehouse(name: String, house: House) -> String {
