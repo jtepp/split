@@ -15,6 +15,7 @@ struct SplashView: View {
         VStack {
             HeaderText(text: "What's New")
                 .padding(.bottom)
+            ScrollView {
             LazyVStack {
                 if showCore {
                     SplashDetailsView(title: "Invite your friends", text: "Long press your group name to copy an invitation on the members page", image: "person.3", color: .blue)
@@ -40,8 +41,15 @@ struct SplashView: View {
                         Color.white.opacity(0.2)
                     )
             )
+            .padding(.bottom)
             .onTapGesture {
                 showCore.toggle()
+            }
+            
+            SplashDetailsView(title: "See who's online", text: "See when a member was last active, turn this off on the profile page", image: "smallcircle.fill.circle", color: .green)
+                .padding(.bottom)
+            SplashDetailsView(title: "Easily fulfill requests", text: "Long press on a request to easily pay back the exact amount", image: "arrow.right.circle", color: .blue)
+                .padding(.bottom)
             }
             Spacer()
             Text("Disclaimer: This app does not involve any actual money or payments, it is just a way to keep track of payments in your group")
