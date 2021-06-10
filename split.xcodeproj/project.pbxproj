@@ -25,6 +25,7 @@
 		0C64FED3265ED9F4009B0C3C /* ActivityRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED2265ED9F4009B0C3C /* ActivityRequestCell.swift */; };
 		0C64FED6265EDA9E009B0C3C /* GeneralRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */; };
 		0C64FEDA265EED43009B0C3C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED9265EED43009B0C3C /* ImagePicker.swift */; };
+		0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */; };
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
 		0C95131E265DB7C0005398CF /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C95131D265DB7C0005398CF /* MemberCell.swift */; };
 		0C9570C82670E9BC00831D17 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C9570C72670E9BC00831D17 /* GoogleService-Info.plist */; };
@@ -68,6 +69,7 @@
 		0C64FED2265ED9F4009B0C3C /* ActivityRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRequestCell.swift; sourceTree = "<group>"; };
 		0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRequestCell.swift; sourceTree = "<group>"; };
 		0C64FED9265EED43009B0C3C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+timeAgo.swift"; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		0C95131D265DB7C0005398CF /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		0C9570C62670A61800831D17 /* split.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = split.entitlements; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */,
 				0CA0E9CC26604315002876CF /* View+allowAutoDismiss.swift */,
+				0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */,
 				0C9D26CE265F263E006A7AF6 /* String+isNumeric.swift */,
 			);
 			path = Extensions;
@@ -395,6 +398,7 @@
 				0C64FED3265ED9F4009B0C3C /* ActivityRequestCell.swift in Sources */,
 				0CA0E9BD2660369D002876CF /* ModalView.swift in Sources */,
 				0CA0E9CA26603A32002876CF /* EditProfileView.swift in Sources */,
+				0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */,
 				0C95131E265DB7C0005398CF /* MemberCell.swift in Sources */,
 				0CA0E9CD26604315002876CF /* View+allowAutoDismiss.swift in Sources */,
 				0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */,
