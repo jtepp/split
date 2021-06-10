@@ -31,32 +31,11 @@ struct MemberCell: View {
                 //                moneyText(b: .constant(0.0))//$m.balance)
                 if m.showStatus {
                     if !m.online {
-                        Text("Last seen: \(Date(timeIntervalSince1970: TimeInterval(m.lastSeen)).timeAgo())")
-                            .onAppear(){
-                                print("LASTSEEND \(m.lastSeen)")
-                            }
+                        Text("Last seen: \(Date(timeIntervalSince1970: TimeInterval(truncating: m.lastSeen)).timeAgo())")
+                            .font(.caption)
                     }
-//                    HStack {
-//                        if m.online {
-//                            Label {
-//                                Text("Online")
-//                            } icon: {
-//                                Image(systemName: "circlebadge.fill")
-//                                    .foregroundColor(.green)
-//                                    .shadow(color: .green.opacity(0.5), radius: 2, x: 0, y: 0)
-//                            }
-//                        } else {
-//                            Label {
-//                                Text("Last seen: \(unixtotime(unix: m.lastSeen))\n\(unixtodate(unix: m.lastSeen))")
-//                            } icon: {
-//                                Image(systemName: "circlebadge")
-//                            }
-//                        }
-//                    }
-//                    .font(.caption)
                 }
             }
-            //          Image(systemName: "chevron.right")
         }
         .foregroundColor(.black)
         .padding(.horizontal)
@@ -66,6 +45,26 @@ struct MemberCell: View {
                 .fill(
                     Color.white.opacity(0.5)
                 )
+        )
+        .overlay(
+            HStack(alignment: .center) {
+                if m.online {
+                    Image(systemName: "circlebadge.fill")
+                        .foregroundColor(.green)
+                        .background(
+                            Image(systemName: "circlebadge.fill")
+                                .foregroundColor(.green)
+                                .blur(radius: 2)
+//                                .scaleEffect(1.2)
+                        )
+                } else {
+                    Image(systemName: "circlebadge")
+                        .foregroundColor(.black)
+                }
+                Spacer()
+            }
+            .font(.caption2)
+            .padding(.leading, 4)
         )
     }
 }
