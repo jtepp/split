@@ -8,7 +8,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
     let message = {
         notification: {
             title: "Update",
-            content: "Check the app!"
+            body: "Check the app!"
         },
         token: "dOA3ab8BD0Ysp2ovfjwAPo:APA91bEcsAR3ecJ-8LouirdNvF5l1QbPQkvYM9uMUfaXmJialdMyfH1pIZKRU7avGfMgAKglKwIMdbCmh7fkcq13xQiHQ-TCiH48edrWVz9AEA17zQBkGoWu_6a_5qZ-Zc17oKFtAtsN"
     }
