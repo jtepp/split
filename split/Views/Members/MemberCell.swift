@@ -28,9 +28,32 @@ struct MemberCell: View {
             VStack(alignment: .trailing) {
                 Text(m.name)
                     .bold()
-//                moneyText(b: .constant(0.0))//$m.balance)
+                //                moneyText(b: .constant(0.0))//$m.balance)
+                if m.showStatus {
+                    if !m.online {
+                        Text("Last seen: \(unixtotime(unix: m.lastSeen)) \(unixtodate(unix: m.lastSeen))")
+                    }
+//                    HStack {
+//                        if m.online {
+//                            Label {
+//                                Text("Online")
+//                            } icon: {
+//                                Image(systemName: "circlebadge.fill")
+//                                    .foregroundColor(.green)
+//                                    .shadow(color: .green.opacity(0.5), radius: 2, x: 0, y: 0)
+//                            }
+//                        } else {
+//                            Label {
+//                                Text("Last seen: \(unixtotime(unix: m.lastSeen))\n\(unixtodate(unix: m.lastSeen))")
+//                            } icon: {
+//                                Image(systemName: "circlebadge")
+//                            }
+//                        }
+//                    }
+//                    .font(.caption)
+                }
             }
-//          Image(systemName: "chevron.right")
+            //          Image(systemName: "chevron.right")
         }
         .foregroundColor(.black)
         .padding(.horizontal)
