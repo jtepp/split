@@ -203,14 +203,55 @@ class Fetch: ObservableObject {
     }
     
     func sendPayment(p: Payment, h: House) {
-        //        let pId =
-        db.collection("houses/\(h.id)/payments").addDocument(data:
-                                                                ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "isAn":p.isAn]
-        )
-        //            .documentID
-        for member in h.members {
-            self.updateBalances(h: h, m: member)
+        db.collection("houses/\(h.id)/members").getDocuments { querySnapshot, err in
+            guard let docs = querySnapshot?.documents else {
+                print(err.debugDescription)
+                return
+            }
+            var fcms = [String]()
+            if p.isAn {
+                docs.forEach { qds in
+                    let d = qds.data()
+                    let f = d["fcm"] as? String ?? ""
+                    if f != "" {
+                        fcms.append(f)
+                    }
+                }
+                
+            } else if p.isRequest {
+                docs.forEach { qds in
+                    let d = qds.data()
+                    let f = d["fcm"] as? String ?? ""
+                    let n = d["name"] as? String ?? ""
+                    if f != "" && p.reqfrom.contains(n) {
+                        fcms.append(f)
+                    }
+                }
+                
+            } else {
+                docs.forEach { qds in
+                    let d = qds.data()
+                    let f = d["fcm"] as? String ?? ""
+                    let n = d["name"] as? String ?? ""
+                    if f != "" && p.to == n {
+                        fcms.append(f)
+                    }
+                }
+                
+            }
+            
+            
+            
+            
+            self.db.collection("houses/\(h.id)/payments").addDocument(data:
+                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "isAn":p.isAn, "fcm":fcms]
+            )
+            //            .documentID
+            for member in h.members {
+                self.updateBalances(h: h, m: member)
+            }
         }
+        
         
     }
     
