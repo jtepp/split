@@ -26,7 +26,9 @@ struct TabsView: View {
                         .tag(2)
                     ProfileView(house: $house, m: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
-                    }) ?? Member.empty), inWR: $inWR)
+                    }) ?? Member.empty), inWR: $inWR, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
+                        return m.id == myId
+                    })?.showStatus ?? Member.empty.showStatus))
                         .tag(3)
                 })
             .tabViewStyle(PageTabViewStyle())

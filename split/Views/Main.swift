@@ -40,8 +40,8 @@ struct Main: View {
             Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         })
         .onChange(of: scenePhase) { newPhase in
-//            UserDefaults.standard.bool(forKey: "status") && 
-            if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
+
+            if UserDefaults.standard.bool(forKey: "status") && (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
                 if newPhase == .inactive {
                     Fetch().updateStatus(status: false)
                 } else if newPhase == .active {

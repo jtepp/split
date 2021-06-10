@@ -18,15 +18,31 @@ struct ProfileView: View {
     @State var adminChoice = [Member]()
     @State var img: UIImage?
     @Binding var inWR: Bool
+    @Binding var showStatus: Bool
     var body: some View {
         ScrollView {
             HStack {
                 HeaderText(text: "Profile")
                 Spacer()
                 Menu {
-                    Toggle(isOn: .constant(false)) {
-                        Text("Show status")
+                    Button {
+                        if showStatus {
+                            showStatus = false
+                            Fetch().toggleShowStatus(s: false)
+                        } else {
+                            showStatus = true
+                            Fetch().toggleShowStatus(s: true)
+                        }
+                        UserDefaults.standard.setValue(showStatus, forKey: "status")
+                    } label: {
+                        Text("Show Status")
+                        Image(systemName: showStatus ? "circlebadge.fill" : "circlebadge")
+                            .renderingMode(.original)
+                            .foregroundColor(
+                                showStatus ? .green : .black
+                            )
                     }
+
                 } label: {
                     Image(systemName: "ellipsis")
                         .foregroundColor(.white)
@@ -38,11 +54,6 @@ struct ProfileView: View {
                                 )
                         )
                 }
-                .padding(10)
-                .background(
-                    Circle()
-                        .fill(Color.white.opacity(0.2))
-                )
                 
             }
             VStack {
