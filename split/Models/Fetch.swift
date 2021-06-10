@@ -137,8 +137,8 @@ class Fetch: ObservableObject {
                 let admin = data["admin"] as? Bool ?? false
                 let showStatus = data["showStatus"] as? Bool ?? false
                 let online = data["online"] as? Bool ?? false
-                let lastSeen = data["lastSeen"] as? Int ?? 0
-                
+                let lastSeen = data["lastSeen"] as? NSNumber ?? 0
+//                print("DFSSSS: \(name) \(data["lastSeen"])")
                 return Member(id: q.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: showStatus, online: online, lastSeen: lastSeen)
             })
             for member in h.wrappedValue.members {

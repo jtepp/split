@@ -31,7 +31,10 @@ struct MemberCell: View {
                 //                moneyText(b: .constant(0.0))//$m.balance)
                 if m.showStatus {
                     if !m.online {
-                        Text("Last seen: \(unixtotime(unix: m.lastSeen)) \(unixtodate(unix: m.lastSeen))")
+                        Text("Last seen: \(Date(timeIntervalSince1970: TimeInterval(m.lastSeen)).timeAgo())")
+                            .onAppear(){
+                                print("LASTSEEND \(m.lastSeen)")
+                            }
                     }
 //                    HStack {
 //                        if m.online {
