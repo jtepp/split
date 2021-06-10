@@ -81,13 +81,15 @@ struct ActivityView: View {
                         }
                     } else if payment.isRequest {
                         
-                        if payment.reqFrom.contains(house.members.first(where: { (m) -> Bool in
+                        if payment.reqfrom.contains(house.members.first(where: { (m) -> Bool in
                             return m.id == UserDefaults.standard.string(forKey: "myId")
                         })!.name) {
                             ActivityRequestCell(payment: .constant(payment))
                                 .contextMenu(menuItems: {
                                     Button(action: {
-//                                        Fetch().deletePayment(p: payment, h: house)
+                                        Fetch().sendPayment(p: Payment(to: payment.to, from: house.members.first(where: { (m) -> Bool in
+                                            return m.id == UserDefaults.standard.string(forKey: "myId")
+                                        })!.name, amount: payment.amount / Float(payment.reqfrom.count), time: Int(NSDate().timeIntervalSince1970), isRequest: false, isAn: false, by: UserDefaults.standard.string(forKey: "myId")!), h: house)
                                         print("quickpay")
                                     }, label: {
                                         Text("Pay")
