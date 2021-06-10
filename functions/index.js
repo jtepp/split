@@ -28,16 +28,18 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
     }
 
 
+    event.after.get("fcm").array.forEach(async tkn => {
+        let message = {
+            notification: {
+                title: title,
+                body: body
+            },
+            token: tkn
+        }
+        let response = await admin.messaging().send(message)
+        console.log(response)
+    });
 
-    let message = {
-        notification: {
-            title: title,
-            body: body
-        },
-        token: "dOA3ab8BD0Ysp2ovfjwAPo:APA91bEcsAR3ecJ-8LouirdNvF5l1QbPQkvYM9uMUfaXmJialdMyfH1pIZKRU7avGfMgAKglKwIMdbCmh7fkcq13xQiHQ-TCiH48edrWVz9AEA17zQBkGoWu_6a_5qZ-Zc17oKFtAtsN"
-    }
-    let response = await admin.messaging().send(message)
-    console.log(response)
 
 
 })
