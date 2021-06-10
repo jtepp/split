@@ -28,8 +28,15 @@ struct ProfileView: View {
                         Text("Show status")
                     }
                 } label: {
-                    Image(systemName: "ellipsis.circle")
+                    Image(systemName: "ellipsis")
                         .foregroundColor(.white)
+                        .padding(10)
+                        .background(
+                            Circle()
+                                .fill(
+                                    Color.white.opacity(0.2)
+                                )
+                        )
                 }
                 .padding(10)
                 .background(
