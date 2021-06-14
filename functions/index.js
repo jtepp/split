@@ -32,10 +32,16 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         let message = {
             notification: {
                 title: title,
-                sound: "default",
                 body: body
             },
-            token: tkn
+            token: tkn,
+            apns: {
+                payload: {
+                    aps: {
+                        sound: 'default',
+                    }
+                }
+            }
         }
         let response = await admin.messaging().send(message)
         console.log(response)
