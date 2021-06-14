@@ -173,9 +173,9 @@ struct ActivityView: View {
         .foregroundColor(.white)
         .onAppear {
             //show splash for update
-            if UserDefaults.standard.bool(forKey: "1.3") == false {
+            if UserDefaults.standard.bool(forKey: "1.3.1") == false {
                 showSplash = true
-                UserDefaults.standard.setValue(true, forKey: "1.3")
+                UserDefaults.standard.setValue(true, forKey: "1.3.1")
             }
         }
         .sheet(isPresented: $showSplash, content: {

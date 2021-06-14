@@ -16,34 +16,38 @@ struct SplashView: View {
             HeaderText(text: "What's New")
                 .padding(.bottom)
             ScrollView {
-            LazyVStack {
-                if showCore {
-                    SplashDetailsView(title: "Invite your friends", text: "Long press your group name to copy an invitation on the members page", image: "person.3", color: .blue)
-                        .padding(.bottom)
-                    SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
-                        .padding(.bottom)
-                    SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .yellow)
-                        .padding(.bottom)
-                } else {
-                    HStack {
-                        Text("Show main features")
-                        Image(systemName: "chevron.down")
+                HStack {
+                    Spacer()
+                    VStack {
+                    if showCore {
+                        SplashDetailsView(title: "Invite your friends", text: "Long press your group name to copy an invitation on the members page", image: "person.3", color: .blue)
+                            .padding(.bottom)
+                        SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
+                            .padding(.bottom)
+                        SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .yellow)
+                            .padding(.bottom)
+                    } else {
+                        HStack {
+                            Text("Show main features")
+                            Image(systemName: "chevron.down")
+                        }
+                        .foregroundColor(.white)
+                        .padding()
+                        
                     }
-                    .foregroundColor(.white)
-                    .padding()
-                    
                 }
-            }
-            .animation(Animation.easeIn.speed(2))
-            .background(
-                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                    .fill(
-                        Color.white.opacity(0.2)
-                    )
-            )
-            .padding(.bottom)
-            .onTapGesture {
-                showCore.toggle()
+                .animation(Animation.easeIn.speed(2))
+                    Spacer()
+                }
+                .background(
+                    RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                        .fill(
+                            Color.white.opacity(0.2)
+                        )
+                )
+                .padding(.bottom)
+                .onTapGesture {
+                    showCore.toggle()
             }
             
             SplashDetailsView(title: "See who's online", text: "See when a member was last active, turn this off on the profile page", image: "smallcircle.fill.circle", color: .green)
@@ -76,7 +80,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "1.3")
+            UserDefaults.standard.setValue(true, forKey: "1.3.1")
         }
     }
 }
@@ -109,6 +113,8 @@ struct SplashDetailsView: View {
             .frame(maxWidth: 250)
             
         }
+        .lineLimit(2)
+        .minimumScaleFactor(0.4)
     }
 }
 
