@@ -14,7 +14,7 @@ struct splitApp: App {
     var body: some Scene {
         WindowGroup {
             Main()
-                .preferredColorScheme(.dark)
+//                .preferredColorScheme(.dark)
 //                .onAppear(){
 //                    Messaging.messaging().token { token, error in
 //                      if let error = error {

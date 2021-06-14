@@ -315,7 +315,7 @@ class Fetch: ObservableObject {
             //        let id = UserDefaults.standard.string(forKey: "myId")
             print("\n\nowes\(owesMe)\n\n\n\(iOwe)\niown")
             iOwe.forEach { (key: String, value: Float) in
-                if abs(value - owesMe[key]!) < 0.01 {
+                if abs(value - (owesMe[key] ?? Float(0))) < 0.01 {
                     iOwe[key] = 0
                     owesMe[key] = 0
                 }
