@@ -46,10 +46,11 @@ struct Main: View {
         })
         .onChange(of: scenePhase) { newPhase in
             
-            if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
+//            if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
                 if newPhase == .inactive {
                     Fetch().updateStatus(status: false)
                 } else if newPhase == .active {
+                    print("LIIII \(showLinkAlert)")
                     Fetch().updateStatus(status: true)
                     guard let name = shortcutItemToProcess?.localizedTitle as? String else {
                         print("else")
@@ -66,9 +67,10 @@ struct Main: View {
                 } else if newPhase == .background {
                     Fetch().updateStatus(status: false)
                 }
-            }
+//            }
         }
         .onOpenURL{ url in
+//            showLinkAlert = true
             print("AAAAAAAAAAAAA")
             let link = url.absoluteString.components(separatedBy: "//")[1]
             let newGroup = link.split(separator: "$")[0]
@@ -93,10 +95,9 @@ struct Main: View {
             }
             
         }
-        .alert(isPresented: $showLinkAlert) {
-            Alert(title: Text(newName), message: Text(msg), primaryButton: Alert.Button.default(Text("Join"), action: {
-                
-            }), secondaryButton: Alert.Button.cancel())
+        .sheet(isPresented: $showLinkAlert) {
+//            Alert(title: Text(newName), message: Text(msg), primaryButton: Alert.Button.default(Text("Join"), action: {
+//            }), secondaryButton: Alert.Button.cancel())
         }
     }
 }
