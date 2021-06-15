@@ -32,6 +32,14 @@
 				<string>com.googleusercontent.apps.914562162036-6kn566lincf3vodrj37qdbnicjkc2ulf</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>split</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
@@ -73,6 +81,41 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>ActivityAction</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>rectangle.grid.1x2</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Activity</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>MembersAction</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>person.2</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Members</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>PaymentsAction</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>dollarsign.square</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Payments</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>ProfileAction</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>person.crop.square</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Profile</string>
+		</dict>
 	</array>
 </dict>
 </plist>
