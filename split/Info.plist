@@ -88,7 +88,7 @@
 			<key>UIApplicationShortcutItemType</key>
 			<string>ActivityAction</string>
 			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>rectangle.grid.1x2</string>
+			<string>rectangle.grid.1x2.fill</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Activity</string>
 		</dict>
@@ -96,7 +96,7 @@
 			<key>UIApplicationShortcutItemType</key>
 			<string>MembersAction</string>
 			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>person.2</string>
+			<string>person.2.fill</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Members</string>
 		</dict>
@@ -104,7 +104,7 @@
 			<key>UIApplicationShortcutItemType</key>
 			<string>PaymentsAction</string>
 			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>dollarsign.square</string>
+			<string>dollarsign.square.fill</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Payments</string>
 		</dict>
