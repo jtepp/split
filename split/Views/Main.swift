@@ -14,6 +14,9 @@ struct Main: View {
     @State var noProf = true
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
     @State var tabSelection = 0
+    @State var title = ""
+    @State var msg = ""
+    @State var showLinkAlert = false
     var body: some View {
         ZStack {
             TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
@@ -68,9 +71,28 @@ struct Main: View {
             let newGroup = link.split(separator: "$")[0]
             let newPass = link.split(separator: "$")[1]
             
-            let oldGroup = UserDefaults.standard.string(forKey: "hId") ?? "blank"
-            print("asefasdfasf \(h.id)")
+            let oldGroup = h.id
+            let oldID = UserDefaults.standard.string(forKey: "myId") ?? ""
+            
+            
+            if oldID == "" {
+            
+            if oldGroup == newGroup {
+                title = "Already in this group"
+                msg = "You are already a member of the group you are trying to join"
+            }
+            } else {
+                title = "Already in a group"
+                msg = "You are already in another group. Please delete this account from the profile page to "
+            }
+            
+            showLinkAlert = true
         })
+        .alert(isPresented: $showLinkAlert) {
+            Alert(title: Text(title), message: Text(msg), primaryButton: Alert.Button.default(Text("Join"), action: {
+                
+            }), secondaryButton: Alert.Button.cancel())
+        }
     }
 }
 
