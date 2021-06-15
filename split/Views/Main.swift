@@ -63,6 +63,14 @@ struct Main: View {
                 }
             }
         }
+        .onOpenURL(perform: { url in
+            let link = url.absoluteString.components(separatedBy: "//")[1]
+            let newGroup = link.split(separator: "$")[0]
+            let newPass = link.split(separator: "$")[1]
+            
+            let oldGroup = UserDefaults.standard.string(forKey: "hId") ?? "blank"
+            print("asefasdfasf \(h.id)")
+        })
     }
 }
 

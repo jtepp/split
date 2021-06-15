@@ -40,6 +40,7 @@ struct TabsView: View {
 //                print("WAITING ROOM CHANGED \n\n\(member)\n\n\n\n\n")
                 if inWR {
                     member = .empty
+                    house = .empty
                 }
                 noProf = member.id == ""
             })

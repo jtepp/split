@@ -60,10 +60,12 @@ class Fetch: ObservableObject {
                             UserDefaults.standard.set("", forKey: "houseId")
                             noProf.wrappedValue = true
                             inWR.wrappedValue = true
+                            h.wrappedValue = .empty
                         } else {
                             print("wred")
                             UserDefaults.standard.set("waitingRoom", forKey: "houseId")
                             noProf.wrappedValue = false
+                            h.wrappedValue = .empty
                         }
                         inWR.wrappedValue = true
                     }
