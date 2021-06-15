@@ -14,6 +14,10 @@ struct TabsView: View {
     @Binding var myId: String
     @Binding var inWR: Bool
     @Binding var noProf: Bool
+    @Binding var showLinkAlert: Bool
+    @State var newGroup = ""
+    @State var newPass = ""
+    @State var newName = ""
     @State var member = Member.empty
     var body: some View {
         TabView(selection: $tabSelection,
@@ -29,7 +33,7 @@ struct TabsView: View {
                     }) ?? Member.empty), inWR: $inWR, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
                     })?.showStatus ?? Member.empty.showStatus))
-                        .tag(3)
+                    .tag(3)
                 })
             .tabViewStyle(PageTabViewStyle())
             .background(Color.black.edgesIgnoringSafeArea(.all))
@@ -37,8 +41,8 @@ struct TabsView: View {
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
             }
             .onChange(of: inWR, perform: { (_) in
-//                print("WAITING ROOM CHANGED \n\n\(member)\n\n\n\n\n")
-                if inWR {
+                //                print("WAITING ROOM CHANGED \n\n\(member)\n\n\n\n\n")
+                if inWR && !showLinkAlert {
                     member = .empty
                     house = .empty
                 }
@@ -48,15 +52,20 @@ struct TabsView: View {
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
             }) {
                 if (dontSplash) {
-                if (noProf) {
-                    NoProfileView(m: $member, myId: $myId, show: $noProf, house: $house)
-                        .background(Color.black.edgesIgnoringSafeArea(.all))
-                        .allowAutoDismiss(false)
-                } else {
-                    WaitingRoomView(h: $house, inWR: $inWR, noProf: $noProf, member: $member)
+                    if showLinkAlert {
+                        LinkInviteView(h: $house, m: $member, newGroup: $newGroup, newPass: $newPass, newName: $newName)
                             .background(Color.black.edgesIgnoringSafeArea(.all))
                             .allowAutoDismiss(false)
-                }
+                    }
+                    else if (noProf) {
+                        NoProfileView(m: $member, myId: $myId, show: $noProf, house: $house)
+                            .background(Color.black.edgesIgnoringSafeArea(.all))
+                            .allowAutoDismiss(false)
+                    } else {
+                        WaitingRoomView(h: $house, inWR: $inWR, noProf: $noProf, member: $member)
+                            .background(Color.black.edgesIgnoringSafeArea(.all))
+                            .allowAutoDismiss(false)
+                    }
                 } else {
                     SplashView(dontSplash: $dontSplash, showSplash: .constant(false))
                         .padding()
@@ -65,9 +74,19 @@ struct TabsView: View {
                         .animation(Animation.easeIn.speed(3))
                 }
             }
-//            .onChange(of: tabSelection) { (_) in
-//                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
-//            }
-
+            .onOpenURL{ url in
+                showLinkAlert = true
+                inWR = true
+                let link = url.absoluteString.components(separatedBy: "//")[1]
+                newGroup = String(link.split(separator: "$")[0])
+                newPass = String(link.split(separator: "$")[1])
+                Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
+                
+                
+            }
+        //            .onChange(of: tabSelection) { (_) in
+        //                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+        //            }
+        
     }
 }

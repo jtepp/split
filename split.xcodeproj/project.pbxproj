@@ -26,6 +26,7 @@
 		0C64FED6265EDA9E009B0C3C /* GeneralRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */; };
 		0C64FEDA265EED43009B0C3C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED9265EED43009B0C3C /* ImagePicker.swift */; };
 		0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */; };
+		0C8FFA9026795AB5005EE156 /* LinkInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8FFA8F26795AB5005EE156 /* LinkInviteView.swift */; };
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
 		0C95131E265DB7C0005398CF /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C95131D265DB7C0005398CF /* MemberCell.swift */; };
 		0C9570C82670E9BC00831D17 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C9570C72670E9BC00831D17 /* GoogleService-Info.plist */; };
@@ -70,6 +71,7 @@
 		0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRequestCell.swift; sourceTree = "<group>"; };
 		0C64FED9265EED43009B0C3C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+timeAgo.swift"; sourceTree = "<group>"; };
+		0C8FFA8F26795AB5005EE156 /* LinkInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkInviteView.swift; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		0C95131D265DB7C0005398CF /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		0C9570C62670A61800831D17 /* split.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = split.entitlements; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			children = (
 				0C2A0588265CAA44002BD46D /* Main.swift */,
 				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
+				0C8FFA8F26795AB5005EE156 /* LinkInviteView.swift */,
 				0CAA803A2661CC4A00A3081B /* SplashView.swift */,
 				0CA0E9BC2660369D002876CF /* ModalView.swift */,
 				0CA0E9BF266037FE002876CF /* Profiles */,
@@ -382,6 +385,7 @@
 				0C2A05A0265CB17D002BD46D /* House.swift in Sources */,
 				0C625972265EA868002E58A3 /* Payment.swift in Sources */,
 				0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */,
+				0C8FFA9026795AB5005EE156 /* LinkInviteView.swift in Sources */,
 				0CA0E9C5266038EB002876CF /* NoProfileView.swift in Sources */,
 				0C64FEDA265EED43009B0C3C /* ImagePicker.swift in Sources */,
 				0C9D26CF265F263E006A7AF6 /* String+isNumeric.swift in Sources */,

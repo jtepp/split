@@ -561,6 +561,10 @@ class Fetch: ObservableObject {
         }
     }
     
+    func returnMembers(hId: String, nm: Binding<[Member]>) {
+        db.collection("houses/\(hId)/members")
+    }
+    
 }
 
 func idfromnamehouse(name: String, house: House) -> String {

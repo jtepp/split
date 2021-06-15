@@ -14,13 +14,10 @@ struct Main: View {
     @State var noProf = true
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
     @State var tabSelection = 0
-    @State var title = ""
-    @State var msg = ""
     @State var showLinkAlert = false
-    @State var newName = ""
     var body: some View {
         ZStack {
-            TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
+            TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf, showLinkAlert: $showLinkAlert)
                 .animation(.easeOut)
             //                .onAppear{
             //                    print("\n\n\n\n\ntrue\n\n\n\n\n\n")
@@ -69,36 +66,7 @@ struct Main: View {
                 }
             }
         }
-        .onOpenURL{ url in
-//            showLinkAlert = true
-            print("AAAAAAAAAAAAA")
-            let link = url.absoluteString.components(separatedBy: "//")[1]
-            let newGroup = link.split(separator: "$")[0]
-            let newPass = link.split(separator: "$")[1]
-            
-            let oldGroup = h.id
-            let oldID = UserDefaults.standard.string(forKey: "myId") ?? ""
-            
-            Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
-            
-//            print("asef \(newName)")
-            
-            if oldID == "" {
-            
-            if oldGroup == newGroup {
-                title = "Already in this group"
-                msg = "You are already a member of the group you are trying to join"
-            }
-            } else {
-                title = "Already in a group"
-                msg = "You are already in another group. Please delete this account from the profile page to "
-            }
-            
-        }
-        .sheet(isPresented: $showLinkAlert) {
-//            Alert(title: Text(newName), message: Text(msg), primaryButton: Alert.Button.default(Text("Join"), action: {
-//            }), secondaryButton: Alert.Button.cancel())
-        }
+        
     }
 }
 
