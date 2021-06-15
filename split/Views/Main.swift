@@ -46,7 +46,7 @@ struct Main: View {
         })
         .onChange(of: scenePhase) { newPhase in
             
-//            if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
+            if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
                 if newPhase == .inactive {
                     Fetch().updateStatus(status: false)
                 } else if newPhase == .active {
@@ -67,7 +67,7 @@ struct Main: View {
                 } else if newPhase == .background {
                     Fetch().updateStatus(status: false)
                 }
-//            }
+            }
         }
         .onOpenURL{ url in
 //            showLinkAlert = true
