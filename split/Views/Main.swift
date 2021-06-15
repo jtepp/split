@@ -40,15 +40,27 @@ struct Main: View {
             Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         })
         .onChange(of: scenePhase) { newPhase in
-
+            
             if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
                 if newPhase == .inactive {
                     Fetch().updateStatus(status: false)
                 } else if newPhase == .active {
                     Fetch().updateStatus(status: true)
+                    guard let name = shortcutItemToProcess?.localizedTitle as? String else {
+                        print("else")
+                        return
+                    }
+                    switch name {
+                    case "Send payment":
+                        tabSelection = 2
+                    case "Send request":
+                        tabSelection = 2
+                    default:
+                        tabSelection = 0
+                    }
                 } else if newPhase == .background {
                     Fetch().updateStatus(status: false)
-                    }
+                }
             }
         }
     }

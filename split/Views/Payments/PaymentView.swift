@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PaymentView: View {
+    @Environment(\.scenePhase) var scenePhase
     @Binding var house: House
     @State var typeSelection = 0
     @Binding var tabSelection: Int
@@ -48,6 +49,22 @@ struct PaymentView: View {
         }.onTapGesture {
             if UIApplication.shared.isKeyboardPresented {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
+        }
+        .onChange(of: scenePhase){ newPhase in
+            if newPhase == .active {
+                guard let name = shortcutItemToProcess?.localizedTitle as? String else {
+                    print("else")
+                    return
+                }
+                switch name {
+                case "Send payment":
+                    typeSelection = 0
+                case "Send request":
+                    typeSelection = 1
+                default:
+                    tabSelection = 0
+                }
             }
         }
         

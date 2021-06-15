@@ -86,35 +86,19 @@
 	<array>
 		<dict>
 			<key>UIApplicationShortcutItemType</key>
-			<string>ActivityAction</string>
+			<string>PaymentAction</string>
 			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>rectangle.grid.1x2.fill</string>
+			<string>arrow.right.circle</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Activity</string>
+			<string>Send payment</string>
 		</dict>
 		<dict>
 			<key>UIApplicationShortcutItemType</key>
-			<string>MembersAction</string>
+			<string>RequestAction</string>
 			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>person.2.fill</string>
+			<string>arrow.left.circle</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Members</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
-			<string>PaymentsAction</string>
-			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>dollarsign.square.fill</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Payments</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
-			<string>ProfileAction</string>
-			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>person.crop.square</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Profile</string>
+			<string>Send request</string>
 		</dict>
 	</array>
 </dict>
