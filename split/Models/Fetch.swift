@@ -551,6 +551,16 @@ class Fetch: ObservableObject {
         db.document("houses/\(id)/members/\(myId)/").updateData(["showStatus":s])
     }
     
+    func groupNameFromId(id: String, nn: Binding<String>) {
+        db.document("houses/\(id)").getDocument { docSnap, err in
+            guard let doc = docSnap?.get("name") else {
+                nn.wrappedValue = "err"
+                return
+            }
+            nn.wrappedValue = doc as! String
+        }
+    }
+    
 }
 
 func idfromnamehouse(name: String, house: House) -> String {

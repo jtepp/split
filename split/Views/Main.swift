@@ -17,6 +17,7 @@ struct Main: View {
     @State var title = ""
     @State var msg = ""
     @State var showLinkAlert = false
+    @State var newName = ""
     var body: some View {
         ZStack {
             TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
@@ -31,6 +32,7 @@ struct Main: View {
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
+            
             Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         }
         .onChange(of: h.id, perform: { _ in
@@ -66,7 +68,8 @@ struct Main: View {
                 }
             }
         }
-        .onOpenURL(perform: { url in
+        .onOpenURL{ url in
+            print("AAAAAAAAAAAAA")
             let link = url.absoluteString.components(separatedBy: "//")[1]
             let newGroup = link.split(separator: "$")[0]
             let newPass = link.split(separator: "$")[1]
@@ -74,6 +77,9 @@ struct Main: View {
             let oldGroup = h.id
             let oldID = UserDefaults.standard.string(forKey: "myId") ?? ""
             
+            Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
+            
+//            print("asef \(newName)")
             
             if oldID == "" {
             
@@ -86,10 +92,9 @@ struct Main: View {
                 msg = "You are already in another group. Please delete this account from the profile page to "
             }
             
-            showLinkAlert = true
-        })
+        }
         .alert(isPresented: $showLinkAlert) {
-            Alert(title: Text(title), message: Text(msg), primaryButton: Alert.Button.default(Text("Join"), action: {
+            Alert(title: Text(newName), message: Text(msg), primaryButton: Alert.Button.default(Text("Join"), action: {
                 
             }), secondaryButton: Alert.Button.cancel())
         }
