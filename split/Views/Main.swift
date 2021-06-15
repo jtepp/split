@@ -46,7 +46,9 @@ struct Main: View {
                     Fetch().updateStatus(status: false)
                 } else if newPhase == .active {
                     Fetch().updateStatus(status: true)
-                }
+                } else if newPhase == .background {
+                    Fetch().updateStatus(status: false)
+                    }
             }
         }
     }
