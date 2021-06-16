@@ -11,15 +11,11 @@ struct TabsView: View {
     @State var dontSplash = UserDefaults.standard.bool(forKey: "dontSplash")
     @Binding var tabSelection: Int
     @Binding var house: House
+    @Binding var member: Member
     @Binding var myId: String
     @Binding var inWR: Bool
     @Binding var noProf: Bool
     @Binding var showInvite: Bool
-    @State var newGroup = ""
-    @State var newPass = ""
-    @State var newName = ""
-    @State var member = Member.empty
-    @State var showAlreadyGroup = false
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
@@ -53,12 +49,7 @@ struct TabsView: View {
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
             }) {
                 if (dontSplash) {
-                    if showInvite {
-                        LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInvite, h: $house, m: $member, newGroup: $newGroup, newPass: $newPass, newName: $newName)
-                            .background(Color.black.edgesIgnoringSafeArea(.all))
-                            .allowAutoDismiss(false)
-                    }
-                    else if (noProf) {
+                    if (noProf) {
                         NoProfileView(m: $member, myId: $myId, show: $noProf, house: $house)
                             .background(Color.black.edgesIgnoringSafeArea(.all))
                             .allowAutoDismiss(false)
@@ -75,26 +66,6 @@ struct TabsView: View {
                         .animation(Animation.easeIn.speed(3))
                 }
             }
-            .onChange(of: showInvite, perform: { _ in
-                if dontSplash && !showInvite && !noProf && house.id != "" {
-                    inWR = false
-                }
-            })
-            .onOpenURL{ url in
-                let link = url.absoluteString.components(separatedBy: "//")[1]
-                newGroup = String(link.split(separator: "$")[0])
-                newPass = String(link.split(separator: "$")[1])
-                Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
-                if newGroup == house.id {
-                    showAlreadyGroup = true
-                } else {
-                    showInvite = true
-                    inWR = true
-                }
-            }
-            .alert(isPresented: $showAlreadyGroup, content: {
-                Alert(title: Text("Already in this group"), message: Text("You are already a member of the group you are trying to join"), dismissButton: Alert.Button.default(Text("Ok")))
-            })
         //            .onChange(of: tabSelection) { (_) in
         //                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
         //            }

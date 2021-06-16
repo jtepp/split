@@ -64,9 +64,9 @@ struct LinkInviteView: View {
                 Button(action: {
 //                    showInvite = false
                     tapped = true
-//                    Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
-//                    
-//                    
+                    Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                    
+                    
                     
             }, label: {
                 HStack {
@@ -85,10 +85,6 @@ struct LinkInviteView: View {
             
             Button(action: {
                 showInvite = false
-                if (UserDefaults.standard.string(forKey: "hId") ?? "") != "" {
-                    inWR = false
-                    noProf = false
-                }
             }, label: {
                 HStack {
                     Spacer()
@@ -116,7 +112,7 @@ struct LinkInviteView: View {
                 }), secondaryButton: Alert.Button.cancel())
             } else {
                 return Alert(title: Text("Error joining group"), message: Text(msg), dismissButton: Alert.Button.default(Text("Ok"), action: {
-                    inWR = false
+                    showInvite = false
                 }))
             }
         })
