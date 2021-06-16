@@ -137,7 +137,7 @@ class Fetch: ObservableObject {
                 let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
                 let image = data["image"] as? String ?? ""
                 let admin = data["admin"] as? Bool ?? false
-                let showStatus = data["showStatus"] as? Bool ?? false
+                let showStatus = data["showStatus"] as? Bool ?? true
                 let online = data["online"] as? Bool ?? false
                 let lastSeen = data["lastSeen"] as? NSNumber ?? 0
 //                print("DFSSSS: \(name) \(data["lastSeen"])")
@@ -562,7 +562,27 @@ class Fetch: ObservableObject {
     }
     
     func returnMembers(hId: String, nm: Binding<[Member]>) {
-        db.collection("houses/\(hId)/members")
+        db.collection("houses/\(hId)/members").getDocuments { querySnapshot, err in
+            guard let docs = querySnapshot?.documents else {
+                print(err.debugDescription)
+                return
+            }
+            nm.wrappedValue = docs.map({ q in
+                let data = q.data()
+                
+                let name = data["name"] as? String ?? ""
+                let home = data["home"] as? String ?? ""
+//                let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
+//                let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
+                let image = data["image"] as? String ?? ""
+                let admin = data["admin"] as? Bool ?? false
+//                let showStatus = data["showStatus"] as? Bool ?? false
+//                let online = data["online"] as? Bool ?? false
+//                let lastSeen = data["lastSeen"] as? NSNumber ?? 0
+
+                return Member(id: q.documentID, home: home, name: name, owesMe: [:], iOwe: [:], image: image, admin: admin, showStatus: false)
+            })
+        }
     }
     
 }

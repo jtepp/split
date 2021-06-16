@@ -29,12 +29,12 @@ struct MemberCell: View {
                 Text(m.name)
                     .bold()
                 if m.showStatus {
-                    if !m.online {
+                    if !m.online && m.lastSeen != 0 {
                         if unixtodate(unix: Int(m.lastSeen)) == unixtodate(unix: Int(NSDate().timeIntervalSince1970)) {
                             Text("Last seen: \(unixtotime(unix: Int(m.lastSeen)))")
                                 .font(.caption)
                         } else {
-                            Text("Last seen: \(Date(timeIntervalSince1970: TimeInterval(truncating: m.lastSeen)).timeAgo())")
+                            Text("Last seen: \(Date(timeIntervalSince1970: TimeInterval(truncating: m.lastSeen)).timeAgo()) ago")
                                 .font(.caption)
                         }
                     }

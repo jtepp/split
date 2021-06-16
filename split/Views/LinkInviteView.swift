@@ -13,10 +13,10 @@ struct LinkInviteView: View {
     @Binding var newGroup: String
     @Binding var newPass: String
     @Binding var newName: String
-    @Binding var newMembers: [Member]()
+    @State var newMembers = [Member]()
     var body: some View {
         VStack{
-            HeaderText(text: "Invitation from")
+            HeaderText(text: "Invitation to join")
             HStack {
                 Text(newName)
                     .font(Font.largeTitle.bold())
@@ -33,17 +33,18 @@ struct LinkInviteView: View {
             }
             .padding(.leading)
             .padding(.top, -20)
+            Spacer()
             ScrollView {
                 ForEach(newMembers) { member in
-                    
+                    MemberCell(m: .constant(member))
                 }
             }
-            .frame(maxHeight: 160)
+            .padding()
             .padding(.bottom, 10)
             .background(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 25)
                     .fill(
-                        Color.black.opacity(0.5)
+                        Color.white.opacity(0.2)
                     )
             )
             Spacer()
@@ -87,7 +88,7 @@ struct LinkInviteView: View {
 
 struct LinkInviteView_Previews: PreviewProvider {
     static var previews: some View {
-        LinkInviteView(h: .constant(.placeholder), m: .constant(.placeholder), newGroup: .constant("x9vd0sduWMWT5Zv1FTAD"), newPass: .constant("pass"), newName: .constant("name"))
+        LinkInviteView(h: .constant(.placeholder), m: .constant(.placeholder), newGroup: .constant("x9vd0sduWMWT5Zv1FTAD"), newPass: .constant("pass"), newName: .constant("name"), newMembers: [.empty])
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }
