@@ -160,7 +160,7 @@ struct ActivityView: View {
                         }
                     }
                 } else {
-//                    wrStuff(inWR: $inWR, h: $house, m: $m)
+                    wrStuff(inWR: $inWR, h: $house, m: $m)
                 }
             }
             
@@ -186,7 +186,7 @@ struct ActivityView: View {
 }
 
 
-func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) {
+func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) -> EmptyView {
     m.wrappedValue = .empty
     UserDefaults.standard.set("", forKey: "houseId")
     UserDefaults.standard.set("", forKey: "myId")
@@ -195,5 +195,5 @@ func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) {
     h.wrappedValue = q
     inWR.wrappedValue = true
 //    print("DONE\n\n\n\n\(h.wrappedValue)\n\n")
-//    return EmptyView()
+    return EmptyView()
 }
