@@ -160,7 +160,7 @@ struct ActivityView: View {
                         }
                     }
                 } else {
-//                    wrStuff(inWR: $inWR, h: $house, m: $m)
+                    wrStuff(inWR: $inWR, h: $house, m: $m)
                 }
             }
             

@@ -446,6 +446,7 @@ class Fetch: ObservableObject {
                                 }) || forceAdmin {
                                     //
                                     self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "showStatus": mm.showStatus]) { _ in
+                                        hh.wrappedValue.members.append(m.wrappedValue)
                                         self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.standard.set(house, forKey: "houseId")
