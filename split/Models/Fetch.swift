@@ -391,7 +391,7 @@ class Fetch: ObservableObject {
         db.collection("waitingRoom").addDocument(data: ["name":m.wrappedValue.name, "image":m.wrappedValue.image]).getDocument { (documentSnapshot, err) in
             UserDefaults.standard.set(documentSnapshot?.documentID ?? "", forKey: "myId")
             myId.wrappedValue = documentSnapshot?.documentID ?? ""
-            m.wrappedValue.id = documentSnapshot?.documentID ?? ""
+            m.wrappedValue.id = documentSnapshot?.documentID ?? "addtowrerror"
             m.wrappedValue.home = "waitingRoom"
             h.members.wrappedValue.append(m.wrappedValue)
             

@@ -73,10 +73,10 @@ struct LinkInviteView: View {
                         
                         
                     } else {
-                            //if has id (easy)
-                            /*
-                             - join!
-                             */
+                        //if has id (easy)
+                        /*
+                         - join!
+                         */
                         Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
                         
                     }
@@ -89,14 +89,18 @@ struct LinkInviteView: View {
                         /*
                          - duplicate into other house, set UD, delete old
                          */} else {
-                            msg = "You have to choose a new Group admin before you leave"
-                            showSheet = true
-                            showEdit = false
-                            //if already in house and admin
-                            /*
-                             - set new admin then on dismiss...
-                             - duplicate into other house, set UD, delete old
-                             */
+                            //if ur only one
+                            if h.members.count == 1 {
+                                Fetch().deleteAccount(m: $m, erase: true, inWR: $inWR)
+                            } else {
+                                showAlert = true
+                                msg = "You have to choose a new Group admin before you leave"
+                                
+                                //if already in house and admin
+                                /*
+                                 - set new admin then on dismiss...
+                                 - duplicate into other house, set UD, delete old
+                                 */}
                             
                          }
                 }
@@ -116,7 +120,7 @@ struct LinkInviteView: View {
             })
             .disabled(tapped)
             Button(action: {
-//                inWR = false
+                //                inWR = false
                 showInvite = false
             }, label: {
                 HStack {
@@ -135,7 +139,14 @@ struct LinkInviteView: View {
             })
         }
         .alert(isPresented: $showAlert, content: {
-            Alert(title: Text(msg == "You have to choose a new Group admin before you leave" ? "Choose Admin" : "Error joining group"), message: Text(msg))
+            if msg == "You have to choose a new Group admin before you leave" {
+                return Alert(title: Text("Choose Admin"), message: Text(msg), primaryButton: Alert.Button.destructive(Text("Ok"), action: {
+                    showSheet = true
+                    showEdit = false
+                }), secondaryButton: Alert.Button.cancel())
+            } else {
+                return Alert(title: Text("Error joining group"), message: Text(msg))
+            }
         })
         .sheet(isPresented: $showSheet, onDismiss: {
             if !choice.isEmpty {
@@ -144,17 +155,20 @@ struct LinkInviteView: View {
             Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
         }, content: {
             if showEdit {
-            NoProfileView(m: $m, myId: .constant(""), show: $showSheet, house: $h)
-                .allowAutoDismiss(false)
+                NoProfileView(m: $m, myId: .constant(""), show: $showSheet, house: $h)
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
+                    .allowAutoDismiss(false)
             } else {
                 MemberPicker(show: $showSheet, house: $h, choice: $choice)
-                    .onChange(of: /*@START_MENU_TOKEN@*/"Value"/*@END_MENU_TOKEN@*/, perform: { value in
-                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Code@*/ /*@END_MENU_TOKEN@*/
-                    })
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
+                    .allowAutoDismiss(false)
             }
         })
         .onAppear{
             Fetch().returnMembers(hId: newGroup, nm: $newMembers)
+            if newName == "err" {
+                showInvite = false
+            }
         }
     }
 }
