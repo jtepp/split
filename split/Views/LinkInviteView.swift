@@ -57,10 +57,12 @@ struct LinkInviteView: View {
             .padding(.vertical)
             Spacer()
             Button(action: {
+                tapped = true
                 /**** not in house ****/
                 if h.id == "" {
                     //if no my id
                     if m.id == "" {
+                        showEdit = true
                         /*
                          - open account maker to set to $m, join house on accept
                          */
@@ -71,7 +73,10 @@ struct LinkInviteView: View {
                             //if has id (easy)
                             /*
                              - join!
-                             */}
+                             */
+                        Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
+                        
+                    }
                     
                     /****in house ****/
                 } else {
@@ -97,10 +102,11 @@ struct LinkInviteView: View {
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.blue)
+                        .fill(tapped ? Color.gray : Color.blue)
                 )
                 .padding()
             })
+            .disabled(tapped)
             Button(action: {
                 inWR = false
                 showInvite = false
@@ -127,6 +133,7 @@ struct LinkInviteView: View {
             Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
         }, content: {
             NoProfileView(m: $m, myId: .constant(""), show: $showEdit, house: $h)
+                .allowAutoDismiss(false)
         })
         .onAppear{
             Fetch().returnMembers(hId: newGroup, nm: $newMembers)
