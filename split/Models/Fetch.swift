@@ -448,9 +448,7 @@ class Fetch: ObservableObject {
                                     self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "showStatus": mm.showStatus]) { _ in
                                         self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
                                         if deleteFromHere != "" {
-//                                            var ah = House.empty
-//                                            ah.id = startHouseID
-//                                            self.removeMember(m: mm, h: .constant(ah))
+                                            self.deleteAccount(m: .constant(mm), erase: true, inWR: .constant(false))
                                         } else {
                                             self.db.document("waitingRoom/\(mm.id)").delete()
                                         }
@@ -510,22 +508,30 @@ class Fetch: ObservableObject {
                     print("remove member no payments or something")
                     return
                 }
-                if erase {
-                    for doc in documents {
-                        self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+                
+                self.db.collection("houses/\(m.wrappedValue.home)/members").getDocuments { qs, err in
+                    guard let docs = qs?.count else {
+                        return
                     }
-                } else {
-                    for doc in documents.filter({ (doc) -> Bool in
-                        let d = doc.data()
-                        let to = (d["to"] ?? "") as! String
-                        let from = (d["from"] ?? "") as! String
-                        let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
-                        let isAn = d["isAn"] as? Bool ?? false
-                        return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && !isAn
-                    }) {
-                        self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+                    if erase && docs > 0 {
+                        for doc in documents {
+                            self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+                        }
+                    } else {
+                        for doc in documents.filter({ (doc) -> Bool in
+                            let d = doc.data()
+                            let to = (d["to"] ?? "") as! String
+                            let from = (d["from"] ?? "") as! String
+                            let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
+                            let isAn = d["isAn"] as? Bool ?? false
+                            return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && !isAn
+                        }) {
+                            self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+                        }
                     }
+                    
                 }
+                
             }
             db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete { (err) in
                 if erase {
