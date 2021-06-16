@@ -91,7 +91,7 @@ struct LinkInviteView: View {
                          */} else {
                             //if ur only one
                             if h.members.count == 1 {
-                                Fetch().deleteAccount(m: $m, erase: true, inWR: $inWR)
+                                Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, deleteFromHere: h.id, killHouse: true)
                             } else {
                                 showAlert = true
                                 msg = "You have to choose a new Group admin before you leave"

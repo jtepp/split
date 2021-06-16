@@ -401,7 +401,7 @@ class Fetch: ObservableObject {
         
     }
     
-    func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false, deleteFromHere: String = "") {
+    func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false, deleteFromHere: String = "", killHouse: Bool = false) {
         var house = House.empty.id
         db.collection("houses").getDocuments { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
@@ -455,6 +455,9 @@ class Fetch: ObservableObject {
                                         UserDefaults.standard.set(house, forKey: "houseId")
                                         inWR.wrappedValue = false
                                         self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the group", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+                                        if killHouse {
+                                            db.document("houses/\(h.documentID)").delete()
+                                        }
                                     }
                                     //
                                     
