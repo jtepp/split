@@ -450,7 +450,7 @@ class Fetch: ObservableObject {
                                         if deleteFromHere != "" {
 //                                            self.deleteAccount(m: .constant(mm), erase: true, inWR: .constant(false))
                                         } else {
-//                                            self.db.document("waitingRoom/\(mm.id)").delete()
+                                            self.db.document("waitingRoom/\(mm.id)").delete()
                                         }
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.standard.set(house, forKey: "houseId")
