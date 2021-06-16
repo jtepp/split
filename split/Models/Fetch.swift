@@ -401,7 +401,7 @@ class Fetch: ObservableObject {
         
     }
     
-    func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false) {
+    func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false, deleteFromHere: String = "") {
         var house = House.empty.id
         db.collection("houses").getDocuments { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
@@ -444,9 +444,13 @@ class Fetch: ObservableObject {
                                     
                                 }) || forceAdmin {
                                     //
-                                    self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin]) { _ in
+                                    self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "showsStatus": mm.showStatus]) { _ in
                                         self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
-                                        self.db.document("waitingRoom/\(mm.id)").delete()
+                                        if deleteFromHere != "" {
+                                            self.db.document("houses/\(h.documentID)/members/\(mm.id)").delete()
+                                        } else {
+                                            self.db.document("waitingRoom/\(mm.id)").delete()
+                                        }
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.standard.set(house, forKey: "houseId")
                                         inWR.wrappedValue = false

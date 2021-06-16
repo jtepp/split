@@ -19,6 +19,7 @@ struct LinkInviteView: View {
     @State var tapped = false
     @State var newMembers = [Member]()
     @State var msg = ""
+    @State var showEdit = false
     var body: some View {
         VStack{
             HeaderText(text: "Invitation to join")
@@ -58,21 +59,33 @@ struct LinkInviteView: View {
             Button(action: {
                 /**** not in house ****/
                 if h.id == "" {
-                //if no my id
-                /*
-                     - open account maker to set to $m, join house on accept
-                */
+                    //if no my id
+                    if m.id == "" {
+                        /*
+                         - open account maker to set to $m, join house on accept
+                         */
+                        
+                        
+                        
+                    } else {
+                            //if has id (easy)
+                            /*
+                             - join!
+                             */}
                     
-                //if has id (easy)
-                /*
-                     - join!
-                */
-                
-                /****in house ****/
+                    /****in house ****/
                 } else {
-                    //not admin
-                    
-                    //if already in house and admin
+                    if !m.admin {
+                        //not admin
+                        /*
+                         - duplicate into other house, set UD, delete old
+                         */} else {
+                            //if already in house and admin
+                            /*
+                             - set new admin then on dismiss...
+                             - duplicate into other house, set UD, delete old
+                             */
+                         }
                 }
             }, label: {
                 HStack {
@@ -109,6 +122,11 @@ struct LinkInviteView: View {
         }
         .alert(isPresented: $showAlert, content: {
             Alert(title: Text("Error joining group"), message: Text(msg))
+        })
+        .sheet(isPresented: $showEdit, onDismiss: {
+            Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
+        }, content: {
+            NoProfileView(m: $m, myId: .constant(""), show: $showEdit, house: $h)
         })
         .onAppear{
             Fetch().returnMembers(hId: newGroup, nm: $newMembers)
