@@ -43,7 +43,7 @@ struct TabsView: View {
             }
             .onChange(of: inWR, perform: { (_) in
                 //                print("WAITING ROOM CHANGED \n\n\(member)\n\n\n\n\n")
-                if inWR && !showInvite {
+                if inWR && noProf {
                     member = .empty
                     house = .empty
                 }
