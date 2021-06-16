@@ -62,9 +62,9 @@ struct LinkInviteView: View {
             
             VStack {
                 Button(action: {
-                    showInvite = false
-                tapped = true
-
+//                    showInvite = false
+                    tapped = true
+                    Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                     
                     
                     
@@ -112,7 +112,9 @@ struct LinkInviteView: View {
                     showEdit = false
                 }), secondaryButton: Alert.Button.cancel())
             } else {
-                return Alert(title: Text("Error joining group"), message: Text(msg))
+                return Alert(title: Text("Error joining group"), message: Text(msg), dismissButton: Alert.Button.default(Text("Ok"), action: {
+                    inWR = false
+                }))
             }
         })
         .sheet(isPresented: $showSheet, onDismiss: {
@@ -132,11 +134,14 @@ struct LinkInviteView: View {
             }
         })
         .onAppear{
-            Fetch().returnMembers(hId: newGroup, nm: $newMembers)
-            if newName == "err" {
-                showInvite = false
-            }
+            Fetch().returnMembers(hId: newGroup, nm: $newMembers, msg: $msg, showAlert: $showAlert)
         }
+        .onChange(of: newName, perform: { _ in
+            if newName == "err" {
+                msg = "Group not found"
+                showAlert = true
+            }
+        })
     }
 }
 

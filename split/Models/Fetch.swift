@@ -401,6 +401,26 @@ class Fetch: ObservableObject {
         
     }
     
+    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
+        var house = ""
+        db.collection("houses").getDocuments { querySnapshot, err in
+            guard let documents = querySnapshot?.documents else {
+                return
+            }
+            documents.forEach { queryDocumentSnapshot in
+                if newGroup == queryDocumentSnapshot.documentID {
+                    house = queryDocumentSnapshot.documentID
+                }
+            }
+            if house == "" {
+                tapped.wrappedValue = false
+                msg.wrappedValue = "Group not found"
+                showAlert.wrappedValue = true
+            }
+        }
+        
+    }
+    
     func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false, deleteFromHere: String = "", killHouse: Bool = false) {
         var house = House.empty.id
         let startHouseID = hh.wrappedValue.id
@@ -583,7 +603,7 @@ class Fetch: ObservableObject {
         }
     }
     
-    func returnMembers(hId: String, nm: Binding<[Member]>) {
+    func returnMembers(hId: String, nm: Binding<[Member]>, msg: Binding<String>, showAlert: Binding<Bool>) {
         db.collection("houses/\(hId)/members").getDocuments { querySnapshot, err in
             guard let docs = querySnapshot?.documents else {
                 print(err.debugDescription)
