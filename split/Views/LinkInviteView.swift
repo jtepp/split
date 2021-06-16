@@ -116,7 +116,7 @@ struct LinkInviteView: View {
             })
             .disabled(tapped)
             Button(action: {
-                inWR = false
+//                inWR = false
                 showInvite = false
             }, label: {
                 HStack {

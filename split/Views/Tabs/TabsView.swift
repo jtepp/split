@@ -75,6 +75,11 @@ struct TabsView: View {
                         .animation(Animation.easeIn.speed(3))
                 }
             }
+            .onChange(of: showInvite, perform: { _ in
+                if dontSplash && !showInvite && !noProf {
+                    inWR = false
+                }
+            })
             .onOpenURL{ url in
                 let link = url.absoluteString.components(separatedBy: "//")[1]
                 newGroup = String(link.split(separator: "$")[0])
