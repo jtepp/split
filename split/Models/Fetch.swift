@@ -403,7 +403,7 @@ class Fetch: ObservableObject {
     
     func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false, deleteFromHere: String = "", killHouse: Bool = false) {
         var house = House.empty.id
-//        let startHouseID = hh.wrappedValue.id
+        let startHouseID = hh.wrappedValue.id
         db.collection("houses").getDocuments { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
                 print(err.debugDescription)
@@ -447,14 +447,17 @@ class Fetch: ObservableObject {
                                     //
                                     self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "showStatus": mm.showStatus]) { _ in
                                         self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
-                                        if deleteFromHere != "" {
-//                                            self.deleteAccount(m: .constant(mm), erase: true, inWR: .constant(false))
-                                        } else {
-                                            self.db.document("waitingRoom/\(mm.id)").delete()
-                                        }
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.standard.set(house, forKey: "houseId")
                                         inWR.wrappedValue = false
+                                        if deleteFromHere != "" {
+                                            var mem = Member.empty
+                                            mem.id = mm.id
+                                            mem.home = startHouseID
+                                            self.deleteAccount(m: .constant(mem), erase: true, inWR: .constant(false))
+                                        } else {
+                                            self.db.document("waitingRoom/\(mm.id)").delete()
+                                        }
                                         self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the group", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                         if killHouse {
 //                                            self.db.document("houses/\(h.documentID)").delete()
