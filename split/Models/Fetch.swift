@@ -26,6 +26,11 @@ class Fetch: ObservableObject {
                 print("has real hid \(id) \(myId)")
                 inWR.wrappedValue = false
                 noProf.wrappedValue = false
+                if !h.wrappedValue.members.contains(where: { m in
+                    m.id == mmm.wrappedValue.id
+                }) {
+                    wrStuff(inWR: inWR, h: h, m: mmm)
+                }
                 
                 db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
                     guard let doc = querySnapshot else {
@@ -69,12 +74,6 @@ class Fetch: ObservableObject {
                     }
                     
                 }
-                if !h.wrappedValue.members.contains(where: { m in
-                    m.id == mmm.wrappedValue.id
-                }) {
-                    wrStuff(inWR: inWR, h: h, m: mmm)
-                }
-                
             }
             //        else if id == "waitingRoom" && myId != "" { //in waiting room and account exists
             //            print("in waiting room and account exists")
