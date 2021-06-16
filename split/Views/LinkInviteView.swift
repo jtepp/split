@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct LinkInviteView: View {
+    @Binding var inWR: Bool
+    @Binding var showInvite: Bool
     @Binding var h: House
     @Binding var m: Member
     @Binding var newGroup: String
     @Binding var newPass: String
     @Binding var newName: String
+    @State var showAlert = false
+    @State var tapped = false
     @State var newMembers = [Member]()
+    @State var msg = ""
     var body: some View {
         VStack{
             HeaderText(text: "Invitation to join")
@@ -27,7 +32,7 @@ struct LinkInviteView: View {
                             .fill(
                                 Color.gray.opacity(0.2)
                             )
-                )
+                    )
                 
                 Spacer()
             }
@@ -39,16 +44,36 @@ struct LinkInviteView: View {
                     MemberCell(m: .constant(member))
                 }
             }
+            //            .frame(maxHeight: 300)
             .padding()
-            .padding(.bottom, 10)
+            //            .padding(.bottom, 10)
             .background(
                 RoundedRectangle(cornerRadius: 25)
                     .fill(
                         Color.white.opacity(0.2)
                     )
             )
+            .padding(.vertical)
             Spacer()
             Button(action: {
+                /**** not in house ****/
+                if h.id == "" {
+                //if no my id
+                /*
+                     - open account maker to set to $m, join house on accept
+                */
+                    
+                //if has id (easy)
+                /*
+                     - join!
+                */
+                
+                /****in house ****/
+                } else {
+                    //not admin
+                    
+                    //if already in house and admin
+                }
             }, label: {
                 HStack {
                     Spacer()
@@ -56,14 +81,16 @@ struct LinkInviteView: View {
                         .foregroundColor(.white)
                     Spacer()
                 }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.blue)
-                    )
-                    .padding()
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.blue)
+                )
+                .padding()
             })
             Button(action: {
+                inWR = false
+                showInvite = false
             }, label: {
                 HStack {
                     Spacer()
@@ -71,15 +98,18 @@ struct LinkInviteView: View {
                         .foregroundColor(.white)
                     Spacer()
                 }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.white.opacity(0.2))
-                    )
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.white.opacity(0.2))
+                )
                 .padding(.horizontal)
                 .padding(.bottom)
             })
         }
+        .alert(isPresented: $showAlert, content: {
+            Alert(title: Text("Error joining group"), message: Text(msg))
+        })
         .onAppear{
             Fetch().returnMembers(hId: newGroup, nm: $newMembers)
         }
@@ -88,7 +118,7 @@ struct LinkInviteView: View {
 
 struct LinkInviteView_Previews: PreviewProvider {
     static var previews: some View {
-        LinkInviteView(h: .constant(.placeholder), m: .constant(.placeholder), newGroup: .constant("x9vd0sduWMWT5Zv1FTAD"), newPass: .constant("pass"), newName: .constant("name"), newMembers: [.empty])
+        LinkInviteView(inWR: .constant(true), showInvite: .constant(true), h: .constant(.placeholder), m: .constant(.placeholder), newGroup: .constant("x9vd0sduWMWT5Zv1FTAD"), newPass: .constant("pass"), newName: .constant("name"), newMembers: [.empty])
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

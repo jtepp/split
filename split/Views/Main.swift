@@ -17,7 +17,7 @@ struct Main: View {
     @State var showLinkAlert = false
     var body: some View {
         ZStack {
-            TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf, showLinkAlert: $showLinkAlert)
+            TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf, showInvite: $showLinkAlert)
                 .animation(.easeOut)
             //                .onAppear{
             //                    print("\n\n\n\n\ntrue\n\n\n\n\n\n")
