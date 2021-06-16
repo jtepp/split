@@ -76,7 +76,7 @@ struct TabsView: View {
                 }
             }
             .onChange(of: showInvite, perform: { _ in
-                if dontSplash && !showInvite && !noProf {
+                if dontSplash && !showInvite && !noProf && house.id != "" {
                     inWR = false
                 }
             })
