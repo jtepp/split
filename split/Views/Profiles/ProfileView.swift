@@ -19,6 +19,8 @@ struct ProfileView: View {
     @State var img: UIImage?
     @Binding var inWR: Bool
     @Binding var showStatus: Bool
+    @Binding var noProf: Bool
+    @Binding var showInvite: Bool
     var body: some View {
         ScrollView {
             HStack {
@@ -145,6 +147,8 @@ struct ProfileView: View {
                                 Fetch().deleteAccount(m: $m, inWR: $inWR)
                             }), secondaryButton: Alert.Button.cancel())
                         }
+                        showInvite = false
+                        noProf = true
                     })
                 }
                 Text("ID: \(m.id)")

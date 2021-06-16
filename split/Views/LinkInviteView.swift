@@ -20,6 +20,8 @@ struct LinkInviteView: View {
     @State var newMembers = [Member]()
     @State var msg = ""
     @State var showEdit = false
+    @State var showSheet = false
+    @State var choice = [Member]()
     var body: some View {
         VStack{
             HeaderText(text: "Invitation to join")
@@ -63,6 +65,7 @@ struct LinkInviteView: View {
                     //if no my id
                     if m.id == "" {
                         showEdit = true
+                        showSheet = true
                         /*
                          - open account maker to set to $m, join house on accept
                          */
@@ -81,15 +84,20 @@ struct LinkInviteView: View {
                     /****in house ****/
                 } else {
                     if !m.admin {
+                        Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, deleteFromHere: h.id)
                         //not admin
                         /*
                          - duplicate into other house, set UD, delete old
                          */} else {
+                            msg = "You have to choose a new Group admin before you leave"
+                            showSheet = true
+                            showEdit = false
                             //if already in house and admin
                             /*
                              - set new admin then on dismiss...
                              - duplicate into other house, set UD, delete old
                              */
+                            
                          }
                 }
             }, label: {
@@ -127,13 +135,23 @@ struct LinkInviteView: View {
             })
         }
         .alert(isPresented: $showAlert, content: {
-            Alert(title: Text("Error joining group"), message: Text(msg))
+            Alert(title: Text(msg == "You have to choose a new Group admin before you leave" ? "Choose Admin" : "Error joining group"), message: Text(msg))
         })
-        .sheet(isPresented: $showEdit, onDismiss: {
+        .sheet(isPresented: $showSheet, onDismiss: {
+            if !choice.isEmpty {
+                Fetch().swapAdmin(m: choice.first!, h: h)
+            }
             Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
         }, content: {
-            NoProfileView(m: $m, myId: .constant(""), show: $showEdit, house: $h)
+            if showEdit {
+            NoProfileView(m: $m, myId: .constant(""), show: $showSheet, house: $h)
                 .allowAutoDismiss(false)
+            } else {
+                MemberPicker(show: $showSheet, house: $h, choice: $choice)
+                    .onChange(of: /*@START_MENU_TOKEN@*/"Value"/*@END_MENU_TOKEN@*/, perform: { value in
+                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Code@*/ /*@END_MENU_TOKEN@*/
+                    })
+            }
         })
         .onAppear{
             Fetch().returnMembers(hId: newGroup, nm: $newMembers)

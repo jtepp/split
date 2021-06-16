@@ -33,7 +33,7 @@ struct TabsView: View {
                         return m.id == myId
                     }) ?? Member.empty), inWR: $inWR, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
-                    })?.showStatus ?? true))
+                    })?.showStatus ?? true), noProf: $noProf, showInvite: $showInvite)
                     .tag(3)
                 })
             .tabViewStyle(PageTabViewStyle())
