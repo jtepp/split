@@ -454,7 +454,7 @@ class Fetch: ObservableObject {
                                             var mem = Member.empty
                                             mem.id = mm.id
                                             mem.home = startHouseID
-                                            self.deleteAccount(m: .constant(mem), erase: true, inWR: .constant(false))
+                                            self.deleteAccount(m: .constant(mem), erase: true, inWR: .constant(false), transfer: true)
                                         } else {
                                             self.db.document("waitingRoom/\(mm.id)").delete()
                                         }
@@ -504,7 +504,7 @@ class Fetch: ObservableObject {
         //        }
     }
     
-    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>) {
+    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>, transfer: Bool = false) {
         if m.wrappedValue.home != "" {
             self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
@@ -542,11 +542,13 @@ class Fetch: ObservableObject {
                 } else {
                     self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", isAn: true), h: House(id: m.wrappedValue.home, name: "", members: [Member](), payments: [Payment](), password: ""))
                 }
-                m.wrappedValue = .empty
-                UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
-                UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
-                inWR.wrappedValue = true
-                m.wrappedValue.id = ""
+                if !transfer {
+                    m.wrappedValue = .empty
+                    UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
+                    UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
+                    inWR.wrappedValue = true
+                    m.wrappedValue.id = ""
+                }
                 
             }
         }
