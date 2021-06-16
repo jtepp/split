@@ -12,7 +12,7 @@ import FirebaseFirestore
 class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
-    func getHouse (h: Binding<House>, inWR: Binding<Bool>, noProf: Binding<Bool>) {
+    func getHouse (h: Binding<House>, inWR: Binding<Bool>, noProf: Binding<Bool>, mmm: Binding<Member> = .constant(.empty)) {
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != ""
         {
             let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
@@ -26,8 +26,11 @@ class Fetch: ObservableObject {
                 print("has real hid \(id) \(myId)")
                 inWR.wrappedValue = false
                 noProf.wrappedValue = false
-                
-                
+                if !h.wrappedValue.members.contains(where: { m in
+                    m.id == mmm.wrappedValue.id
+                }) {
+                    wrStuff(inWR: inWR, h: h, m: mmm)
+                }
                 
                 db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
                     guard let doc = querySnapshot else {
@@ -446,8 +449,8 @@ class Fetch: ObservableObject {
                                 }) || forceAdmin {
                                     //
                                     self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "showStatus": mm.showStatus]) { _ in
-                                        hh.wrappedValue.members.append(m.wrappedValue)
-                                        self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
+                                        self.getHouse(h: hh, inWR: inWR, noProf: .constant(false), mmm: m)
+//                                        hh.wrappedValue.members.append(m.wrappedValue)
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.standard.set(house, forKey: "houseId")
                                         inWR.wrappedValue = false
