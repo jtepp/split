@@ -160,7 +160,9 @@ struct ActivityView: View {
                         }
                     }
                 } else {
-                    wrStuff(inWR: $inWR, h: $house, m: $m)
+                    if !UserDefaults.standard.bool(forKey: "inv") {
+                        wrStuff(inWR: $inWR, h: $house, m: $m)
+                    }
                 }
             }
             

@@ -20,7 +20,7 @@ class Fetch: ObservableObject {
             
             print("ID:    \(id)")
             print("ME:    \(myId)")
-            print("H:     \(h.wrappedValue)")
+            print("H:     \(h.wrappedValue.members.count)")
             
             if id != "" && id != "waitingRoom" { // has real house id
                 print("has real hid \(id) \(myId)")

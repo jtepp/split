@@ -60,6 +60,7 @@ struct LinkInviteView: View {
             Spacer()
             Button(action: {
                 tapped = true
+                UserDefaults.standard.setValue(true, forKey: "inv")
                 /**** not in house ****/
                 if h.id == "" {
                     //if no my id
