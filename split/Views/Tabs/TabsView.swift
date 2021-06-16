@@ -54,7 +54,7 @@ struct TabsView: View {
             }) {
                 if (dontSplash) {
                     if showInvite {
-                        LinkInviteView(inWR: $inWR, showInvite: $showInvite, h: $house, m: $member, newGroup: $newGroup, newPass: $newPass, newName: $newName)
+                        LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInvite, h: $house, m: $member, newGroup: $newGroup, newPass: $newPass, newName: $newName)
                             .background(Color.black.edgesIgnoringSafeArea(.all))
                             .allowAutoDismiss(false)
                     }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LinkInviteView: View {
     @Binding var inWR: Bool
+    @Binding var noProf: Bool
     @Binding var showInvite: Bool
     @Binding var h: House
     @Binding var m: Member
@@ -47,7 +48,7 @@ struct LinkInviteView: View {
                     MemberCell(m: .constant(member))
                 }
             }
-            //            .frame(maxHeight: 300)
+                        .frame(maxHeight: 400)
             .padding()
             //            .padding(.bottom, 10)
             .background(
@@ -58,53 +59,15 @@ struct LinkInviteView: View {
             )
             .padding(.vertical)
             Spacer()
-            Button(action: {
+            
+            VStack {
+                Button(action: {
+                    showInvite = false
                 tapped = true
-                UserDefaults.standard.setValue(true, forKey: "inv")
-                /**** not in house ****/
-                if h.id == "" {
-                    //if no my id
-                    if m.id == "" {
-                        showEdit = true
-                        showSheet = true
-                        /*
-                         - open account maker to set to $m, join house on accept
-                         */
-                        
-                        
-                        
-                    } else {
-                        //if has id (easy)
-                        /*
-                         - join!
-                         */
-                        Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
-                        
-                    }
+
                     
-                    /****in house ****/
-                } else {
-                    if !m.admin {
-                        Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, deleteFromHere: h.id)
-                        //not admin
-                        /*
-                         - duplicate into other house, set UD, delete old
-                         */} else {
-                            //if ur only one
-                            if h.members.count == 1 {
-                                Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, deleteFromHere: h.id)
-                            } else {
-                                showAlert = true
-                                msg = "You have to choose a new Group admin before you leave"
-                                
-                                //if already in house and admin
-                                /*
-                                 - set new admin then on dismiss...
-                                 - duplicate into other house, set UD, delete old
-                                 */}
-                            
-                         }
-                }
+                    
+                    
             }, label: {
                 HStack {
                     Spacer()
@@ -117,9 +80,9 @@ struct LinkInviteView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(tapped ? Color.gray : Color.blue)
                 )
-                .padding()
             })
             .disabled(tapped)
+            
             Button(action: {
                 //                inWR = false
                 showInvite = false
@@ -135,9 +98,12 @@ struct LinkInviteView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.white.opacity(0.2))
                 )
-                .padding(.horizontal)
-                .padding(.bottom)
+//                .padding(.horizontal)
+//                .padding(.bottom)
             })
+                
+            }
+            .padding()
         }
         .alert(isPresented: $showAlert, content: {
             if msg == "You have to choose a new Group admin before you leave" {
@@ -176,7 +142,7 @@ struct LinkInviteView: View {
 
 struct LinkInviteView_Previews: PreviewProvider {
     static var previews: some View {
-        LinkInviteView(inWR: .constant(true), showInvite: .constant(true), h: .constant(.placeholder), m: .constant(.placeholder), newGroup: .constant("x9vd0sduWMWT5Zv1FTAD"), newPass: .constant("pass"), newName: .constant("name"), newMembers: [.empty])
+        LinkInviteView(inWR: .constant(true), noProf: .constant(false), showInvite: .constant(true), h: .constant(.placeholder), m: .constant(.placeholder), newGroup: .constant("x9vd0sduWMWT5Zv1FTAD"), newPass: .constant("pass"), newName: .constant("name"), newMembers: [.empty])
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }
