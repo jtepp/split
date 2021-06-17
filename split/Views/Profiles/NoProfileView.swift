@@ -21,7 +21,9 @@ struct NoProfileView: View {
             Button(action: {
                 if name.replacingOccurrences(of: " ", with: "") != "" {
                     show = false
-                    Fetch().addToWR(m: $m, myId: $myId, h: $house)
+                    if m.id = Member.empty.id {
+                        Fetch().addToWR(m: $m, myId: $myId, h: $house)
+                    }
                 }
             }, label: {
                 HStack {
