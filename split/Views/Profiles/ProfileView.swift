@@ -147,8 +147,8 @@ struct ProfileView: View {
                                 Fetch().deleteAccount(m: $m, inWR: $inWR)
                             }), secondaryButton: Alert.Button.cancel())
                         }
-                        showInvite = false
-                        noProf = true
+//                        showInvite = false
+//                        noProf = true
                     })
                 }
                 Text("ID: \(m.id)")

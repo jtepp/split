@@ -605,7 +605,7 @@ class Fetch: ObservableObject {
                     guard let docs = qs?.count else {
                         return
                     }
-                    if erase && docs > 0 {
+                    if erase && docs <= 1 {
                         for doc in documents {
                             self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
                         }
