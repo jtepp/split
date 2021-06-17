@@ -80,7 +80,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "1.3.1")
+            UserDefaults.standard.setValue(true, forKey: "1.4")
         }
     }
 }
