@@ -591,7 +591,7 @@ class Fetch: ObservableObject {
         //        db.collection("houses/\(id)/members").addDocument(data: ["admin" : true, "name" : m.wrappedValue.name, "home" : id, "image" : m.wrappedValue.id]) { (err) in
         UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
         UserDefaults.standard.set(id, forKey: "houseId")
-        self.joinHouse(hh: hh, m: m, hId: id, password: password, showAlert: .constant(false), tapped: tapped, msg: .constant(""), inWR: inWR, forceAdmin: true)
+        self.joinHouse(hh: hh, m: m, hId: id, password: password, showAlert: .constant(false), tapped: .constant(true), msg: .constant(""), inWR: inWR, forceAdmin: true)
         //        }
     }
     
@@ -698,7 +698,7 @@ class Fetch: ObservableObject {
     }
     
     func checkKicked(h: House, m: Member, _ completion: @escaping (Bool) -> EmptyView) -> EmptyView {
-        print("CHECKKICKED")
+        print("CHECKKICKED \(h.id) <- hid")
         self.db.collection("houses/\(h.id)/payments").getDocuments { querySnapshot, err in
             guard let docs = querySnapshot?.documents else {
                 print("noPaymentsSoKicked")
