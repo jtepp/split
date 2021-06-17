@@ -422,7 +422,7 @@ class Fetch: ObservableObject {
                         print("mm \(mm)")
                         print("house \(house)")
                         print("hid \(doc.documentID)")
-                        print("mid \(mm.id)")
+                        print("mid switching \(mm.id)")
                         UserDefaults.standard.set(mm.id, forKey: "myId")
                         
                             
@@ -448,6 +448,7 @@ class Fetch: ObservableObject {
                                         if deleteFromHere != "" {
                                             var mem = Member.empty
                                             mem.id = mm.id
+                                            mem.name = mm.name
                                             mem.home = startHouse.id
                                             self.deleteAccount(m: .constant(mem), erase: startHouse.members.count == 1, inWR: .constant(false), transfer: true)
                                         } else {
@@ -511,7 +512,7 @@ class Fetch: ObservableObject {
                         print("mm \(mm)")
                         print("house \(house)")
                         print("hid \(h.documentID)")
-                        print("mid \(mm.id)")
+                        print("mid joining \(mm.id)")
                         UserDefaults.standard.set(mm.id, forKey: "myId")
                         
                         if mm.id == "" {
@@ -694,6 +695,35 @@ class Fetch: ObservableObject {
                 return Member(id: q.documentID, home: home, name: name, owesMe: [:], iOwe: [:], image: image, admin: admin, showStatus: false)
             })
         }
+    }
+    
+    func checkKicked(h: House, m: Member, _ completion: @escaping (Bool) -> EmptyView) -> EmptyView {
+        print("CHECKKICKED")
+        self.db.collection("houses/\(h.id)/payments").getDocuments { querySnapshot, err in
+            guard let docs = querySnapshot?.documents else {
+                print("noPaymentsSoKicked")
+                completion(true)
+                return
+            }
+            var started = false
+            docs.forEach { queryDocumentSnapshot in
+                started = true
+                let d = queryDocumentSnapshot.data()
+                let from = d["from"] as? String ?? ""
+                let memo = d["memo"] as? String ?? ""
+                
+                if from == m.name && memo == "was removed from the group" {
+                    print("REDHANDED")
+                    completion(true)
+                }
+                
+            }
+            if started {
+                print("DIDNTFINDITSOJUSTINVITE")
+                completion(false)
+            }
+        }
+        return EmptyView()
     }
     
 }

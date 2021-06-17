@@ -66,14 +66,14 @@ struct TabsView: View {
             .onChange(of: inWR, perform: { (_) in
                 //                print("WAITING ROOM CHANGED \n\n\(member)\n\n\n\n\n")
                 if inWR && noProf {
-                    member = .empty
-                    house = .empty
+//                    member = .empty
+//                    house = .empty
                 }
                 noProf = member.id == ""
             })
-        //            .onChange(of: tabSelection) { (_) in
-        //                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
-        //            }
+                    .onChange(of: tabSelection) { (_) in
+                        Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+                    }
         
     }
 }

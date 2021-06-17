@@ -70,6 +70,10 @@ struct MembersView: View {
         .sheet(isPresented: $showDetails, content: {
             MemberDetailsView(house: $house, member: $tappedMember, showView: $showDetails)
         })
+        .onChange(of: house.members.count) { _ in
+            print("COUNTCHANGE")
+            Fetch().getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
+        }
     }
 }
 
