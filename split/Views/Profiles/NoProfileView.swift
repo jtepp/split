@@ -21,7 +21,7 @@ struct NoProfileView: View {
             Button(action: {
                 if name.replacingOccurrences(of: " ", with: "") != "" {
                     show = false
-                    if m.id = Member.empty.id {
+                    if m.id == Member.empty.id {
                         Fetch().addToWR(m: $m, myId: $myId, h: $house)
                     }
                 }

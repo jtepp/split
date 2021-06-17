@@ -62,10 +62,10 @@ class Fetch: ObservableObject {
                             inWR.wrappedValue = true
                             h.wrappedValue = .empty
                         } else {
-                            print("wred")
-                            UserDefaults.standard.set("waitingRoom", forKey: "houseId")
-                            noProf.wrappedValue = false
-                            h.wrappedValue = .empty
+//                            print("wred")
+//                            UserDefaults.standard.set("waitingRoom", forKey: "houseId")
+//                            noProf.wrappedValue = false
+//                            h.wrappedValue = .empty
                         }
                         inWR.wrappedValue = true
                     }
@@ -448,7 +448,7 @@ class Fetch: ObservableObject {
                                             var mem = Member.empty
                                             mem.id = mm.id
                                             mem.home = startHouseID
-                                            self.deleteAccount(m: .constant(mem), erase: true, inWR: .constant(false), transfer: true)
+                                            self.deleteAccount(m: .constant(mem), inWR: .constant(false), transfer: true)
                                         } else {
                                             self.db.document("waitingRoom/\(mm.id)").delete()
                                         }
