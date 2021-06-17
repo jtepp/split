@@ -448,7 +448,7 @@ class Fetch: ObservableObject {
                                             var mem = Member.empty
                                             mem.id = mm.id
                                             mem.home = startHouseID
-                                            self.deleteAccount(m: .constant(mem), inWR: .constant(false), transfer: true)
+                                            self.deleteAccount(m: .constant(mem), erase: true, inWR: .constant(false), transfer: true)
                                         } else {
                                             self.db.document("waitingRoom/\(mm.id)").delete()
                                         }
@@ -605,7 +605,7 @@ class Fetch: ObservableObject {
                     guard let docs = qs?.count else {
                         return
                     }
-                    if erase && docs <= 1 {
+                    if erase && docs <= 0 {
                         for doc in documents {
                             self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
                         }
