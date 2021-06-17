@@ -412,11 +412,11 @@ class Fetch: ObservableObject {
                     house = queryDocumentSnapshot.documentID
                 }
             }
-            if house == "" {
-                tapped.wrappedValue = false
-                msg.wrappedValue = "Group not found"
-                showAlert.wrappedValue = true
-            }
+//            if house == "" {
+//                tapped.wrappedValue = false
+//                msg.wrappedValue = "Group not found"
+//                showAlert.wrappedValue = true
+//            }
         }
         
     }
