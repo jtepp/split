@@ -118,7 +118,7 @@ struct LinkInviteView: View {
         }
         .alert(isPresented: $showAlert, content: {
             if msg == "You have to choose a new Group admin before you leave" {
-                return Alert(title: Text("Choose Admin"), message: Text(msg), primaryButton: Alert.Button.destructive(Text("Ok"), action: {
+                return Alert(title: Text("Choose Admin"), message: Text(msg), primaryButton: Alert.Button.destructive(Text("Choose Admin"), action: {
                     showSheet = true
                     showEdit = false
                 }), secondaryButton: Alert.Button.cancel())
@@ -133,6 +133,7 @@ struct LinkInviteView: View {
                 Fetch().swapAdmin(m: choice.first!, h: h)
             }
             Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite, deleteFromHere: h.id)
+            showInvite = false
         }, content: {
             if showEdit {
                 NoProfileView(m: $m, myId: .constant(""), show: $showSheet, house: $h)
