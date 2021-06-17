@@ -71,12 +71,13 @@ struct LinkInviteView: View {
                     }
                     else {
                         // if admin and house has more, show switch
-//                        if m.admin && h.members.count > 2 {
-//                        msg = "You have to choose a new Group admin before you leave"
-//                          showAlert = true
-//                        } else {
+                        if m.admin {
+                        msg = "You have to choose a new Group admin before you leave"
+                          showAlert = true
+                            print("COUNTERHERE \(h.members.count)")
+                        } else {
                             Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite, deleteFromHere: h.id)
-//                        }
+                        }
                     }
                     
             }, label: {
