@@ -20,7 +20,7 @@ struct SplashView: View {
                     Spacer()
                     VStack {
                     if showCore {
-                        SplashDetailsView(title: "Invite your friends", text: "Long press your group name to copy an invitation on the members page", image: "person.3", color: .blue)
+                        SplashDetailsView(title: "Invite your friends", text: "Long press your group name to copy an invitation on the members page", image: "person.3.fill", color: .blue)
                             .padding(.bottom)
                         SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
                             .padding(.bottom)
@@ -40,7 +40,7 @@ struct SplashView: View {
                     Spacer()
                 }
                 .background(
-                    RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                    RoundedRectangle(cornerRadius: 25.0)
                         .fill(
                             Color.white.opacity(0.2)
                         )
@@ -50,10 +50,10 @@ struct SplashView: View {
                     showCore.toggle()
             }
             
-            SplashDetailsView(title: "See who's online", text: "See when a member was last active, turn this off on the profile page", image: "smallcircle.fill.circle", color: .green)
-                .padding(.bottom)
-            SplashDetailsView(title: "Easily fulfill requests", text: "Long press on a request to easily pay back the exact amount", image: "arrow.right.circle", color: .blue)
-                .padding(.bottom)
+                SplashDetailsView(title: "New invite links", text: "Send your friends a link to join your group directly", image: "link.circle", color: .purple)
+                    .padding(.bottom)
+                SplashDetailsView(title: "Take a shortcut", text: "Long press on the spllit app to use the new quick actions", image: "arrowshape.turn.up.right.fill", color: .red)
+                    .padding(.bottom)
             }
             Spacer()
             Text("Disclaimer: This app does not involve any actual money or payments, it is just a way to keep track of payments in your group")
