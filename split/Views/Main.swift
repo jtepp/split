@@ -8,18 +8,15 @@
 import SwiftUI
 
 struct Main: View {
+    @State var dontSplash = UserDefaults.standard.bool(forKey: "dontSplash")
     @Environment(\.scenePhase) var scenePhase
     @State var h = House.empty
+    @State var member = Member.empty
     @State var inWR = ((UserDefaults.standard.value(forKey: "houseId") as? String ?? ""  == "waitingRoom") || (UserDefaults.standard.value(forKey: "houseId") as? String ?? ""  == "")) 
     @State var noProf = true
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
     @State var tabSelection = 0
     @State var showInvite = false
-    @State var newGroup = ""
-    @State var newPass = ""
-    @State var newName = ""
-    @State var member = Member.empty
-    @State var showAlreadyGroup = false
     var body: some View {
         ZStack {
             TabsView(tabSelection: $tabSelection, house: $h, member: $member, myId: $myId, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
@@ -37,29 +34,27 @@ struct Main: View {
             
             Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
         }
-        .sheet(isPresented: $showInvite, content: {
-            LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInvite, h: $h, m: $member, newGroup: $newGroup, newPass: $newPass, newName: $newName)
-                .background(Color.black.edgesIgnoringSafeArea(.all))
-                .allowAutoDismiss(false)
-        })
-        .onOpenURL{ url in
-            let arr = url.absoluteString.components(separatedBy: "//")
-            if arr.count == 2 {
-                let link = arr[1]
-                
-                newGroup = String(link.split(separator: "$")[0])
-                newPass = String(link.split(separator: "$")[1])
-                Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
-                if newGroup == h.id {
-                    showAlreadyGroup = true
+        .sheet(isPresented: $inWR, onDismiss: {
+            Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
+        }) {
+            if (dontSplash) {
+                if (noProf) {
+                    NoProfileView(m: $member, myId: $myId, show: $noProf, house: $h)
+                        .background(Color.black.edgesIgnoringSafeArea(.all))
+                        .allowAutoDismiss(false)
                 } else {
-                    showInvite = true
+                    WaitingRoomView(h: $h, inWR: $inWR, noProf: $noProf, member: $member)
+                        .background(Color.black.edgesIgnoringSafeArea(.all))
+                        .allowAutoDismiss(false)
                 }
+            } else {
+                SplashView(dontSplash: $dontSplash, showSplash: .constant(false))
+                    .padding()
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
+                    .allowAutoDismiss(false)
+                    .animation(Animation.easeIn.speed(3))
             }
         }
-        .alert(isPresented: $showAlreadyGroup, content: {
-            Alert(title: Text("Already in this group"), message: Text("You are already a member of the group you are trying to join"), dismissButton: Alert.Button.default(Text("Ok")))
-        })
         .onChange(of: h.id, perform: { _ in
             //            inWR = false
             //            noProf = false
