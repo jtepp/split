@@ -123,12 +123,12 @@ struct WaitingRoomView: View {
                 .alert(isPresented: $showWrongPassAlert, content: {
                     Alert(title: Text(msg), message: Text("Please make sure you put in your information correctly and try again"), dismissButton: Alert.Button.default(Text("Ok"), action: {
                         if msg == "Member already exists by that name" {
-                            UserDefaults.standard.set("", forKey: "myId")
-                            UserDefaults.standard.set("", forKey: "houseId")
-                            member = .empty
-                            h = .empty
+//                            UserDefaults.standard.set("", forKey: "myId")
+//                            UserDefaults.standard.set("", forKey: "houseId")
+//                            member = .empty
+//                            h = .empty
                             inWR = true
-                            noProf = true
+//                            noProf = true
                         }
                     }))
                 })

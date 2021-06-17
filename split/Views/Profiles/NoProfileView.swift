@@ -47,9 +47,9 @@ struct NoProfileView: View {
             }
             Spacer(minLength: 80)
                 .onAppear(){
-                    UserDefaults.standard.set("", forKey: "houseId")
-                    UserDefaults.standard.set("", forKey: "myId")
-                    myId = ""
+//                    UserDefaults.standard.set("", forKey: "houseId")
+//                    UserDefaults.standard.set("", forKey: "myId")
+//                    myId = ""
                 }
         }
         

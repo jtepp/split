@@ -62,12 +62,12 @@ class Fetch: ObservableObject {
                             inWR.wrappedValue = true
                             h.wrappedValue = .empty
                         } else {
-//                            print("wred")
+                            print("wred")
 //                            UserDefaults.standard.set("waitingRoom", forKey: "houseId")
 //                            noProf.wrappedValue = false
 //                            h.wrappedValue = .empty
+//                            inWR.wrappedValue = true
                         }
-                        inWR.wrappedValue = true
                     }
                     
                 }
@@ -442,6 +442,7 @@ class Fetch: ObservableObject {
                                         h.wrappedValue.id = doc.documentID
                                         h.wrappedValue.members.append(m.wrappedValue)
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
+                                        print("ISTHISIT \(doc.documentID)")
                                         UserDefaults.standard.set(doc.documentID, forKey: "houseId")
                                         inWR.wrappedValue = false
                                         if deleteFromHere != "" {
@@ -537,7 +538,7 @@ class Fetch: ObservableObject {
                                         hh.wrappedValue.members.append(m.wrappedValue)
                                         self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
-                                        UserDefaults.standard.set(house, forKey: "houseId")
+                                        UserDefaults.standard.set(h.documentID, forKey: "houseId")
                                         inWR.wrappedValue = false
                                         if deleteFromHere != "" {
                                             var mem = Member.empty
