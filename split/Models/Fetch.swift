@@ -403,7 +403,7 @@ class Fetch: ObservableObject {
     
     func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, deleteFromHere: String = "", killHouse: Bool = false) {
         var house = House.empty.id
-        let startHouseID = h.wrappedValue.id
+        let startHouse = h.wrappedValue
         db.collection("houses").getDocuments { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
                 print(err.debugDescription)
@@ -439,6 +439,7 @@ class Fetch: ObservableObject {
                                 }) {
                                     //
                                     self.db.document("houses/\(house)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
+                                        h.wrappedValue.id = house
                                         h.wrappedValue.members.append(m.wrappedValue)
 //                                        self.getHouse(h: h, inWR: inWR, noProf: .constant(false))
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
@@ -447,8 +448,8 @@ class Fetch: ObservableObject {
                                         if deleteFromHere != "" {
                                             var mem = Member.empty
                                             mem.id = mm.id
-                                            mem.home = startHouseID
-                                            self.deleteAccount(m: .constant(mem), erase: true, inWR: .constant(false), transfer: true)
+                                            mem.home = startHouse.id
+                                            self.deleteAccount(m: .constant(mem), erase: startHouse.members.count == 1, inWR: .constant(false), transfer: true)
                                         } else {
                                             self.db.document("waitingRoom/\(mm.id)").delete()
                                         }
@@ -602,10 +603,10 @@ class Fetch: ObservableObject {
                 }
                 
                 self.db.collection("houses/\(m.wrappedValue.home)/members").getDocuments { qs, err in
-                    guard let docs = qs?.count else {
+                    guard (qs?.count) != nil else {
                         return
                     }
-                    if erase && docs <= 0 {
+                    if erase {
                         for doc in documents {
                             self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
                         }
