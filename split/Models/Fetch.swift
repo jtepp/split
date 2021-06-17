@@ -438,12 +438,11 @@ class Fetch: ObservableObject {
                                     
                                 }) {
                                     //
-                                    self.db.document("houses/\(house)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
-                                        h.wrappedValue.id = house
+                                    self.db.document("houses/\(doc.documentID)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
+                                        h.wrappedValue.id = doc.documentID
                                         h.wrappedValue.members.append(m.wrappedValue)
-//                                        self.getHouse(h: h, inWR: inWR, noProf: .constant(false))
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
-                                        UserDefaults.standard.set(house, forKey: "houseId")
+                                        UserDefaults.standard.set(doc.documentID, forKey: "houseId")
                                         inWR.wrappedValue = false
                                         if deleteFromHere != "" {
                                             var mem = Member.empty
