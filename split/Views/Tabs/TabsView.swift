@@ -28,9 +28,7 @@ struct TabsView: View {
                         .tag(1)
                     PaymentView(house: $house, tabSelection: $tabSelection)
                         .tag(2)
-                    ProfileView(house: $house, m: member.id == "" ? .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
-                                    return m.id == myId
-                                            }) ?? Member.empty) : $member, inWR: $inWR, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
+                    ProfileView(house: $house, m:  $member, inWR: $inWR, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
                     })?.showStatus ?? true), noProf: $noProf, showInvite: $showInvite)
                     .tag(3)
@@ -39,6 +37,10 @@ struct TabsView: View {
             .background(Color.black.edgesIgnoringSafeArea(.all))
             .onAppear(){
                 Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+                member = house.members.first(where: { mem in
+                    print("SHMYID tabs \(myId)")
+                    return mem.id == myId
+                }) ?? .empty
             }
             .sheet(isPresented: $showInvite, content: {
                 LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInvite, h: $house, m: $member, newGroup: $newGroup, newPass: $newPass, newName: $newName)
@@ -72,6 +74,10 @@ struct TabsView: View {
                 noProf = member.id == ""
             })
                     .onChange(of: tabSelection) { (_) in
+                        member = house.members.first(where: { mem in
+                            print("SHMYID tabselect \(myId)")
+                            return mem.id == myId
+                        }) ?? .empty
                         Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
                     }
         
