@@ -401,7 +401,7 @@ class Fetch: ObservableObject {
         
     }
     
-    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
+    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, deleteFromHere: String = "", killHouse: Bool = false) {
         var house = House.empty.id
         let startHouseID = h.wrappedValue.id
         db.collection("houses").getDocuments { (querySnapshot, err) in
@@ -425,13 +425,6 @@ class Fetch: ObservableObject {
                         print("mid \(mm.id)")
                         UserDefaults.standard.set(mm.id, forKey: "myId")
                         
-                        if m.wrappedValue.id == "" {
-                            m.wrappedValue = .empty
-                            UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
-                            UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
-                            inWR.wrappedValue = true
-                            print("\n\n\n\n\(mm)\n\n\n\n")
-                        } else {
                             
                             self.db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
                                 guard let docs = querySnapshot?.documents else {
@@ -445,9 +438,9 @@ class Fetch: ObservableObject {
                                     
                                 }) {
                                     //
-                                    self.db.document("houses/\(house)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "showStatus": mm.showStatus]) { _ in
+                                    self.db.document("houses/\(house)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
                                         h.wrappedValue.members.append(m.wrappedValue)
-                                        self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
+//                                        self.getHouse(h: h, inWR: inWR, noProf: .constant(false))
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.standard.set(house, forKey: "houseId")
                                         inWR.wrappedValue = false
@@ -459,10 +452,12 @@ class Fetch: ObservableObject {
                                         } else {
                                             self.db.document("waitingRoom/\(mm.id)").delete()
                                         }
-                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the group", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                         if killHouse {
 //                                            self.db.document("houses/\(h.documentID)").delete()
                                         }
+                                        self.getHouse(h: h, inWR: inWR, noProf: noProf)
+                                        showInvite.wrappedValue = false
                                     }
                                     //
                                     
@@ -475,7 +470,7 @@ class Fetch: ObservableObject {
                             }
                             
                             
-                        }
+                        
                     } else {
                         showAlert.wrappedValue = true
                         tapped.wrappedValue = false
@@ -484,11 +479,11 @@ class Fetch: ObservableObject {
                     
                 }
             }
-            if house == House.empty.id {
-                showAlert.wrappedValue = true
-                tapped.wrappedValue = false
-                msg.wrappedValue = "Group not found"
-            }
+//            if house == House.empty.id {
+//                showAlert.wrappedValue = true
+//                tapped.wrappedValue = false
+//                msg.wrappedValue = "Group not found"
+//            }
             tapped.wrappedValue = false
         }
         

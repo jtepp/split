@@ -64,9 +64,20 @@ struct LinkInviteView: View {
                 Button(action: {
 //                    showInvite = false
                     tapped = true
-                    Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
-//                    Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $showAlert)
-                    
+                    if noProf {
+                        print("noprof inv")
+                        showSheet = true
+                        showEdit = true
+                    }
+                    else {
+                        // if admin and house has more, show switch
+//                        if m.admin && h.members.count > 2 {
+//                        msg = "You have to choose a new Group admin before you leave"
+//                          showAlert = true
+//                        } else {
+                            Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite, deleteFromHere: h.id)
+//                        }
+                    }
                     
             }, label: {
                 HStack {
@@ -120,7 +131,7 @@ struct LinkInviteView: View {
             if !choice.isEmpty {
                 Fetch().swapAdmin(m: choice.first!, h: h)
             }
-            Fetch().joinHouse(hh: $h, m: $m, hId: newGroup, password: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
+            Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite, deleteFromHere: h.id)
         }, content: {
             if showEdit {
                 NoProfileView(m: $m, myId: .constant(""), show: $showSheet, house: $h)
