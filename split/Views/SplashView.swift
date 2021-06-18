@@ -45,6 +45,7 @@ struct SplashView: View {
                             Color.white.opacity(0.2)
                         )
                 )
+                .padding(.horizontal)
                 .padding(.bottom)
                 .onTapGesture {
                     showCore.toggle()
