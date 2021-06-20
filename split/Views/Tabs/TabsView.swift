@@ -28,7 +28,9 @@ struct TabsView: View {
                         .tag(1)
                     PaymentView(house: $house, tabSelection: $tabSelection)
                         .tag(2)
-                    ProfileView(house: $house, m:  $member, inWR: $inWR, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
+                    ProfileView(house: $house, m:  .constant(house.members.first(where: { mm in
+                        return mm.id == myId
+                    }) ?? member), inWR: $inWR, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
                     })?.showStatus ?? true), noProf: $noProf, showInvite: $showInvite)
                     .tag(3)
