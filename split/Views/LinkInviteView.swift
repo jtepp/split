@@ -146,6 +146,7 @@ struct LinkInviteView: View {
             }
         })
         .onAppear{
+            print("asfasdf\n\n\(m.id)\n\n")
             Fetch().returnMembers(hId: newGroup, nm: $newMembers, msg: $msg, showAlert: $showAlert)
         }
         .onChange(of: newName, perform: { _ in
