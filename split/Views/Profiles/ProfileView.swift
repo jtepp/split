@@ -34,6 +34,7 @@ struct ProfileView: View {
                             Fetch().toggleShowStatus(s: true)
                         }
                         UserDefaults.standard.setValue(showStatus, forKey: "status")
+                        UserDefaults.standard.setValue(true, forKey: "statusSet")
                     } label: {
                         Text("Show Status")
                         Image(systemName: showStatus ? "circlebadge.fill" : "circlebadge")
