@@ -10,6 +10,7 @@ import SwiftUI
 struct Main: View {
     @Environment(\.scenePhase) var scenePhase
     @State var h = House.empty
+    @State var m = Member.empty
     @State var inWR = ((UserDefaults.standard.value(forKey: "houseId") as? String ?? ""  == "waitingRoom") || (UserDefaults.standard.value(forKey: "houseId") as? String ?? ""  == "")) 
     @State var noProf = true
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
@@ -21,7 +22,7 @@ struct Main: View {
     @State var newPass = ""
     var body: some View {
         ZStack {
-            TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
+            TabsView(tabSelection: $tabSelection, house: $h, member: $m, myId: $myId, inWR: $inWR, noProf: $noProf)
                 .animation(.easeOut)
             //                .onAppear{
             //                    print("\n\n\n\n\ntrue\n\n\n\n\n\n")
@@ -86,6 +87,9 @@ struct Main: View {
         }
         .alert(isPresented: $showInviteAlert, content: {
             Alert(title: Text("Already in this group"), message: Text("You are already a member of the group you are trying to join"), dismissButton: Alert.Button.default(Text("Ok")))
+        })
+        .sheet(isPresented: showInviteSheet, onDismiss: {Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)}, content: {
+            LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInviteSheet, h: $h, m: , newGroup: <#T##Binding<String>#>, newPass: <#T##Binding<String>#>, newName: <#T##Binding<String>#>)
         })
     }
 }

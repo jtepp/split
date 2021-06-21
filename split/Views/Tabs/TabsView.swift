@@ -11,10 +11,10 @@ struct TabsView: View {
     @State var dontSplash = UserDefaults.standard.bool(forKey: "dontSplash")
     @Binding var tabSelection: Int
     @Binding var house: House
+    @Binding var member: Member
     @Binding var myId: String
     @Binding var inWR: Bool
     @Binding var noProf: Bool
-    @State var member = Member.empty
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
