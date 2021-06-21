@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import MessageUI
 
 struct SplashView: View {
     @Binding var dontSplash: Bool
     @Binding var showSplash: Bool
     @State var showCore = false
+    @State var result: Result<MFMailComposeResult, Error>? = nil
+    @State var isShowingMailView = false
     var body: some View {
         VStack {
+
             HeaderText(text: "What's New")
                 .padding(.bottom)
             ScrollView {
@@ -56,6 +60,20 @@ struct SplashView: View {
 
             }
             Spacer()
+            Button(action : {
+                isShowingMailView = true
+            }) {
+                Label(
+                    title: { Text("Send Feedback") },
+                    icon: { Image(systemName: "exclamationmark.bubble.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width:30)
+                    }
+                )
+                .foregroundColor(.white)
+            }
+            .padding(.horizontal)
             Text("Disclaimer: This app does not involve any actual money or payments, it is just a way to keep track of payments in your group")
                 .font(.footnote)
                 .foregroundColor(Color.white.opacity(0.5))
@@ -82,6 +100,9 @@ struct SplashView: View {
         .onAppear(){
             UserDefaults.standard.setValue(true, forKey: "1.4.1")
         }
+        .sheet(isPresented: $isShowingMailView) {
+                    MailView(result: self.$result)
+                }
     }
 }
 

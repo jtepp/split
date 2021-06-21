@@ -16,6 +16,7 @@
 		0C210D6926811F42008220B6 /* pay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6426811F41008220B6 /* pay.mp3 */; };
 		0C210D6A26811F42008220B6 /* req.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6526811F41008220B6 /* req.mp3 */; };
 		0C210D6B26811F42008220B6 /* join.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6626811F41008220B6 /* join.mp3 */; };
+		0C210D6D26812AE7008220B6 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C210D6C26812AE7008220B6 /* MailView.swift */; };
 		0C2A0587265CAA44002BD46D /* splitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A0586265CAA44002BD46D /* splitApp.swift */; };
 		0C2A0589265CAA44002BD46D /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A0588265CAA44002BD46D /* Main.swift */; };
 		0C2A058B265CAA44002BD46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2A058A265CAA44002BD46D /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		0C210D6426811F41008220B6 /* pay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pay.mp3; sourceTree = "<group>"; };
 		0C210D6526811F41008220B6 /* req.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = req.mp3; sourceTree = "<group>"; };
 		0C210D6626811F41008220B6 /* join.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = join.mp3; sourceTree = "<group>"; };
+		0C210D6C26812AE7008220B6 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		0C2A0583265CAA44002BD46D /* split.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = split.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C2A0586265CAA44002BD46D /* splitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splitApp.swift; sourceTree = "<group>"; };
 		0C2A0588265CAA44002BD46D /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
 				0CAA803A2661CC4A00A3081B /* SplashView.swift */,
 				0CA0E9BC2660369D002876CF /* ModalView.swift */,
+				0C210D6C26812AE7008220B6 /* MailView.swift */,
 				0CA0E9BF266037FE002876CF /* Profiles */,
 				0C64FED9265EED43009B0C3C /* ImagePicker.swift */,
 				0C625990265EB440002E58A3 /* HeaderText.swift */,
@@ -410,6 +413,7 @@
 				0C2A05A0265CB17D002BD46D /* House.swift in Sources */,
 				0C625972265EA868002E58A3 /* Payment.swift in Sources */,
 				0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */,
+				0C210D6D26812AE7008220B6 /* MailView.swift in Sources */,
 				0CA0E9C5266038EB002876CF /* NoProfileView.swift in Sources */,
 				0C64FEDA265EED43009B0C3C /* ImagePicker.swift in Sources */,
 				0C9D26CF265F263E006A7AF6 /* String+isNumeric.swift in Sources */,
