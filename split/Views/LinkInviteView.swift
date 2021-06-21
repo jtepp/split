@@ -76,7 +76,7 @@ struct LinkInviteView: View {
                           showAlert = true
                             print("COUNTERHERE \(h.members.count)")
                         } else {
-                            Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite, deleteFromHere: h.id)
+                            Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                         }
                     }
                     
@@ -132,7 +132,7 @@ struct LinkInviteView: View {
             if !choice.isEmpty {
                 Fetch().swapAdmin(m: choice.first!, h: h)
             }
-            Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite, deleteFromHere: h.id)
+            Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
             showInvite = false
         }, content: {
             if showEdit {
