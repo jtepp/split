@@ -14,6 +14,11 @@ struct Main: View {
     @State var noProf = true
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
     @State var tabSelection = 0
+    @State var showInviteAlert = false
+    @State var showInviteSheet = false
+    @State var newName = ""
+    @State var newGroup = ""
+    @State var newPass = ""
     var body: some View {
         ZStack {
             TabsView(tabSelection: $tabSelection, house: $h, myId: $myId, inWR: $inWR, noProf: $noProf)
@@ -63,6 +68,25 @@ struct Main: View {
                 }
             }
         }
+        .onOpenURL{ url in
+                        let arr = url.absoluteString.components(separatedBy: "//")
+                        if arr.count == 2 {
+                            let link = arr[1]
+                            
+                            newGroup = String(link.split(separator: "$")[0])
+                            newPass = String(link.split(separator: "$")[1])
+                            Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
+                            if newGroup == h.id {
+                                //ALREADY
+                                showInviteAlert = true
+                            } else {
+                                showInviteSheet = true
+                            }
+                        }
+        }
+        .alert(isPresented: $showInviteAlert, content: {
+            Alert(title: Text("Already in this group"), message: Text("You are already a member of the group you are trying to join"), dismissButton: Alert.Button.default(Text("Ok")))
+        })
     }
 }
 

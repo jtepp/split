@@ -549,6 +549,39 @@ class Fetch: ObservableObject {
         db.document("houses/\(id)/members/\(myId)/").updateData(["showStatus":s])
     }
     
+    func groupNameFromId(id: String, nn: Binding<String>) {
+        db.document("houses/\(id)").getDocument { docSnap, err in
+            guard let doc = docSnap?.get("name") else {
+                nn.wrappedValue = "err"
+                return
+            }
+            nn.wrappedValue = doc as! String
+        }
+    }
+    
+    func returnMembers(hId: String, nm: Binding<[Member]>, msg: Binding<String>, showAlert: Binding<Bool>) {
+        db.collection("houses/\(hId)/members").getDocuments { querySnapshot, err in
+            guard let docs = querySnapshot?.documents else {
+                print(err.debugDescription)
+                return
+            }
+            nm.wrappedValue = docs.map({ q in
+                let data = q.data()
+                
+                let name = data["name"] as? String ?? ""
+                let home = data["home"] as? String ?? ""
+//                let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
+//                let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
+                let image = data["image"] as? String ?? ""
+                let admin = data["admin"] as? Bool ?? false
+//                let showStatus = data["showStatus"] as? Bool ?? false
+//                let online = data["online"] as? Bool ?? false
+//                let lastSeen = data["lastSeen"] as? NSNumber ?? 0
+                return Member(id: q.documentID, home: home, name: name, owesMe: [:], iOwe: [:], image: image, admin: admin, showStatus: false)
+            })
+        }
+    }
+    
 }
 
 func idfromnamehouse(name: String, house: House) -> String {
