@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct TabsView: View {
-    @State var dontSplash = UserDefaults.standard.bool(forKey: "dontSplash")
     @Binding var tabSelection: Int
     @Binding var house: House
     @Binding var member: Member
     @Binding var myId: String
     @Binding var inWR: Bool
     @Binding var noProf: Bool
+    @State var showInviteAlert = false
+    @State var showInviteSheet = false
+    @State var newName = ""
+    @State var newGroup = ""
+    @State var newPass = ""
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
@@ -43,27 +47,28 @@ struct TabsView: View {
                 }
                 noProf = member.id == ""
             })
-            .sheet(isPresented: $inWR, onDismiss: {
-                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
-            }) {
-                if (dontSplash) {
-                if (noProf) {
-                    NoProfileView(m: $member, myId: $myId, show: $noProf, house: $house)
-                        .background(Color.black.edgesIgnoringSafeArea(.all))
-                        .allowAutoDismiss(false)
-                } else {
-                    WaitingRoomView(h: $house, inWR: $inWR, noProf: $noProf, member: $member)
-                            .background(Color.black.edgesIgnoringSafeArea(.all))
-                            .allowAutoDismiss(false)
-                }
-                } else {
-                    SplashView(dontSplash: $dontSplash, showSplash: .constant(false))
-                        .padding()
-                        .background(Color.black.edgesIgnoringSafeArea(.all))
-                        .allowAutoDismiss(false)
-                        .animation(Animation.easeIn.speed(3))
-                }
+            .onOpenURL{ url in
+                            let arr = url.absoluteString.components(separatedBy: "//")
+                            if arr.count == 2 {
+                                let link = arr[1]
+                                
+                                newGroup = String(link.split(separator: "$")[0])
+                                newPass = String(link.split(separator: "$")[1])
+                                Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
+                                if newGroup == house.id {
+                                    //ALREADY
+                                    showInviteAlert = true
+                                } else {
+                                    showInviteSheet = true
+                                }
+                            }
             }
+            .alert(isPresented: $showInviteAlert, content: {
+                Alert(title: Text("Already in this group"), message: Text("You are already a member of the group you are trying to join"), dismissButton: Alert.Button.default(Text("Ok")))
+            })
+            .sheet(isPresented: $showInviteSheet, onDismiss: {Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)}, content: {
+                LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInviteSheet, h: $house, m: $member, newGroup: $newGroup, newPass: $newPass, newName: $newName)
+            })
 //            .onChange(of: tabSelection) { (_) in
 //                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
 //            }

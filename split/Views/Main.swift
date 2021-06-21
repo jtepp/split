@@ -15,11 +15,7 @@ struct Main: View {
     @State var noProf = true
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
     @State var tabSelection = 0
-    @State var showInviteAlert = false
-    @State var showInviteSheet = false
-    @State var newName = ""
-    @State var newGroup = ""
-    @State var newPass = ""
+    @State var dontSplash = UserDefaults.standard.bool(forKey: "dontSplash")
     var body: some View {
         ZStack {
             TabsView(tabSelection: $tabSelection, house: $h, member: $m, myId: $myId, inWR: $inWR, noProf: $noProf)
@@ -69,28 +65,27 @@ struct Main: View {
                 }
             }
         }
-        .onOpenURL{ url in
-                        let arr = url.absoluteString.components(separatedBy: "//")
-                        if arr.count == 2 {
-                            let link = arr[1]
-                            
-                            newGroup = String(link.split(separator: "$")[0])
-                            newPass = String(link.split(separator: "$")[1])
-                            Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
-                            if newGroup == h.id {
-                                //ALREADY
-                                showInviteAlert = true
-                            } else {
-                                showInviteSheet = true
-                            }
-                        }
+        .sheet(isPresented: $inWR, onDismiss: {
+            Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
+        }) {
+            if (dontSplash) {
+            if (noProf) {
+                NoProfileView(m: $m, myId: $myId, show: $noProf, house: $h)
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
+                    .allowAutoDismiss(false)
+            } else {
+                WaitingRoomView(h: $h, inWR: $inWR, noProf: $noProf, member: $m)
+                        .background(Color.black.edgesIgnoringSafeArea(.all))
+                        .allowAutoDismiss(false)
+            }
+            } else {
+                SplashView(dontSplash: $dontSplash, showSplash: .constant(false))
+                    .padding()
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
+                    .allowAutoDismiss(false)
+                    .animation(Animation.easeIn.speed(3))
+            }
         }
-        .alert(isPresented: $showInviteAlert, content: {
-            Alert(title: Text("Already in this group"), message: Text("You are already a member of the group you are trying to join"), dismissButton: Alert.Button.default(Text("Ok")))
-        })
-        .sheet(isPresented: showInviteSheet, onDismiss: {Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)}, content: {
-            LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInviteSheet, h: $h, m: , newGroup: <#T##Binding<String>#>, newPass: <#T##Binding<String>#>, newName: <#T##Binding<String>#>)
-        })
     }
 }
 
