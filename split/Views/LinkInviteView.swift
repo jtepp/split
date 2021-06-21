@@ -13,6 +13,7 @@ struct LinkInviteView: View {
     @Binding var showInvite: Bool
     @Binding var h: House
     @Binding var m: Member
+    @Binding var myId: String
     @Binding var newGroup: String
     @Binding var newPass: String
     @Binding var newName: String
@@ -136,7 +137,7 @@ struct LinkInviteView: View {
             showInvite = false
         }, content: {
             if showEdit {
-                NoProfileView(m: $m, myId: .constant(""), show: $showSheet, house: $h)
+                NoProfileView(m: $m, myId: $myId, show: $showSheet, house: $h)
                     .background(Color.black.edgesIgnoringSafeArea(.all))
                     .allowAutoDismiss(false)
             } else {
@@ -160,7 +161,7 @@ struct LinkInviteView: View {
 
 struct LinkInviteView_Previews: PreviewProvider {
     static var previews: some View {
-        LinkInviteView(inWR: .constant(true), noProf: .constant(false), showInvite: .constant(true), h: .constant(.placeholder), m: .constant(.placeholder), newGroup: .constant("x9vd0sduWMWT5Zv1FTAD"), newPass: .constant("pass"), newName: .constant("name"), newMembers: [.empty])
+        LinkInviteView(inWR: .constant(true), noProf: .constant(false), showInvite: .constant(true), h: .constant(.placeholder), m: .constant(.placeholder), myId: .constant(""), newGroup: .constant("x9vd0sduWMWT5Zv1FTAD"), newPass: .constant("pass"), newName: .constant("name"), newMembers: [.empty])
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

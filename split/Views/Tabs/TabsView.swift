@@ -67,7 +67,7 @@ struct TabsView: View {
                 Alert(title: Text("Already in this group"), message: Text("You are already a member of the group you are trying to join"), dismissButton: Alert.Button.default(Text("Ok")))
             })
             .sheet(isPresented: $showInviteSheet, onDismiss: {Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)}, content: {
-                LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInviteSheet, h: $house, m: $member, newGroup: $newGroup, newPass: $newPass, newName: $newName)
+                LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInviteSheet, h: $house, m: $member, myId: $myId, newGroup: $newGroup, newPass: $newPass, newName: $newName)
                     .background(
                         Color.black.edgesIgnoringSafeArea(.all)
                     )
