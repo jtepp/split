@@ -419,7 +419,7 @@ class Fetch: ObservableObject {
                     return
                 }
                 
-                if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
+//                if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
                     documents.forEach { (doc) in
                         if doc.documentID == newGroup {
                             house = doc.documentID
@@ -480,11 +480,11 @@ class Fetch: ObservableObject {
                             
                         }
                     }
-                } else {
-                    showAlert.wrappedValue = true
-                    tapped.wrappedValue = false
-                    msg.wrappedValue = "Please leave your current group before opening an invite link"
-                }
+//                } else {
+//                    showAlert.wrappedValue = true
+//                    tapped.wrappedValue = false
+//                    msg.wrappedValue = "Please leave your current group before opening an invite link"
+//                }
 
     //            if house == House.empty.id {
     //                showAlert.wrappedValue = true
