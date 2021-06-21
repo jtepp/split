@@ -31,7 +31,7 @@ struct MembersView: View {
                     .padding()
                     .contextMenu(menuItems: {
                         Button {
-                            UIPasteboard.general.string = "Join my group on spllit!\nID: \(house.id)\nPassword: \(house.password)"
+                            UIPasteboard.general.string = "Join my group on spllit!\nspllit://\(house.id)$\(house.password)"
                         } label: {
                             Text("Copy group invite")
                         }
