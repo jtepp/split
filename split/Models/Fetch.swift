@@ -30,6 +30,7 @@ class Fetch: ObservableObject {
                 
                 
                 db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
+                    if (querySnapshot?.exists ?? false) {
                     guard let doc = querySnapshot else {
                         print("no house by id %s", id)
                         return
@@ -68,7 +69,15 @@ class Fetch: ObservableObject {
                         inWR.wrappedValue = true
                     }
                     
+                    } else {
+                        print("gotovoid2")
+                        UserDefaults.standard.set("", forKey: "houseId")
+                        noProf.wrappedValue = true
+                        inWR.wrappedValue = true
+                    }
+                    
                 }
+                
             }
             //        else if id == "waitingRoom" && myId != "" { //in waiting room and account exists
             //            print("in waiting room and account exists")
