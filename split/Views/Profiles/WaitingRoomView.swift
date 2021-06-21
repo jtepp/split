@@ -37,6 +37,9 @@ struct WaitingRoomView: View {
                                 InputField(name: "Password", text: $hPw, small: true)
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
+                                    .onChange(of: hPw, perform: { _ in
+                                        hPw = hPw.replacingOccurrences(of: "$", with: "")
+                                    })
                                 Button(action: {
                                     tapped = true
                                     if showPanel == 1 {
