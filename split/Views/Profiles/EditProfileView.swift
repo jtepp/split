@@ -77,7 +77,7 @@ struct EditProfileView: View {
             })
             .onChange(of: img, perform: { _ in
                 if img != nil {
-                    m.image = imgtob64(img: img!.resized(toWidth: 400)!)
+                    m.image = imgtob64(img: img!.resized(toWidth: 600)!)
                 }
             })
         }

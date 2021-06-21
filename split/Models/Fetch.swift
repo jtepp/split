@@ -202,7 +202,7 @@ class Fetch: ObservableObject {
     func updateImg(img: UIImage, hId: String, myId: String) {
         let id = UserDefaults.standard.string(forKey: "myId")
         print("UPDATEIMG")
-        db.document("houses/\(hId)/members/\(id ?? "EMPTYIMG")").updateData(["image":imgtob64(img: img.resized(toWidth: 400)!)])
+        db.document("houses/\(hId)/members/\(id ?? "EMPTYIMG")").updateData(["image":imgtob64(img: img.resized(toWidth: 600)!)])
     }
     
     func sendPayment(p: Payment, h: House) {
