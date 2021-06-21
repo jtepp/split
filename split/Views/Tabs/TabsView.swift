@@ -68,6 +68,9 @@ struct TabsView: View {
             })
             .sheet(isPresented: $showInviteSheet, onDismiss: {Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)}, content: {
                 LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInviteSheet, h: $house, m: $member, newGroup: $newGroup, newPass: $newPass, newName: $newName)
+                    .background(
+                        Color.black.edgesIgnoringSafeArea(.all)
+                    )
             })
 //            .onChange(of: tabSelection) { (_) in
 //                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
