@@ -160,20 +160,7 @@ struct ActivityView: View {
                         }
                     }
                 } else {
-//                    check if payment exists that says you were removed
-                    
-//                    if !UserDefaults.standard.bool(forKey: "inv") {
-                    Fetch().checkKicked(h: house, m: m){ kicked in
-                        print("KICKEDYO \(kicked)")
-                        if kicked {
-                            return wrStuff(inWR: $inWR, h: $house, m: $m)
-                        } else {
-                            house.members.append(m)
-                            print("ADDEDYO \(m)")
-                            return EmptyView()
-                        }
-                    }
-//                    }
+                    wrStuff(inWR: $inWR, h: $house, m: $m)
                 }
             }
             
@@ -186,9 +173,9 @@ struct ActivityView: View {
         .foregroundColor(.white)
         .onAppear {
             //show splash for update
-            if UserDefaults.standard.bool(forKey: "1.4") == false {
+            if UserDefaults.standard.bool(forKey: "1.4.1") == false {
                 showSplash = true
-                UserDefaults.standard.setValue(true, forKey: "1.4")
+                UserDefaults.standard.setValue(true, forKey: "1.4.1")
             }
         }
         .sheet(isPresented: $showSplash, content: {
@@ -201,13 +188,12 @@ struct ActivityView: View {
 
 func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) -> EmptyView {
     m.wrappedValue = .empty
-    print("WRSTUFFED")
     UserDefaults.standard.set("", forKey: "houseId")
     UserDefaults.standard.set("", forKey: "myId")
     var q = House.empty
     q.members = [m.wrappedValue]
     h.wrappedValue = q
     inWR.wrappedValue = true
-//    print("DONE\n\n\n\n\(h.wrappedValue)\n\n")
+    print("DONE\n\n\n\n\(h.wrappedValue)\n\n")
     return EmptyView()
 }

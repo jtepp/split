@@ -20,7 +20,7 @@ struct SplashView: View {
                     Spacer()
                     VStack {
                     if showCore {
-                        SplashDetailsView(title: "Invite your friends", text: "Long press your group name to copy an invitation on the members page", image: "person.3.fill", color: .blue)
+                        SplashDetailsView(title: "Invite your friends", text: "Long press your group name to copy an invitation on the members page", image: "person.3", color: .blue)
                             .padding(.bottom)
                         SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
                             .padding(.bottom)
@@ -51,10 +51,9 @@ struct SplashView: View {
                     showCore.toggle()
             }
             
-                SplashDetailsView(title: "New invite links", text: "Send your friends a link to join your group directly", image: "link.circle", color: .purple)
-                    .padding(.bottom)
-                SplashDetailsView(title: "Take a shortcut", text: "Long press on the spllit app to use the new quick actions", image: "arrowshape.turn.up.right.fill", color: .red)
-                    .padding(.bottom)
+            SplashDetailsView(title: "Take a shortcut", text: "Long press on the spllit app to use the new quick actions", image: "arrowshape.turn.up.right.fill", color: .green)
+                .padding(.bottom)
+
             }
             Spacer()
             Text("Disclaimer: This app does not involve any actual money or payments, it is just a way to keep track of payments in your group")
@@ -81,7 +80,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "1.4")
+            UserDefaults.standard.setValue(true, forKey: "1.4.1")
         }
     }
 }

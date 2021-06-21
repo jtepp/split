@@ -59,6 +59,7 @@ struct PaymentPaymentView: View {
                 amountText = ""
                 memoText = ""
                 tabSelection = 0
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             }, label: {
                 HStack {
                     Spacer()

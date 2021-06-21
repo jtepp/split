@@ -6,11 +6,22 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
 
     var title;
     var body;
+    var snd = "default"
 
     if (event.after.get("isAn")) {
+        let memo = event.after.get("memo")
         title = "Announcement"
-        body = event.after.get("from") + " " + event.after.get("memo")
+        body = event.after.get("from") + " " + memo
+        if (memo.includes("join") || memo.includes("create")) {
+            snd = "join.mp3"
+        } else if (memo.includes("left") || memo.includes("remove")) {
+            snd = "leave.mp3"
+        } else if (memo.includes("admin")) {
+            snd = "admin.mp3"
+        }
+
     } else if (event.after.get("isRequest")) {
+        snd = "req.mp3"
         title = "Request received"
         let reqFrom = event.after.get("reqfrom")
         console.log("REQFROM: " + reqFrom.toString())
@@ -22,6 +33,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + ", split between you and " + (reqFrom.length - 1) + " others"
         }
     } else {
+        snd = "pay.mp3"
         title = "Payment received"
         body = event.after.get("from") + " sent you $" + event.after.get("amount").toFixed(2)
 
@@ -38,7 +50,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             apns: {
                 payload: {
                     aps: {
-                        sound: 'default',
+                        sound: snd,
                     }
                 }
             }
