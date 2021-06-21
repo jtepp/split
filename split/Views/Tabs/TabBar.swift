@@ -67,6 +67,7 @@ struct TabButton: View {
             .frame(width: 30, height: 30)
             .onTapGesture {
                 tabSelection = index
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             }
     }
 }
