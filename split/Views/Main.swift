@@ -86,6 +86,7 @@ struct Main: View {
                     .animation(Animation.easeIn.speed(3))
             }
         }
+        .animation(Animation.easeIn.speed(3))
     }
 }
 

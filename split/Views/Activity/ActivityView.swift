@@ -181,6 +181,7 @@ struct ActivityView: View {
         .sheet(isPresented: $showSplash, content: {
             SplashView(dontSplash: .constant(true), showSplash: $showSplash)
                 .preferredColorScheme(.dark)
+                .animation(Animation.easeIn.speed(3))
         })
     }
 }
