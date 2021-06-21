@@ -11,6 +11,11 @@
 		0C0CA77E265F01BE0062FDDD /* PaymentPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */; };
 		0C0CA781265F01F10062FDDD /* RequestPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */; };
 		0C0CA784265F08CD0062FDDD /* MemberPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA783265F08CD0062FDDD /* MemberPicker.swift */; };
+		0C210D6726811F42008220B6 /* leave.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6226811F41008220B6 /* leave.mp3 */; };
+		0C210D6826811F42008220B6 /* admin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6326811F41008220B6 /* admin.mp3 */; };
+		0C210D6926811F42008220B6 /* pay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6426811F41008220B6 /* pay.mp3 */; };
+		0C210D6A26811F42008220B6 /* req.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6526811F41008220B6 /* req.mp3 */; };
+		0C210D6B26811F42008220B6 /* join.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6626811F41008220B6 /* join.mp3 */; };
 		0C2A0587265CAA44002BD46D /* splitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A0586265CAA44002BD46D /* splitApp.swift */; };
 		0C2A0589265CAA44002BD46D /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A0588265CAA44002BD46D /* Main.swift */; };
 		0C2A058B265CAA44002BD46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2A058A265CAA44002BD46D /* Assets.xcassets */; };
@@ -53,6 +58,11 @@
 		0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPaymentView.swift; sourceTree = "<group>"; };
 		0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPaymentView.swift; sourceTree = "<group>"; };
 		0C0CA783265F08CD0062FDDD /* MemberPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPicker.swift; sourceTree = "<group>"; };
+		0C210D6226811F41008220B6 /* leave.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = leave.mp3; sourceTree = "<group>"; };
+		0C210D6326811F41008220B6 /* admin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = admin.mp3; sourceTree = "<group>"; };
+		0C210D6426811F41008220B6 /* pay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pay.mp3; sourceTree = "<group>"; };
+		0C210D6526811F41008220B6 /* req.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = req.mp3; sourceTree = "<group>"; };
+		0C210D6626811F41008220B6 /* join.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = join.mp3; sourceTree = "<group>"; };
 		0C2A0583265CAA44002BD46D /* split.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = split.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C2A0586265CAA44002BD46D /* splitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splitApp.swift; sourceTree = "<group>"; };
 		0C2A0588265CAA44002BD46D /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
@@ -118,6 +128,18 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0C210D6126811EE5008220B6 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				0C210D6326811F41008220B6 /* admin.mp3 */,
+				0C210D6626811F41008220B6 /* join.mp3 */,
+				0C210D6226811F41008220B6 /* leave.mp3 */,
+				0C210D6426811F41008220B6 /* pay.mp3 */,
+				0C210D6526811F41008220B6 /* req.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		0C2A057A265CAA44002BD46D = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +163,7 @@
 			children = (
 				0C9570C62670A61800831D17 /* split.entitlements */,
 				0C2A0586265CAA44002BD46D /* splitApp.swift */,
+				0C210D6126811EE5008220B6 /* Sounds */,
 				0C0CA778265EF4BF0062FDDD /* Extensions */,
 				0C2A059B265CB0FB002BD46D /* Models */,
 				0C2A059A265CB0F7002BD46D /* Views */,
@@ -320,8 +343,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C210D6726811F42008220B6 /* leave.mp3 in Resources */,
 				0C2A058E265CAA44002BD46D /* Preview Assets.xcassets in Resources */,
+				0C210D6826811F42008220B6 /* admin.mp3 in Resources */,
+				0C210D6926811F42008220B6 /* pay.mp3 in Resources */,
+				0C210D6A26811F42008220B6 /* req.mp3 in Resources */,
 				0C9570C82670E9BC00831D17 /* GoogleService-Info.plist in Resources */,
+				0C210D6B26811F42008220B6 /* join.mp3 in Resources */,
 				0C2A058B265CAA44002BD46D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,7 +581,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"c++\"",
@@ -635,7 +663,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"c++\"",
