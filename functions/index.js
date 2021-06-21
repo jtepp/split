@@ -16,7 +16,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             snd = "join.mp3"
         } else if (memo.includes("left") || memo.includes("remove")) {
             snd = "leave.mp3"
-        } else if (memo.includes("admin")) {
+        } else if (memo.includes("Admin")) {
             snd = "admin.mp3"
         }
 
