@@ -96,6 +96,8 @@ class Fetch: ObservableObject {
             //                    //                        inWR.wrappedValue = true
             //                    //                    }
             //
+            
+            
             //                    return
             //                }
             //                let data = doc
@@ -528,7 +530,7 @@ class Fetch: ObservableObject {
                                     
                                 }) || forceAdmin {
                                     //
-                                    self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin]) { _ in
+                                    self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "online": true]) { _ in
                                         self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
                                         self.db.document("waitingRoom/\(mm.id)").delete()
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
