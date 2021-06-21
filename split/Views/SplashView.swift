@@ -19,6 +19,29 @@ struct SplashView: View {
 
             HeaderText(text: "What's New")
                 .padding(.bottom)
+                .overlay(
+                    VStack {
+                        Spacer()
+                        HStack{
+                            Button(action : {
+                                isShowingMailView = true
+                            }) {
+                                Label(
+                                    title: { Text("Send Feedback") },
+                                    icon: { Image(systemName: "exclamationmark.bubble.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width:30)
+                                    }
+                                )
+                                .foregroundColor(.white)
+                            }
+                            .scaleEffect(0.8)
+                            Spacer()
+                        }
+                    }
+                    .padding(.leading)
+                )
             ScrollView {
                 HStack {
                     Spacer()
@@ -60,20 +83,6 @@ struct SplashView: View {
 
             }
             Spacer()
-            Button(action : {
-                isShowingMailView = true
-            }) {
-                Label(
-                    title: { Text("Send Feedback") },
-                    icon: { Image(systemName: "exclamationmark.bubble.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width:30)
-                    }
-                )
-                .foregroundColor(.white)
-            }
-            .padding(.horizontal)
             Text("Disclaimer: This app does not involve any actual money or payments, it is just a way to keep track of payments in your group")
                 .font(.footnote)
                 .foregroundColor(Color.white.opacity(0.5))
