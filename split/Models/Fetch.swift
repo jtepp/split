@@ -403,7 +403,7 @@ class Fetch: ObservableObject {
     
     func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false) {
             var house = House.empty.id
-            let startHouse = h.wrappedValue
+//            let startHouse = h.wrappedValue
             db.collection("houses").getDocuments { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
                     print(err.debugDescription)
@@ -530,7 +530,7 @@ class Fetch: ObservableObject {
                                     
                                 }) || forceAdmin {
                                     //
-                                    self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "online": true, "showStatus": (UserDefaults.standard.bool(forKey: "statusSet") ?? false) ? mm.showStatus : true]) { _ in
+                                    self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "online": true, "showStatus": (UserDefaults.standard.bool(forKey: "statusSet")) ? mm.showStatus : true]) { _ in
                                         self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
                                         self.db.document("waitingRoom/\(mm.id)").delete()
                                         UserDefaults.standard.set(mm.id, forKey: "myId")

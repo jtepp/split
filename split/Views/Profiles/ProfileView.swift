@@ -35,6 +35,7 @@ struct ProfileView: View {
                         }
                         UserDefaults.standard.setValue(showStatus, forKey: "status")
                         UserDefaults.standard.setValue(true, forKey: "statusSet")
+                        print("STATUSSET\(UserDefaults.standard.bool(forKey: "statusSet"))")
                     } label: {
                         Text("Show Status")
                         Image(systemName: showStatus ? "circlebadge.fill" : "circlebadge")
