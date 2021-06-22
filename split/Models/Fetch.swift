@@ -423,7 +423,7 @@ class Fetch: ObservableObject {
         completion()
     }
     
-    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false) {
+    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, _ completion: () -> Void = {}) {
             var house = House.empty.id
 //            let startHouse = h.wrappedValue
             db.collection("houses").getDocuments { (querySnapshot, err) in
@@ -472,6 +472,7 @@ class Fetch: ObservableObject {
                                             self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                             self.getHouse(h: h, inWR: inWR, noProf: noProf)
                                             showInvite.wrappedValue = false
+                                            completion()
                                         }
                                         //
                                         
@@ -601,7 +602,7 @@ class Fetch: ObservableObject {
         //        }
     }
     
-    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>, _ completion: () -> Void = {}) {
+    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>) {
         if m.wrappedValue.home != "" {
             self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
@@ -631,15 +632,15 @@ class Fetch: ObservableObject {
                 } else {
                     self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", isAn: true), h: House(id: m.wrappedValue.home, name: "", members: [Member](), payments: [Payment](), password: ""))
                 }
-                m.wrappedValue = .empty
-                UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
-                UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
-                inWR.wrappedValue = true
-                m.wrappedValue.id = ""
-                
+                if !transfer {
+                    m.wrappedValue = .empty
+                    UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
+                    UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
+                    inWR.wrappedValue = true
+                    m.wrappedValue.id = ""
+                }
             }
         }
-        completion()
         
     }
     

@@ -81,10 +81,10 @@ struct LinkInviteView: View {
                                 showAlert = true
                                 print("COUNTERHERE \(h.members.count)")
                             } else {
-                                transfer(m: $m, h: $h, lastM: lastM, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                                transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                             }
                         } else {
-                            transfer(m: $m, h: $h, lastM: lastM, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                            transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                         }
                     }
                         
@@ -142,7 +142,7 @@ struct LinkInviteView: View {
             if !choice.isEmpty {
                 Fetch().swapAdmin(m: choice.first!, h: h)
 //            }
-                transfer(m: $m, h: $h, lastM: lastM, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
             } else {
                 Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
             }
@@ -180,15 +180,17 @@ struct LinkInviteView_Previews: PreviewProvider {
 }
 
 
-func transfer(m: Binding<Member>, h: Binding<House>, lastM: Member, myId: Binding<String>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
-    Fetch().deleteAccount(m: m, erase: true, inWR: inWR) {
+func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
+//    Fetch().deleteAccount(m: .constant(m.wrappedValue), erase: true, inWR: inWR) {
         h.wrappedValue = .empty
-        m.wrappedValue = lastM
+        let mmm = m.wrappedValue
         h.wrappedValue.members.append(m.wrappedValue)
         Fetch().addToWR(m: m, myId: myId, h: h){
-            Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite)
+            Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){
+                Fetch().deleteAccount(m: .constant(mmm), inWR: .constant(false), transfer: true)
+            }
         }
         
-    }
+//    }
     
 }
