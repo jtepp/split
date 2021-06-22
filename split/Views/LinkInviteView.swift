@@ -71,8 +71,13 @@ struct LinkInviteView: View {
                     if h.id == "" || h.id == "waitingRoom" {
                         if noProf {
                             print("noprof inv")
-                            showSheet = true
-                            showEdit = true
+//                            Fetch().checkSwitch(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite){ go in
+//                                print("gogogo\(go)")
+//                                if go {
+                                    showSheet = true
+                                    showEdit = true
+//                                }
+//                            }
                         } else {
                             print("SDFSDFSDDFSFDFS\(m.admin)")
                             // if admin and house has more, show switch
@@ -175,7 +180,9 @@ struct LinkInviteView: View {
             showInvite = false
         }, content: {
             if showEdit {
-                NoProfileView(m: $m, myId: $myId, show: $showSheet, house: $h)
+                NoProfileView(m: $m, myId: $myId, show: $showSheet, house: $h, newMembers: newMembers.map({ member in
+                    return member.name
+                }))
                     .background(Color.black.edgesIgnoringSafeArea(.all))
                     .allowAutoDismiss(false)
             } else {
