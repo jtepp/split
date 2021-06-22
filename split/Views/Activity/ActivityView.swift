@@ -195,6 +195,6 @@ func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) -> Empt
     q.members = [m.wrappedValue]
     h.wrappedValue = q
     inWR.wrappedValue = true
-    print("DONE\n\n\n\n\(h.wrappedValue)\n\n")
+    print("DONEwrstuff\(h.wrappedValue.id)")
     return EmptyView()
 }
