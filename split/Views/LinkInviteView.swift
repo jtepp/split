@@ -187,8 +187,9 @@ func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newG
             Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){ go in
                 if go {
                     Fetch().getHouse(h: h, inWR: inWR, noProf: noProf)
-                    Fetch().deleteAccount(m: .constant(mmm), inWR: .constant(false), transfer: true){
+                    Fetch().deleteAccount(m: .constant(mmm), erase: true, inWR: .constant(false), transfer: true){
                         print("asfas\(m.wrappedValue.name)d\(m.wrappedValue.id)fas")
+                        Fetch().getHouse(h: h, inWR: inWR, noProf: noProf)
                     }
                 }
             }
