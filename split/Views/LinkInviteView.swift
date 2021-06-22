@@ -71,13 +71,8 @@ struct LinkInviteView: View {
                     if h.id == "" || h.id == "waitingRoom" {
                         if noProf {
                             print("noprof inv")
-//                            Fetch().checkSwitch(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite){ go in
-//                                print("gogogo\(go)")
-//                                if go {
-                                    showSheet = true
-                                    showEdit = true
-//                                }
-//                            }
+                            showSheet = true
+                            showEdit = true
                         } else {
                             print("SDFSDFSDDFSFDFS\(m.admin)")
                             // if admin and house has more, show switch
@@ -214,6 +209,11 @@ struct LinkInviteView_Previews: PreviewProvider {
 
 
 func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
+    
+    Fetch().checkSwitch(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){ go in
+        print("OGOGOGO\(go)")
+    }
+    
 //    Fetch().deleteAccount(m: .constant(m.wrappedValue), erase: true, inWR: inWR) {
     
 //        h.wrappedValue = .empty
@@ -221,7 +221,7 @@ func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newG
 //        h.wrappedValue.members.append(m.wrappedValue)
 //        Fetch().addToWR(m: m, myId: myId, h: h){
 
-            Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite)
+//            Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite)
         
 //    }
     
