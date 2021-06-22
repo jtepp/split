@@ -424,7 +424,7 @@ class Fetch: ObservableObject {
         completion()
     }
     
-    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, completion: @escaping (Bool) -> Void) {
+    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, completion: (() -> Void)? = {}) {
             var house = House.empty.id
 //            let startHouse = h.wrappedValue
             db.collection("houses").getDocuments { (querySnapshot, err) in
@@ -473,7 +473,7 @@ class Fetch: ObservableObject {
                                             self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                             self.getHouse(h: h, inWR: inWR, noProf: noProf)
                                             showInvite.wrappedValue = false
-                                            completion(true)
+                                            (completion ?? {})()
                                         }
                                         //
                                         
@@ -481,7 +481,6 @@ class Fetch: ObservableObject {
                                         msg.wrappedValue = "Member already exists by that name"
                                         showAlert.wrappedValue = true
                                         tapped.wrappedValue = false
-                                        completion(false)
                                     }
                                     
                                 }
@@ -492,7 +491,6 @@ class Fetch: ObservableObject {
                                 showAlert.wrappedValue = true
                                 tapped.wrappedValue = false
                                 msg.wrappedValue = "Incorrect password"
-                                completion(false)
                             }
                             
                         }

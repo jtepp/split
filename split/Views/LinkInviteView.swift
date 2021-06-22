@@ -142,7 +142,7 @@ struct LinkInviteView: View {
                     transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                 }
             } else {
-                Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite){_ in}
+                Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
             }
             showInvite = false
         }, content: {
@@ -184,14 +184,25 @@ func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newG
         let mmm = m.wrappedValue
         h.wrappedValue.members.append(m.wrappedValue)
         Fetch().addToWR(m: m, myId: myId, h: h){
+<<<<<<< HEAD
+<<<<<<< HEAD
             Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){ go in
                 if go {
                     Fetch().getHouse(h: h, inWR: inWR, noProf: noProf)
-                    Fetch().deleteAccount(m: .constant(mmm), erase: true, inWR: .constant(false), transfer: true){
+                    Fetch().deleteAccount(m: .constant(mmm), inWR: .constant(false), transfer: true){
                         print("asfas\(m.wrappedValue.name)d\(m.wrappedValue.id)fas")
-                        Fetch().getHouse(h: h, inWR: inWR, noProf: noProf)
                     }
                 }
+=======
+            Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){
+                Fetch().getHouse(h: h, inWR: inWR, noProf: noProf)
+                Fetch().deleteAccount(m: .constant(mmm), inWR: .constant(false), transfer: true)
+>>>>>>> parent of c83922e6 (added (bool) to switch)
+=======
+            Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){
+                Fetch().getHouse(h: h, inWR: inWR, noProf: noProf)
+                Fetch().deleteAccount(m: .constant(mmm), inWR: .constant(false), transfer: true)
+>>>>>>> parent of c83922e6 (added (bool) to switch)
             }
         }
         
