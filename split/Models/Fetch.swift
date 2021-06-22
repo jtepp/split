@@ -424,7 +424,7 @@ class Fetch: ObservableObject {
         completion()
     }
     
-    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, completion: (() -> Void)? = {}) {
+    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false) {
             var house = House.empty.id
 //            let startHouse = h.wrappedValue
             db.collection("houses").getDocuments { (querySnapshot, err) in
@@ -432,8 +432,7 @@ class Fetch: ObservableObject {
                     print(err.debugDescription)
                     return
                 }
-                
-//                if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
+                if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
                     documents.forEach { (doc) in
                         if doc.documentID == newGroup {
                             house = doc.documentID
@@ -473,7 +472,6 @@ class Fetch: ObservableObject {
                                             self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                             self.getHouse(h: h, inWR: inWR, noProf: noProf)
                                             showInvite.wrappedValue = false
-                                            (completion ?? {})()
                                         }
                                         //
                                         
@@ -495,11 +493,11 @@ class Fetch: ObservableObject {
                             
                         }
                     }
-//                } else {
-//                    showAlert.wrappedValue = true
-//                    tapped.wrappedValue = false
-//                    msg.wrappedValue = "Please leave your current group before opening an invite link"
-//                }
+                } else {
+                    showAlert.wrappedValue = true
+                    tapped.wrappedValue = false
+                    msg.wrappedValue = "Please leave your current group before opening an invite link"
+                }
 
     //            if house == House.empty.id {
     //                showAlert.wrappedValue = true
