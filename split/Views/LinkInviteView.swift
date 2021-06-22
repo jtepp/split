@@ -74,10 +74,9 @@ struct LinkInviteView: View {
                     } else {
                         print("SDFSDFSDDFSFDFS\(m.admin)")
                         // if admin and house has more, show switch
-                        let lastM = m
                         if h.members.count > 1 {
                             if m.admin {
-                                msg = "You have to choose a new Group admin before you leave"
+                                msg = "You have to choose a new Group Admin before you leave"
                                 showAlert = true
                                 print("COUNTERHERE \(h.members.count)")
                             } else {
@@ -126,7 +125,7 @@ struct LinkInviteView: View {
             .padding()
         }
         .alert(isPresented: $showAlert, content: {
-            if msg == "You have to choose a new Group admin before you leave" {
+            if msg == "You have to choose a new Group Admin before you leave" {
                 return Alert(title: Text("Choose Admin"), message: Text(msg), primaryButton: Alert.Button.destructive(Text("Choose Admin"), action: {
                     showSheet = true
                     showEdit = false
@@ -138,11 +137,10 @@ struct LinkInviteView: View {
             }
         })
         .sheet(isPresented: $showSheet, onDismiss: {
-            let lastM = m
             if !choice.isEmpty {
-                Fetch().swapAdmin(m: choice.first!, h: h)
-//            }
-                transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                Fetch().swapAdmin(m: choice.first!, h: h) {
+                    transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                }
             } else {
                 Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
             }
@@ -187,6 +185,7 @@ func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newG
         h.wrappedValue.members.append(m.wrappedValue)
         Fetch().addToWR(m: m, myId: myId, h: h){
             Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){
+                Fetch().getHouse(h: h, inWR: inWR, noProf: noProf)
                 Fetch().deleteAccount(m: .constant(mmm), inWR: .constant(false), transfer: true)
             }
         }

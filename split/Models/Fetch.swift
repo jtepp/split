@@ -384,7 +384,7 @@ class Fetch: ObservableObject {
             }
             
         }}
-    func swapAdmin(m:Member, h:House){
+    func swapAdmin(m:Member, h:House, completion: @escaping () -> Void = {}){
         db.collection("houses/"+h.id+"/members").getDocuments{ (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("no house by id %s, or maybe no members..?", h.id)
@@ -395,11 +395,12 @@ class Fetch: ObservableObject {
                 self.db.document("houses/\(h.id)/members/\(id)").updateData(["admin": id == m.id ? true : false])
                 if m.id == id {
                     self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was made the Group Admin", isAn: true), h: h)
+                    completion()
                 }
             }
         }
     }
-    func addToWR(m: Binding<Member>, myId: Binding<String>, h: Binding<House>, _ completion: () -> Void = {}){
+    func addToWR(m: Binding<Member>, myId: Binding<String>, h: Binding<House>, _ completion: @escaping () -> Void){
         if myId.wrappedValue == "" {
         db.collection("waitingRoom").addDocument(data: ["name":m.wrappedValue.name, "image":m.wrappedValue.image]).getDocument { (documentSnapshot, err) in
             UserDefaults.standard.set(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
@@ -423,7 +424,7 @@ class Fetch: ObservableObject {
         completion()
     }
     
-    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, _ completion: () -> Void = {}) {
+    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, completion: (() -> Void)? = {}) {
             var house = House.empty.id
 //            let startHouse = h.wrappedValue
             db.collection("houses").getDocuments { (querySnapshot, err) in
@@ -472,7 +473,7 @@ class Fetch: ObservableObject {
                                             self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                             self.getHouse(h: h, inWR: inWR, noProf: noProf)
                                             showInvite.wrappedValue = false
-                                            completion()
+                                            (completion ?? {})()
                                         }
                                         //
                                         
@@ -602,7 +603,7 @@ class Fetch: ObservableObject {
         //        }
     }
     
-    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>) {
+    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>, transfer: Bool = false) {
         if m.wrappedValue.home != "" {
             self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
