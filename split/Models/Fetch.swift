@@ -603,7 +603,7 @@ class Fetch: ObservableObject {
         //        }
     }
     
-    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>, transfer: Bool = false) {
+    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>, transfer: Bool = false, _ completion: @escaping () -> Void = {}) {
         if m.wrappedValue.home != "" {
             self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
@@ -640,6 +640,7 @@ class Fetch: ObservableObject {
                     inWR.wrappedValue = true
                     m.wrappedValue.id = ""
                 }
+                completion()
             }
         }
         

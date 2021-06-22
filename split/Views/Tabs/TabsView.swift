@@ -30,7 +30,7 @@ struct TabsView: View {
                         .tag(2)
                     ProfileView(house: $house, m: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
-                    }) ?? Member.empty), inWR: $inWR, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
+                    }) ?? Member.empty), inWR: $inWR, noProf: $noProf, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
                     })?.showStatus ?? Member.empty.showStatus))
                         .tag(3)
