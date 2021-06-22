@@ -424,6 +424,98 @@ class Fetch: ObservableObject {
         completion()
     }
     
+    func checkSwitch(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, completion: @escaping (Bool) -> Void) {
+        
+        
+                var house = House.empty.id
+    //            let startHouse = h.wrappedValue
+                db.collection("houses").getDocuments { (querySnapshot, err) in
+                    guard let documents = querySnapshot?.documents else {
+                        print(err.debugDescription)
+                        return
+                    }
+//                    if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
+                        documents.forEach { (doc) in
+                            if doc.documentID == newGroup {
+                                house = doc.documentID
+                                let d = doc.data()
+                                let p = (d["password"] ?? "") as! String
+                                
+                                if newPass == p {
+                                    //add this member to house, remove from wr set userdefaults and call for a refresh
+                                    let mm = m.wrappedValue
+                                    print("mm \(mm)")
+                                    print("house \(house)")
+                                    print("hid \(doc.documentID)")
+                                    print("mid switching \(mm.id)")
+                                    UserDefaults.standard.set(mm.id, forKey: "myId")
+                                    
+                                    
+                                    self.db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
+                                        guard let docs = querySnapshot?.documents else {
+                                            print(err.debugDescription)
+                                            completion(false)
+                                            return
+                                        }
+                                        if !docs.contains(where: { doc in
+                                            let data = doc.data()
+                                            let name = data["name"] ?? ""
+                                            return name as! String == m.wrappedValue.name
+                                            
+                                        }) {
+                                            //
+//                                            self.db.document("houses/\(doc.documentID)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
+//                                                h.wrappedValue.id = doc.documentID
+//                                                h.wrappedValue.members.append(m.wrappedValue)
+//                                                UserDefaults.standard.set(mm.id, forKey: "myId")
+//                                                print("ISTHISIT \(doc.documentID)")
+//                                                UserDefaults.standard.set(doc.documentID, forKey: "houseId")
+//                                                inWR.wrappedValue = false
+//                                                self.db.document("waitingRoom/\(mm.id)").delete()
+//                                                self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+//                                                self.getHouse(h: h, inWR: inWR, noProf: noProf)
+//                                                showInvite.wrappedValue = false
+//                                            }
+                                            //
+                                            completion(true)
+                                            
+                                        } else {
+                                            msg.wrappedValue = "Member already exists by that name"
+                                            showAlert.wrappedValue = true
+                                            tapped.wrappedValue = false
+                                            completion(false)
+                                        }
+                                        
+                                    }
+                                    
+                                    
+                                    
+                                } else {
+                                    showAlert.wrappedValue = true
+                                    tapped.wrappedValue = false
+                                    msg.wrappedValue = "Incorrect password"
+                                    completion(false)
+                                }
+                                
+                            }
+                        }
+//                    } else {
+//                        showAlert.wrappedValue = true
+//                        tapped.wrappedValue = false
+//                        msg.wrappedValue = "Please leave your current group before opening an invite link"
+//                    }
+
+        //            if house == House.empty.id {
+        //                showAlert.wrappedValue = true
+        //                tapped.wrappedValue = false
+        //                msg.wrappedValue = "Group not found"
+        //            }
+                    tapped.wrappedValue = false
+                }
+                
+        
+    }
+    
     func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false) {
             var house = House.empty.id
 //            let startHouse = h.wrappedValue

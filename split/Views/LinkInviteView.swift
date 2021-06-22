@@ -67,26 +67,54 @@ struct LinkInviteView: View {
 //                    showAlert = true
 //                    print("SDFSDFSDSDFSDF\(showAlert)")
                     tapped = true
-                    if noProf {
-                        print("noprof inv")
-                        showSheet = true
-                        showEdit = true
-                    } else {
-                        print("SDFSDFSDDFSFDFS\(m.admin)")
-                        // if admin and house has more, show switch
-                        if h.members.count > 1 {
-                            if m.admin {
-                                msg = "You have to choose a new Group Admin before you leave"
-                                showAlert = true
-                                print("COUNTERHERE \(h.members.count)")
+                    
+                    if h.id == "" || h.id == "waitingRoom" {
+                        if noProf {
+                            print("noprof inv")
+                            showSheet = true
+                            showEdit = true
+                        } else {
+                            print("SDFSDFSDDFSFDFS\(m.admin)")
+                            // if admin and house has more, show switch
+                            if h.members.count > 1 {
+                                if m.admin {
+                                    msg = "You have to choose a new Group Admin before you leave"
+                                    showAlert = true
+                                    print("COUNTERHERE \(h.members.count)")
+                                } else {
+                                    transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                                }
                             } else {
                                 transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                             }
-                        } else {
-                            transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                         }
-                    }
+                    } else {
                         
+                        if noProf {
+                            print("noprof inv")
+                            Fetch().checkSwitch(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite){ go in
+                                print("gogogo\(go)")
+                            }
+//                            showSheet = true
+//                            showEdit = true
+                        }
+//                        else {
+//                            print("SDFSDFSDDFSFDFS\(m.admin)")
+//                            // if admin and house has more, show switch
+//                            if h.members.count > 1 {
+//                                if m.admin {
+//                                    msg = "You have to choose a new Group Admin before you leave"
+//                                    showAlert = true
+//                                    print("COUNTERHERE \(h.members.count)")
+//                                } else {
+//                                    transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+//                                }
+//                            } else {
+//                                transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+//                            }
+//                        }
+                        
+                    }
                     
             }, label: {
                 HStack {
