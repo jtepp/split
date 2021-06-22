@@ -524,7 +524,7 @@ class Fetch: ObservableObject {
         
     }
     
-    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false) {
+    func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
             var house = House.empty.id
 //            let startHouse = h.wrappedValue
             db.collection("houses").getDocuments { (querySnapshot, err) in
@@ -532,7 +532,7 @@ class Fetch: ObservableObject {
                     print(err.debugDescription)
                     return
                 }
-//                if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
+                if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
                     documents.forEach { (doc) in
                         if doc.documentID == newGroup {
                             house = doc.documentID
@@ -577,9 +577,9 @@ class Fetch: ObservableObject {
                                         
                                     } else {
                                         print("NAM\(m.wrappedValue.name)")
-                                        msg.wrappedValue = "Member already exists by that name"
-                                        showAlert.wrappedValue = true
-                                        tapped.wrappedValue = false
+                                            msg.wrappedValue = "Member already exists by that name"
+                                            showAlert.wrappedValue = true
+                                            tapped.wrappedValue = false
                                     }
                                     
                                 }
@@ -594,11 +594,11 @@ class Fetch: ObservableObject {
                             
                         }
                     }
-//                } else {
-//                    showAlert.wrappedValue = true
-//                    tapped.wrappedValue = false
-//                    msg.wrappedValue = "Please leave your current group before opening an invite link"
-//                }
+                } else {
+                    showAlert.wrappedValue = true
+                    tapped.wrappedValue = false
+                    msg.wrappedValue = "Please leave your current group before opening an invite link"
+                }
 
     //            if house == House.empty.id {
     //                showAlert.wrappedValue = true
@@ -610,7 +610,7 @@ class Fetch: ObservableObject {
             
         }
     
-    func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false) {
+    func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false, approved: Bool = false) {
         var house = House.empty.id
         db.collection("houses").getDocuments { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
@@ -664,9 +664,12 @@ class Fetch: ObservableObject {
                                     //
                                     
                                 } else {
-                                    tapped.wrappedValue = false
-                                    msg.wrappedValue = "Member already exists by that name"
-                                    showAlert.wrappedValue = true
+                                    print("LOOOF\(approved) \(mm.dict())")
+                                    if !approved {
+                                        tapped.wrappedValue = false
+                                        msg.wrappedValue = "Member already exists by that name"
+                                        showAlert.wrappedValue = true
+                                    }
                                 }
                                 
                             }
