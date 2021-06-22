@@ -212,6 +212,13 @@ func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newG
     
     Fetch().checkSwitch(h: h.wrappedValue, m: m.wrappedValue, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){ go in
         print("OGOGOGO\(go)")
+        if go {
+            Fetch().deleteAccount(m: .constant(m.wrappedValue), inWR: .constant(false)){
+                Fetch().addToWR(m: m, myId: myId, h: h){
+                    Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite)
+                }
+            }
+        }
     }
     
 //    Fetch().deleteAccount(m: .constant(m.wrappedValue), erase: true, inWR: inWR) {
