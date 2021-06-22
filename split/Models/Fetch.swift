@@ -327,7 +327,7 @@ class Fetch: ObservableObject {
                 }
             }
             //        let id = UserDefaults.standard.string(forKey: "myId")
-            print("\n\nowes\(owesMe)\n\n\n\(iOwe)\niown")
+//            print("\n\nowes\(owesMe)\n\n\n\(iOwe)\niown")
             iOwe.forEach { (key: String, value: Float) in
                 if abs(value - (owesMe[key] ?? Float(0))) < 0.01 {
                     iOwe[key] = 0
@@ -424,7 +424,7 @@ class Fetch: ObservableObject {
         completion()
     }
     
-    func checkSwitch(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, completion: @escaping (Bool) -> Void) {
+    func checkSwitch(h: House, m: Member, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, completion: @escaping (Bool) -> Void) {
         
         
                 var house = House.empty.id
@@ -443,12 +443,11 @@ class Fetch: ObservableObject {
                                 
                                 if newPass == p {
                                     //add this member to house, remove from wr set userdefaults and call for a refresh
-                                    let mm = m.wrappedValue
-                                    print("mm \(mm)")
+                                    print("mm \(m)")
                                     print("house \(house)")
                                     print("hid \(doc.documentID)")
-                                    print("mid switching \(mm.id)")
-                                    UserDefaults.standard.set(mm.id, forKey: "myId")
+                                    print("mid switching \(m.id)")
+//                                    UserDefaults.standard.set(mm.id, forKey: "myId")
                                     
                                     
                                     self.db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
@@ -460,7 +459,7 @@ class Fetch: ObservableObject {
                                         if !docs.contains(where: { doc in
                                             let data = doc.data()
                                             let name = data["name"] ?? ""
-                                            return name as! String == m.wrappedValue.name
+                                            return name as! String == m.name
                                             
                                         }) {
                                             //

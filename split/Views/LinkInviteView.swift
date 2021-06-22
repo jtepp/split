@@ -68,7 +68,7 @@ struct LinkInviteView: View {
 //                    print("SDFSDFSDSDFSDF\(showAlert)")
                     tapped = true
                     
-                    if h.id == "" || h.id == "waitingRoom" {
+//                    if h.id == "" || h.id == "waitingRoom" {
                         if noProf {
                             print("noprof inv")
                             showSheet = true
@@ -88,33 +88,33 @@ struct LinkInviteView: View {
                                 transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                             }
                         }
-                    } else {
-                        
-                        if noProf {
-                            print("noprof inv")
-                            Fetch().checkSwitch(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite){ go in
-                                print("gogogo\(go)")
-                            }
-//                            showSheet = true
-//                            showEdit = true
-                        }
-//                        else {
-//                            print("SDFSDFSDDFSFDFS\(m.admin)")
-//                            // if admin and house has more, show switch
-//                            if h.members.count > 1 {
-//                                if m.admin {
-//                                    msg = "You have to choose a new Group Admin before you leave"
-//                                    showAlert = true
-//                                    print("COUNTERHERE \(h.members.count)")
-//                                } else {
-//                                    transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
-//                                }
-//                            } else {
-//                                transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+//                    } else {
+//                        
+//                        if noProf {
+//                            print("noprof inv")
+//                            Fetch().checkSwitch(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite){ go in
+//                                print("gogogo\(go)")
 //                            }
+////                            showSheet = true
+////                            showEdit = true
 //                        }
-                        
-                    }
+////                        else {
+////                            print("SDFSDFSDDFSFDFS\(m.admin)")
+////                            // if admin and house has more, show switch
+////                            if h.members.count > 1 {
+////                                if m.admin {
+////                                    msg = "You have to choose a new Group Admin before you leave"
+////                                    showAlert = true
+////                                    print("COUNTERHERE \(h.members.count)")
+////                                } else {
+////                                    transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+////                                }
+////                            } else {
+////                                transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+////                            }
+////                        }
+//                        
+//                    }
                     
             }, label: {
                 HStack {
@@ -170,7 +170,7 @@ struct LinkInviteView: View {
                     transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                 }
             } else {
-                Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
             }
             showInvite = false
         }, content: {
@@ -210,7 +210,7 @@ struct LinkInviteView_Previews: PreviewProvider {
 
 func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
     
-    Fetch().checkSwitch(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){ go in
+    Fetch().checkSwitch(h: h.wrappedValue, m: m.wrappedValue, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){ go in
         print("OGOGOGO\(go)")
     }
     
