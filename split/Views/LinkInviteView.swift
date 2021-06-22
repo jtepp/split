@@ -142,7 +142,7 @@ struct LinkInviteView: View {
                     transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                 }
             } else {
-                Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite){_ in}
             }
             showInvite = false
         }, content: {
@@ -184,9 +184,13 @@ func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newG
         let mmm = m.wrappedValue
         h.wrappedValue.members.append(m.wrappedValue)
         Fetch().addToWR(m: m, myId: myId, h: h){
-            Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){
-                Fetch().getHouse(h: h, inWR: inWR, noProf: noProf)
-                Fetch().deleteAccount(m: .constant(mmm), inWR: .constant(false), transfer: true)
+            Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){ go in
+                if go {
+                    Fetch().getHouse(h: h, inWR: inWR, noProf: noProf)
+                    Fetch().deleteAccount(m: .constant(mmm), inWR: .constant(false), transfer: true){
+                        print("asfas\(m.wrappedValue.name)d\(m.wrappedValue.id)fas")
+                    }
+                }
             }
         }
         
