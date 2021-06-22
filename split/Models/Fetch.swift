@@ -479,6 +479,7 @@ class Fetch: ObservableObject {
                                             completion(true)
                                             
                                         } else {
+                                            print("NAM2\(m.dict())")
                                             msg.wrappedValue = "Member already exists by that name"
                                             showAlert.wrappedValue = true
                                             tapped.wrappedValue = false
@@ -523,7 +524,7 @@ class Fetch: ObservableObject {
                     print(err.debugDescription)
                     return
                 }
-                if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
+//                if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
                     documents.forEach { (doc) in
                         if doc.documentID == newGroup {
                             house = doc.documentID
@@ -567,6 +568,7 @@ class Fetch: ObservableObject {
                                         //
                                         
                                     } else {
+                                        print("NAM\(m.wrappedValue.name)")
                                         msg.wrappedValue = "Member already exists by that name"
                                         showAlert.wrappedValue = true
                                         tapped.wrappedValue = false
@@ -584,11 +586,11 @@ class Fetch: ObservableObject {
                             
                         }
                     }
-                } else {
-                    showAlert.wrappedValue = true
-                    tapped.wrappedValue = false
-                    msg.wrappedValue = "Please leave your current group before opening an invite link"
-                }
+//                } else {
+//                    showAlert.wrappedValue = true
+//                    tapped.wrappedValue = false
+//                    msg.wrappedValue = "Please leave your current group before opening an invite link"
+//                }
 
     //            if house == House.empty.id {
     //                showAlert.wrappedValue = true
