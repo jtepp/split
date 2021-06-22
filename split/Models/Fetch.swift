@@ -72,6 +72,9 @@ class Fetch: ObservableObject {
                     } else {
                         print("gotovoid2")
                         UserDefaults.standard.set("", forKey: "houseId")
+                        UserDefaults.standard.set("", forKey: "myId")
+                        h.wrappedValue = .empty
+                        
                         noProf.wrappedValue = true
                         inWR.wrappedValue = true
                     }
@@ -396,18 +399,28 @@ class Fetch: ObservableObject {
             }
         }
     }
-    func addToWR(m: Binding<Member>, myId: Binding<String>, h: Binding<House>){
+    func addToWR(m: Binding<Member>, myId: Binding<String>, h: Binding<House>, _ completion: () -> Void = {}){
+        if myId.wrappedValue == "" {
         db.collection("waitingRoom").addDocument(data: ["name":m.wrappedValue.name, "image":m.wrappedValue.image]).getDocument { (documentSnapshot, err) in
-            UserDefaults.standard.set(documentSnapshot?.documentID ?? "", forKey: "myId")
-            myId.wrappedValue = documentSnapshot?.documentID ?? ""
-            m.wrappedValue.id = documentSnapshot?.documentID ?? ""
+            UserDefaults.standard.set(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
+            myId.wrappedValue = documentSnapshot?.documentID ?? "wrbs"
+            m.wrappedValue.id = documentSnapshot?.documentID ?? "wrbs"
             m.wrappedValue.home = "waitingRoom"
             h.members.wrappedValue.append(m.wrappedValue)
             
         }
+        } else {
+            db.document("waitingRoom/\(myId.wrappedValue)").updateData(["name":m.wrappedValue.name, "image":m.wrappedValue.image]){ (err) in
+                UserDefaults.standard.set(myId.wrappedValue, forKey: "myId")
+                m.wrappedValue.id = myId.wrappedValue
+                m.wrappedValue.home = "waitingRoom"
+                h.members.wrappedValue.append(m.wrappedValue)
+                
+            }
+        }
         UserDefaults.standard.set("waitingRoom", forKey: "houseId")
         
-        
+        completion()
     }
     
     func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false) {
@@ -588,7 +601,7 @@ class Fetch: ObservableObject {
         //        }
     }
     
-    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>) {
+    func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>, _ completion: () -> Void = {}) {
         if m.wrappedValue.home != "" {
             self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
@@ -626,6 +639,8 @@ class Fetch: ObservableObject {
                 
             }
         }
+        completion()
+        
     }
     
     func placeToken(h: Binding<House>, id: String, token: String) {

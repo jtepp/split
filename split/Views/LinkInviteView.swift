@@ -64,22 +64,30 @@ struct LinkInviteView: View {
             VStack {
                 Button(action: {
 //                    showInvite = false
+//                    showAlert = true
+//                    print("SDFSDFSDSDFSDF\(showAlert)")
                     tapped = true
                     if noProf {
                         print("noprof inv")
                         showSheet = true
                         showEdit = true
-                    }
-                    else {
+                    } else {
+                        print("SDFSDFSDDFSFDFS\(m.admin)")
                         // if admin and house has more, show switch
-                        if m.admin {
-                        msg = "You have to choose a new Group admin before you leave"
-                          showAlert = true
-                            print("COUNTERHERE \(h.members.count)")
+                        let lastM = m
+                        if h.members.count > 1 {
+                            if m.admin {
+                                msg = "You have to choose a new Group admin before you leave"
+                                showAlert = true
+                                print("COUNTERHERE \(h.members.count)")
+                            } else {
+                                transfer(m: $m, h: $h, lastM: lastM, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                            }
                         } else {
-                            Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                            transfer(m: $m, h: $h, lastM: lastM, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                         }
                     }
+                        
                     
             }, label: {
                 HStack {
@@ -130,10 +138,14 @@ struct LinkInviteView: View {
             }
         })
         .sheet(isPresented: $showSheet, onDismiss: {
+            let lastM = m
             if !choice.isEmpty {
                 Fetch().swapAdmin(m: choice.first!, h: h)
+//            }
+                transfer(m: $m, h: $h, lastM: lastM, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+            } else {
+                Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
             }
-            Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
             showInvite = false
         }, content: {
             if showEdit {
@@ -147,6 +159,7 @@ struct LinkInviteView: View {
             }
         })
         .onAppear{
+            tapped = false
             print("asfasdf\n\n\(m.id)\n\n")
             Fetch().returnMembers(hId: newGroup, nm: $newMembers, msg: $msg, showAlert: $showAlert)
         }
@@ -164,4 +177,18 @@ struct LinkInviteView_Previews: PreviewProvider {
         LinkInviteView(inWR: .constant(true), noProf: .constant(false), showInvite: .constant(true), h: .constant(.placeholder), m: .constant(.placeholder), myId: .constant(""), newGroup: .constant("x9vd0sduWMWT5Zv1FTAD"), newPass: .constant("pass"), newName: .constant("name"), newMembers: [.empty])
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }
+}
+
+
+func transfer(m: Binding<Member>, h: Binding<House>, lastM: Member, myId: Binding<String>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
+    Fetch().deleteAccount(m: m, erase: true, inWR: inWR) {
+        h.wrappedValue = .empty
+        m.wrappedValue = lastM
+        h.wrappedValue.members.append(m.wrappedValue)
+        Fetch().addToWR(m: m, myId: myId, h: h){
+            Fetch().switchToHouse(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite)
+        }
+        
+    }
+    
 }
