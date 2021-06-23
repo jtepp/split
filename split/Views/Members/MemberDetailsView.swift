@@ -95,7 +95,7 @@ struct MenuButton: View {
                         showRemove = true
                     } label: {
                         Text("Remove from group")
-                        Image(systemName: "person.badge")
+                        Image(systemName: "person.badge.minus")
                     }
 
                 }, label: {
