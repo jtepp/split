@@ -74,7 +74,7 @@ struct ActivityView: View {
                                     }, label: {
                                         Text("Delete")
 //                                            .foregroundColor(.red)
-                                        Image(systemName: "trash.fill")
+                                        Image(systemName: "trash")
 //                                            .foregroundColor(.red)
                                         
                                     }
@@ -113,7 +113,7 @@ struct ActivityView: View {
                                         }, label: {
                                             Text("Delete")
                                                 .foregroundColor(.red)
-                                            Image(systemName: "trash.fill")
+                                            Image(systemName: "trash")
                                                 .foregroundColor(.red)
                                             
                                         }
@@ -131,7 +131,7 @@ struct ActivityView: View {
                                     }, label: {
                                         Text("Delete")
                                             .foregroundColor(.red)
-                                        Image(systemName: "trash.fill")
+                                        Image(systemName: "trash")
                                             .foregroundColor(.red)
                                         
                                     }
@@ -153,7 +153,7 @@ struct ActivityView: View {
                                         Fetch().deletePayment(p: payment, h: house)
                                     }, label: {
                                         Text("Delete")
-                                        Image(systemName: "trash.fill")
+                                        Image(systemName: "trash")
                                     }
                                     )
                                 })

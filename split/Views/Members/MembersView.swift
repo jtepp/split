@@ -36,11 +36,14 @@ struct MembersView: View {
                             UIPasteboard.general.string = "Join my group on spllit!\nspllit://\(house.id)$\(house.password)"
                         } label: {
                             Text("Copy group invite")
+                            Image(systemName: "link.circle")
                         }
                         Button {
                             UIPasteboard.general.string = "\(house.id)"
                         } label: {
                             Text("Copy group ID")
+                            Image(systemName: "doc.on.doc")
+                            
                         }
                         
                         Text("Password: \(house.password)")
@@ -62,7 +65,7 @@ struct MembersView: View {
                                 showRemove = false
                             } label: {
                                 Text("Set as admin")
-                                Image(systemName: "crown.fill")
+                                Image(systemName: "crown")
                             }
                             Button {
                                 tappedMember = member
@@ -70,7 +73,7 @@ struct MembersView: View {
                                 showRemove = true
                             } label: {
                                 Text("Remove from group")
-                                Image(systemName: "person.badge.minus.fill")
+                                Image(systemName: "person.badge.minus")
                             }
                             
                         })

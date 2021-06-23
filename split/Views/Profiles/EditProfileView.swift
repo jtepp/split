@@ -35,6 +35,7 @@ struct EditProfileView: View {
                                 sourceType = .camera
                             }, label: {
                                 Text("Take Picture")
+                                Image(systemName: "camera.on.rectangle")
                             })
                             Button(action: {
                                 showImagePicker = true
@@ -43,6 +44,7 @@ struct EditProfileView: View {
                                 
                             }, label: {
                                 Text("Choose from Library")
+                                Image(systemName: "photo.on.rectangle")
                             })
                             
                         }, label: {

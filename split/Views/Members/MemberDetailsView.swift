@@ -89,13 +89,13 @@ struct MenuButton: View {
                         showAdminAlert = true
                     } label: {
                         Text("Set as admin")
-                        Image(systemName: "crown.fill")
+                        Image(systemName: "crown")
                     }
                     Button {
                         showRemove = true
                     } label: {
                         Text("Remove from group")
-                        Image(systemName: "person.badge.minus.fill")
+                        Image(systemName: "person.badge")
                     }
 
                 }, label: {

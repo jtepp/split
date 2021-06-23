@@ -78,6 +78,7 @@ struct ProfileView: View {
                                 showSheet = true
                             }, label: {
                                 Text("Take Picture")
+                                Image(systemName: "camera.on.rectangle")
                             })
                             Button(action: {
                                 sourceType = .photoLibrary
@@ -87,6 +88,7 @@ struct ProfileView: View {
                                 
                             }, label: {
                                 Text("Choose from Library")
+                                Image(systemName: "photo.on.rectangle")
                             })
                             
                         }, label: {
