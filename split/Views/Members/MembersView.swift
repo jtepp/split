@@ -50,6 +50,38 @@ struct MembersView: View {
                         
                     })
                 Spacer()
+                Menu {
+
+                        Button {
+                            UIPasteboard.general.string = "Join my group on spllit!\nspllit://\(house.id)$\(house.password)"
+                        } label: {
+                            Text("Copy group invite")
+                            Image(systemName: "link.circle")
+                        }
+                        Button {
+                            UIPasteboard.general.string = "\(house.id)"
+                        } label: {
+                            Text("Copy group ID")
+                            Image(systemName: "doc.on.doc")
+                            
+                        }
+                        
+                        Text("Password: \(house.password)")
+                        
+                } label: {
+                    Image(systemName: "link")
+                                            .font(Font.body.bold())
+                                            .foregroundColor(.white)
+                                            .padding(12)
+                                            .background(
+                                                Circle()
+                                                    .fill(
+                                                        Color.gray.opacity(0.2)
+                                                    )
+                                            )
+                        
+                }
+                .padding(.trailing)
             }
             ForEach(house.members) { member in
                 if member.id != UserDefaults.standard.string(forKey: "myId") && house.members.first(where: { mr in

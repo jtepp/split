@@ -50,7 +50,7 @@ struct ProfileView: View {
                     Image(systemName: "ellipsis")
                         .foregroundColor(.white)
                         .font(Font.body.bold())
-                        .padding()
+                        .padding(18)
                         .background(
                             Circle()
                                 .fill(
