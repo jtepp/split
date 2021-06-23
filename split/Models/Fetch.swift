@@ -823,21 +823,56 @@ class Fetch: ObservableObject {
                 print("maidwhoopsies")
                 return
             }
-            documents.forEach { qds in
+            documents.forEach { houseq in
                 //if needed, here would be where to add delete all empty houses
 //                print("\(qds.documentID) - \(newGroup) -> \(qds.documentID == newGroup)")
-                if qds.documentID != m.wrappedValue.home {
-                    self.db.collection("houses/\(qds.documentID)/members").getDocuments { documentSnapshot, err in
+                if houseq.documentID != m.wrappedValue.home {
+                    self.db.collection("houses/\(houseq.documentID)/members").getDocuments { documentSnapshot, err in
                         guard let doc = documentSnapshot?.documents else {
                             print("maindocerrr")
                             return
                         }
-                        
-                        doc.forEach { sdq in
-                            if sdq.documentID == m.wrappedValue.id {
+                        let empt = doc.count == 1
+                        doc.forEach { memberq in
+                            if memberq.documentID == m.wrappedValue.id {
                                 //delete
-                                print("FOUNDMAID\(qds.documentID)\(sdq.documentID)")
-
+                                print("FOUNDMAID\(houseq.documentID)\(memberq.documentID)")
+                                
+                                if empt {
+                                    self.db.collection("houses/\(houseq.documentID)/members").getDocuments { qs, e in
+                                        qs?.documents.forEach({ qqq in
+                                            self.db.document("houses/\(houseq.documentID)/members/\(qqq.documentID)").delete()
+                                        })
+                                    }
+                                    self.db.collection("houses/\(houseq.documentID)/payments").getDocuments { qs, e in
+                                        qs?.documents.forEach({ qqq in
+                                            self.db.document("houses/\(houseq.documentID)/payments/\(qqq.documentID)").delete()
+                                        })
+                                    }
+                                } else {
+                                    //delete member
+                                    self.db.document("houses/\(houseq.documentID)/members/\(memberq.documentID)").delete()
+                                    //delete payments
+                                    self.db.collection("houses/\(houseq.documentID)/members/\(memberq.documentID)").getDocuments { payq, err in
+                                        guard let pays = payq?.documents else {
+                                            return
+                                        }
+                                        pays.filter({ payeachfilter in
+                                            let d = payeachfilter.data()
+                                            let to = (d["to"] ?? "") as! String
+                                            let from = (d["from"] ?? "") as! String
+                                            let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
+                                            let isAn = d["isAn"] as? Bool ?? false
+                                            return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && !isAn
+                                        }).forEach { payeach in
+                                            self.db.document("houses/\(houseq.documentID)/payments/\(payeach.documentID)").delete()
+                                        }
+                                    }
+                                    //send payment
+                                    var hhh = House.empty
+                                    hhh.id = houseq.documentID
+                                    self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the group", isAn: true), h: hhh)
+                                }
                                 
                             }
                         }
