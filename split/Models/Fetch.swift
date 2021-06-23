@@ -47,6 +47,7 @@ class Fetch: ObservableObject {
                     
                     self.getPayments(h: h, id: id)
                     
+                    self.maid(m: m)
                         
                     let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
                     
@@ -359,7 +360,7 @@ class Fetch: ObservableObject {
         }
     }
     
-    func removeMember(m: Member, h: Binding<House>, left: Bool = false) {
+    func removeMember(m: Member, h: Binding<House>) {
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" {
             let docRef = db.document("houses/\(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSERMMEMBER")/members/\(m.id)")
             docRef.getDocument { (documentSnapshot, err) in
@@ -389,7 +390,7 @@ class Fetch: ObservableObject {
                         }
                     }
                     docRef.delete()
-                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: left ? "left the group" : "was removed from the group", isAn: true), h: h.wrappedValue)
+                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the group", isAn: true), h: h.wrappedValue)
                 })
             }
             
@@ -705,7 +706,6 @@ class Fetch: ObservableObject {
             self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
             showInvite.wrappedValue = false
             self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false), showInvite: showInvite)
-            self.maid(m: m, newGroup: newGroup)
         }
 //        self.getMembers(h: h, id: newGroup)
 //        self.getPayments(h: h, id: newGroup)
@@ -817,7 +817,7 @@ class Fetch: ObservableObject {
         }
     }
     
-    func maid(m: Binding<Member>, newGroup: String) {
+    func maid(m: Binding<Member>) {
         db.collection("houses").addSnapshotListener { querySnapshot, err in
             guard let documents = querySnapshot?.documents else {
                 print("maidwhoopsies")
@@ -825,8 +825,8 @@ class Fetch: ObservableObject {
             }
             documents.forEach { qds in
                 //if needed, here would be where to add delete all empty houses
-                if qds.documentID != newGroup {
-                    print("\(qds.documentID) - \(newGroup)")
+//                print("\(qds.documentID) - \(newGroup) -> \(qds.documentID == newGroup)")
+                if qds.documentID != m.wrappedValue.home {
                     self.db.collection("houses/\(qds.documentID)/members").getDocuments { documentSnapshot, err in
                         guard let doc = documentSnapshot?.documents else {
                             print("maindocerrr")
@@ -836,21 +836,16 @@ class Fetch: ObservableObject {
                         doc.forEach { sdq in
                             if sdq.documentID == m.wrappedValue.id {
                                 //delete
-                                var hhh = House.empty
-                                hhh.id = qds.documentID
                                 print("FOUNDMAID\(qds.documentID)\(sdq.documentID)")
-                                var bmr = m.wrappedValue
-                                bmr.id = sdq.documentID
-                                bmr.home = qds.documentID
-                                self.removeMember(m: bmr, h: .constant(hhh), left: true)
+
+                                
                             }
                         }
-                        
+                    }
                     }
                 }
-            }
-            
-            
+                
+                
         }
     }
     
