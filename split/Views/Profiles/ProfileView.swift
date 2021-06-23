@@ -109,7 +109,7 @@ struct ProfileView: View {
                     .font(.largeTitle)
                     .bold()
                 if m.admin {
-                    Text("Group admin")
+                    Text("Group Admin")
                 }
                 Spacer()
                 if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" && (UserDefaults.standard.string(forKey: "houseId") ?? "") != "waitingRoom" {
