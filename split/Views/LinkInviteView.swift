@@ -216,16 +216,14 @@ func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newG
         if go {
 //            Fetch().deleteAccount(m: .constant(m.wrappedValue), inWR: .constant(false)){
             
-            let home = m.wrappedValue.home
-            let id = m.wrappedValue.id
-            let name = m.wrappedValue.name
-            let bm = Member(id: id, home: home, name: name, image: "", showStatus: false)
+//            let home = m.wrappedValue.home
+//            let id = m.wrappedValue.id
+//            let name = m.wrappedValue.name
+//            let bm = Member(id: id, home: home, name: name, image: "", showStatus: false)
             
             Fetch().switchToHouseTwo(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite)
 //            }
-        } else {
-            tapped = false
-        }
+        } 
     }
     
 //    Fetch().deleteAccount(m: .constant(m.wrappedValue), erase: true, inWR: inWR) {
