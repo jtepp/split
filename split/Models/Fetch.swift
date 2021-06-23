@@ -487,6 +487,7 @@ class Fetch: ObservableObject {
 //                                                showInvite.wrappedValue = false
 //                                            }
                                             //
+                                            tapped.wrappedValue = true
                                             completion(true)
                                             
                                         } else {
