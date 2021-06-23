@@ -12,7 +12,7 @@ import FirebaseFirestore
 class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
-    func getHouse (h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>) {
+    func getHouse (h: Binding<House>, inWR: Binding<Bool>, noProf: Binding<Bool>) {
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != ""
         {
             let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
@@ -52,14 +52,6 @@ class Fetch: ObservableObject {
                         self.placeToken(h: h, id: myId, token: t)
                     }
                     
-                        if h.wrappedValue.members.first(where: { (m) -> Bool in
-                            return m.id == UserDefaults.standard.string(forKey: "myId")
-                        }) != nil {
-                            m.wrappedValue = h.wrappedValue.members.first(where: { (m) -> Bool in
-                                return m.id == UserDefaults.standard.string(forKey: "myId")
-                            })!
-                        }
-                        
                     if h.wrappedValue.members.first(where: { (m) -> Bool in
                         return m.id == UserDefaults.standard.string(forKey: "myId")
                     }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
@@ -432,7 +424,7 @@ class Fetch: ObservableObject {
         completion()
     }
     
-    func checkSwitch(h: House, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, completion: @escaping (Bool) -> Void) {
+    func checkSwitch(h: House, m: Member, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, completion: @escaping (Bool) -> Void) {
         
         
                 var house = House.empty.id
@@ -451,10 +443,10 @@ class Fetch: ObservableObject {
                                 
                                 if newPass == p {
                                     //add this member to house, remove from wr set userdefaults and call for a refresh
-                                    print("mm \(m.wrappedValue)")
+                                    print("mm \(m)")
                                     print("house \(house)")
                                     print("hid \(doc.documentID)")
-                                    print("mid switching \(m.wrappedValue.id)")
+                                    print("mid switching \(m.id)")
 //                                    UserDefaults.standard.set(mm.id, forKey: "myId")
                                     
                                     
@@ -467,7 +459,7 @@ class Fetch: ObservableObject {
                                         if !docs.contains(where: { doc in
                                             let data = doc.data()
                                             let name = data["name"] ?? ""
-                                            return name as! String == m.wrappedValue.name
+                                            return name as! String == m.name
                                             
                                         }) {
                                             //
@@ -487,7 +479,7 @@ class Fetch: ObservableObject {
                                             completion(true)
                                             
                                         } else {
-                                            print("NAM2\(m.wrappedValue.dict())")
+                                            print("NAM2\(m.dict())")
                                             msg.wrappedValue = "Member already exists by that name"
                                             showAlert.wrappedValue = true
                                             tapped.wrappedValue = false
@@ -570,7 +562,7 @@ class Fetch: ObservableObject {
                                             inWR.wrappedValue = false
                                             self.db.document("waitingRoom/\(mm.id)").delete()
                                             self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
-                                            self.getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
+                                            self.getHouse(h: h, inWR: inWR, noProf: noProf)
                                             showInvite.wrappedValue = false
                                         }
                                         //
@@ -654,7 +646,7 @@ class Fetch: ObservableObject {
                                 }) || forceAdmin {
                                     //
                                     self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "online": true, "showStatus": (UserDefaults.standard.bool(forKey: "statusSet")) ? mm.showStatus : true]) { _ in
-                                        self.getHouse(h: hh, m: m, inWR: inWR, noProf: .constant(false))
+                                        self.getHouse(h: hh, inWR: inWR, noProf: .constant(false))
                                         self.db.document("waitingRoom/\(mm.id)").delete()
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.standard.set(house, forKey: "houseId")

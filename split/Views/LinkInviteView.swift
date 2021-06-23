@@ -188,7 +188,7 @@ struct LinkInviteView: View {
         })
         .onAppear{
             tapped = false
-            print("LINKPEAR\(m.name)\n\n")
+            print("asfasdf\n\n\(m.id)\n\n")
             Fetch().returnMembers(hId: newGroup, nm: $newMembers, msg: $msg, showAlert: $showAlert)
         }
         .onChange(of: newName, perform: { _ in
@@ -210,7 +210,7 @@ struct LinkInviteView_Previews: PreviewProvider {
 
 func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
     
-    Fetch().checkSwitch(h: h.wrappedValue, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){ go in
+    Fetch().checkSwitch(h: h.wrappedValue, m: m.wrappedValue, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite){ go in
         print("OGOGOGO\(go)")
         if go {
             Fetch().deleteAccount(m: .constant(m.wrappedValue), inWR: .constant(false)){

@@ -54,7 +54,7 @@ struct MemberDetailsView: View {
             .alert(isPresented: $showRemove, content: {
                 Alert(title: Text("Remove \(member.name)"), message: Text("Are you sure you want to remove \(member.name) from this group?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
                     Fetch().removeMember(m: member, h: $house)
-                    Fetch().getHouse(h: $house, m: $member, inWR: .constant(false), noProf: .constant(false))
+                    Fetch().getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
                     showView = false
                 }), secondaryButton: Alert.Button.cancel())
             })
