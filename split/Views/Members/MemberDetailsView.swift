@@ -69,7 +69,7 @@ struct MemberDetailsView_Previews: PreviewProvider {
         Text("")
             .sheet(isPresented: .constant(true), content: {
                 MemberDetailsView(house: .constant(.placeholder), member: .constant(Member.placeholder), showView: .constant(true))
-                    .preferredColorScheme(.dark)
+//                    .preferredColorScheme(.dark)
             })
         
     }

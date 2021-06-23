@@ -49,7 +49,7 @@ struct EditProfileView: View {
                             Image(systemName: "camera.fill")
                                 .padding(10)
                                 .foregroundColor(.primary)
-                                .preferredColorScheme(.dark)
+//                                .preferredColorScheme(.dark)
                                 .background(
                                     Circle()
                                         .fill(

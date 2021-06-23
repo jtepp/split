@@ -23,6 +23,7 @@ struct ActivityView: View {
                     showSplash = true
                 }, label:{
                     Image(systemName: "questionmark")
+                        .font(Font.body.bold())
                         .foregroundColor(.white)
                         .padding()
                         .background(
