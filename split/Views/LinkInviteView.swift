@@ -168,10 +168,10 @@ struct LinkInviteView: View {
         .sheet(isPresented: $showSheet, onDismiss: {
             if !choice.isEmpty {
                 Fetch().swapAdmin(m: choice.first!, h: h) {
-                    transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                    Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                 }
             } else {
-                transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
             }
             showInvite = false
         }, content: {
@@ -223,6 +223,8 @@ func transfer(m: Binding<Member>, h: Binding<House>, myId: Binding<String>, newG
             
             Fetch().switchToHouseTwo(h: h, m: m, newGroup: newGroup, newPass: newPass, showAlert: showAlert, tapped: tapped, msg: msg, inWR: inWR, noProf: noProf, showInvite: showInvite)
 //            }
+        } else {
+            tapped = false
         }
     }
     
