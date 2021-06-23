@@ -170,7 +170,7 @@ struct LinkInviteView: View {
         .sheet(isPresented: $showSheet, onDismiss: {
             if !choice.isEmpty {
                 Fetch().swapAdmin(m: choice.first!, h: h) {
-                    Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
+                    transfer(m: $m, h: $h, myId: $myId, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)
                 }
             } else {
                 Fetch().switchToHouse(h: $h, m: $m, newGroup: newGroup, newPass: newPass, showAlert: $showAlert, tapped: $tapped, msg: $msg, inWR: $inWR, noProf: $noProf, showInvite: $showInvite)

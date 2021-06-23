@@ -49,7 +49,7 @@ struct MailView: UIViewControllerRepresentable {
         vc.mailComposeDelegate = context.coordinator
         vc.setToRecipients(["jtepp+spllit@icloud.com"])
         vc.setSubject("spllit Feedback")
-        vc.setMessageBody("Feedback:\n\n\nFeature Requests:", isHTML: false)
+        vc.setMessageBody("Feedback:\n\n\nFeature Requests:\n\n\nBug Reports:\n\n\n", isHTML: false)
         return vc
     }
 
