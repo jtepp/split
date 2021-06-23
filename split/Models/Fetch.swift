@@ -27,7 +27,7 @@ class Fetch: ObservableObject {
                 showInvite.wrappedValue = false
                 inWR.wrappedValue = false
                 noProf.wrappedValue = false
-                self.maid(m: m, h: h)
+                
                 
                 
                 db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
@@ -54,8 +54,6 @@ class Fetch: ObservableObject {
                         self.placeToken(h: h, id: myId, token: t)
                     }
                     
-                        
-                        
                         if h.wrappedValue.members.first(where: { (m) -> Bool in
                             return m.id == UserDefaults.standard.string(forKey: "myId")
                         }) != nil {
@@ -708,6 +706,7 @@ class Fetch: ObservableObject {
             self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
             showInvite.wrappedValue = false
             self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false), showInvite: showInvite)
+            self.maid(m: m, h: h)
         }
 //        self.getMembers(h: h, id: newGroup)
 //        self.getPayments(h: h, id: newGroup)
@@ -820,7 +819,6 @@ class Fetch: ObservableObject {
     }
     
     func maid(m: Binding<Member>, h: Binding<House>) {
-        var hhh = House.empty
         db.collection("houses").getDocuments { querySnapshot, err in
             guard let documents = querySnapshot?.documents else {
                 print("maidwhoopsies")
@@ -858,7 +856,7 @@ class Fetch: ObservableObject {
                                     self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
                                     //delete member
                                     print("delete time \(houseq.documentID) \(m.wrappedValue.home) \(UserDefaults.standard.string(forKey: "houseId"))")
-                                    self.db.document("houses/\(houseq.documentID)/members/\(memberq.documentID)").delete()
+//                                    self.db.document("houses/\(houseq.documentID)/members/\(memberq.documentID)").delete()
                                     //delete payments
                                     self.db.collection("houses/\(houseq.documentID)/payments").getDocuments { payq, err in
                                         guard let pays = payq?.documents else {
@@ -876,38 +874,19 @@ class Fetch: ObservableObject {
                                         }
                                     }
                                     //send payment
+                                    var hhh = House.empty
                                     hhh.id = houseq.documentID
-                                    print("sent die payment to \(hhh.id)")
                                     self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", isAn: true), h: hhh)
-                                    self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
                                 }
+                                self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
                             }
                         }
-                        
-                        self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
                     }
                     }
                 }
                 
                 
         }
-    }
-    func checkThere(m: Binding<Member>, h: Binding<House>, completion: @escaping (Bool) -> Void) -> EmptyView {
-        db.collection("houses/\(m.wrappedValue.home)/members").getDocuments { memberListSnapshot, err in
-            guard let members = memberListSnapshot?.documents else {
-                completion(false)
-                return
-            }
-            var has = false
-            members.forEach { memberSnap in
-                if m.wrappedValue.id == memberSnap.documentID {
-                    has = true
-                }
-            }
-            completion(has)
-            
-        }
-        return EmptyView()
     }
     
 }
