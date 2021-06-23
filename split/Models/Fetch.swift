@@ -701,6 +701,7 @@ class Fetch: ObservableObject {
         h.wrappedValue.id = newGroup
         h.wrappedValue.members = [m.wrappedValue]
         db.document("houses/\(newGroup)/members/\(m.wrappedValue.id)").setData(m.wrappedValue.dictimg(), merge: true){ _ in
+            self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
             showInvite.wrappedValue = false
             self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
         }
@@ -819,6 +820,12 @@ class Fetch: ObservableObject {
             guard let documents = querySnapshot?.documents else {
                 print("maidwhoopsies")
                 return
+            }
+            documents.forEach { qds in
+                //if needed, here would be where to add delete all empty houses
+                if qds.documentID != m.home {
+                    
+                }
             }
             
         }
