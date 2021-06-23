@@ -47,7 +47,6 @@ class Fetch: ObservableObject {
                     
                     self.getPayments(h: h, id: id)
                     
-                        self.maid(m: m.wrappedValue)
                         
                     let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
                     
@@ -300,7 +299,7 @@ class Fetch: ObservableObject {
                 })
             {
                 if payment.isRequest {
-                    print("WASREQ\(payment)")
+//                    print("WASREQ\(payment)")
                     if payment.to == m.name {
                         for member in payment.reqfrom {
                             //they owe me from my request
@@ -319,7 +318,7 @@ class Fetch: ObservableObject {
                         }
                     }
                 } else { //its a payment
-                    print("WASPAY\(payment)")
+//                    print("WASPAY\(payment)")
                     if payment.to == m.name {
                         //paid to me
                         if (owesMe[payment.from] ?? 0) == 0 {
@@ -706,6 +705,7 @@ class Fetch: ObservableObject {
             self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
             showInvite.wrappedValue = false
             self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false), showInvite: showInvite)
+            self.maid(m: m, newGroup: newGroup)
         }
 //        self.getMembers(h: h, id: newGroup)
 //        self.getPayments(h: h, id: newGroup)
@@ -817,7 +817,7 @@ class Fetch: ObservableObject {
         }
     }
     
-    func maid(m: Member) {
+    func maid(m: Binding<Member>, newGroup: String) {
         db.collection("houses").addSnapshotListener { querySnapshot, err in
             guard let documents = querySnapshot?.documents else {
                 print("maidwhoopsies")
@@ -825,10 +825,31 @@ class Fetch: ObservableObject {
             }
             documents.forEach { qds in
                 //if needed, here would be where to add delete all empty houses
-                if qds.documentID != m.home {
-                    
+                if qds.documentID != newGroup {
+                    print("\(qds.documentID) - \(newGroup)")
+                    self.db.collection("houses/\(qds.documentID)/members").getDocuments { documentSnapshot, err in
+                        guard let doc = documentSnapshot?.documents else {
+                            print("maindocerrr")
+                            return
+                        }
+                        
+                        doc.forEach { sdq in
+                            if sdq.documentID == m.wrappedValue.id {
+                                //delete
+                                var hhh = House.empty
+                                hhh.id = qds.documentID
+                                print("FOUNDMAID\(qds.documentID)\(sdq.documentID)")
+                                var bmr = m.wrappedValue
+                                bmr.id = sdq.documentID
+                                bmr.home = qds.documentID
+                                self.removeMember(m: bmr, h: .constant(hhh), left: true)
+                            }
+                        }
+                        
+                    }
                 }
             }
+            
             
         }
     }
