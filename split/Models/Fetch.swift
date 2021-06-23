@@ -57,6 +57,7 @@ class Fetch: ObservableObject {
                         if h.wrappedValue.members.first(where: { (m) -> Bool in
                             return m.id == UserDefaults.standard.string(forKey: "myId")
                         }) != nil {
+                            print('setdead')
                             m.wrappedValue = h.wrappedValue.members.first(where: { (m) -> Bool in
                                 return m.id == UserDefaults.standard.string(forKey: "myId")
                             })!
@@ -705,7 +706,7 @@ class Fetch: ObservableObject {
             self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
             showInvite.wrappedValue = false
             self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false), showInvite: showInvite)
-            self.maid(m: m)
+            self.maid(m: m, h: h)
         }
 //        self.getMembers(h: h, id: newGroup)
 //        self.getPayments(h: h, id: newGroup)
@@ -817,7 +818,7 @@ class Fetch: ObservableObject {
         }
     }
     
-    func maid(m: Binding<Member>) {
+    func maid(m: Binding<Member>, h: Binding<House>) {
         db.collection("houses").getDocuments { querySnapshot, err in
             guard let documents = querySnapshot?.documents else {
                 print("maidwhoopsies")
@@ -874,7 +875,7 @@ class Fetch: ObservableObject {
                                     hhh.id = houseq.documentID
                                     self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", isAn: true), h: hhh)
                                 }
-                                
+                                self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
                             }
                         }
                     }
