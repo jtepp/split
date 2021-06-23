@@ -700,9 +700,9 @@ class Fetch: ObservableObject {
     func switchToHouseTwo(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
         UserDefaults.standard.setValue(newGroup, forKey: "houseId")
         m.wrappedValue.home = newGroup
-        h.wrappedValue.id = newGroup
         h.wrappedValue.members = [m.wrappedValue]
         db.document("houses/\(newGroup)/members/\(m.wrappedValue.id)").setData(m.wrappedValue.dictimg(), merge: true){ _ in
+            h.wrappedValue.id = newGroup
             self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
             showInvite.wrappedValue = false
             self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false), showInvite: showInvite)
@@ -827,7 +827,7 @@ class Fetch: ObservableObject {
             documents.forEach { houseq in
                 //if needed, here would be where to add delete all empty houses
 //                print("\(qds.documentID) - \(newGroup) -> \(qds.documentID == newGroup)")
-                if houseq.documentID != m.wrappedValue.home {
+                if houseq.documentID != (UserDefaults.standard.string(forKey: "houseId") ?? "") {
                     self.db.collection("houses/\(houseq.documentID)/members").getDocuments { documentSnapshot, err in
                         guard let doc = documentSnapshot?.documents else {
                             print("maindocerrr")
