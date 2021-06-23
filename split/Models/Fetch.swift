@@ -20,7 +20,7 @@ class Fetch: ObservableObject {
             
             print("ID:    \(id)")
             print("ME:    \(myId)")
-            print("H:     \(h.wrappedValue)")
+//            print("H:     \(h.wrappedValue)")
             
             if id != "" && id != "waitingRoom" { // has real house id
                 print("has real hid \(id) \(myId)")
@@ -46,8 +46,7 @@ class Fetch: ObservableObject {
                     self.getMembers(h: h, id: id)
                     
                     self.getPayments(h: h, id: id)
-                    
-                    self.maid(m: m)
+                
                         
                     let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
                     
@@ -706,6 +705,7 @@ class Fetch: ObservableObject {
             self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
             showInvite.wrappedValue = false
             self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false), showInvite: showInvite)
+            self.maid(m: m)
         }
 //        self.getMembers(h: h, id: newGroup)
 //        self.getPayments(h: h, id: newGroup)
@@ -818,7 +818,7 @@ class Fetch: ObservableObject {
     }
     
     func maid(m: Binding<Member>) {
-        db.collection("houses").addSnapshotListener { querySnapshot, err in
+        db.collection("houses").getDocuments { querySnapshot, err in
             guard let documents = querySnapshot?.documents else {
                 print("maidwhoopsies")
                 return
@@ -851,9 +851,10 @@ class Fetch: ObservableObject {
                                     }
                                 } else {
                                     //delete member
-                                    self.db.document("houses/\(houseq.documentID)/members/\(memberq.documentID)").delete()
+                                    print("delete time \(houseq.documentID) \(m.wrappedValue.home) \(UserDefaults.standard.string(forKey: "houseId"))")
+//                                    self.db.document("houses/\(houseq.documentID)/members/\(memberq.documentID)").delete()
                                     //delete payments
-                                    self.db.collection("houses/\(houseq.documentID)/members/\(memberq.documentID)").getDocuments { payq, err in
+                                    self.db.collection("houses/\(houseq.documentID)/payments").getDocuments { payq, err in
                                         guard let pays = payq?.documents else {
                                             return
                                         }
@@ -871,7 +872,7 @@ class Fetch: ObservableObject {
                                     //send payment
                                     var hhh = House.empty
                                     hhh.id = houseq.documentID
-                                    self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the group", isAn: true), h: hhh)
+                                    self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", isAn: true), h: hhh)
                                 }
                                 
                             }
