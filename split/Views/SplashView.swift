@@ -24,7 +24,7 @@ struct SplashView: View {
                     Spacer()
                     VStack {
                     if showCore {
-                        SplashDetailsView(title: "Invite your friends", text: "Long press your group name to copy an invitation on the members page", image: "person.3", color: .blue)
+                        SplashDetailsView(title: "Invite your friends", text: "Use the link button on the members page to copy an invitation to your group", image: "person.3.fill", color: .blue)
                             .padding(.bottom)
                         SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
                             .padding(.bottom)
@@ -103,6 +103,7 @@ struct SplashView: View {
         .sheet(isPresented: $isShowingMailView) {
                     MailView(result: self.$result)
                 }
+        .animation(Animation.easeIn.speed(2))
     }
 }
 
