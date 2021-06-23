@@ -699,8 +699,8 @@ class Fetch: ObservableObject {
         h.wrappedValue.id = newGroup
         h.wrappedValue.members = [m.wrappedValue]
         db.document("houses/\(newGroup)/members/\(m.wrappedValue.id)").setData(m.wrappedValue.dictimg(), merge: true){ _ in
-            self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
             showInvite.wrappedValue = false
+            self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
         }
 //        self.getMembers(h: h, id: newGroup)
 //        self.getPayments(h: h, id: newGroup)

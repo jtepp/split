@@ -180,7 +180,9 @@ struct ActivityView: View {
         }
         .sheet(isPresented: $showSplash, content: {
             SplashView(dontSplash: .constant(true), showSplash: $showSplash)
-                .preferredColorScheme(.dark)
+                .background(
+                    Color.black.edgesIgnoringSafeArea(.all)
+                )
                 .animation(Animation.easeIn.speed(3))
         })
     }
