@@ -18,6 +18,19 @@ struct SplashView: View {
         VStack {
 
             HeaderText(text: "What's New")
+                .overlay(
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Text("v2.0.0")
+                                .foregroundColor(.white)
+                                .font(Font.subheadline.bold())
+    //                            .padding()
+                                .padding(.leading,30)
+                            Spacer()
+                        }
+                    }
+                )
                 .padding(.bottom)
             ScrollView {
                 HStack {
@@ -55,8 +68,14 @@ struct SplashView: View {
                     showCore.toggle()
             }
             
-            SplashDetailsView(title: "Take a shortcut", text: "Long press on the spllit app to use the new quick actions", image: "arrowshape.turn.up.right.fill", color: .green)
+            SplashDetailsView(title: "New invite links", text: "Send your friends a link to directly join your group", image: "link.circle", color: .purple)
                 .padding(.bottom)
+                SplashDetailsView(title: "Notification sounds", text: "Leave your ringer on to hear all the new sounds for every notification", image: "bell.badge.fill", color: .red)
+                    .padding(.bottom)
+                SplashDetailsView(title: "Better dark mode", text: "Check out the new, darker UI elements in dark mode", image: "moon.circle", color: .gray)
+                    .padding(.bottom)
+                SplashDetailsView(title: "More icons", text: "Every context menu now has its own icons to go with each action", image: "filemenu.and.selection", color: .blue)
+                    .padding(.bottom)
 
             }
             Spacer()
@@ -74,6 +93,7 @@ struct SplashView: View {
                 .foregroundColor(.white)
             }
             .padding(.horizontal)
+            .padding(.vertical)
             Text("Disclaimer: This app does not involve any actual money or payments, it is just a way to keep track of payments in your group")
                 .font(.footnote)
                 .foregroundColor(Color.white.opacity(0.5))
