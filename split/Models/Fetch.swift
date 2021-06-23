@@ -12,7 +12,7 @@ import FirebaseFirestore
 class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
-    func getHouse (h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool> = .constant(false)) {
+    func getHouse (h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool> = .constant(false), completion: @escaping () -> Void = {}) {
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != ""
         {
             let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
@@ -27,7 +27,6 @@ class Fetch: ObservableObject {
                 showInvite.wrappedValue = false
                 inWR.wrappedValue = false
                 noProf.wrappedValue = false
-                
                 
                 
                 db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
@@ -63,7 +62,7 @@ class Fetch: ObservableObject {
                             })!
                             print("setdead222\(m.wrappedValue.id)")
                         }
-                        
+                        completion()
                     if h.wrappedValue.members.first(where: { (m) -> Bool in
                         return m.id == UserDefaults.standard.string(forKey: "myId")
                     }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
@@ -854,10 +853,11 @@ class Fetch: ObservableObject {
                                         self.db.document("houses/\(houseq.documentID)").delete()
                                     }
                                 } else {
-                                    self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
+                                    self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false)){
+                                        print("delete time \(houseq.documentID) \(m.wrappedValue.home) \(UserDefaults.standard.string(forKey: "houseId"))")
+                                        self.db.document("houses/\(houseq.documentID)/members/\(memberq.documentID)").delete()
+                                    }
                                     //delete member
-                                    print("delete time \(houseq.documentID) \(m.wrappedValue.home) \(UserDefaults.standard.string(forKey: "houseId"))")
-//                                    self.db.document("houses/\(houseq.documentID)/members/\(memberq.documentID)").delete()
                                     //delete payments
                                     self.db.collection("houses/\(houseq.documentID)/payments").getDocuments { payq, err in
                                         guard let pays = payq?.documents else {
