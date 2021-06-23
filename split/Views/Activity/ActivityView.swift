@@ -54,12 +54,12 @@ struct ActivityView: View {
             ForEach(house.payments.sorted(by: { a, b in
                 return a.time > b.time
             })) { payment in
-                if house.members.contains(where: { (m) -> Bool in
-                    return m.id == UserDefaults.standard.string(forKey: "myId")
+                if house.members.contains(where: { (mr) -> Bool in
+                    return mr.id == m.id
                 }){
                     if payment.isAn {
-                        if house.members.first(where: { (m) -> Bool in
-                            return m.id == UserDefaults.standard.string(forKey: "myId")
+                        if house.members.first(where: { (mr) -> Bool in
+                            return mr.id == m.id
                         })!.admin {
                             ActivityAnnouncementCell(payment: .constant(payment))
                                 .contextMenu(menuItems: {
@@ -160,7 +160,10 @@ struct ActivityView: View {
                         }
                     }
                 } else {
-                    wrStuff(inWR: $inWR, h: $house, m: $m)
+                    if house.id != UserDefaults.standard.string(forKey: "houseId") {
+//                        wrStuff(inWR: $inWR, h: $house, m: $m)
+                        getHouse(h: $house, m: $m, inWR: $inWR, noProf: .constant(false))
+                    }
                 }
             }
             
@@ -196,5 +199,11 @@ func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) -> Empt
     h.wrappedValue = q
     inWR.wrappedValue = true
     print("DONEwrstuff\(h.wrappedValue.id)")
+    return EmptyView()
+}
+
+func getHouse (h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>) -> EmptyView {
+    m.wrappedValue.id = UserDefaults.standard.string(forKey: "myId") ?? "AFSD"
+    Fetch().getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
     return EmptyView()
 }

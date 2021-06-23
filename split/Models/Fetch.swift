@@ -20,7 +20,7 @@ class Fetch: ObservableObject {
             
             print("ID:    \(id)")
             print("ME:    \(myId)")
-            print("H:     \(h.wrappedValue)")
+//            print("H:     \(h.wrappedValue)")
             
             if id != "" && id != "waitingRoom" { // has real house id
                 print("has real hid \(id) \(myId)")
@@ -694,14 +694,43 @@ class Fetch: ObservableObject {
     }
     
     func switchToHouseTwo(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
+        let old = m.wrappedValue
         UserDefaults.standard.setValue(newGroup, forKey: "houseId")
         m.wrappedValue.home = newGroup
-        h.wrappedValue.id = newGroup
+//        h.wrappedValue.id = newGroup
         h.wrappedValue.members = [m.wrappedValue]
         db.document("houses/\(newGroup)/members/\(m.wrappedValue.id)").setData(m.wrappedValue.dictimg(), merge: true){ _ in
             self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
             showInvite.wrappedValue = false
+            self.db.collection("house/\(old.home)/members").getDocuments { snap, err in
+                guard let docs = snap?.documents else {
+                    print("erroverhere")
+                    return
+                }
+                if false {//docs.count == 1 {
+                    self.db.document("houses/\(old.home)").delete()
+                } else {
+                    self.db.document("houses/\(old.home)/members/\(old.id)").delete()
+                    self.db.collection("houses/\(old.home)/payments").getDocuments { snapshot, err in
+                        guard let documents = snapshot?.documents else {
+                            print("HEROVERHER")
+                            return
+                        }
+                        for doc in documents.filter({ (doc) -> Bool in
+                            let d = doc.data()
+                            let to = (d["to"] ?? "") as! String
+                            let from = (d["from"] ?? "") as! String
+                            let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
+                            let isAn = d["isAn"] as? Bool ?? false
+                            return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && !isAn
+                        }) {
+                            self.db.document("houses/\(old.home)/payments/\(doc.documentID)").delete()
+                        }
+                    }
+                }
+            }
         }
+        
 //        self.getMembers(h: h, id: newGroup)
 //        self.getPayments(h: h, id: newGroup)
     }
