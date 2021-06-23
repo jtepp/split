@@ -888,6 +888,23 @@ class Fetch: ObservableObject {
                 
         }
     }
+    func checkThere(m: Binding<Member>, h: Binding<House>, completion: @escaping (Bool) -> Void) -> EmptyView {
+            db.collection("houses/\(m.wrappedValue.home)/members").getDocuments { memberListSnapshot, err in
+                guard let members = memberListSnapshot?.documents else {
+                    completion(false)
+                    return
+                }
+                var has = false
+                members.forEach { memberSnap in
+                    if m.wrappedValue.id == memberSnap.documentID {
+                        has = true
+                    }
+                }
+                completion(has)
+                
+            }
+            return EmptyView()
+        }
     
 }
 

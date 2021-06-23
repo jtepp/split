@@ -163,10 +163,12 @@ struct ActivityView: View {
                         }
                     }
                 } else {
-                    if false {
-                        getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
-                    } else {
-                        wrStuff(inWR: $inWR, h: $house, m: $m)
+                    Fetch().checkThere(m: $m, h:$house){ has in
+                        if has {
+                            getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+                        } else {
+                            wrStuff(inWR: $inWR, h: $house, m: $m)
+                        }
                     }
                 }
             }
@@ -196,7 +198,7 @@ struct ActivityView: View {
 }
 
 
-func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) -> EmptyView {
+func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) {//-> EmptyView {
     m.wrappedValue = .empty
     UserDefaults.standard.set("", forKey: "houseId")
     UserDefaults.standard.set("", forKey: "myId")
@@ -205,10 +207,11 @@ func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) -> Empt
     h.wrappedValue = q
     inWR.wrappedValue = true
     print("DONEwrstuff\(h.wrappedValue.id)")
-    return EmptyView()
+//    return EmptyView()
 }
 
-func getHouse(h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>) -> EmptyView {
+func getHouse(h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>) {//-> EmptyView {
     Fetch().getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
-    return EmptyView()
+    print("gotgot\(h.wrappedValue.id)\(m.wrappedValue.home)")
+//    return EmptyView()
 }
