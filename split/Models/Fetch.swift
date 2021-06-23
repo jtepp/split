@@ -693,19 +693,6 @@ class Fetch: ObservableObject {
         }
     }
     
-    func switchToHouseTwo(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
-        UserDefaults.standard.setValue(newGroup, forKey: "houseId")
-        m.wrappedValue.home = newGroup
-        h.wrappedValue.id = newGroup
-        h.wrappedValue.members = [m.wrappedValue]
-        db.document("houses/\(newGroup)/members/\(m.wrappedValue.id)").setData(m.wrappedValue.dictimg(), merge: true){ _ in
-            self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
-            showInvite.wrappedValue = false
-        }
-//        self.getMembers(h: h, id: newGroup)
-//        self.getPayments(h: h, id: newGroup)
-    }
-    
     func createHouse(hh: Binding<House>, m: Binding<Member>, name: String, password: String, tapped: Binding<Bool>, inWR: Binding<Bool>) {
         let id = db.collection("houses").addDocument(data: ["name" : name, "password" : password]).documentID
         m.wrappedValue.home = id
