@@ -11,6 +11,7 @@ struct ActivityView: View {
     @Binding var house: House
     @Binding var tabSelection: Int
     @Binding var inWR: Bool
+    @Binding var noProf: Bool
     @Binding var m: Member
     @State var showSplash = false
     var body: some View {
@@ -162,7 +163,11 @@ struct ActivityView: View {
                         }
                     }
                 } else {
-                    wrStuff(inWR: $inWR, h: $house, m: $m)
+                    if false {
+                        getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+                    } else {
+                        wrStuff(inWR: $inWR, h: $house, m: $m)
+                    }
                 }
             }
             
@@ -200,5 +205,10 @@ func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) -> Empt
     h.wrappedValue = q
     inWR.wrappedValue = true
     print("DONEwrstuff\(h.wrappedValue.id)")
+    return EmptyView()
+}
+
+func getHouse(h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>) -> EmptyView {
+    Fetch().getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
     return EmptyView()
 }

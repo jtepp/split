@@ -22,7 +22,7 @@ struct TabsView: View {
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
-                    ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, m: $member)
+                    ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member)
                         .tag(0)
                     MembersView(house: $house, tabSelection: $tabSelection)
                         .tag(1)

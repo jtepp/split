@@ -840,6 +840,7 @@ class Fetch: ObservableObject {
                                 print("FOUNDMAID\(houseq.documentID)\(memberq.documentID)")
                                 
                                 if empt {
+                                    self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
                                     self.db.collection("houses/\(houseq.documentID)/members").getDocuments { qs, e in
                                         qs?.documents.forEach({ qqq in
                                             self.db.document("houses/\(houseq.documentID)/members/\(qqq.documentID)").delete()
@@ -852,6 +853,7 @@ class Fetch: ObservableObject {
                                         self.db.document("houses/\(houseq.documentID)").delete()
                                     }
                                 } else {
+                                    self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
                                     //delete member
                                     print("delete time \(houseq.documentID) \(m.wrappedValue.home) \(UserDefaults.standard.string(forKey: "houseId"))")
 //                                    self.db.document("houses/\(houseq.documentID)/members/\(memberq.documentID)").delete()
