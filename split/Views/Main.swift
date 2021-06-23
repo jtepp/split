@@ -30,7 +30,7 @@ struct Main: View {
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
-            Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
+            Fetch().getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
         }
         .onChange(of: h.id, perform: { _ in
             //            inWR = false
@@ -39,7 +39,7 @@ struct Main: View {
             //            UserDefaults.standard.set("TlRWEGz9GWrKBXqI9T8L", forKey: "houseId")
             //            myId = "SIfrfcT2735XvpRCB714"
             //            h.id = "TlRWEGz9GWrKBXqI9T8L"
-            Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
+            Fetch().getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
         })
         .onChange(of: scenePhase) { newPhase in
             
@@ -66,7 +66,7 @@ struct Main: View {
             }
         }
         .sheet(isPresented: $inWR, onDismiss: {
-            Fetch().getHouse(h: $h, inWR: $inWR, noProf: $noProf)
+            Fetch().getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
         }) {
             if (dontSplash) {
             if (noProf) {

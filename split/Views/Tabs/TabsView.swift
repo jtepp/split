@@ -38,7 +38,7 @@ struct TabsView: View {
             .tabViewStyle(PageTabViewStyle())
             .background(Color.black.edgesIgnoringSafeArea(.all))
             .onAppear(){
-                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+                Fetch().getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
             }
             .onChange(of: inWR, perform: { (_) in
 //                print("WAITING ROOM CHANGED \n\n\(member)\n\n\n\n\n")
@@ -66,14 +66,15 @@ struct TabsView: View {
             .alert(isPresented: $showInviteAlert, content: {
                 Alert(title: Text("Already in this group"), message: Text("You are already a member of the group you are trying to join"), dismissButton: Alert.Button.default(Text("Ok")))
             })
-            .sheet(isPresented: $showInviteSheet, onDismiss: {Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)}, content: {
+            .sheet(isPresented: $showInviteSheet, onDismiss: {Fetch().getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)}, content: {
                 LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInviteSheet, h: $house, m: $member, myId: $myId, newGroup: $newGroup, newPass: $newPass, newName: $newName)
                     .background(
                         Color.black.edgesIgnoringSafeArea(.all)
                     )
             })
             .onChange(of: tabSelection) { (_) in
-                Fetch().getHouse(h: $house, inWR: $inWR, noProf: $noProf)
+                Fetch().getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
+                print("PEARL\(member.dict())")
             }
 
     }
