@@ -101,7 +101,8 @@ struct MenuButton: View {
                 }, label: {
                     Image(systemName: "ellipsis")
                         .foregroundColor(.white)
-                        .padding(10)
+                        .font(Font.body.bold())
+                        .padding()
                         .background(
                             Circle()
                                 .fill(
