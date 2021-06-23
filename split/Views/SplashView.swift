@@ -46,7 +46,7 @@ struct SplashView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 25.0)
                         .fill(
-                            Color.white.opacity(0.2)
+                            Color("DarkMaterial")
                         )
                 )
                 .padding(.horizontal)
@@ -144,5 +144,6 @@ struct SplashView_Previews: PreviewProvider {
         SplashView(dontSplash: .constant(false), showSplash: .constant(false))
             .padding()
             .background(Color.black.edgesIgnoringSafeArea(.all))
+            
     }
 }

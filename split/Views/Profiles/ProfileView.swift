@@ -53,7 +53,7 @@ struct ProfileView: View {
                         .background(
                             Circle()
                                 .fill(
-                                    Color.white.opacity(0.2)
+                                    Color("DarkMaterial")
                                 )
                         )
                 }
@@ -93,11 +93,11 @@ struct ProfileView: View {
                             Image(systemName: "camera.fill")
                                 .padding(10)
                                 .shadow(radius: 2)
-                                .foregroundColor(.black)
+                                .foregroundColor(.primary)
                                 .background(
                                     Circle()
                                         .fill(
-                                            Color.gray
+                                            Color("Material")
                                         )
                                 )
                         })
@@ -126,7 +126,7 @@ struct ProfileView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(
-                                    Color.white.opacity(0.2)
+                                    Color("DarkMaterial")
                                 )
                         )
                         .padding()

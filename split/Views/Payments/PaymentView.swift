@@ -23,7 +23,7 @@ struct PaymentView: View {
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .fill(
-                        Color.white.opacity(0.2)
+                        Color("DarkMaterial")
                     )
             )
             .padding()

@@ -41,7 +41,7 @@ struct MemberCell: View {
                 }
             }
         }
-        .foregroundColor(.black)
+        .foregroundColor(.primary)
         .padding(.horizontal)
         .padding(.vertical, 10)
         .background(
@@ -64,7 +64,7 @@ struct MemberCell: View {
                         )
                 } else {
                     Image(systemName: "circlebadge")
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                 }
                 Spacer()
                 }

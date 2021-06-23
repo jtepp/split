@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MemberPaymentInfoView: View {
+    @Environment(\.colorScheme) var colorScheme
     @Binding var member: Member
     @Binding var house: House
     var body: some View {
@@ -18,7 +19,7 @@ struct MemberPaymentInfoView: View {
                 Spacer()
             }
             Rectangle()
-                .fill(Color.black.opacity(0.5))
+                .fill(Color.black.opacity(colorScheme == .dark ? 1 : 0.5))
                 .frame(height:2)
             
             ScrollView {
@@ -55,7 +56,7 @@ struct MemberPaymentInfoView: View {
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .fill(
-                        Color.black.opacity(0.5)
+                        Color.black.opacity(colorScheme == .dark ? 1 : 0.5)
                     )
             )
         }
@@ -64,7 +65,7 @@ struct MemberPaymentInfoView: View {
         .background(
             RoundedRectangle(cornerRadius: 20)
                 .fill(
-                    Color.white.opacity(0.2)
+                    Color("DarkMaterial")
                 )
         )
         .padding()

@@ -55,7 +55,7 @@ struct LinkInviteView: View {
             .background(
                 RoundedRectangle(cornerRadius: 25)
                     .fill(
-                        Color.white.opacity(0.2)
+                        Color("DarkMaterial")
                     )
             )
             .padding(.vertical)
@@ -144,7 +144,9 @@ struct LinkInviteView: View {
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.white.opacity(0.2))
+                        .fill(
+                            Color("DarkMaterial")
+                        )
                 )
 //                .padding(.horizontal)
 //                .padding(.bottom)

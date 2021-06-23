@@ -49,7 +49,7 @@ struct PickerButton: View {
     var body: some View {
         if choice.isEmpty {
             Text(text)
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
         } else {
             VStack (alignment: .leading) {
                 ForEach(choice) { m in
@@ -62,7 +62,7 @@ struct PickerButton: View {
                             .shadow(radius: 4)
                         Text(m.name)
                     }
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
                 }
             }
         }
@@ -105,7 +105,7 @@ struct imgButton: View {
                     .bold()
             }
         }
-        .foregroundColor(.black)
+        .foregroundColor(.primary)
         .padding(.horizontal)
         .padding(.vertical, 10)
         .background(

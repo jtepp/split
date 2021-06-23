@@ -98,7 +98,7 @@ struct MenuButton: View {
                         .background(
                             Circle()
                                 .fill(
-                                    Color.white.opacity(0.2)
+                                    Color("DarkMaterial")
                                 )
                         )
                         .padding(.vertical)

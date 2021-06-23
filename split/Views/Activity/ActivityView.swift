@@ -42,7 +42,9 @@ struct ActivityView: View {
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white.opacity(0.2))
+                                .fill(
+                                    Color("DarkMaterial")
+                                )
                         )
                         .onTapGesture {
                             tabSelection = 2

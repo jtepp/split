@@ -48,12 +48,12 @@ struct EditProfileView: View {
                         }, label: {
                             Image(systemName: "camera.fill")
                                 .padding(10)
-                                .foregroundColor(.black)
+                                .foregroundColor(.primary)
                                 .preferredColorScheme(.dark)
                                 .background(
                                     Circle()
                                         .fill(
-                                            Color.gray
+                                            Color("Material")
                                         )
                                 )
                         })
