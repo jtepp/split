@@ -12,7 +12,7 @@ import FirebaseFirestore
 class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
-    func getHouse (h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>) {
+    func getHouse (h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool> = .constant(false)) {
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != ""
         {
             let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
@@ -24,6 +24,7 @@ class Fetch: ObservableObject {
             
             if id != "" && id != "waitingRoom" { // has real house id
                 print("has real hid \(id) \(myId)")
+                showInvite.wrappedValue = false
                 inWR.wrappedValue = false
                 noProf.wrappedValue = false
                 
@@ -703,7 +704,7 @@ class Fetch: ObservableObject {
         db.document("houses/\(newGroup)/members/\(m.wrappedValue.id)").setData(m.wrappedValue.dictimg(), merge: true){ _ in
             self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
             showInvite.wrappedValue = false
-            self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
+            self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false), showInvite: showInvite)
         }
 //        self.getMembers(h: h, id: newGroup)
 //        self.getPayments(h: h, id: newGroup)
