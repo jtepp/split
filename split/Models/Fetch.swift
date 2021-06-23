@@ -46,6 +46,8 @@ class Fetch: ObservableObject {
                     
                     self.getPayments(h: h, id: id)
                     
+                        self.maid(m: m.wrappedValue)
+                        
                     let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
                     
                     if t != "" {
@@ -357,7 +359,7 @@ class Fetch: ObservableObject {
         }
     }
     
-    func removeMember(m: Member, h: Binding<House>) {
+    func removeMember(m: Member, h: Binding<House>, left: Bool = false) {
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" {
             let docRef = db.document("houses/\(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSERMMEMBER")/members/\(m.id)")
             docRef.getDocument { (documentSnapshot, err) in
@@ -387,7 +389,7 @@ class Fetch: ObservableObject {
                         }
                     }
                     docRef.delete()
-                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the group", isAn: true), h: h.wrappedValue)
+                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: left ? "left the group" : "was removed from the group", isAn: true), h: h.wrappedValue)
                 })
             }
             
@@ -809,6 +811,16 @@ class Fetch: ObservableObject {
 //                let lastSeen = data["lastSeen"] as? NSNumber ?? 0
                 return Member(id: q.documentID, home: home, name: name, owesMe: [:], iOwe: [:], image: image, admin: admin, showStatus: false)
             })
+        }
+    }
+    
+    func maid(m: Member) {
+        db.collection("houses").addSnapshotListener { querySnapshot, err in
+            guard let documents = querySnapshot?.documents else {
+                print("maidwhoopsies")
+                return
+            }
+            
         }
     }
     
