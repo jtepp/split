@@ -98,7 +98,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "1.4.1")
+            UserDefaults.standard.setValue(true, forKey: "2.0.0")
         }
         .sheet(isPresented: $isShowingMailView) {
                     MailView(result: self.$result)
