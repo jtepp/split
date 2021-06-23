@@ -24,12 +24,12 @@ struct GeneralPaymentCell: View {
             }
             Spacer()
             moneyText(b: $payment.amount)
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 .padding(6)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .fill(
-                            Color.white
+                            Color("whiteblack")
                         )
                 )
         }

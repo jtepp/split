@@ -35,7 +35,7 @@ struct MemberDetailsView: View {
                     .shadow(radius: 4)
                     .background(
                         RoundedRectangle(cornerRadius: 25)
-                            .fill(Color.white.opacity(0.5))
+                            .fill(Color("Material"))
                     )
                 Text(member.name)
                     .font(.largeTitle)

@@ -36,7 +36,7 @@ struct ActivityPaymentCell: View {
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(
-                    Color.white.opacity(0.5)
+                    Color("Material")
                 )
         )
         .overlay(

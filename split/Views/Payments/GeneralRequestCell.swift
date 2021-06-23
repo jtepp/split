@@ -45,22 +45,22 @@ struct GeneralRequestCell: View {
             HStack {
                 if showEach {
                     moneyText(b: (minimal && payment.to != m.name) ? .constant(payment.amount / Float(payment.reqfrom.count)) : .constant($payment.wrappedValue.amount / Float($payment.wrappedValue.reqfrom.count)), post: showEach ? " each" : "")
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .padding(6)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(
-                                    Color.white
+                                    Color("whiteblack")
                                 )
                     )
                 } else {
                     moneyText(b: (minimal && payment.to != m.name) ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .padding(6)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(
-                                    Color.white
+                                    Color("whiteblack")
                                 )
                     )
                 }
