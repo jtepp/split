@@ -69,9 +69,9 @@ struct ActivityView: View {
                                         Fetch().deletePayment(p: payment, h: house)
                                     }, label: {
                                         Text("Delete")
-                                            .foregroundColor(.red)
+//                                            .foregroundColor(.red)
                                         Image(systemName: "trash.fill")
-                                            .foregroundColor(.red)
+//                                            .foregroundColor(.red)
                                         
                                     }
                                     )

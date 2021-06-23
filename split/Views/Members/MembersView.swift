@@ -13,6 +13,8 @@ struct MembersView: View {
     @State var showDetails = false
     @State var tappedMember = Member.empty
     @Binding var tabSelection: Int
+    @State var showRemove = false
+    @State var showAlert = false
     var body: some View {
         ScrollView {
             HStack {
@@ -47,19 +49,56 @@ struct MembersView: View {
                 Spacer()
             }
             ForEach(house.members) { member in
-                MemberCell(m: .constant(member))
-                    .padding(.horizontal)
-                    .padding(.top, 10)
-                    .onTapGesture {
-                        //                                Fetch().getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
-                        tappedMember = member
-                        print(tappedMember)
-                        if tappedMember.id == UserDefaults.standard.string(forKey: "myId")  {
-                            tabSelection = 3
-                        } else {
-                            showDetails = true
+                if member.id != UserDefaults.standard.string(forKey: "myId") && house.members.first(where: { mr in
+                    return mr.id == UserDefaults.standard.string(forKey: "myId")
+                })?.admin ?? false {
+                    MemberCell(m: .constant(member))
+                        .padding(.horizontal)
+                        .padding(.top, 10)
+                        .contextMenu(menuItems: {
+                            Button {
+                                tappedMember = member
+                                showAlert = true
+                                showRemove = false
+                            } label: {
+                                Text("Set as admin")
+                                Image(systemName: "crown.fill")
+                            }
+                            Button {
+                                tappedMember = member
+                                showAlert = true
+                                showRemove = true
+                            } label: {
+                                Text("Remove from group")
+                                Image(systemName: "person.badge.minus.fill")
+                            }
+                            
+                        })
+                        .onTapGesture {
+                            //                                Fetch().getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
+                            tappedMember = member
+                            print(tappedMember)
+                            if tappedMember.id == UserDefaults.standard.string(forKey: "myId")  {
+                                tabSelection = 3
+                            } else {
+                                showDetails = true
+                            }
                         }
-                    }
+                } else {
+                    MemberCell(m: .constant(member))
+                        .padding(.horizontal)
+                        .padding(.top, 10)
+                        .onTapGesture {
+                            //                                Fetch().getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
+                            tappedMember = member
+                            print(tappedMember)
+                            if tappedMember.id == UserDefaults.standard.string(forKey: "myId")  {
+                                tabSelection = 3
+                            } else {
+                                showDetails = true
+                            }
+                        }
+                }
             }
             Rectangle()
                 .fill(Color.black)
@@ -69,6 +108,19 @@ struct MembersView: View {
         }
         .sheet(isPresented: $showDetails, content: {
             MemberDetailsView(house: $house, member: $tappedMember, showView: $showDetails)
+        })
+        .alert(isPresented: $showAlert, content: {
+            if showRemove {
+                return Alert(title: Text("Remove \(tappedMember.name)"), message: Text("Are you sure you want to remove \(tappedMember.name) from this group?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                    Fetch().removeMember(m: tappedMember, h: $house)
+                    Fetch().getHouse(h: $house, m: .constant(tappedMember), inWR: .constant(false), noProf: .constant(false))
+                }), secondaryButton: Alert.Button.cancel())
+            
+        } else {
+            return Alert(title: Text("Set \(tappedMember.name) as Group admin"), message: Text("Are you sure you want to set \(tappedMember.name) as the new Group admin? This change can only be reverted by the new admin"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                Fetch().swapAdmin(m: tappedMember, h: house)
+            }), secondaryButton: Alert.Button.cancel())
+        }
         })
     }
 }

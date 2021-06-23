@@ -85,12 +85,19 @@ struct MenuButton: View {
             HStack {
                 Spacer()
                 Menu(content: {
-                    Button("Set as admin", action: {
+                    Button {
                         showAdminAlert = true
-                    })
-                    Button("Remove from group", action: {
+                    } label: {
+                        Text("Set as admin")
+                        Image(systemName: "crown.fill")
+                    }
+                    Button {
                         showRemove = true
-                    })
+                    } label: {
+                        Text("Remove from group")
+                        Image(systemName: "person.badge.minus.fill")
+                    }
+
                 }, label: {
                     Image(systemName: "ellipsis")
                         .foregroundColor(.white)

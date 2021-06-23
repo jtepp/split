@@ -57,7 +57,7 @@ class Fetch: ObservableObject {
                         if h.wrappedValue.members.first(where: { (m) -> Bool in
                             return m.id == UserDefaults.standard.string(forKey: "myId")
                         }) != nil {
-                            print('setdead')
+                            print("setdead\(m.wrappedValue.id)")
                             m.wrappedValue = h.wrappedValue.members.first(where: { (m) -> Bool in
                                 return m.id == UserDefaults.standard.string(forKey: "myId")
                             })!
@@ -849,6 +849,7 @@ class Fetch: ObservableObject {
                                         qs?.documents.forEach({ qqq in
                                             self.db.document("houses/\(houseq.documentID)/payments/\(qqq.documentID)").delete()
                                         })
+                                        self.db.document("houses/\(houseq.documentID)").delete()
                                     }
                                 } else {
                                     //delete member
