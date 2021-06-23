@@ -34,7 +34,9 @@ struct ActivityView: View {
                 })
                 .padding()
             }
-            if house.payments.isEmpty {
+            if house.payments.isEmpty || !house.payments.contains { pp in
+                return !pp.isAn
+            } {
                 VStack {
                     Spacer()
                     Text("No payments have been made or requested yet")

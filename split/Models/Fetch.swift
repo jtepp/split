@@ -61,6 +61,7 @@ class Fetch: ObservableObject {
                             m.wrappedValue = h.wrappedValue.members.first(where: { (m) -> Bool in
                                 return m.id == UserDefaults.standard.string(forKey: "myId")
                             })!
+                            print("setdead222\(m.wrappedValue.id)")
                         }
                         
                     if h.wrappedValue.members.first(where: { (m) -> Bool in
