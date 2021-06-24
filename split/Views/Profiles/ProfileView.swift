@@ -245,7 +245,7 @@ struct ProfileView: View, KeyboardReadable {
                     )
                     .frame(height: 200)
                     .onAppear{
-                        UIApplication.shared.setAlternateIconName("Default-inverse"){err in
+                        UIApplication.shared.setAlternateIconName("Depth-inverse"){err in
                             print("NOOO \(err?.localizedDescription)")
                         }
                     }
