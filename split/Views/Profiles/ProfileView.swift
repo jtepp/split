@@ -20,6 +20,7 @@ struct ProfileView: View {
     @Binding var inWR: Bool
     @Binding var noProf: Bool
     @Binding var showStatus: Bool
+    @State var editName = false
     var body: some View {
         ScrollView {
             HStack {
@@ -119,6 +120,27 @@ struct ProfileView: View {
                 Text(m.name)
                     .font(.largeTitle)
                     .bold()
+                    .overlay(
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                editName.toggle()
+                            }, label: {
+                                Image(systemName: "pencil")
+                                    .foregroundColor(editName ? .black : .white)
+                                    .font(Font.body.bold())
+                                    .padding(4)
+                                    .background(
+                                        Circle()
+                                            .fill(
+                                                editName ? Color.white : Color.clear
+                                            )
+                                    )
+                            })
+                            .offset(x: 38)
+
+                        }
+                    )
                 if m.admin {
                     Text("Group Admin")
                 }
@@ -205,5 +227,6 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(house: .constant(.placeholder), m: .constant(.placeholder), inWR: .constant(false), noProf: .constant(false), showStatus: .constant(true))
+            .background(Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
     }
 }
