@@ -29,6 +29,7 @@ struct Main: View {
             //                    print("\n\n\n\n\nfalse\n\n\n\n\n\n")
             //                }
             TabBar(tabSelection: $tabSelection, engaged: $engaged, watch: $watch)
+                .shadow(color: .black, radius: 10)
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
