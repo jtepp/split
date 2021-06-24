@@ -14,12 +14,12 @@ struct AlternateIconButton: View {
         Image(uiImage: UIImage(named: name+"@3x") ?? UIImage())
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 40)
-            .cornerRadius(7)
+            .frame(width: 50)
+            .cornerRadius(8.8)
             .background(
-                RoundedRectangle(cornerRadius: 9)
+                RoundedRectangle(cornerRadius: 10)
                 .stroke((name == choice) ? Color.blue : Color.clear , lineWidth: 4)
-                    .frame(width: (name == choice) ? 52 : 20, height: (name == choice) ? 52 : 20, alignment: .center)
+                    .frame(width: (name == choice) ? 60 : 40, height: (name == choice) ? 60 : 40, alignment: .center)
             )
             .padding(.horizontal)
             .onTapGesture {
