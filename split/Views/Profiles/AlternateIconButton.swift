@@ -18,12 +18,13 @@ struct AlternateIconButton: View {
             .cornerRadius(10)
             .background(
                 RoundedRectangle(cornerRadius: 12.65)
-                .stroke((name == choice) || (name == "Default" && choice == "nil") ? Color.blue : Color.clear , lineWidth: 4)
-                    .frame(width: (name == choice) || (name == "Default" && choice == "nil") ? 72 : 40, height: (name == choice) || (name == "Default" && choice == "nil") ? 72 : 40, alignment: .center)
+                .stroke((name == choice) ? Color.blue : Color.clear , lineWidth: 4)
+                    .frame(width: (name == choice) ? 72 : 40, height: (name == choice) ? 72 : 40, alignment: .center)
             )
+            .padding(.horizontal)
             .onTapGesture {
                 choice = name
-                UIApplication.shared.setAlternateIconName(name == "nil" ? nil : name)
+//                UIApplication.shared.setAlternateIconName(name == "Default" ? nil : name)
             }
     }
 }
@@ -34,8 +35,8 @@ struct AlternateIconButton_Previews: PreviewProvider {
             Spacer()
             VStack {
                 Spacer()
-                AlternateIconButton(choice: .constant("nil"), name: "Default")
-                AlternateIconButton(choice: .constant("nil"), name: "Default-inverse")
+                AlternateIconButton(choice: .constant("Default"), name: "Default")
+                AlternateIconButton(choice: .constant("Default"), name: "Default-inverse")
                 Spacer()
             }
             Spacer()

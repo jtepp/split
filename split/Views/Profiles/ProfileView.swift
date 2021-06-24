@@ -255,6 +255,9 @@ struct ProfileView: View, KeyboardReadable {
                     Text("Default")
                         .font(Font.title2.weight(.semibold))
                         .padding(.leading)
+                    HStack{
+                        ForEach(["Default"])
+                    }
                     Text("Depth")
                         .font(Font.title2.weight(.semibold))
                         .padding(.leading)
