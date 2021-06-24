@@ -38,11 +38,8 @@ struct SplashView: View {
                     VStack {
                     if showCore {
                         SplashDetailsView(title: "Invite your friends", text: "Use the link button on the members page to copy an invitation to your group", image: "person.3.fill", color: .blue)
-                            .padding(.bottom)
                         SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
-                            .padding(.bottom)
                         SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .yellow)
-                            .padding(.bottom)
                     } else {
                         HStack {
                             Text("Show main features")
@@ -69,13 +66,9 @@ struct SplashView: View {
             }
             
             SplashDetailsView(title: "New invite links", text: "Send your friends a link to directly join your group", image: "link.circle", color: .purple)
-                .padding(.bottom)
                 SplashDetailsView(title: "Notification sounds", text: "Leave your ringer on to hear all the new sounds for every notification", image: "bell.badge.fill", color: .red)
-                    .padding(.bottom)
-                SplashDetailsView(title: "Better dark mode", text: "Check out the new, darker UI elements in dark mode", image: "moon.circle", color: .gray)
-                    .padding(.bottom)
-                SplashDetailsView(title: "More icons", text: "Every context menu now has its own icons to go with each action", image: "filemenu.and.selection", color: .blue)
-                    .padding(.bottom)
+                SplashDetailsView(title: "Icons everywhere", text: "Every menu now has icons. Also, double tap on the profile tab to set alternate app icons", image: "square.on.square.fill", color: .blue)
+               SplashDetailsView(title: "So much more...", text: "Better dark mode UI, edit your name, more context menus, and more", image: "ellipsis.circle", color: .gray)
 
             }
             Spacer()
@@ -157,6 +150,7 @@ struct SplashDetailsView: View {
         }
         .lineLimit(2)
         .minimumScaleFactor(0.4)
+        .padding(.bottom, 10)
     }
 }
 
