@@ -236,6 +236,22 @@ struct ProfileView: View, KeyboardReadable {
                     MemberPicker(show: $showSheet, house: $house, choice: $adminChoice)
                 }
             })
+        
+            if UIApplication.shared.supportsAlternateIcons {
+                
+                Rectangle()
+                    .fill(
+                        Color.black
+                    )
+                    .frame(height: 200)
+                HeaderText(text: "App icons")
+                
+                
+                
+                
+                
+                Spacer(minLength: 80)
+            }
         }
     }
 }

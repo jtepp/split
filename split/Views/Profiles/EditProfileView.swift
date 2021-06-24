@@ -64,7 +64,7 @@ struct EditProfileView: View {
                     .padding(.top, -40)
                 Spacer()
                 InputField(name: "Name", text: $name)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                     .padding()
                     .padding(.top)
                     .onChange(of: name, perform: { value in
