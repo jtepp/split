@@ -906,7 +906,9 @@ class Fetch: ObservableObject {
             }
             return EmptyView()
         }
-    
+    func removePhoto(m: Binding<Member>) {
+        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["image":""])
+    }
 }
 
 func idfromnamehouse(name: String, house: House) -> String {

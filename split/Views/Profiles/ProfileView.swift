@@ -91,6 +91,16 @@ struct ProfileView: View {
                                 Text("Choose from Library")
                                 Image(systemName: "photo.on.rectangle")
                             })
+                            if m.image != "" {
+                                Button(action: {
+                                    Fetch().removePhoto(m: $m)
+                                    
+                                    
+                                }, label: {
+                                    Text("Remove photo")
+                                    Image(systemName: "rectangle.slash")
+                                })
+                            }
                             
                         }, label: {
                             Image(systemName: "camera.fill")
