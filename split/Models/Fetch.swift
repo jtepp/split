@@ -913,6 +913,7 @@ class Fetch: ObservableObject {
     }
     func changeName(m:Binding<Member>, newName: Binding<String>, completion: @escaping ()->Void = {}) {
         let deadname = m.wrappedValue.name
+        newName.wrappedValue = newName.wrappedValue.trimmingCharacters(in: .whitespacesAndNewlines)
         db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["name":newName.wrappedValue]){ _ in
             //change the name
             //replace all payment names
