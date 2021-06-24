@@ -22,6 +22,7 @@ struct ProfileView: View, KeyboardReadable {
     @Binding var showStatus: Bool
     @State var keyboardOpen = false
     @Binding var newName: String
+    @State var alternateIcon = UserDefaults.standard.string(forKey: "alternateIcon") ?? nil
     var body: some View {
         ScrollView {
             HStack {

@@ -9,11 +9,18 @@ import SwiftUI
 
 struct AlternateIconButton: View {
     @Binding var choice: String
-    var name: String
+    var name: String?
     var body: some View {
-        Image(uiImage: UIImage(named: name) ?? UIImage())
+        Image(uiImage: UIImage(named: (name ?? "Default") + "@3x") ?? UIImage())
             .resizable()
             .aspectRatio(contentMode: .fit)
+            .frame(width: 60)
+            .cornerRadius(10)
+            .background(
+                RoundedRectangle(cornerRadius: 12.65)
+                .stroke((name == choice) || (name == "Default" && choice == nil) ? Color.blue : Color.clear , lineWidth: 4)
+                .frame(width: 72, height: 72, alignment: .center)
+            )
     }
 }
 
@@ -23,12 +30,12 @@ struct AlternateIconButton_Previews: PreviewProvider {
             Spacer()
             VStack {
                 Spacer()
-            AlternateIconButton(choice: .constant("Default-inverse"), name: "Default")
+            AlternateIconButton(choice: .constant("Default"), name: nil)
                 .foregroundColor(.white)
                 Spacer()
             }
             Spacer()
         }
-        .background(Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
+        .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }
