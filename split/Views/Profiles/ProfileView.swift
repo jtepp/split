@@ -244,13 +244,32 @@ struct ProfileView: View, KeyboardReadable {
                         Color.black
                     )
                     .frame(height: 200)
-                HeaderText(text: "App icons")
-                
-                
-                
-                
-                
-                Spacer(minLength: 80)
+                    .onAppear{
+                        UIApplication.shared.setAlternateIconName("Default-inverse"){err in
+                            print("NOOO \(err?.localizedDescription)")
+                        }
+                    }
+                VStack(alignment: .leading) {
+                    HeaderText(text: "App icons")
+                    Text("Default")
+                        .font(Font.title2.weight(.semibold))
+                        .padding(.leading)
+                    Text("Depth")
+                        .font(Font.title2.weight(.semibold))
+                        .padding(.leading)
+                    Text("Rainbow")
+                        .font(Font.title2.weight(.semibold))
+                        .padding(.leading)
+                    Text("more coming soon...")
+                        .font(.subheadline)
+                        .padding()
+                    
+                    
+                    
+                    Spacer(minLength: 80)
+                    
+                }
+                .foregroundColor(.white)
             }
         }
     }
