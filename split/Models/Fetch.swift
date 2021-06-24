@@ -907,7 +907,9 @@ class Fetch: ObservableObject {
             return EmptyView()
         }
     func removePhoto(m: Binding<Member>) {
-        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["image":""])
+        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["image":""]){ _ in
+            m.wrappedValue.image = ""
+        }
     }
     func changeName(m:Binding<Member>, newName: String) {
         let deadname = m.wrappedValue.name

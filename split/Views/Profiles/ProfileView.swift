@@ -202,8 +202,8 @@ struct ProfileView: View {
     }
 }
 
-//struct ProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder))
-//    }
-//}
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder), inWR: .constant(false), noProf: .constant(false), showStatus: .constant(true))
+    }
+}
