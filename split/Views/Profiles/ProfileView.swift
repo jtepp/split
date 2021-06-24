@@ -255,7 +255,7 @@ struct ProfileView: View, KeyboardReadable {
                     VStack(alignment: .leading) {
                         Text("Default")
                             .font(Font.title2.weight(.semibold))
-                            .padding(.leading)
+
                         HStack{
                             AlternateIconButton(choice: $alternateIcon, name: "Default")
                             AlternateIconButton(choice: $alternateIcon, name: "Default-inverse")
@@ -263,7 +263,7 @@ struct ProfileView: View, KeyboardReadable {
                         .padding(.bottom)
                         Text("Depth")
                             .font(Font.title2.weight(.semibold))
-                            .padding(.leading)
+
                         HStack{
                             AlternateIconButton(choice: $alternateIcon, name: "Depth")
                             AlternateIconButton(choice: $alternateIcon, name: "Depth-inverse")
@@ -271,7 +271,7 @@ struct ProfileView: View, KeyboardReadable {
                         .padding(.bottom)
                         Text("Rainbow")
                             .font(Font.title2.weight(.semibold))
-                            .padding(.leading)
+
                         HStack{
                             AlternateIconButton(choice: $alternateIcon, name: "Rainbow")
                             AlternateIconButton(choice: $alternateIcon, name: "Rainbow-vertical")
@@ -280,18 +280,25 @@ struct ProfileView: View, KeyboardReadable {
                         .padding(.bottom)
                         Text("more coming soon...")
                             .font(.subheadline)
-                            .padding()
-                        
-                        
-                        
-                        Spacer(minLength: 100)
+                            .padding(.top)
+                            .id("icons")
                         
                     }
                     .foregroundColor(.white)
                     .animation(.easeOut)
                     Spacer()
                 }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(Color("DarkMaterial"))
+                )
+                .padding(.horizontal)
             }
+            
+            
+            
+            Spacer(minLength: 120)
         }
     }
 }
