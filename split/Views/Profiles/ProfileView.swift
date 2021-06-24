@@ -23,11 +23,14 @@ struct ProfileView: View, KeyboardReadable {
     @State var keyboardOpen = false
     @Binding var newName: String
     @State var alternateIcon = UserDefaults.standard.string(forKey: "alternateIcon") ?? "Default"
+    @Binding var watch: Int
+    @Binding var engaged: Bool
     var body: some View {
         ScrollView {
             ScrollViewReader { svr in
                 HStack {
                     HeaderText(text: "Profile")
+                        .id("top")
                     Spacer()
                     Menu {
                         Button {
@@ -252,11 +255,6 @@ struct ProfileView: View, KeyboardReadable {
                     //                        }
                     //                    }
                     HeaderText(text: "App icons")
-                        .onTapGesture {
-                            withAnimation {
-                                svr.scrollTo("icons")
-                            }
-                        }
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Default")
@@ -312,7 +310,7 @@ struct ProfileView: View, KeyboardReadable {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder), inWR: .constant(false), noProf: .constant(false), showStatus: .constant(true), newName: .constant(""))
-            .background(Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
+        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder), inWR: .constant(false), noProf: .constant(false), showStatus: .constant(true), newName: .constant(""), watch: .constant(0), engaged: .constant(false))
+            .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

@@ -16,9 +16,11 @@ struct Main: View {
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
     @State var tabSelection = 0
     @State var dontSplash = UserDefaults.standard.bool(forKey: "dontSplash")
+    @State var engaged = false
+    @State var watch = 0
     var body: some View {
         ZStack {
-            TabsView(tabSelection: $tabSelection, house: $h, member: $m, myId: $myId, inWR: $inWR, noProf: $noProf)
+            TabsView(tabSelection: $tabSelection, house: $h, member: $m, myId: $myId, inWR: $inWR, noProf: $noProf, engaged: $engaged, watch: $watch)
                 .animation(.easeOut)
             //                .onAppear{
             //                    print("\n\n\n\n\ntrue\n\n\n\n\n\n")
@@ -26,7 +28,7 @@ struct Main: View {
             //                .onDisappear{
             //                    print("\n\n\n\n\nfalse\n\n\n\n\n\n")
             //                }
-            TabBar(tabSelection: $tabSelection)
+            TabBar(tabSelection: $tabSelection, engaged: $engaged, watch: $watch)
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
