@@ -203,7 +203,7 @@ struct ProfileView: View, KeyboardReadable {
                 Text("ID: \(m.id)")
                     .font(.caption)
                     .foregroundColor(Color("Secondary"))
-                Spacer(minLength: 80)
+                Spacer(minLength: 40)
             }
             .padding(.vertical, 40)
             .foregroundColor(.white)
@@ -239,16 +239,16 @@ struct ProfileView: View, KeyboardReadable {
         
             if UIApplication.shared.supportsAlternateIcons {
                 
-                Rectangle()
-                    .fill(
-                        Color.black
-                    )
-                    .frame(height: 200)
-                    .onAppear{
-                        UIApplication.shared.setAlternateIconName("Depth-inverse"){err in
-                            print("NOOO \(err?.localizedDescription)")
-                        }
-                    }
+//                Rectangle()
+//                    .fill(
+//                        Color.black
+//                    )
+//                    .frame(height: 200)
+//                    .onAppear{
+//                        UIApplication.shared.setAlternateIconName("Depth-inverse"){err in
+//                            print("NOOO \(err?.localizedDescription)")
+//                        }
+//                    }
                 VStack(alignment: .leading) {
                     HeaderText(text: "App icons")
                     Text("Default")
@@ -266,7 +266,7 @@ struct ProfileView: View, KeyboardReadable {
                     
                     
                     
-                    Spacer(minLength: 80)
+                    Spacer(minLength: 100)
                     
                 }
                 .foregroundColor(.white)
