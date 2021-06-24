@@ -909,6 +909,44 @@ class Fetch: ObservableObject {
     func removePhoto(m: Binding<Member>) {
         db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["image":""])
     }
+    func changeName(m:Binding<Member>, newName: String) {
+        let deadname = m.wrappedValue.name
+        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["name":""]){ _ in
+            //change the name
+            //replace all payment names
+            self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { allPaymentSnapshot, err in
+                guard let allPayments = allPaymentSnapshot?.documents else {
+                    return
+                }
+                allPayments.forEach { paymentSnapshot in
+                    let d = paymentSnapshot.data()
+                    var reqfrom = d["reqfrom"] as? [String] ?? []
+                    var to = d["to"] as? String ?? ""
+                    var from = d["from"] as? String ?? ""
+                    
+                    if reqfrom.contains(deadname) {
+                        reqfrom.removeAll { s in
+                            return s == deadname
+                        }
+                        reqfrom.append(newName)
+                    }
+                    
+                    if to == deadname {
+                        to = newName
+                    }
+                    
+                    if from == deadname {
+                        from = newName
+                    }
+                    
+                    self.db.document("houses/\(m.wrappedValue.home)/payments/\(paymentSnapshot.documentID)").updateData(["reqfrom": reqfrom, "to": to, "from": from])
+                    
+                    m.wrappedValue.name = newName
+                }
+            }
+        }
+        
+    }
 }
 
 func idfromnamehouse(name: String, house: House) -> String {
