@@ -22,7 +22,7 @@ struct ProfileView: View, KeyboardReadable {
     @Binding var showStatus: Bool
     @State var keyboardOpen = false
     @Binding var newName: String
-    @State var alternateIcon = UserDefaults.standard.string(forKey: "alternateIcon") ?? nil
+    @State var alternateIcon = UserDefaults.standard.string(forKey: "alternateIcon") ?? "Default"
     var body: some View {
         ScrollView {
             HStack {
@@ -250,30 +250,47 @@ struct ProfileView: View, KeyboardReadable {
 //                            print("NOOO \(err?.localizedDescription)")
 //                        }
 //                    }
-                VStack(alignment: .leading) {
-                    HeaderText(text: "App icons")
-                    Text("Default")
-                        .font(Font.title2.weight(.semibold))
-                        .padding(.leading)
-                    HStack{
-                        ForEach(["Default"])
+                HeaderText(text: "App icons")
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Default")
+                            .font(Font.title2.weight(.semibold))
+                            .padding(.leading)
+                        HStack{
+                            AlternateIconButton(choice: $alternateIcon, name: "Default")
+                            AlternateIconButton(choice: $alternateIcon, name: "Default-inverse")
+                        }
+                        .padding(.bottom)
+                        Text("Depth")
+                            .font(Font.title2.weight(.semibold))
+                            .padding(.leading)
+                        HStack{
+                            AlternateIconButton(choice: $alternateIcon, name: "Depth")
+                            AlternateIconButton(choice: $alternateIcon, name: "Depth-inverse")
+                        }
+                        .padding(.bottom)
+                        Text("Rainbow")
+                            .font(Font.title2.weight(.semibold))
+                            .padding(.leading)
+                        HStack{
+                            AlternateIconButton(choice: $alternateIcon, name: "Rainbow")
+                            AlternateIconButton(choice: $alternateIcon, name: "Rainbow-vertical")
+                            AlternateIconButton(choice: $alternateIcon, name: "Rainbow-angle")
+                        }
+                        .padding(.bottom)
+                        Text("more coming soon...")
+                            .font(.subheadline)
+                            .padding()
+                        
+                        
+                        
+                        Spacer(minLength: 100)
+                        
                     }
-                    Text("Depth")
-                        .font(Font.title2.weight(.semibold))
-                        .padding(.leading)
-                    Text("Rainbow")
-                        .font(Font.title2.weight(.semibold))
-                        .padding(.leading)
-                    Text("more coming soon...")
-                        .font(.subheadline)
-                        .padding()
-                    
-                    
-                    
-                    Spacer(minLength: 100)
-                    
+                    .foregroundColor(.white)
+                    .animation(.easeOut)
+                    Spacer()
                 }
-                .foregroundColor(.white)
             }
         }
     }

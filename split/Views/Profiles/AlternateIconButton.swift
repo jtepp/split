@@ -14,17 +14,18 @@ struct AlternateIconButton: View {
         Image(uiImage: UIImage(named: name+"@3x") ?? UIImage())
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 60)
-            .cornerRadius(10)
+            .frame(width: 40)
+            .cornerRadius(7)
             .background(
-                RoundedRectangle(cornerRadius: 12.65)
+                RoundedRectangle(cornerRadius: 9)
                 .stroke((name == choice) ? Color.blue : Color.clear , lineWidth: 4)
-                    .frame(width: (name == choice) ? 72 : 40, height: (name == choice) ? 72 : 40, alignment: .center)
+                    .frame(width: (name == choice) ? 52 : 20, height: (name == choice) ? 52 : 20, alignment: .center)
             )
             .padding(.horizontal)
             .onTapGesture {
                 choice = name
-//                UIApplication.shared.setAlternateIconName(name == "Default" ? nil : name)
+                UIApplication.shared.setAlternateIconName(name == "Default" ? nil : name)
+                UserDefaults.standard.string(forKey: "alternateIcon")
             }
     }
 }
