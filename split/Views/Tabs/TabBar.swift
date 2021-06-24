@@ -25,6 +25,7 @@ struct TabBar: View {
                 RoundedRectangle(cornerRadius: 25.0)
                     .fill(Color("AccentGray"))
                     .frame(width: UIScreen.main.bounds.width, height: 100, alignment: .bottom)
+                    .shadow(color: .black, radius: 6, y: -8)
                     .overlay(
                         HStack(spacing: 60) {
                             TabButton(tabSelection: $tabSelection, index: 0, name: "rectangle.grid.1x2", engaged: .constant(false), watch: .constant(0))
@@ -40,6 +41,7 @@ struct TabBar: View {
                                 .frame(width: 10)
                                 .offset(x: -45 * 2 * (1.5 - CGFloat(tabSelection)), y:30)
                                 .animation(Animation.easeOut.speed(1.4))
+                                .shadow(color: .black, radius: 10)
                         )
                     )
             }
