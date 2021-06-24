@@ -297,7 +297,16 @@ struct ProfileView: View, KeyboardReadable {
                             .fill(Color("DarkMaterial"))
                     )
                     .padding(.horizontal)
+                    .onChange(of: watch, perform: { _ in
+                        withAnimation {
+                            switch(engaged) {
+                            case false: svr.scrollTo("icons")
+                            case true: svr.scrollTo("top")
+                            }
+                        }
+                    })
                 }
+                
                 
                 
                 

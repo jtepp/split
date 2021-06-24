@@ -72,9 +72,15 @@ struct TabButton: View {
             .onTapGesture {
                 tabSelection = index
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                if tabSelection == 3 {
+                if index == 3 {
                     watch += 1
-                    engaged.toggle()
+                    if tabSelection == 3 {
+                        engaged.toggle()
+                    } else {
+                        engaged = false
+                    }
+                } else {
+                    engaged = true
                 }
             }
     }

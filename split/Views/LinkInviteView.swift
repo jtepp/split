@@ -58,7 +58,7 @@ struct LinkInviteView: View {
                         Color("DarkMaterial")
                     )
             )
-            .padding(.vertical)
+            .padding()
             Spacer()
             
             VStack {
