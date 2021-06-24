@@ -911,9 +911,9 @@ class Fetch: ObservableObject {
             m.wrappedValue.image = ""
         }
     }
-    func changeName(m:Binding<Member>, newName: String) {
+    func changeName(m:Binding<Member>, newName: Binding<String>, completion: @escaping ()->Void = {}) {
         let deadname = m.wrappedValue.name
-        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["name":""]){ _ in
+        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["name":newName.wrappedValue]){ _ in
             //change the name
             //replace all payment names
             self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { allPaymentSnapshot, err in
@@ -930,20 +930,21 @@ class Fetch: ObservableObject {
                         reqfrom.removeAll { s in
                             return s == deadname
                         }
-                        reqfrom.append(newName)
+                        reqfrom.append(newName.wrappedValue)
                     }
                     
                     if to == deadname {
-                        to = newName
+                        to = newName.wrappedValue
                     }
                     
                     if from == deadname {
-                        from = newName
+                        from = newName.wrappedValue
                     }
                     
                     self.db.document("houses/\(m.wrappedValue.home)/payments/\(paymentSnapshot.documentID)").updateData(["reqfrom": reqfrom, "to": to, "from": from])
                     
-                    m.wrappedValue.name = newName
+                    m.wrappedValue.name = newName.wrappedValue
+                    completion()
                 }
             }
         }

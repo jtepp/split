@@ -11,6 +11,7 @@
 		0C0CA77E265F01BE0062FDDD /* PaymentPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */; };
 		0C0CA781265F01F10062FDDD /* RequestPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */; };
 		0C0CA784265F08CD0062FDDD /* MemberPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA783265F08CD0062FDDD /* MemberPicker.swift */; };
+		0C15F8912685026E006BF2B0 /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15F8902685026E006BF2B0 /* KeyboardReadable.swift */; };
 		0C210D6726811F42008220B6 /* leave.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6226811F41008220B6 /* leave.mp3 */; };
 		0C210D6826811F42008220B6 /* admin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6326811F41008220B6 /* admin.mp3 */; };
 		0C210D6926811F42008220B6 /* pay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6426811F41008220B6 /* pay.mp3 */; };
@@ -60,6 +61,7 @@
 		0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPaymentView.swift; sourceTree = "<group>"; };
 		0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPaymentView.swift; sourceTree = "<group>"; };
 		0C0CA783265F08CD0062FDDD /* MemberPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPicker.swift; sourceTree = "<group>"; };
+		0C15F8902685026E006BF2B0 /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
 		0C210D6226811F41008220B6 /* leave.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = leave.mp3; sourceTree = "<group>"; };
 		0C210D6326811F41008220B6 /* admin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = admin.mp3; sourceTree = "<group>"; };
 		0C210D6426811F41008220B6 /* pay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pay.mp3; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */,
 				0CA0E9CC26604315002876CF /* View+allowAutoDismiss.swift */,
+				0C15F8902685026E006BF2B0 /* KeyboardReadable.swift */,
 				0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */,
 				0C9D26CE265F263E006A7AF6 /* String+isNumeric.swift */,
 			);
@@ -427,6 +430,7 @@
 				0C0CA784265F08CD0062FDDD /* MemberPicker.swift in Sources */,
 				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,
 				0CEE3827265E16700013BB12 /* MemberDetailsView.swift in Sources */,
+				0C15F8912685026E006BF2B0 /* KeyboardReadable.swift in Sources */,
 				0CBF0A00265D91640016CA92 /* TabsView.swift in Sources */,
 				0C0CA781265F01F10062FDDD /* RequestPaymentView.swift in Sources */,
 				0CAA803B2661CC4A00A3081B /* SplashView.swift in Sources */,

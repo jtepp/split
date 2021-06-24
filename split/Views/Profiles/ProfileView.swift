@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct ProfileView: View, KeyboardReadable {
     @Binding var house: House
     @Binding var m: Member
     @State var showSignOut = false
@@ -20,7 +20,8 @@ struct ProfileView: View {
     @Binding var inWR: Bool
     @Binding var noProf: Bool
     @Binding var showStatus: Bool
-    @State var editName = false
+    @State var keyboardOpen = false
+    @Binding var newName: String
     var body: some View {
         ScrollView {
             HStack {
@@ -117,30 +118,40 @@ struct ProfileView: View {
                         })
                         .offset(y: 100)
                     )
-                Text(m.name)
-                    .font(.largeTitle)
-                    .bold()
-                    .overlay(
-                        HStack {
-                            Spacer()
+                
+                TextField("Name", text: $newName)
+                    .disableAutocorrection(true)
+                .font(Font.largeTitle.bold())
+                .multilineTextAlignment(.center)
+                .padding(.top, 10)
+                .overlay(
+                    HStack {
+                        Spacer()
+                        if keyboardOpen {
                             Button(action: {
-                                editName.toggle()
+                                print(newName)
+                                Fetch().changeName(m: $m, newName: $newName){
+                                    Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+                                }
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             }, label: {
-                                Image(systemName: "pencil")
-                                    .foregroundColor(editName ? .black : .white)
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.black)
                                     .font(Font.body.bold())
                                     .padding(4)
                                     .background(
                                         Circle()
                                             .fill(
-                                                editName ? Color.white : Color.clear
-                                            )
+                                                Color.white                                        )
                                     )
                             })
-                            .offset(x: 38)
-
+                            
                         }
-                    )
+                    }
+                )
+                .onReceive(keyboardPublisher, perform: { k in
+                    keyboardOpen = k
+                })
                 if m.admin {
                     Text("Group Admin")
                 }
@@ -202,8 +213,13 @@ struct ProfileView: View {
                     Fetch().updateImg(img: img!, hId: house.id, myId: m.id)
                 }
             })
+            .onChange(of: m, perform: { _ in
+                newName = m.name
+                Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+            })
             .onAppear{
                 UserDefaults.standard.set(m.id, forKey: "myId")
+                newName = m.name
                 //                Fetch().updateMember(m: $m)
             }
             .sheet(isPresented: $showSheet, onDismiss: {
@@ -226,7 +242,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder), inWR: .constant(false), noProf: .constant(false), showStatus: .constant(true))
+        ProfileView(house: .constant(.placeholder), m: .constant(.placeholder), inWR: .constant(false), noProf: .constant(false), showStatus: .constant(true), newName: .constant(""))
             .background(Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
     }
 }

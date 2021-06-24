@@ -19,6 +19,7 @@ struct TabsView: View {
     @State var newName = ""
     @State var newGroup = ""
     @State var newPass = ""
+    @State var newMemberName = ""
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
@@ -32,7 +33,7 @@ struct TabsView: View {
                         return m.id == myId
                     }) ?? Member.empty), inWR: $inWR, noProf: $noProf, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
-                    })?.showStatus ?? Member.empty.showStatus))
+                    })?.showStatus ?? Member.empty.showStatus), newName: $newMemberName)
                         .tag(3)
                 })
             .tabViewStyle(PageTabViewStyle())
@@ -75,6 +76,7 @@ struct TabsView: View {
             .onChange(of: tabSelection) { (_) in
                 Fetch().getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
                 print("PEARL\(member.dict())")
+                newMemberName = member.name
             }
 
     }
