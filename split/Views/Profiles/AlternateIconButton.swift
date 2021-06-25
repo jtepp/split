@@ -25,7 +25,7 @@ struct AlternateIconButton: View {
             .onTapGesture {
                 choice = name
                 UIApplication.shared.setAlternateIconName(name == "Default" ? nil : name)
-                UserDefaults.standard.string(forKey: "alternateIcon")
+                UserDefaults.standard.setValue(name, forKey: "alternateIcon")
             }
     }
 }
