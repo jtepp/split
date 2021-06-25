@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AlternateIconButton: View {
+    @State var showAlert = false
     @Binding var choice: String
     var name: String
     var body: some View {
@@ -23,10 +24,17 @@ struct AlternateIconButton: View {
             )
             .padding(.horizontal)
             .onTapGesture {
-                choice = name
-                UIApplication.shared.setAlternateIconName(name == "Default" ? nil : name)
-                UserDefaults.standard.setValue(name, forKey: "alternateIcon")
+                if choice == name {
+                    showAlert = true
+                } else {
+                    choice = name
+                    UIApplication.shared.setAlternateIconName(name == "Default" ? nil : name)
+                    UserDefaults.standard.setValue(name, forKey: "alternateIcon")
+                }
             }
+            .alert(isPresented: $showAlert, content: {
+                Alert(title: Text("Having trouble setting the icon?"), message: Text("This is a common iOS glitch. Restart your phone and it should work again.\n\nIf the problem persists, send me a screen recording through the feedback button on the splash screen (tap the ? button on the Activity page)"))
+            })
     }
 }
 
