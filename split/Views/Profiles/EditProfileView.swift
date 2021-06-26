@@ -16,7 +16,6 @@ struct EditProfileView: View {
     @State var showImagePicker = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
     @State var cropperShown = false
-    @State var crop = false
     var body: some View {
         ScrollView {
             HeaderText(text: "Create your profile")
@@ -36,7 +35,6 @@ struct EditProfileView: View {
                             Button(action: {
                                 showImagePicker = true
                                 sourceType = .camera
-                                crop = true
                             }, label: {
                                 Text("Take Picture")
                                 Image(systemName: "camera.on.rectangle")
@@ -44,32 +42,12 @@ struct EditProfileView: View {
                             Button(action: {
                                 showImagePicker = true
                                 sourceType = .photoLibrary
-                                crop = true
+                                
                                 
                             }, label: {
                                 Text("Choose from Library")
                                 Image(systemName: "photo.on.rectangle")
                             })
-                            
-                            Button(action: {
-                                showImagePicker = true
-                                sourceType = .camera
-                                crop = false
-                            }, label: {
-                                Text("Take Picture (uncropped)")
-                                Image(systemName: "camera.on.rectangle")
-                            })
-                            Button(action: {
-                                showImagePicker = true
-                                sourceType = .photoLibrary
-                                crop = false
-                                
-                            }, label: {
-                                Text("Choose from Library (uncropped)")
-                                Image(systemName: "photo.on.rectangle")
-                            })
-                            
-                            Text("Warning: the crop tool is currently in beta")
                             
                         }, label: {
                             Image(systemName: "camera.fill")
@@ -102,7 +80,7 @@ struct EditProfileView: View {
                 if cropperShown {
                     ImageCroppingView(shown: $cropperShown, image: tempimg ?? UIImage(), croppedImage: $img)
                 } else {
-                    ImagePicker(img: crop ? $tempimg : $img, isShown: $showImagePicker, cropperShown: $cropperShown, sourceType: $sourceType, crop: $crop)
+                    ImagePicker(img: $tempimg, isShown: $showImagePicker, cropperShown: $cropperShown, sourceType: $sourceType)
                 }
             })
             .onChange(of: img, perform: { _ in

@@ -11,23 +11,18 @@ class ImagePickerCoordinator: NSObject, UINavigationControllerDelegate, UIImageP
     @Binding var img: UIImage?
     @Binding var isShown: Bool
     @Binding var cropperShown: Bool
-    @Binding var crop: Bool
     
-    init(img: Binding<UIImage?>, isShown: Binding<Bool>, cropperShown: Binding<Bool>, crop: Binding<Bool>) {
+    init(img: Binding<UIImage?>, isShown: Binding<Bool>, cropperShown: Binding<Bool>) {
         _img = img
         _isShown = isShown
         _cropperShown = cropperShown
-        _crop = crop
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             img = uiImage
-            if crop {
-                cropperShown = true
-            } else {
-                isShown = false
-            }
+//            isShown = false
+            cropperShown = true
         }
     }
     
@@ -44,13 +39,12 @@ struct ImagePicker: UIViewControllerRepresentable {
     @Binding var isShown: Bool
     @Binding var cropperShown: Bool
     @Binding var sourceType: UIImagePickerController.SourceType
-    @Binding var crop: Bool
     
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
     }
     
     func makeCoordinator() -> ImagePicker.Coordinator {
-        return ImagePickerCoordinator(img: $img, isShown: $isShown, cropperShown: $cropperShown, crop: $crop)
+        return ImagePickerCoordinator(img: $img, isShown: $isShown, cropperShown: $cropperShown)
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {

@@ -27,7 +27,6 @@ struct ProfileView: View, KeyboardReadable {
     @Binding var watch: Int
     @Binding var engaged: Bool
     @State var cropperShown = false
-    @State var crop = false
     var body: some View {
         ScrollView {
             ScrollViewReader { svr in
@@ -84,43 +83,33 @@ struct ProfileView: View, KeyboardReadable {
                         .overlay(
                             Menu(content: {
                                 Button(action: {
-                                    showImagePicker = true
                                     sourceType = .camera
-                                    crop = true
+                                    showImagePicker = true
+                                    showSheet = true
                                 }, label: {
                                     Text("Take Picture")
                                     Image(systemName: "camera.on.rectangle")
                                 })
                                 Button(action: {
-                                    showImagePicker = true
                                     sourceType = .photoLibrary
-                                    crop = true
+                                    showImagePicker = true
+                                    showSheet = true
+                                    
                                     
                                 }, label: {
                                     Text("Choose from Library")
                                     Image(systemName: "photo.on.rectangle")
                                 })
-                                
-                                Button(action: {
-                                    showImagePicker = true
-                                    sourceType = .camera
-                                    crop = false
-                                }, label: {
-                                    Text("Take Picture (uncropped)")
-                                    Image(systemName: "camera.on.rectangle")
-                                })
-                                Button(action: {
-                                    showImagePicker = true
-                                    sourceType = .photoLibrary
-                                    crop = false
-                                    
-                                }, label: {
-                                    Text("Choose from Library (uncropped)")
-                                    Image(systemName: "photo.on.rectangle")
-                                })
-                                
-                                Text("Warning: the crop tool is currently in beta")
-                                    .font(.caption)
+                                if m.image != "" {
+                                    Button(action: {
+                                        Fetch().removePhoto(m: $m)
+                                        
+                                        
+                                    }, label: {
+                                        Text("Remove photo")
+                                        Image(systemName: "rectangle.slash")
+                                    })
+                                }
                                 
                             }, label: {
                                 Image(systemName: "camera.fill")
@@ -251,7 +240,7 @@ struct ProfileView: View, KeyboardReadable {
                     if cropperShown {
                         ImageCroppingView(shown: $cropperShown, image: tempimg ?? UIImage(), croppedImage: $img)
                     } else if showImagePicker {
-                        ImagePicker(img: crop ? $tempimg : $img, isShown: $showImagePicker, cropperShown: $cropperShown, sourceType: $sourceType, crop: $crop)
+                        ImagePicker(img: $tempimg, isShown: $showSheet, cropperShown: $cropperShown, sourceType: $sourceType)
                     }
                     if showAdminPicker {
                         MemberPicker(show: $showSheet, house: $house, choice: $adminChoice)
