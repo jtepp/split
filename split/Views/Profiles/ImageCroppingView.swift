@@ -36,7 +36,7 @@ struct ImageCroppingView: View {
                             .foregroundColor(.red)
                     }
                     Spacer()
-                    Text("You may need to re-select your filter after cropping")
+                    Text("Resize and crop your picture")
                         .font(.system(size: 12))
                         .foregroundColor(.init(white: 0.7))
                         .padding(.horizontal, 20)

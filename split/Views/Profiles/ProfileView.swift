@@ -16,6 +16,7 @@ struct ProfileView: View, KeyboardReadable {
     @State var showSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
     @State var adminChoice = [Member]()
+    @State var tempimg: UIImage?
     @State var img: UIImage?
     @Binding var inWR: Bool
     @Binding var noProf: Bool
@@ -25,6 +26,7 @@ struct ProfileView: View, KeyboardReadable {
     @State var alternateIcon = UserDefaults.standard.string(forKey: "alternateIcon") ?? "Default"
     @Binding var watch: Int
     @Binding var engaged: Bool
+    @State var cropperShown = false
     var body: some View {
         ScrollView {
             ScrollViewReader { svr in
@@ -216,6 +218,7 @@ struct ProfileView: View, KeyboardReadable {
                 .onChange(of: img, perform: { _ in
                     if img != nil {
                         Fetch().updateImg(img: img!, hId: house.id, myId: m.id)
+                        showSheet = false
                     }
                 })
                 .onChange(of: m, perform: { _ in
@@ -234,8 +237,10 @@ struct ProfileView: View, KeyboardReadable {
                     showImagePicker = false
                     showAdminPicker = false
                 }, content: {
-                    if showImagePicker {
-                        ImagePicker(img: $img, isShown: $showSheet, sourceType: $sourceType)
+                    if cropperShown {
+                        ImageCroppingView(shown: $cropperShown, image: tempimg ?? UIImage(), croppedImage: $img)
+                    } else if showImagePicker {
+                        ImagePicker(img: $tempimg, isShown: $showSheet, cropperShown: $cropperShown, sourceType: $sourceType)
                     }
                     if showAdminPicker {
                         MemberPicker(show: $showSheet, house: $house, choice: $adminChoice)
