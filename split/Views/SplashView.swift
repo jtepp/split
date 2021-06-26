@@ -22,7 +22,7 @@ struct SplashView: View {
                     VStack {
                         Spacer()
                         HStack {
-                            Text("v2.0.0")
+                            Text("v2.1.0")
                                 .foregroundColor(.white)
                                 .font(Font.subheadline.bold())
     //                            .padding()
@@ -65,10 +65,8 @@ struct SplashView: View {
                     showCore.toggle()
             }
             
-            SplashDetailsView(title: "New invite links", text: "Send your friends a link to directly join your group", image: "link.circle", color: .purple)
-                SplashDetailsView(title: "Notification sounds", text: "Leave your ringer on to hear all the new sounds for every notification", image: "bell.badge.fill", color: .red)
-                SplashDetailsView(title: "Icons everywhere", text: "Every menu now has icons. Also, double tap on the profile tab to set alternate app icons", image: "square.on.square.fill", color: .blue)
-               SplashDetailsView(title: "So much more...", text: "Better dark mode UI, edit your name, more context menus, and more", image: "ellipsis.circle", color: .gray)
+            SplashDetailsView(title: "Picture tools", text: "Easily crop, rotate, and resize your profile pictures", image: "crop.rotate", color: .purple)
+                SplashDetailsView(title: "More app icons", text: "Check out all the new alternate icon collections below the profile page", image: "square.on.square.fill", color: .blue)
 
             }
             Spacer()
@@ -111,7 +109,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "2.0.0")
+            UserDefaults.standard.setValue(true, forKey: "2.1.0")
         }
         .sheet(isPresented: $isShowingMailView) {
                     MailView(result: self.$result)
