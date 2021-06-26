@@ -88,70 +88,69 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-            <key>Neon-pink</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>Neon-pink</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>Neon-blue</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>Neon-blue</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>Neon-green</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>Neon-green</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>Shadow-white</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>Shadow-white</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>Shadow-black</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>Shadow-black</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>Soft-white</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>Soft-white</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            <key>Soft-black</key>
-            <dict>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <string>Soft-black</string>
-                </array>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-            </dict>
-            
+			<key>Neon-pink</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Neon-pink</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Neon-blue</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Neon-blue</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Neon-green</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Neon-green</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Shadow-white</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Shadow-white</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Shadow-black</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Shadow-black</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Soft-white</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Soft-white</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Soft-black</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Soft-black</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
 		</dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
@@ -244,6 +243,8 @@
 	</array>
 	<key>UILaunchScreen</key>
 	<dict>
+		<key>UIColorName</key>
+		<string>black</string>
 		<key>UIImageName</key>
 		<string>Launch</string>
 		<key>UIImageRespectsSafeAreaInsets</key>
