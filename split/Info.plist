@@ -61,6 +61,33 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
+			<key>Neon-blue</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Neon-blue</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Neon-green</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Neon-green</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Neon-pink</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Neon-pink</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
 			<key>Rainbow</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -88,29 +115,11 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>Neon-pink</key>
+			<key>Shadow-black</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Neon-pink</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>Neon-blue</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Neon-blue</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>Neon-green</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Neon-green</string>
+					<string>Shadow-black</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -124,11 +133,11 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>Shadow-black</key>
+			<key>Soft-black</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Shadow-black</string>
+					<string>Soft-black</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -138,15 +147,6 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Soft-white</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>Soft-black</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Soft-black</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -241,15 +241,8 @@
 		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>black</string>
-		<key>UIImageName</key>
-		<string>Launch</string>
-		<key>UIImageRespectsSafeAreaInsets</key>
-		<false/>
-	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
