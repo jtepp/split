@@ -12,11 +12,10 @@ struct AlternateIconButton: View {
     @Binding var choice: String
     var name: String
     var body: some View {
-        Image(uiImage: UIImage(named: name+"@3x") ?? UIImage())
+        Image(uiImage: UIImage(named: name) ?? UIImage())
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 50)
-            .cornerRadius(8.8)
             .background(
                 RoundedRectangle(cornerRadius: 10)
                 .stroke((name == choice) ? Color.blue : Color.clear , lineWidth: 4)

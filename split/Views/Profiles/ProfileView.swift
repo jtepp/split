@@ -270,8 +270,7 @@ struct ProfileView: View, KeyboardReadable {
                             
                             AlternateIconRow(title: "Neon", names: ["Neon-pink", "Neon-blue", "Neon-green"], choice: $alternateIcon)
                             
-                            
-                            AlternateIconRow(title: "Rainbow", names: ["Rainbow", "Rainbow-vertical", "Rainbow-horizontal"], choice: $alternateIcon)
+                            AlternateIconRow(title: "Rainbow", names: ["Rainbow", "Rainbow-vertical", "Rainbow-angle"], choice: $alternateIcon)
                             
                             
                             

@@ -13,7 +13,7 @@ struct AlternateIconRow: View {
     @Binding var choice: String
     var body: some View {
         VStack(alignment: .leading){
-            Text("Default")
+            Text(title)
                 .font(Font.title2.weight(.semibold))
             HStack{
                 ForEach(names, id: \.self) { name in
