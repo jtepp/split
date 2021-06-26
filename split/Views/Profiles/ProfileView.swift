@@ -102,6 +102,13 @@ struct ProfileView: View, KeyboardReadable {
                                 })
                                 if m.image != "" {
                                     Button(action: {
+                                        img = b64touiimg(b64: m.image)!.rotate(radians: Float(Double.pi/2))
+                                        Fetch().updateImg(img: img!, hId: house.id, myId: m.id)
+                                    }, label: {
+                                        Text("Rotate photo")
+                                        Image(systemName: "rotate.right")
+                                    })
+                                    Button(action: {
                                         Fetch().removePhoto(m: $m)
                                         
                                         
@@ -110,7 +117,6 @@ struct ProfileView: View, KeyboardReadable {
                                         Image(systemName: "rectangle.slash")
                                     })
                                 }
-                                
                             }, label: {
                                 Image(systemName: "camera.fill")
                                     .padding(10)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C016A9D2687E72700EFFC3E /* UIImage+rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C016A9C2687E72700EFFC3E /* UIImage+rotate.swift */; };
 		0C0CA77A265EF4D20062FDDD /* UIImage+resized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */; };
 		0C0CA77E265F01BE0062FDDD /* PaymentPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */; };
 		0C0CA781265F01F10062FDDD /* RequestPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */; };
@@ -109,6 +110,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C016A9C2687E72700EFFC3E /* UIImage+rotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+rotate.swift"; sourceTree = "<group>"; };
 		0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resized.swift"; sourceTree = "<group>"; };
 		0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPaymentView.swift; sourceTree = "<group>"; };
 		0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPaymentView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */,
+				0C016A9C2687E72700EFFC3E /* UIImage+rotate.swift */,
 				0CA0E9CC26604315002876CF /* View+allowAutoDismiss.swift */,
 				0C15F8902685026E006BF2B0 /* KeyboardReadable.swift */,
 				0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */,
@@ -645,6 +648,7 @@
 				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,
 				0CEE3827265E16700013BB12 /* MemberDetailsView.swift in Sources */,
 				0C15F8912685026E006BF2B0 /* KeyboardReadable.swift in Sources */,
+				0C016A9D2687E72700EFFC3E /* UIImage+rotate.swift in Sources */,
 				0CBF0A00265D91640016CA92 /* TabsView.swift in Sources */,
 				0C0CA781265F01F10062FDDD /* RequestPaymentView.swift in Sources */,
 				0CD117C22687DBD40093426F /* ImageCroppingView.swift in Sources */,

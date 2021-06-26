@@ -48,6 +48,22 @@ struct EditProfileView: View {
                                 Text("Choose from Library")
                                 Image(systemName: "photo.on.rectangle")
                             })
+                            if m.image != "" {
+                            Button(action: {
+                                m.image = imgtob64(img:b64touiimg(b64: m.image)!.rotate(radians: Float(Double.pi/2))!)
+                            }, label: {
+                                Text("Rotate photo")
+                                Image(systemName: "rotate.right")
+                            })
+                                Button(action: {
+//                                    Fetch().removePhoto(m: $m)
+                                    m.image = ""
+                                    
+                                }, label: {
+                                    Text("Remove photo")
+                                    Image(systemName: "rectangle.slash")
+                                })
+                            }
                             
                         }, label: {
                             Image(systemName: "camera.fill")

@@ -87,6 +87,18 @@ func b64toimg(b64: String) -> Image {
     return img
 }
 
+func b64touiimg(b64: String) -> UIImage? {
+    let data = Data(base64Encoded: b64)
+    var img = UIImage(systemName: "gear")
+    guard let d = data else {
+        print(data ?? "uh oh")
+        return img
+    }
+    img = (UIImage(data: d) ?? UIImage(named: "Placeholder"))!
+    return img
+}
+
+
 func imgtob64(img: UIImage) -> String {
     let data = img.jpegData(compressionQuality: 1)
     return data!.base64EncodedString()
