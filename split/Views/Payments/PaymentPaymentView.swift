@@ -64,17 +64,17 @@ struct PaymentPaymentView: View {
                 HStack {
                     Spacer()
                     Text("Post")
-                        .foregroundColor(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric ? .clear : .white)
+                        .foregroundColor(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric  || validateFloatString(str: $amountText) ? .clear : .white)
                     Spacer()
                 }
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric ? .clear : Color.blue)
+                            .fill(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric || validateFloatString(str: $amountText) ? .clear : Color.blue)
                     )
                     .padding()
             })
-            .allowsHitTesting(!(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric))
+            .allowsHitTesting(!(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric || validateFloatString(str: $amountText)))
         }
     }
 }
@@ -109,4 +109,8 @@ struct PaymentPaymentView_Previews: PreviewProvider {
             PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
         }
     }
+}
+
+func validateFloatString(str: Binding<String>) -> Bool {
+    return Float(String(format: "%.2f", Float(str.wrappedValue) ?? 0.00))! == 0.00
 }

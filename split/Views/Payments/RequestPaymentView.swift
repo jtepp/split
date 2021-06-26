@@ -66,7 +66,7 @@ struct RequestPaymentView: View {
                     })
                 })
                     .foregroundColor(.white)
-                if includeSelf && amountText != "" && !choice.isEmpty {
+                if includeSelf && !validateFloatString(str: $amountText) && !choice.isEmpty {
                     Text("Total request amount to be posted: \(Float(amountText)! * Float(choice.count) / Float(choice.count + 1), specifier: "%.2f")")
                         .foregroundColor(.white)
                 }
@@ -93,17 +93,17 @@ struct RequestPaymentView: View {
                 HStack {
                     Spacer()
                     Text("Post")
-                        .foregroundColor(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric ? .clear : .white)
+                        .foregroundColor(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric || validateFloatString(str: $amountText) ? .clear : .white)
                     Spacer()
                 }
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric ? .clear : Color.blue)
+                            .fill(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric || validateFloatString(str: $amountText) ? .clear : Color.blue)
                     )
                     .padding()
             })
-            .allowsHitTesting(!(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric))
+            .allowsHitTesting(!(choice.isEmpty || amountText.isEmpty || !amountText.isNumeric || validateFloatString(str: $amountText)))
         }
         .alert(isPresented: $explainIncludeSelf, content: {
             Alert.init(title: Text("Include yourself in amount split"), message: Text("Total amount posted for the request will remove your share of the payment.\n\nWith this on, posting a $60 request to 2 friends will ask for $20 from each.\n\nWith this off, posting a $60 request to 2 friends will ask for $30 from each."), dismissButton: Alert.Button.cancel(Text("Ok")))
@@ -114,7 +114,7 @@ struct RequestPaymentView: View {
 struct RequestPaymentView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            Color.black.edgesIgnoringSafeArea(.all)
             PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
         }
     }
