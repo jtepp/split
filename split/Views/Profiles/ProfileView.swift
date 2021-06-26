@@ -84,7 +84,6 @@ struct ProfileView: View, KeyboardReadable {
                         .overlay(
                             Menu(content: {
                                 Button(action: {
-                                    showSheet = true
                                     showImagePicker = true
                                     sourceType = .camera
                                     crop = true
@@ -93,7 +92,6 @@ struct ProfileView: View, KeyboardReadable {
                                     Image(systemName: "camera.on.rectangle")
                                 })
                                 Button(action: {
-                                    showSheet = true
                                     showImagePicker = true
                                     sourceType = .photoLibrary
                                     crop = true
@@ -104,7 +102,6 @@ struct ProfileView: View, KeyboardReadable {
                                 })
                                 
                                 Button(action: {
-                                    showSheet = true
                                     showImagePicker = true
                                     sourceType = .camera
                                     crop = false
@@ -113,7 +110,6 @@ struct ProfileView: View, KeyboardReadable {
                                     Image(systemName: "camera.on.rectangle")
                                 })
                                 Button(action: {
-                                    showSheet = true
                                     showImagePicker = true
                                     sourceType = .photoLibrary
                                     crop = false
@@ -255,7 +251,7 @@ struct ProfileView: View, KeyboardReadable {
                     if cropperShown {
                         ImageCroppingView(shown: $cropperShown, image: tempimg ?? UIImage(), croppedImage: $img)
                     } else if showImagePicker {
-                        ImagePicker(img: crop ? $tempimg : $img, isShown: $showSheet, cropperShown: $cropperShown, sourceType: $sourceType, crop: $crop)
+                        ImagePicker(img: crop ? $tempimg : $img, isShown: $showImagePicker, cropperShown: $cropperShown, sourceType: $sourceType, crop: $crop)
                     }
                     if showAdminPicker {
                         MemberPicker(show: $showSheet, house: $house, choice: $adminChoice)
