@@ -11,9 +11,11 @@ import Firebase
 @main
 struct splitApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    let persistenceController = PersistenceController.shared
     var body: some Scene {
         WindowGroup {
             Main()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 //                .preferredColorScheme(.dark)
 //                .onAppear(){
 //                    Messaging.messaging().token { token, error in
