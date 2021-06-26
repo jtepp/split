@@ -12,7 +12,7 @@ struct AlternateIconButton: View {
     @Binding var choice: String
     var name: String
     var body: some View {
-        Image(uiImage: UIImage(named: name) ?? UIImage())
+        Image(name)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 50)
