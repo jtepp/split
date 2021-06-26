@@ -257,34 +257,27 @@ struct ProfileView: View, KeyboardReadable {
                     HeaderText(text: "App icons")
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("Default")
-                                .font(Font.title2.weight(.semibold))
                             
-                            HStack{
-                                AlternateIconButton(choice: $alternateIcon, name: "Default")
-                                AlternateIconButton(choice: $alternateIcon, name: "Default-inverse")
-                            }
-                            .padding(.bottom)
-                            Text("Depth")
-                                .font(Font.title2.weight(.semibold))
+                            AlternateIconRow(title: "Default", names: ["Default", "Default-inverse"], choice: $alternateIcon)
                             
-                            HStack{
-                                AlternateIconButton(choice: $alternateIcon, name: "Depth")
-                                AlternateIconButton(choice: $alternateIcon, name: "Depth-inverse")
-                            }
-                            .padding(.bottom)
-                            Text("Rainbow")
-                                .font(Font.title2.weight(.semibold))
+                            AlternateIconRow(title: "Name", names: ["Name", "Name-inverse"], choice: $alternateIcon)
                             
-                            HStack{
-                                AlternateIconButton(choice: $alternateIcon, name: "Rainbow")
-                                AlternateIconButton(choice: $alternateIcon, name: "Rainbow-vertical")
-                                AlternateIconButton(choice: $alternateIcon, name: "Rainbow-angle")
-                            }
-                            .padding(.bottom)
-                            Text("more coming soon...")
-                                .font(.subheadline)
-                                .padding(.top)
+                            AlternateIconRow(title: "Depth", names: ["Depth", "Depth-inverse"], choice: $alternateIcon)
+                            
+                            AlternateIconRow(title: "Shadow", names: ["Shadow-black", "Shadow-white"], choice: $alternateIcon)
+                            
+                            AlternateIconRow(title: "Soft", names: ["Soft-black", "Soft-white"], choice: $alternateIcon)
+                            
+                            AlternateIconRow(title: "Neon", names: ["Neon-pink", "Neon-blue", "Neon-green"], choice: $alternateIcon)
+                            
+                            
+                            AlternateIconRow(title: "Rainbow", names: ["Rainbow", "Rainbow-vertical", "Rainbow-horizontal"], choice: $alternateIcon)
+                            
+                            
+                            
+//                            Text("more coming soon...")
+//                                .font(.subheadline)
+//                                .padding(.top)
                             
                         }
                         .foregroundColor(.white)

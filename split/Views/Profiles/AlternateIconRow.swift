@@ -12,14 +12,16 @@ struct AlternateIconRow: View {
     var names: [String]
     @Binding var choice: String
     var body: some View {
-        Text("Default")
-                                        .font(Font.title2.weight(.semibold))
-        HStack{
-            ForEach(names, id: \.self) { name in
-                AlternateIconButton(choice: $choice, name: name)
+        VStack(alignment: .leading){
+            Text("Default")
+                .font(Font.title2.weight(.semibold))
+            HStack{
+                ForEach(names, id: \.self) { name in
+                    AlternateIconButton(choice: $choice, name: name)
+                }
             }
+            .padding(.bottom)
         }
-        .padding(.bottom)
     }
 }
 
