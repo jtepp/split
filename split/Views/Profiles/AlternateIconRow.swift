@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct AlternateIconRow: View {
-    @Binding var choice: String
+    var title: String
     var names: [String]
+    @Binding var choice: String
     var body: some View {
+        Text("Default")
+                                        .font(Font.title2.weight(.semibold))
         HStack{
             ForEach(names, id: \.self) { name in
                 AlternateIconButton(choice: $choice, name: name)
@@ -22,6 +25,6 @@ struct AlternateIconRow: View {
 
 struct AlternateIconRow_Previews: PreviewProvider {
     static var previews: some View {
-        AlternateIconRow(choice: .constant("Default-inverse"), names: ["Default", "Default-inverse"])
+        AlternateIconRow(title: "Default", names: ["Default", "Default-inverse"], choice: .constant("Default-inverse"))
     }
 }
