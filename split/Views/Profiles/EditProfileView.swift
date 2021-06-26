@@ -11,6 +11,7 @@ struct EditProfileView: View {
     @Binding var show: Bool
     @Binding var m: Member
     @Binding var img: UIImage?
+    @State var tempimg: UIImage?
     @Binding var name: String
     @State var showImagePicker = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
@@ -76,11 +77,16 @@ struct EditProfileView: View {
             .foregroundColor(.white)
             .background(Color.black.edgesIgnoringSafeArea(.all))
             .sheet(isPresented: $showImagePicker, content: {
-                ImagePicker(img: $img, isShown: $showImagePicker, cropperShown: $cropperShown, sourceType: $sourceType)
+                if cropperShown {
+                    ImageCroppingView(shown: $cropperShown, image: tempimg ?? UIImage(), croppedImage: $img)
+                } else {
+                    ImagePicker(img: $tempimg, isShown: $showImagePicker, cropperShown: $cropperShown, sourceType: $sourceType)
+                }
             })
             .onChange(of: img, perform: { _ in
                 if img != nil {
                     m.image = imgtob64(img: img!.resized(toWidth: 600)!)
+                    showImagePicker = false
                 }
             })
         }
