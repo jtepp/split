@@ -124,6 +124,7 @@ struct WaitingRoomView: View {
                     Alert(title: Text(msg), message: Text("Please make sure you put in your information correctly and try again"), dismissButton: Alert.Button.default(Text("Ok"), action: {
                         if msg == "Member already exists by that name" {
                             UserDefaults.standard.set("", forKey: "myId")
+                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
                             UserDefaults.standard.set("", forKey: "houseId")
                             member = .empty
                             h = .empty

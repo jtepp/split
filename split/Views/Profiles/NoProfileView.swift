@@ -48,6 +48,7 @@ struct NoProfileView: View {
             .disabled(name.replacingOccurrences(of: " ", with: "") == "")
             .onChange(of: m.id) { (_) in
                 UserDefaults.standard.set(m.id, forKey: "myId")
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.id, forKey: "myId")
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Account error"), message: Text(msg))
@@ -56,6 +57,7 @@ struct NoProfileView: View {
                 .onAppear(){
                     UserDefaults.standard.set("", forKey: "houseId")
                     UserDefaults.standard.set("", forKey: "myId")
+                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
                     myId = ""
                 }
         }
