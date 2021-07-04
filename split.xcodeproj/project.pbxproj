@@ -37,6 +37,11 @@
 		0C64FED3265ED9F4009B0C3C /* ActivityRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED2265ED9F4009B0C3C /* ActivityRequestCell.swift */; };
 		0C64FED6265EDA9E009B0C3C /* GeneralRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */; };
 		0C64FEDA265EED43009B0C3C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED9265EED43009B0C3C /* ImagePicker.swift */; };
+		0C6A740E26927C7400275A9B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6A740D26927C7400275A9B /* WidgetKit.framework */; };
+		0C6A741026927C7400275A9B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6A740F26927C7400275A9B /* SwiftUI.framework */; };
+		0C6A741326927C7400275A9B /* BalanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A741226927C7400275A9B /* BalanceWidget.swift */; };
+		0C6A741526927C7500275A9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C6A741426927C7500275A9B /* Assets.xcassets */; };
+		0C6A741926927C7500275A9B /* BalanceWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0C6A740B26927C7400275A9B /* BalanceWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0C7C87F726851F6A0040BFA7 /* AlternateIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */; };
 		0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */; };
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
@@ -111,6 +116,30 @@
 		0CEE382E265E1CE00013BB12 /* MemberPaymentInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEE382D265E1CE00013BB12 /* MemberPaymentInfoView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0C6A741726927C7500275A9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C2A057B265CAA44002BD46D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C6A740A26927C7400275A9B;
+			remoteInfo = BalanceWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0C6A741A26927C7500275A9B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0C6A741926927C7500275A9B /* BalanceWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0C016A9C2687E72700EFFC3E /* UIImage+rotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+rotate.swift"; sourceTree = "<group>"; };
 		0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resized.swift"; sourceTree = "<group>"; };
@@ -141,6 +170,13 @@
 		0C64FED2265ED9F4009B0C3C /* ActivityRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRequestCell.swift; sourceTree = "<group>"; };
 		0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRequestCell.swift; sourceTree = "<group>"; };
 		0C64FED9265EED43009B0C3C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0C6A740B26927C7400275A9B /* BalanceWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BalanceWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C6A740D26927C7400275A9B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		0C6A740F26927C7400275A9B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		0C6A741226927C7400275A9B /* BalanceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceWidget.swift; sourceTree = "<group>"; };
+		0C6A741426927C7500275A9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0C6A741626927C7500275A9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0C6A741E26927CB600275A9B /* BalanceWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceWidgetExtension.entitlements; sourceTree = "<group>"; };
 		0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconButton.swift; sourceTree = "<group>"; };
 		0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+timeAgo.swift"; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -227,6 +263,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0C6A740826927C7400275A9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C6A741026927C7400275A9B /* SwiftUI.framework in Frameworks */,
+				0C6A740E26927C7400275A9B /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -258,7 +303,10 @@
 		0C2A057A265CAA44002BD46D = {
 			isa = PBXGroup;
 			children = (
+				0C6A741E26927CB600275A9B /* BalanceWidgetExtension.entitlements */,
 				0C2A0585265CAA44002BD46D /* split */,
+				0C6A741126927C7400275A9B /* BalanceWidget */,
+				0C6A740C26927C7400275A9B /* Frameworks */,
 				0C2A0584265CAA44002BD46D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -267,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2A0583265CAA44002BD46D /* split.app */,
+				0C6A740B26927C7400275A9B /* BalanceWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,6 +399,25 @@
 				0C64FED2265ED9F4009B0C3C /* ActivityRequestCell.swift */,
 			);
 			path = Activity;
+			sourceTree = "<group>";
+		};
+		0C6A740C26927C7400275A9B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C6A740D26927C7400275A9B /* WidgetKit.framework */,
+				0C6A740F26927C7400275A9B /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0C6A741126927C7400275A9B /* BalanceWidget */ = {
+			isa = PBXGroup;
+			children = (
+				0C6A741226927C7400275A9B /* BalanceWidget.swift */,
+				0C6A741426927C7500275A9B /* Assets.xcassets */,
+				0C6A741626927C7500275A9B /* Info.plist */,
+			);
+			path = BalanceWidget;
 			sourceTree = "<group>";
 		};
 		0C7C87F8268526400040BFA7 /* icons */ = {
@@ -452,10 +520,12 @@
 				0C2A057F265CAA44002BD46D /* Sources */,
 				0C2A0580265CAA44002BD46D /* Frameworks */,
 				0C2A0581265CAA44002BD46D /* Resources */,
+				0C6A741A26927C7500275A9B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0C6A741826927C7500275A9B /* PBXTargetDependency */,
 			);
 			name = split;
 			packageProductDependencies = (
@@ -467,17 +537,37 @@
 			productReference = 0C2A0583265CAA44002BD46D /* split.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0C6A740A26927C7400275A9B /* BalanceWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C6A741D26927C7500275A9B /* Build configuration list for PBXNativeTarget "BalanceWidgetExtension" */;
+			buildPhases = (
+				0C6A740726927C7400275A9B /* Sources */,
+				0C6A740826927C7400275A9B /* Frameworks */,
+				0C6A740926927C7400275A9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BalanceWidgetExtension;
+			productName = BalanceWidgetExtension;
+			productReference = 0C6A740B26927C7400275A9B /* BalanceWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		0C2A057B265CAA44002BD46D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					0C2A0582265CAA44002BD46D = {
 						CreatedOnToolsVersion = 12.4;
+					};
+					0C6A740A26927C7400275A9B = {
+						CreatedOnToolsVersion = 12.5;
 					};
 				};
 			};
@@ -498,6 +588,7 @@
 			projectRoot = "";
 			targets = (
 				0C2A0582265CAA44002BD46D /* split */,
+				0C6A740A26927C7400275A9B /* BalanceWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -567,6 +658,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0C6A740926927C7400275A9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C6A741526927C7500275A9B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -619,7 +718,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0C6A740726927C7400275A9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C6A741326927C7400275A9B /* BalanceWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0C6A741826927C7500275A9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C6A740A26927C7400275A9B /* BalanceWidgetExtension */;
+			targetProxy = 0C6A741726927C7500275A9B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0C2A0590265CAA44002BD46D /* Debug */ = {
@@ -743,6 +858,7 @@
 		0C2A0593265CAA44002BD46D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = DefaultIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = split/split.entitlements;
@@ -771,6 +887,7 @@
 		0C2A0594265CAA44002BD46D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = DefaultIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = split/split.entitlements;
@@ -796,6 +913,54 @@
 			};
 			name = Release;
 		};
+		0C6A741B26927C7500275A9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BalanceWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BLAVQ37GJV;
+				INFOPLIST_FILE = BalanceWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jtepp.spllit.BalanceWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0C6A741C26927C7500275A9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BalanceWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BLAVQ37GJV;
+				INFOPLIST_FILE = BalanceWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jtepp.spllit.BalanceWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -813,6 +978,15 @@
 			buildConfigurations = (
 				0C2A0593265CAA44002BD46D /* Debug */,
 				0C2A0594265CAA44002BD46D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C6A741D26927C7500275A9B /* Build configuration list for PBXNativeTarget "BalanceWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C6A741B26927C7500275A9B /* Debug */,
+				0C6A741C26927C7500275A9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
