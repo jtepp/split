@@ -70,11 +70,13 @@ class Fetch: ObservableObject {
                         if myId == "" {
                             print("gotovoid")
                             UserDefaults.standard.set("", forKey: "houseId")
+                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
                             noProf.wrappedValue = true
                             inWR.wrappedValue = true
                         } else {
                             print("wred")
                             UserDefaults.standard.set("waitingRoom", forKey: "houseId")
+                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("waitingRoom", forKey: "houseId")
                             noProf.wrappedValue = false
                         }
                         inWR.wrappedValue = true
@@ -83,6 +85,7 @@ class Fetch: ObservableObject {
                     } else {
                         print("gotovoid2")
                         UserDefaults.standard.set("", forKey: "houseId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
                         UserDefaults.standard.set("", forKey: "myId")
                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
                         h.wrappedValue = .empty
@@ -434,6 +437,7 @@ class Fetch: ObservableObject {
             }
         }
         UserDefaults.standard.set("waitingRoom", forKey: "houseId")
+        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("waitingRoom", forKey: "houseId")
         
         completion()
     }
@@ -576,6 +580,7 @@ class Fetch: ObservableObject {
                                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
                                             print("ISTHISIT \(doc.documentID)")
                                             UserDefaults.standard.set(doc.documentID, forKey: "houseId")
+                                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(doc.documentID, forKey: "houseId")
                                             inWR.wrappedValue = false
                                             self.db.document("waitingRoom/\(mm.id)").delete()
                                             self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
@@ -648,6 +653,7 @@ class Fetch: ObservableObject {
                             UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.id, forKey: "myId")
                             UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
+                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.home, forKey: "houseId")
                             inWR.wrappedValue = true
                             print("\n\n\n\n\(mm)\n\n\n\n")
                         } else {
@@ -670,6 +676,7 @@ class Fetch: ObservableObject {
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
                                         UserDefaults.standard.set(house, forKey: "houseId")
+                                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(house, forKey: "houseId")
                                         inWR.wrappedValue = false
                                         self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the group", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                     }
@@ -729,6 +736,7 @@ class Fetch: ObservableObject {
         UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.id, forKey: "myId")
         UserDefaults.standard.set(id, forKey: "houseId")
+        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(id, forKey: "houseId")
         self.joinHouse(hh: hh, m: m, hId: id, password: password, showAlert: .constant(false), tapped: tapped, msg: .constant(""), inWR: inWR, forceAdmin: true)
         //        }
     }
@@ -768,6 +776,7 @@ class Fetch: ObservableObject {
                     UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.id, forKey: "myId")
                     UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
+                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.home, forKey: "houseId")
                     inWR.wrappedValue = true
                     m.wrappedValue.id = ""
                 }

@@ -56,6 +56,7 @@ struct NoProfileView: View {
             Spacer(minLength: 80)
                 .onAppear(){
                     UserDefaults.standard.set("", forKey: "houseId")
+                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
                     UserDefaults.standard.set("", forKey: "myId")
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
                     myId = ""

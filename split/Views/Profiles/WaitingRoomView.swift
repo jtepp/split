@@ -126,6 +126,7 @@ struct WaitingRoomView: View {
                             UserDefaults.standard.set("", forKey: "myId")
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
                             UserDefaults.standard.set("", forKey: "houseId")
+                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
                             member = .empty
                             h = .empty
                             inWR = true

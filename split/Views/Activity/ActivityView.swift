@@ -204,6 +204,7 @@ struct ActivityView: View {
 func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) {//-> EmptyView {
     m.wrappedValue = .empty
     UserDefaults.standard.set("", forKey: "houseId")
+    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
     UserDefaults.standard.set("", forKey: "myId")
     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
     var q = House.empty
