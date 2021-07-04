@@ -868,7 +868,7 @@
 				CODE_SIGN_ENTITLEMENTS = split/split.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"split/Preview Content\"";
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				ENABLE_PREVIEWS = YES;
@@ -897,7 +897,7 @@
 				CODE_SIGN_ENTITLEMENTS = split/split.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"split/Preview Content\"";
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				ENABLE_PREVIEWS = YES;
@@ -933,6 +933,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jtepp.spllit.BalanceWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -957,6 +958,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jtepp.spllit.BalanceWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
