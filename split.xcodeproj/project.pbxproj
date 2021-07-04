@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0C016A9D2687E72700EFFC3E /* UIImage+rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C016A9C2687E72700EFFC3E /* UIImage+rotate.swift */; };
+		0C04B214269267B600B2DF2C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0C04B213269267B600B2DF2C /* FirebaseAnalytics */; };
+		0C04B216269267B600B2DF2C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0C04B215269267B600B2DF2C /* FirebaseFirestore */; };
+		0C04B218269267B600B2DF2C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0C04B217269267B600B2DF2C /* FirebaseMessaging */; };
 		0C0CA77A265EF4D20062FDDD /* UIImage+resized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */; };
 		0C0CA77E265F01BE0062FDDD /* PaymentPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */; };
 		0C0CA781265F01F10062FDDD /* RequestPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */; };
@@ -218,6 +221,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C04B218269267B600B2DF2C /* FirebaseMessaging in Frameworks */,
+				0C04B214269267B600B2DF2C /* FirebaseAnalytics in Frameworks */,
+				0C04B216269267B600B2DF2C /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +260,6 @@
 			children = (
 				0C2A0585265CAA44002BD46D /* split */,
 				0C2A0584265CAA44002BD46D /* Products */,
-				CF8DBBB01192A25A38E58444 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -437,13 +442,6 @@
 			path = Tabs;
 			sourceTree = "<group>";
 		};
-		CF8DBBB01192A25A38E58444 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -460,6 +458,11 @@
 			dependencies = (
 			);
 			name = split;
+			packageProductDependencies = (
+				0C04B213269267B600B2DF2C /* FirebaseAnalytics */,
+				0C04B215269267B600B2DF2C /* FirebaseFirestore */,
+				0C04B217269267B600B2DF2C /* FirebaseMessaging */,
+			);
 			productName = split;
 			productReference = 0C2A0583265CAA44002BD46D /* split.app */;
 			productType = "com.apple.product-type.application";
@@ -487,6 +490,9 @@
 				Base,
 			);
 			mainGroup = 0C2A057A265CAA44002BD46D;
+			packageReferences = (
+				0C04B212269267B600B2DF2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 0C2A0584265CAA44002BD46D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -918,6 +924,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0C04B212269267B600B2DF2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0C04B213269267B600B2DF2C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0C04B212269267B600B2DF2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		0C04B215269267B600B2DF2C /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0C04B212269267B600B2DF2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		0C04B217269267B600B2DF2C /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0C04B212269267B600B2DF2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0C2A057B265CAA44002BD46D /* Project object */;
 }
