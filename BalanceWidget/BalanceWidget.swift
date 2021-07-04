@@ -9,34 +9,27 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+    func placeholder(in context: Context) -> BalanceEntry {
+        BalanceEntry(date: Date(), myId: "placeholder", houseId: "placeholder")
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
+    func getSnapshot(in context: Context, completion: @escaping (BalanceEntry) -> ()) {
+        let entry = BalanceEntry(date: Date(), myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "")
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+        var entries: [BalanceEntry] = [BalanceEntry(date: Date(), myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "")]
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
-            entries.append(entry)
-        }
+//        let currentDate = Date()
 
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let timeline = Timeline(entries: entries, policy: .after(Calendar.current.date(byAdding: .second, value: 300, to: Date())!))
+        
         completion(timeline)
     }
 }
 
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-}
 
 struct BalanceWidgetEntryView : View {
     var entry: Provider.Entry
@@ -54,14 +47,14 @@ struct BalanceWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             BalanceWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("spllit balances")
+        .description("See a simplified view of who you owe and who owes you")
     }
 }
 
 struct BalanceWidget_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceWidgetEntryView(entry: SimpleEntry(date: Date()))
+        BalanceWidgetEntryView(entry: BalanceEntry(date: Date()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
