@@ -43,9 +43,13 @@
 		0C6A741526927C7500275A9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C6A741426927C7500275A9B /* Assets.xcassets */; };
 		0C6A741926927C7500275A9B /* BalanceWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0C6A740B26927C7400275A9B /* BalanceWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0C6A742126927DB500275A9B /* BalanceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A741F26927D9300275A9B /* BalanceEntry.swift */; };
-		0C6A74242692854200275A9B /* FetchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A74232692854200275A9B /* FetchWidget.swift */; };
 		0C6A74262692859700275A9B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0C6A74252692859700275A9B /* FirebaseAnalytics */; };
 		0C6A74282692859700275A9B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0C6A74272692859700275A9B /* FirebaseFirestore */; };
+		0C6A7429269285BC00275A9B /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
+		0C6A742A269285FE00275A9B /* Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A059C265CB123002BD46D /* Fetch.swift */; };
+		0C6A742B2692860B00275A9B /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C625971265EA868002E58A3 /* Payment.swift */; };
+		0C6A742C2692860F00275A9B /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A059F265CB17D002BD46D /* House.swift */; };
+		0C6A742D2692862D00275A9B /* UIImage+resized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */; };
 		0C7C87F726851F6A0040BFA7 /* AlternateIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */; };
 		0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */; };
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
@@ -182,7 +186,6 @@
 		0C6A741626927C7500275A9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C6A741E26927CB600275A9B /* BalanceWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceWidgetExtension.entitlements; sourceTree = "<group>"; };
 		0C6A741F26927D9300275A9B /* BalanceEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceEntry.swift; sourceTree = "<group>"; };
-		0C6A74232692854200275A9B /* FetchWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchWidget.swift; sourceTree = "<group>"; };
 		0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconButton.swift; sourceTree = "<group>"; };
 		0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+timeAgo.swift"; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -425,7 +428,6 @@
 				0C6A741F26927D9300275A9B /* BalanceEntry.swift */,
 				0C6A741426927C7500275A9B /* Assets.xcassets */,
 				0C6A741626927C7500275A9B /* Info.plist */,
-				0C6A74232692854200275A9B /* FetchWidget.swift */,
 			);
 			path = BalanceWidget;
 			sourceTree = "<group>";
@@ -736,9 +738,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C6A742A269285FE00275A9B /* Fetch.swift in Sources */,
 				0C6A741326927C7400275A9B /* BalanceWidget.swift in Sources */,
+				0C6A742D2692862D00275A9B /* UIImage+resized.swift in Sources */,
 				0C6A742126927DB500275A9B /* BalanceEntry.swift in Sources */,
-				0C6A74242692854200275A9B /* FetchWidget.swift in Sources */,
+				0C6A7429269285BC00275A9B /* Member.swift in Sources */,
+				0C6A742C2692860F00275A9B /* House.swift in Sources */,
+				0C6A742B2692860B00275A9B /* Payment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

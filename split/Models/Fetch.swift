@@ -971,10 +971,25 @@ class Fetch: ObservableObject {
         }
         
     }
+    
+    
+    //Widget funcs
+    
+    func updateBalanceWidget(members: Binding<[Member]>, myId: String, houseId: String){
+        
+    }
+    
+    
 }
 
 func idfromnamehouse(name: String, house: House) -> String {
     return house.members.first { (m) -> Bool in
         return m.name == name
     }?.id ?? ""
+}
+
+
+func imgtob64(img: UIImage) -> String {
+    let data = img.jpegData(compressionQuality: 1)
+    return data!.base64EncodedString()
 }

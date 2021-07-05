@@ -99,10 +99,6 @@ func b64touiimg(b64: String) -> UIImage? {
 }
 
 
-func imgtob64(img: UIImage) -> String {
-    let data = img.jpegData(compressionQuality: 1)
-    return data!.base64EncodedString()
-}
 
 func moneyText(b: Binding<Float>, pre: String = "", post: String = "") -> Text {
     return Text("\(pre)\(b.wrappedValue < 0 ? "-" : "")$\(abs(b.wrappedValue), specifier: "%.2f")\(post)")
