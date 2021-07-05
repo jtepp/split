@@ -7,10 +7,14 @@
 
 import WidgetKit
 import SwiftUI
+import Firebase
 
 
 @main
 struct spllitWidgets: WidgetBundle {
+    init() {
+        FirebaseApp.configure()
+      }
     @WidgetBundleBuilder
     var body: some Widget {
         BalanceWidget()
