@@ -996,6 +996,7 @@ class Fetch: ObservableObject {
 
                     return Member(id: queryDocumentSnapshot.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0)
                 }
+                print(members.wrappedValue.count)
             }
         }
     }

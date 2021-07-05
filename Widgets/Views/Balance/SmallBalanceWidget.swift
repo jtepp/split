@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SmallBalanceWidget: View {
-    @Binding var members: [Member]
+    var members: [Member]
     var body: some View {
         Text("\(members.count)")
     }
@@ -16,6 +16,6 @@ struct SmallBalanceWidget: View {
 
 struct SmallBalanceWidget_Previews: PreviewProvider {
     static var previews: some View {
-        SmallBalanceWidget(members: .constant([Member]()))
+        SmallBalanceWidget(members: [Member]())
     }
 }

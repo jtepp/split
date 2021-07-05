@@ -10,16 +10,16 @@ import WidgetKit
 
 struct MembersProvider: TimelineProvider {
     func placeholder(in context: Context) -> spllitEntry {
-        spllitEntry(date: Date(), myId: "placeholder", houseId: "placeholder")
+        spllitEntry(myId: "placeholder", houseId: "placeholder", members: [.placeholder, .placeholder2])
     }
 
     func getSnapshot(in context: Context, completion: @escaping (spllitEntry) -> ()) {
-        let entry = spllitEntry(date: Date(), myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "")
+        let entry = spllitEntry(myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "", members: [.placeholder])
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<spllitEntry>) -> ()) {
-        var entries: [spllitEntry] = [spllitEntry(date: Date(), myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "")]
+        var entries: [spllitEntry] = [spllitEntry(myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "", members: [.placeholder])]
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
 //        let currentDate = Date()
