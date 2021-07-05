@@ -10,18 +10,19 @@ import WidgetKit
 
 struct BalanceWidgetEntryView : View {
     var entry: Provider.Entry
+    @State var members = [Member]()
 
     @Environment(\.widgetFamily) var family
     var body: some View {
         switch family {
         case .systemSmall:
-            SmallBalanceWidget(entry: entry)
+            SmallBalanceWidget(members: $members)
         case .systemMedium:
-            MediumBalanceWidget(entry: entry)
+            MediumBalanceWidget(members: $members)
         case .systemLarge:
-            LargeBalanceWidget(entry: entry)
-        @unkown default:
-            SmallBalanceWidget(entry: entry)
+            LargeBalanceWidget(members: $members)
+        default:
+            SmallBalanceWidget(members: $members)
         }
     }
 }
