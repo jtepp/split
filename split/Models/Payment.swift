@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Payment: Identifiable {
+struct Payment: Identifiable, Codable {
     var id: String?
     var to: String = ""
     var from: String = String()
