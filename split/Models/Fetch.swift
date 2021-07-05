@@ -48,6 +48,8 @@ class Fetch: ObservableObject {
                         
                         self.updateStatus(status: true)
                         
+                        self.balanceWidgetMembers(myId: myId, houseId: id)
+                        
                         let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
                         
                         if t != "" {
@@ -63,11 +65,6 @@ class Fetch: ObservableObject {
                             })!
                             print("setdead222\(m.wrappedValue.id)")
                         }
-                        
-                        self.balanceWidgetMembers(myName: h.wrappedValue.members.first(where: { (m) -> Bool in
-                            return m.id == UserDefaults.standard.string(forKey: "myId")
-                            })?.name ?? "", myId: myId, houseId: id)
-                        
                         completion()
                         if h.wrappedValue.members.first(where: { (m) -> Bool in
                             return m.id == UserDefaults.standard.string(forKey: "myId")
@@ -980,8 +977,8 @@ class Fetch: ObservableObject {
     
     //Widget funcs
     
-    func balanceWidgetMembers(myName: String, myId: String, houseId: String){
-        if myName != "" && myId != "" && houseId != "" && houseId != "waitingRoom" {
+    func balanceWidgetMembers(myId: String, houseId: String){
+        if myId != "" && houseId != "" && houseId != "waitingRoom" {
             db.collection("houses/\(houseId)/members").getDocuments { querySnapshot, err in
                 guard let docs = querySnapshot?.documents else {
                     return
@@ -1013,8 +1010,6 @@ class Fetch: ObservableObject {
                 }
                 
             }
-        } else {
-            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "members")
         }
     }
     
