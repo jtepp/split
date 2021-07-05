@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct SmallBalanceWidget: View {
+struct MediumBalanceWidget: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct SmallBalanceWidget_Previews: PreviewProvider {
+struct MediumBalanceWidget_Previews: PreviewProvider {
     static var previews: some View {
-        SmallBalanceWidget()
+        MediumBalanceWidget()
     }
 }
