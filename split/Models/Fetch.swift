@@ -976,7 +976,27 @@ class Fetch: ObservableObject {
     //Widget funcs
     
     func updateBalanceWidget(members: Binding<[Member]>, myId: String, houseId: String){
-        
+        if myId != "" && houseId != "" && houseId != "waitingRoom" {
+            db.collection("houses/\(houseId)/members").addSnapshotListener { querySnapshot, err in
+                guard let docs = querySnapshot?.documents else {
+                    return
+                }
+                
+                
+                members.wrappedValue = docs.map { queryDocumentSnapshot in
+                    let data = queryDocumentSnapshot.data()
+                    
+                    let name = data["name"] as? String ?? ""
+                    let home = data["home"] as? String ?? ""
+                    let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
+                    let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
+                    let image = data["image"] as? String ?? ""
+                    let admin = data["admin"] as? Bool ?? false
+                    
+                    return Member(id: queryDocumentSnapshot.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0)
+                }
+            }
+        }
     }
     
     
