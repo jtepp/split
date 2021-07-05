@@ -9,15 +9,17 @@ import SwiftUI
 import WidgetKit
 
 struct BalanceWidgetEntryView : View {
-    var entry: Provider.Entry
+    var entry: MembersProvider.Entry
     @State var members = [Member]()
 
     @Environment(\.widgetFamily) var family
     var body: some View {
-        Group {
             switch family {
             case .systemSmall:
                 SmallBalanceWidget(members: $members)
+                    .onAppear{
+                        Fetch().balanceWidgetMembers(myId: entry.myId, houseId: entry.houseId, members: $members)
+                    }
             case .systemMedium:
                 MediumBalanceWidget(members: $members)
             case .systemLarge:
@@ -25,10 +27,7 @@ struct BalanceWidgetEntryView : View {
             default:
                 SmallBalanceWidget(members: $members)
             }
-        }
-        .onAppear{
-            Fetch().balanceWidgetMembers(members: $members, myId: entry.myId, houseId: entry.houseId)
-        }
+    
     }
 }
 

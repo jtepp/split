@@ -25,7 +25,7 @@ struct BalanceWidget: Widget {
     let kind: String = "BalanceWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: MembersProvider()) { entry in
             BalanceWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("spllit Balances")
@@ -34,9 +34,9 @@ struct BalanceWidget: Widget {
     }
 }
 
-struct BalanceWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        BalanceWidgetEntryView(entry: spllitEntry(date: Date(), myId: "placeholder", houseId: "placeholder"))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
-}
+//struct BalanceWidget_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BalanceWidgetEntryView(entry: MembersEntry(date: Date(), myId: "placeholder", houseId: "placeholder"))
+//            .previewContext(WidgetPreviewContext(family: .systemSmall))
+//    }
+//}

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct Main: View {
     @Environment(\.scenePhase) var scenePhase
@@ -48,6 +49,7 @@ struct Main: View {
             if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
                 if newPhase == .inactive {
                     Fetch().updateStatus(status: false)
+                    WidgetCenter.shared.reloadAllTimelines()
                 } else if newPhase == .active {
                     Fetch().updateStatus(status: true)
                     guard let name = shortcutItemToProcess?.localizedTitle as? String else {
@@ -64,6 +66,7 @@ struct Main: View {
                     }
                 } else if newPhase == .background {
                     Fetch().updateStatus(status: false)
+                    WidgetCenter.shared.reloadAllTimelines()
                 }
             }
         }

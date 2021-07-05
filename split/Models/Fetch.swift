@@ -975,17 +975,16 @@ class Fetch: ObservableObject {
     
     //Widget funcs
     
-    func balanceWidgetMembers(members: Binding<[Member]>, myId: String, houseId: String){
+    func balanceWidgetMembers(myId: String, houseId: String, members: Binding<[Member]>){
         if myId != "" && houseId != "" && houseId != "waitingRoom" {
-            db.collection("houses/\(houseId)/members").addSnapshotListener { querySnapshot, err in
+            db.collection("houses/\(houseId)/members").getDocuments { querySnapshot, err in
                 guard let docs = querySnapshot?.documents else {
                     return
                 }
-                
-                
-                members.wrappedValue = docs.map { queryDocumentSnapshot in
-                    let data = queryDocumentSnapshot.data()
                     
+                members.wrappedValue = docs.map { queryDocumentSnapshot -> Member in
+                    let data = queryDocumentSnapshot.data()
+
                     let name = data["name"] as? String ?? ""
                     let home = data["home"] as? String ?? ""
                     let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
@@ -993,6 +992,8 @@ class Fetch: ObservableObject {
                     let image = data["image"] as? String ?? ""
                     let admin = data["admin"] as? Bool ?? false
                     
+                    print(name)
+
                     return Member(id: queryDocumentSnapshot.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0)
                 }
             }

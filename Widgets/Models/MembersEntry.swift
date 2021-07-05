@@ -1,5 +1,5 @@
 //
-//  spllitEntry.swift
+//  BalanceEntry.swift
 //  split
 //
 //  Created by Jacob Tepperman on 2021-07-04.
