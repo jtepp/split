@@ -35,7 +35,7 @@ struct ActivityWidgetView: View {
 
 struct ActivityWidgetView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityWidgetView(payments: [.placeholderr, .placeholder, .placeholdera, .placeholder, .placeholder, .placeholder, .placeholder, .placeholder], limit: 3)
+        ActivityWidgetView(payments: [.placeholderr, .placeholder, .placeholdera, .placeholder, .placeholder, .placeholder, .placeholder, .placeholder], limit: 2)
             .background(Color.black.edgesIgnoringSafeArea(.all))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }

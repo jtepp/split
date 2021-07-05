@@ -12,7 +12,7 @@ struct ActivityWidgetEntryView: View {
     var entry: ActivityProvider.Entry
     @Environment(\.widgetFamily) var family
     var body: some View {
-        ActivityWidgetView(payments: entry.payments, limit: family == .systemMedium ? 3 : 7)
+        ActivityWidgetView(payments: entry.payments, limit: family == .systemMedium ? 2 : 5)
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }
