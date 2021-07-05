@@ -30,12 +30,12 @@ struct MembersProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<spllitEntry>) -> ()) {
         
-//        let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
-//        let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "0"
-//        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myHouse") ?? "0"
-//
-//
-//        Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId)
+        let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
+        let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "0"
+        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myHouse") ?? "0"
+
+
+        Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId)
         
         
         if let savedMembers = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.object(forKey: "members") as? Data {

@@ -17,7 +17,7 @@ struct BalanceWidgetView: View {
             ForEach(0..<rows){ r in
                 HStack {
                     ForEach(0..<cols){ c in
-                        BalanceTileView(member: balWidSort(members: members)[Int(c + r * cols)])
+                        BalanceTileView(member: balWidSort(members: members, index: Int(c + r * cols)))
                     }
                 }
             }
@@ -34,11 +34,17 @@ struct SmallBalanceWidget_Previews: PreviewProvider {
     }
 }
 
-func balWidSort(members: [codableMember]) -> [codableMember] {
+func balWidSort(members: [codableMember], index: Int) -> codableMember {
     let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
-    return members.sorted(by: { a, b in
+    let sorted = members.sorted(by: { a, b in
         let aa = abs((a.iOwe[myName] ?? 0) - (a.owesMe[myName] ?? 0))
         let bb = abs((b.iOwe[myName] ?? 0) - (b.owesMe[myName] ?? 0))
         return aa > bb
     })
+    if sorted.count > index {
+        return sorted[index]
+    } else {
+        print("WAS OUT OF INDEX \(index) \(sorted.count)")
+        return sorted[0]
+    }
 }
