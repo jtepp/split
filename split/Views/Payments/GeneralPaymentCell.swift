@@ -35,3 +35,7 @@ struct GeneralPaymentCell: View {
         }
     }
 }
+
+func moneyText(b: Binding<Float>, pre: String = "", post: String = "") -> Text {
+    return Text("\(pre)\(b.wrappedValue < 0 ? "-" : "")$\(abs(b.wrappedValue), specifier: "%.2f")\(post)")
+}

@@ -14,8 +14,6 @@ struct ActivityProvider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (spllitEntry) -> ()) {
-        
-        let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
         let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "0"
         let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "0"
         
@@ -28,26 +26,25 @@ struct ActivityProvider: TimelineProvider {
 //            }
 //        }
         
-        Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId){ loadedMembers in
-            print("LM \(loadedMembers.count)")
-            let entry = spllitEntry(myId: myId, houseId: houseId, members: loadedMembers)
+        Fetch().activityWidgetPayments(houseId: houseId) { loadedPayments in
+            print("Lp \(loadedPayments.count)")
+            let entry = spllitEntry(myId: myId, houseId: houseId, payments: loadedPayments)
             completion(entry)
-            
         }
+        
         
         
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<spllitEntry>) -> ()) {
         
-        let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
         let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "0"
         let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "0"
 
 
-        Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId){ loadedMembers in
-            print("LM \(loadedMembers.count)")
-            let entry = spllitEntry(myId: myId, houseId: houseId, members: loadedMembers)
+        Fetch().activityWidgetPayments(houseId: houseId) { loadedPayments in
+            print("Lp \(loadedPayments.count)")
+            let entry = spllitEntry(myId: myId, houseId: houseId, payments: loadedPayments)
             let curD = Date()
             let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .second, value: 10, to: curD)!))
             

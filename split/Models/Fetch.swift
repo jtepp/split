@@ -1025,6 +1025,34 @@ class Fetch: ObservableObject {
         }
     }
     
+    func activityWidgetPayments(houseId: String, _ completion: @escaping ([Payment]) -> Void) {
+        if houseId != "" && houseId != "waitingRoom" {
+            print("WIDGETSET2")
+            db.collection("houses/\(houseId)/payments").getDocuments { querySnapshot, err in
+                guard let docs = querySnapshot?.documents else {
+                    return
+                }
+                completion(docs.map({ queryDocumentSnapshot in
+                    let data = queryDocumentSnapshot.data()
+                    
+                    let to = data["to"] as? String ?? ""
+                    let time = data["time"] as? NSNumber ?? 0
+                    let from = data["from"] as? String ?? ""
+                    let reqfrom = data["reqfrom"] as? [String] ?? [""]
+                    let amount = data["amount"] as? NSNumber ?? 0
+                    let memo = data["memo"] as? String ?? ""
+                    let isRequest = data["isRequest"] as? Bool ?? false
+                    let isAn = data["isAn"] as? Bool ?? false
+                    let by = data["by"] as? String ?? ""
+                    
+                    return Payment(id: queryDocumentSnapshot.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, isAn: isAn, by: by)
+                }))
+            }
+        } else {
+            print("UHOHHOUSEID \(houseId)")
+        }
+    }
+    
     
 }
 

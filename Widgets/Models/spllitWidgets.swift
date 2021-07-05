@@ -18,6 +18,7 @@ struct spllitWidgets: WidgetBundle {
     @WidgetBundleBuilder
     var body: some Widget {
         BalanceWidget()
+        ActivityWidget()
     }
 }
 
