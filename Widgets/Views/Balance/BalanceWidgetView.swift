@@ -45,6 +45,6 @@ func balWidSort(members: [codableMember], index: Int) -> codableMember {
         return sorted[index]
     } else {
         print("WAS OUT OF INDEX \(index) \(sorted.count)")
-        return sorted[0]
+        return .empty
     }
 }

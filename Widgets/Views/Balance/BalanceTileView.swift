@@ -18,6 +18,7 @@ struct BalanceTileView: View {
                             b64toimg(b64: member.image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
+                                .clipShape(RoundedRectangle(cornerRadius: 6))
                                 .background(
                                 RoundedRectangle(cornerRadius: 6)
                                     .fill(Color("Material"))

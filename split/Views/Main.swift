@@ -49,7 +49,7 @@ struct Main: View {
             if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
                 if newPhase == .inactive {
                     Fetch().updateStatus(status: false)
-                    Fetch().balanceWidgetMembers(myName: m.name, myId: m.id, houseId: h.id)
+//                    Fetch().balanceWidgetMembers(myName: m.name, myId: m.id, houseId: h.id)
                     WidgetCenter.shared.reloadAllTimelines()
                 } else if newPhase == .active {
                     Fetch().updateStatus(status: true)
@@ -67,7 +67,7 @@ struct Main: View {
                     }
                 } else if newPhase == .background {
                     Fetch().updateStatus(status: false)
-                    Fetch().balanceWidgetMembers(myName: m.name, myId: m.id, houseId: h.id)
+//                    Fetch().balanceWidgetMembers(myName: m.name, myId: m.id, houseId: h.id)
                     WidgetCenter.shared.reloadAllTimelines()
                 }
             }

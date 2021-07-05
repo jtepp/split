@@ -19,9 +19,9 @@ struct BalanceWidgetEntryView : View {
             case .systemSmall:
                 BalanceWidgetView(members: Array(entry.members.prefix(4)), rows: 2, cols: 2)
             case .systemMedium:
-                BalanceWidgetView(members: Array(entry.members.prefix(4)), rows: 2, cols: 3)
+                BalanceWidgetView(members: Array(entry.members.prefix(4)), rows: 2, cols: 4)
             case .systemLarge:
-                BalanceWidgetView(members: Array(entry.members.prefix(4)), rows: 3, cols: 3)
+                BalanceWidgetView(members: Array(entry.members.prefix(4)), rows: 4, cols: 4)
             default:
                 BalanceWidgetView(members: Array(entry.members.prefix(4)), rows: 2, cols: 2)
             }

@@ -46,7 +46,8 @@ struct codableMember: Identifiable, Codable {
         image = member.image
         admin = member.admin
     }
-    static let placeholder = codableMember(member: Member(id: "sdafgasdgsd", home:"h", name: "Johnny J", image: "", showStatus: true))
-    static let placeholder2 = codableMember(member: Member(id: "sdfasdgs", home: "h", name: "Tedward", image: "", showStatus: true, online: true))
+    static let placeholder = codableMember(member: .placeholder)
+    static let placeholder2 = codableMember(member: .placeholder2)
+    static let empty = codableMember(member: .empty)
 
 }
