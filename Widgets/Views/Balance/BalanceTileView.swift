@@ -30,9 +30,10 @@ struct BalanceTileView: View {
                             Text(member.name)
                                 .font(Font.caption2.weight(.bold))
                                 .foregroundColor(Color("Material"))
-                            Text(balWidCalc(member:member))
+                            balWidCalc(member:member)
                                 .font(Font.caption2.weight(.bold))
-                                .foregroundColor(Color("Material"))
+                                .padding(.horizontal, 4)
+                                .minimumScaleFactor(0.1)
                         }
                     )
     }
@@ -45,8 +46,27 @@ struct BalanceTileView_Previews: PreviewProvider {
     }
 }
 
-func balWidCalc(member: codableMember) -> String {
+func balWidCalc(member: codableMember) -> AnyView {
     let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
     let num = (member.iOwe[myName] ?? 0) - (member.owesMe[myName] ?? 0)
-    return String(format: "$%.2f", num)
+    if num > 0 {
+        return AnyView(
+            HStack {
+//                Image(systemName: "chevron.up.circle")
+//                    .prep()
+                Text(String(format: "$%.2f", abs(num)))
+            }
+        .foregroundColor(.green))
+    } else if num > 0 {
+        return AnyView(
+            HStack {
+//                Image(systemName: "chevron.down.circle")
+//                    .prep()
+                Text(String(format: "$%.2f", abs(num)))
+            }
+        .foregroundColor(.red))
+    } else {
+        return AnyView(Text(String(format: "$%.2f", num))
+            .foregroundColor(Color("Material")))
+    }
 }

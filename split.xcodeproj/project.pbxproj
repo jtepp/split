@@ -56,6 +56,7 @@
 		0C6A743C2692922C00275A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C9570C72670E9BC00831D17 /* GoogleService-Info.plist */; };
 		0C6A743F2692C4AC00275A9B /* BalanceTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A743E2692C4AC00275A9B /* BalanceTileView.swift */; };
 		0C6A74402692C63000275A9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2A058A265CAA44002BD46D /* Assets.xcassets */; };
+		0C6A744226935DAF00275A9B /* Image+prep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A744126935DAF00275A9B /* Image+prep.swift */; };
 		0C7C87F726851F6A0040BFA7 /* AlternateIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */; };
 		0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */; };
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
@@ -196,6 +197,7 @@
 		0C6A7432269288FE00275A9B /* MembersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersProvider.swift; sourceTree = "<group>"; };
 		0C6A743726928C0A00275A9B /* BalanceWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceWidgetView.swift; sourceTree = "<group>"; };
 		0C6A743E2692C4AC00275A9B /* BalanceTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTileView.swift; sourceTree = "<group>"; };
+		0C6A744126935DAF00275A9B /* Image+prep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+prep.swift"; sourceTree = "<group>"; };
 		0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconButton.swift; sourceTree = "<group>"; };
 		0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+timeAgo.swift"; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				0C016A9C2687E72700EFFC3E /* UIImage+rotate.swift */,
 				0CA0E9CC26604315002876CF /* View+allowAutoDismiss.swift */,
 				0C15F8902685026E006BF2B0 /* KeyboardReadable.swift */,
+				0C6A744126935DAF00275A9B /* Image+prep.swift */,
 				0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */,
 				0C9D26CE265F263E006A7AF6 /* String+isNumeric.swift */,
 			);
@@ -786,6 +789,7 @@
 				0C6A7433269288FE00275A9B /* MembersProvider.swift in Sources */,
 				0C6A7429269285BC00275A9B /* Member.swift in Sources */,
 				0C6A743826928C0A00275A9B /* BalanceWidgetView.swift in Sources */,
+				0C6A744226935DAF00275A9B /* Image+prep.swift in Sources */,
 				0C6A742C2692860F00275A9B /* House.swift in Sources */,
 				0C6A742B2692860B00275A9B /* Payment.swift in Sources */,
 				0C6A74312692882800275A9B /* BalanceWidgetEntryView.swift in Sources */,
