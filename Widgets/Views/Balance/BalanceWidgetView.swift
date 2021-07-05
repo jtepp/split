@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct BalanceWidgetView: View {
     var members: [codableMember]
@@ -13,23 +14,29 @@ struct BalanceWidgetView: View {
     let cols: Int
     var body: some View {
         VStack {
-            ForEach(members.sorted(by: { a, b in
-                let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
-                let aa = abs((a.iOwe[myName] ?? 0) - (a.owesMe[myName] ?? 0))
-                let bb = abs((b.iOwe[myName] ?? 0) - (b.owesMe[myName] ?? 0))
-                return aa > bb
-            })){ member in
-                Text(member.name)
-                    .foregroundColor(.blue)
+            ForEach(0..<rows){ r in
+                HStack {
+                    ForEach(0..<cols){ c in
+                        Text("a")
+                    }
+                }
             }
-            Circle()
-                .fill(Color.blue)
         }
     }
 }
 
 struct SmallBalanceWidget_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceWidgetView(members: [codableMember](), rows: 2, cols: 2)
+        BalanceWidgetView(members: [.placeholder,.placeholder,.placeholder,.placeholder2], rows: 2, cols: 2)
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
+}
+
+func balWidSort(members: [codableMember], index: Int) -> codableMember {
+    let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
+    return members.sorted(by: { a, b in
+        let aa = abs((a.iOwe[myName] ?? 0) - (a.owesMe[myName] ?? 0))
+        let bb = abs((b.iOwe[myName] ?? 0) - (b.owesMe[myName] ?? 0))
+        return aa > bb
+    })[0]
 }
