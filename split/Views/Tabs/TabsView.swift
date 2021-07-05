@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct TabsView: View {
     @Binding var tabSelection: Int
@@ -85,6 +86,7 @@ struct TabsView: View {
                     engaged = false
                 }
                 Fetch().updateStatus(status: true)
+                WidgetCenter.shared.reloadAllTimelines()
             }
 
     }

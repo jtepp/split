@@ -13,7 +13,10 @@ struct SmallBalanceWidget: View {
         VStack {
             ForEach(members){ member in
                 Text(member.name)
+                    .foregroundColor(.red )
             }
+            Circle()
+                .fill(Color.red)
         }
     }
 }

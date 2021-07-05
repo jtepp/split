@@ -30,30 +30,27 @@ struct MembersProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<spllitEntry>) -> ()) {
         
-        let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? ""
-        let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? ""
-        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myHouse") ?? ""
+//        let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
+//        let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "0"
+//        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myHouse") ?? "0"
+//
+//
+//        Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId)
         
-        
-        Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId)
-        
-        
-        var entryMembers = [codableMember]()
         
         if let savedMembers = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.object(forKey: "members") as? Data {
             let decoder = JSONDecoder()
             if let loadedMembers = try? decoder.decode([codableMember].self, from: savedMembers){
-                entryMembers = loadedMembers
+                let entry = spllitEntry(myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "", members: loadedMembers)
+
+                // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+        //        let currentDate = Date()
+                
+                let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .second, value: 60, to: Date())!))
+                
+                completion(timeline)
             }
         }
         
-        var entries: [spllitEntry] = [spllitEntry(myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "", members: entryMembers)]
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-//        let currentDate = Date()
-
-        let timeline = Timeline(entries: entries, policy: .after(Calendar.current.date(byAdding: .second, value: 60, to: Date())!))
-        
-        completion(timeline)
     }
 }

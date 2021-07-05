@@ -1011,8 +1011,8 @@ class Fetch: ObservableObject {
                     return member.id != myId
                 }
                 .sorted(by: { a, b in
-                    let aa = ((a.iOwe[myName] ?? 0) - (a.owesMe[myName] ?? 0))
-                    let bb = ((b.iOwe[myName] ?? 0) - (b.owesMe[myName] ?? 0))
+                    let aa = abs((a.iOwe[myName] ?? 0) - (a.owesMe[myName] ?? 0))
+                    let bb = abs((b.iOwe[myName] ?? 0) - (b.owesMe[myName] ?? 0))
                     return aa < bb
                 })
                 let encoder = JSONEncoder()
