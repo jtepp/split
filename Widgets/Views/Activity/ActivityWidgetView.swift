@@ -18,9 +18,9 @@ struct ActivityWidgetView: View {
                 return a.time > b.time
             }).prefix(limit)) { payment in
                 if payment.isAn {
-                    WidgetActivityAnnouncementCell(payment: .constant(payment))
+                    ActivityWidgetAnnouncementCell(payment: .constant(payment))
                 } else if payment.isRequest {
-//                    WidgetActivityRequestCell(payment: .constant(payment))
+                    ActivityWidgetRequestCell(payment: .constant(payment))
                 } else {
                     ActivityWidgetPaymentCell(payment: .constant(payment))
                 }

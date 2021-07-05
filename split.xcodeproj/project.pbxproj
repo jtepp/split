@@ -58,7 +58,7 @@
 		0C6A7444269388C000275A9B /* ActivityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7443269388C000275A9B /* ActivityProvider.swift */; };
 		0C6A744826938CEB00275A9B /* ActivityWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A744626938CE800275A9B /* ActivityWidgetEntryView.swift */; };
 		0C6A744A26938D3100275A9B /* ActivityWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A744926938D3100275A9B /* ActivityWidgetView.swift */; };
-		0C6A7455269392D300275A9B /* WidgetActivityAnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7452269392D300275A9B /* WidgetActivityAnnouncementCell.swift */; };
+		0C6A7455269392D300275A9B /* ActivityWidgetAnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7452269392D300275A9B /* ActivityWidgetAnnouncementCell.swift */; };
 		0C6A7456269392D300275A9B /* ActivityWidgetRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7454269392D300275A9B /* ActivityWidgetRequestCell.swift */; };
 		0C6A7457269392D300275A9B /* ActivityWidgetPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7453269392D300275A9B /* ActivityWidgetPaymentCell.swift */; };
 		0C6A7458269392D900275A9B /* ActivityRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED2265ED9F4009B0C3C /* ActivityRequestCell.swift */; };
@@ -208,7 +208,7 @@
 		0C6A7443269388C000275A9B /* ActivityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityProvider.swift; sourceTree = "<group>"; };
 		0C6A744626938CE800275A9B /* ActivityWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidgetEntryView.swift; sourceTree = "<group>"; };
 		0C6A744926938D3100275A9B /* ActivityWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidgetView.swift; sourceTree = "<group>"; };
-		0C6A7452269392D300275A9B /* WidgetActivityAnnouncementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetActivityAnnouncementCell.swift; sourceTree = "<group>"; };
+		0C6A7452269392D300275A9B /* ActivityWidgetAnnouncementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidgetAnnouncementCell.swift; sourceTree = "<group>"; };
 		0C6A7453269392D300275A9B /* ActivityWidgetPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidgetPaymentCell.swift; sourceTree = "<group>"; };
 		0C6A7454269392D300275A9B /* ActivityWidgetRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidgetRequestCell.swift; sourceTree = "<group>"; };
 		0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconButton.swift; sourceTree = "<group>"; };
@@ -504,7 +504,7 @@
 			isa = PBXGroup;
 			children = (
 				0C6A7453269392D300275A9B /* ActivityWidgetPaymentCell.swift */,
-				0C6A7452269392D300275A9B /* WidgetActivityAnnouncementCell.swift */,
+				0C6A7452269392D300275A9B /* ActivityWidgetAnnouncementCell.swift */,
 				0C6A7454269392D300275A9B /* ActivityWidgetRequestCell.swift */,
 			);
 			path = Cells;
@@ -825,7 +825,7 @@
 				0C6A742126927DB500275A9B /* spllitEntry.swift in Sources */,
 				0C6A743F2692C4AC00275A9B /* BalanceTileView.swift in Sources */,
 				0C6A7433269288FE00275A9B /* MembersProvider.swift in Sources */,
-				0C6A7455269392D300275A9B /* WidgetActivityAnnouncementCell.swift in Sources */,
+				0C6A7455269392D300275A9B /* ActivityWidgetAnnouncementCell.swift in Sources */,
 				0C6A7429269285BC00275A9B /* Member.swift in Sources */,
 				0C6A743826928C0A00275A9B /* BalanceWidgetView.swift in Sources */,
 				0C6A7444269388C000275A9B /* ActivityProvider.swift in Sources */,

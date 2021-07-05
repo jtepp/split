@@ -31,21 +31,21 @@ struct ActivityWidgetRequestCell: View {
                                     .minimumScaleFactor(0.1)
                             }
                         }
+                        .minimumScaleFactor(0.1)
                 }
                 Spacer()
-                HStack {
-                        moneyTextWidget(b: $payment.amount)
-                            .foregroundColor(.primary)
-                            .padding(6)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(
-                                        Color("whiteblack")
-                                    )
-                        )
-                }
+                moneyTextWidget(b: $payment.amount)
+                    .font(.callout)
+                    .foregroundColor(.primary)
+                    .padding(2)
+                    .background(
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(
+                                Color("whiteblack")
+                            )
+                )
             }
-            .padding(.vertical, 6)
+            .padding(.top, 6)
             
             WidgetTimeBar(unix: payment.time, white: colorScheme == .dark)
         }
@@ -61,7 +61,7 @@ struct ActivityWidgetRequestCell: View {
 
 struct ActivityWidgetRequestCell_Preview: PreviewProvider {
     static var previews: some View {
-        ActivityWidgetView(payments: [.placeholderr, .placeholderr, .placeholder, .placeholder, .placeholdera], limit: 5)
+        ActivityWidgetView(payments: [.placeholdera, .placeholderr, .placeholder, .placeholder, .placeholderx], limit: 5)
             .background(Color.black.edgesIgnoringSafeArea(.all))
             .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
