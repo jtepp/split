@@ -12,5 +12,6 @@ struct spllitEntry: TimelineEntry {
     let date = Date()
     var myId: String = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? ""
     var houseId: String = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? ""
-    var members: [codableMember]
+    var members: [codableMember] = [codableMember]()
+    var payments: [Payment] = [Payment]()
 }
