@@ -1010,11 +1010,6 @@ class Fetch: ObservableObject {
                 .filter{ member in
                     return member.id != myId
                 }
-                .sorted(by: { a, b in
-                    let aa = abs((a.iOwe[myName] ?? 0) - (a.owesMe[myName] ?? 0))
-                    let bb = abs((b.iOwe[myName] ?? 0) - (b.owesMe[myName] ?? 0))
-                    return aa < bb
-                })
                 let encoder = JSONEncoder()
                 if let encoded = try? encoder.encode(members) {
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(encoded, forKey: "members")

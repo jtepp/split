@@ -13,7 +13,12 @@ struct BalanceWidgetView: View {
     let cols: Int
     var body: some View {
         VStack {
-            ForEach(members){ member in
+            ForEach(members.sorted(by: { a, b in
+                let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
+                let aa = abs((a.iOwe[myName] ?? 0) - (a.owesMe[myName] ?? 0))
+                let bb = abs((b.iOwe[myName] ?? 0) - (b.owesMe[myName] ?? 0))
+                return aa < bb
+            })){ member in
                 Text(member.name)
                     .foregroundColor(.blue)
             }
