@@ -23,10 +23,10 @@ struct BalanceWidgetView: View {
                         ForEach(0..<cols){ c in
                             if members.count > Int(c + r * cols) {
                                 BalanceTileView(member: balWidSort(members: members, index: Int(c + r * cols)))
-                            } else if members.count == 0 {
-    //                            BalanceTileView(member: balWidSort(members: [.empty], index: 0))
+                                  .frame(width:62, height:62)
                             } else {
-    //                            Rectangle()
+                                Rectangle()
+                                    .frame(width:62, height:62)
                             }
                         }
                         Spacer(minLength: 0)
@@ -93,3 +93,7 @@ func balWidSort(members: [codableMember], index: Int) -> codableMember {
         return .empty
     }
 }
+
+//func framer(v: some View) -> some View {
+//    return v.frame
+//}

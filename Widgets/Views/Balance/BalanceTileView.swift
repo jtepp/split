@@ -49,24 +49,17 @@ struct BalanceTileView_Previews: PreviewProvider {
 func balWidCalc(member: codableMember) -> AnyView {
     let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
     let num = (member.iOwe[myName] ?? 0) - (member.owesMe[myName] ?? 0)
+    let str = String(format: "$%.2f", abs(num))
+    var col: Color = Color("Material")
     if num > 0 {
-        return AnyView(
-            HStack {
-//                Image(systemName: "chevron.up.circle")
-//                    .prep()
-                Text(String(format: "$%.2f", abs(num)))
-            }
-        .foregroundColor(.green))
+                col = .green
     } else if num < 0 {
-        return AnyView(
-            HStack {
-//                Image(systemName: "chevron.down.circle")
-//                    .prep()
-                Text(String(format: "$%.2f", abs(num)))
-            }
-        .foregroundColor(.red))
-    } else {
-        return AnyView(Text(String(format: "$%.2f", num))
-            .foregroundColor(Color("Material")))
+        col = .red
     }
+    return AnyView(HStack {
+        //                Image(systemName: "chevron.up.circle")
+        //                    .prep()
+                        Text(str)
+                    }
+                .foregroundColor(col))
 }
