@@ -48,6 +48,7 @@ struct ActivityWidgetView_Previews: PreviewProvider {
 }
 
 func easeLimitWithReqs(payments: [Payment], limit: Int) -> Int {
+    if limit > 2 {
     let numReqs = payments.sorted(by: { a, b in
         return a.time > b.time
     }).prefix(limit).map({ p -> Double in
@@ -61,4 +62,11 @@ func easeLimitWithReqs(payments: [Payment], limit: Int) -> Int {
     }).reduce(0){$0+$1}
     
     return Int(Double(limit) - numReqs + 1)
+    } else {
+        return payments.sorted(by: { a, b in
+            return a.time > b.time
+        }).prefix(limit).contains { p in
+            return p.reqfrom.count > 2
+        } ? limit - 1 : limit
+    }
 }

@@ -61,8 +61,8 @@ struct ActivityWidgetRequestCell: View {
 
 struct ActivityWidgetRequestCell_Preview: PreviewProvider {
     static var previews: some View {
-        ActivityWidgetView(payments: [.placeholdera, .placeholdera, .placeholderr, .placeholderx, .placeholderr], limit: 5)
+        ActivityWidgetView(payments: [.placeholderr, .placeholderr, .placeholderx, .placeholderx, .placeholderx], limit: 2)
             .background(Color.black.edgesIgnoringSafeArea(.all))
-            .previewContext(WidgetPreviewContext(family: .systemLarge))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
