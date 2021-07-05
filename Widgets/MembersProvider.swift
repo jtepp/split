@@ -48,8 +48,8 @@ struct MembersProvider: TimelineProvider {
         Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId){ loadedMembers in
             print("LM \(loadedMembers.count)")
             let entry = spllitEntry(myId: myId, houseId: houseId, members: loadedMembers)
-            
-            let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .second, value: 30, to: Date())!))
+            let curD = Date()
+            let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .second, value: 10, to: curD)!))
             
             completion(timeline)
             
