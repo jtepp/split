@@ -63,9 +63,6 @@ class Fetch: ObservableObject {
                             print("setdead222\(m.wrappedValue.id)")
                         }
                         
-                        self.balanceWidgetMembers(myName: h.wrappedValue.members.first(where: { (m) -> Bool in
-                            return m.id == UserDefaults.standard.string(forKey: "myId")
-                            })?.name ?? "", myId: myId, houseId: id)
                         
                         completion()
                         if h.wrappedValue.members.first(where: { (m) -> Bool in
