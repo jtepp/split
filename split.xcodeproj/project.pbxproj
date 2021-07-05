@@ -54,6 +54,8 @@
 		0C6A7433269288FE00275A9B /* MembersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7432269288FE00275A9B /* MembersProvider.swift */; };
 		0C6A743826928C0A00275A9B /* BalanceWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A743726928C0A00275A9B /* BalanceWidgetView.swift */; };
 		0C6A743C2692922C00275A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C9570C72670E9BC00831D17 /* GoogleService-Info.plist */; };
+		0C6A743F2692C4AC00275A9B /* BalanceTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A743E2692C4AC00275A9B /* BalanceTileView.swift */; };
+		0C6A74402692C63000275A9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2A058A265CAA44002BD46D /* Assets.xcassets */; };
 		0C7C87F726851F6A0040BFA7 /* AlternateIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */; };
 		0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */; };
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
@@ -193,6 +195,7 @@
 		0C6A74302692882800275A9B /* BalanceWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceWidgetEntryView.swift; sourceTree = "<group>"; };
 		0C6A7432269288FE00275A9B /* MembersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersProvider.swift; sourceTree = "<group>"; };
 		0C6A743726928C0A00275A9B /* BalanceWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceWidgetView.swift; sourceTree = "<group>"; };
+		0C6A743E2692C4AC00275A9B /* BalanceTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTileView.swift; sourceTree = "<group>"; };
 		0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconButton.swift; sourceTree = "<group>"; };
 		0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+timeAgo.swift"; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -462,6 +465,7 @@
 			children = (
 				0C6A74302692882800275A9B /* BalanceWidgetEntryView.swift */,
 				0C6A743726928C0A00275A9B /* BalanceWidgetView.swift */,
+				0C6A743E2692C4AC00275A9B /* BalanceTileView.swift */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -713,6 +717,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C6A741526927C7500275A9B /* Assets.xcassets in Resources */,
+				0C6A74402692C63000275A9B /* Assets.xcassets in Resources */,
 				0C6A743C2692922C00275A9B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -777,6 +782,7 @@
 				0C6A741326927C7400275A9B /* spllitWidgets.swift in Sources */,
 				0C6A742D2692862D00275A9B /* UIImage+resized.swift in Sources */,
 				0C6A742126927DB500275A9B /* spllitEntry.swift in Sources */,
+				0C6A743F2692C4AC00275A9B /* BalanceTileView.swift in Sources */,
 				0C6A7433269288FE00275A9B /* MembersProvider.swift in Sources */,
 				0C6A7429269285BC00275A9B /* Member.swift in Sources */,
 				0C6A743826928C0A00275A9B /* BalanceWidgetView.swift in Sources */,

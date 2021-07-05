@@ -17,11 +17,13 @@ struct BalanceWidgetView: View {
             ForEach(0..<rows){ r in
                 HStack {
                     ForEach(0..<cols){ c in
-                        Text("a")
+                        BalanceTileView(member: balWidSort(members: members)[Int(c + r * cols)])
                     }
                 }
             }
         }
+        .padding(8)
+        .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }
 
@@ -32,11 +34,11 @@ struct SmallBalanceWidget_Previews: PreviewProvider {
     }
 }
 
-func balWidSort(members: [codableMember], index: Int) -> codableMember {
+func balWidSort(members: [codableMember]) -> [codableMember] {
     let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
     return members.sorted(by: { a, b in
         let aa = abs((a.iOwe[myName] ?? 0) - (a.owesMe[myName] ?? 0))
         let bb = abs((b.iOwe[myName] ?? 0) - (b.owesMe[myName] ?? 0))
         return aa > bb
-    })[0]
+    })
 }
