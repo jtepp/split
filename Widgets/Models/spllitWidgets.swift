@@ -10,6 +10,13 @@ import SwiftUI
 
 
 @main
+struct spllitWidgets: WidgetBundle {
+    @WidgetBundleBuilder
+    var body: some Widget {
+        BalanceWidget()
+    }
+}
+
 struct BalanceWidget: Widget {
     let kind: String = "BalanceWidget"
 
@@ -19,6 +26,7 @@ struct BalanceWidget: Widget {
         }
         .configurationDisplayName("spllit Balances")
         .description("See a simplified view of who you owe and who owes you")
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
 

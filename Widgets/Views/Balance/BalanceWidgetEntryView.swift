@@ -11,8 +11,18 @@ import WidgetKit
 struct BalanceWidgetEntryView : View {
     var entry: Provider.Entry
 
+    @Environment(\.widgetFamily) var family
     var body: some View {
-        Text(entry.date, style: .time)
+        switch family {
+        case .systemSmall:
+            SmallBalanceWidget(entry: entry)
+        case .systemMedium:
+            MediumBalanceWidget(entry: entry)
+        case .systemLarge:
+            LargeBalanceWidget(entry: entry)
+        @unkown default:
+            SmallBalanceWidget(entry: entry)
+        }
     }
 }
 
