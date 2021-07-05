@@ -46,7 +46,7 @@ struct MembersProvider: TimelineProvider {
                 // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         //        let currentDate = Date()
                 
-                let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .second, value: 60, to: Date())!))
+                let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .second, value: 30, to: Date())!))
                 
                 completion(timeline)
             }

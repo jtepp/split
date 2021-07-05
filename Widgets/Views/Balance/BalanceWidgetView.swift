@@ -45,6 +45,14 @@ func balWidSort(members: [codableMember], index: Int) -> codableMember {
         return sorted[index]
     } else {
         print("WAS OUT OF INDEX \(index) \(sorted.count)")
+        
+        if let savedMembers = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.object(forKey: "members") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedMembers = try? decoder.decode([codableMember].self, from: savedMembers){
+             print(loadedMembers)
+            }
+        }
+        
         return .empty
     }
 }

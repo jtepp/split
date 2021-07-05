@@ -988,6 +988,7 @@ class Fetch: ObservableObject {
     
     func balanceWidgetMembers(myName: String, myId: String, houseId: String){
         if myName != "" && myId != "" && houseId != "" && houseId != "waitingRoom" {
+            print("WIDGETSET")
             db.collection("houses/\(houseId)/members").getDocuments { querySnapshot, err in
                 guard let docs = querySnapshot?.documents else {
                     return
@@ -1017,6 +1018,7 @@ class Fetch: ObservableObject {
                 
             }
         } else {
+            print(myName+myId+houseId)
             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "members")
         }
     }

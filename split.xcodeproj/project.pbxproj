@@ -434,6 +434,7 @@
 		0C6A741126927C7400275A9B /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				0C6A7432269288FE00275A9B /* MembersProvider.swift */,
 				0C6A742F2692881C00275A9B /* Views */,
 				0C6A742E2692881000275A9B /* Models */,
 				0C6A741426927C7500275A9B /* Assets.xcassets */,
@@ -446,7 +447,6 @@
 			isa = PBXGroup;
 			children = (
 				0C6A741226927C7400275A9B /* spllitWidgets.swift */,
-				0C6A7432269288FE00275A9B /* MembersProvider.swift */,
 				0C6A741F26927D9300275A9B /* spllitEntry.swift */,
 			);
 			path = Models;

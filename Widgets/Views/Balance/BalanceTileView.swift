@@ -23,7 +23,13 @@ struct BalanceTileView: View {
                                 RoundedRectangle(cornerRadius: 6)
                                     .fill(Color("Material"))
                                 )
+                                .padding(.top, 6)
                             Text(member.name)
+                                .font(Font.caption2.weight(.bold))
+                                .foregroundColor(Color("Material"))
+                            Text(balWidCalc(member:member))
+                                .font(Font.caption2.weight(.bold))
+                                .foregroundColor(Color("Material"))
                         }
                     )
     }
@@ -34,4 +40,10 @@ struct BalanceTileView_Previews: PreviewProvider {
         BalanceWidgetView(members: [.placeholder,.placeholder,.placeholder2,.placeholder2], rows: 2, cols: 2)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
+}
+
+func balWidCalc(member: codableMember) -> String {
+    let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
+    let num = (member.iOwe[myName] ?? 0) - (member.owesMe[myName] ?? 0)
+    return String(format: "$%.2f", num)
 }
