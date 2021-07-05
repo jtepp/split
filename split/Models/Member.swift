@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Member: Identifiable, Equatable, Codable {
+struct Member: Identifiable, Equatable {
     var id: String
     var home: String
     var name: String
@@ -27,4 +27,21 @@ struct Member: Identifiable, Equatable, Codable {
     static let empty = Member(id: "", home: "", name: "", image: "", showStatus: false)
     static let placeholder = Member(id: "sdafgasdgsd", home:"h", name: "Johnny J", image: "", showStatus: true)
     static let placeholder2 = Member(id: "sdfasdgs", home: "h", name: "Tedward", image: "", showStatus: true, online: true)
+}
+
+struct codableMember: Identifiable, Codable {
+    var id: String
+    var home: String
+    var owesMe: [String : Float] = [String : Float]()
+    var iOwe: [String : Float] = [String : Float]()
+    var image: String
+    var admin: Bool = false
+    init(member: Member){
+        id = member.id
+        home = member.home
+        owesMe = member.owesMe
+        iOwe = member.iOwe
+        image = member.image
+        admin = member.admin
+    }
 }
