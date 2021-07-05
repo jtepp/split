@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct BalanceWidgetEntryView : View {
-    var entry: Provider.Entry
+    var entry: MembersProvider.Entry
 
     @Environment(\.widgetFamily) var family
     
