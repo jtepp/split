@@ -61,9 +61,9 @@
 		0C6A744F2693918800275A9B /* GeneralPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */; };
 		0C6A74502693918C00275A9B /* GeneralRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */; };
 		0C6A74512693919300275A9B /* TimeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FECF265ECB87009B0C3C /* TimeBar.swift */; };
-		0C6A7455269392D300275A9B /* ActivityAnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7452269392D300275A9B /* ActivityAnnouncementCell.swift */; };
-		0C6A7456269392D300275A9B /* ActivityRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7454269392D300275A9B /* ActivityRequestCell.swift */; };
-		0C6A7457269392D300275A9B /* ActivityPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7453269392D300275A9B /* ActivityPaymentCell.swift */; };
+		0C6A7455269392D300275A9B /* WidgetActivityAnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7452269392D300275A9B /* WidgetActivityAnnouncementCell.swift */; };
+		0C6A7456269392D300275A9B /* WidgetActivityRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7454269392D300275A9B /* WidgetActivityRequestCell.swift */; };
+		0C6A7457269392D300275A9B /* WidgetActivityPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7453269392D300275A9B /* WidgetActivityPaymentCell.swift */; };
 		0C6A7458269392D900275A9B /* ActivityRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED2265ED9F4009B0C3C /* ActivityRequestCell.swift */; };
 		0C6A7459269392D900275A9B /* ActivityAnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA80362661860600A3081B /* ActivityAnnouncementCell.swift */; };
 		0C6A745A269392D900275A9B /* ActivityPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */; };
@@ -210,9 +210,9 @@
 		0C6A7443269388C000275A9B /* ActivityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityProvider.swift; sourceTree = "<group>"; };
 		0C6A744626938CE800275A9B /* ActivityWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidgetEntryView.swift; sourceTree = "<group>"; };
 		0C6A744926938D3100275A9B /* ActivityWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidgetView.swift; sourceTree = "<group>"; };
-		0C6A7452269392D300275A9B /* ActivityAnnouncementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnnouncementCell.swift; sourceTree = "<group>"; };
-		0C6A7453269392D300275A9B /* ActivityPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPaymentCell.swift; sourceTree = "<group>"; };
-		0C6A7454269392D300275A9B /* ActivityRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRequestCell.swift; sourceTree = "<group>"; };
+		0C6A7452269392D300275A9B /* WidgetActivityAnnouncementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetActivityAnnouncementCell.swift; sourceTree = "<group>"; };
+		0C6A7453269392D300275A9B /* WidgetActivityPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetActivityPaymentCell.swift; sourceTree = "<group>"; };
+		0C6A7454269392D300275A9B /* WidgetActivityRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetActivityRequestCell.swift; sourceTree = "<group>"; };
 		0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconButton.swift; sourceTree = "<group>"; };
 		0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+timeAgo.swift"; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -495,11 +495,19 @@
 			children = (
 				0C6A744626938CE800275A9B /* ActivityWidgetEntryView.swift */,
 				0C6A744926938D3100275A9B /* ActivityWidgetView.swift */,
-				0C6A7453269392D300275A9B /* ActivityPaymentCell.swift */,
-				0C6A7452269392D300275A9B /* ActivityAnnouncementCell.swift */,
-				0C6A7454269392D300275A9B /* ActivityRequestCell.swift */,
+				0C6A745B2693970300275A9B /* Cells */,
 			);
 			path = Activity;
+			sourceTree = "<group>";
+		};
+		0C6A745B2693970300275A9B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0C6A7453269392D300275A9B /* WidgetActivityPaymentCell.swift */,
+				0C6A7452269392D300275A9B /* WidgetActivityAnnouncementCell.swift */,
+				0C6A7454269392D300275A9B /* WidgetActivityRequestCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		0C7C87F8268526400040BFA7 /* icons */ = {
@@ -819,18 +827,18 @@
 				0C6A742126927DB500275A9B /* spllitEntry.swift in Sources */,
 				0C6A743F2692C4AC00275A9B /* BalanceTileView.swift in Sources */,
 				0C6A7433269288FE00275A9B /* MembersProvider.swift in Sources */,
-				0C6A7455269392D300275A9B /* ActivityAnnouncementCell.swift in Sources */,
+				0C6A7455269392D300275A9B /* WidgetActivityAnnouncementCell.swift in Sources */,
 				0C6A7429269285BC00275A9B /* Member.swift in Sources */,
 				0C6A743826928C0A00275A9B /* BalanceWidgetView.swift in Sources */,
 				0C6A7444269388C000275A9B /* ActivityProvider.swift in Sources */,
 				0C6A744226935DAF00275A9B /* Image+prep.swift in Sources */,
 				0C6A744A26938D3100275A9B /* ActivityWidgetView.swift in Sources */,
 				0C6A742C2692860F00275A9B /* House.swift in Sources */,
-				0C6A7456269392D300275A9B /* ActivityRequestCell.swift in Sources */,
+				0C6A7456269392D300275A9B /* WidgetActivityRequestCell.swift in Sources */,
 				0C6A742B2692860B00275A9B /* Payment.swift in Sources */,
 				0C6A74312692882800275A9B /* BalanceWidgetEntryView.swift in Sources */,
 				0C6A74512693919300275A9B /* TimeBar.swift in Sources */,
-				0C6A7457269392D300275A9B /* ActivityPaymentCell.swift in Sources */,
+				0C6A7457269392D300275A9B /* WidgetActivityPaymentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

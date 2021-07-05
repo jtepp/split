@@ -13,19 +13,21 @@ struct ActivityWidgetView: View {
     var limit: Int
     var body: some View {
         VStack {
+            Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
             ForEach(payments.sorted(by: { a, b in
                 return a.time > b.time
             }).prefix(limit)) { payment in
                 if payment.isAn {
-                    ActivityAnnouncementCell(payment: .constant(payment))
+                    WidgetActivityAnnouncementCell(payment: .constant(payment))
                 } else if payment.isRequest {
-//                    ActivityRequestCell(payment: .constant(payment))
+//                    WidgetActivityRequestCell(payment: .constant(payment))
                 } else {
-                    ActivityPaymentCell(payment: .constant(payment))
+                    WidgetActivityPaymentCell(payment: .constant(payment))
                 }
             }
             .padding(.horizontal)
             .padding(.bottom, 10)
+            Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
     }
     }
 }
@@ -33,6 +35,7 @@ struct ActivityWidgetView: View {
 struct ActivityWidgetView_Previews: PreviewProvider {
     static var previews: some View {
         ActivityWidgetView(payments: [.placeholderr, .placeholder, .placeholdera, .placeholder, .placeholder, .placeholder, .placeholder, .placeholder], limit: 3)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
