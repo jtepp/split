@@ -11,31 +11,31 @@ import WidgetKit
 struct BalanceTileView: View {
     var member: codableMember
     var body: some View {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color("DarkMaterial"))
-                    .aspectRatio(1.0, contentMode: .fit)
-                    .overlay(
-                        VStack {
-                            b64toimg(b64: member.image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 30, height: 30)
-                                .clipShape(RoundedRectangle(cornerRadius: 6))
-                                .background(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .fill(Color("Material"))
-                                )
-                                .padding(.top, 6)
-                                .padding(.bottom, -6)
-                            Text(member.name)
-                                .font(Font.caption2.weight(.bold))
-                                .foregroundColor(Color("Material"))
-                            balWidCalc(member:member)
-                                .font(Font.caption2.weight(.bold))
-                                .padding(.horizontal, 4)
-                                .minimumScaleFactor(0.1)
-                        }
-                    )
+        RoundedRectangle(cornerRadius: 10)
+            .fill(Color("DarkMaterial"))
+            .aspectRatio(1.0, contentMode: .fit)
+            .overlay(
+                VStack {
+                    b64toimg(b64: member.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                        .background(
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(Color("Material"))
+                        )
+                        .padding(.top, 6)
+                        .padding(.bottom, -6)
+                    Text(member.name)
+                        .font(.system(size: 8).weight(.bold))
+                        .foregroundColor(Color("Material"))
+                    balWidCalc(member:member)
+                        .font(.system(size: 8).weight(.bold))
+                        .padding(.horizontal, 10)
+//                        .minimumScaleFactor(0.3)
+                }
+            )
     }
 }
 
@@ -51,15 +51,27 @@ func balWidCalc(member: codableMember) -> AnyView {
     let num = (member.iOwe[myName] ?? 0) - (member.owesMe[myName] ?? 0)
     let str = String(format: "$%.2f", abs(num))
     var col: Color = Color("Material")
+    var img = ""
     if num > 0 {
-                col = .green
+        col = .green
+        img = "arrowtriangle.up.fill"
     } else if num < 0 {
         col = .red
+        img = "arrowtriangle.down.fill"
     }
     return AnyView(HStack {
-        //                Image(systemName: "chevron.up.circle")
-        //                    .prep()
-                        Text(str)
-                    }
-                .foregroundColor(col))
+        Text(str)
+            .lineLimit(1)
+    }
+    .foregroundColor(col)
+    .overlay(
+        HStack {
+            Image(systemName: img)
+                .prep()
+                .foregroundColor(col)
+            Spacer()
+        }
+        
+    )
+    )
 }

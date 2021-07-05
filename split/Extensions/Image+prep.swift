@@ -9,6 +9,6 @@ import SwiftUI
 
 extension Image {
     func prep() -> some View {
-        return self.resizable().aspectRatio(contentMode: .fit).minimumScaleFactor(0.1)
+        return self.resizable().aspectRatio(contentMode: .fit).offset(x: -18).scaleEffect(0.5)
     }
 }
