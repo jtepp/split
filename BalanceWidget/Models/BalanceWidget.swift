@@ -31,21 +31,13 @@ struct Provider: TimelineProvider {
 }
 
 
-struct BalanceWidgetEntryView : View {
-    var entry: Provider.Entry
-
-    var body: some View {
-        Text(entry.date, style: .time)
-    }
-}
-
 @main
 struct BalanceWidget: Widget {
     let kind: String = "BalanceWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            BalanceWidgetEntryView(entry: entry)
+            BalanceWidgetView(entry: entry)
         }
         .configurationDisplayName("spllit balances")
         .description("See a simplified view of who you owe and who owes you")
@@ -54,7 +46,7 @@ struct BalanceWidget: Widget {
 
 struct BalanceWidget_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceWidgetEntryView(entry: BalanceEntry(date: Date(), myId: "placeholder", houseId: "placeholder"))
+        BalanceWidgetView(entry: BalanceEntry(date: Date(), myId: "placeholder", houseId: "placeholder"))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
