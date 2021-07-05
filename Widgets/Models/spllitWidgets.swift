@@ -24,7 +24,7 @@ struct BalanceWidget: Widget {
 
 struct BalanceWidget_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceWidgetEntryView(entry: BalanceEntry(date: Date(), myId: "placeholder", houseId: "placeholder"))
+        BalanceWidgetEntryView(entry: spllitEntry(date: Date(), myId: "placeholder", houseId: "placeholder"))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
