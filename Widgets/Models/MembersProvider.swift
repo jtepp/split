@@ -14,12 +14,32 @@ struct MembersProvider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (spllitEntry) -> ()) {
-        let entry = spllitEntry(myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "", members: [.placeholder])
+        
+        var entryMembers = [codableMember]()
+        
+        if let savedMembers = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.object(forKey: "members") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedMembers = try? decoder.decode([codableMember].self, from: savedMembers){
+                entryMembers = loadedMembers
+            }
+        }
+        
+        let entry = spllitEntry(myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "", members: entryMembers)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<spllitEntry>) -> ()) {
-        var entries: [spllitEntry] = [spllitEntry(myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "", members: [.placeholder])]
+        
+        var entryMembers = [codableMember]()
+        
+        if let savedMembers = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.object(forKey: "members") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedMembers = try? decoder.decode([codableMember].self, from: savedMembers){
+                entryMembers = loadedMembers
+            }
+        }
+        
+        var entries: [spllitEntry] = [spllitEntry(myId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "", houseId: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "", members: entryMembers)]
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
 //        let currentDate = Date()
