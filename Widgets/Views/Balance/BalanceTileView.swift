@@ -57,7 +57,7 @@ func balWidCalc(member: codableMember) -> AnyView {
                 Text(String(format: "$%.2f", abs(num)))
             }
         .foregroundColor(.green))
-    } else if num > 0 {
+    } else if num < 0 {
         return AnyView(
             HStack {
 //                Image(systemName: "chevron.down.circle")

@@ -994,6 +994,8 @@ class Fetch: ObservableObject {
                     return
                 }
 //                var members = [codableMember]()
+                print(myName+myId+houseId)
+                print("\(docs.count) FDFSFD")
                 completion(docs.map { queryDocumentSnapshot -> codableMember in
                     let data = queryDocumentSnapshot.data()
                     
