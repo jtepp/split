@@ -25,7 +25,7 @@ struct BalanceWidget: Widget {
     let kind: String = "BalanceWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: MembersProvider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
             BalanceWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("spllit Balances")

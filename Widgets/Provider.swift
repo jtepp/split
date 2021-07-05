@@ -8,7 +8,7 @@
 import Foundation
 import WidgetKit
 
-struct MembersProvider: TimelineProvider {
+struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> spllitEntry {
         spllitEntry(myId: "placeholder", houseId: "placeholder", members: Array(repeating: .empty, count: 9))
     }

@@ -51,7 +51,7 @@
 		0C6A742C2692860F00275A9B /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A059F265CB17D002BD46D /* House.swift */; };
 		0C6A742D2692862D00275A9B /* UIImage+resized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */; };
 		0C6A74312692882800275A9B /* BalanceWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A74302692882800275A9B /* BalanceWidgetEntryView.swift */; };
-		0C6A7433269288FE00275A9B /* MembersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7432269288FE00275A9B /* MembersProvider.swift */; };
+		0C6A7433269288FE00275A9B /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7432269288FE00275A9B /* Provider.swift */; };
 		0C6A743826928C0A00275A9B /* BalanceWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A743726928C0A00275A9B /* BalanceWidgetView.swift */; };
 		0C6A743C2692922C00275A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C9570C72670E9BC00831D17 /* GoogleService-Info.plist */; };
 		0C6A743F2692C4AC00275A9B /* BalanceTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A743E2692C4AC00275A9B /* BalanceTileView.swift */; };
@@ -194,7 +194,7 @@
 		0C6A741E26927CB600275A9B /* spllitWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = spllitWidgetExtension.entitlements; sourceTree = "<group>"; };
 		0C6A741F26927D9300275A9B /* spllitEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spllitEntry.swift; sourceTree = "<group>"; };
 		0C6A74302692882800275A9B /* BalanceWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceWidgetEntryView.swift; sourceTree = "<group>"; };
-		0C6A7432269288FE00275A9B /* MembersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersProvider.swift; sourceTree = "<group>"; };
+		0C6A7432269288FE00275A9B /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		0C6A743726928C0A00275A9B /* BalanceWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceWidgetView.swift; sourceTree = "<group>"; };
 		0C6A743E2692C4AC00275A9B /* BalanceTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTileView.swift; sourceTree = "<group>"; };
 		0C6A744126935DAF00275A9B /* Image+prep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+prep.swift"; sourceTree = "<group>"; };
@@ -437,7 +437,7 @@
 		0C6A741126927C7400275A9B /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				0C6A7432269288FE00275A9B /* MembersProvider.swift */,
+				0C6A7432269288FE00275A9B /* Provider.swift */,
 				0C6A742F2692881C00275A9B /* Views */,
 				0C6A742E2692881000275A9B /* Models */,
 				0C6A741426927C7500275A9B /* Assets.xcassets */,
@@ -786,7 +786,7 @@
 				0C6A742D2692862D00275A9B /* UIImage+resized.swift in Sources */,
 				0C6A742126927DB500275A9B /* spllitEntry.swift in Sources */,
 				0C6A743F2692C4AC00275A9B /* BalanceTileView.swift in Sources */,
-				0C6A7433269288FE00275A9B /* MembersProvider.swift in Sources */,
+				0C6A7433269288FE00275A9B /* Provider.swift in Sources */,
 				0C6A7429269285BC00275A9B /* Member.swift in Sources */,
 				0C6A743826928C0A00275A9B /* BalanceWidgetView.swift in Sources */,
 				0C6A744226935DAF00275A9B /* Image+prep.swift in Sources */,
