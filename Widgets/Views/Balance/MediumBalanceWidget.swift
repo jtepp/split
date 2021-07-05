@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MediumBalanceWidget: View {
-    var members: [Member]
+    var members: [codableMember]
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
@@ -16,6 +16,6 @@ struct MediumBalanceWidget: View {
 
 struct MediumBalanceWidget_Previews: PreviewProvider {
     static var previews: some View {
-        MediumBalanceWidget(members: [Member]())
+        MediumBalanceWidget(members: [codableMember]())
     }
 }

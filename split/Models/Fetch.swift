@@ -48,8 +48,6 @@ class Fetch: ObservableObject {
                         
                         self.updateStatus(status: true)
                         
-                        self.balanceWidgetMembers(myId: myId, houseId: id)
-                        
                         let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
                         
                         if t != "" {
@@ -65,6 +63,11 @@ class Fetch: ObservableObject {
                             })!
                             print("setdead222\(m.wrappedValue.id)")
                         }
+                        
+                        self.balanceWidgetMembers(myName: h.wrappedValue.members.first(where: { (m) -> Bool in
+                            return m.id == UserDefaults.standard.string(forKey: "myId")
+                            })?.name ?? "", myId: myId, houseId: id)
+                        
                         completion()
                         if h.wrappedValue.members.first(where: { (m) -> Bool in
                             return m.id == UserDefaults.standard.string(forKey: "myId")
@@ -977,8 +980,8 @@ class Fetch: ObservableObject {
     
     //Widget funcs
     
-    func balanceWidgetMembers(myId: String, houseId: String){
-        if myId != "" && houseId != "" && houseId != "waitingRoom" {
+    func balanceWidgetMembers(myName: String, myId: String, houseId: String){
+        if myName != "" && myId != "" && houseId != "" && houseId != "waitingRoom" {
             db.collection("houses/\(houseId)/members").getDocuments { querySnapshot, err in
                 guard let docs = querySnapshot?.documents else {
                     return
@@ -994,16 +997,24 @@ class Fetch: ObservableObject {
                     let image = data["image"] as? String ?? ""
                     let admin = data["admin"] as? Bool ?? false
                     
-                    print(name)
+//                    print(name)
                     
                     return codableMember(member: Member(id: queryDocumentSnapshot.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0))
                 }
+                .filter{ member in
+                    return member.id != myId
+                }
+                .sorted(by: { a, b in
+                    return
+                })
                 let encoder = JSONEncoder()
                 if let encoded = try? encoder.encode(members) {
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(encoded, forKey: "members")
                 }
                 
             }
+        } else {
+            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "members")
         }
     }
     
