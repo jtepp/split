@@ -25,8 +25,7 @@ struct BalanceWidgetView: View {
 //                                Spacer(minLength: 0)
                                 BalanceTileView(member: balWidSort(members: members, index: Int(c + r * cols)))
                                   .frame(width:62, height:62)
-//                                Spacer(minLength: 0)
-                            } else   {
+                            } else {
                                 Rectangle()
                                     .frame(width:62, height:62)
                             }
