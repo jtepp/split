@@ -17,7 +17,11 @@ struct BalanceWidgetView: View {
             ForEach(0..<rows){ r in
                 HStack {
                     ForEach(0..<cols){ c in
-                        BalanceTileView(member: balWidSort(members: members, index: Int(c + r * cols)))
+                        if members.count > Int(c + r * cols) {
+                            BalanceTileView(member: balWidSort(members: members, index: Int(c + r * cols)))
+                        } else {
+                            Spacer()
+                        }
                     }
                 }
             }
@@ -49,7 +53,7 @@ func balWidSort(members: [codableMember], index: Int) -> codableMember {
         if let savedMembers = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.object(forKey: "members") as? Data {
             let decoder = JSONDecoder()
             if let loadedMembers = try? decoder.decode([codableMember].self, from: savedMembers){
-             print(loadedMembers)
+                print(loadedMembers)
             }
         }
         
