@@ -46,7 +46,6 @@ class Fetch: ObservableObject {
                         
                         self.getPayments(h: h, id: id)
                         
-                        self.updateStatus(status: true)
                         
                         let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
                         

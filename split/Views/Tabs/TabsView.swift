@@ -84,6 +84,7 @@ struct TabsView: View {
                 } else {
                     engaged = false
                 }
+                Fetch().updateStatus(status: true)
             }
 
     }
