@@ -20,7 +20,7 @@ class Fetch: ObservableObject {
             
             print("ID:    \(id)")
             print("ME:    \(myId)")
-//            print("H:     \(h.wrappedValue)")
+            //            print("H:     \(h.wrappedValue)")
             
             if id != "" && id != "waitingRoom" { // has real house id
                 print("has real hid \(id) \(myId)")
@@ -31,29 +31,31 @@ class Fetch: ObservableObject {
                 
                 db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
                     if (querySnapshot?.exists ?? false) {
-                    guard let doc = querySnapshot else {
-                        print("no house by id %s", id)
-                        return
-                    }
-                    let data = doc.data()
-                    let name = data?["name"] as? String ?? ""
-                    
-                    let password = data?["password"] as? String ?? ""
-                    
-                    h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, payments: h.wrappedValue.payments, password: password)
-                    
-                    self.getMembers(h: h, id: id)
-                    
-                    self.getPayments(h: h, id: id)
-                
-                    self.updateStatus(status: true)
+                        guard let doc = querySnapshot else {
+                            print("no house by id %s", id)
+                            return
+                        }
+                        let data = doc.data()
+                        let name = data?["name"] as? String ?? ""
                         
-                    let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
-                    
-                    if t != "" {
-                        self.placeToken(h: h, id: myId, token: t)
-                    }
-                    
+                        let password = data?["password"] as? String ?? ""
+                        
+                        h.wrappedValue = House(id: id, name: name, members: h.wrappedValue.members, payments: h.wrappedValue.payments, password: password)
+                        
+                        self.getMembers(h: h, id: id)
+                        
+                        self.getPayments(h: h, id: id)
+                        
+                        self.updateStatus(status: true)
+                        
+                        self.balanceWidgetMembers(myId: myId, houseId: id)
+                        
+                        let t = UserDefaults.standard.string(forKey: "fcm") ?? ""
+                        
+                        if t != "" {
+                            self.placeToken(h: h, id: myId, token: t)
+                        }
+                        
                         if h.wrappedValue.members.first(where: { (m) -> Bool in
                             return m.id == UserDefaults.standard.string(forKey: "myId")
                         }) != nil {
@@ -64,25 +66,25 @@ class Fetch: ObservableObject {
                             print("setdead222\(m.wrappedValue.id)")
                         }
                         completion()
-                    if h.wrappedValue.members.first(where: { (m) -> Bool in
-                        return m.id == UserDefaults.standard.string(forKey: "myId")
-                    }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
-                        //if ur an alien, go to void, otherwise get waitingRoomed
-                        if myId == "" {
-                            print("gotovoid")
-                            UserDefaults.standard.set("", forKey: "houseId")
-                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
-                            noProf.wrappedValue = true
+                        if h.wrappedValue.members.first(where: { (m) -> Bool in
+                            return m.id == UserDefaults.standard.string(forKey: "myId")
+                        }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
+                            //if ur an alien, go to void, otherwise get waitingRoomed
+                            if myId == "" {
+                                print("gotovoid")
+                                UserDefaults.standard.set("", forKey: "houseId")
+                                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
+                                noProf.wrappedValue = true
+                                inWR.wrappedValue = true
+                            } else {
+                                print("wred")
+                                UserDefaults.standard.set("waitingRoom", forKey: "houseId")
+                                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("waitingRoom", forKey: "houseId")
+                                noProf.wrappedValue = false
+                            }
                             inWR.wrappedValue = true
-                        } else {
-                            print("wred")
-                            UserDefaults.standard.set("waitingRoom", forKey: "houseId")
-                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("waitingRoom", forKey: "houseId")
-                            noProf.wrappedValue = false
                         }
-                        inWR.wrappedValue = true
-                    }
-                    
+                        
                     } else {
                         print("gotovoid2")
                         UserDefaults.standard.set("", forKey: "houseId")
@@ -168,7 +170,7 @@ class Fetch: ObservableObject {
                 let showStatus = data["showStatus"] as? Bool ?? false
                 let online = data["online"] as? Bool ?? false
                 let lastSeen = data["lastSeen"] as? NSNumber ?? 0
-//                print("DFSSSS: \(name) \(data["lastSeen"])")
+                //                print("DFSSSS: \(name) \(data["lastSeen"])")
                 return Member(id: q.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: showStatus, online: online, lastSeen: lastSeen)
             })
             for member in h.wrappedValue.members {
@@ -305,7 +307,7 @@ class Fetch: ObservableObject {
                 })
             {
                 if payment.isRequest {
-//                    print("WASREQ\(payment)")
+                    //                    print("WASREQ\(payment)")
                     if payment.to == m.name {
                         for member in payment.reqfrom {
                             //they owe me from my request
@@ -324,7 +326,7 @@ class Fetch: ObservableObject {
                         }
                     }
                 } else { //its a payment
-//                    print("WASPAY\(payment)")
+                    //                    print("WASPAY\(payment)")
                     if payment.to == m.name {
                         //paid to me
                         if (owesMe[payment.from] ?? 0) == 0 {
@@ -343,7 +345,7 @@ class Fetch: ObservableObject {
                 }
             }
             //        let id = UserDefaults.standard.string(forKey: "myId")
-//            print("\n\nowes\(owesMe)\n\n\n\(iOwe)\niown")
+            //            print("\n\nowes\(owesMe)\n\n\n\(iOwe)\niown")
             iOwe.forEach { (key: String, value: Float) in
                 if abs(value - (owesMe[key] ?? Float(0))) < 0.01 {
                     iOwe[key] = 0
@@ -418,15 +420,15 @@ class Fetch: ObservableObject {
     }
     func addToWR(m: Binding<Member>, myId: Binding<String>, h: Binding<House>, _ completion: @escaping () -> Void){
         if myId.wrappedValue == "" {
-        db.collection("waitingRoom").addDocument(data: ["name":m.wrappedValue.name, "image":m.wrappedValue.image]).getDocument { (documentSnapshot, err) in
-            UserDefaults.standard.set(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
-            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
-            myId.wrappedValue = documentSnapshot?.documentID ?? "wrbs"
-            m.wrappedValue.id = documentSnapshot?.documentID ?? "wrbs"
-            m.wrappedValue.home = "waitingRoom"
-            h.members.wrappedValue.append(m.wrappedValue)
-            
-        }
+            db.collection("waitingRoom").addDocument(data: ["name":m.wrappedValue.name, "image":m.wrappedValue.image]).getDocument { (documentSnapshot, err) in
+                UserDefaults.standard.set(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
+                myId.wrappedValue = documentSnapshot?.documentID ?? "wrbs"
+                m.wrappedValue.id = documentSnapshot?.documentID ?? "wrbs"
+                m.wrappedValue.home = "waitingRoom"
+                h.members.wrappedValue.append(m.wrappedValue)
+                
+            }
         } else {
             db.document("waitingRoom/\(myId.wrappedValue)").updateData(["name":m.wrappedValue.name, "image":m.wrappedValue.image]){ (err) in
                 UserDefaults.standard.set(myId.wrappedValue, forKey: "myId")
@@ -446,184 +448,184 @@ class Fetch: ObservableObject {
     func checkSwitch(h: House, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>, killHouse: Bool = false, completion: @escaping (Bool) -> Void) {
         
         
-                var house = House.empty.id
-    //            let startHouse = h.wrappedValue
-                db.collection("houses").getDocuments { (querySnapshot, err) in
-                    guard let documents = querySnapshot?.documents else {
-                        print(err.debugDescription)
-                        return
-                    }
-//                    if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
-                        documents.forEach { (doc) in
-                            if doc.documentID == newGroup {
-                                house = doc.documentID
-                                let d = doc.data()
-                                let p = (d["password"] ?? "") as! String
-                                
-                                if newPass == p {
-                                    //add this member to house, remove from wr set userdefaults and call for a refresh
-                                    print("mm \(m.wrappedValue)")
-                                    print("house \(house)")
-                                    print("hid \(doc.documentID)")
-                                    print("mid switching \(m.wrappedValue.id)")
-//                                    UserDefaults.standard.set(mm.id, forKey: "myId")
-                                    
-                                    
-                                    self.db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
-                                        guard let docs = querySnapshot?.documents else {
-                                            print(err.debugDescription)
-                                            completion(false)
-                                            return
-                                        }
-                                        if !docs.contains(where: { doc in
-                                            let data = doc.data()
-                                            let name = data["name"] ?? ""
-                                            return name as! String == m.wrappedValue.name
-                                            
-                                        }) {
-                                            //
-//                                            self.db.document("houses/\(doc.documentID)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
-//                                                h.wrappedValue.id = doc.documentID
-//                                                h.wrappedValue.members.append(m.wrappedValue)
-//                                                UserDefaults.standard.set(mm.id, forKey: "myId")
-//                                                print("ISTHISIT \(doc.documentID)")
-//                                                UserDefaults.standard.set(doc.documentID, forKey: "houseId")
-//                                                inWR.wrappedValue = false
-//                                                self.db.document("waitingRoom/\(mm.id)").delete()
-//                                                self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
-//                                                self.getHouse(h: h, inWR: inWR, noProf: noProf)
-//                                                showInvite.wrappedValue = false
-//                                            }
-                                            //
-                                            tapped.wrappedValue = true
-                                            completion(true)
-                                            
-                                        } else {
-                                            print("NAM2\(m.wrappedValue.dict())")
-                                            msg.wrappedValue = "Member already exists by that name"
-                                            showAlert.wrappedValue = true
-                                            tapped.wrappedValue = false
-                                            completion(false)
-                                        }
-                                        
-                                    }
-                                    
-                                    
-                                    
-                                } else {
-                                    showAlert.wrappedValue = true
-                                    tapped.wrappedValue = false
-                                    msg.wrappedValue = "Incorrect password"
-                                    completion(false)
-                                }
-                                
+        var house = House.empty.id
+        //            let startHouse = h.wrappedValue
+        db.collection("houses").getDocuments { (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else {
+                print(err.debugDescription)
+                return
+            }
+            //                    if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
+            documents.forEach { (doc) in
+                if doc.documentID == newGroup {
+                    house = doc.documentID
+                    let d = doc.data()
+                    let p = (d["password"] ?? "") as! String
+                    
+                    if newPass == p {
+                        //add this member to house, remove from wr set userdefaults and call for a refresh
+                        print("mm \(m.wrappedValue)")
+                        print("house \(house)")
+                        print("hid \(doc.documentID)")
+                        print("mid switching \(m.wrappedValue.id)")
+                        //                                    UserDefaults.standard.set(mm.id, forKey: "myId")
+                        
+                        
+                        self.db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
+                            guard let docs = querySnapshot?.documents else {
+                                print(err.debugDescription)
+                                completion(false)
+                                return
                             }
+                            if !docs.contains(where: { doc in
+                                let data = doc.data()
+                                let name = data["name"] ?? ""
+                                return name as! String == m.wrappedValue.name
+                                
+                            }) {
+                                //
+                                //                                            self.db.document("houses/\(doc.documentID)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
+                                //                                                h.wrappedValue.id = doc.documentID
+                                //                                                h.wrappedValue.members.append(m.wrappedValue)
+                                //                                                UserDefaults.standard.set(mm.id, forKey: "myId")
+                                //                                                print("ISTHISIT \(doc.documentID)")
+                                //                                                UserDefaults.standard.set(doc.documentID, forKey: "houseId")
+                                //                                                inWR.wrappedValue = false
+                                //                                                self.db.document("waitingRoom/\(mm.id)").delete()
+                                //                                                self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+                                //                                                self.getHouse(h: h, inWR: inWR, noProf: noProf)
+                                //                                                showInvite.wrappedValue = false
+                                //                                            }
+                                //
+                                tapped.wrappedValue = true
+                                completion(true)
+                                
+                            } else {
+                                print("NAM2\(m.wrappedValue.dict())")
+                                msg.wrappedValue = "Member already exists by that name"
+                                showAlert.wrappedValue = true
+                                tapped.wrappedValue = false
+                                completion(false)
+                            }
+                            
                         }
-//                    } else {
-//                        showAlert.wrappedValue = true
-//                        tapped.wrappedValue = false
-//                        msg.wrappedValue = "Please leave your current group before opening an invite link"
-//                    }
-
-        //            if house == House.empty.id {
-        //                showAlert.wrappedValue = true
-        //                tapped.wrappedValue = false
-        //                msg.wrappedValue = "Group not found"
-        //            }
-                    tapped.wrappedValue = false
+                        
+                        
+                        
+                    } else {
+                        showAlert.wrappedValue = true
+                        tapped.wrappedValue = false
+                        msg.wrappedValue = "Incorrect password"
+                        completion(false)
+                    }
+                    
                 }
-                
+            }
+            //                    } else {
+            //                        showAlert.wrappedValue = true
+            //                        tapped.wrappedValue = false
+            //                        msg.wrappedValue = "Please leave your current group before opening an invite link"
+            //                    }
+            
+            //            if house == House.empty.id {
+            //                showAlert.wrappedValue = true
+            //                tapped.wrappedValue = false
+            //                msg.wrappedValue = "Group not found"
+            //            }
+            tapped.wrappedValue = false
+        }
+        
         
     }
     
     func switchToHouse(h: Binding<House>, m: Binding<Member>, newGroup: String, newPass: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool>) {
-            var house = House.empty.id
-//            let startHouse = h.wrappedValue
-            db.collection("houses").getDocuments { (querySnapshot, err) in
-                guard let documents = querySnapshot?.documents else {
-                    print(err.debugDescription)
-                    return
-                }
-                if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
-                    documents.forEach { (doc) in
-                        if doc.documentID == newGroup {
-                            house = doc.documentID
-                            let d = doc.data()
-                            let p = (d["password"] ?? "") as! String
+        var house = House.empty.id
+        //            let startHouse = h.wrappedValue
+        db.collection("houses").getDocuments { (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else {
+                print(err.debugDescription)
+                return
+            }
+            if h.wrappedValue.id == "waitingRoom" || h.wrappedValue.id == "" {
+                documents.forEach { (doc) in
+                    if doc.documentID == newGroup {
+                        house = doc.documentID
+                        let d = doc.data()
+                        let p = (d["password"] ?? "") as! String
+                        
+                        if newPass == p {
+                            //add this member to house, remove from wr set userdefaults and call for a refresh
+                            let mm = m.wrappedValue
+                            print("mm \(mm)")
+                            print("house \(house)")
+                            print("hid \(doc.documentID)")
+                            print("mid switching \(mm.id)")
+                            UserDefaults.standard.set(mm.id, forKey: "myId")
+                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
                             
-                            if newPass == p {
-                                //add this member to house, remove from wr set userdefaults and call for a refresh
-                                let mm = m.wrappedValue
-                                print("mm \(mm)")
-                                print("house \(house)")
-                                print("hid \(doc.documentID)")
-                                print("mid switching \(mm.id)")
-                                UserDefaults.standard.set(mm.id, forKey: "myId")
-                                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
-                                
-                                
-                                self.db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
-                                    guard let docs = querySnapshot?.documents else {
-                                        print(err.debugDescription)
-                                        return
-                                    }
-                                    if !docs.contains(where: { doc in
-                                        let data = doc.data()
-                                        let name = data["name"] ?? ""
-                                        return name as! String == m.wrappedValue.name
-                                        
-                                    }) {
-                                        //
-                                        self.db.document("houses/\(doc.documentID)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
-                                            h.wrappedValue.id = doc.documentID
-                                            h.wrappedValue.members.append(m.wrappedValue)
-                                            UserDefaults.standard.set(mm.id, forKey: "myId")
-                                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
-                                            print("ISTHISIT \(doc.documentID)")
-                                            UserDefaults.standard.set(doc.documentID, forKey: "houseId")
-                                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(doc.documentID, forKey: "houseId")
-                                            inWR.wrappedValue = false
-                                            self.db.document("waitingRoom/\(mm.id)").delete()
-                                            self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
-                                            self.getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
-                                            showInvite.wrappedValue = false
-                                        }
-                                        //
-                                        
-                                    } else {
-                                        print("NAM\(m.wrappedValue.name)")
-                                            msg.wrappedValue = "Member already exists by that name"
-                                            showAlert.wrappedValue = true
-                                            tapped.wrappedValue = false
-                                    }
+                            
+                            self.db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
+                                guard let docs = querySnapshot?.documents else {
+                                    print(err.debugDescription)
+                                    return
+                                }
+                                if !docs.contains(where: { doc in
+                                    let data = doc.data()
+                                    let name = data["name"] ?? ""
+                                    return name as! String == m.wrappedValue.name
                                     
+                                }) {
+                                    //
+                                    self.db.document("houses/\(doc.documentID)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
+                                        h.wrappedValue.id = doc.documentID
+                                        h.wrappedValue.members.append(m.wrappedValue)
+                                        UserDefaults.standard.set(mm.id, forKey: "myId")
+                                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
+                                        print("ISTHISIT \(doc.documentID)")
+                                        UserDefaults.standard.set(doc.documentID, forKey: "houseId")
+                                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(doc.documentID, forKey: "houseId")
+                                        inWR.wrappedValue = false
+                                        self.db.document("waitingRoom/\(mm.id)").delete()
+                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+                                        self.getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
+                                        showInvite.wrappedValue = false
+                                    }
+                                    //
+                                    
+                                } else {
+                                    print("NAM\(m.wrappedValue.name)")
+                                    msg.wrappedValue = "Member already exists by that name"
+                                    showAlert.wrappedValue = true
+                                    tapped.wrappedValue = false
                                 }
                                 
-                                
-                                
-                            } else {
-                                showAlert.wrappedValue = true
-                                tapped.wrappedValue = false
-                                msg.wrappedValue = "Incorrect password"
                             }
                             
+                            
+                            
+                        } else {
+                            showAlert.wrappedValue = true
+                            tapped.wrappedValue = false
+                            msg.wrappedValue = "Incorrect password"
                         }
+                        
                     }
-                } else {
-                    showAlert.wrappedValue = true
-                    tapped.wrappedValue = false
-                    msg.wrappedValue = "Please leave your current group before opening an invite link"
                 }
-
-    //            if house == House.empty.id {
-    //                showAlert.wrappedValue = true
-    //                tapped.wrappedValue = false
-    //                msg.wrappedValue = "Group not found"
-    //            }
+            } else {
+                showAlert.wrappedValue = true
                 tapped.wrappedValue = false
+                msg.wrappedValue = "Please leave your current group before opening an invite link"
             }
             
+            //            if house == House.empty.id {
+            //                showAlert.wrappedValue = true
+            //                tapped.wrappedValue = false
+            //                msg.wrappedValue = "Group not found"
+            //            }
+            tapped.wrappedValue = false
         }
+        
+    }
     
     func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false, approved: Bool = false) {
         var house = House.empty.id
@@ -724,8 +726,8 @@ class Fetch: ObservableObject {
             self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false), showInvite: showInvite)
             self.maid(m: m, h: h)
         }
-//        self.getMembers(h: h, id: newGroup)
-//        self.getPayments(h: h, id: newGroup)
+        //        self.getMembers(h: h, id: newGroup)
+        //        self.getPayments(h: h, id: newGroup)
     }
     
     func createHouse(hh: Binding<House>, m: Binding<Member>, name: String, password: String, tapped: Binding<Bool>, inWR: Binding<Bool>) {
@@ -826,13 +828,13 @@ class Fetch: ObservableObject {
                 
                 let name = data["name"] as? String ?? ""
                 let home = data["home"] as? String ?? ""
-//                let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
-//                let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
+                //                let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
+                //                let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
                 let image = data["image"] as? String ?? ""
                 let admin = data["admin"] as? Bool ?? false
-//                let showStatus = data["showStatus"] as? Bool ?? false
-//                let online = data["online"] as? Bool ?? false
-//                let lastSeen = data["lastSeen"] as? NSNumber ?? 0
+                //                let showStatus = data["showStatus"] as? Bool ?? false
+                //                let online = data["online"] as? Bool ?? false
+                //                let lastSeen = data["lastSeen"] as? NSNumber ?? 0
                 return Member(id: q.documentID, home: home, name: name, owesMe: [:], iOwe: [:], image: image, admin: admin, showStatus: false)
             })
         }
@@ -846,7 +848,7 @@ class Fetch: ObservableObject {
             }
             documents.forEach { houseq in
                 //if needed, here would be where to add delete all empty houses
-//                print("\(qds.documentID) - \(newGroup) -> \(qds.documentID == newGroup)")
+                //                print("\(qds.documentID) - \(newGroup) -> \(qds.documentID == newGroup)")
                 if houseq.documentID != (UserDefaults.standard.string(forKey: "houseId") ?? "") {
                     self.db.collection("houses/\(houseq.documentID)/members").getDocuments { documentSnapshot, err in
                         guard let doc = documentSnapshot?.documents else {
@@ -903,29 +905,29 @@ class Fetch: ObservableObject {
                             }
                         }
                     }
-                    }
                 }
-                
-                
+            }
+            
+            
         }
     }
     func checkThere(m: Binding<Member>, h: Binding<House>, completion: @escaping (Bool) -> Void) -> EmptyView {
-            db.collection("houses/\(m.wrappedValue.home)/members").getDocuments { memberListSnapshot, err in
-                guard let members = memberListSnapshot?.documents else {
-                    completion(false)
-                    return
-                }
-                var has = false
-                members.forEach { memberSnap in
-                    if m.wrappedValue.id == memberSnap.documentID {
-                        has = true
-                    }
-                }
-                completion(has)
-                
+        db.collection("houses/\(m.wrappedValue.home)/members").getDocuments { memberListSnapshot, err in
+            guard let members = memberListSnapshot?.documents else {
+                completion(false)
+                return
             }
-            return EmptyView()
+            var has = false
+            members.forEach { memberSnap in
+                if m.wrappedValue.id == memberSnap.documentID {
+                    has = true
+                }
+            }
+            completion(has)
+            
         }
+        return EmptyView()
+    }
     func removePhoto(m: Binding<Member>) {
         db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["image":""]){ _ in
             m.wrappedValue.image = ""
@@ -975,16 +977,16 @@ class Fetch: ObservableObject {
     
     //Widget funcs
     
-    func balanceWidgetMembers(myId: String, houseId: String, members: Binding<[Member]>){
+    func balanceWidgetMembers(myId: String, houseId: String){
         if myId != "" && houseId != "" && houseId != "waitingRoom" {
             db.collection("houses/\(houseId)/members").getDocuments { querySnapshot, err in
                 guard let docs = querySnapshot?.documents else {
                     return
                 }
-                    
-                members.wrappedValue = docs.map { queryDocumentSnapshot -> Member in
+                var members = [codableMember]()
+                members = docs.map { queryDocumentSnapshot -> codableMember in
                     let data = queryDocumentSnapshot.data()
-
+                    
                     let name = data["name"] as? String ?? ""
                     let home = data["home"] as? String ?? ""
                     let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
@@ -993,10 +995,14 @@ class Fetch: ObservableObject {
                     let admin = data["admin"] as? Bool ?? false
                     
                     print(name)
-
-                    return Member(id: queryDocumentSnapshot.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0)
+                    
+                    return codableMember(member: Member(id: queryDocumentSnapshot.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0))
                 }
-                print(members.wrappedValue.count)
+                let encoder = JSONEncoder()
+                if let encoded = try? encoder.encode(members) {
+                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(encoded, forKey: "members")
+                }
+                
             }
         }
     }
