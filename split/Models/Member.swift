@@ -15,7 +15,7 @@ struct Member: Identifiable, Equatable {
     var iOwe: [String : Float] = [String : Float]()
     var image: String
     var admin: Bool = false
-    var showStatus: Bool
+    var showStatus = false//: Bool
     var online: Bool = false
     var lastSeen: NSNumber = 0
     func dict() -> [String: Any] {

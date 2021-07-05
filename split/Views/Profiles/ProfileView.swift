@@ -34,39 +34,39 @@ struct ProfileView: View, KeyboardReadable {
                     HeaderText(text: "Profile")
                         .id("top")
                     Spacer()
-                    Menu {
-                        Button {
-                            if showStatus {
-                                showStatus = false
-                                Fetch().toggleShowStatus(s: false)
-                            } else {
-                                showStatus = true
-                                Fetch().toggleShowStatus(s: true)
-                            }
-                            UserDefaults.standard.setValue(showStatus, forKey: "status")
-                            UserDefaults.standard.setValue(true, forKey: "statusSet")
-                            print("STATUSSET\(UserDefaults.standard.bool(forKey: "statusSet"))")
-                        } label: {
-                            Text("Show Status")
-                            Image(systemName: showStatus ? "circlebadge.fill" : "circlebadge")
-                                .renderingMode(.original)
-                                .foregroundColor(
-                                    showStatus ? .green : .black
-                                )
-                        }
-                        
-                    } label: {
-                        Image(systemName: "ellipsis")
-                            .foregroundColor(.white)
-                            .font(Font.body.bold())
-                            .padding(18)
-                            .background(
-                                Circle()
-                                    .fill(
-                                        Color("DarkMaterial")
-                                    )
-                            )
-                    }
+//                    Menu {
+//                        Button {
+//                            if showStatus {
+//                                showStatus = false
+//                                Fetch().toggleShowStatus(s: false)
+//                            } else {
+//                                showStatus = true
+//                                Fetch().toggleShowStatus(s: true)
+//                            }
+//                            UserDefaults.standard.setValue(showStatus, forKey: "status")
+//                            UserDefaults.standard.setValue(true, forKey: "statusSet")
+//                            print("STATUSSET\(UserDefaults.standard.bool(forKey: "statusSet"))")
+//                        } label: {
+//                            Text("Show Status")
+//                            Image(systemName: showStatus ? "circlebadge.fill" : "circlebadge")
+//                                .renderingMode(.original)
+//                                .foregroundColor(
+//                                    showStatus ? .green : .black
+//                                )
+//                        }
+//                        
+//                    } label: {
+//                        Image(systemName: "ellipsis")
+//                            .foregroundColor(.white)
+//                            .font(Font.body.bold())
+//                            .padding(18)
+//                            .background(
+//                                Circle()
+//                                    .fill(
+//                                        Color("DarkMaterial")
+//                                    )
+//                            )
+//                    }
                     
                 }
                 VStack {

@@ -803,10 +803,10 @@ class Fetch: ObservableObject {
     }
     
     func updateStatus(status: Bool) {
-        let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
-        let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
-        print("Status: \(id) \(myId)")
-        db.document("houses/\(id)/members/\(myId)/").updateData(["online":status, "lastSeen":NSDate().timeIntervalSince1970])
+//        let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
+//        let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
+//        print("Status: \(id) \(myId)")
+//        db.document("houses/\(id)/members/\(myId)/").updateData(["online":status, "lastSeen":NSDate().timeIntervalSince1970])
     }
     
     func toggleShowStatus(s: Bool) {

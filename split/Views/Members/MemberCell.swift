@@ -50,28 +50,28 @@ struct MemberCell: View {
                     Color("Material")
                 )
         )
-        .overlay(
-            HStack(alignment: .center) {
-                if m.showStatus {
-                if m.online {
-                    Image(systemName: "circlebadge.fill")
-                        .foregroundColor(.green)
-                        .background(
-                            Image(systemName: "circlebadge.fill")
-                                .foregroundColor(.green)
-                                .blur(radius: 2)
-//                                .scaleEffect(1.2)
-                        )
-                } else {
-                    Image(systemName: "circlebadge")
-                        .foregroundColor(.primary)
-                }
-                Spacer()
-                }
-            }
-            .font(.caption2)
-            .padding(.leading, 4)
-        )
+//        .overlay(
+//            HStack(alignment: .center) {
+//                if m.showStatus {
+//                if m.online {
+//                    Image(systemName: "circlebadge.fill")
+//                        .foregroundColor(.green)
+//                        .background(
+//                            Image(systemName: "circlebadge.fill")
+//                                .foregroundColor(.green)
+//                                .blur(radius: 2)
+////                                .scaleEffect(1.2)
+//                        )
+//                } else {
+//                    Image(systemName: "circlebadge")
+//                        .foregroundColor(.primary)
+//                }
+//                Spacer()
+//                }
+//            }
+//            .font(.caption2)
+//            .padding(.leading, 4)
+//        )
     }
 }
 
