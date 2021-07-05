@@ -90,6 +90,7 @@ class Fetch: ObservableObject {
                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
                         UserDefaults.standard.set("", forKey: "myId")
                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
                         h.wrappedValue = .empty
                         
                         noProf.wrappedValue = true
@@ -422,6 +423,7 @@ class Fetch: ObservableObject {
             db.collection("waitingRoom").addDocument(data: ["name":m.wrappedValue.name, "image":m.wrappedValue.image]).getDocument { (documentSnapshot, err) in
                 UserDefaults.standard.set(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(documentSnapshot?.data()?["name"] ?? "wrbs", forKey: "myName")
                 myId.wrappedValue = documentSnapshot?.documentID ?? "wrbs"
                 m.wrappedValue.id = documentSnapshot?.documentID ?? "wrbs"
                 m.wrappedValue.home = "waitingRoom"
@@ -432,6 +434,7 @@ class Fetch: ObservableObject {
             db.document("waitingRoom/\(myId.wrappedValue)").updateData(["name":m.wrappedValue.name, "image":m.wrappedValue.image]){ (err) in
                 UserDefaults.standard.set(myId.wrappedValue, forKey: "myId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(myId.wrappedValue, forKey: "myId")
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
                 m.wrappedValue.id = myId.wrappedValue
                 m.wrappedValue.home = "waitingRoom"
                 h.members.wrappedValue.append(m.wrappedValue)
@@ -561,6 +564,7 @@ class Fetch: ObservableObject {
                             print("mid switching \(mm.id)")
                             UserDefaults.standard.set(mm.id, forKey: "myId")
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
+                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.name, forKey: "myName")
                             
                             
                             self.db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
@@ -580,6 +584,7 @@ class Fetch: ObservableObject {
                                         h.wrappedValue.members.append(m.wrappedValue)
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
+                                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.name, forKey: "myName")
                                         print("ISTHISIT \(doc.documentID)")
                                         UserDefaults.standard.set(doc.documentID, forKey: "houseId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(doc.documentID, forKey: "houseId")
@@ -649,11 +654,13 @@ class Fetch: ObservableObject {
                         print("mid \(h.documentID)")
                         UserDefaults.standard.set(mm.id, forKey: "myId")
                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.name, forKey: "myName")
                         
                         if mm.id == "" {
                             m.wrappedValue = .empty
                             UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.id, forKey: "myId")
+                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
                             UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.home, forKey: "houseId")
                             inWR.wrappedValue = true
@@ -677,6 +684,7 @@ class Fetch: ObservableObject {
                                         self.db.document("waitingRoom/\(mm.id)").delete()
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
+                                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.name, forKey: "myName")
                                         UserDefaults.standard.set(house, forKey: "houseId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(house, forKey: "houseId")
                                         inWR.wrappedValue = false
@@ -737,6 +745,7 @@ class Fetch: ObservableObject {
         //        db.collection("houses/\(id)/members").addDocument(data: ["admin" : true, "name" : m.wrappedValue.name, "home" : id, "image" : m.wrappedValue.id]) { (err) in
         UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.id, forKey: "myId")
+        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
         UserDefaults.standard.set(id, forKey: "houseId")
         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(id, forKey: "houseId")
         self.joinHouse(hh: hh, m: m, hId: id, password: password, showAlert: .constant(false), tapped: tapped, msg: .constant(""), inWR: inWR, forceAdmin: true)
@@ -777,6 +786,7 @@ class Fetch: ObservableObject {
                     m.wrappedValue = .empty
                     UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.id, forKey: "myId")
+                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
                     UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.home, forKey: "houseId")
                     inWR.wrappedValue = true

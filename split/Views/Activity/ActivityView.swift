@@ -207,6 +207,7 @@ func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) {//-> E
     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
     UserDefaults.standard.set("", forKey: "myId")
     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
+    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
     var q = House.empty
     q.members = [m.wrappedValue]
     h.wrappedValue = q

@@ -49,6 +49,7 @@ struct NoProfileView: View {
             .onChange(of: m.id) { (_) in
                 UserDefaults.standard.set(m.id, forKey: "myId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.id, forKey: "myId")
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.name, forKey: "myName")
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Account error"), message: Text(msg))
@@ -59,6 +60,7 @@ struct NoProfileView: View {
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
                     UserDefaults.standard.set("", forKey: "myId")
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
+                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
                     myId = ""
                 }
         }

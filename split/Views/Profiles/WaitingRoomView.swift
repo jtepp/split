@@ -125,6 +125,7 @@ struct WaitingRoomView: View {
                         if msg == "Member already exists by that name" {
                             UserDefaults.standard.set("", forKey: "myId")
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
+                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
                             UserDefaults.standard.set("", forKey: "houseId")
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
                             member = .empty

@@ -234,6 +234,7 @@ struct ProfileView: View, KeyboardReadable {
                 .onAppear{
                     UserDefaults.standard.set(m.id, forKey: "myId")
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.id, forKey: "myId")
+                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.name, forKey: "myName")
                     newName = m.name
                     //                Fetch().updateMember(m: $m)
                 }
