@@ -10,7 +10,7 @@ import WidgetKit
 
 struct MembersProvider: TimelineProvider {
     func placeholder(in context: Context) -> spllitEntry {
-        spllitEntry(myId: "placeholder", houseId: "placeholder", members: [.placeholder, .placeholder2])
+        spllitEntry(myId: "placeholder", houseId: "placeholder", members: Array(repeating: .empty, count: 9))
     }
 
     func getSnapshot(in context: Context, completion: @escaping (spllitEntry) -> ()) {

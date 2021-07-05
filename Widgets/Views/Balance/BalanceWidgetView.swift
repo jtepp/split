@@ -14,17 +14,50 @@ struct BalanceWidgetView: View {
     let cols: Int
     var body: some View {
         VStack {
-            ForEach(0..<rows){ r in
-                HStack {
-                    ForEach(0..<cols){ c in
-                        if members.count > Int(c + r * cols) {
-                            BalanceTileView(member: balWidSort(members: members, index: Int(c + r * cols)))
-                        } else {
-                            Spacer()
+            Spacer(minLength: 0)
+            VStack {
+                if members.count != 0 {
+                    ForEach(0..<rows){ r in
+                    HStack {
+                        Spacer(minLength: 0)
+                        ForEach(0..<cols){ c in
+                            if members.count > Int(c + r * cols) {
+                                BalanceTileView(member: balWidSort(members: members, index: Int(c + r * cols)))
+                            } else if members.count == 0 {
+    //                            BalanceTileView(member: balWidSort(members: [.empty], index: 0))
+                            } else {
+    //                            Rectangle()
+                            }
                         }
+                        Spacer(minLength: 0)
+                    }
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
                     }
                 }
             }
+            
+            if members.count == 0 {
+                HStack{
+                    Spacer(minLength: 0)
+                    Text("Open spllit and join a house to update this widget")
+                        .font(.footnote)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(
+                                    Color("DarkMaterial")
+                                )
+                        )
+                        .frame(maxWidth: 240)
+                    Spacer(minLength: 0)
+                }
+                
+            }
+            
+            Spacer(minLength: 0)
+
         }
         .padding(8)
         .background(Color.black.edgesIgnoringSafeArea(.all))

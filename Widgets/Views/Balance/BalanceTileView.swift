@@ -13,17 +13,20 @@ struct BalanceTileView: View {
     var body: some View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color("DarkMaterial"))
+                    .aspectRatio(1.0, contentMode: .fit)
                     .overlay(
                         VStack {
                             b64toimg(b64: member.image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
+                                .frame(width: 30, height: 30)
                                 .clipShape(RoundedRectangle(cornerRadius: 6))
                                 .background(
                                 RoundedRectangle(cornerRadius: 6)
                                     .fill(Color("Material"))
                                 )
                                 .padding(.top, 6)
+                                .padding(.bottom, -6)
                             Text(member.name)
                                 .font(Font.caption2.weight(.bold))
                                 .foregroundColor(Color("Material"))
