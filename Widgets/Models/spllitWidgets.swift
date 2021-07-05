@@ -34,6 +34,19 @@ struct BalanceWidget: Widget {
     }
 }
 
+struct ActivityWidget: Widget {
+    let kind: String = "ActivityWidget"
+
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: ActivityProvider()) { entry in
+            ActivityWidgetEntryView(entry: entry)
+        }
+        .configurationDisplayName("spllit Activity")
+        .description("See your group's recent activity")
+        .supportedFamilies([.systemMedium, .systemLarge])
+    }
+}
+
 //struct BalanceWidget_Previews: PreviewProvider {
 //    static var previews: some View {
 //        BalanceWidgetEntryView(entry: MembersEntry(date: Date(), myId: "placeholder", houseId: "placeholder"))
