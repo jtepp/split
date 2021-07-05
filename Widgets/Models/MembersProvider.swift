@@ -30,6 +30,14 @@ struct MembersProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<spllitEntry>) -> ()) {
         
+        let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? ""
+        let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? ""
+        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myHouse") ?? ""
+        
+        
+        Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId)
+        
+        
         var entryMembers = [codableMember]()
         
         if let savedMembers = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.object(forKey: "members") as? Data {
@@ -44,7 +52,7 @@ struct MembersProvider: TimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
 //        let currentDate = Date()
 
-        let timeline = Timeline(entries: entries, policy: .after(Calendar.current.date(byAdding: .second, value: 300, to: Date())!))
+        let timeline = Timeline(entries: entries, policy: .after(Calendar.current.date(byAdding: .second, value: 60, to: Date())!))
         
         completion(timeline)
     }
