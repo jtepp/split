@@ -22,13 +22,14 @@ struct ActivityWidgetView: View {
                 } else if payment.isRequest {
 //                    WidgetActivityRequestCell(payment: .constant(payment))
                 } else {
-                    WidgetActivityPaymentCell(payment: .constant(payment))
+                    ActivityWidgetPaymentCell(payment: .constant(payment))
                 }
             }
             .padding(.horizontal)
             .padding(.bottom, 10)
             Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
     }
+        .padding(.bottom, -10)
     }
 }
 
