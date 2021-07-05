@@ -55,6 +55,7 @@
 		0C6A743626928C0500275A9B /* MediumBalanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A743526928C0500275A9B /* MediumBalanceWidget.swift */; };
 		0C6A743826928C0A00275A9B /* SmallBalanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A743726928C0A00275A9B /* SmallBalanceWidget.swift */; };
 		0C6A743A26928C1E00275A9B /* LargeBalanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A743926928C1E00275A9B /* LargeBalanceWidget.swift */; };
+		0C6A743C2692922C00275A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C9570C72670E9BC00831D17 /* GoogleService-Info.plist */; };
 		0C7C87F726851F6A0040BFA7 /* AlternateIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */; };
 		0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */; };
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
@@ -718,6 +719,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C6A741526927C7500275A9B /* Assets.xcassets in Resources */,
+				0C6A743C2692922C00275A9B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
