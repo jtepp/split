@@ -58,9 +58,6 @@
 		0C6A7444269388C000275A9B /* ActivityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7443269388C000275A9B /* ActivityProvider.swift */; };
 		0C6A744826938CEB00275A9B /* ActivityWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A744626938CE800275A9B /* ActivityWidgetEntryView.swift */; };
 		0C6A744A26938D3100275A9B /* ActivityWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A744926938D3100275A9B /* ActivityWidgetView.swift */; };
-		0C6A744F2693918800275A9B /* GeneralPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */; };
-		0C6A74502693918C00275A9B /* GeneralRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */; };
-		0C6A74512693919300275A9B /* TimeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FECF265ECB87009B0C3C /* TimeBar.swift */; };
 		0C6A7455269392D300275A9B /* WidgetActivityAnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7452269392D300275A9B /* WidgetActivityAnnouncementCell.swift */; };
 		0C6A7456269392D300275A9B /* WidgetActivityRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7454269392D300275A9B /* WidgetActivityRequestCell.swift */; };
 		0C6A7457269392D300275A9B /* WidgetActivityPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A7453269392D300275A9B /* WidgetActivityPaymentCell.swift */; };
@@ -136,6 +133,9 @@
 		0CD117BE2687AD110093426F /* Soft-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CD117BC2687AD110093426F /* Soft-black.png */; };
 		0CD117C02687D7FD0093426F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CD117BF2687D7FD0093426F /* Launch Screen.storyboard */; };
 		0CD117C22687DBD40093426F /* ImageCroppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD117C12687DBD40093426F /* ImageCroppingView.swift */; };
+		0CE5F5232693985C00DAD578 /* WidgetTimeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE5F5222693985C00DAD578 /* WidgetTimeBar.swift */; };
+		0CE5F5262693994D00DAD578 /* WidgetGeneralPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE5F5242693994D00DAD578 /* WidgetGeneralPaymentCell.swift */; };
+		0CE5F5272693994D00DAD578 /* WidgetGeneralRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE5F5252693994D00DAD578 /* WidgetGeneralRequestCell.swift */; };
 		0CEE3827265E16700013BB12 /* MemberDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEE3826265E16700013BB12 /* MemberDetailsView.swift */; };
 		0CEE382E265E1CE00013BB12 /* MemberPaymentInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEE382D265E1CE00013BB12 /* MemberPaymentInfoView.swift */; };
 /* End PBXBuildFile section */
@@ -284,6 +284,9 @@
 		0CD117BC2687AD110093426F /* Soft-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Soft-black.png"; sourceTree = "<group>"; };
 		0CD117BF2687D7FD0093426F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0CD117C12687DBD40093426F /* ImageCroppingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCroppingView.swift; sourceTree = "<group>"; };
+		0CE5F5222693985C00DAD578 /* WidgetTimeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTimeBar.swift; sourceTree = "<group>"; };
+		0CE5F5242693994D00DAD578 /* WidgetGeneralPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetGeneralPaymentCell.swift; sourceTree = "<group>"; };
+		0CE5F5252693994D00DAD578 /* WidgetGeneralRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetGeneralRequestCell.swift; sourceTree = "<group>"; };
 		0CEE3826265E16700013BB12 /* MemberDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailsView.swift; sourceTree = "<group>"; };
 		0CEE382D265E1CE00013BB12 /* MemberPaymentInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPaymentInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -495,6 +498,7 @@
 			children = (
 				0C6A744626938CE800275A9B /* ActivityWidgetEntryView.swift */,
 				0C6A744926938D3100275A9B /* ActivityWidgetView.swift */,
+				0CE5F5222693985C00DAD578 /* WidgetTimeBar.swift */,
 				0C6A745B2693970300275A9B /* Cells */,
 			);
 			path = Activity;
@@ -503,6 +507,7 @@
 		0C6A745B2693970300275A9B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				0CE5F5282693995000DAD578 /* General */,
 				0C6A7453269392D300275A9B /* WidgetActivityPaymentCell.swift */,
 				0C6A7452269392D300275A9B /* WidgetActivityAnnouncementCell.swift */,
 				0C6A7454269392D300275A9B /* WidgetActivityRequestCell.swift */,
@@ -577,6 +582,15 @@
 				0CA0E9C4266038EB002876CF /* NoProfileView.swift */,
 			);
 			path = Profiles;
+			sourceTree = "<group>";
+		};
+		0CE5F5282693995000DAD578 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				0CE5F5242693994D00DAD578 /* WidgetGeneralPaymentCell.swift */,
+				0CE5F5252693994D00DAD578 /* WidgetGeneralRequestCell.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		0CEE3829265E167C0013BB12 /* Members */ = {
@@ -820,13 +834,13 @@
 			files = (
 				0C6A744826938CEB00275A9B /* ActivityWidgetEntryView.swift in Sources */,
 				0C6A742A269285FE00275A9B /* Fetch.swift in Sources */,
-				0C6A74502693918C00275A9B /* GeneralRequestCell.swift in Sources */,
-				0C6A744F2693918800275A9B /* GeneralPaymentCell.swift in Sources */,
 				0C6A741326927C7400275A9B /* spllitWidgets.swift in Sources */,
 				0C6A742D2692862D00275A9B /* UIImage+resized.swift in Sources */,
 				0C6A742126927DB500275A9B /* spllitEntry.swift in Sources */,
 				0C6A743F2692C4AC00275A9B /* BalanceTileView.swift in Sources */,
 				0C6A7433269288FE00275A9B /* MembersProvider.swift in Sources */,
+				0CE5F5262693994D00DAD578 /* WidgetGeneralPaymentCell.swift in Sources */,
+				0CE5F5272693994D00DAD578 /* WidgetGeneralRequestCell.swift in Sources */,
 				0C6A7455269392D300275A9B /* WidgetActivityAnnouncementCell.swift in Sources */,
 				0C6A7429269285BC00275A9B /* Member.swift in Sources */,
 				0C6A743826928C0A00275A9B /* BalanceWidgetView.swift in Sources */,
@@ -836,8 +850,8 @@
 				0C6A742C2692860F00275A9B /* House.swift in Sources */,
 				0C6A7456269392D300275A9B /* WidgetActivityRequestCell.swift in Sources */,
 				0C6A742B2692860B00275A9B /* Payment.swift in Sources */,
+				0CE5F5232693985C00DAD578 /* WidgetTimeBar.swift in Sources */,
 				0C6A74312692882800275A9B /* BalanceWidgetEntryView.swift in Sources */,
-				0C6A74512693919300275A9B /* TimeBar.swift in Sources */,
 				0C6A7457269392D300275A9B /* WidgetActivityPaymentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

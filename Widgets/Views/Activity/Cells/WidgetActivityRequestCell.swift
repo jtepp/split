@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct ActivityRequestCell: View {
+struct WidgetActivityRequestCell: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var payment: Payment
     @State var showMemo = false
     var body: some View {
         VStack {
-            GeneralRequestCell(payment: $payment, m: .constant(.empty))
+            WidgetGeneralRequestCell(payment: $payment, m: .constant(.empty))
             ScrollView {
                 HStack {
                     Text("Request")
@@ -53,7 +53,7 @@ struct ActivityRequestCell: View {
                     Spacer()
                 }
                 .overlay(
-                    TimeBar(unix: payment.time, white: colorScheme == .dark)
+                    WidgetTimeBar(unix: payment.time, white: colorScheme == .dark)
                         .padding(.horizontal, 4)
                         .offset(y: payment.memo == "" ? 8 : 12)
                 )
@@ -69,12 +69,12 @@ struct ActivityRequestCell: View {
     }
 }
 
-struct ActivityRequestCell_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-            ActivityRequestCell(payment: .constant(.placeholder))
-        }
-        
-    }
-}
+//struct ActivityRequestCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ZStack {
+//            Color.black.edgesIgnoringSafeArea(.all)
+//            ActivityRequestCell(payment: .constant(.placeholder))
+//        }
+//
+//    }
+//}

@@ -12,7 +12,7 @@ struct WidgetActivityPaymentCell: View {
     @Binding var payment: Payment
     @State var showMemo = false
     var body: some View {
-        GeneralPaymentCell(payment: $payment)
+        WidgetGeneralPaymentCell(payment: $payment)
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .fill(
@@ -21,7 +21,7 @@ struct WidgetActivityPaymentCell: View {
             )
             
             .overlay(
-                TimeBar(unix: payment.time, white: colorScheme == .dark)
+                WidgetTimeBar(unix: payment.time, white: colorScheme == .dark)
                     .padding(.horizontal, 4)
                     .offset(y: 16)
             )

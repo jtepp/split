@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ActivityAnnouncementCell: View {
+struct WidgetActivityAnnouncementCell: View {
     @Binding var payment: Payment
     @State var showMemo = false
     var body: some View {
@@ -34,7 +34,7 @@ struct ActivityAnnouncementCell: View {
         .overlay(
             VStack {
                 Spacer()
-                TimeBar(unix: payment.time, white: true)
+                WidgetTimeBar(unix: payment.time, white: true)
                     .padding(.horizontal,4)
             }
         )
