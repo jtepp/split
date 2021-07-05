@@ -17,13 +17,13 @@ struct BalanceWidgetEntryView : View {
     var body: some View {
             switch family {
             case .systemSmall:
-                SmallBalanceWidget(members: entry.members)
+                SmallBalanceWidget(members: Array(entry.members.prefix(4)))
             case .systemMedium:
-                MediumBalanceWidget(members: entry.members)
+                MediumBalanceWidget(members: Array(entry.members.prefix(6)))
             case .systemLarge:
-                LargeBalanceWidget(members: entry.members)
+                LargeBalanceWidget(members: Array(entry.members.prefix(9)))
             default:
-                SmallBalanceWidget(members: entry.members)
+                SmallBalanceWidget(members: Array(entry.members.prefix(4)))
             }
     
     }
