@@ -32,6 +32,7 @@ struct Member: Identifiable, Equatable {
 struct codableMember: Identifiable, Codable {
     var id: String
     var home: String
+    var name: String
     var owesMe: [String : Float] = [String : Float]()
     var iOwe: [String : Float] = [String : Float]()
     var image: String
@@ -39,6 +40,7 @@ struct codableMember: Identifiable, Codable {
     init(member: Member){
         id = member.id
         home = member.home
+        name = member.name
         owesMe = member.owesMe
         iOwe = member.iOwe
         image = member.image

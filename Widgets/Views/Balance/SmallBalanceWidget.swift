@@ -10,7 +10,11 @@ import SwiftUI
 struct SmallBalanceWidget: View {
     var members: [codableMember]
     var body: some View {
-        Text("\(members.count)")
+        VStack {
+            ForEach(members){ member in
+                Text(member.name)
+            }
+        }
     }
 }
 
