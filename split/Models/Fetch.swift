@@ -986,15 +986,15 @@ class Fetch: ObservableObject {
     
     //Widget funcs
     
-    func balanceWidgetMembers(myName: String, myId: String, houseId: String){
+    func balanceWidgetMembers(myName: String, myId: String, houseId: String, _ completion: @escaping ([codableMember])->Void ){
         if myName != "" && myId != "" && houseId != "" && houseId != "waitingRoom" {
             print("WIDGETSET")
             db.collection("houses/\(houseId)/members").getDocuments { querySnapshot, err in
                 guard let docs = querySnapshot?.documents else {
                     return
                 }
-                var members = [codableMember]()
-                members = docs.map { queryDocumentSnapshot -> codableMember in
+//                var members = [codableMember]()
+                completion(docs.map { queryDocumentSnapshot -> codableMember in
                     let data = queryDocumentSnapshot.data()
                     
                     let name = data["name"] as? String ?? ""
@@ -1010,11 +1010,11 @@ class Fetch: ObservableObject {
                 }
                 .filter{ member in
                     return member.id != myId
-                }
-                let encoder = JSONEncoder()
-                if let encoded = try? encoder.encode(members) {
-                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(encoded, forKey: "members")
-                }
+                })
+//                let encoder = JSONEncoder()
+//                if let encoded = try? encoder.encode(members) {
+//                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(encoded, forKey: "members")
+//                }
                 
             }
         } else {
