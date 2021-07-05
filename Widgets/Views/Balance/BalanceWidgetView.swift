@@ -26,7 +26,7 @@ struct BalanceWidgetView: View {
                                 BalanceTileView(member: balWidSort(members: members, index: Int(c + r * cols)))
                                   .frame(width:62, height:62)
 //                                Spacer(minLength: 0)
-                            } else if r >= ceiling(mc: members.count, cols: cols)  {
+                            } else   {
                                 Rectangle()
                                     .frame(width:62, height:62)
                             }
