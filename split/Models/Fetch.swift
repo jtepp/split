@@ -671,7 +671,7 @@ class Fetch: ObservableObject {
                                     
                                 }) || forceAdmin {
                                     //
-                                    self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "online": true, "showStatus": (UserDefaults.standard.bool(forKey: "statusSet")) ? mm.showStatus : true]) { _ in
+                                    self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "online": true, "showStatus": (UserDefaults.standard.bool(forKey: "statusSet")) ? UserDefaults.standard.bool(forKey: "showStatus") : true]) { _ in
                                         self.getHouse(h: hh, m: m, inWR: inWR, noProf: .constant(false))
                                         self.db.document("waitingRoom/\(mm.id)").delete()
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
@@ -975,7 +975,7 @@ class Fetch: ObservableObject {
     
     //Widget funcs
     
-    func updateBalanceWidget(members: Binding<[Member]>, myId: String, houseId: String){
+    func balanceWidgetMembers(members: Binding<[Member]>, myId: String, houseId: String){
         if myId != "" && houseId != "" && houseId != "waitingRoom" {
             db.collection("houses/\(houseId)/members").addSnapshotListener { querySnapshot, err in
                 guard let docs = querySnapshot?.documents else {

@@ -14,15 +14,20 @@ struct BalanceWidgetEntryView : View {
 
     @Environment(\.widgetFamily) var family
     var body: some View {
-        switch family {
-        case .systemSmall:
-            SmallBalanceWidget(members: $members)
-        case .systemMedium:
-            MediumBalanceWidget(members: $members)
-        case .systemLarge:
-            LargeBalanceWidget(members: $members)
-        default:
-            SmallBalanceWidget(members: $members)
+        Group {
+            switch family {
+            case .systemSmall:
+                SmallBalanceWidget(members: $members)
+            case .systemMedium:
+                MediumBalanceWidget(members: $members)
+            case .systemLarge:
+                LargeBalanceWidget(members: $members)
+            default:
+                SmallBalanceWidget(members: $members)
+            }
+        }
+        .onAppear{
+            Fetch().balanceWidgetMembers(members: $members, myId: entry.myId, houseId: entry.houseId)
         }
     }
 }
