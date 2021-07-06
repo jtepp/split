@@ -15,17 +15,17 @@ struct ActivityWidgetAnnouncementCell: View {
             HStack {
                 Spacer()
                 Text(payment.from)
-                    .font(Font.callout.weight(.heavy))
+                    .font(Font.system(size: 14).weight(.heavy))
                     .padding(.trailing, -4)
                 Text(payment.memo)
-                    .font(Font.callout)
+                    .font(Font.system(size: 14))
                 Spacer()
             }
         }
         .foregroundColor(.white)
         .padding(.vertical, 2)
         .padding(.top, 4)
-        .padding(.bottom, 8)
+        .padding(.bottom, 10)
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(
