@@ -40,7 +40,7 @@ struct BalanceWidgetView: View {
             if members.count == 0 {
                 HStack{
                     Spacer(minLength: 0)
-                    Text("Open spllit and join a house to update this widget")
+                    Text("Open spllit and join a group to update this widget")
                         .font(.footnote)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
