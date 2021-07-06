@@ -11,7 +11,7 @@ import WidgetKit
 struct BalanceTileView: View {
     var member: codableMember
     var body: some View {
-        Link(destination: URL(string: "spllit://")!){
+        Link(destination: URL(string: "widgetlink")!){
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color("DarkMaterial"))
                 .aspectRatio(1.0, contentMode: .fit)
