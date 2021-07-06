@@ -53,7 +53,7 @@ struct BalanceTileView: View {
         let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
         let num = (member.iOwe[myName] ?? 0) - (member.owesMe[myName] ?? 0)
         let str = String(format: "$%.2f", abs(num))
-        var col: Color = Color("Material")
+        var col: Color = .white
         var img = ""
         if num > 0 {
             col = .green
