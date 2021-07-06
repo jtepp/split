@@ -14,6 +14,26 @@ struct ActivityWidgetView: View {
     var body: some View {
         VStack {
             Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
+            if payments.count == 0 {
+                
+                HStack{
+                    Spacer(minLength: 0)
+                    Text("No payments have been posted yet")
+                        .font(.footnote)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(
+                                    Color("DarkMaterial")
+                                )
+                        )
+                        .frame(maxWidth: 240)
+                    Spacer(minLength: 0)
+                }
+                
+            }
             ForEach(payments.sorted(by: { a, b in
                 return a.time > b.time
             }).prefix(
@@ -34,7 +54,9 @@ struct ActivityWidgetView: View {
             .padding(.horizontal)
             .padding(.bottom, 4)
             Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
-    }
+            
+
+        }
 //        .padding(.bottom, -6)
     }
 }

@@ -40,7 +40,7 @@ struct ActivityView: View {
             } {
                 VStack {
                     Spacer()
-                    Text("No payments have been sent or requested yet")
+                    Text("No payments have been posted yet")
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                         .padding()
