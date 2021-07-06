@@ -22,7 +22,7 @@ struct SplashView: View {
                     VStack {
                         Spacer()
                         HStack {
-                            Text("v2.1.0")
+                            Text("v2.2.0")
                                 .foregroundColor(.white)
                                 .font(Font.subheadline.bold())
     //                            .padding()
@@ -109,7 +109,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "2.1.0")
+            UserDefaults.standard.setValue(true, forKey: "2.2.0")
         }
         .sheet(isPresented: $isShowingMailView) {
                     MailView(result: self.$result)
