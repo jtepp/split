@@ -28,6 +28,9 @@ class Fetch: ObservableObject {
                 inWR.wrappedValue = false
                 noProf.wrappedValue = false
                 
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(id, forKey: "houseId")
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(myId, forKey: "myId")
+                
                 
                 db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
                     if (querySnapshot?.exists ?? false) {

@@ -17,7 +17,7 @@ struct MembersProvider: TimelineProvider {
         
         let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
         let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "0"
-        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "0"
+        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "memsnap"
         
 //        var entryMembers = [codableMember]()
         
@@ -42,7 +42,7 @@ struct MembersProvider: TimelineProvider {
         
         let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
         let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "0"
-        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "0"
+        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "memtime"
 
 
         Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId){ loadedMembers in

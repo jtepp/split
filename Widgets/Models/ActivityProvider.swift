@@ -15,7 +15,7 @@ struct ActivityProvider: TimelineProvider {
 
     func getSnapshot(in context: Context, completion: @escaping (spllitEntry) -> ()) {
         let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "0"
-        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "0"
+        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "actsnap"
         
 //        var entryMembers = [codableMember]()
         
@@ -39,7 +39,7 @@ struct ActivityProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<spllitEntry>) -> ()) {
         
         let myId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myId") ?? "0"
-        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "0"
+        let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "acttime"
 
 
         Fetch().activityWidgetPayments(houseId: houseId) { loadedPayments in
