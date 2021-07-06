@@ -10,7 +10,7 @@ import WidgetKit
 
 struct MembersProvider: TimelineProvider {
     func placeholder(in context: Context) -> spllitEntry {
-        spllitEntry(myId: "placeholder", houseId: "placeholder", members: Array(repeating: .empty, count: 9))
+        spllitEntry(myId: "placeholder", houseId: "placeholder", members: Array(repeating: .empty, count: 9), payments: Array(repeating: .empty, count: 9))
     }
 
     func getSnapshot(in context: Context, completion: @escaping (spllitEntry) -> ()) {
@@ -30,7 +30,7 @@ struct MembersProvider: TimelineProvider {
         
         Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId){ loadedMembers in
             print("LM \(loadedMembers.count)")
-            let entry = spllitEntry(myId: myId, houseId: houseId, members: loadedMembers)
+            let entry = spllitEntry(myId: myId, houseId: houseId, members: loadedMembers, payments: [.empty])
             completion(entry)
             
         }
@@ -47,7 +47,7 @@ struct MembersProvider: TimelineProvider {
 
         Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId){ loadedMembers in
             print("LM \(loadedMembers.count)")
-            let entry = spllitEntry(myId: myId, houseId: houseId, members: loadedMembers)
+            let entry = spllitEntry(myId: myId, houseId: houseId, members: loadedMembers, payments: [.empty])
             let curD = Date()
             let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .second, value: 10, to: curD)!))
             

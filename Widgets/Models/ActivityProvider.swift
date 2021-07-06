@@ -10,7 +10,7 @@ import WidgetKit
 
 struct ActivityProvider: TimelineProvider {
     func placeholder(in context: Context) -> spllitEntry {
-        spllitEntry(myId: "placeholder", houseId: "placeholder", payments: Array(repeating: .empty, count: 9))
+        spllitEntry(myId: "placeholder", houseId: "placeholder", members: Array(repeating: .empty, count: 9), payments: Array(repeating: .empty, count: 9))
     }
 
     func getSnapshot(in context: Context, completion: @escaping (spllitEntry) -> ()) {
@@ -28,7 +28,7 @@ struct ActivityProvider: TimelineProvider {
         
         Fetch().activityWidgetPayments(houseId: houseId) { loadedPayments in
             print("Lp \(loadedPayments.count)")
-            let entry = spllitEntry(myId: myId, houseId: houseId, payments: loadedPayments)
+            let entry = spllitEntry(myId: myId, houseId: houseId, members: [.empty], payments: loadedPayments)
             completion(entry)
         }
         
@@ -44,7 +44,7 @@ struct ActivityProvider: TimelineProvider {
 
         Fetch().activityWidgetPayments(houseId: houseId) { loadedPayments in
             print("Lp \(loadedPayments.count)")
-            let entry = spllitEntry(myId: myId, houseId: houseId, payments: loadedPayments)
+            let entry = spllitEntry(myId: myId, houseId: houseId, members: [.empty], payments: loadedPayments)
             let curD = Date()
             let timeline = Timeline(entries: [entry], policy: .after(Calendar.current.date(byAdding: .second, value: 10, to: curD)!))
             
