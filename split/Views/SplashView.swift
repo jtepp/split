@@ -65,8 +65,9 @@ struct SplashView: View {
                     showCore.toggle()
             }
             
-            SplashDetailsView(title: "Picture tools", text: "Easily crop, rotate, and resize your profile pictures", image: "crop.rotate", color: .purple)
-                SplashDetailsView(title: "More app icons", text: "Check out all the new alternate icon collections below the profile page", image: "square.on.square.fill", color: .blue)
+                SplashDetailsView(title: "New Widgets", text: "Check your balances or recent activity on your Home Screen with the new spllit widgets", image: "rectangle.3.offgrid.fill", color: .blue)
+                SplashDetailsView(title: "More shortcuts", text: "Long press on a member on the members page to quickly start a payment or request", image: "arrowshape.turn.up.right.fill", color: .green)
+                SplashDetailsView(title: "Status removed", text: "You may not have noticed it was there, but the status feature has now been removed", image: "circlebadge", color: .gray)
 
             }
             Spacer()
