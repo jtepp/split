@@ -26,8 +26,7 @@ struct BalanceWidgetView: View {
                                 BalanceTileView(member: balWidSort(members: members, index: Int(c + r * cols)))
                                   .frame(width:62, height:62)
                             } else {
-                                Rectangle()
-                                    .frame(width:62, height:62)
+                                AnyView(Rectangle().fill(Color.black)).stupidFrame()
                             }
                         }
                         Spacer(minLength: 0)
@@ -98,4 +97,10 @@ func balWidSort(members: [codableMember], index: Int) -> codableMember {
 func ceiling(mc: Int, cols: Int) -> Int {
 //    return Int((mc/cols))
     return Int(ceil(Double(mc/cols)))
+}
+
+extension AnyView {
+    func stupidFrame() -> AnyView {
+        return AnyView(self.frame(width:62, height:62))
+    }
 }

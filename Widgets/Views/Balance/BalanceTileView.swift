@@ -30,7 +30,7 @@ struct BalanceTileView: View {
                             .padding(.bottom, -6)
                         Text(member.name)
                             .font(.system(size: 8).weight(.bold))
-                            .foregroundColor(Color("Material"))
+                            .foregroundColor(.white)
                         balWidCalc(member:member)
                             .font(.system(size: 8).weight(.bold))
                             .padding(.horizontal, 10)
