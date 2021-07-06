@@ -145,7 +145,7 @@ struct MembersView: View {
                         .padding(.horizontal)
                         .padding(.top, 10)
                         .contextMenu(menuItems: {
-                            if tappedMember.id != UserDefaults.standard.string(forKey: "myId")  {
+                            if member.id != UserDefaults.standard.string(forKey: "myId")  {
                                 Button {
                                     payType = 0
                                     tabSelection = 2
@@ -170,7 +170,7 @@ struct MembersView: View {
                             //                                Fetch().getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
                             tappedMember = member
                             print(tappedMember)
-                            if tappedMember.id == UserDefaults.standard.string(forKey: "myId")  {
+                            if member.id == UserDefaults.standard.string(forKey: "myId")  {
                                 tabSelection = 3
                             } else {
                                 showDetails = true
