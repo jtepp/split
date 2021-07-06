@@ -30,6 +30,9 @@ class Fetch: ObservableObject {
                 
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(id, forKey: "houseId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(myId, forKey: "myId")
+                if m.wrappedValue.name != "" {
+                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
+                }
                 
                 
                 db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
@@ -63,6 +66,7 @@ class Fetch: ObservableObject {
                             m.wrappedValue = h.wrappedValue.members.first(where: { (m) -> Bool in
                                 return m.id == UserDefaults.standard.string(forKey: "myId")
                             })!
+                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
                             print("setdead222\(m.wrappedValue.id)")
                         }
                         
