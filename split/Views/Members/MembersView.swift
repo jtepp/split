@@ -142,13 +142,23 @@ struct MembersView: View {
                         .padding(.horizontal)
                         .padding(.top, 10)
                         .contextMenu(menuItems: {
-                            Button {
-                                tabSelection = 2
-                                pchoice = [member]
-                            }
-                            label: {
-                                Text("Send payment")
-                                Image(systemName: "arrow.right.circle")
+                            if tappedMember.id != UserDefaults.standard.string(forKey: "myId")  {
+                                Button {
+                                    tabSelection = 2
+                                    pchoice = [member]
+                                }
+                                label: {
+                                    Text("Send payment")
+                                    Image(systemName: "arrow.right.circle")
+                                }
+                                Button {
+                                    tabSelection = 2
+                                    rchoice = [member]
+                                }
+                                label: {
+                                    Text("Send request")
+                                    Image(systemName: "arrow.left.circle")
+                                }
                             }
                         })
                         .onTapGesture {
