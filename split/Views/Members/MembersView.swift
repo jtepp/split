@@ -12,6 +12,7 @@ struct MembersView: View {
     @Binding var house: House
     @State var showDetails = false
     @State var tappedMember = Member.empty
+    @Binding var payType: Int
     @Binding var tabSelection: Int
     @State var showRemove = false
     @State var showAlert = false
@@ -94,6 +95,7 @@ struct MembersView: View {
                         .padding(.top, 10)
                         .contextMenu(menuItems: {
                             Button {
+                                payType = 0
                                 tabSelection = 2
                                 pchoice = [member]
                             }
@@ -102,6 +104,7 @@ struct MembersView: View {
                                 Image(systemName: "arrow.right.circle")
                             }
                             Button {
+                                payType = 1
                                 tabSelection = 2
                                 rchoice = [member]
                             }
@@ -144,6 +147,7 @@ struct MembersView: View {
                         .contextMenu(menuItems: {
                             if tappedMember.id != UserDefaults.standard.string(forKey: "myId")  {
                                 Button {
+                                    payType = 0
                                     tabSelection = 2
                                     pchoice = [member]
                                 }
@@ -152,6 +156,7 @@ struct MembersView: View {
                                     Image(systemName: "arrow.right.circle")
                                 }
                                 Button {
+                                    payType = 1
                                     tabSelection = 2
                                     rchoice = [member]
                                 }
@@ -200,7 +205,7 @@ struct MembersView: View {
 
 struct MembersView_Previews: PreviewProvider {
     static var previews: some View {
-        MembersView(house: .constant(House.placeholder), tabSelection: .constant(0), pchoice: .constant([.empty]), rchoice: .constant([.empty]))
+        MembersView(house: .constant(House.placeholder), payType: .constant(0), tabSelection: .constant(0), pchoice: .constant([.empty]), rchoice: .constant([.empty]))
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

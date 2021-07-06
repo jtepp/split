@@ -21,6 +21,7 @@ struct TabsView: View {
     @State var newGroup = ""
     @State var newPass = ""
     @State var newMemberName = ""
+    @State var payType = 0
     @Binding var engaged: Bool
     @Binding var watch: Int
     @State var pchoice = [Member]()
@@ -30,9 +31,9 @@ struct TabsView: View {
                 content:  {
                     ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member)
                         .tag(0)
-                    MembersView(house: $house, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)
+                    MembersView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)
                         .tag(1)
-                    PaymentView(house: $house, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)
+                    PaymentView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)
                         .tag(2)
                     ProfileView(house: $house, m: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId

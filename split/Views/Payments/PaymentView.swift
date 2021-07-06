@@ -10,14 +10,14 @@ import SwiftUI
 struct PaymentView: View {
     @Environment(\.scenePhase) var scenePhase
     @Binding var house: House
-    @State var typeSelection = 0
+    @Binding var payType: Int
     @Binding var tabSelection: Int
     @Binding var pchoice: [Member]
     @Binding var rchoice: [Member]
     var body: some View {
         ScrollView {
-            HeaderText(text: typeSelection == 1 ? "Request" : "Payment")
-            Picker(selection: $typeSelection, label: Text("Picker"), content: {
+            HeaderText(text: payType == 1 ? "Request" : "Payment")
+            Picker(selection: $payType, label: Text("Picker"), content: {
                 Text("Payment").tag(0)
                 Text("Request").tag(1)
             })
@@ -33,14 +33,14 @@ struct PaymentView: View {
                 if UIApplication.shared.isKeyboardPresented {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }
-                if typeSelection == 0 {
-                    typeSelection = 1
+                if payType == 0 {
+                    payType = 1
                 } else {
-                    typeSelection = 0
+                    payType = 0
                 }
             }
             
-            if typeSelection == 0 {
+            if payType == 0 {
                 PaymentPaymentView(house: $house, choice: $pchoice, tabSelection: $tabSelection)
             } else {
                 RequestPaymentView(house: $house, choice: $rchoice, tabSelection: $tabSelection)
@@ -61,9 +61,9 @@ struct PaymentView: View {
                 }
                 switch name {
                 case "Send payment":
-                    typeSelection = 0
+                    payType = 0
                 case "Send request":
-                    typeSelection = 1
+                    payType = 1
                 default:
                     tabSelection = 0
                 }
@@ -78,7 +78,7 @@ struct PaymentView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0), pchoice: .constant([.empty]), rchoice: .constant([.empty]))
+            PaymentView(house: .constant(.placeholder), payType: .constant(0), tabSelection: .constant(0), pchoice: .constant([.empty]), rchoice: .constant([.empty]))
         }
     }
 }
