@@ -11,7 +11,7 @@ struct PaymentPaymentView: View {
     
     @Binding var house: House
     @State var showPicker = false
-    @State var choice: [Member] = [Member]()
+    @Binding var choice: [Member]
     @State var amountText = String()
     @State var memoText = String()
     @Binding var tabSelection: Int
@@ -102,14 +102,14 @@ struct InputField: View {
 }
 
 
-struct PaymentPaymentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
-        }
-    }
-}
+//struct PaymentPaymentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ZStack {
+//            Color.black.edgesIgnoringSafeArea(.all)
+//            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
+//        }
+//    }
+//}
 
 func validateFloatString(str: Binding<String>) -> Bool {
     return Float(String(format: "%.2f", Float(str.wrappedValue) ?? 0.00))! == 0.00

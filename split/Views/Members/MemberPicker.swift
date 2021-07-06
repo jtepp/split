@@ -141,11 +141,11 @@ struct imgButton: View {
     }
 }
 
-struct MemberPicker_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
-        }
-    }
-}
+//struct MemberPicker_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ZStack {
+//            Color.black.edgesIgnoringSafeArea(.all)
+//            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
+//        }
+//    }
+//}

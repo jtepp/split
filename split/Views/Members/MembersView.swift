@@ -15,6 +15,8 @@ struct MembersView: View {
     @Binding var tabSelection: Int
     @State var showRemove = false
     @State var showAlert = false
+    @Binding var pchoice: [Member]
+    @Binding var rchoice: [Member]
     var body: some View {
         ScrollView {
             HStack {
@@ -162,7 +164,7 @@ struct MembersView: View {
 
 struct MembersView_Previews: PreviewProvider {
     static var previews: some View {
-        MembersView(house: .constant(House.placeholder), tabSelection: .constant(0))
+        MembersView(house: .constant(House.placeholder), tabSelection: .constant(0), pchoice: .constant([.empty]), rchoice: .constant([.empty]))
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

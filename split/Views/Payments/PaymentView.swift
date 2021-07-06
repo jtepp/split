@@ -12,6 +12,8 @@ struct PaymentView: View {
     @Binding var house: House
     @State var typeSelection = 0
     @Binding var tabSelection: Int
+    @Binding var pchoice: [Member]
+    @Binding var rchoice: [Member]
     var body: some View {
         ScrollView {
             HeaderText(text: typeSelection == 1 ? "Request" : "Payment")
@@ -39,9 +41,9 @@ struct PaymentView: View {
             }
             
             if typeSelection == 0 {
-                PaymentPaymentView(house: $house, tabSelection: $tabSelection)
+                PaymentPaymentView(house: $house, choice: $pchoice, tabSelection: $tabSelection)
             } else {
-                RequestPaymentView(house: $house, tabSelection: $tabSelection)
+                RequestPaymentView(house: $house, choice: $rchoice, tabSelection: $tabSelection)
             }
             Rectangle()
                 .fill(Color.black)
@@ -76,7 +78,7 @@ struct PaymentView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
+            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0), pchoice: .constant([.empty]), rchoice: .constant([.empty]))
         }
     }
 }

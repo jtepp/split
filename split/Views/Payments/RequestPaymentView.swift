@@ -10,7 +10,7 @@ import SwiftUI
 struct RequestPaymentView: View {
     @Binding var house: House
     @State var showPicker = false
-    @State var choice: [Member] = [Member]()
+    @Binding var choice: [Member]
     @State var amountText = String()
     @State var memoText = String()
     @Binding var tabSelection: Int
@@ -111,11 +111,11 @@ struct RequestPaymentView: View {
     }
 }
 
-struct RequestPaymentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
-        }
-    }
-}
+//struct RequestPaymentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ZStack {
+//            Color.black.edgesIgnoringSafeArea(.all)
+//            PaymentView(house: .constant(.placeholder), tabSelection: .constant(0))
+//        }
+//    }
+//}
