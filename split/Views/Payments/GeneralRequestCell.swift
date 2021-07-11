@@ -66,7 +66,7 @@ struct GeneralRequestCell: View {
                 }
             }
             .onTapGesture {
-                if !minimal {
+                if !minimal && payment.reqfrom.count > 1 {
                     showEach.toggle()
                 }
         }

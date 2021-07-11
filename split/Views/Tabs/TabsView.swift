@@ -27,6 +27,7 @@ struct TabsView: View {
     @State var pchoice = [Member]()
     @State var rchoice = [Member]()
     @State var FMBopen = false
+    @State var showMessagePopover = false
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
@@ -48,6 +49,7 @@ struct TabsView: View {
                                 Spacer()
                                 FloatingMenuButton(open: $FMBopen, actions: [Action(image: "plus.bubble", label: "New message") {
                                     //new message popup
+                                    showMessagePopover = true
                                 },
                                 Action(image: "arrow.right.circle", label: "New payment") {
                                     payType = 0
@@ -61,6 +63,9 @@ struct TabsView: View {
                             }
                         }
                     }
+                    .popover(isPresented: $showMessagePopover, content: {
+                        Text("MESSAGE")
+                    })
                     .tag(0)
                     MembersView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)
                         .tag(1)
