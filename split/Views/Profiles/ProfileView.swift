@@ -274,15 +274,15 @@ struct ProfileView: View, KeyboardReadable {
                             AlternateIconRow(title: "Default", names: ["Default", "Default-inverse"], choice: $alternateIcon)
                             
                             AlternateIconRow(title: "Name", names: ["Name", "Name-inverse"], choice: $alternateIcon)
-                            
+
                             AlternateIconRow(title: "Depth", names: ["Depth", "Depth-inverse"], choice: $alternateIcon)
-                            
+
                             AlternateIconRow(title: "Shadow", names: ["Shadow-black", "Shadow-white"], choice: $alternateIcon)
-                            
+
                             AlternateIconRow(title: "Soft", names: ["Soft-black", "Soft-white"], choice: $alternateIcon)
-                            
+
                             AlternateIconRow(title: "Neon", names: ["Neon-pink", "Neon-blue", "Neon-green"], choice: $alternateIcon)
-                            
+
                             AlternateIconRow(title: "Rainbow", names: ["Rainbow", "Rainbow-vertical", "Rainbow-angle"], choice: $alternateIcon)
                             
                             
