@@ -42,6 +42,7 @@ struct ActivityMessageCell: View {
                             .padding(.horizontal)
                             .padding(.bottom, 10)
                             .multilineTextAlignment(.leading)
+                            .foregroundColor(payment.by == (UserDefaults.standard.string(forKey: "myId") ?? "") ? .white : .black)
                         if payment.by != (UserDefaults.standard.string(forKey: "myId") ?? "") {
                             Spacer(minLength: 0)
                         }
@@ -54,7 +55,7 @@ struct ActivityMessageCell: View {
                 .background(
                     CustomRoundedRect(corners: [.topLeft, .topRight, payment.by == (UserDefaults.standard.string(forKey: "myId") ?? "") ? .bottomLeft : .bottomRight],radius: 10)
                         .fill(
-                            Color.blue
+                            Color(payment.by == (UserDefaults.standard.string(forKey: "myId") ?? "") ? "MessageBlue" : "MessageWhite")
                         )
                 )
                 .overlay(
