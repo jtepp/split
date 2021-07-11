@@ -49,7 +49,7 @@ struct ActivityPaymentCell: View {
                         Image(systemName:  "chevron.down")
                             .rotationEffect(.degrees(showMemo ? 180 : 0))
                             .padding()
-                            .foregroundColor(Color("DarkMaterial"))
+                            .foregroundColor(.black)
                             .opacity(0.6)
                     }
                         
