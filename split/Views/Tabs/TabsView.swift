@@ -30,6 +30,11 @@ struct TabsView: View {
         TabView(selection: $tabSelection,
                 content:  {
                     ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member)
+                        .overlay(
+                            FloatingButton()
+                                .offset(x: -20, y: -100)
+                            , alignment: .bottomTrailing
+                        )
                         .tag(0)
                     MembersView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)
                         .tag(1)
