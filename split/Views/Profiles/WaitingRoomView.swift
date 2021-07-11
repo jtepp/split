@@ -121,7 +121,14 @@ struct WaitingRoomView: View {
             
             Spacer()
             Button{
-                print("\(UserDefaults.standard.string(forKey: "houseId"))   \(UserDefaults.standard.string(forKey: "myId"))")
+                Fetch().removeFromWr(id: UserDefaults.standard.string(forKey: "myId")!)
+                UserDefaults.standard.set("", forKey: "houseId")
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
+                UserDefaults.standard.set("", forKey: "myId")
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
+                member = .empty
+                noProf = true
             } label: {
                 Text("Reset Account")
                     .foregroundColor(.white)

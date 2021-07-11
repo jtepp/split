@@ -52,7 +52,9 @@ struct TabsView: View {
                 if inWR {
                     member = .empty
                 }
-                noProf = member.id == ""
+                if UserDefaults.standard.string(forKey: "houseId") != "waitingRoom" {
+                    noProf = member.id == ""
+                }
             })
             .onOpenURL{ url in
                             let arr = url.absoluteString.components(separatedBy: "//")

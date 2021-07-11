@@ -56,12 +56,24 @@ struct NoProfileView: View {
             }
             Spacer(minLength: 80)
                 .onAppear(){
-                    UserDefaults.standard.set("", forKey: "houseId")
-                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
-                    UserDefaults.standard.set("", forKey: "myId")
-                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
-                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
-                    myId = ""
+                    if UserDefaults.standard.string(forKey: "houseId") != "waitingRoom" {
+                        UserDefaults.standard.set("", forKey: "houseId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
+                        UserDefaults.standard.set("", forKey: "myId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
+                        myId = ""
+                    } else {
+                        let md = UserDefaults.standard.string(forKey: "myId")
+                        let hd = UserDefaults.standard.string(forKey: "houseId")
+                        UserDefaults.standard.set(hd, forKey: "houseId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(hd, forKey: "houseId")
+                        UserDefaults.standard.set(md, forKey: "myId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(md, forKey: "myId")
+                        myId = md!
+                        show = false
+                        Fetch().bindingMemberFromIdsWR(id: myId, bm: $m)
+                    }
                 }
         }
         

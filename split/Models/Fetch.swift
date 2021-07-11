@@ -76,6 +76,7 @@ class Fetch: ObservableObject {
                             return m.id == UserDefaults.standard.string(forKey: "myId")
                         }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
                             //if ur an alien, go to void, otherwise get waitingRoomed
+//                            if UserDefaults.standard.string(forKey: "houseId") != "waitingRoom" {
                             if myId == "" {
                                 print("gotovoid")
                                 UserDefaults.standard.set("", forKey: "houseId")
@@ -89,6 +90,7 @@ class Fetch: ObservableObject {
                                 noProf.wrappedValue = false
                             }
                             inWR.wrappedValue = true
+//                        }
                         }
                         
                     } else {
@@ -435,7 +437,8 @@ class Fetch: ObservableObject {
                 m.wrappedValue.id = documentSnapshot?.documentID ?? "wrbs"
                 m.wrappedValue.home = "waitingRoom"
                 h.members.wrappedValue.append(m.wrappedValue)
-                
+                UserDefaults.standard.setValue(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
+                UserDefaults.standard.setValue("waitingRoom", forKey: "houseId")
             }
         } else {
             db.document("waitingRoom/\(myId.wrappedValue)").updateData(["name":m.wrappedValue.name, "image":m.wrappedValue.image]){ (err) in
@@ -445,6 +448,8 @@ class Fetch: ObservableObject {
                 m.wrappedValue.id = myId.wrappedValue
                 m.wrappedValue.home = "waitingRoom"
                 h.members.wrappedValue.append(m.wrappedValue)
+                UserDefaults.standard.setValue(myId.wrappedValue, forKey: "myId")
+                UserDefaults.standard.setValue("waitingRoom", forKey: "houseId")
                 
             }
         }
@@ -1060,6 +1065,29 @@ class Fetch: ObservableObject {
         }
     }
     
+    func removeFromWr(id: String){
+        if id != "" {
+        db.document("waitingRoom/\(id)").delete()
+        } else {
+            print("removed empty id from wr")
+        }
+    }
+    
+    func bindingMemberFromIdsWR(id: String, bm:Binding<Member>) {
+        db.document("waitingRoom/\(id)").getDocument { ds, error in
+            guard let data = ds?.data() else {
+                print(error)
+                return
+            }
+            let name = data["name"] as? String ?? ""
+            let home = data["home"] as? String ?? ""
+            let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
+            let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
+            let image = data["image"] as? String ?? ""
+            let admin = data["admin"] as? Bool ?? false
+            bm.wrappedValue = Member(id: id, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0)
+        }
+    }
     
 }
 

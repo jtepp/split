@@ -170,7 +170,9 @@ struct ActivityView: View {
                         if has {
                             getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                         } else {
-                            wrStuff(inWR: $inWR, h: $house, m: $m)
+                            if UserDefaults.standard.string(forKey: "houseId") != "waitingRoom" {
+                                wrStuff(inWR: $inWR, h: $house, m: $m)
+                            }
                         }
                     }
                 }
