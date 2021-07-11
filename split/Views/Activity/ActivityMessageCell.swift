@@ -39,6 +39,7 @@ struct ActivityMessageCell: View {
                             Spacer(minLength: 0)
                         }
                         Text(payment.memo)
+                            .lineLimit(10)
                             .padding(.horizontal)
                             .padding(.bottom, 10)
                             .multilineTextAlignment(.leading)
@@ -48,7 +49,6 @@ struct ActivityMessageCell: View {
                         }
                     }
                 }
-                .foregroundColor(.white)
                 .padding(.vertical, 2)
                 .padding(.top, 6)
                 .padding(.bottom, 10)
@@ -61,7 +61,7 @@ struct ActivityMessageCell: View {
                 .overlay(
                     VStack {
                         Spacer()
-                        TimeBar(unix: payment.time, white: true)
+                        TimeBar(unix: payment.time, white: payment.by == (UserDefaults.standard.string(forKey: "myId") ?? ""))
                             .padding(.horizontal,4)
                     }
             )
