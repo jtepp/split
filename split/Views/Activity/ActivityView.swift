@@ -80,11 +80,14 @@ struct ActivityView: View {
                                     }
                                     )
                                 })
-                                .padding(.bottom, -20)
+                                
                         } else {
                             ActivityAnnouncementCell(payment: .constant(payment))
-                                .padding(.bottom, -20)
+                                
                         }
+                    } else if payment.isGM {
+                        ActivityMessageCell(payment: .constant(payment))
+                            
                     } else if payment.isRequest {
                         
                         if payment.reqfrom.contains(house.members.first(where: { (m) -> Bool in
@@ -120,7 +123,7 @@ struct ActivityView: View {
                                         )
                                     }
                                 })
-                                .padding(.bottom, -20)
+                                
                         } else if payment.by == UserDefaults.standard.string(forKey: "myId") || house.members.first(where: { (m) -> Bool in
                             return m.id == UserDefaults.standard.string(forKey: "myId")
                         })!.admin {
@@ -137,10 +140,10 @@ struct ActivityView: View {
                                     }
                                     )
                                 })
-                                .padding(.bottom, -20)
+                                
                             } else {
                             ActivityRequestCell(payment: .constant(payment))
-                                .padding(.bottom, -20)
+                                
                         }
                     } else {
                         
@@ -158,11 +161,11 @@ struct ActivityView: View {
                                     }
                                     )
                                 })
-                                .padding(.bottom, -20)
+                                
                             
                         } else {
                             ActivityPaymentCell(payment: .constant(payment))
-                                .padding(.bottom, -20)
+                                
                             
                         }
                     }
@@ -180,6 +183,7 @@ struct ActivityView: View {
             }
             
             .padding()
+            .padding(.bottom, -20)
             Rectangle()
                 .fill(Color.black)
                 .frame(minHeight:120)

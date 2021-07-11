@@ -1075,6 +1075,22 @@ class Fetch: ObservableObject {
         }
     }
     
+    func imgFromId(id: String, img: Binding<String>){
+        let house = UserDefaults.standard.string(forKey: "houseId") ?? ""
+        
+        if house != "" {
+            db.document("houses/\(house)/members/\(id)").getDocument { ds, err in
+                guard let data = ds?.data() else {
+                    return
+                }
+                img.wrappedValue = ((data["image"] ?? "") as! String)
+            }
+            
+        } else {
+            img.wrappedValue = ""
+        }
+    }
+    
     func bindingMemberFromIdsWR(id: String, bm:Binding<Member>) {
         db.document("waitingRoom/\(id)").getDocument { ds, error in
             guard let data = ds?.data() else {
