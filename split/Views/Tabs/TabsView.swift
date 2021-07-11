@@ -30,23 +30,38 @@ struct TabsView: View {
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
-                    ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member)
-                        .overlay(
-                            FloatingMenuButton(open: $FMBopen, actions: [Action(image: "plus.bubble", label: "New message") {
-                                //new message popup
-                            },
-                                                         Action(image: "arrow.right.circle", label: "New payment") {
-                                                            payType = 1
-                                                            tabSelection = 2
-                                                         },
-                                                         Action(image: "arrow.left.circle", label: "New Request") {
-                                                            payType = 2
-                                                            tabSelection = 2
-                                                         }])
-                                .offset(x: -20, y: -100)
-                            , alignment: .bottomTrailing
-                        )
-                        .tag(0)
+                    ZStack {
+                        ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member)
+                            .blur(radius: FMBopen ? 8 : 0)
+                        if FMBopen {
+                            Rectangle()
+                                .fill(
+                                    Color("DarkMaterial").opacity(0.01)
+                                )
+                                .onTapGesture {
+                                    FMBopen = false
+                                }
+                        }
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Spacer()
+                                FloatingMenuButton(open: $FMBopen, actions: [Action(image: "plus.bubble", label: "New message") {
+                                    //new message popup
+                                },
+                                Action(image: "arrow.right.circle", label: "New payment") {
+                                    payType = 0
+                                    tabSelection = 2
+                                },
+                                Action(image: "arrow.left.circle", label: "New Request") {
+                                    payType = 1
+                                    tabSelection = 2
+                                }])
+                                .offset(x: 60, y: -60)
+                            }
+                        }
+                    }
+                    .tag(0)
                     MembersView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)
                         .tag(1)
                     PaymentView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)

@@ -22,10 +22,12 @@ struct FloatingMenuButton: View {
                         }
                         label: {
                             Text(a.label)
+                                .font(.body)
                             Spacer()
                             Image(systemName: a.image)
+                                .font(.body.bold())
                         }
-                        .font(.system(size: 20).bold())
+                        
                         .foregroundColor(.white)
                         .allowsHitTesting(open)
                     }
@@ -43,11 +45,11 @@ struct FloatingMenuButton: View {
             .frame(width: 200)
             .padding()
             .background(RoundedRectangle(cornerRadius: 20).fill(Color("DarkMaterial")))
-//            .shadow(radius: 10)
-            .offset(x:-80, y: -CGFloat(20*actions.count + 4) - 80)
+            .shadow(radius: 10)
+            .offset(x:-80, y: -CGFloat(20*actions.count + 4) - 60)
 //            .opacity(open ? 1 : 0)
             .scaleEffect(open ? 1 : 0)
-            .animation(.easeOut.speed(1))
+            .animation(.easeInOut.speed(1.2))
             
             Circle()
                 .fill(Color("DarkMaterial"))
@@ -61,7 +63,7 @@ struct FloatingMenuButton: View {
                         .foregroundColor(.white)
                         .rotationEffect(Angle(degrees: open ? 225 : 0))
                         .onTapGesture {
-                            withAnimation(.easeOut) {
+                            withAnimation(.easeInOut) {
                                 open.toggle()
                             }
                         }
