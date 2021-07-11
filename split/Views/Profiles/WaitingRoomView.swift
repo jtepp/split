@@ -140,9 +140,10 @@ struct WaitingRoomView: View {
     }
 }
 
-//struct WaitingRoomView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WaitingRoomView(member: .constant(.placeholder))
-//            .background(Color.black.edgesIgnoringSafeArea(.all))
-//    }
-//}
+struct WaitingRoomView_Previews: PreviewProvider {
+    static var previews: some View {
+        WaitingRoomView(h: .constant(.empty), inWR: .constant(true), noProf: .constant(false), member: .constant(.placeholder))
+            .preferredColorScheme(.dark)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+    }
+}
