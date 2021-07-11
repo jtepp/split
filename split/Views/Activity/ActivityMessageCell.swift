@@ -23,7 +23,7 @@ struct ActivityMessageCell: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                     .shadow(radius: 4)
                     .background(
-                        RoundedRectangle(cornerRadius: 25)
+                        RoundedRectangle(cornerRadius: 5)
                             .fill(Color("Material"))
                     )
                     .onAppear {
