@@ -40,6 +40,7 @@ struct ActivityRequestCell: View {
                     Color("Material")
                 )
         )
+        
         .overlay(
             VStack {
                 Spacer()

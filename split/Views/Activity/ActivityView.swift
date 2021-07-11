@@ -137,6 +137,7 @@ struct ActivityView: View {
                                     }
                                     )
                                 })
+                                .padding(.bottom, -20)
                             } else {
                             ActivityRequestCell(payment: .constant(payment))
                                 .padding(.bottom, -20)
