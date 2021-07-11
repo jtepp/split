@@ -31,7 +31,7 @@ struct TabsView: View {
                 content:  {
                     ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member)
                         .overlay(
-                            FloatingButton()
+                            FloatingMenuButton(actions: Action.placeholders)
                                 .offset(x: -20, y: -100)
                             , alignment: .bottomTrailing
                         )
