@@ -22,7 +22,7 @@ struct Payment: Identifiable, Codable {
     static let empty = Payment(id: "", to: "", from: "", amount: 0, time: 0)
     static let placeholder = Payment(id: "34f43", to: "Jacob T", from: "Praw", amount: 5.6, time: 1622044000, memo: "mem")
     static let placeholdera = Payment(id: "343", to: "Jacob T", from: "Praw", amount: 5.6, time: 1621044000, memo: "mem", isAn: true)
-    static let placeholderm = Payment(id: "34443", to: "", from: "Praw", amount: 5.6, time: 1621044000, memo: "mem", isAn: true)
+    static let placeholderm = Payment(id: "34443", to: "", from: "Praw", time: 1621044000, memo: "mem", isGM: true)
     static let placeholderr = Payment(id: "3463", to: "Jacob T", reqfrom: ["Praw", "Schaffer", "Ethan"], amount: 5.6, time: 1620044000, memo: "mem", isRequest: true)
     static let placeholderx = Payment(id: "63", to: "Jacob T", reqfrom: ["Name", "2"], amount: 57.6, time: 1620084000, memo: "m7em", isRequest: true)
 }
