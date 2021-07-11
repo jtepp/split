@@ -230,9 +230,10 @@ class Fetch: ObservableObject {
                 let memo = data["memo"] as? String ?? ""
                 let isRequest = data["isRequest"] as? Bool ?? false
                 let isAn = data["isAn"] as? Bool ?? false
+                let isGM = data["isGM"] as? Bool ?? false
                 let by = data["by"] as? String ?? ""
                 
-                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, isAn: isAn, by: by)
+                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, isAn: isAn, isGM: isGM, by: by)
             })
             for member in h.wrappedValue.members {
                 self.updateBalances(h: h.wrappedValue, m: member)
@@ -312,7 +313,7 @@ class Fetch: ObservableObject {
             
             for payment in h.payments
                 .filter({ (p) -> Bool in //iterate thru all payments
-                    return !p.isAn && !p.isGM //exclude announcments
+                    return !p.isAn && !p.isGM //exclude announcments and group messages
                 })
             {
                 if payment.isRequest {
@@ -1055,9 +1056,10 @@ class Fetch: ObservableObject {
                     let memo = data["memo"] as? String ?? ""
                     let isRequest = data["isRequest"] as? Bool ?? false
                     let isAn = data["isAn"] as? Bool ?? false
+                    let isGM = data["isGM"] as? Bool ?? false
                     let by = data["by"] as? String ?? ""
                     
-                    return Payment(id: queryDocumentSnapshot.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, isAn: isAn, by: by)
+                    return Payment(id: queryDocumentSnapshot.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, isAn: isAn, isGM: isGM, by: by)
                 }))
             }
         } else {
