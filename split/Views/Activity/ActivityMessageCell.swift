@@ -16,38 +16,46 @@ struct ActivityMessageCell: View {
             if payment.by != (UserDefaults.standard.string(forKey: "myId") ?? "") {
                 VStack {
                 Spacer()
-                b64toimg(b64: img)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 40, height: 40)
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                    .shadow(radius: 4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(Color("Material"))
-                    )
-                    .onAppear {
-                        Fetch().imgFromId(id: payment.by, img: $img)
-                }
+                    VStack {
+                        b64toimg(b64: img)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 40, height: 40)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .shadow(radius: 4)
+                        .background(
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(Color("Material"))
+                        )
+                        .onAppear {
+                            Fetch().imgFromId(id: payment.by, img: $img)
+                    }
+                        Text(payment.from)
+                            .font(.caption2)
+                            .foregroundColor(Color("Material"))
+                            .lineLimit(2)
+                            .padding(.vertical, -4)
+                    }
             }
             .padding(.trailing)
             }
             
             VStack {
                     HStack {
-                        if payment.by == (UserDefaults.standard.string(forKey: "myId") ?? "") {
-                            Spacer(minLength: 0)
-                        }
+//                        if payment.by == (UserDefaults.standard.string(forKey: "myId") ?? "") {
+//                            Spacer(minLength: 0)
+//                        }
                         Text(payment.memo)
-                            .lineLimit(10)
-                            .padding(.horizontal)
+                            .padding(.horizontal,10)
                             .padding(.bottom, 10)
                             .multilineTextAlignment(.leading)
                             .foregroundColor(payment.by == (UserDefaults.standard.string(forKey: "myId") ?? "") ? .white : .black)
-                        if payment.by != (UserDefaults.standard.string(forKey: "myId") ?? "") {
+//                        if payment.by != (UserDefaults.standard.string(forKey: "myId") ?? "") {
                             Spacer(minLength: 0)
-                        }
+//                        }
                     }
+                    .lineLimit(10)
+                    .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(.vertical, 2)
                 .padding(.top, 6)
@@ -68,19 +76,26 @@ struct ActivityMessageCell: View {
             if payment.by == (UserDefaults.standard.string(forKey: "myId") ?? "") {
                 VStack {
                 Spacer()
-                b64toimg(b64: img)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 40, height: 40)
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                    .shadow(radius: 4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(Color("Material"))
-                    )
-                    .onAppear {
-                        Fetch().imgFromId(id: payment.by, img: $img)
-                }
+                    VStack {
+                        b64toimg(b64: img)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 40, height: 40)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .shadow(radius: 4)
+                        .background(
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(Color("Material"))
+                        )
+                        .onAppear {
+                            Fetch().imgFromId(id: payment.by, img: $img)
+                    }
+                        Text(payment.from)
+                            .font(.caption2)
+                            .foregroundColor(Color("Material"))
+                            .lineLimit(2)
+                            .padding(.vertical, -4)
+                    }
             }
             .padding(.leading)
             }
@@ -93,6 +108,7 @@ struct ActivityMessageCell_Previews: PreviewProvider {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             ActivityMessageCell(payment: .constant(.placeholderm))
+                .frame(height: 00)
         }
     }
 }
