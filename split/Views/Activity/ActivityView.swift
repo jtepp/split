@@ -86,7 +86,9 @@ struct ActivityView: View {
                                 
                         }
                     } else if payment.isGM {
-                        ActivityMessageCell(payment: .constant(payment))
+                        ActivityMessageCell(allPayments: .constant(house.payments.sorted(by: { a, b in
+                            return a.time > b.time
+                        })), payment: .constant(payment))
                             
                     } else if payment.isRequest {
                         
