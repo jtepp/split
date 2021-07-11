@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FloatingMenuButton: View {
-    @State var open = false
+    @Binding var open: Bool
     var actions:[Action]
     var body: some View {
         ZStack {
@@ -18,6 +18,7 @@ struct FloatingMenuButton: View {
                     HStack {
                         Button{
                             a.action()
+                            open = false
                         }
                         label: {
                             Text(a.label)
@@ -72,7 +73,7 @@ struct FloatingMenuButton: View {
 
 struct FloatingButton_Previews: PreviewProvider {
     static var previews: some View {
-        FloatingMenuButton(actions: Action.placeholders)
+        FloatingMenuButton(open: .constant(false), actions: Action.placeholders)
     }
 }
 

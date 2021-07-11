@@ -26,12 +26,23 @@ struct TabsView: View {
     @Binding var watch: Int
     @State var pchoice = [Member]()
     @State var rchoice = [Member]()
+    @State var FMBopen = false
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
                     ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member)
                         .overlay(
-                            FloatingMenuButton(actions: Action.placeholders)
+                            FloatingMenuButton(open: $FMBopen, actions: [Action(image: "plus.bubble", label: "New message") {
+                                //new message popup
+                            },
+                                                         Action(image: "arrow.right.circle", label: "New payment") {
+                                                            payType = 1
+                                                            tabSelection = 2
+                                                         },
+                                                         Action(image: "arrow.left.circle", label: "New Request") {
+                                                            payType = 2
+                                                            tabSelection = 2
+                                                         }])
                                 .offset(x: -20, y: -100)
                             , alignment: .bottomTrailing
                         )
@@ -45,7 +56,7 @@ struct TabsView: View {
                     }) ?? Member.empty), inWR: $inWR, noProf: $noProf, showStatus: .constant($house.members.wrappedValue.first(where: { (m) -> Bool in
                         return m.id == myId
                     })?.showStatus ?? Member.empty.showStatus), newName: $newMemberName, watch: $watch, engaged: $engaged)
-                        .tag(3)
+                    .tag(3)
                 })
             .tabViewStyle(PageTabViewStyle())
             .background(Color.black.edgesIgnoringSafeArea(.all))
@@ -53,7 +64,7 @@ struct TabsView: View {
                 Fetch().getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
             }
             .onChange(of: inWR, perform: { (_) in
-//                print("WAITING ROOM CHANGED \n\n\(member)\n\n\n\n\n")
+                //                print("WAITING ROOM CHANGED \n\n\(member)\n\n\n\n\n")
                 if inWR {
                     member = .empty
                 }
@@ -62,20 +73,20 @@ struct TabsView: View {
                 }
             })
             .onOpenURL{ url in
-                            let arr = url.absoluteString.components(separatedBy: "//")
-                            if arr.count == 2 {
-                                let link = arr[1]
-                                
-                                newGroup = String(link.split(separator: "$")[0])
-                                newPass = String(link.split(separator: "$")[1])
-                                Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
-                                if newGroup == house.id {
-                                    //ALREADY
-                                    showInviteAlert = true
-                                } else {
-                                    showInviteSheet = true
-                                }
-                            }
+                let arr = url.absoluteString.components(separatedBy: "//")
+                if arr.count == 2 {
+                    let link = arr[1]
+                    
+                    newGroup = String(link.split(separator: "$")[0])
+                    newPass = String(link.split(separator: "$")[1])
+                    Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
+                    if newGroup == house.id {
+                        //ALREADY
+                        showInviteAlert = true
+                    } else {
+                        showInviteSheet = true
+                    }
+                }
             }
             .alert(isPresented: $showInviteAlert, content: {
                 Alert(title: Text("Already in this group"), message: Text("You are already a member of the group you are trying to join"), dismissButton: Alert.Button.default(Text("Ok")))
@@ -98,6 +109,6 @@ struct TabsView: View {
                 Fetch().updateStatus(status: true)
                 WidgetCenter.shared.reloadAllTimelines()
             }
-
+        
     }
 }
