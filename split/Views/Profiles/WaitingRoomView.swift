@@ -132,6 +132,7 @@ struct WaitingRoomView: View {
                             h = .empty
                             inWR = true
                             noProf = true
+                            UserDefaults.standard.set(true, forKey: "noProf")
                         }
                     }))
                 })

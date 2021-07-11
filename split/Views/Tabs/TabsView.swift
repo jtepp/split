@@ -53,6 +53,7 @@ struct TabsView: View {
                     member = .empty
                 }
                 noProf = member.id == ""
+                UserDefaults.standard.set(member.id == "", forKey: "noProf")
             })
             .onOpenURL{ url in
                             let arr = url.absoluteString.components(separatedBy: "//")
