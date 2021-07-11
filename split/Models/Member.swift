@@ -51,7 +51,3 @@ struct codableMember: Identifiable, Codable {
     static let empty = codableMember(member: .empty)
 
 }
-
-func codableToMember(c:codableMember) -> Member {
-    return Member(id: c.id, home: c.home, name: c.name, owesMe: c.owesMe, iOwe: c.iOwe, image: c.image, admin: c.admin, showStatus: false, online: false, lastSeen: 0)
-}

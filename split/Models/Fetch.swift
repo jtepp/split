@@ -27,7 +27,6 @@ class Fetch: ObservableObject {
                 showInvite.wrappedValue = false
                 inWR.wrappedValue = false
                 noProf.wrappedValue = false
-                UserDefaults.standard.set(false, forKey: "noProf")
                 
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(id, forKey: "houseId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(myId, forKey: "myId")
@@ -82,14 +81,12 @@ class Fetch: ObservableObject {
                                 UserDefaults.standard.set("", forKey: "houseId")
                                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
                                 noProf.wrappedValue = true
-                                UserDefaults.standard.set(true, forKey: "noProf")
                                 inWR.wrappedValue = true
                             } else {
                                 print("wred")
                                 UserDefaults.standard.set("waitingRoom", forKey: "houseId")
                                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("waitingRoom", forKey: "houseId")
                                 noProf.wrappedValue = false
-                                UserDefaults.standard.set(false, forKey: "noProf")
                             }
                             inWR.wrappedValue = true
                         }
@@ -104,7 +101,6 @@ class Fetch: ObservableObject {
                         h.wrappedValue = .empty
                         
                         noProf.wrappedValue = true
-                        UserDefaults.standard.set(true, forKey: "noProf")
                         inWR.wrappedValue = true
                     }
                     
@@ -115,14 +111,12 @@ class Fetch: ObservableObject {
             //            print("in waiting room and account exists")
             //            inWR.wrappedValue = true
             //            noProf.wrappedValue = false
-            //            UserDefaults.standard.set(false, forKey: "noProf")
             //            db.document("waitingRoom/"+myId).addSnapshotListener { (querySnapshot, error) in
             //                guard let doc = querySnapshot?.data() else {
             //                    //                    print("asfasdfjkasd \(error!)")
             //
             ////                    inWR.wrappedValue = true
-            ////                    noprof.wrappedvalue = true
-            //UserDefaults.standard.set(true, forKey: "noProf")
+            ////                    noProf.wrappedValue = true
             //
             //                    //                    //set id bound and ud to ""
             //                    //                    if h.wrappedValue.members.first(where: { (m) -> Bool in
@@ -131,12 +125,10 @@ class Fetch: ObservableObject {
             //                    //                        //if ur an alien, go to void, otherwise get waitingRoomed
             //                    //                        if myId == "" {
             //                    //                            UserDefaults.standard.set("", forKey: "houseId")
-            //                    //                            noprof.wrappedvalue = true
-            //UserDefaults.standard.set(true, forKey: "noProf")
+            //                    //                            noProf.wrappedValue = true
             //                    //                        } else {
             //                    //                            UserDefaults.standard.set("waitingRoom", forKey: "houseId")
             //                    //                            noProf.wrappedValue = false
-            //            UserDefaults.standard.set(false, forKey: "noProf")
             //                    //                        }
             //                    //                        inWR.wrappedValue = true
             //                    //                    }
@@ -156,15 +148,13 @@ class Fetch: ObservableObject {
             //        } else if id == "waitingRoom" && myId == "" {
             //            print("get out of waiting room alien")
             //            inWR.wrappedValue = true
-            //            noprof.wrappedvalue = true
-            //UserDefaults.standard.set(true, forKey: "noProf")
+            //            noProf.wrappedValue = true
             //            UserDefaults.standard.set("", forKey: "houseId") //get out of waiting room alien
             //        } else if id == "" {
             //            print("where u belong")
             //            UserDefaults.standard.set("", forKey: "houseId")
             //            inWR.wrappedValue = true
-            //            noprof.wrappedvalue = true
-            //UserDefaults.standard.set(true, forKey: "noProf")
+            //            noProf.wrappedValue = true
             //        }
         }}
     
@@ -820,10 +810,10 @@ class Fetch: ObservableObject {
     }
     
     func updateStatus(status: Bool) {
-        //        let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
-        //        let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
-        //        print("Status: \(id) \(myId)")
-        //        db.document("houses/\(id)/members/\(myId)/").updateData(["online":status, "lastSeen":NSDate().timeIntervalSince1970])
+//        let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
+//        let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
+//        print("Status: \(id) \(myId)")
+//        db.document("houses/\(id)/members/\(myId)/").updateData(["online":status, "lastSeen":NSDate().timeIntervalSince1970])
     }
     
     func toggleShowStatus(s: Bool) {
@@ -1010,7 +1000,7 @@ class Fetch: ObservableObject {
                 guard let docs = querySnapshot?.documents else {
                     return
                 }
-                //                var members = [codableMember]()
+//                var members = [codableMember]()
                 print(myName+myId+houseId)
                 print("\(docs.count) FDFSFD")
                 completion(docs.map { queryDocumentSnapshot -> codableMember in
@@ -1023,17 +1013,17 @@ class Fetch: ObservableObject {
                     let image = data["image"] as? String ?? ""
                     let admin = data["admin"] as? Bool ?? false
                     
-                    //                    print(name)
+//                    print(name)
                     
                     return codableMember(member: Member(id: queryDocumentSnapshot.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0))
                 }
                 .filter{ member in
                     return member.id != myId
                 })
-                //                let encoder = JSONEncoder()
-                //                if let encoded = try? encoder.encode(members) {
-                //                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(encoded, forKey: "members")
-                //                }
+//                let encoder = JSONEncoder()
+//                if let encoded = try? encoder.encode(members) {
+//                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(encoded, forKey: "members")
+//                }
                 
             }
         } else {

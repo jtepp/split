@@ -50,9 +50,6 @@ struct NoProfileView: View {
                 UserDefaults.standard.set(m.id, forKey: "myId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.id, forKey: "myId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.name, forKey: "myName")
-//                if m.id != "" {
-//
-//                }
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Account error"), message: Text(msg))

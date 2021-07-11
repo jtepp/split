@@ -13,7 +13,7 @@ struct Main: View {
     @State var h = House.empty
     @State var m = Member.empty
     @State var inWR = ((UserDefaults.standard.string(forKey: "houseId") ?? "")  == "waitingRoom") || ((UserDefaults.standard.string(forKey: "houseId") ?? "") == "")
-    @State var noProf = UserDefaults.standard.bool(forKey:"noProf") ?? true
+    @State var noProf = true
     @State var myId = UserDefaults.standard.string(forKey: "myId") ?? ""
     @State var tabSelection = 0
     @State var dontSplash = UserDefaults.standard.bool(forKey: "dontSplash")
