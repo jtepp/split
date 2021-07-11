@@ -121,6 +121,7 @@ struct TabsView: View {
                 } else {
                     engaged = false
                 }
+                FMBopen = false
                 Fetch().updateStatus(status: true)
                 WidgetCenter.shared.reloadAllTimelines()
             }

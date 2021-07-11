@@ -61,7 +61,7 @@ struct FloatingMenuButton: View {
                         .aspectRatio(contentMode: .fit)
                         .padding()
                         .foregroundColor(.white)
-                        .rotationEffect(Angle(degrees: open ? 225 : 0))
+                        .rotationEffect(Angle(degrees: open ? 135 : 0))
                         .onTapGesture {
                             withAnimation(.easeInOut) {
                                 open.toggle()
