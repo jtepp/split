@@ -312,7 +312,7 @@ class Fetch: ObservableObject {
             
             for payment in h.payments
                 .filter({ (p) -> Bool in //iterate thru all payments
-                    return !p.isAn //exclude announcments
+                    return !p.isAn && !p.isGM //exclude announcments
                 })
             {
                 if payment.isRequest {
