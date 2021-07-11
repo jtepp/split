@@ -120,6 +120,14 @@ struct WaitingRoomView: View {
             .padding()
             
             Spacer()
+            Button{
+                print("\(UserDefaults.standard.string(forKey: "houseId"))   \(UserDefaults.standard.string(forKey: "myId"))")
+            } label: {
+                Text("Reset Account")
+                    .foregroundColor(.white)
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color("DarkMaterial")))
+            }
                 .alert(isPresented: $showWrongPassAlert, content: {
                     Alert(title: Text(msg), message: Text("Please make sure you put in your information correctly and try again"), dismissButton: Alert.Button.default(Text("Ok"), action: {
                         if msg == "Member already exists by that name" {
