@@ -48,6 +48,10 @@ struct ActivityRequestCell: View {
                     Spacer()
                     if payment.memo != "" {
                         Image(systemName:  "chevron.down")
+                            .rotationEffect(.degrees(showMemo ? 180 : 0))
+                            .padding()
+                            .foregroundColor(Color("DarkMaterial"))
+                            .opacity(0.6)
                     }
                     Spacer()
                 }
