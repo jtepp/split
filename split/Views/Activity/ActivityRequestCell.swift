@@ -46,11 +46,9 @@ struct ActivityRequestCell: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Image(systemName: payment.memo != "" ? "chevron.down" : "")
-                        .rotationEffect(.degrees(showMemo ? 180 : 0))
-                        .padding()
-                        .foregroundColor(.primary)
-                    //                        .padding(.top, -10)
+                    if payment.memo != "" {
+                        Image(systemName:  "chevron.down")
+                    }
                     Spacer()
                 }
                 .overlay(
