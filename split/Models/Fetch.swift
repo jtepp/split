@@ -268,8 +268,10 @@ class Fetch: ObservableObject {
                     let d = qds.data()
                     let f = d["fcm"] as? String ?? ""
                     let n = d["name"] as? String ?? ""
-                    if f != "" && p.reqfrom.contains(n) {
-                        fcms.append(f)
+                    if f != "" {
+                        if p.memo.contains("@"+n) {
+                            fcms.append(f)
+                        }
                     }
                 }
                 
