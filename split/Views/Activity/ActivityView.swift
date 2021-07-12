@@ -16,11 +16,15 @@ struct ActivityView: View {
     @State var showSplash = false
     @Binding var showMessagePopover: Bool
     @Binding var GMmsg: String
-    @State var filterOpen = false
+    @State var incPay = true
+    @State var incReq = true
+    @State var incAn = true
+    @State var incGM = true
     var body: some View {
         ScrollView {
             HStack {
                 HeaderText(text: "Activity")
+                FilterButton(incPay: $incPay, incReq: $incReq, incAn: $incAn, incGM: $incGM)
                 Spacer()
                 Button(action: {
                     showSplash = true
