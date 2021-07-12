@@ -18,7 +18,11 @@ struct ComposeView: View {
     @Binding var focus: String?
 
     var body: some View {
-        ZStack {
+        VStack {
+            TaggedView(tagmsg: $tagmsg, members: $members)
+                .opacity(showTagged ? 1 : 0)
+                .animation(Animation.easeOut.speed(2))
+            Spacer()
             HStack {
                 TextField("Message...", text: $msg)
                     .firstResponder(id: "msg", firstResponder: $focus)
@@ -36,7 +40,7 @@ struct ComposeView: View {
                 .padding(.trailing)
                 .disabled(!canTap)
                 .onChange(of: msg, perform: { _ in
-                    if (members.contains(where: { mem in
+                    if ((msg.components(separatedBy: " ").last ?? "").contains("@") && members.contains(where: { mem in
                         return mem.id != UserDefaults.standard.string(forKey: "myId") && mem.name.lowercased().contains((msg.components(separatedBy: " ").last ?? "").replacingOccurrences(of: "@", with: "").lowercased())
                     })) {
                         tagmsg = msg.components(separatedBy: " ").last!
@@ -53,12 +57,7 @@ struct ComposeView: View {
             )
             
             .shadow(radius: 10)
-            
-            VStack {
-                TaggedView(tagmsg: $tagmsg, members: $members)
-                    .animation(Animation.easeOut.speed(2))
-                Spacer()
-            }
+            Spacer()
         }
     }
 }
