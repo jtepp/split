@@ -82,20 +82,7 @@ struct ActivityView: View {
                     } else if payment.isGM {
                         ActivityMessageCell(allPayments: .constant(house.payments.sorted(by: { a, b in
                             return a.time > b.time
-                        })), payment: .constant(payment))
-                        .contextMenu(menuItems: {
-                            if m.admin || payment.by == m.id {
-                            Button {
-                                Fetch().deletePayment(p: payment, h: house)
-                            } label: {
-                                Text("Delete")
-                                    .foregroundColor(.red)
-                                Image(systemName: "trash")
-                                    .foregroundColor(.red)
-                            }
-                            }
-                            
-                        })
+                        })), payment: .constant(payment), member: $m)
                             
                     } else if payment.isRequest {
                         

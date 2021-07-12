@@ -10,6 +10,7 @@ import SwiftUI
 struct ActivityMessageCell: View {
     @Binding var allPayments: [Payment]
     @Binding var payment: Payment
+    @Binding var member: Member
     @State var img = ""
     var body: some View {
         HStack {
@@ -41,11 +42,11 @@ struct ActivityMessageCell: View {
                                 .multilineTextAlignment(.center)
                         }
                         .fixedSize(horizontal: false, vertical: true)
-                        .frame(width: 40)
+                        .frame(width: 40, height: 60)
                     } else {
                         Rectangle()
-                            .fill(Color.clear)
-                            .frame(width: 40)
+                            .fill(Color.black)
+                            .frame(width: 40, height: 60)
                     }
                 }
                 .padding(.trailing)
@@ -112,18 +113,45 @@ struct ActivityMessageCell: View {
                                     .multilineTextAlignment(.center)
                             }
                             .fixedSize(horizontal: false, vertical: true)
-                            .frame(width: 40)
+                            .frame(width: 40, height: 60)
                         } else {
                             Rectangle()
-                                .fill(Color.clear)
-                                .frame(width: 40)
+                                .fill(Color.black)
+                                .frame(width: 40, height: 60)
                         }
                     }
                     .padding(.leading)
                 }
             }
         }
-        .padding(.bottom, nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) ? -10 : 0)
+        .contextMenu(menuItems: {
+                                    
+                                    if payment.by != member.id {
+                                        Button {
+                                            
+                                        } label: {
+                                            Text("Reply")
+                                            Image(systemName: "arrowshape.turn.up.left")
+                                        }
+                                        
+                                    }
+                                    
+                                    if member.admin || payment.by == member.id {
+                                    Button {
+                                        var house = House.empty
+                                        house.id = member.home
+                                        Fetch().deletePayment(p: payment, h: house)
+                                    } label: {
+                                        Text("Delete")
+                                            .foregroundColor(.red)
+                                        Image(systemName: "trash")
+                                            .foregroundColor(.red)
+                                    }
+                                    }
+                                    
+                                })
+        .padding(.bottom, nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) ? -20 : -8)
+        .padding(.top, -10)
     }
 }
 
@@ -131,7 +159,7 @@ struct ActivityMessageCell_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            ActivityMessageCell(allPayments: .constant([.placeholderm]), payment: .constant(.placeholder))
+            ActivityMessageCell(allPayments: .constant([.placeholderm]), payment: .constant(.placeholder), member: .constant(.placeholder))
                 .frame(height: 00)
         }
     }
