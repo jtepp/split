@@ -90,7 +90,7 @@ struct TabsView: View {
                     })?.showStatus ?? Member.empty.showStatus), newName: $newMemberName, watch: $watch, engaged: $engaged)
                     .tag(3)
                 })
-            .tabViewStyle(PageTabViewStyle())
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .background(Color.black.edgesIgnoringSafeArea(.all))
             .onAppear(){
                 Fetch().getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
