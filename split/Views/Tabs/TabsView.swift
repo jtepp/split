@@ -61,7 +61,7 @@ struct TabsView: View {
                                                         payType = 1
                                                         tabSelection = 2
                                                     }])
-                                    .offset(x: 60, y: -60)
+                                    .offset(x: 60, y: needsMoreOffset() ? -100 : -60)
                                     .opacity(showMessagePopover ? 0 : 1)
                                     .allowsHitTesting(showMessagePopover ? false : true)
                             }

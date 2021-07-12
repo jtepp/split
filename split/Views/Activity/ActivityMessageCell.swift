@@ -38,6 +38,7 @@ struct ActivityMessageCell: View {
                                 .lineLimit(2)
                                 .padding(.vertical, -4)
                                 .minimumScaleFactor(0.4)
+                                .multilineTextAlignment(.center)
                         }
                         .fixedSize(horizontal: false, vertical: true)
                         .frame(width: 40)
@@ -108,6 +109,7 @@ struct ActivityMessageCell: View {
                                     .lineLimit(2)
                                     .padding(.vertical, -4)
                                     .minimumScaleFactor(0.4)
+                                    .multilineTextAlignment(.center)
                             }
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(width: 40)
