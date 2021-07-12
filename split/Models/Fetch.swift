@@ -247,7 +247,7 @@ class Fetch: ObservableObject {
         db.document("houses/\(hId)/members/\(id ?? "EMPTYIMG")").updateData(["image":imgtob64(img: img.resized(toWidth: 600)!)])
     }
     
-    func sendPayment(p: Payment, h: House) {
+    func sendPayment(p: Payment, h: House, _ completion: @escaping () -> Void = {}) {
         db.collection("houses/\(h.id)/members").getDocuments { querySnapshot, err in
             guard let docs = querySnapshot?.documents else {
                 print(err.debugDescription)
@@ -302,10 +302,12 @@ class Fetch: ObservableObject {
             
             self.db.collection("houses/\(h.id)/payments").addDocument(data:
                                                                         ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "isGM": p.isGM, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "isAn":p.isAn, "fcm":fcms]
-            )
+            ){ _ in
             //            .documentID
             for member in h.members {
                 self.updateBalances(h: h, m: member)
+            }
+                completion()
             }
         }
         
