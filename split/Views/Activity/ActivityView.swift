@@ -64,9 +64,9 @@ struct ActivityView: View {
                     return m.id == UserDefaults.standard.string(forKey: "myId")
                 }){
                     if payment.isAn {
-                        if m.admin {
                             ActivityAnnouncementCell(payment: .constant(payment))
                                 .contextMenu(menuItems: {
+                                    if m.admin {
                                     Button(action: {
                                         Fetch().deletePayment(p: payment, h: house)
                                     }, label: {
@@ -77,23 +77,33 @@ struct ActivityView: View {
                                         
                                     }
                                     )
+                                    }
                                 })
-                                
-                        } else {
-                            ActivityAnnouncementCell(payment: .constant(payment))
-                        }
                     } else if payment.isGM {
                         ActivityMessageCell(allPayments: .constant(house.payments.sorted(by: { a, b in
                             return a.time > b.time
                         })), payment: .constant(payment))
+                        .contextMenu(menuItems: {
+//                            if m.admin || payment.by == m.id {
+//                            Button {
+//                                Fetch().deletePayment(p: payment, h: house)
+//                            } label: {
+//                                Text("Delete")
+//                                    .foregroundColor(.red)
+//                                Image(systemName: "trash")
+//                                    .foregroundColor(.red)
+//                            }
+//                            }
+                            
+                        })
                             
                     } else if payment.isRequest {
                         
-                        if payment.reqfrom.contains(house.members.first(where: { (mm) -> Bool in
-                            return mm.id == m.id
-                        })?.name ?? "") {
-                            ActivityRequestCell(payment: .constant(payment))
-                                .contextMenu(menuItems: {
+                        ActivityRequestCell(payment: .constant(payment))
+                            .contextMenu(menuItems: {
+                                if payment.reqfrom.contains(house.members.first(where: { (mm) -> Bool in
+                                    return mm.id == m.id
+                                })?.name ?? "") {
                                     Button(action: {
                                         Fetch().sendPayment(p: Payment(to: payment.to, from: house.members.first(where: { (m) -> Bool in
                                             return m.id == UserDefaults.standard.string(forKey: "myId")
@@ -107,23 +117,8 @@ struct ActivityView: View {
                                         
                                     }
                                     )
-                                    if m.admin {
-                                        Button(action: {
-                                            Fetch().deletePayment(p: payment, h: house)
-                                        }, label: {
-                                            Text("Delete")
-                                                .foregroundColor(.red)
-                                            Image(systemName: "trash")
-                                                .foregroundColor(.red)
-                                            
-                                        }
-                                        )
-                                    }
-                                })
-                                
-                        } else if payment.by == m.id || m.admin {
-                            ActivityRequestCell(payment: .constant(payment))
-                                .contextMenu(menuItems: {
+                                }
+                                if m.admin || payment.by == m.id {
                                     Button(action: {
                                         Fetch().deletePayment(p: payment, h: house)
                                     }, label: {
@@ -134,18 +129,15 @@ struct ActivityView: View {
                                         
                                     }
                                     )
-                                })
-                                
-                            } else {
-                            ActivityRequestCell(payment: .constant(payment))
-                                
-                        }
+                                }
+                            })
                     } else {
                         
-                        if payment.by == m.id || m.admin {
+                        
                             
                             ActivityPaymentCell(payment: .constant(payment))
                                 .contextMenu(menuItems: {
+                                    if payment.by == m.id || m.admin {
                                     Button(action: {
                                         Fetch().deletePayment(p: payment, h: house)
                                     }, label: {
@@ -153,14 +145,9 @@ struct ActivityView: View {
                                         Image(systemName: "trash")
                                     }
                                     )
+                                    }
                                 })
                                 
-                            
-                        } else {
-                            ActivityPaymentCell(payment: .constant(payment))
-                                
-                            
-                        }
                     }
                 } else {
                     Fetch().checkThere(m: $m, h:$house){ has in
