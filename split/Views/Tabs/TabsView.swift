@@ -60,6 +60,8 @@ struct TabsView: View {
                                     tabSelection = 2
                                 }])
                                 .offset(x: 60, y: -60)
+                                .opacity(showMessagePopover ? 0 : 1)
+                                .allowsHitTesting(showMessagePopover ? false : true)
                             }
                         }
                         if showMessagePopover {
