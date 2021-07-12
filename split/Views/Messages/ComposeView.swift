@@ -11,7 +11,6 @@ import MbSwiftUIFirstResponder
 struct ComposeView: View {
     @Binding var house: House
     @Binding var members: [Member]
-    var allMembers: [Member]
     @Binding var show: Bool
     @State var msg = ""
     @State var tagmsg = ""
@@ -19,11 +18,10 @@ struct ComposeView: View {
     @State var canTap = true
     @Binding var focus: String?
     
-    init(house: Binding<House>, members: Binding<[Member]>, allMembers: [Member], show: Binding<Bool>, focus: Binding<String?>) {
+    init(house: Binding<House>, members: Binding<[Member]>, show: Binding<Bool>, focus: Binding<String?>) {
         UITextField.appearance().clearButtonMode = .whileEditing
         self._house = house
         self._members = members
-        self.allMembers = allMembers
         self._show = show
         self._focus = focus
     }
@@ -56,14 +54,28 @@ struct ComposeView: View {
                 .foregroundColor(canTap ? .blue : .gray)
                 .disabled(!canTap)
                 .onChange(of: msg, perform: { v in
-                    if v.last == " " {
-                        var words = msg.components(separatedBy: " ")
-                        words.remove(at: words.count - 1)
-                        msg = words.joined(separator: " ") + " @" + members[0].name + " "
+                    let cp = msg.components(separatedBy: " ")
+                    
+                    if cp.last == "" && msg != "" {
+                        if cp.count > 1 {
+                            
+                            if cp[cp.count - 2].contains("@") && members.contains(where: { m in
+                                return m.name.lowercased().contains(cp[cp.count - 2].replacingOccurrences(of: "@", with: "").lowercased())
+                            }) {
+                                var fixedcp = cp
+                                fixedcp.removeLast()
+                                var ls = fixedcp.last
+                                fixedcp.removeLast()
+                                ls = members.filter( { m in
+                                    return m.name.lowercased().contains(cp[cp.count - 2].replacingOccurrences(of: "@", with: "").lowercased())
+                                })[0].name
+                                
+                                msg = fixedcp.joined(separator: " ") + " @" + ls! + " "
+                                
+                                
+                            }
+                        }
                     }
-                        members = allMembers.filter({ fm in
-                            return fm.id != UserDefaults.standard.string(forKey: "myId") && fm.name.lowercased().contains(tagmsg.replacingOccurrences(of: "@", with: "").lowercased())
-                        })
                     
                     if ((msg.components(separatedBy: " ").last ?? "").contains("@") && members.contains(where: { mem in
                         return mem.id != UserDefaults.standard.string(forKey: "myId") && mem.name.lowercased().contains((msg.components(separatedBy: " ").last ?? "").replacingOccurrences(of: "@", with: "").lowercased())
@@ -96,7 +108,7 @@ struct ComposeView_Previews: PreviewProvider {
                 .font(.largeTitle)
                 .offset(y:-100)
                 .blur(radius: 10)
-            ComposeView(house: .constant(.empty), members: .constant([.placeholder, .placeholder2, .placeholder3]), allMembers: [], show: .constant(true), focus: .constant(""))
+            ComposeView(house: .constant(.empty), members: .constant([.placeholder, .placeholder2, .placeholder3]), show: .constant(true), focus: .constant(""))
                 .padding()
         }
         
@@ -110,7 +122,9 @@ struct TaggedView: View {
     @Binding var focus: String?
     var body: some View {
         VStack {
-            ForEach(members) {m in
+            ForEach(members.filter({ fm in
+                return fm.id != UserDefaults.standard.string(forKey: "myId") && fm.name.lowercased().contains(tagmsg.replacingOccurrences(of: "@", with: "").lowercased())
+            })) {m in
                 Button {
                     var words = msg.components(separatedBy: " ")
                     words.remove(at: words.count - 1)
