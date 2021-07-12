@@ -14,6 +14,7 @@ struct ComposeView: View {
     @State var tagmsg = ""
     @State var showTagged = false
     @State var canTap = true
+
     var body: some View {
         ZStack {
             HStack {
@@ -90,11 +91,12 @@ struct TaggedView: View {
                     }
             }
         }
+        .frame(minWidth: 200)
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color("DarkMaterial"))
         )
-        .frame(minWidth: 200)
     }
 }
+
