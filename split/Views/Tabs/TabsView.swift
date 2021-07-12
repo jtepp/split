@@ -49,19 +49,22 @@ struct TabsView: View {
                             Spacer()
                             HStack {
                                 Spacer()
-                                FloatingMenuButton(open: $FMBopen, actions: [
+                                FloatingMenuButton(open: $FMBopen, above: true,radius: 35, rotate: true, actions: [
                                                     Action(image: "plus.bubble", label: "New message") {
                                                         //new message popup
                                                         showMessagePopover = true
+                                                        FMBopen = false
                                                     },
                                                     Action(image: "arrow.right.circle", label: "New payment") {
                                                         payType = 0
                                                         tabSelection = 2
+                                                        FMBopen = false
                                                     },
                                                     Action(image: "arrow.left.circle", label: "New Request") {
                                                         payType = 1
                                                         tabSelection = 2
-                                                    }])
+                                                        FMBopen = false
+                                                    }], image: "plus")
                                     .offset(x: 60, y: needsMoreOffset() ? -100 : -60)
                                     .opacity(showMessagePopover ? 0 : 1)
                                     .allowsHitTesting(showMessagePopover ? false : true)

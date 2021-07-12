@@ -16,10 +16,13 @@ struct ActivityView: View {
     @State var showSplash = false
     @Binding var showMessagePopover: Bool
     @Binding var GMmsg: String
+    @State var filterOpen = false
     var body: some View {
         ScrollView {
             HStack {
                 HeaderText(text: "Activity")
+                //fmb 2
+                FloatingMenuButton(open: $filterOpen, above: false, radius: 20, actions: Action.placeholders, image: "plus")
                 Spacer()
                 Button(action: {
                     showSplash = true

@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-struct FloatingMenuButton: View {
+struct FloatingMenuButton: View{
     @Binding var open: Bool
+    var above: Bool
+    var radius: CGFloat
+    var rotate: Bool = false
     var actions:[Action]
+    var image: String
     var body: some View {
         ZStack {
             VStack{
@@ -18,7 +22,6 @@ struct FloatingMenuButton: View {
                     HStack {
                         Button{
                             a.action()
-                            open = false
                         }
                         label: {
                             Text(a.label)
@@ -46,36 +49,38 @@ struct FloatingMenuButton: View {
             .padding()
             .background(RoundedRectangle(cornerRadius: 20).fill(Color("DarkMaterial")))
             .shadow(radius: 10)
-            .offset(x:-80, y: -CGFloat(20*actions.count + 4) - 60)
-//            .opacity(open ? 1 : 0)
+            .offset(x:-2 * radius - 10, y: (above ? -1 : 1) * (CGFloat(20*actions.count + 4) + 25 + radius))
+            //            .opacity(open ? 1 : 0)
             .scaleEffect(open ? 1 : 0)
             .animation(.easeInOut.speed(1.2))
             
             Circle()
                 .fill(Color("DarkMaterial"))
                 .shadow(radius: 10)
-                .frame(width: 70, height: 70)
+                .frame(width: 2*radius, height: 2*radius)
                 .overlay(
-                    Image(systemName: "plus")
+                    //                    Image(systemName: "plus")
+                    //                        .resizable()
+                    Image(systemName: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .padding()
                         .foregroundColor(.white)
-                        .rotationEffect(Angle(degrees: open ? 135 : 0))
-                        .onTapGesture {
-                            withAnimation(.easeInOut) {
-                                open.toggle()
-                            }
-                        }
+                        .rotationEffect(Angle(degrees: (open && rotate) ? 135 : 0))
                     
                 )
+                .onTapGesture {
+                    withAnimation(.easeInOut) {
+                        open.toggle()
+                    }
+                }
         }
     }
 }
 
 struct FloatingButton_Previews: PreviewProvider {
     static var previews: some View {
-        FloatingMenuButton(open: .constant(false), actions: Action.placeholders)
+        FloatingMenuButton(open: .constant(false), above: true, radius: 35, rotate: true, actions: Action.placeholders, image: "plus")
     }
 }
 
