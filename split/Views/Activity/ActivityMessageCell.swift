@@ -38,7 +38,7 @@ struct ActivityMessageCell: View {
                                 .lineLimit(2)
                                 .padding(.vertical, -4)
                         }
-                        .frame(maxWidth: 60)
+                        .frame(width: 40)
                     } else {
                         Rectangle()
                             .fill(Color.clear)
@@ -106,7 +106,7 @@ struct ActivityMessageCell: View {
                                     .lineLimit(2)
                                     .padding(.vertical, -4)
                             }
-                            .frame(maxWidth: 60)
+                            .frame(width: 40)
                         } else {
                             Rectangle()
                                 .fill(Color.clear)
@@ -117,6 +117,7 @@ struct ActivityMessageCell: View {
                 }
             }
         }
+        .padding(.bottom, nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) ? -20 : 0)
     }
 }
 
