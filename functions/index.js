@@ -7,7 +7,6 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
     var title;
     var body;
     var snd = "default"
-    var category = "";
 
     if (event.after.get("isAn")) {
         let memo = event.after.get("memo")
@@ -25,7 +24,6 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         snd = "pay.mp3"
         title = "from " + event.after.get("from")
         body = event.after.get("memo")
-        category = "QuickReply"
 
     } else if (event.after.get("isRequest")) {
         snd = "req.mp3"
@@ -58,7 +56,6 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                 payload: {
                     aps: {
                         sound: snd,
-                        category: category
                     }
                 }
             }

@@ -47,7 +47,7 @@ struct ComposeView: View {
                     if canTap {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         canTap = false
-                        Fetch().sendPayment(p: paymentFromMsg(msg), h: house){
+                        Fetch().sendPayment(p: paymentFromMsg(msg), h: house){ 
                             canTap = true
                             msg = ""
                             show = false

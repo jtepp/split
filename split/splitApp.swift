@@ -50,16 +50,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 options: authOptions,
                 completionHandler: {(granted, error) in
                     
-                    guard granted else { return }
-                    UNUserNotificationCenter.current().delegate = self
-                    let replyAction = UNTextInputNotificationAction(identifier: "ReplyAction", title: "Reply", options: [])
-                    let quickReplyCategory = UNNotificationCategory(identifier: "QuickReply", actions: [replyAction], intentIdentifiers: [], options: [])
-                    UNUserNotificationCenter.current().setNotificationCategories([quickReplyCategory])
-                    
-                    UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-                        guard settings.authorizationStatus == .authorized else { return }
-                        //                            UIApplication.shared.registerForRemoteNotifications()
-                    }
+//                    guard granted else { return }
+//                    UNUserNotificationCenter.current().delegate = self
+//                    let replyAction = UNTextInputNotificationAction(identifier: "ReplyAction", title: "Reply", options: [])
+//                    let quickReplyCategory = UNNotificationCategory(identifier: "QuickReply", actions: [replyAction], intentIdentifiers: [], options: [])
+//                    UNUserNotificationCenter.current().setNotificationCategories([quickReplyCategory])
+//                    
+//                    UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+//                        guard settings.authorizationStatus == .authorized else { return }
+//                        //                            UIApplication.shared.registerForRemoteNotifications()
+//                    }
                     
                 })
             
@@ -167,12 +167,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if response.actionIdentifier == "ReplyAction" {
             let textResponse = response as! UNTextInputNotificationResponse
             print(textResponse.userText)
-            var house = House.empty
-            house.id = UserDefaults.standard.string(forKey: "houseId") ?? "NOHOD"
-            print(house.id)
-            Fetch().sendPayment(p: paymentFromMsg(textResponse.userText), h: house){
-                print(false)
-            }
+
         }
         
         print("ugh user info^")
