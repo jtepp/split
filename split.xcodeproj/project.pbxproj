@@ -31,6 +31,7 @@
 		0C2A05A0265CB17D002BD46D /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A059F265CB17D002BD46D /* House.swift */; };
 		0C5C0E2D269CA14E00BD092F /* TrayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C0E2C269CA14E00BD092F /* TrayButton.swift */; };
 		0C5C0E30269CB16200BD092F /* TrayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C0E2F269CB16200BD092F /* TrayItem.swift */; };
+		0C5C0E32269CBEDE00BD092F /* VerticalToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C0E31269CBEDE00BD092F /* VerticalToggle.swift */; };
 		0C625972265EA868002E58A3 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C625971265EA868002E58A3 /* Payment.swift */; };
 		0C625991265EB440002E58A3 /* HeaderText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C625990265EB440002E58A3 /* HeaderText.swift */; };
 		0C64FECD265EC57F009B0C3C /* GeneralPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */; };
@@ -195,6 +196,7 @@
 		0C2A059F265CB17D002BD46D /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
 		0C5C0E2C269CA14E00BD092F /* TrayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrayButton.swift; sourceTree = "<group>"; };
 		0C5C0E2F269CB16200BD092F /* TrayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrayItem.swift; sourceTree = "<group>"; };
+		0C5C0E31269CBEDE00BD092F /* VerticalToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalToggle.swift; sourceTree = "<group>"; };
 		0C625971265EA868002E58A3 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPaymentCell.swift; sourceTree = "<group>"; };
 		0C625990265EB440002E58A3 /* HeaderText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderText.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				0C5C0E2C269CA14E00BD092F /* TrayButton.swift */,
+				0C5C0E31269CBEDE00BD092F /* VerticalToggle.swift */,
 				0C5C0E2F269CB16200BD092F /* TrayItem.swift */,
 			);
 			path = Filter;
@@ -834,6 +837,7 @@
 				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,
 				0CEE3827265E16700013BB12 /* MemberDetailsView.swift in Sources */,
 				0C15F8912685026E006BF2B0 /* KeyboardReadable.swift in Sources */,
+				0C5C0E32269CBEDE00BD092F /* VerticalToggle.swift in Sources */,
 				0C6A7459269392D900275A9B /* ActivityAnnouncementCell.swift in Sources */,
 				0C016A9D2687E72700EFFC3E /* UIImage+rotate.swift in Sources */,
 				0C6A745A269392D900275A9B /* ActivityPaymentCell.swift in Sources */,

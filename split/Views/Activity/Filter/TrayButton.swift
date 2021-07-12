@@ -16,53 +16,95 @@ struct TrayButton: View {
     var body: some View {
         
         HStack {
-            if !open {
-            Image("funnel")
-                .resizable()
-                .renderingMode(.template)
-                .foregroundColor(.white)
-                .frame(width: 18, height: 18, alignment: .center)
-                .padding(14)
-            } else {
-                TrayItem(on: $incPay)
-                TrayItem(on: $incReq)
-                TrayItem(on: $incAn)
-                TrayItem(on: $incGM)
+            if open {
+                HStack {
+                    TrayItem(on: $incPay)
+                    Rectangle()
+                        .fill(Color("Material"))
+                        .frame(width: 2)
+                    TrayItem(on: $incReq)
+                    Rectangle()
+                        .fill(Color("Material"))
+                        .frame(width: 2)
+                    TrayItem(on: $incAn)
+                    Rectangle()
+                        .fill(Color("Material"))
+                        .frame(width: 2)
+                    TrayItem(on: $incGM)
+                }.padding(.horizontal)
             }
+            Button {open.toggle()}
+                label: {
+                    ZStack {
+                        Image("funnel")
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.white)
+                            .frame(width: 18, height: 18, alignment: .center)
+                            .padding(14)
+                            .opacity(open ? 0 : 1)
+                            .allowsHitTesting(!open)
+                        Image(systemName: "plus")
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.white)
+                            .frame(width: 18, height: 18, alignment: .center)
+                            .padding(14)
+                            .rotationEffect(Angle(degrees: open ? 45 : -90))
+                            .opacity(open ? 1 : 0)
+                            .allowsHitTesting(open)
+                        
+                    }
+                    
+                }
         }
-        .background(
-            Capsule()
-                .fill(
-                    Color.gray.opacity(0.2)
-                )
-        )
-    }
-}
-
-struct TrayButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ScrollView {
-            HStack {
-                HeaderText(text: "Activity", space: false)
-                TrayButton(open: .constant(true), incPay: .constant(true), incReq: .constant(true), incAn: .constant(true), incGM: .constant(true))
-                Spacer()
-                Button(action: {
-                }, label:{
-                    Image(systemName: "questionmark")
-                        .font(Font.body.bold())
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(
-                            Circle()
-                                .fill(
-                                    Color.gray.opacity(0.2)
-                                )
+                .background(
+                    Capsule()
+                        .fill(
+                            Color.gray.opacity(0.2)
                         )
-                })
-                .padding()
-            }
+                        .frame(height:46)
+                )
+                .frame(height:46)
+                .animation(.easeOut)
         }
-        .background(Color.black.edgesIgnoringSafeArea(.all))
     }
-}
+    
+    struct TBC: View {
+        @State var open = false
+        var body: some View {
+            ScrollView {
+                HStack {
+                    HeaderText(text: "Activity", space: false)
+                    TrayButton(open: $open, incPay: .constant(true), incReq: .constant(true), incAn: .constant(true), incGM: .constant(true))
+                    Spacer()
+                }
+                .overlay(
+                    Button(action: {
+                    }, label:{
+                        Image(systemName: "questionmark")
+                            .font(Font.body.bold())
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(
+                                Circle()
+                                    .fill(
+                                        Color.gray.opacity(0.2)
+                                    )
+                            )
+                    })
+                    .padding()
+                    .offset(x: open ? 100 : 0)
+                    .animation(.easeOut), alignment: .trailing
+                )
+            }
+            .background(Color.black.edgesIgnoringSafeArea(.all))
+        }
+    }
+    
+    struct TrayButton_Previews: PreviewProvider {
+        static var previews: some View {
+            TBC()
+        }
+    }
 

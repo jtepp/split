@@ -20,15 +20,16 @@ struct ActivityView: View {
     @State var incReq = true
     @State var incAn = true
     @State var incGM = true
-    @State var FilterButtonOpen = false
+    @State var TrayButtonOpen = false
     var body: some View {
         ScrollView {
             HStack {
                 HeaderText(text: "Activity", space: false)
-                TrayButton(open: $FilterButtonOpen, incPay: $incPay, incReq: $incReq, incAn: $incAn, incGM: $incGM)
+                TrayButton(open: $TrayButtonOpen, incPay: $incPay, incReq: $incReq, incAn: $incAn, incGM: $incGM)
                 Spacer()
+            }
+            .overlay(
                 Button(action: {
-                    showSplash = true
                 }, label:{
                     Image(systemName: "questionmark")
                         .font(Font.body.bold())
@@ -42,7 +43,9 @@ struct ActivityView: View {
                         )
                 })
                 .padding()
-            }
+                .offset(x: TrayButtonOpen ? 100 : 0)
+                .animation(.easeOut), alignment: .trailing
+            )
             if house.payments.isEmpty || !house.payments.contains { pp in
                 return !pp.isAn
             } {

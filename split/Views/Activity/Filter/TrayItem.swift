@@ -9,20 +9,19 @@ import SwiftUI
 
 struct TrayItem: View {
     @Binding var on: Bool
+    var img: String = "arrow.right.circle"
     var body: some View {
-        
-        Label(
-            title: { Text("Messages")},
-            icon: { Image(systemName: on ? "circlebadge.fill" : "circlebadge") }
-        )
-        .onTapGesture {
-            on.toggle()
+        HStack {
+            Image(systemName: img)
+                .foregroundColor(.white)
+            VerticalToggle(on: $on)
+                .frame(width: 10, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
         }
     }
 }
 
 struct FilterButtonItem_Previews: PreviewProvider {
     static var previews: some View {
-        TrayItem(on: .constant(true))
+        TBC()
     }
 }
