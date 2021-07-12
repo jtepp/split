@@ -17,7 +17,7 @@ struct ActivityMessageCell: View {
             if payment.by != (UserDefaults.standard.string(forKey: "myId") ?? "") {
                 VStack {
                     Spacer()
-//                    if !nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) {
+                    if !nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) {
                         VStack {
                             b64toimg(b64: img)
                                 .resizable()
@@ -38,7 +38,11 @@ struct ActivityMessageCell: View {
                                 .lineLimit(2)
                                 .padding(.vertical, -4)
                         }
-//                    }
+                    } else {
+                        Rectangle()
+                            .fill(Color.clear)
+                            .frame(width: 40)
+                    }
                 }
                 .padding(.trailing)
             }
@@ -64,7 +68,7 @@ struct ActivityMessageCell: View {
             .padding(.top, 6)
             .padding(.bottom, 10)
             .background(
-                CustomRoundedRect(corners: [.topLeft, .topRight, payment.by == (UserDefaults.standard.string(forKey: "myId") ?? "") ? .bottomLeft : .bottomRight],radius: 10)
+                CustomRoundedRect(corners: nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) ? [.allCorners] : [.topLeft, .topRight, (payment.by == (UserDefaults.standard.string(forKey: "myId") ?? "") ? .bottomLeft : .bottomRight)],radius: 10)
                     .fill(
                         Color(payment.by == (UserDefaults.standard.string(forKey: "myId") ?? "") ? "MessageBlue" : "MessageWhite")
                     )
@@ -80,7 +84,7 @@ struct ActivityMessageCell: View {
                 VStack {
                     VStack {
                         Spacer()
-//                        if !nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) {
+                        if !nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) {
                             VStack {
                                 b64toimg(b64: img)
                                     .resizable()
@@ -101,7 +105,11 @@ struct ActivityMessageCell: View {
                                     .lineLimit(2)
                                     .padding(.vertical, -4)
                             }
-//                        }
+                        } else {
+                            Rectangle()
+                                .fill(Color.clear)
+                                .frame(width: 40)
+                        }
                     }
                     .padding(.leading)
                 }
