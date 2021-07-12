@@ -60,6 +60,7 @@ struct NoProfileView: View {
                         UserDefaults.standard.set("", forKey: "houseId")
                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
                         UserDefaults.standard.set("", forKey: "myId")
+                        UserDefaults.standard.set("", forKey: "imageB64")
                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
                         myId = ""
@@ -72,7 +73,8 @@ struct NoProfileView: View {
                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(md, forKey: "myId")
                         myId = md!
                         show = false
-                        Fetch().bindingMemberFromIdsWR(id: myId, bm: $m)
+                        print("BINDERNO")
+                        Fetch().bindingMemberFromIdsWR(id: myId, bm: $m, house: $house, myId: $myId)
                     }
                 }
         }
