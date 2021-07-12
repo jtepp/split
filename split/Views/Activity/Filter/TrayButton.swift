@@ -22,15 +22,15 @@ struct TrayButton: View {
                     Rectangle()
                         .fill(Color("Material"))
                         .frame(width: 2)
-                    TrayItem(on: $incReq)
+                    TrayItem(on: $incReq, img: "arrow.left.circle")
                     Rectangle()
                         .fill(Color("Material"))
                         .frame(width: 2)
-                    TrayItem(on: $incAn)
+                    TrayItem(on: $incAn, img: "exclamationmark.square")
                     Rectangle()
                         .fill(Color("Material"))
                         .frame(width: 2)
-                    TrayItem(on: $incGM)
+                    TrayItem(on: $incGM, img: "bubble.left")
                 }.padding(.horizontal)
             }
             Button {open.toggle()}
@@ -75,10 +75,12 @@ struct TrayButton: View {
         var body: some View {
             ScrollView {
                 HStack {
-                    HeaderText(text: "Activity", space: false)
+                    HeaderText(text: "Activity", space: false, clear: .constant(false))
+                        .opacity(open ? 0 : 1)
                     TrayButton(open: $open, incPay: .constant(true), incReq: .constant(true), incAn: .constant(true), incGM: .constant(true))
                     Spacer()
                 }
+                .frame(height:46)
                 .overlay(
                     Button(action: {
                     }, label:{

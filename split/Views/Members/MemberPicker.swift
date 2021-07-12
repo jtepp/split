@@ -16,7 +16,7 @@ struct MemberPicker: View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             ScrollView {
-                HeaderText(text: "Choose \(multiple ? "members" : "a member")")
+                HeaderText(text: "Choose \(multiple ? "members" : "a member")", clear: .constant(false))
                 ForEach (house.members.filter({ (m) -> Bool in
                     return m.id != UserDefaults.standard.string(forKey: "myId")
                 })) { member in

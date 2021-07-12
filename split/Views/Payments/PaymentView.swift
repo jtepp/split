@@ -16,7 +16,7 @@ struct PaymentView: View {
     @Binding var rchoice: [Member]
     var body: some View {
         ScrollView {
-            HeaderText(text: payType == 1 ? "Request" : "Payment")
+            HeaderText(text: payType == 1 ? "Request" : "Payment", clear: .constant(false))
             Picker(selection: $payType, label: Text("Picker"), content: {
                 Text("Payment").tag(0)
                 Text("Request").tag(1)

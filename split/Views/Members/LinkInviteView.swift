@@ -26,7 +26,7 @@ struct LinkInviteView: View {
     @State var choice = [Member]()
     var body: some View {
         VStack{
-            HeaderText(text: "Invitation to join")
+            HeaderText(text: "Invitation to join", clear: .constant(false))
             HStack {
                 Text(newName)
                     .font(Font.largeTitle.bold())

@@ -31,7 +31,7 @@ struct ProfileView: View, KeyboardReadable {
         ScrollView {
             ScrollViewReader { svr in
                 HStack {
-                    HeaderText(text: "Profile")
+                    HeaderText(text: "Profile", clear: .constant(false))
                         .id("top")
                     Spacer()
 //                    Menu {
@@ -267,7 +267,7 @@ struct ProfileView: View, KeyboardReadable {
                     //                            print("NOOO \(err?.localizedDescription)")
                     //                        }
                     //                    }
-                    HeaderText(text: "App icons")
+                    HeaderText(text: "App icons", clear: .constant(false))
                     HStack {
                         VStack(alignment: .leading) {
                             

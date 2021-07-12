@@ -17,7 +17,7 @@ struct SplashView: View {
     var body: some View {
         VStack {
 
-            HeaderText(text: "What's New")
+            HeaderText(text: "What's New", clear: .constant(false))
                 .overlay(
                     VStack {
                         Spacer()

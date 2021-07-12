@@ -18,7 +18,7 @@ struct EditProfileView: View {
     @State var cropperShown = false
     var body: some View {
         ScrollView {
-            HeaderText(text: "Create your profile")
+            HeaderText(text: "Create your profile", clear: .constant(false))
             VStack {
                 b64toimg(b64: m.image)
                     .resizable()

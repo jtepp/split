@@ -24,10 +24,11 @@ struct ActivityView: View {
     var body: some View {
         ScrollView {
             HStack {
-                HeaderText(text: "Activity", space: false)
+                HeaderText(text: "Activity", space: false, clear: $TrayButtonOpen)
                 TrayButton(open: $TrayButtonOpen, incPay: $incPay, incReq: $incReq, incAn: $incAn, incGM: $incGM)
                 Spacer()
             }
+            .frame(height:46)
             .overlay(
                 Button(action: {
                 }, label:{
@@ -46,12 +47,43 @@ struct ActivityView: View {
                 .offset(x: TrayButtonOpen ? 100 : 0)
                 .animation(.easeOut), alignment: .trailing
             )
+            .padding(.top)
             if house.payments.isEmpty || !house.payments.contains { pp in
                 return !pp.isAn
             } {
                 VStack {
                     Spacer()
                     Text("No payments have been posted yet")
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(
+                                    Color("DarkMaterial")
+                                )
+                        )
+                        .onTapGesture {
+                            tabSelection = 2
+                        }
+                        .padding()
+                    
+                }
+            } else if house.payments.filter({p in
+                return incPay ? true :(p.isAn || p.isRequest || p.isGM)
+            })
+            .filter({p in
+                return incReq ? true : !p.isRequest
+            })
+            .filter({p in
+                return incAn ? true : !p.isAn
+            })
+            .filter({p in
+                return incGM ? true : !p.isGM
+            }).isEmpty {
+                VStack {
+                    Spacer()
+                    Text("No payments visible through this filter")
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                         .padding()
