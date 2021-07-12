@@ -33,7 +33,7 @@ struct TabsView: View {
                 content:  {
                     ZStack {
                         ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member)
-                            .blur(radius: FMBopen ? 8 : 0)
+                            .blur(radius: FMBopen || showMessagePopover ? 8 : 0)
                         if FMBopen {
                             Rectangle()
                                 .fill(
@@ -62,10 +62,20 @@ struct TabsView: View {
                                 .offset(x: 60, y: -60)
                             }
                         }
+                        if showMessagePopover {
+                            Rectangle()
+                                .fill(
+                                    Color("DarkMaterial").opacity(0.01)
+                                )
+                                .onTapGesture {
+                                    showMessagePopover = false
+                                }
+                        }
+                        ComposeView(members: .constant(house.members), show: $showMessagePopover)
+                            .offset(y: showMessagePopover ? 0 : 400)
+                            .opacity(showMessagePopover ? 1 : 0)
+                            .animation(Animation.easeOut.speed(2))
                     }
-                    .popover(isPresented: $showMessagePopover, content: {
-                        Text("MESSAGE")
-                    })
                     .tag(0)
                     MembersView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)
                         .tag(1)

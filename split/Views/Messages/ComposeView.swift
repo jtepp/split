@@ -10,29 +10,13 @@ import SwiftUI
 struct ComposeView: View {
     @Binding var members: [Member]
     @Binding var show: Bool
-    @State var msg = "hey @joh"
+    @State var msg = ""
     @State var tagmsg = ""
     @State var showTagged = false
     var body: some View {
         ZStack {
             HStack {
-                TextField("Message...", text: $msg, onEditingChanged: { bool in
-                    
-                    if (msg.components(separatedBy: " ").last ?? "").contains("@") {
-                        tagmsg = msg.components(separatedBy: " ").last!
-                        withAnimation(.easeOut.speed(2)) {
-                            showTagged = true
-                        }
-                    } else {
-                        tagmsg = ""
-                        withAnimation(.easeOut.speed(2)) {
-                            showTagged = false
-                        }
-                    }
-                    
-                }, onCommit: {
-                    
-                })
+                TextField("Message...", text: $msg)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 Button("Send"){
@@ -43,6 +27,15 @@ struct ComposeView: View {
                 }
                 .padding(.leading, -8)
                 .padding(.trailing)
+                .onChange(of: msg, perform: { _ in
+                    if (msg.components(separatedBy: " ").last ?? "").contains("@") {
+                        tagmsg = msg.components(separatedBy: " ").last!
+                        showTagged = true
+                    } else {
+                        tagmsg = ""
+                        showTagged = false
+                    }
+                })
             }
             .background(
                 RoundedRectangle(cornerRadius: 10)
