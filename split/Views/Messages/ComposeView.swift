@@ -13,6 +13,7 @@ struct ComposeView: View {
     @State var msg = ""
     @State var tagmsg = ""
     @State var showTagged = false
+    @State var canTap = true
     var body: some View {
         ZStack {
             HStack {
@@ -20,13 +21,16 @@ struct ComposeView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 Button("Send"){
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        show = false
+                    if canTap {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            show = false
+                        }
                     }
                 }
                 .padding(.leading, -8)
                 .padding(.trailing)
+                .disabled(!canTap)
                 .onChange(of: msg, perform: { _ in
                     if (msg.components(separatedBy: " ").last ?? "").contains("@") {
                         tagmsg = msg.components(separatedBy: " ").last!
@@ -75,7 +79,7 @@ struct TaggedView: View {
     var body: some View {
         VStack {
             ForEach(members.filter({ fm in
-                return fm.id != UserDefaults.standard.string(forKey: "myId") && fm.name.lowercased().contains(tagmsg.lowercased())
+                return fm.id != UserDefaults.standard.string(forKey: "myId") && fm.name.lowercased().contains(tagmsg.replacingOccurrences(of: "@", with: "").lowercased())
             })) {m in
                 Button {}
                     label: {
