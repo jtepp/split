@@ -47,7 +47,22 @@ class AppDelegate: NSObject, UIApplicationDelegate {
           let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
           UNUserNotificationCenter.current().requestAuthorization(
             options: authOptions,
-            completionHandler: {_, _ in })
+            completionHandler: {(granted, error) in
+                
+                guard granted else { return }
+                        let replyAction = UNTextInputNotificationAction(identifier: "ReplyAction", title: "Reply", options: [])
+                        let openAppAction = UNNotificationAction(identifier: "OpenAppAction", title: "Open app", options: [.foreground])
+                        let quickReplyCategory = UNNotificationCategory(identifier: "QuickReply", actions: [replyAction, openAppAction], intentIdentifiers: [], options: [])
+                        UNUserNotificationCenter.current().setNotificationCategories([quickReplyCategory])
+                        
+                        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+                            guard settings.authorizationStatus == .authorized else { return }
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                
+            })
+            
+            
         } else {
           let settings: UIUserNotificationSettings =
           UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -121,6 +136,8 @@ extension AppDelegate: MessagingDelegate {
 
 @available(iOS 10, *)
 extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         
@@ -149,5 +166,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         completionHandler()
     }
+    
+    
     
 }

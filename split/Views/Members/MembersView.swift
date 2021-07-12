@@ -39,7 +39,7 @@ struct MembersView: View {
                             UIPasteboard.general.string = "Join my group on spllit!\nspllit://\(house.id)$\(house.password)"
                         } label: {
                             Text("Copy group invite")
-                            Image(systemName: "link.circle")
+                            Image(systemName: "link")
                         }
                         Button {
                             UIPasteboard.general.string = "\(house.id)"
@@ -59,7 +59,7 @@ struct MembersView: View {
                         UIPasteboard.general.string = "Join my group on spllit!\nspllit://\(house.id)$\(house.password)"
                     } label: {
                         Text("Copy group invite")
-                        Image(systemName: "link.circle")
+                        Image(systemName: "link")
                     }
                     Button {
                         UIPasteboard.general.string = "\(house.id)"
