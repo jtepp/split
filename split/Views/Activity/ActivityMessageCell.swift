@@ -37,7 +37,9 @@ struct ActivityMessageCell: View {
                                 .foregroundColor(Color("Material"))
                                 .lineLimit(2)
                                 .padding(.vertical, -4)
+                                .minimumScaleFactor(0.4)
                         }
+                        .fixedSize(horizontal: false, vertical: true)
                         .frame(width: 40)
                     } else {
                         Rectangle()
@@ -105,7 +107,9 @@ struct ActivityMessageCell: View {
                                     .foregroundColor(Color("Material"))
                                     .lineLimit(2)
                                     .padding(.vertical, -4)
+                                    .minimumScaleFactor(0.4)
                             }
+                            .fixedSize(horizontal: false, vertical: true)
                             .frame(width: 40)
                         } else {
                             Rectangle()
