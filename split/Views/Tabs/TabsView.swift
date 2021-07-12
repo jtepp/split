@@ -28,12 +28,13 @@ struct TabsView: View {
     @State var rchoice = [Member]()
     @State var FMBopen = false
     @State var showMessagePopover = false
+    @State var GMmsg = ""
     @State var focus: String? = ""
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
                     ZStack {
-                        ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member)
+                        ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member, showMessagePopover: $showMessagePopover, GMmsg: $GMmsg)
                             .blur(radius: FMBopen || showMessagePopover ? 8 : 0)
                         if FMBopen {
                             Rectangle()
@@ -75,7 +76,7 @@ struct TabsView: View {
                                     showMessagePopover = false
                                 }
                         }
-                        ComposeView(house: $house, members: .constant(house.members), show: $showMessagePopover, focus: $focus)
+                        ComposeView(house: $house, members: .constant(house.members), msg: $GMmsg, show: $showMessagePopover, focus: $focus)
                             .offset(y: showMessagePopover ? 0 : 400)
                             .opacity(showMessagePopover ? 1 : 0)
                             .animation(Animation.easeOut)

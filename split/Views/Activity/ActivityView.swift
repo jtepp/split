@@ -14,6 +14,8 @@ struct ActivityView: View {
     @Binding var noProf: Bool
     @Binding var m: Member
     @State var showSplash = false
+    @Binding var showMessagePopover: Bool
+    @Binding var GMmsg: String
     var body: some View {
         ScrollView {
             HStack {
@@ -82,7 +84,7 @@ struct ActivityView: View {
                     } else if payment.isGM {
                         ActivityMessageCell(allPayments: .constant(house.payments.sorted(by: { a, b in
                             return a.time > b.time
-                        })), payment: .constant(payment), member: $m)
+                        })), payment: .constant(payment), member: $m, GMmsg: $GMmsg, showMessagePopover: $showMessagePopover)
                             
                     } else if payment.isRequest {
                         

@@ -11,8 +11,8 @@ import MbSwiftUIFirstResponder
 struct ComposeView: View {
     @Binding var house: House
     @Binding var members: [Member]
+    @Binding var msg: String
     @Binding var show: Bool
-    @State var msg = ""
     @State var tagmsg = ""
     @State var showTagged = false
     @State var canTap = true
@@ -47,7 +47,7 @@ struct ComposeView: View {
                     if canTap {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         canTap = false
-                        Fetch().sendPayment(p: paymentFromMsg(msg), h: house){ 
+                        Fetch().sendPayment(p: paymentFromMsg(msg), h: house){
                             canTap = true
                             msg = ""
                             show = false
@@ -113,7 +113,7 @@ struct ComposeView_Previews: PreviewProvider {
                 .font(.largeTitle)
                 .offset(y:-100)
                 .blur(radius: 10)
-            ComposeView(house: .constant(.empty), members: .constant([.placeholder, .placeholder2, .placeholder3]), show: .constant(true), focus: .constant(""))
+            ComposeView(house: .constant(.empty), members: .constant([.placeholder, .placeholder2, .placeholder3]), msg: .constant(""), show: .constant(true), focus: .constant(""))
                 .padding()
         }
         

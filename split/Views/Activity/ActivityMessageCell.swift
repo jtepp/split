@@ -12,13 +12,16 @@ struct ActivityMessageCell: View {
     @Binding var payment: Payment
     @Binding var member: Member
     @State var img = ""
+    @Binding var GMmsg: String
+    @Binding var showMessagePopover: Bool
     var body: some View {
         
         Menu {
             
             if payment.by != member.id {
                 Button {
-                    
+                    GMmsg = "@"+payment.from+" "
+                    showMessagePopover = true
                 } label: {
                     Text("Reply")
                     Image(systemName: "arrowshape.turn.up.left")
@@ -188,7 +191,7 @@ struct ActivityMessageCell_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            ActivityMessageCell(allPayments: .constant([.placeholderm]), payment: .constant(.placeholder), member: .constant(.placeholder))
+            ActivityMessageCell(allPayments: .constant([.placeholderm]), payment: .constant(.placeholder), member: .constant(.placeholder), GMmsg: .constant(""), showMessagePopover: .constant(true))
                 .frame(height: 00)
         }
     }
