@@ -84,16 +84,16 @@ struct ActivityView: View {
                             return a.time > b.time
                         })), payment: .constant(payment))
                         .contextMenu(menuItems: {
-//                            if m.admin || payment.by == m.id {
-//                            Button {
-//                                Fetch().deletePayment(p: payment, h: house)
-//                            } label: {
-//                                Text("Delete")
-//                                    .foregroundColor(.red)
-//                                Image(systemName: "trash")
-//                                    .foregroundColor(.red)
-//                            }
-//                            }
+                            if m.admin || payment.by == m.id {
+                            Button {
+                                Fetch().deletePayment(p: payment, h: house)
+                            } label: {
+                                Text("Delete")
+                                    .foregroundColor(.red)
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red)
+                            }
+                            }
                             
                         })
                             
