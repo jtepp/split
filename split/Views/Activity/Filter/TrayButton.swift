@@ -16,12 +16,19 @@ struct TrayButton: View {
     var body: some View {
         
         HStack {
+            if !open {
             Image("funnel")
                 .resizable()
                 .renderingMode(.template)
                 .foregroundColor(.white)
                 .frame(width: 18, height: 18, alignment: .center)
                 .padding(14)
+            } else {
+                TrayItem(on: $incPay)
+                TrayItem(on: $incReq)
+                TrayItem(on: $incAn)
+                TrayItem(on: $incGM)
+            }
         }
         .background(
             Capsule()

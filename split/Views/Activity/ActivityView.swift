@@ -67,7 +67,19 @@ struct ActivityView: View {
             }
             ForEach(house.payments.sorted(by: { a, b in
                 return a.time > b.time
-            })) { payment in
+            }).filter({p in
+                return incPay ? true :(p.isAn || p.isRequest || p.isGM)
+            })
+            .filter({p in
+                return incReq ? true : !p.isRequest
+            })
+            .filter({p in
+                return incAn ? true : !p.isAn
+            })
+            .filter({p in
+                return incGM ? true : !p.isGM
+            })
+            ) { payment in
                 if house.members.contains(where: { (m) -> Bool in
                     return m.id == UserDefaults.standard.string(forKey: "myId")
                 }){
