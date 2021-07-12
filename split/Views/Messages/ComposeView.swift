@@ -32,7 +32,9 @@ struct ComposeView: View {
                 .padding(.trailing)
                 .disabled(!canTap)
                 .onChange(of: msg, perform: { _ in
-                    if (msg.components(separatedBy: " ").last ?? "").contains("@") {
+                    if (members.contains(where: { mem in
+                        return mem.id != UserDefaults.standard.string(forKey: "myId") && mem.name.lowercased().contains((msg.components(separatedBy: " ").last ?? "").replacingOccurrences(of: "@", with: "").lowercased())
+                    })) {
                         tagmsg = msg.components(separatedBy: " ").last!
                         showTagged = true
                     } else {
@@ -51,6 +53,7 @@ struct ComposeView: View {
             VStack {
                 TaggedView(tagmsg: $tagmsg, members: $members)
                     .offset(y: showTagged ? 0: -600)
+                    .animation(Animation.easeOut.speed(2))
                 Spacer()
             }
         }

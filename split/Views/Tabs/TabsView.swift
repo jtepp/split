@@ -74,7 +74,7 @@ struct TabsView: View {
                         ComposeView(members: .constant(house.members), show: $showMessagePopover)
                             .offset(y: showMessagePopover ? 0 : 400)
                             .opacity(showMessagePopover ? 1 : 0)
-                            .animation(Animation.easeOut.speed(2))
+                            .animation(Animation.easeOut)
                     }
                     .tag(0)
                     MembersView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)
