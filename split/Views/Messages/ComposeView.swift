@@ -18,13 +18,13 @@ struct ComposeView: View {
     @State var canTap = true
     @Binding var focus: String?
     
-    init(house: Binding<House>, members: Binding<[Member]>, show: Binding<Bool>, focus: Binding<String?>) {
-        UITextField.appearance().clearButtonMode = .whileEditing
-        self._house = house
-        self._members = members
-        self._show = show
-        self._focus = focus
-    }
+//    init(house: Binding<House>, members: Binding<[Member]>, show: Binding<Bool>, focus: Binding<String?>) {
+////        UITextField.appearance().clearButtonMode = .whileEditing
+//        self._house = house
+//        self._members = members
+//        self._show = show
+//        self._focus = focus
+//    }
     
     
     var body: some View {
@@ -38,6 +38,11 @@ struct ComposeView: View {
                     .firstResponder(id: "msg", firstResponder: $focus, resignableUserOperations: .none)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
+                    .overlay(
+                        Button{msg = ""} label: {Image(systemName: "plus.circle.fill").rotationEffect(Angle(degrees: 45)).foregroundColor(Color("Material"))}.padding(.trailing, 24)
+                            .opacity(msg == "" ? 0 : 1)
+                        , alignment: .trailing
+                    )
                 Button("Send"){
                     if canTap {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
