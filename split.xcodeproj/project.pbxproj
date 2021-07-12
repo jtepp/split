@@ -29,7 +29,8 @@
 		0C2A058E265CAA44002BD46D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2A058D265CAA44002BD46D /* Preview Assets.xcassets */; };
 		0C2A059D265CB123002BD46D /* Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A059C265CB123002BD46D /* Fetch.swift */; };
 		0C2A05A0265CB17D002BD46D /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A059F265CB17D002BD46D /* House.swift */; };
-		0C5C0E2D269CA14E00BD092F /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C0E2C269CA14E00BD092F /* FilterButton.swift */; };
+		0C5C0E2D269CA14E00BD092F /* TrayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C0E2C269CA14E00BD092F /* TrayButton.swift */; };
+		0C5C0E30269CB16200BD092F /* TrayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C0E2F269CB16200BD092F /* TrayItem.swift */; };
 		0C625972265EA868002E58A3 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C625971265EA868002E58A3 /* Payment.swift */; };
 		0C625991265EB440002E58A3 /* HeaderText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C625990265EB440002E58A3 /* HeaderText.swift */; };
 		0C64FECD265EC57F009B0C3C /* GeneralPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */; };
@@ -192,7 +193,8 @@
 		0C2A058F265CAA44002BD46D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C2A059C265CB123002BD46D /* Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch.swift; sourceTree = "<group>"; };
 		0C2A059F265CB17D002BD46D /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
-		0C5C0E2C269CA14E00BD092F /* FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
+		0C5C0E2C269CA14E00BD092F /* TrayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrayButton.swift; sourceTree = "<group>"; };
+		0C5C0E2F269CB16200BD092F /* TrayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrayItem.swift; sourceTree = "<group>"; };
 		0C625971265EA868002E58A3 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPaymentCell.swift; sourceTree = "<group>"; };
 		0C625990265EB440002E58A3 /* HeaderText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderText.swift; sourceTree = "<group>"; };
@@ -431,6 +433,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		0C5C0E2E269CB15500BD092F /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				0C5C0E2C269CA14E00BD092F /* TrayButton.swift */,
+				0C5C0E2F269CB16200BD092F /* TrayItem.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		0C625970265EA855002E58A3 /* Payments */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,8 +457,8 @@
 		0C625976265EAE58002E58A3 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				0C5C0E2E269CB15500BD092F /* Filter */,
 				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
-				0C5C0E2C269CA14E00BD092F /* FilterButton.swift */,
 				0CBF09F3265D8F140016CA92 /* ActivityView.swift */,
 				0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */,
 				0CAA80362661860600A3081B /* ActivityAnnouncementCell.swift */,
@@ -833,9 +844,10 @@
 				0CAA803B2661CC4A00A3081B /* SplashView.swift in Sources */,
 				0CA0E9BD2660369D002876CF /* ModalView.swift in Sources */,
 				0CA0E9CA26603A32002876CF /* EditProfileView.swift in Sources */,
-				0C5C0E2D269CA14E00BD092F /* FilterButton.swift in Sources */,
+				0C5C0E2D269CA14E00BD092F /* TrayButton.swift in Sources */,
 				0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */,
 				0C95131E265DB7C0005398CF /* MemberCell.swift in Sources */,
+				0C5C0E30269CB16200BD092F /* TrayItem.swift in Sources */,
 				0CA0E9CD26604315002876CF /* View+allowAutoDismiss.swift in Sources */,
 				0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */,
 				0C2A0587265CAA44002BD46D /* splitApp.swift in Sources */,

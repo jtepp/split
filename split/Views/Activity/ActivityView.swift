@@ -20,11 +20,12 @@ struct ActivityView: View {
     @State var incReq = true
     @State var incAn = true
     @State var incGM = true
+    @State var FilterButtonOpen = false
     var body: some View {
         ScrollView {
             HStack {
-                HeaderText(text: "Activity")
-                FilterButton(incPay: $incPay, incReq: $incReq, incAn: $incAn, incGM: $incGM)
+                HeaderText(text: "Activity", space: false)
+                TrayButton(open: $FilterButtonOpen, incPay: $incPay, incReq: $incReq, incAn: $incAn, incGM: $incGM)
                 Spacer()
                 Button(action: {
                     showSplash = true
