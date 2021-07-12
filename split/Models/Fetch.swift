@@ -269,7 +269,7 @@ class Fetch: ObservableObject {
                     let f = d["fcm"] as? String ?? ""
                     let n = d["name"] as? String ?? ""
                     if f != "" {
-                        if p.memo.contains("@"+n) {
+                        if p.memo.lowercased().contains("@"+n.lowercased()) {
                             fcms.append(f)
                         }
                     }
