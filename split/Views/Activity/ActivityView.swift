@@ -31,6 +31,7 @@ struct ActivityView: View {
             .frame(height:46)
             .overlay(
                 Button(action: {
+                    showSplash = true
                 }, label:{
                     Image(systemName: "questionmark")
                         .font(Font.body.bold())

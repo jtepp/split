@@ -30,7 +30,7 @@ struct TrayButton: View {
                     Rectangle()
                         .fill(Color("Material"))
                         .frame(width: 2)
-                    TrayItem(on: $incGM, img: "text.bubble")
+                    TrayItem(on: $incGM, img: "bubble.left.and.bubble.right")
                 }.padding(.horizontal)
             }
             Button {open.toggle()}
