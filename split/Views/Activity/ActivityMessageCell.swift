@@ -123,7 +123,7 @@ struct ActivityMessageCell: View {
                 }
             }
         }
-        .padding(.bottom, nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) ? -20 : 0)
+        .padding(.bottom, nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) ? -10 : 0)
     }
 }
 

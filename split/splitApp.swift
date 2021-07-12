@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import UIKit
 
 @main
 struct splitApp: App {
@@ -61,6 +62,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 
             })
             
+            func didReceive(_ response: UNNotificationResponse, completionHandler completion: @escaping (UInt) -> Void) {
+                print("RESPONSER \(response)")
+                if response.actionIdentifier == "ReplyAction" {
+                    if let textResponse = response as? UNTextInputNotificationResponse {
+                        print("USERTEXTER \(textResponse.userText)")
+                        var house = House.empty
+                        house.id = UserDefaults.standard.string(forKey: "houseId") ?? "NOHOD"
+                            Fetch().sendPayment(p: paymentFromMsg(textResponse.userText), h: house)
+                        completion(0)
+                        print("DOANER")
+                        return
+                    }
+                }
+                completion(1)
+            }
             
         } else {
           let settings: UIUserNotificationSettings =
@@ -84,6 +100,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
       // Print full message.
       print(userInfo)
+        print("that was user info^")
 
       completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -147,6 +164,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         //print full message
         print(userInfo)
+        print("twas also user info^")
         
         //change this to preferred presentation option
         
@@ -162,7 +180,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         
         print(userInfo)
-        
+        print("ugh user info^")
         completionHandler()
     }
     
