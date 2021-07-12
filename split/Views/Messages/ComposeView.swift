@@ -9,6 +9,7 @@ import SwiftUI
 import MbSwiftUIFirstResponder
 
 struct ComposeView: View {
+    @Binding var house: House
     @Binding var members: [Member]
     @Binding var show: Bool
     @State var msg = ""
@@ -17,8 +18,9 @@ struct ComposeView: View {
     @State var canTap = true
     @Binding var focus: String?
     
-    init(members: Binding<[Member]>, show: Binding<Bool>, focus: Binding<String?>) {
+    init(house: Binding<House>, members: Binding<[Member]>, show: Binding<Bool>, focus: Binding<String?>) {
         UITextField.appearance().clearButtonMode = .whileEditing
+        self._house = house
         self._members = members
         self._show = show
         self._focus = focus
@@ -39,10 +41,8 @@ struct ComposeView: View {
                 Button("Send"){
                     if canTap {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            show = false
-                            msg = ""
-                        }
+                        canTap = false
+                        Fetch().sendPayment(p: paymentFromMsg(msg), h: house)
                     }
                 }
                 .padding(.leading, -8)
@@ -81,7 +81,7 @@ struct ComposeView_Previews: PreviewProvider {
                 .font(.largeTitle)
                 .offset(y:-100)
                 .blur(radius: 10)
-            ComposeView(members: .constant([.placeholder, .placeholder2, .placeholder3]), show: .constant(true), focus: .constant(""))
+            ComposeView(house: .constant(.empty), members: .constant([.placeholder, .placeholder2, .placeholder3]), show: .constant(true), focus: .constant(""))
                 .padding()
         }
         
@@ -117,3 +117,12 @@ struct TaggedView: View {
     }
 }
 
+
+func paymentFromMsg(_ msg: String) -> Payment {
+    let rf = msg.components(separatedBy: " ").filter { n in
+        return n.contains("@")
+    }.map { n in
+        return n.replacingOccurrences(of: "@", with: "")
+    }
+    return Payment(from: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "noname", reqfrom: rf, time: Int(NSDate().timeIntervalSince1970), memo: msg, isGM: true, by: UserDefaults.standard.string(forKey: "myId") ?? "noId")
+}

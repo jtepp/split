@@ -263,7 +263,17 @@ class Fetch: ObservableObject {
                     }
                 }
                 
-            } else if p.isRequest {
+            } else if p.isGM {
+                docs.forEach { qds in
+                    let d = qds.data()
+                    let f = d["fcm"] as? String ?? ""
+                    let n = d["name"] as? String ?? ""
+                    if f != "" && p.reqfrom.contains(n) {
+                        fcms.append(f)
+                    }
+                }
+                
+            }else if p.isRequest {
                 docs.forEach { qds in
                     let d = qds.data()
                     let f = d["fcm"] as? String ?? ""
