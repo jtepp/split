@@ -34,7 +34,7 @@ struct ActivityMessageCell: View {
                                 }
                             Text(payment.from)
                                 .font(.caption2)
-                                .foregroundColor(Color("Material"))
+                                .foregroundColor(.gray)
                                 .lineLimit(2)
                                 .padding(.vertical, -4)
                                 .minimumScaleFactor(0.4)
@@ -105,7 +105,7 @@ struct ActivityMessageCell: View {
                                     }
                                 Text(payment.from)
                                     .font(.caption2)
-                                    .foregroundColor(Color("Material"))
+                                    .foregroundColor(.gray)
                                     .lineLimit(2)
                                     .padding(.vertical, -4)
                                     .minimumScaleFactor(0.4)
