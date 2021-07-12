@@ -38,6 +38,7 @@ struct ActivityMessageCell: View {
                                 .lineLimit(2)
                                 .padding(.vertical, -4)
                         }
+                        .frame(maxWidth: 60)
                     } else {
                         Rectangle()
                             .fill(Color.clear)
@@ -105,6 +106,7 @@ struct ActivityMessageCell: View {
                                     .lineLimit(2)
                                     .padding(.vertical, -4)
                             }
+                            .frame(maxWidth: 60)
                         } else {
                             Rectangle()
                                 .fill(Color.clear)

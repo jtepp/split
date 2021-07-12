@@ -48,21 +48,22 @@ struct TabsView: View {
                             Spacer()
                             HStack {
                                 Spacer()
-                                FloatingMenuButton(open: $FMBopen, actions: [Action(image: "plus.bubble", label: "New message") {
-                                    //new message popup
-                                    showMessagePopover = true
-                                },
-                                Action(image: "arrow.right.circle", label: "New payment") {
-                                    payType = 0
-                                    tabSelection = 2
-                                },
-                                Action(image: "arrow.left.circle", label: "New Request") {
-                                    payType = 1
-                                    tabSelection = 2
-                                }])
-                                .offset(x: 60, y: -60)
-                                .opacity(showMessagePopover ? 0 : 1)
-                                .allowsHitTesting(showMessagePopover ? false : true)
+                                FloatingMenuButton(open: $FMBopen, actions: [
+                                                    Action(image: "plus.bubble", label: "New message") {
+                                                        //new message popup
+                                                        showMessagePopover = true
+                                                    },
+                                                    Action(image: "arrow.right.circle", label: "New payment") {
+                                                        payType = 0
+                                                        tabSelection = 2
+                                                    },
+                                                    Action(image: "arrow.left.circle", label: "New Request") {
+                                                        payType = 1
+                                                        tabSelection = 2
+                                                    }])
+                                    .offset(x: 60, y: -60)
+                                    .opacity(showMessagePopover ? 0 : 1)
+                                    .allowsHitTesting(showMessagePopover ? false : true)
                             }
                         }
                         if showMessagePopover {
@@ -148,4 +149,31 @@ struct TabsView: View {
             }
         
     }
+}
+
+
+func needsMoreOffset() -> Bool {
+    switch UIScreen.main.nativeBounds.height {
+    case 1136:
+        return true
+        
+    case 1334:
+        return true
+        
+    case 1920, 2208:
+        return true
+        
+    case 2436:
+        return false
+        
+    case 2688:
+        return false
+        
+    case 1792:
+        return false
+        
+    default:
+        return true
+    }
+    
 }
