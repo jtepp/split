@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ComposeView: View {
     @Binding var members: [Member]
+    @Binding var show: Bool
     @State var msg = "hey @joh"
     @State var tagmsg = ""
     @State var showTagged = false
@@ -36,6 +37,9 @@ struct ComposeView: View {
                 .padding()
                 Button("Send"){
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        show = false
+                    }
                 }
                 .padding(.leading, -8)
                 .padding(.trailing)
@@ -65,7 +69,7 @@ struct ComposeView_Previews: PreviewProvider {
                 .font(.largeTitle)
                 .offset(y:-100)
                 .blur(radius: 10)
-            ComposeView(members: .constant([.placeholder, .placeholder2, .placeholder3]))
+            ComposeView(members: .constant([.placeholder, .placeholder2, .placeholder3]), show: .constant(true))
                 .padding()
         }
         
