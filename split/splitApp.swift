@@ -15,16 +15,16 @@ struct splitApp: App {
     var body: some Scene {
         WindowGroup {
             Main()
-//                .preferredColorScheme(.dark)
-//                .onAppear(){
-//                    Messaging.messaging().token { token, error in
-//                      if let error = error {
-//                        print("Error fetching FCM registration token: \(error)")
-//                      } else if let token = token {
-//                        print("FCM registration token: \(token)")
-//                      }
-//                    }
-//                }
+            //                .preferredColorScheme(.dark)
+            //                .onAppear(){
+            //                    Messaging.messaging().token { token, error in
+            //                      if let error = error {
+            //                        print("Error fetching FCM registration token: \(error)")
+            //                      } else if let token = token {
+            //                        print("FCM registration token: \(token)")
+            //                      }
+            //                    }
+            //                }
         }
     }
 }
@@ -39,51 +39,36 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         //set up cloud messaging
         Messaging.messaging().delegate = self
-
+        
         //set up notifications
         if #available(iOS 10.0, *) {
-          // For iOS 10 display notification (sent via APNS)
-          UNUserNotificationCenter.current().delegate = self
-
-          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-          UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: {(granted, error) in
-                
-                guard granted else { return }
-                        let replyAction = UNTextInputNotificationAction(identifier: "ReplyAction", title: "Reply", options: [])
-                        let quickReplyCategory = UNNotificationCategory(identifier: "QuickReply", actions: [replyAction], intentIdentifiers: [], options: [])
-                        UNUserNotificationCenter.current().setNotificationCategories([quickReplyCategory])
-                        
-                        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-                            guard settings.authorizationStatus == .authorized else { return }
-//                            UIApplication.shared.registerForRemoteNotifications()
-                        }
-                
-            })
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
             
-            func didReceive(_ response: UNNotificationResponse, completionHandler completion: @escaping (UInt) -> Void) {
-                print("RESPONSER \(response)")
-                if response.actionIdentifier == "ReplyAction" {
-                    if let textResponse = response as? UNTextInputNotificationResponse {
-                        print("USERTEXTER \(textResponse.userText)")
-                        var house = House.empty
-                        house.id = UserDefaults.standard.string(forKey: "houseId") ?? "NOHOD"
-                            Fetch().sendPayment(p: paymentFromMsg(textResponse.userText), h: house)
-                        completion(0)
-                        print("DOANER")
-                        return
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {(granted, error) in
+                    
+                    guard granted else { return }
+                    UNUserNotificationCenter.current().delegate = self
+                    let replyAction = UNTextInputNotificationAction(identifier: "ReplyAction", title: "Reply", options: [])
+                    let quickReplyCategory = UNNotificationCategory(identifier: "QuickReply", actions: [replyAction], intentIdentifiers: [], options: [])
+                    UNUserNotificationCenter.current().setNotificationCategories([quickReplyCategory])
+                    
+                    UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+                        guard settings.authorizationStatus == .authorized else { return }
+                        //                            UIApplication.shared.registerForRemoteNotifications()
                     }
-                }
-                completion(1)
-            }
+                    
+                })
             
         } else {
-          let settings: UIUserNotificationSettings =
-          UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-          application.registerUserNotificationSettings(settings)
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
         }
-
+        
         application.registerForRemoteNotifications()
         
         
@@ -94,15 +79,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //do something with message data here
-      if let messageID = userInfo[gcmMessageIDKey] {
-        print("Message ID: \(messageID)")
-      }
-
-      // Print full message.
-      print(userInfo)
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
         print("that was user info^")
-
-      completionHandler(UIBackgroundFetchResult.newData)
+        
+        completionHandler(UIBackgroundFetchResult.newData)
     }
     
     //in orderto recieve notifications, need implenment methods
@@ -110,7 +95,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         
     }
-
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
     }
@@ -142,7 +127,7 @@ class CustomSceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         
-      let dataDict:[String: String] = ["token": fcmToken ?? ""]
+        let dataDict:[String: String] = ["token": fcmToken ?? ""]
         UserDefaults.standard.setValue(fcmToken, forKey: "fcm")
         // store token in firestore for sending notificaitons from server
         
@@ -179,9 +164,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             print("Message ID: \(messageID)")
         }
         
-        print(userInfo)
+        if response.actionIdentifier == "ReplyAction" {
+            let textResponse = response as! UNTextInputNotificationResponse
+            print(textResponse.userText)
+            var house = House.empty
+            house.id = UserDefaults.standard.string(forKey: "houseId") ?? "NOHOD"
+            print(house.id)
+            Fetch().sendPayment(p: paymentFromMsg(textResponse.userText), h: house){
+                print(false)
+            }
+        }
+        
         print("ugh user info^")
-        completionHandler()
     }
     
     

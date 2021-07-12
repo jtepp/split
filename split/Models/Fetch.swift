@@ -248,11 +248,15 @@ class Fetch: ObservableObject {
     }
     
     func sendPayment(p: Payment, h: House, _ completion: @escaping () -> Void = {}) {
+        print("STARTED")
         db.collection("houses/\(h.id)/members").getDocuments { querySnapshot, err in
+            print("STARTED2")
             guard let docs = querySnapshot?.documents else {
+                print("STARTED22")
                 print(err.debugDescription)
                 return
             }
+            print("STARTED3")
             var fcms = [String]()
             if p.isAn {
                 docs.forEach { qds in
@@ -298,15 +302,17 @@ class Fetch: ObservableObject {
             }
             
             
-            
+            print("STARTED4")
             
             self.db.collection("houses/\(h.id)/payments").addDocument(data:
                                                                         ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "isGM": p.isGM, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "isAn":p.isAn, "fcm":fcms]
             ){ _ in
             //            .documentID
+                print("STARTED 5")
             for member in h.members {
                 self.updateBalances(h: h, m: member)
             }
+                print("STARTED 6")
                 completion()
             }
         }

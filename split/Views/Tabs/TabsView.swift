@@ -75,7 +75,7 @@ struct TabsView: View {
                                     showMessagePopover = false
                                 }
                         }
-                        ComposeView(house: $house, members: .constant(house.members), show: $showMessagePopover, focus: $focus)
+                        ComposeView(house: $house, members: .constant(house.members), allMembers: house.members, show: $showMessagePopover, focus: $focus)
                             .offset(y: showMessagePopover ? 0 : 400)
                             .opacity(showMessagePopover ? 1 : 0)
                             .animation(Animation.easeOut)
