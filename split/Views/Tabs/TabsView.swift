@@ -28,6 +28,7 @@ struct TabsView: View {
     @State var rchoice = [Member]()
     @State var FMBopen = false
     @State var showMessagePopover = false
+    @State var focus: String? = ""
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
@@ -73,10 +74,13 @@ struct TabsView: View {
                                     showMessagePopover = false
                                 }
                         }
-                        ComposeView(members: .constant(house.members), show: $showMessagePopover)
+                        ComposeView(members: .constant(house.members), show: $showMessagePopover, focus: $focus)
                             .offset(y: showMessagePopover ? 0 : 400)
                             .opacity(showMessagePopover ? 1 : 0)
                             .animation(Animation.easeOut)
+                            .onChange(of: showMessagePopover, perform: { _ in
+                                focus = showMessagePopover ? "msg" : ""
+                            })
                     }
                     .tag(0)
                     MembersView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)

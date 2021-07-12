@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MbSwiftUIFirstResponder
 
 struct ComposeView: View {
     @Binding var members: [Member]
@@ -14,11 +15,13 @@ struct ComposeView: View {
     @State var tagmsg = ""
     @State var showTagged = false
     @State var canTap = true
+    @Binding var focus: String?
 
     var body: some View {
         ZStack {
             HStack {
                 TextField("Message...", text: $msg)
+                    .firstResponder(id: "msg", firstResponder: $focus)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 Button("Send"){
@@ -53,7 +56,6 @@ struct ComposeView: View {
             
             VStack {
                 TaggedView(tagmsg: $tagmsg, members: $members)
-                    .offset(y: showTagged ? 0: -600)
                     .animation(Animation.easeOut.speed(2))
                 Spacer()
             }
@@ -70,7 +72,7 @@ struct ComposeView_Previews: PreviewProvider {
                 .font(.largeTitle)
                 .offset(y:-100)
                 .blur(radius: 10)
-            ComposeView(members: .constant([.placeholder, .placeholder2, .placeholder3]), show: .constant(true))
+            ComposeView(members: .constant([.placeholder, .placeholder2, .placeholder3]), show: .constant(true), focus: .constant(""))
                 .padding()
         }
         
