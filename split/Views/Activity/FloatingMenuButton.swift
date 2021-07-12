@@ -14,6 +14,7 @@ struct FloatingMenuButton: View{
     var rotate: Bool = false
     var actions:[Action]
     var image: String
+    var scale: CGFloat = 1
     var body: some View {
         ZStack {
             VStack{
@@ -64,6 +65,7 @@ struct FloatingMenuButton: View{
                     Image(systemName: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .scaleEffect(scale)
                         .padding()
                         .foregroundColor(.white)
                         .rotationEffect(Angle(degrees: (open && rotate) ? 135 : 0))

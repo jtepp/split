@@ -21,8 +21,6 @@ struct ActivityView: View {
         ScrollView {
             HStack {
                 HeaderText(text: "Activity")
-                //fmb 2
-                FloatingMenuButton(open: $filterOpen, above: false, radius: 20, actions: Action.placeholders, image: "plus")
                 Spacer()
                 Button(action: {
                     showSplash = true
@@ -159,9 +157,11 @@ struct ActivityView: View {
             Rectangle()
                 .fill(Color.black)
                 .frame(minHeight:120)
+                .padding(.top, 20)
             
         }
         .foregroundColor(.white)
+        
         .onAppear {
             //show splash for update
             if UserDefaults.standard.bool(forKey: "2.2.0") == false {
