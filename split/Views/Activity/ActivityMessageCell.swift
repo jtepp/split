@@ -16,34 +16,34 @@ struct ActivityMessageCell: View {
     @Binding var showMessagePopover: Bool
     var body: some View {
         
-        Menu {
-            
-            if payment.by != member.id {
-                Button {
-                    GMmsg = "@"+payment.from+" "
-                    showMessagePopover = true
-                } label: {
-                    Text("Reply")
-                    Image(systemName: "arrowshape.turn.up.left")
-                }
-                
-            }
-            
-            if member.admin || payment.by == member.id {
-            Button {
-                var house = House.empty
-                house.id = member.home
-                Fetch().deletePayment(p: payment, h: house)
-            } label: {
-                Text("Delete")
-                    .foregroundColor(.red)
-                Image(systemName: "trash")
-                    .foregroundColor(.red)
-            }
-            }
-            
-        }
-            label: {
+//        Menu {
+//
+//            if payment.by != member.id {
+//                Button {
+//                    GMmsg = "@"+payment.from+" "
+//                    showMessagePopover = true
+//                } label: {
+//                    Text("Reply")
+//                    Image(systemName: "arrowshape.turn.up.left")
+//                }
+//
+//            }
+//
+//            if member.admin || payment.by == member.id {
+//            Button {
+//                var house = House.empty
+//                house.id = member.home
+//                Fetch().deletePayment(p: payment, h: house)
+//            } label: {
+//                Text("Delete")
+//                    .foregroundColor(.red)
+//                Image(systemName: "trash")
+//                    .foregroundColor(.red)
+//            }
+//            }
+//
+//        }
+//            label: {
             HStack {
                 
                 if payment.by != (UserDefaults.standard.string(forKey: "myId") ?? "") {
@@ -155,35 +155,37 @@ struct ActivityMessageCell: View {
                     }
                 }
             }
-    //        .contextMenu(menuItems: {
-    //
-    //                                    if payment.by != member.id {
-    //                                        Button {
-    //
-    //                                        } label: {
-    //                                            Text("Reply")
-    //                                            Image(systemName: "arrowshape.turn.up.left")
-    //                                        }
-    //
-    //                                    }
-    //
-    //                                    if member.admin || payment.by == member.id {
-    //                                    Button {
-    //                                        var house = House.empty
-    //                                        house.id = member.home
-    //                                        Fetch().deletePayment(p: payment, h: house)
-    //                                    } label: {
-    //                                        Text("Delete")
-    //                                            .foregroundColor(.red)
-    //                                        Image(systemName: "trash")
-    //                                            .foregroundColor(.red)
-    //                                    }
-    //                                    }
-    //
-    //                                })
+            .contextMenu(menuItems: {
+                
+                if payment.by != member.id {
+                    Button {
+                        GMmsg = "@"+payment.from+" "
+                        showMessagePopover = true
+                    } label: {
+                        Text("Reply")
+                        Image(systemName: "arrowshape.turn.up.left")
+                    }
+                    
+                }
+                
+                if member.admin || payment.by == member.id {
+                Button {
+                    var house = House.empty
+                    house.id = member.home
+                    Fetch().deletePayment(p: payment, h: house)
+                } label: {
+                    Text("Delete")
+                        .foregroundColor(.red)
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                }
+                }
+                
+            })
             .padding(.bottom, nextMessageIsSameSender(allPayments, id: payment.id!, from: payment.from) ? -20 : -8)
             .padding(.top, -10)
-        }
+
+//        }
     }
 }
 
