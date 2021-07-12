@@ -138,6 +138,7 @@
 		0CD16875269B829800CFD7C2 /* CustomRoundedRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD16874269B829800CFD7C2 /* CustomRoundedRect.swift */; };
 		0CD16877269B8B1600CFD7C2 /* FloatingMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD16876269B8B1600CFD7C2 /* FloatingMenuButton.swift */; };
 		0CD16879269BA8BE00CFD7C2 /* ActivityMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD16878269BA8BE00CFD7C2 /* ActivityMessageCell.swift */; };
+		0CD1687C269BC17F00CFD7C2 /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD1687B269BC17F00CFD7C2 /* ComposeView.swift */; };
 		0CE5F5232693985C00DAD578 /* WidgetTimeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE5F5222693985C00DAD578 /* WidgetTimeBar.swift */; };
 		0CEE3827265E16700013BB12 /* MemberDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEE3826265E16700013BB12 /* MemberDetailsView.swift */; };
 		0CEE382E265E1CE00013BB12 /* MemberPaymentInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEE382D265E1CE00013BB12 /* MemberPaymentInfoView.swift */; };
@@ -291,6 +292,7 @@
 		0CD16874269B829800CFD7C2 /* CustomRoundedRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedRect.swift; sourceTree = "<group>"; };
 		0CD16876269B8B1600CFD7C2 /* FloatingMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingMenuButton.swift; sourceTree = "<group>"; };
 		0CD16878269BA8BE00CFD7C2 /* ActivityMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMessageCell.swift; sourceTree = "<group>"; };
+		0CD1687B269BC17F00CFD7C2 /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
 		0CE5F5222693985C00DAD578 /* WidgetTimeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTimeBar.swift; sourceTree = "<group>"; };
 		0CEE3826265E16700013BB12 /* MemberDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailsView.swift; sourceTree = "<group>"; };
 		0CEE382D265E1CE00013BB12 /* MemberPaymentInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPaymentInfoView.swift; sourceTree = "<group>"; };
@@ -399,8 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2A0588265CAA44002BD46D /* Main.swift */,
-				0C210D6E26813075008220B6 /* LinkInviteView.swift */,
-				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
+				0CD1687A269BC16900CFD7C2 /* Messages */,
 				0CAA803A2661CC4A00A3081B /* SplashView.swift */,
 				0CA0E9BC2660369D002876CF /* ModalView.swift */,
 				0C210D6C26812AE7008220B6 /* MailView.swift */,
@@ -441,6 +442,7 @@
 		0C625976265EAE58002E58A3 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
 				0CBF09F3265D8F140016CA92 /* ActivityView.swift */,
 				0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */,
 				0CAA80362661860600A3081B /* ActivityAnnouncementCell.swift */,
@@ -592,9 +594,18 @@
 			path = Profiles;
 			sourceTree = "<group>";
 		};
+		0CD1687A269BC16900CFD7C2 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				0CD1687B269BC17F00CFD7C2 /* ComposeView.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
 		0CEE3829265E167C0013BB12 /* Members */ = {
 			isa = PBXGroup;
 			children = (
+				0C210D6E26813075008220B6 /* LinkInviteView.swift */,
 				0CBF09F6265D8F370016CA92 /* MembersView.swift */,
 				0C0CA783265F08CD0062FDDD /* MemberPicker.swift */,
 				0C95131D265DB7C0005398CF /* MemberCell.swift */,
@@ -827,6 +838,7 @@
 				0CD16879269BA8BE00CFD7C2 /* ActivityMessageCell.swift in Sources */,
 				0CEE382E265E1CE00013BB12 /* MemberPaymentInfoView.swift in Sources */,
 				0C64FED0265ECB87009B0C3C /* TimeBar.swift in Sources */,
+				0CD1687C269BC17F00CFD7C2 /* ComposeView.swift in Sources */,
 				0C210D6F26813075008220B6 /* LinkInviteView.swift in Sources */,
 				0CD16877269B8B1600CFD7C2 /* FloatingMenuButton.swift in Sources */,
 			);
