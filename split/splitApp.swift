@@ -51,13 +51,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 
                 guard granted else { return }
                         let replyAction = UNTextInputNotificationAction(identifier: "ReplyAction", title: "Reply", options: [])
-                        let openAppAction = UNNotificationAction(identifier: "OpenAppAction", title: "Open app", options: [.foreground])
-                        let quickReplyCategory = UNNotificationCategory(identifier: "QuickReply", actions: [replyAction, openAppAction], intentIdentifiers: [], options: [])
+                        let quickReplyCategory = UNNotificationCategory(identifier: "QuickReply", actions: [replyAction], intentIdentifiers: [], options: [])
                         UNUserNotificationCenter.current().setNotificationCategories([quickReplyCategory])
                         
                         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
                             guard settings.authorizationStatus == .authorized else { return }
-                            UIApplication.shared.registerForRemoteNotifications()
+//                            UIApplication.shared.registerForRemoteNotifications()
                         }
                 
             })

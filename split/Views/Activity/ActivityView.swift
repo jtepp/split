@@ -64,9 +64,7 @@ struct ActivityView: View {
                     return m.id == UserDefaults.standard.string(forKey: "myId")
                 }){
                     if payment.isAn {
-                        if house.members.first(where: { (m) -> Bool in
-                            return m.id == UserDefaults.standard.string(forKey: "myId")
-                        })!.admin {
+                        if m.admin {
                             ActivityAnnouncementCell(payment: .constant(payment))
                                 .contextMenu(menuItems: {
                                     Button(action: {
@@ -83,7 +81,6 @@ struct ActivityView: View {
                                 
                         } else {
                             ActivityAnnouncementCell(payment: .constant(payment))
-                                
                         }
                     } else if payment.isGM {
                         ActivityMessageCell(allPayments: .constant(house.payments.sorted(by: { a, b in
@@ -92,9 +89,9 @@ struct ActivityView: View {
                             
                     } else if payment.isRequest {
                         
-                        if payment.reqfrom.contains(house.members.first(where: { (m) -> Bool in
-                            return m.id == UserDefaults.standard.string(forKey: "myId")
-                        })!.name) {
+                        if payment.reqfrom.contains(house.members.first(where: { (mm) -> Bool in
+                            return mm.id == m.id
+                        })?.name ?? "") {
                             ActivityRequestCell(payment: .constant(payment))
                                 .contextMenu(menuItems: {
                                     Button(action: {
@@ -110,9 +107,7 @@ struct ActivityView: View {
                                         
                                     }
                                     )
-                                    if house.members.first(where: { (m) -> Bool in
-                                        return m.id == UserDefaults.standard.string(forKey: "myId")
-                                    })!.admin {
+                                    if m.admin {
                                         Button(action: {
                                             Fetch().deletePayment(p: payment, h: house)
                                         }, label: {
@@ -126,9 +121,7 @@ struct ActivityView: View {
                                     }
                                 })
                                 
-                        } else if payment.by == UserDefaults.standard.string(forKey: "myId") || house.members.first(where: { (m) -> Bool in
-                            return m.id == UserDefaults.standard.string(forKey: "myId")
-                        })!.admin {
+                        } else if payment.by == m.id || m.admin {
                             ActivityRequestCell(payment: .constant(payment))
                                 .contextMenu(menuItems: {
                                     Button(action: {
@@ -149,9 +142,7 @@ struct ActivityView: View {
                         }
                     } else {
                         
-                        if payment.by == UserDefaults.standard.string(forKey: "myId") || house.members.first(where: { (m) -> Bool in
-                            return m.id == UserDefaults.standard.string(forKey: "myId")
-                        })!.admin {
+                        if payment.by == m.id || m.admin {
                             
                             ActivityPaymentCell(payment: .constant(payment))
                                 .contextMenu(menuItems: {
