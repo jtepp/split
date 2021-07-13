@@ -199,14 +199,14 @@ struct ProfileView: View, KeyboardReadable {
                                     }), secondaryButton: Alert.Button.cancel())
                                 } else {
                                     return Alert(title: Text("Erase Group"), message: Text("Deleting this account will erase this group from the database"), primaryButton: Alert.Button.destructive(Text("Erase"), action: {
-                                        Fetch().deleteAccount(m: $m, erase: true, inWR: $inWR){
+                                        Fetch().deleteAccount(m: $m, erase: true, inWR: $inWR, transfer: false){
                                             Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                                         }
                                     }), secondaryButton: Alert.Button.cancel())
                                 }
                             } else {
                                 return Alert(title: Text("Delete account"), message: Text("Are you sure you want to delete this acount?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                                    Fetch().deleteAccount(m: $m, inWR: $inWR){
+                                    Fetch().deleteAccount(m: $m, inWR: $inWR, transfer: false){
                                         Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                                     }
                                 }), secondaryButton: Alert.Button.cancel())

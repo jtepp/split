@@ -13,7 +13,10 @@ class Fetch: ObservableObject {
     private var db = Firestore.firestore()
     
     func getHouse (h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool> = .constant(false), completion: @escaping () -> Void = {}) {
-        if (UserDefaults.standard.string(forKey: "houseId") ?? "") != ""
+        if (UserDefaults.standard.string(forKey: "houseId") ?? "") == "waitingRoom" {
+            inWR.wrappedValue = true
+        }
+        if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" && (UserDefaults.standard.string(forKey: "houseId") ?? "") != "waitingRoom"
         {
             let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
             let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
@@ -25,6 +28,7 @@ class Fetch: ObservableObject {
             if id != "" && id != "waitingRoom" { // has real house id
                 print("has real hid \(id) \(myId)")
                 showInvite.wrappedValue = false
+                print("uno")
                 inWR.wrappedValue = false
                 noProf.wrappedValue = false
                 
@@ -88,6 +92,7 @@ class Fetch: ObservableObject {
                                 UserDefaults.standard.set("waitingRoom", forKey: "houseId")
                                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("waitingRoom", forKey: "houseId")
                                 noProf.wrappedValue = false
+                                inWR.wrappedValue = true
                             }
                             inWR.wrappedValue = true
 //                        }
@@ -161,6 +166,8 @@ class Fetch: ObservableObject {
         }}
     
     func getMembers(h: Binding<House>, id: String) {
+        print("//getMembers")
+        if id != "" {
         db.collection("houses/"+id+"/members").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("no house by id %s, or maybe no members..?", id)
@@ -185,6 +192,10 @@ class Fetch: ObservableObject {
             for member in h.wrappedValue.members {
                 self.updateBalances(h: h.wrappedValue, m: member)
             }
+        }
+        } else {
+            print("ASDASADDASDASSDASDDS     MEMBERS")
+            h.wrappedValue = .empty
         }
     }
     
@@ -249,6 +260,7 @@ class Fetch: ObservableObject {
     
     func sendPayment(p: Payment, h: House, _ completion: @escaping () -> Void = {}) {
 //        print("STARTED")
+        print("//sendPayment")
         db.collection("houses/\(h.id)/members").getDocuments { querySnapshot, err in
 //            print("STARTED2")
             guard let docs = querySnapshot?.documents else {
@@ -433,6 +445,7 @@ class Fetch: ObservableObject {
             
         }}
     func swapAdmin(m:Member, h:House, completion: @escaping () -> Void = {}){
+        print("defnothere")
         db.collection("houses/"+h.id+"/members").getDocuments{ (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("no house by id %s, or maybe no members..?", h.id)
@@ -621,6 +634,7 @@ class Fetch: ObservableObject {
                                         print("ISTHISIT \(doc.documentID)")
                                         UserDefaults.standard.set(doc.documentID, forKey: "houseId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(doc.documentID, forKey: "houseId")
+                                        print("dos")
                                         inWR.wrappedValue = false
                                         self.db.document("waitingRoom/\(mm.id)").delete()
                                         self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
@@ -720,6 +734,7 @@ class Fetch: ObservableObject {
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.name, forKey: "myName")
                                         UserDefaults.standard.set(house, forKey: "houseId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(house, forKey: "houseId")
+                                        print("tres")
                                         inWR.wrappedValue = false
                                         self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the group", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                     }
@@ -786,7 +801,7 @@ class Fetch: ObservableObject {
     }
     
     func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>, transfer: Bool = false, _ completion: @escaping () -> Void = {}) {
-        if m.wrappedValue.home != "" {
+        if m.wrappedValue.home != "" && m.wrappedValue.home != "waitingRoom" {
             self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
                     print("remove member no payments or something")
@@ -810,6 +825,10 @@ class Fetch: ObservableObject {
                 }
             }
             db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete { (err) in
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
+                UserDefaults.standard.setValue("", forKey: "houseId")
+                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
+                UserDefaults.standard.setValue("", forKey: "myId")
                 if erase {
                     self.db.document("houses/\(m.wrappedValue.home)").delete()
                 } else {
@@ -822,6 +841,7 @@ class Fetch: ObservableObject {
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
                     UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.home, forKey: "houseId")
+                    print("quattro")
                     inWR.wrappedValue = true
                     m.wrappedValue.id = ""
                 }
@@ -860,6 +880,7 @@ class Fetch: ObservableObject {
     }
     
     func returnMembers(hId: String, nm: Binding<[Member]>, msg: Binding<String>, showAlert: Binding<Bool>) {
+        print("RLLYHREE????")
         db.collection("houses/\(hId)/members").getDocuments { querySnapshot, err in
             guard let docs = querySnapshot?.documents else {
                 print(err.debugDescription)
@@ -892,6 +913,7 @@ class Fetch: ObservableObject {
                 //if needed, here would be where to add delete all empty houses
                 //                print("\(qds.documentID) - \(newGroup) -> \(qds.documentID == newGroup)")
                 if houseq.documentID != (UserDefaults.standard.string(forKey: "houseId") ?? "") {
+                    print("COULDMAYBE")
                     self.db.collection("houses/\(houseq.documentID)/members").getDocuments { documentSnapshot, err in
                         guard let doc = documentSnapshot?.documents else {
                             print("maindocerrr")
@@ -905,6 +927,7 @@ class Fetch: ObservableObject {
                                 
                                 if empt {
                                     self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
+                                    print("COULDBEHERE?")
                                     self.db.collection("houses/\(houseq.documentID)/members").getDocuments { qs, e in
                                         qs?.documents.forEach({ qqq in
                                             self.db.document("houses/\(houseq.documentID)/members/\(qqq.documentID)").delete()
@@ -954,7 +977,8 @@ class Fetch: ObservableObject {
         }
     }
     func checkThere(m: Binding<Member>, h: Binding<House>, completion: @escaping (Bool) -> Void) -> EmptyView {
-        db.collection("houses/\(m.wrappedValue.home)/members").getDocuments { memberListSnapshot, err in
+        print("CHECKHERE \(h.wrappedValue.id)")
+        db.collection("houses/\(h.wrappedValue.id)/members").getDocuments { memberListSnapshot, err in
             guard let members = memberListSnapshot?.documents else {
                 completion(false)
                 return
