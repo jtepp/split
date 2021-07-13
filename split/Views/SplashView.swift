@@ -16,16 +16,16 @@ struct SplashView: View {
     @State var isShowingMailView = false
     var body: some View {
         VStack {
-
+            
             HeaderText(text: "What's New", clear: .constant(false))
                 .overlay(
                     VStack {
                         Spacer()
                         HStack {
-                            Text("v2.2.0")
+                            Text("v2.3.0")
                                 .foregroundColor(.white)
                                 .font(Font.subheadline.bold())
-    //                            .padding()
+                                //                            .padding()
                                 .padding(.leading,30)
                             Spacer()
                         }
@@ -36,21 +36,21 @@ struct SplashView: View {
                 HStack {
                     Spacer()
                     VStack {
-                    if showCore {
-                        SplashDetailsView(title: "Invite your friends", text: "Use the link button on the members page to copy an invitation to your group", image: "person.3.fill", color: .blue)
-                        SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
-                        SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .yellow)
-                    } else {
-                        HStack {
-                            Text("Show main features")
-                            Image(systemName: "chevron.down")
+                        if showCore {
+                            SplashDetailsView(title: "Invite your friends", text: "Use the link button on the members page to copy an invitation to your group", image: "person.3.fill", color: .blue)
+                            SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
+                            SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .yellow)
+                        } else {
+                            HStack {
+                                Text("Show main features")
+                                Image(systemName: "chevron.down")
+                            }
+                            .foregroundColor(.white)
+                            .padding()
+                            
                         }
-                        .foregroundColor(.white)
-                        .padding()
-                        
                     }
-                }
-                .animation(Animation.easeIn.speed(2))
+                    .animation(Animation.easeIn.speed(2))
                     Spacer()
                 }
                 .background(
@@ -63,12 +63,12 @@ struct SplashView: View {
                 .padding(.bottom)
                 .onTapGesture {
                     showCore.toggle()
-            }
-            
-                SplashDetailsView(title: "New Widgets", text: "Check your balances or recent activity on your Home Screen with the new spllit widgets", image: "rectangle.3.offgrid.fill", color: .blue)
-                SplashDetailsView(title: "More shortcuts", text: "Long press on a member on the members page to quickly start a payment or request", image: "arrowshape.turn.up.right.fill", color: .green)
-                SplashDetailsView(title: "Status removed", text: "You may not have noticed it was there, but the status feature has now been removed", image: "circlebadge", color: .gray)
-
+                }
+                
+                SplashDetailsView(title: "Activity filter", text: "Filter the activity page to remove each type of message", image: "funnel", color: .green)
+                SplashDetailsView(title: "New messages", text: "Tap the new floating button to send a message to your group", image: "bubble.left.and.bubble.right.fill", color: .blue)
+                SplashDetailsView(title: "Tag your friends", text: "Use the '@' symbol to send someone a notification for your message", image: "at.badge.plus", color: .red)
+                
             }
             Spacer()
             Button(action : {
@@ -110,11 +110,11 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "2.2.0")
+            UserDefaults.standard.setValue(true, forKey: "2.3.0")
         }
         .sheet(isPresented: $isShowingMailView) {
-                    MailView(result: self.$result)
-                }
+            MailView(result: self.$result)
+        }
         .animation(Animation.easeIn.speed(2))
     }
 }
@@ -126,12 +126,22 @@ struct SplashDetailsView: View {
     var color: Color = .white
     var body: some View {
         HStack {
-            Image(systemName: image)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
-                .foregroundColor(color)
-                .padding()
+            if image == "funnel" {
+                Image("funnel")
+                    .resizable()
+                    .renderingMode(.template)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(color)
+                    .padding()
+            } else {
+                Image(systemName: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(color)
+                    .padding()
+            }
             HStack {
                 VStack(alignment: .leading) {
                     Text(title)
@@ -158,6 +168,6 @@ struct SplashView_Previews: PreviewProvider {
         SplashView(dontSplash: .constant(false), showSplash: .constant(false))
             .padding()
             .background(Color.black.edgesIgnoringSafeArea(.all))
-            
+        
     }
 }
