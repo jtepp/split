@@ -25,7 +25,8 @@ class Fetch: ObservableObject {
             if id != "" && id != "waitingRoom" { // has real house id
                 print("has real hid \(id) \(myId)")
                 showInvite.wrappedValue = false
-                inWR.wrappedValue = false
+//                inWR.wrappedValue = false
+                print("BOUNCER LET US IN \(id) \(myId)")
                 noProf.wrappedValue = false
                 
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(id, forKey: "houseId")
