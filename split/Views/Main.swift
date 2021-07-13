@@ -72,32 +72,6 @@ struct Main: View {
                 }
             }
         }
-        .onChange(of: noProf, perform: { _ in
-            if noProf == false && (UserDefaults.standard.string(forKey: "myId") ?? "") == "" {
-                noProf = true
-            }
-//            if UserDefaults.standard.string(forKey: "houseId") != "waitingRoom" {
-//                UserDefaults.standard.set("", forKey: "houseId")
-//                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
-//                UserDefaults.standard.set("", forKey: "myId")
-//                UserDefaults.standard.set("", forKey: "imageB64")
-//                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
-//                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
-//                myId = ""
-//            } else {
-//                let md = UserDefaults.standard.string(forKey: "myId")
-//                let hd = UserDefaults.standard.string(forKey: "houseId")
-//                UserDefaults.standard.set(hd, forKey: "houseId")
-//                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(hd, forKey: "houseId")
-//                UserDefaults.standard.set(md, forKey: "myId")
-//                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(md, forKey: "myId")
-//                myId = md!
-//                noProf = false
-//                print("BINDERMAIN")
-//
-////                Fetch().bindingMemberFromIdsWR(id: myId, bm: $m, house: $h, myId: $myId)
-//            }
-        })
         .sheet(isPresented: $inWR, onDismiss: {
             Fetch().getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
         }) {

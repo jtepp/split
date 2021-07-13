@@ -67,53 +67,39 @@ class Fetch: ObservableObject {
                                 return m.id == UserDefaults.standard.string(forKey: "myId")
                             })!
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
-                            print("setdead222 \(m.wrappedValue.id)")
+                            print("setdead222\(m.wrappedValue.id)")
                         }
                         
                         
                         completion()
-                        self.checkThere(m: m, h: h){ cb in
-                            if !cb { //if u dont exist in the house and its not just empty
+                        if h.wrappedValue.members.first(where: { (m) -> Bool in
+                            return m.id == UserDefaults.standard.string(forKey: "myId")
+                        }) == nil && !h.wrappedValue.members.isEmpty && h.wrappedValue.id != "" { //if u dont exist in the house and its not just empty
                             //if ur an alien, go to void, otherwise get waitingRoomed
 //                            if UserDefaults.standard.string(forKey: "houseId") != "waitingRoom" {
                             if myId == "" {
                                 print("gotovoid")
-                                if (UserDefaults.standard.string(forKey: "myId") ?? "") == "" {
                                 UserDefaults.standard.set("", forKey: "houseId")
                                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
-                                } else {
-                                    UserDefaults.standard.set("waitingRoom", forKey: "houseId")
-                                    UserDefaults.init(suiteName: "waitingRoom")!.set("", forKey: "houseId")
-                                }
-                                print("UIPPPPER")
                                 noProf.wrappedValue = true
                                 inWR.wrappedValue = true
                             } else {
-                                print("wred \(UserDefaults.standard.string(forKey: "myId") ?? "fff")")
+                                print("wred")
                                 UserDefaults.standard.set("waitingRoom", forKey: "houseId")
                                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("waitingRoom", forKey: "houseId")
                                 noProf.wrappedValue = false
                             }
-                                print("LOOWWWWER")
                             inWR.wrappedValue = true
 //                        }
-                        }}
+                        }
                         
                     } else {
-                        print("gotovoid2 \(UserDefaults.standard.string(forKey: "myId") ?? "fff")")
-                        if (UserDefaults.standard.string(forKey: "myId") ?? "") == "" {
-                            print("void2top \(UserDefaults.standard.string(forKey: "myId")) \(UserDefaults.standard.string(forKey: "houseId"))")
-                            UserDefaults.standard.set("", forKey: "houseId")
-                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
-                            print("KILLEDv2")
-                            UserDefaults.standard.set("", forKey: "myId")
-                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
-                            UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
-                            } else {
-                                print("void2bot")
-                                UserDefaults.standard.set("waitingRoom", forKey: "houseId")
-                                UserDefaults.init(suiteName: "waitingRoom")!.set("", forKey: "houseId")
-                            }
+                        print("gotovoid2")
+                        UserDefaults.standard.set("", forKey: "houseId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
+                        UserDefaults.standard.set("", forKey: "myId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myName")
                         h.wrappedValue = .empty
                         
                         noProf.wrappedValue = true
@@ -258,7 +244,6 @@ class Fetch: ObservableObject {
     func updateImg(img: UIImage, hId: String, myId: String) {
         let id = UserDefaults.standard.string(forKey: "myId")
         print("UPDATEIMG")
-        UserDefaults.standard.set(imgtob64(img: img.resized(toWidth: 600)!), forKey: "imageB64")
         db.document("houses/\(hId)/members/\(id ?? "EMPTYIMG")").updateData(["image":imgtob64(img: img.resized(toWidth: 600)!)])
     }
     
@@ -464,11 +449,8 @@ class Fetch: ObservableObject {
         }
     }
     func addToWR(m: Binding<Member>, myId: Binding<String>, h: Binding<House>, _ completion: @escaping () -> Void){
-        print("ADDTOWRID \(myId.wrappedValue)")
         if myId.wrappedValue == "" {
-            print("myidtop")
             db.collection("waitingRoom").addDocument(data: ["name":m.wrappedValue.name, "image":m.wrappedValue.image]).getDocument { (documentSnapshot, err) in
-                print("myidtop22222")
                 UserDefaults.standard.set(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(documentSnapshot?.documentID ?? "wrbs", forKey: "myId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(documentSnapshot?.data()?["name"] ?? "wrbs", forKey: "myName")
@@ -480,8 +462,6 @@ class Fetch: ObservableObject {
                 UserDefaults.standard.setValue("waitingRoom", forKey: "houseId")
             }
         } else {
-            print("myidbot")
-            if myId.wrappedValue != "" {
             db.document("waitingRoom/\(myId.wrappedValue)").updateData(["name":m.wrappedValue.name, "image":m.wrappedValue.image]){ (err) in
                 UserDefaults.standard.set(myId.wrappedValue, forKey: "myId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(myId.wrappedValue, forKey: "myId")
@@ -492,7 +472,6 @@ class Fetch: ObservableObject {
                 UserDefaults.standard.setValue(myId.wrappedValue, forKey: "myId")
                 UserDefaults.standard.setValue("waitingRoom", forKey: "houseId")
                 
-            }
             }
         }
         UserDefaults.standard.set("waitingRoom", forKey: "houseId")
@@ -686,7 +665,7 @@ class Fetch: ObservableObject {
     }
     
     func joinHouse(hh: Binding<House>, m: Binding<Member>, hId: String, password: String, showAlert: Binding<Bool>, tapped: Binding<Bool>, msg: Binding<String>, inWR: Binding<Bool>, forceAdmin: Bool = false, approved: Bool = false) {
-        var house = "hehe"
+        var house = House.empty.id
         db.collection("houses").getDocuments { (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
                 print(err.debugDescription)
@@ -701,28 +680,24 @@ class Fetch: ObservableObject {
                     
                     if password == p {
                         //add this member to house, remove from wr set userdefaults and call for a refresh
-                        print("mm \(m.wrappedValue)")
+                        let mm = m.wrappedValue
+                        print("mm \(mm)")
                         print("house \(house)")
                         print("hid \(h.documentID)")
-                        print("mid \(m.wrappedValue.id)")
-                        UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
-                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.id, forKey: "myId")
-                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
+                        print("mid \(h.documentID)")
+                        UserDefaults.standard.set(mm.id, forKey: "myId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
+                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.name, forKey: "myName")
                         
-                        if m.wrappedValue.id == "" && (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
-                            m.wrappedValue.id = UserDefaults.standard.string(forKey: "myId")!
-                        }
-                        
-                        if m.wrappedValue.id == "" {
+                        if mm.id == "" {
                             m.wrappedValue = .empty
-                            print("emptyparty")
                             UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.id, forKey: "myId")
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
                             UserDefaults.standard.set(m.wrappedValue.home, forKey: "houseId")
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.home, forKey: "houseId")
                             inWR.wrappedValue = true
-                            print("\n\n\n\n\(m.wrappedValue)\n\n\n\n")
+                            print("\n\n\n\n\(mm)\n\n\n\n")
                         } else {
                             
                             self.db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
@@ -737,21 +712,21 @@ class Fetch: ObservableObject {
                                     
                                 }) || forceAdmin {
                                     //
-                                    self.db.document("houses/\(house)/members/\("\(m.wrappedValue.id)")").setData(["name" : m.wrappedValue.name, "image" : m.wrappedValue.image, "home" : h.documentID, "admin": forceAdmin, "online": true, "showStatus": (UserDefaults.standard.bool(forKey: "statusSet")) ? UserDefaults.standard.bool(forKey: "showStatus") : true]) { _ in
+                                    self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "online": true, "showStatus": (UserDefaults.standard.bool(forKey: "statusSet")) ? UserDefaults.standard.bool(forKey: "showStatus") : true]) { _ in
                                         self.getHouse(h: hh, m: m, inWR: inWR, noProf: .constant(false))
-                                        self.db.document("waitingRoom/\(m.wrappedValue.id)").delete()
-                                        UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
-                                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.id, forKey: "myId")
-                                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
+                                        self.db.document("waitingRoom/\(mm.id)").delete()
+                                        UserDefaults.standard.set(mm.id, forKey: "myId")
+                                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
+                                        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.name, forKey: "myName")
                                         UserDefaults.standard.set(house, forKey: "houseId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(house, forKey: "houseId")
                                         inWR.wrappedValue = false
-                                        self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the group", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the group", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                     }
                                     //
                                     
                                 } else {
-                                    print("LOOOF\(approved) \(m.wrappedValue.dict())")
+                                    print("LOOOF\(approved) \(mm.dict())")
                                     if !approved {
                                         tapped.wrappedValue = false
                                         msg.wrappedValue = "Member already exists by that name"
@@ -799,29 +774,19 @@ class Fetch: ObservableObject {
         let id = db.collection("houses").addDocument(data: ["name" : name, "password" : password]).documentID
         m.wrappedValue.home = id
         m.wrappedValue.admin = true
-        UserDefaults.standard.set(id, forKey: "houseId")
-        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(id, forKey: "houseId")
         hh.wrappedValue.members = [m.wrappedValue]
         //        db.collection("houses/\(id)/members").addDocument(data: ["admin" : true, "name" : m.wrappedValue.name, "home" : id, "image" : m.wrappedValue.id]) { (err) in
-        if m.wrappedValue.id == "" {
-            if (UserDefaults.standard.string(forKey: "myId") ?? "") == "" {
-                m.wrappedValue.id = UUID().uuidString
-                UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
-                print("UUID BS \(m.wrappedValue.id)")
-            } else {
-                m.wrappedValue.id = UserDefaults.standard.string(forKey: "myId")!
-                print("NO UUIDDDDD BS \(m.wrappedValue.id)")
-            }
-        }
-        print("THISISURID \(m.wrappedValue.id)")
+        UserDefaults.standard.set(m.wrappedValue.id, forKey: "myId")
         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.id, forKey: "myId")
         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
+        UserDefaults.standard.set(id, forKey: "houseId")
+        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(id, forKey: "houseId")
         self.joinHouse(hh: hh, m: m, hId: id, password: password, showAlert: .constant(false), tapped: tapped, msg: .constant(""), inWR: inWR, forceAdmin: true)
         //        }
     }
     
     func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>, transfer: Bool = false, _ completion: @escaping () -> Void = {}) {
-        if m.wrappedValue.home != "" && m.wrappedValue.home != "waitingRoom" {
+        if m.wrappedValue.home != "" {
             self.db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
                     print("remove member no payments or something")
@@ -845,8 +810,6 @@ class Fetch: ObservableObject {
                 }
             }
             db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete { (err) in
-                UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("waitingRoom", forKey: "houseId")
-                UserDefaults.standard.setValue("waitingRoom", forKey: "houseId")
                 if erase {
                     self.db.document("houses/\(m.wrappedValue.home)").delete()
                 } else {
@@ -1126,16 +1089,10 @@ class Fetch: ObservableObject {
     
     func removeFromWr(id: String){
         if id != "" {
-            db.document("waitingRoom/\(id)").delete(){_ in
-                print("DELTED")
-            }
+        db.document("waitingRoom/\(id)").delete()
         } else {
             print("removed empty id from wr")
         }
-//        UserDefaults.standard.setValue("", forKey: "myId")
-//        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "myID")
-//        UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
-//        UserDefaults.standard.setValue("", forKey: "houseId")
     }
     
     func imgFromId(id: String, img: Binding<String>){
@@ -1154,45 +1111,19 @@ class Fetch: ObservableObject {
         }
     }
     
-    func bindingMemberFromIdsWR(id: String, bm:Binding<Member>, house: Binding<House>, myId: Binding<String>) {
-        if bm.wrappedValue.home != "waitingRoom" && bm.wrappedValue.home != "" {
-        if id != "" {
-            print(" IDIDIDI \(id)")
+    func bindingMemberFromIdsWR(id: String, bm:Binding<Member>) {
         db.document("waitingRoom/\(id)").getDocument { ds, error in
-            if ds?.exists ?? false {
-                guard let data = ds?.data() else {
-                    print(error)
-                    return
-                }
-                let name = data["name"] as? String ?? ""
-                let home = data["home"] as? String ?? ""
-                let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
-                let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
-                let image = data["image"] as? String ?? ""
-                let admin = data["admin"] as? Bool ?? false
-                bm.wrappedValue = Member(id: id, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0)
-            } else {
-                self.db.document("waitingRoom/\(id)").setData(["name": UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "NONAME", "id": id,"home": "waitingRoom", "image": UserDefaults.standard.string(forKey: "imageB64") ?? ""], merge: true){ _ in
-                    UserDefaults.standard.setValue(id, forKey: "myId")
-                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(id, forKey: "myID")
-                    UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("waitingRoom", forKey: "houseId")
-                    UserDefaults.standard.setValue("waitingRoom", forKey: "houseId")
-                    bm.wrappedValue = Member(id: id, home: "waitingRoom", name: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "NONAME", image: (UserDefaults.standard.string(forKey: "imageB64") ?? ""))
-                }
+            guard let data = ds?.data() else {
+                print(error)
+                return
             }
-        }
-        } else {
-            print("idwas empty \(id) \(UserDefaults.standard.string(forKey: "myId"))")
-            self.addToWR(m: bm, myId: myId, h: house) {
-            }
-        }
-        } else {
-            self.checkThere(m: bm, h: house) { b in
-                print("CHECKIGNINBBMBMBBBBMM \(b) \(bm.wrappedValue.home) \(bm.wrappedValue.id)")
-                if b {
-                    print("FOUND SAFE")
-                }
-            }
+            let name = data["name"] as? String ?? ""
+            let home = data["home"] as? String ?? ""
+            let owesMe = data["owesMe"] as? [String : Float] ?? [String : Float]()
+            let iOwe = data["iOwe"] as? [String : Float] ?? [String : Float]()
+            let image = data["image"] as? String ?? ""
+            let admin = data["admin"] as? Bool ?? false
+            bm.wrappedValue = Member(id: id, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0)
         }
     }
     

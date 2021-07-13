@@ -177,7 +177,7 @@ struct ProfileView: View, KeyboardReadable {
                         }, label: {
                             HStack {
                                 Spacer()
-                                Text("Leave Group")
+                                Text("Delete account")
                                     .foregroundColor(.red)
                                 Spacer()
                             }
@@ -193,19 +193,19 @@ struct ProfileView: View, KeyboardReadable {
                         .alert(isPresented: $showSignOut, content: {
                             if m.admin {
                                 if house.members.count > 1 {
-                                    return Alert(title: Text("Set a new admin"), message: Text("You have to choose a new Group Admin before you can leave this group"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
+                                    return Alert(title: Text("Set a new admin"), message: Text("You have to choose a new Group admin before you can delete this account"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
                                         showAdminPicker = true
                                         showSheet = true
                                     }), secondaryButton: Alert.Button.cancel())
                                 } else {
-                                    return Alert(title: Text("Erase Group"), message: Text("Leaving this group will erase it from the database"), primaryButton: Alert.Button.destructive(Text("Erase"), action: {
+                                    return Alert(title: Text("Erase Group"), message: Text("Deleting this account will erase this group from the database"), primaryButton: Alert.Button.destructive(Text("Erase"), action: {
                                         Fetch().deleteAccount(m: $m, erase: true, inWR: $inWR){
                                             Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                                         }
                                     }), secondaryButton: Alert.Button.cancel())
                                 }
                             } else {
-                                return Alert(title: Text("Leave Group"), message: Text("Are you sure you want to leave this group?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                                return Alert(title: Text("Delete account"), message: Text("Are you sure you want to delete this acount?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
                                     Fetch().deleteAccount(m: $m, inWR: $inWR){
                                         Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                                     }
