@@ -156,5 +156,5 @@ func paymentFromMsg(_ msg: String) -> Payment {
     }.map { n in
         return n.replacingOccurrences(of: "@", with: "")
     }
-    return Payment(from: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "noname", reqfrom: rf, time: Int(NSDate().timeIntervalSince1970), memo: msg, isGM: true, by: UserDefaults.standard.string(forKey: "myId") ?? "noId")
+    return Payment(to: "*Update to v2.3.0 to view this message*", from: UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "noname", reqfrom: rf, time: Int(NSDate().timeIntervalSince1970), memo: msg, isGM: true, by: UserDefaults.standard.string(forKey: "myId") ?? "noId")
 }
