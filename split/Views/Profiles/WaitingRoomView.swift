@@ -150,9 +150,6 @@ struct WaitingRoomView: View {
                         }
                     }))
                 })
-            .onAppear{
-                print("ajjkl;asjkasfjkasdfjkl;;dfjjkl;asdfjkl;asdfl;")
-            }
         }
     }
 }

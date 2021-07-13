@@ -1032,7 +1032,7 @@
 				CODE_SIGN_ENTITLEMENTS = split/split.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"split/Preview Content\"";
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				ENABLE_PREVIEWS = YES;
@@ -1061,7 +1061,7 @@
 				CODE_SIGN_ENTITLEMENTS = split/split.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"split/Preview Content\"";
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				ENABLE_PREVIEWS = YES;
@@ -1089,7 +1089,7 @@
 				CODE_SIGN_ENTITLEMENTS = spllitWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
@@ -1115,7 +1115,7 @@
 				CODE_SIGN_ENTITLEMENTS = spllitWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;

@@ -197,9 +197,9 @@ struct ActivityView: View {
                         if has {
                             getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                         } else {
-//                            if UserDefaults.standard.string(forKey: "houseId") != "waitingRoom" {
+                            if UserDefaults.standard.string(forKey: "houseId") != "waitingRoom" {
                                 wrStuff(inWR: $inWR, h: $house, m: $m)
-//                            }
+                            }
                         }
                     }
                 }
