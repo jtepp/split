@@ -11,8 +11,13 @@ struct StoryButton: View {
     let gradient = AngularGradient(
         gradient: Gradient(colors: [Color.red, .orange, .orange, .yellow, .yellow, .green, .green, .purple, .purple, .red]),
         center: .center)
+    let dull = AngularGradient(
+        gradient: Gradient(colors: [Color.gray]),
+        center: .center)
+    let viewed = false
     @State var m: Member = .placeholder2
     let percent: CGFloat = 0.75
+    let storyImage: String = b64ss
     var body: some View {
         ZStack {
 //            b64toimg(b64: m.image)
@@ -30,7 +35,7 @@ struct StoryButton: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
                         .trim(from: 0.0, to: percent)
-                        .stroke(gradient, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                        .stroke(viewed ? dull : gradient, style: StrokeStyle(lineWidth: 6, lineCap: .round))
                 )
                 .background(
                 RoundedRectangle(cornerRadius: 16)
@@ -53,25 +58,6 @@ struct StoryButton: View {
                     ,
                     alignment: .bottom
                 )
-//                .overlay(
-//                    Image(systemName: "crown.fill")
-//                        .offset(x: -3, y: -30)
-//                        .scaleEffect(x: 1.2)
-//                        .rotationEffect(.degrees(-30))
-//                        .foregroundColor(Color.white.opacity(false ? 1 : 0))
-//                )
-            
-            
-//            Circle().stroke(Color.white, lineWidth: 46)
-//
-//            Circle()
-//                .trim(from: 0, to: CGFloat(0.8))
-//                .stroke(gradient, style: StrokeStyle(lineWidth: 46, lineCap: .round))
-//                .overlay(
-//                    Circle().trim(from: 0, to: CGFloat(0.8))
-//                    .rotation(Angle.degrees(-4))
-//                    .stroke(gradient, style: StrokeStyle(lineWidth: 46, lineCap: .butt))
-//            )
 
         }
     }
