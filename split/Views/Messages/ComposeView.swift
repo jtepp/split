@@ -37,12 +37,12 @@ struct ComposeView: View {
                 TextField("Message...", text: $msg)
                     .firstResponder(id: "msg", firstResponder: $focus, resignableUserOperations: .none)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .overlay(
-                        Button{msg = ""} label: {Image(systemName: "plus.circle.fill").rotationEffect(Angle(degrees: 45)).foregroundColor(Color("Material"))}.padding(.trailing, 24)
-                            .opacity(msg == "" ? 0 : 1)
-                        , alignment: .trailing
-                    )
+                    .padding(.vertical)
+                    .padding(.leading)
+                Button{msg = ""} label: {Image(systemName: "plus.circle.fill").rotationEffect(Angle(degrees: 45)).foregroundColor(Color("Material"))}
+                    .opacity(msg == "" ? 0.2 : 1)
+                    .disabled(msg == "")
+                    .padding(.trailing, 10)
                 Button("Send"){
                     if canTap {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -59,28 +59,28 @@ struct ComposeView: View {
                 .foregroundColor(canTap ? .blue : .gray)
                 .disabled(!canTap)
                 .onChange(of: msg, perform: { v in
-                    let cp = msg.components(separatedBy: " ")
+//                    let cp = msg.components(separatedBy: " ")
                     
-                    if cp.last == "" && msg != "" {
-                        if cp.count > 1 {
-                            
-                            if cp[cp.count - 2].contains("@") && members.contains(where: { m in
-                                return m.name.lowercased().contains(cp[cp.count - 2].replacingOccurrences(of: "@", with: "").lowercased())
-                            }) {
-                                var fixedcp = cp
-                                fixedcp.removeLast()
-                                var ls = fixedcp.last
-                                fixedcp.removeLast()
-                                ls = members.filter( { m in
-                                    return m.name.lowercased().contains(cp[cp.count - 2].replacingOccurrences(of: "@", with: "").lowercased())
-                                })[0].name
-                                
-                                msg = fixedcp.joined(separator: " ") + " @" + ls! + " "
-                                
-                                
-                            }
-                        }
-                    }
+//                    if cp.last == "" && msg != "" {
+//                        if cp.count > 1 {
+//
+//                            if cp[cp.count - 2].contains("@") && members.contains(where: { m in
+//                                return m.name.lowercased().contains(cp[cp.count - 2].replacingOccurrences(of: "@", with: "").lowercased())
+//                            }) {
+//                                var fixedcp = cp
+//                                fixedcp.removeLast()
+//                                var ls = fixedcp.last
+//                                fixedcp.removeLast()
+//                                ls = members.filter( { m in
+//                                    return m.name.lowercased().contains(cp[cp.count - 2].replacingOccurrences(of: "@", with: "").lowercased())
+//                                })[0].name
+//
+//                                msg = fixedcp.joined(separator: " ") + " @" + ls! + " "
+//
+//
+//                            }
+//                        }
+//                    }
                     
                     if ((msg.components(separatedBy: " ").last ?? "").contains("@") && members.contains(where: { mem in
                         return mem.id != UserDefaults.standard.string(forKey: "myId") && mem.name.lowercased().contains((msg.components(separatedBy: " ").last ?? "").replacingOccurrences(of: "@", with: "").lowercased())

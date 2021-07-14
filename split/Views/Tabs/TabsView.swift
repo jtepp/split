@@ -81,6 +81,7 @@ struct TabsView: View {
                         }
                         ComposeView(house: $house, members: .constant(house.members), msg: $GMmsg, show: $showMessagePopover, focus: $focus)
                             .offset(y: showMessagePopover ? 0 : 400)
+                            .padding(.horizontal)
                             .opacity(showMessagePopover ? 1 : 0)
                             .animation(Animation.easeOut)
                             .onChange(of: showMessagePopover, perform: { _ in
