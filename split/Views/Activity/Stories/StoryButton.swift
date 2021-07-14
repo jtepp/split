@@ -16,10 +16,12 @@ struct StoryButton: View {
         center: .center)
     let viewed = false
     @State var m: Member = .placeholder2
-    let percent: CGFloat = 0.75
-    let storyImage: String = b64ss
+    var percent: CGFloat = 0.75
+    @Binding var showStory: Bool
+    @Binding var storyImage: String
     var body: some View {
-        ZStack {
+        Button{}
+            label: {
             b64toimg(b64: m.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -33,7 +35,7 @@ struct StoryButton: View {
                 .padding(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .trim(from: 0.0, to: percent)
+                        .trim(from: 0, to: percent)
                         .stroke(viewed ? dull : gradient, style: StrokeStyle(lineWidth: 6, lineCap: .round))
                 )
                 .background(
@@ -62,11 +64,33 @@ struct StoryButton: View {
     }
 }
 
+struct storyPreview: View {
+    @State var showStory = false
+    @State var storyImage = ""
+    var body: some View {
+
+        ScrollView(.vertical){
+            ScrollView(.horizontal){
+                HStack {
+                    ForEach(0..<6) { _ in
+                        StoryButton(percent: 0.90, showStory: $showStory, storyImage: $storyImage)
+                    }
+                    .padding()
+                }
+            }
+            Spacer()
+            Image(systemName: "person.3.sequence")
+                .foregroundColor(.white)
+        }
+        .padding()
+    }
+}
+
 struct StoryButton_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            StoryButton()
+            storyPreview()
         }
         .preferredColorScheme(.light)
     }
