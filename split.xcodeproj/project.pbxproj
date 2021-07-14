@@ -38,6 +38,7 @@
 		0C64FED0265ECB87009B0C3C /* TimeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FECF265ECB87009B0C3C /* TimeBar.swift */; };
 		0C64FED6265EDA9E009B0C3C /* GeneralRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */; };
 		0C64FEDA265EED43009B0C3C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED9265EED43009B0C3C /* ImagePicker.swift */; };
+		0C66EFE7269E804800065E7D /* StoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C66EFE6269E804800065E7D /* StoryButton.swift */; };
 		0C6A740E26927C7400275A9B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6A740D26927C7400275A9B /* WidgetKit.framework */; };
 		0C6A741026927C7400275A9B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6A740F26927C7400275A9B /* SwiftUI.framework */; };
 		0C6A741326927C7400275A9B /* spllitWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A741226927C7400275A9B /* spllitWidgets.swift */; };
@@ -205,6 +206,7 @@
 		0C64FED2265ED9F4009B0C3C /* ActivityRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRequestCell.swift; sourceTree = "<group>"; };
 		0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRequestCell.swift; sourceTree = "<group>"; };
 		0C64FED9265EED43009B0C3C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0C66EFE6269E804800065E7D /* StoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryButton.swift; sourceTree = "<group>"; };
 		0C6A740B26927C7400275A9B /* spllitWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = spllitWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C6A740D26927C7400275A9B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0C6A740F26927C7400275A9B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -462,6 +464,7 @@
 			children = (
 				0C5C0E2E269CB15500BD092F /* Filter */,
 				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
+				0C66EFE5269E803300065E7D /* Stories */,
 				0CBF09F3265D8F140016CA92 /* ActivityView.swift */,
 				0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */,
 				0CAA80362661860600A3081B /* ActivityAnnouncementCell.swift */,
@@ -470,6 +473,14 @@
 				0CD16876269B8B1600CFD7C2 /* FloatingMenuButton.swift */,
 			);
 			path = Activity;
+			sourceTree = "<group>";
+		};
+		0C66EFE5269E803300065E7D /* Stories */ = {
+			isa = PBXGroup;
+			children = (
+				0C66EFE6269E804800065E7D /* StoryButton.swift */,
+			);
+			path = Stories;
 			sourceTree = "<group>";
 		};
 		0C6A740C26927C7400275A9B /* Frameworks */ = {
@@ -835,6 +846,7 @@
 				0C0CA77E265F01BE0062FDDD /* PaymentPaymentView.swift in Sources */,
 				0C0CA784265F08CD0062FDDD /* MemberPicker.swift in Sources */,
 				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,
+				0C66EFE7269E804800065E7D /* StoryButton.swift in Sources */,
 				0CEE3827265E16700013BB12 /* MemberDetailsView.swift in Sources */,
 				0C15F8912685026E006BF2B0 /* KeyboardReadable.swift in Sources */,
 				0C5C0E32269CBEDE00BD092F /* VerticalToggle.swift in Sources */,
