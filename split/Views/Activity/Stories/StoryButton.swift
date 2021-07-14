@@ -20,8 +20,7 @@ struct StoryButton: View {
     let storyImage: String = b64ss
     var body: some View {
         ZStack {
-//            b64toimg(b64: m.image)
-            Image("Face")
+            b64toimg(b64: m.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 60, height: 60)

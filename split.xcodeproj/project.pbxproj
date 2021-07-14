@@ -17,6 +17,7 @@
 		0C0CA784265F08CD0062FDDD /* MemberPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CA783265F08CD0062FDDD /* MemberPicker.swift */; };
 		0C15F8912685026E006BF2B0 /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15F8902685026E006BF2B0 /* KeyboardReadable.swift */; };
 		0C207689269F8D550095608A /* BigStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C207688269F8D550095608A /* BigStrings.swift */; };
+		0C20768A269F8E9C0095608A /* BigStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C207688269F8D550095608A /* BigStrings.swift */; };
 		0C210D6726811F42008220B6 /* leave.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6226811F41008220B6 /* leave.mp3 */; };
 		0C210D6826811F42008220B6 /* admin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6326811F41008220B6 /* admin.mp3 */; };
 		0C210D6926811F42008220B6 /* pay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C210D6426811F41008220B6 /* pay.mp3 */; };
@@ -903,6 +904,7 @@
 				0C6A744A26938D3100275A9B /* ActivityWidgetView.swift in Sources */,
 				0C6A742C2692860F00275A9B /* House.swift in Sources */,
 				0C6A7456269392D300275A9B /* ActivityWidgetRequestCell.swift in Sources */,
+				0C20768A269F8E9C0095608A /* BigStrings.swift in Sources */,
 				0C6A742B2692860B00275A9B /* Payment.swift in Sources */,
 				0CE5F5232693985C00DAD578 /* WidgetTimeBar.swift in Sources */,
 				0C6A74312692882800275A9B /* BalanceWidgetEntryView.swift in Sources */,
