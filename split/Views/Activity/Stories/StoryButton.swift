@@ -20,7 +20,12 @@ struct StoryButton: View {
     @Binding var showStory: Bool
     @Binding var storyImage: String
     var body: some View {
-        Button{}
+        Button{
+            withAnimation(.easeOut) {
+                showStory = true
+            }
+            storyImage = b64ss
+        }
             label: {
             b64toimg(b64: m.image)
                 .resizable()
@@ -66,24 +71,31 @@ struct StoryButton: View {
 }
 
 struct storyPreview: View {
-    @State var showStory = false
+    @State var showStory = true
     @State var storyImage = ""
     var body: some View {
 
-        ScrollView(.vertical){
-            ScrollView(.horizontal){
-                HStack {
-                    ForEach(0..<6) { _ in
-                        StoryButton(percent: 0.90, showStory: $showStory, storyImage: $storyImage)
+        ZStack {
+            ScrollView(.vertical){
+                ScrollView(.horizontal){
+                    HStack {
+                        ForEach(0..<6) { _ in
+                            StoryButton(percent: 0.90, showStory: $showStory, storyImage: $storyImage)
+                        }
+                        .padding()
                     }
-                    .padding()
                 }
+                Spacer()
+                Image(systemName: "person.3.sequence")
+                    .foregroundColor(.white)
             }
-            Spacer()
-            Image(systemName: "person.3.sequence")
-                .foregroundColor(.white)
+            .padding()
+            StoryView(storyImage: $storyImage)
+                .allowsHitTesting(showStory)
+                .offset(y: showStory ? 0 : 1.5 * UIScreen.main.bounds.height)
+//                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+
         }
-        .padding()
     }
 }
 
