@@ -19,11 +19,13 @@ struct StoryButton: View {
     var percent: CGFloat = 0.75
     @Binding var showStory: Bool
     @Binding var storyImage: String
+    @Binding var internalOffset: CGFloat
     var body: some View {
         Button{
-            withAnimation(.easeOut) {
+            withAnimation(.easeInOut) {
                 showStory = true
             }
+            internalOffset = 0
             storyImage = b64ss
         }
             label: {
@@ -71,8 +73,9 @@ struct StoryButton: View {
 }
 
 struct storyPreview: View {
-    @State var showStory = true
+    @State var showStory = false
     @State var storyImage = ""
+    @State var internalOffset: CGFloat = 0
     var body: some View {
 
         ZStack {
@@ -80,7 +83,7 @@ struct storyPreview: View {
                 ScrollView(.horizontal){
                     HStack {
                         ForEach(0..<6) { _ in
-                            StoryButton(percent: 0.90, showStory: $showStory, storyImage: $storyImage)
+                            StoryButton(percent: 0.90, showStory: $showStory, storyImage: $storyImage, internalOffset: $internalOffset)
                         }
                         .padding()
                     }
@@ -90,10 +93,12 @@ struct storyPreview: View {
                     .foregroundColor(.white)
             }
             .padding()
-            StoryView(storyImage: $storyImage)
+            .blur(radius: showStory ? 10 : 0)
+            .allowsHitTesting(!showStory)
+            
+            StoryView(showStory: $showStory, storyImage: $storyImage, offset: $internalOffset)
                 .allowsHitTesting(showStory)
-                .offset(y: showStory ? 0 : 1.5 * UIScreen.main.bounds.height)
-//                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .offset(y: showStory ? 0 : UIScreen.main.bounds.height)
 
         }
     }
