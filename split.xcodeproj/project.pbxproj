@@ -71,7 +71,6 @@
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
 		0C95131E265DB7C0005398CF /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C95131D265DB7C0005398CF /* MemberCell.swift */; };
 		0C9D26CF265F263E006A7AF6 /* String+isNumeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9D26CE265F263E006A7AF6 /* String+isNumeric.swift */; };
-		0CA0E9BD2660369D002876CF /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0E9BC2660369D002876CF /* ModalView.swift */; };
 		0CA0E9C126603809002876CF /* WaitingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0E9C026603809002876CF /* WaitingRoomView.swift */; };
 		0CA0E9C5266038EB002876CF /* NoProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0E9C4266038EB002876CF /* NoProfileView.swift */; };
 		0CA0E9CA26603A32002876CF /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0E9C926603A32002876CF /* EditProfileView.swift */; };
@@ -230,7 +229,6 @@
 		0C95131D265DB7C0005398CF /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		0C9570C62670A61800831D17 /* split.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = split.entitlements; sourceTree = "<group>"; };
 		0C9D26CE265F263E006A7AF6 /* String+isNumeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNumeric.swift"; sourceTree = "<group>"; };
-		0CA0E9BC2660369D002876CF /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		0CA0E9C026603809002876CF /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
 		0CA0E9C4266038EB002876CF /* NoProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoProfileView.swift; sourceTree = "<group>"; };
 		0CA0E9C926603A32002876CF /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -410,12 +408,8 @@
 			children = (
 				0C2A0588265CAA44002BD46D /* Main.swift */,
 				0CD1687A269BC16900CFD7C2 /* Messages */,
-				0CAA803A2661CC4A00A3081B /* SplashView.swift */,
-				0CA0E9BC2660369D002876CF /* ModalView.swift */,
-				0C210D6C26812AE7008220B6 /* MailView.swift */,
 				0CA0E9BF266037FE002876CF /* Profiles */,
-				0C64FED9265EED43009B0C3C /* ImagePicker.swift */,
-				0C625990265EB440002E58A3 /* HeaderText.swift */,
+				0CAB6FEA26A0D43100FA1146 /* Others */,
 				0C625970265EA855002E58A3 /* Payments */,
 				0CEE3829265E167C0013BB12 /* Members */,
 				0CEE382B265E16880013BB12 /* Tabs */,
@@ -460,8 +454,8 @@
 		0C625976265EAE58002E58A3 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
-				0C5C0E2E269CB15500BD092F /* Filter */,
 				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
+				0C5C0E2E269CB15500BD092F /* Filter */,
 				0CBF09F3265D8F140016CA92 /* ActivityView.swift */,
 				0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */,
 				0CAA80362661860600A3081B /* ActivityAnnouncementCell.swift */,
@@ -613,6 +607,18 @@
 			path = Profiles;
 			sourceTree = "<group>";
 		};
+		0CAB6FEA26A0D43100FA1146 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				0C210D6C26812AE7008220B6 /* MailView.swift */,
+				0CAA803A2661CC4A00A3081B /* SplashView.swift */,
+				0C64FED9265EED43009B0C3C /* ImagePicker.swift */,
+				0C210D6E26813075008220B6 /* LinkInviteView.swift */,
+				0C625990265EB440002E58A3 /* HeaderText.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
 		0CD1687A269BC16900CFD7C2 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
@@ -624,7 +630,6 @@
 		0CEE3829265E167C0013BB12 /* Members */ = {
 			isa = PBXGroup;
 			children = (
-				0C210D6E26813075008220B6 /* LinkInviteView.swift */,
 				0CBF09F6265D8F370016CA92 /* MembersView.swift */,
 				0C0CA783265F08CD0062FDDD /* MemberPicker.swift */,
 				0C95131D265DB7C0005398CF /* MemberCell.swift */,
@@ -846,7 +851,6 @@
 				0CD16875269B829800CFD7C2 /* CustomRoundedRect.swift in Sources */,
 				0CD117C22687DBD40093426F /* ImageCroppingView.swift in Sources */,
 				0CAA803B2661CC4A00A3081B /* SplashView.swift in Sources */,
-				0CA0E9BD2660369D002876CF /* ModalView.swift in Sources */,
 				0CA0E9CA26603A32002876CF /* EditProfileView.swift in Sources */,
 				0C5C0E2D269CA14E00BD092F /* TrayButton.swift in Sources */,
 				0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */,
