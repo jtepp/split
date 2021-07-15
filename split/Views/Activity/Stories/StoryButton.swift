@@ -14,7 +14,7 @@ struct StoryButton: View {
     let dull = AngularGradient(
         gradient: Gradient(colors: [Color.gray]),
         center: .center)
-    let viewed = false
+    @State var viewed = false
     @State var m: Member = .placeholder2
     var percent: CGFloat = 0.75
     @Binding var showStory: Bool
@@ -24,6 +24,7 @@ struct StoryButton: View {
         Button{
             withAnimation(.easeInOut) {
                 showStory = true
+                viewed = true
             }
             internalOffset = 0
             storyImage = b64ss
@@ -72,43 +73,12 @@ struct StoryButton: View {
     }
 }
 
-struct storyPreview: View {
-    @State var showStory = false
-    @State var storyImage = ""
-    @State var internalOffset: CGFloat = 0
-    var body: some View {
-
-        ZStack {
-            ScrollView(.vertical){
-                ScrollView(.horizontal){
-                    HStack {
-                        ForEach(0..<6) { _ in
-                            StoryButton(percent: 0.90, showStory: $showStory, storyImage: $storyImage, internalOffset: $internalOffset)
-                        }
-                        .padding()
-                    }
-                }
-                Spacer()
-                Image(systemName: "person.3.sequence")
-                    .foregroundColor(.white)
-            }
-            .padding()
-            .blur(radius: showStory ? 10 : 0)
-            .allowsHitTesting(!showStory)
-            
-            StoryView(showStory: $showStory, storyImage: $storyImage, offset: $internalOffset)
-                .allowsHitTesting(showStory)
-                .offset(y: showStory ? 0 : UIScreen.main.bounds.height)
-
-        }
-    }
-}
 
 struct StoryButton_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            storyPreview()
+            StoryPreview()
         }
         .preferredColorScheme(.light)
     }
