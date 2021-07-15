@@ -37,6 +37,7 @@ struct StoryButton: View {
                     RoundedRectangle(cornerRadius: 12)
                         .trim(from: 0, to: percent)
                         .stroke(viewed ? dull : gradient, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                        .rotationEffect(Angle(degrees: -90))
                 )
                 .background(
                 RoundedRectangle(cornerRadius: 16)
@@ -56,8 +57,7 @@ struct StoryButton: View {
                         )
                         .frame(maxWidth: 84, maxHeight: 20)
                         .fixedSize(horizontal: true, vertical: false)
-                    ,
-                    alignment: .bottom
+                    ,alignment: .bottom
                 )
 
         }
