@@ -26,7 +26,6 @@ class Fetch: ObservableObject {
                 print("has real hid \(id) \(myId)")
                 showInvite.wrappedValue = false
 //                inWR.wrappedValue = false
-                print("BOUNCER LET US IN \(id) \(myId)")
                 noProf.wrappedValue = false
                 
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(id, forKey: "houseId")
@@ -727,7 +726,7 @@ class Fetch: ObservableObject {
                                     //
                                     
                                 } else {
-                                    print("LOOOF\(approved) \(mm.dict())")
+                                    print("approved\(approved) \(mm.dict())")
                                     if !approved {
                                         tapped.wrappedValue = false
                                         msg.wrappedValue = "Member already exists by that name"
@@ -886,7 +885,7 @@ class Fetch: ObservableObject {
     func maid(m: Binding<Member>, h: Binding<House>) {
         db.collection("houses").getDocuments { querySnapshot, err in
             guard let documents = querySnapshot?.documents else {
-                print("maidwhoopsies")
+                print("maiderror")
                 return
             }
             documents.forEach { houseq in
@@ -895,7 +894,7 @@ class Fetch: ObservableObject {
                 if houseq.documentID != (UserDefaults.standard.string(forKey: "houseId") ?? "") {
                     self.db.collection("houses/\(houseq.documentID)/members").getDocuments { documentSnapshot, err in
                         guard let doc = documentSnapshot?.documents else {
-                            print("maindocerrr")
+                            print("mainDocError")
                             return
                         }
                         let empt = doc.count == 1
