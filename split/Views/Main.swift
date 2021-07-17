@@ -23,12 +23,7 @@ struct Main: View {
         ZStack {
             TabsView(tabSelection: $tabSelection, house: $h, member: $m, myId: $myId, inWR: $inWR, noProf: $noProf, engaged: $engaged, watch: $watch)
                 .animation(.easeOut)
-            //                .onAppear{
-            //                    print("\n\n\n\n\ntrue\n\n\n\n\n\n")
-            //                }
-            //                .onDisappear{
-            //                    print("\n\n\n\n\nfalse\n\n\n\n\n\n")
-            //                }
+
             TabBar(tabSelection: $tabSelection, engaged: $engaged, watch: $watch)
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
@@ -36,12 +31,6 @@ struct Main: View {
             Fetch().getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
         }
         .onChange(of: h.id, perform: { _ in
-            //            inWR = false
-            //            noProf = false
-            //            UserDefaults.standard.set("SIfrfcT2735XvpRCB714", forKey: "myId")
-            //            UserDefaults.standard.set("TlRWEGz9GWrKBXqI9T8L", forKey: "houseId")
-            //            myId = "SIfrfcT2735XvpRCB714"
-            //            h.id = "TlRWEGz9GWrKBXqI9T8L"
             Fetch().getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
         })
         .onChange(of: scenePhase) { newPhase in
@@ -53,7 +42,7 @@ struct Main: View {
                     WidgetCenter.shared.reloadAllTimelines()
                 } else if newPhase == .active {
                     Fetch().updateStatus(status: true)
-                    guard let name = shortcutItemToProcess?.localizedTitle as? String else {
+                    guard let name = shortcutItemToProcess?.localizedTitle else {
                         print("else")
                         return
                     }
