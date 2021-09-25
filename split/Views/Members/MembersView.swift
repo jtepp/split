@@ -10,7 +10,9 @@ import MobileCoreServices
 
 struct MembersView: View {
     @Binding var house: House
+    @State var showMemberSheet = false
     @State var showDetails = false
+    @State var showSettle = false
     @State var tappedMember = Member.empty
     @Binding var payType: Int
     @Binding var tabSelection: Int
@@ -21,37 +23,31 @@ struct MembersView: View {
     var body: some View {
         ScrollView {
             HStack {
-                Text(house.name)
-                    .foregroundColor(.white)
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(
-                                Color.gray.opacity(0.2)
-                            )
-                    )
-                    //                        .padding(-10)
-                    .padding()
-                    .contextMenu(menuItems: {
-                        Button {
-                            UIPasteboard.general.string = "Join my group on spllit!\nspllit://\(house.id)$\(house.password)"
-                        } label: {
-                            Text("Copy group invite")
-                            Image(systemName: "link")
-                        }
-                        Button {
-                            UIPasteboard.general.string = "\(house.id)"
-                        } label: {
-                            Text("Copy group ID")
-                            Image(systemName: "doc.on.doc")
-                            
-                        }
-                        
-                        Text("Password: \(house.password)")
-                        
-                    })
+                Menu {
+                    Button {
+                        showDetails = false
+                        showSettle = true
+                        showMemberSheet = true
+                    } label: {
+                        Text("Quick settle")
+                        Image(systemName: "arrowshape.bounce.right")
+                    }
+                } label: {
+                    Text(house.name)
+                        .foregroundColor(.white)
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(
+                                    Color.gray.opacity(0.2)
+                                )
+                        )
+                        //                        .padding(-10)
+                        .padding()
+                }
+                
                 Spacer()
                 Menu {
                     
@@ -138,6 +134,8 @@ struct MembersView: View {
                                 tabSelection = 3
                             } else {
                                 showDetails = true
+                                showSettle = false
+                                showMemberSheet = true
                             }
                         }
                 } else {
@@ -174,6 +172,8 @@ struct MembersView: View {
                                 tabSelection = 3
                             } else {
                                 showDetails = true
+                                showSettle = false
+                                showMemberSheet = true
                             }
                         }
                 }
@@ -184,8 +184,14 @@ struct MembersView: View {
         }
         .onAppear(){
         }
-        .sheet(isPresented: $showDetails, content: {
-            MemberDetailsView(house: $house, member: $tappedMember, showView: $showDetails)
+        .sheet(isPresented: $showMemberSheet, content: {
+            if showDetails {
+            MemberDetailsView(house: $house, member: $tappedMember, showView: $showMemberSheet)
+            } else if showSettle {
+                QuickSettleView(h: house)
+            } else {
+                EmptyView()
+            }
         })
         .alert(isPresented: $showAlert, content: {
             if showRemove {
