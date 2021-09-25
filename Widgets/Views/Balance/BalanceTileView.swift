@@ -19,7 +19,7 @@ struct BalanceTileView: View {
                     VStack {
                         b64toimg(b64: member.image)
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .aspectRatio(contentMode: .fill)
                             .frame(width: 30, height: 30)
                             .clipShape(RoundedRectangle(cornerRadius: 6))
                             .background(

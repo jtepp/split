@@ -77,6 +77,7 @@ struct FloatingMenuButton: View{
                     }
                 }
         }
+        
     }
 }
 
@@ -93,5 +94,5 @@ struct Action: Identifiable {
     var action: () -> Void
     static let placeholders = [Action(image: "plus.bubble", label: "New message") {},
                                Action(image: "arrow.right.circle", label: "New payment") {},
-                               Action(image: "arrow.left.circle", label: "New Request") {}]
+                               Action(image: "arrow.left.circle", label: "New request") {}]
 }

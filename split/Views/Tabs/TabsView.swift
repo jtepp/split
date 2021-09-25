@@ -60,7 +60,7 @@ struct TabsView: View {
                                                         tabSelection = 2
                                                         FMBopen = false
                                                     },
-                                                    Action(image: "arrow.left.circle", label: "New Request") {
+                                                    Action(image: "arrow.left.circle", label: "New request") {
                                                         payType = 1
                                                         tabSelection = 2
                                                         FMBopen = false
@@ -70,6 +70,7 @@ struct TabsView: View {
                                     .allowsHitTesting(showMessagePopover ? false : true)
                             }
                         }
+                        
                         if showMessagePopover {
                             Rectangle()
                                 .fill(
@@ -89,6 +90,7 @@ struct TabsView: View {
                             })
                     }
                     .tag(0)
+                    
                     MembersView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)
                         .tag(1)
                     PaymentView(house: $house, payType: $payType, tabSelection: $tabSelection, pchoice: $pchoice, rchoice: $rchoice)

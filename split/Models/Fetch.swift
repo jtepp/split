@@ -10,6 +10,9 @@ import SwiftUI
 import FirebaseFirestore
 
 class Fetch: ObservableObject {
+//    init() {
+//        Firestore.firestore().clearPersistence()
+//    }
     private var db = Firestore.firestore()
     
     func getHouse (h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>, showInvite: Binding<Bool> = .constant(false), completion: @escaping () -> Void = {}) {
