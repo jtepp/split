@@ -56,3 +56,24 @@ struct codableMember: Identifiable, Codable {
 func codableToMember(c:codableMember) -> Member {
     return Member(id: c.id, home: c.home, name: c.name, owesMe: c.owesMe, iOwe: c.iOwe, image: c.image, admin: c.admin, showStatus: false, online: false, lastSeen: 0)
 }
+
+struct simpleMember: Identifiable {
+    var id: String
+    var home: String
+    var name: String
+    var balance: Float
+    var image: String
+    var admin: Bool = false
+    init(_ member: Member) {
+        id = member.id
+        home = member.home
+        name = member.name
+        balance = member.owesMe.values.reduce(0, {a, b in
+            a + b
+        }) - member.iOwe.values.reduce(0, { a, b in
+            a + b
+        })
+        image = member.image
+        admin = member.admin
+    }
+}

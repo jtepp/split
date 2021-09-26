@@ -14,7 +14,7 @@ struct MemberCellBalance: View {
             b64toimg(b64: m.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 40, height: 40)
+                .frame(width: 20, height: 20)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(radius: 4)
                 .overlay(
@@ -31,7 +31,9 @@ struct MemberCellBalance: View {
             Spacer()
             VStack {
                 Text(memberBalance(m: m))
-                    .minimumScaleFactor(0.4)
+                    .font(.footnote)
+                    .minimumScaleFactor(0.6)
+                    .lineLimit(1)
             }
         }
         .foregroundColor(.primary)
