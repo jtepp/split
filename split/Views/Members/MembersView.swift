@@ -20,6 +20,7 @@ struct MembersView: View {
     @State var showAlert = false
     @Binding var pchoice: [Member]
     @Binding var rchoice: [Member]
+    @State var settleMembers = [Member]()
     var body: some View {
         ScrollView {
             HStack {
@@ -28,6 +29,8 @@ struct MembersView: View {
                         showDetails = false
                         showSettle = true
                         showMemberSheet = true
+                        Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers, msg: .constant(""), showAlert: .constant(false))
+                        
                     } label: {
                         Text("Quick settle")
                         Image(systemName: "arrowshape.bounce.right")
@@ -187,10 +190,8 @@ struct MembersView: View {
         .sheet(isPresented: $showMemberSheet, content: {
             if showDetails {
             MemberDetailsView(house: $house, member: $tappedMember, showView: $showMemberSheet)
-            } else if showSettle {
-                QuickSettleView(h: house)
             } else {
-                EmptyView()
+                QuickSettleView(h: $house, settleMembers: $settleMembers)
             }
         })
         .alert(isPresented: $showAlert, content: {

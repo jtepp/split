@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct QuickSettleView: View {
-    var h: House
+    var h: Binding<House>
+    @Binding var settleMembers: [Member]
+    func upCount() -> Int {
+        return Int(ceil(Float(settleMembers.count)/2))
+    }
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            
+            LazyVGrid(columns: [GridItem(), GridItem()], content: {
+                ForEach(settleMembers.sorted(by: { a, b in
+                    memberBalanceFloat(m: a) > memberBalanceFloat(m: b)
+                })) {member in
+                    MemberCellBalance(m: .constant(member))
+                        .padding(.horizontal, 5)
+                }
+                
+                .padding(.bottom, 5)
+            })
+            .padding(.horizontal)
         }
     }
 }
