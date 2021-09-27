@@ -16,6 +16,7 @@ struct QuickSettleView: View {
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
+            ScrollView {
             LazyVGrid(columns: [GridItem(), GridItem()], content: {
                 ForEach(settleMembers.sorted(by: { a, b in
                     memberBalanceFloat(m: a) > memberBalanceFloat(m: b)
@@ -26,7 +27,27 @@ struct QuickSettleView: View {
                 
                 .padding(.bottom, 5)
             })
-            .padding(.horizontal)
+            .padding()
+                Button {
+                    print(settlePayments(settleMembers).map({ p in
+                        return "\(p.from) -> \(p.to): $\(p.amount)"
+                    }))
+                } label: {
+                    HStack{
+                        Spacer()
+                        Text("Settle")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                        Spacer()
+                    }
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.blue)
+                )
+                .padding()
+            }
         }
     }
 }
