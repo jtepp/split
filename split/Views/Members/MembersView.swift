@@ -11,7 +11,7 @@ import MobileCoreServices
 struct MembersView: View {
     @Binding var house: House
     @State var showMemberSheet = false
-    @State var showDetails = false
+    @State var showDetails = true
     @State var showSettle = false
     @State var tappedMember = Member.empty
     @Binding var payType: Int
@@ -24,34 +24,42 @@ struct MembersView: View {
     var body: some View {
         ScrollView {
             HStack {
-                Menu {
-                    Button {
-                        showDetails = false
-                        showSettle = true
-                        showMemberSheet = true
-                        Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers, msg: .constant(""), showAlert: .constant(false))
-                        
-                    } label: {
-                        Text("Quick settle")
-                        Image(systemName: "arrowshape.bounce.right")
-                    }
+                Text(house.name)
+                    .foregroundColor(.white)
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(
+                                Color.gray.opacity(0.2)
+                            )
+                    )
+                    //                        .padding(-10)
+                    .padding()
+                
+                Spacer()
+                
+                Button {
+                    showDetails = false
+                    showSettle = true
+                    showMemberSheet = true
+                    Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers, msg: .constant(""), showAlert: .constant(false))
+                    
                 } label: {
-                    Text(house.name)
+                    Image(systemName: "arrowshape.bounce.right")
+                        .font(Font.body.bold())
                         .foregroundColor(.white)
-                        .font(.largeTitle)
-                        .bold()
-                        .padding(10)
+                        .padding(13)
                         .background(
-                            RoundedRectangle(cornerRadius: 20)
+                            Circle()
                                 .fill(
                                     Color.gray.opacity(0.2)
                                 )
                         )
-                        //                        .padding(-10)
-                        .padding()
+                    
                 }
                 
-                Spacer()
                 Menu {
                     
                     Button {
@@ -189,9 +197,9 @@ struct MembersView: View {
         }
         .sheet(isPresented: $showMemberSheet, content: {
             if showDetails {
-            MemberDetailsView(house: $house, member: $tappedMember, showView: $showMemberSheet)
+                MemberDetailsView(house: $house, member: $tappedMember, showView: $showMemberSheet)
             } else {
-                QuickSettleView(h: $house, settleMembers: $settleMembers)
+                QuickSettleView(h: $house, settleMembers: $settleMembers, showSheet: $showMemberSheet)
             }
         })
         .alert(isPresented: $showAlert, content: {

@@ -11,6 +11,7 @@ struct ActivityPaymentCell: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var payment: Payment
     @State var showMemo = false
+    var showMemoEver: Bool = true
     var body: some View {
         VStack {
             GeneralPaymentCell(payment: $payment)
@@ -25,10 +26,10 @@ struct ActivityPaymentCell: View {
                     Spacer()
                 }
             }
-            .padding(.bottom, showMemo ? 20 : 0)
+            .padding(.bottom, showMemo ? CGFloat(20) : 0)
             .animation(.easeIn)
-            .frame(maxHeight: showMemo ? .infinity : 0)
-            .frame(minHeight: showMemo ? 80 : 0)
+            .frame(maxHeight: showMemo ? .infinity : CGFloat(0))
+            .frame(minHeight: showMemo ? CGFloat(80) : 0)
             .foregroundColor(showMemo ? .primary : .clear)
         }
         .foregroundColor(.primary)
@@ -50,7 +51,7 @@ struct ActivityPaymentCell: View {
                             .rotationEffect(.degrees(showMemo ? 180 : 0))
                             .padding()
                             .foregroundColor(.black)
-                            .opacity(0.6)
+                            .opacity(showMemoEver ? 0.6 : 0)
                     }
                         
                     //                        .padding(.top, -10)
@@ -65,7 +66,7 @@ struct ActivityPaymentCell: View {
         )
         .onTapGesture {
             withAnimation {
-                if payment.memo != "" {
+                if payment.memo != "" && showMemoEver {
                     showMemo.toggle()
                 }
             }

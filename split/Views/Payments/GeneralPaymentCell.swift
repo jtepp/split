@@ -39,3 +39,18 @@ struct GeneralPaymentCell: View {
 func moneyText(b: Binding<Float>, pre: String = "", post: String = "") -> Text {
     return Text("\(pre)\(b.wrappedValue < 0 ? "-" : "")$\(abs(b.wrappedValue), specifier: "%.2f")\(post)")
 }
+
+struct GeneralPaymentCell_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            ScrollView {
+                ForEach(Range(0...10)) { _ in
+                    ActivityPaymentCell(payment: .constant(.placeholder))
+                }
+            }
+        }
+        
+        
+    }
+}
