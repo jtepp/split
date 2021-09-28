@@ -34,39 +34,39 @@ struct ProfileView: View, KeyboardReadable {
                     HeaderText(text: "Profile", clear: .constant(false))
                         .id("top")
                     Spacer()
-//                    Menu {
-//                        Button {
-//                            if showStatus {
-//                                showStatus = false
-//                                Fetch().toggleShowStatus(s: false)
-//                            } else {
-//                                showStatus = true
-//                                Fetch().toggleShowStatus(s: true)
-//                            }
-//                            UserDefaults.standard.setValue(showStatus, forKey: "status")
-//                            UserDefaults.standard.setValue(true, forKey: "statusSet")
-//                            print("STATUSSET\(UserDefaults.standard.bool(forKey: "statusSet"))")
-//                        } label: {
-//                            Text("Show Status")
-//                            Image(systemName: showStatus ? "circlebadge.fill" : "circlebadge")
-//                                .renderingMode(.original)
-//                                .foregroundColor(
-//                                    showStatus ? .green : .black
-//                                )
-//                        }
-//                        
-//                    } label: {
-//                        Image(systemName: "ellipsis")
-//                            .foregroundColor(.white)
-//                            .font(Font.body.bold())
-//                            .padding(18)
-//                            .background(
-//                                Circle()
-//                                    .fill(
-//                                        Color("DarkMaterial")
-//                                    )
-//                            )
-//                    }
+                    //                    Menu {
+                    //                        Button {
+                    //                            if showStatus {
+                    //                                showStatus = false
+                    //                                Fetch().toggleShowStatus(s: false)
+                    //                            } else {
+                    //                                showStatus = true
+                    //                                Fetch().toggleShowStatus(s: true)
+                    //                            }
+                    //                            UserDefaults.standard.setValue(showStatus, forKey: "status")
+                    //                            UserDefaults.standard.setValue(true, forKey: "statusSet")
+                    //                            print("STATUSSET\(UserDefaults.standard.bool(forKey: "statusSet"))")
+                    //                        } label: {
+                    //                            Text("Show Status")
+                    //                            Image(systemName: showStatus ? "circlebadge.fill" : "circlebadge")
+                    //                                .renderingMode(.original)
+                    //                                .foregroundColor(
+                    //                                    showStatus ? .green : .black
+                    //                                )
+                    //                        }
+                    //
+                    //                    } label: {
+                    //                        Image(systemName: "ellipsis")
+                    //                            .foregroundColor(.white)
+                    //                            .font(Font.body.bold())
+                    //                            .padding(18)
+                    //                            .background(
+                    //                                Circle()
+                    //                                    .fill(
+                    //                                        Color("DarkMaterial")
+                    //                                    )
+                    //                            )
+                    //                    }
                     
                 }
                 VStack {
@@ -274,22 +274,26 @@ struct ProfileView: View, KeyboardReadable {
                             AlternateIconRow(title: "Default", names: ["Default", "Default-inverse"], choice: $alternateIcon)
                             
                             AlternateIconRow(title: "Name", names: ["Name", "Name-inverse"], choice: $alternateIcon)
-
+                            
                             AlternateIconRow(title: "Depth", names: ["Depth", "Depth-inverse"], choice: $alternateIcon)
-
+                            
                             AlternateIconRow(title: "Shadow", names: ["Shadow-black", "Shadow-white"], choice: $alternateIcon)
-
+                            
                             AlternateIconRow(title: "Soft", names: ["Soft-black", "Soft-white"], choice: $alternateIcon)
-
+                            
                             AlternateIconRow(title: "Neon", names: ["Neon-pink", "Neon-blue", "Neon-green"], choice: $alternateIcon)
-
+                            
                             AlternateIconRow(title: "Rainbow", names: ["Rainbow", "Rainbow-vertical", "Rainbow-angle"], choice: $alternateIcon)
                             
+                            if house.id == "kTSIezexeHvrudPleaxY" || house.id == "L2NV1nSXDvXtcu5eZ0eM" || house.id == "PirpSX548mU7d2hacQ1W" {
+                                AlternateIconRow(title: "Special", names: ["Etan"], choice: $alternateIcon)
+                            }
                             
                             
-//                            Text("more coming soon...")
-//                                .font(.subheadline)
-//                                .padding(.top)
+                            
+                            //                            Text("more coming soon...")
+                            //                                .font(.subheadline)
+                            //                                .padding(.top)
                             
                         }
                         .foregroundColor(.white)

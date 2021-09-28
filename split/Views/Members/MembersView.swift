@@ -44,6 +44,7 @@ struct MembersView: View {
                     showDetails = false
                     showSettle = true
                     showMemberSheet = true
+                    showSettle = true
                     Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers, msg: .constant(""), showAlert: .constant(false))
                     
                 } label: {
@@ -147,6 +148,7 @@ struct MembersView: View {
                                 showDetails = true
                                 showSettle = false
                                 showMemberSheet = true
+                                showDetails = true
                             }
                         }
                 } else {
@@ -185,6 +187,7 @@ struct MembersView: View {
                                 showDetails = true
                                 showSettle = false
                                 showMemberSheet = true
+                                showDetails = true
                             }
                         }
                 }

@@ -84,6 +84,9 @@
 		0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09FC265D8F730016CA92 /* PaymentView.swift */; };
 		0CBF0A00265D91640016CA92 /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09FF265D91640016CA92 /* TabsView.swift */; };
 		0CBF0A03265D91B00016CA92 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF0A02265D91B00016CA92 /* TabBar.swift */; };
+		0CC2A2D22702925B00646EDF /* Etan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC2A2CF2702925B00646EDF /* Etan@3x.png */; };
+		0CC2A2D32702925B00646EDF /* Etan.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC2A2D02702925B00646EDF /* Etan.png */; };
+		0CC2A2D42702925B00646EDF /* Etan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC2A2D12702925B00646EDF /* Etan@2x.png */; };
 		0CCC9A132694E13700940E93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC9A122694E13700940E93 /* GoogleService-Info.plist */; };
 		0CCC9A142694E13700940E93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC9A122694E13700940E93 /* GoogleService-Info.plist */; };
 		0CCC9A162694E15500940E93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC9A152694E15500940E93 /* GoogleService-Info.plist */; };
@@ -245,6 +248,9 @@
 		0CBF09FC265D8F730016CA92 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		0CBF09FF265D91640016CA92 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
 		0CBF0A02265D91B00016CA92 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		0CC2A2CF2702925B00646EDF /* Etan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Etan@3x.png"; sourceTree = "<group>"; };
+		0CC2A2D02702925B00646EDF /* Etan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Etan.png; sourceTree = "<group>"; };
+		0CC2A2D12702925B00646EDF /* Etan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Etan@2x.png"; sourceTree = "<group>"; };
 		0CCC9A122694E13700940E93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CCC9A152694E15500940E93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "Widgets/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		0CD1173D2687A4E40093426F /* AlternateIconRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconRow.swift; sourceTree = "<group>"; };
@@ -594,6 +600,9 @@
 				0CD117BB2687AD110093426F /* Soft-white.png */,
 				0CD117492687AC7D0093426F /* Soft-white@2x.png */,
 				0CD1174F2687AC7D0093426F /* Soft-white@3x.png */,
+				0CC2A2D02702925B00646EDF /* Etan.png */,
+				0CC2A2D12702925B00646EDF /* Etan@2x.png */,
+				0CC2A2CF2702925B00646EDF /* Etan@3x.png */,
 			);
 			path = icons;
 			sourceTree = "<group>";
@@ -749,6 +758,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CD117962687AC800093426F /* Default@2x.png in Resources */,
+				0CC2A2D42702925B00646EDF /* Etan@2x.png in Resources */,
 				0CD117A62687ACCC0093426F /* Depth.png in Resources */,
 				0CD117862687AC800093426F /* Shadow-black@2x.png in Resources */,
 				0CD1179E2687AC800093426F /* Neon-blue@2x.png in Resources */,
@@ -759,6 +769,7 @@
 				0CD1178C2687AC800093426F /* Default-inverse@3x.png in Resources */,
 				0CD117892687AC800093426F /* Depth@2x.png in Resources */,
 				0CD1179B2687AC800093426F /* Name@3x.png in Resources */,
+				0CC2A2D32702925B00646EDF /* Etan.png in Resources */,
 				0CD117972687AC800093426F /* Shadow-white@2x.png in Resources */,
 				0C210D6726811F42008220B6 /* leave.mp3 in Resources */,
 				0C2A058E265CAA44002BD46D /* Preview Assets.xcassets in Resources */,
@@ -769,6 +780,7 @@
 				0CD1179D2687AC800093426F /* Name@2x.png in Resources */,
 				0CD117B22687ACF20093426F /* Rainbow-angle.png in Resources */,
 				0CD1178A2687AC800093426F /* Name-inverse@2x.png in Resources */,
+				0CC2A2D22702925B00646EDF /* Etan@3x.png in Resources */,
 				0CD117A42687ACC60093426F /* Default-inverse.png in Resources */,
 				0CD1177E2687AC800093426F /* Rainbow-vertical@2x.png in Resources */,
 				0CD1179A2687AC800093426F /* Name-inverse@3x.png in Resources */,

@@ -22,7 +22,7 @@ struct SplashView: View {
                     VStack {
                         Spacer()
                         HStack {
-                            Text("v2.3.4")
+                            Text("v2.4.0")
                                 .foregroundColor(.white)
                                 .font(Font.subheadline.bold())
                                 //                            .padding()
@@ -65,9 +65,7 @@ struct SplashView: View {
                     showCore.toggle()
                 }
                 
-                SplashDetailsView(title: "Activity filter", text: "Filter the activity page to remove each type of message", image: "funnel", color: .green)
-                SplashDetailsView(title: "New messages", text: "Tap the new floating button to send a message to your group", image: "bubble.left.and.bubble.right.fill", color: .blue)
-                SplashDetailsView(title: "Tag your friends", text: "Use the '@' symbol to send someone a notification for your message", image: "at.badge.plus", color: .red)
+                SplashDetailsView(title: "Quick Settle", text: "Harness the power of machine learning to find the quickest way to settle your balances", image: "arrowshape.bounce.right.fill", color: .green)
                 
             }
             Spacer()
@@ -110,7 +108,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "2.3.0")
+            UserDefaults.standard.setValue(true, forKey: "2.4.0")
         }
         .sheet(isPresented: $isShowingMailView) {
             MailView(result: self.$result)
