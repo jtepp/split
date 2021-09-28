@@ -20,7 +20,24 @@ struct QuickSettleView: View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack {
-                HeaderText(text: "Quick Settle", clear: .constant(false))
+                HStack {
+                    HeaderText(text: "Quick Settle", clear: .constant(false))
+                    Spacer()
+                    Button {
+                        showSheet = false
+                    } label: {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.black)
+                            .font(Font.body.bold())
+                            .padding(4)
+                            .background(
+                                Circle()
+                                    .fill(
+                                        Color.white                                        )
+                            )
+                    }
+                    .padding(.trailing, 10)
+                }
                 ScrollView {
                     if state == .preCalculate {
                         LazyVGrid(columns: [GridItem(spacing: 8), GridItem()], content: {
@@ -58,6 +75,7 @@ struct QuickSettleView: View {
                                 ActivityPaymentCell(payment: .constant(p), showMemoEver: false)
                                 
                             }
+                            .padding(.horizontal, 10)
                             
                             
                         }
@@ -91,7 +109,7 @@ struct QuickSettleView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(state == .preCalculate ? Color.blue : paymentList.count > 0 ? Color.green : Color.gray)
                 )
-                .padding()
+                .padding(.bottom, 90)
             }
         }
     }

@@ -11,6 +11,8 @@ struct MemberPaymentInfoView: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var member: Member
     @Binding var house: House
+    @State var settleMembers = [Member]()
+    
     var body: some View {
         VStack {
             HStack {
@@ -28,32 +30,59 @@ struct MemberPaymentInfoView: View {
                 }) - member.iOwe.values.reduce(0, {a, b in
                     a + b
                 }) != 0) {
-                    ForEach(house.members.filter({ (m) -> Bool in
-                        return ((member.iOwe[m.name] ?? 0) - (member.owesMe[m.name] ?? 0)) != 0
-                    })) { m in
+                    
+                    ForEach(settlePayments(settleMembers).filter({ p in
+                        p.to == member.name || p.from == member.name
+                    })) { p in
                         HStack {
-                            //if member is myId
-                            if checkWithMy(id: member.id) {
-                                Text((member.iOwe[m.name] ?? 0) - (member.owesMe[m.name] ?? 0) > 0 ? "You owe \(m.name):" : "\(m.name) owes you:")
+                        if checkWithMy(id: member.id) {
+                            if p.to == member.name {
+                                Text("\(p.from) owes you:")
+                            } else {
+                                Text("You owe \(p.to):")
                             }
-                            else {
-                                //if member is not myId but m is myId
-                                if checkWithMy(id: m.id) {
-                                    Text((member.iOwe[m.name] ?? 0) - (member.owesMe[m.name] ?? 0) > 0 ? "\(member.name) owes you:" : "You owe \(member.name):")
-                                }
-                                else {
-                                    //if member is not myId^ and m is not myId
-                                    Text((member.iOwe[m.name] ?? 0) - (member.owesMe[m.name] ?? 0) > 0 ? "\(member.name) owes \(m.name):" : "\(m.name) owes \(member.name):")
-                                }
-                                //
-                                //
-                            }
+                        } else {
+                                Text("\(p.from) owes \(p.to):")
+                        }
                             Spacer()
-                            Text("$\(abs((member.iOwe[m.name] ?? 0) - (member.owesMe[m.name] ?? 0)), specifier: "%.2f")")
+                            
+                            Text("\(String(format: "$%.2f", p.amount))")
                         }
                         .padding(.horizontal)
                         .padding(.top, 10)
+                       
+                            
                     }
+                    
+                    
+                    
+                    
+//                    ForEach(house.members.filter({ (m) -> Bool in
+//                        return ((member.iOwe[m.name] ?? 0) - (member.owesMe[m.name] ?? 0)) != 0
+//                    })) { m in
+//                        HStack {
+//                            //if member is myId
+//                            if checkWithMy(id: member.id) {
+//                                Text((member.iOwe[m.name] ?? 0) - (member.owesMe[m.name] ?? 0) > 0 ? "You owe \(m.name):" : "\(m.name) owes you:")
+//                            }
+//                            else {
+//                                //if member is not myId but m is myId
+//                                if checkWithMy(id: m.id) {
+//                                    Text((member.iOwe[m.name] ?? 0) - (member.owesMe[m.name] ?? 0) > 0 ? "\(member.name) owes you:" : "You owe \(member.name):")
+//                                }
+//                                else {
+//                                    //if member is not myId^ and m is not myId
+//                                    Text((member.iOwe[m.name] ?? 0) - (member.owesMe[m.name] ?? 0) > 0 ? "\(member.name) owes \(m.name):" : "\(m.name) owes \(member.name):")
+//                                }
+//                                //
+//                                //
+//                            }
+//                            Spacer()
+//                            Text("$\(abs((member.iOwe[m.name] ?? 0) - (member.owesMe[m.name] ?? 0)), specifier: "%.2f")")
+//                        }
+//                        .padding(.horizontal)
+//                        .padding(.top, 10)
+//                    }
                 }
             }
             .frame(maxHeight: 160)
@@ -75,6 +104,9 @@ struct MemberPaymentInfoView: View {
                 )
         )
         .padding()
+        .onAppear {
+            Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers, msg: .constant(""), showAlert: .constant(false))
+        }
     }
 }
 func checkWithMy(id: String) -> Bool {

@@ -16,15 +16,6 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
-			<key>Etan</key>
-			<dict>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Etan</string>
-				</array>
-			</dict>
 			<key>Default-inverse</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -48,6 +39,15 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Depth-inverse</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Etan</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Etan</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
