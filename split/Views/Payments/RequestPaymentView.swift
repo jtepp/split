@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RequestPaymentView: View {
+    @ObservedObject var amountObj: AmountObject
     @Binding var house: House
     @State var showPicker = false
     @Binding var choice: [Member]
@@ -45,7 +46,7 @@ struct RequestPaymentView: View {
             })
 //            Spacer()
             VStack(alignment: .leading) {
-                InputField(name: "Amount", text: $amountText)
+                AmountField(amountObj: amountObj, amountText: $amountText)
                 Text("Total amount will be split equally between members")
                     .font(.caption)
                     .foregroundColor(.gray)
@@ -86,6 +87,7 @@ struct RequestPaymentView: View {
                 //clear
                 choice = [Member]()
                 amountText = ""
+                amountObj.clear()
                 memoText = ""
                 tabSelection = 0
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()

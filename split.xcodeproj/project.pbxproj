@@ -78,6 +78,8 @@
 		0CA0E9CA26603A32002876CF /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0E9C926603A32002876CF /* EditProfileView.swift */; };
 		0CA0E9CD26604315002876CF /* View+allowAutoDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0E9CC26604315002876CF /* View+allowAutoDismiss.swift */; };
 		0CAA803B2661CC4A00A3081B /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA803A2661CC4A00A3081B /* SplashView.swift */; };
+		0CAB4EF327127C9D00B2E049 /* AmountObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB4EF227127C9D00B2E049 /* AmountObject.swift */; };
+		0CAB4EF5271280A300B2E049 /* AmountField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB4EF4271280A300B2E049 /* AmountField.swift */; };
 		0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F3265D8F140016CA92 /* ActivityView.swift */; };
 		0CBF09F7265D8F370016CA92 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F6265D8F370016CA92 /* MembersView.swift */; };
 		0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F9265D8F510016CA92 /* ProfileView.swift */; };
@@ -242,6 +244,8 @@
 		0CA0E9CC26604315002876CF /* View+allowAutoDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+allowAutoDismiss.swift"; sourceTree = "<group>"; };
 		0CAA80362661860600A3081B /* ActivityAnnouncementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnnouncementCell.swift; sourceTree = "<group>"; };
 		0CAA803A2661CC4A00A3081B /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		0CAB4EF227127C9D00B2E049 /* AmountObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountObject.swift; sourceTree = "<group>"; };
+		0CAB4EF4271280A300B2E049 /* AmountField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountField.swift; sourceTree = "<group>"; };
 		0CBF09F3265D8F140016CA92 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		0CBF09F6265D8F370016CA92 /* MembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersView.swift; sourceTree = "<group>"; };
 		0CBF09F9265D8F510016CA92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -432,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2A059C265CB123002BD46D /* Fetch.swift */,
+				0CAB4EF227127C9D00B2E049 /* AmountObject.swift */,
 				0C625971265EA868002E58A3 /* Payment.swift */,
 				0C951304265DAE6D005398CF /* Member.swift */,
 				0C2A059F265CB17D002BD46D /* House.swift */,
@@ -454,6 +459,7 @@
 			children = (
 				0CBF09FC265D8F730016CA92 /* PaymentView.swift */,
 				0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */,
+				0CAB4EF4271280A300B2E049 /* AmountField.swift */,
 				0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */,
 				0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */,
 				0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */,
@@ -857,6 +863,7 @@
 				0C3061D726FFE7E200C228A8 /* QuickSettleView.swift in Sources */,
 				0CA0E9C126603809002876CF /* WaitingRoomView.swift in Sources */,
 				0C0CA77E265F01BE0062FDDD /* PaymentPaymentView.swift in Sources */,
+				0CAB4EF327127C9D00B2E049 /* AmountObject.swift in Sources */,
 				0C0CA784265F08CD0062FDDD /* MemberPicker.swift in Sources */,
 				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,
 				0CEE3827265E16700013BB12 /* MemberDetailsView.swift in Sources */,
@@ -866,6 +873,7 @@
 				0C6A7459269392D900275A9B /* ActivityAnnouncementCell.swift in Sources */,
 				0C016A9D2687E72700EFFC3E /* UIImage+rotate.swift in Sources */,
 				0C6A745A269392D900275A9B /* ActivityPaymentCell.swift in Sources */,
+				0CAB4EF5271280A300B2E049 /* AmountField.swift in Sources */,
 				0CBF0A00265D91640016CA92 /* TabsView.swift in Sources */,
 				0C0CA781265F01F10062FDDD /* RequestPaymentView.swift in Sources */,
 				0CD16875269B829800CFD7C2 /* CustomRoundedRect.swift in Sources */,

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentPaymentView: View {
-    
+    @ObservedObject var amountObj: AmountObject
     @Binding var house: House
     @State var showPicker = false
     @Binding var choice: [Member]
@@ -43,7 +43,7 @@ struct PaymentPaymentView: View {
                 MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: false)
             })
 //            Spacer()
-            InputField(name: "Amount", text: $amountText)
+            AmountField(amountObj: amountObj, amountText: $amountText)
             .padding()
             InputField(name: "Memo", text: $memoText)
                 .padding()
@@ -57,6 +57,7 @@ struct PaymentPaymentView: View {
                 //clear
                 choice = [Member]()
                 amountText = ""
+                amountObj.clear()
                 memoText = ""
                 tabSelection = 0
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()

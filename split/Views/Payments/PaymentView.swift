@@ -14,6 +14,7 @@ struct PaymentView: View {
     @Binding var tabSelection: Int
     @Binding var pchoice: [Member]
     @Binding var rchoice: [Member]
+    @ObservedObject var amountObj = AmountObject()
     var body: some View {
         ScrollView {
             HeaderText(text: payType == 1 ? "Request" : "Payment", clear: .constant(false))
@@ -41,9 +42,9 @@ struct PaymentView: View {
             }
             
             if payType == 0 {
-                PaymentPaymentView(house: $house, choice: $pchoice, tabSelection: $tabSelection)
+                PaymentPaymentView(amountObj: amountObj, house: $house, choice: $pchoice, tabSelection: $tabSelection)
             } else {
-                RequestPaymentView(house: $house, choice: $rchoice, tabSelection: $tabSelection)
+                RequestPaymentView(amountObj: amountObj, house: $house, choice: $rchoice, tabSelection: $tabSelection)
             }
             Rectangle()
                 .fill(Color.black)
