@@ -66,7 +66,7 @@ struct SplashView: View {
                 }
                 
                 SplashDetailsView(title: "Receipt Mode", text: "Tap the new Receipt Mode button to easily add up your numbers", image: "list.bullet", color: .blue)
-                SplashDetailsView(title: "Balance Widget", text: "The new balance tile widget now shows overall balance, rather than balance relative to yourself", image: "plusminus", color: .green)
+                SplashDetailsView(title: "Balance Widget", text: "The new balance tile widget now shows overall balance, rather than balance relative to yourself", image: "square.grid.2x2.fill", color: .green)
                 
             }
             Spacer()
