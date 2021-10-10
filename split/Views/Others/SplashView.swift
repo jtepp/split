@@ -22,7 +22,7 @@ struct SplashView: View {
                     VStack {
                         Spacer()
                         HStack {
-                            Text("v2.4.0")
+                            Text("v2.5.0")
                                 .foregroundColor(.white)
                                 .font(Font.subheadline.bold())
                                 //                            .padding()
@@ -65,7 +65,8 @@ struct SplashView: View {
                     showCore.toggle()
                 }
                 
-                SplashDetailsView(title: "Quick Settle", text: "Harness the power of machine learning to find the quickest way to settle your balances", image: "arrowshape.bounce.right.fill", color: .green)
+                SplashDetailsView(title: "Receipt Mode", text: "Tap the new Receipt Mode button to easily add up your numbers", image: "list.bullet", color: .blue)
+                SplashDetailsView(title: "Balance Widget", text: "The new balance tile widget now shows overall balance, rather than balance relative to yourself", image: "plusminus", color: .green)
                 
             }
             Spacer()
@@ -108,7 +109,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "2.4.0")
+            UserDefaults.standard.setValue(true, forKey: "2.5.0")
         }
         .sheet(isPresented: $isShowingMailView) {
             MailView(result: self.$result)

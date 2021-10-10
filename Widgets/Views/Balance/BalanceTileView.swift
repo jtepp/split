@@ -50,15 +50,21 @@ struct BalanceTileView: View {
     }
     
     func balWidCalc(member: codableMember) -> AnyView {
-        let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
-        let num = (member.iOwe[myName] ?? 0) - (member.owesMe[myName] ?? 0)
+//        let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
+        let num = member.iOwe.values.reduce(0) { a, b in
+            a+b
+        } - member.owesMe.values.reduce(0, { a, b in
+            a+b
+        })
+        
+        //(member.iOwe[myName] ?? 0) - (member.owesMe[myName] ?? 0)
         let str = String(format: "$%.2f", abs(num))
         var col: Color = .white
         var img = ""
-        if num > 0 {
+        if num < 0 {
             col = .green
             img = "arrowtriangle.up.fill"
-        } else if num < 0 {
+        } else if num > 0 {
             col = .red
             img = "arrowtriangle.down.fill"
         }

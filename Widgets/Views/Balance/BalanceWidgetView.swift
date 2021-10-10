@@ -72,10 +72,18 @@ struct SmallBalanceWidget_Previews: PreviewProvider {
 }
 
 func balWidSort(members: [codableMember], index: Int) -> codableMember {
-    let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
+//    let myName = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "myName") ?? "0"
     let sorted = members.sorted(by: { a, b in
-        let aa = abs((a.iOwe[myName] ?? 0) - (a.owesMe[myName] ?? 0))
-        let bb = abs((b.iOwe[myName] ?? 0) - (b.owesMe[myName] ?? 0))
+        let aa = abs(a.iOwe.values.reduce(0) { c, d in
+            c+d
+        } - a.owesMe.values.reduce(0, { c, d in
+            c+d
+        }))
+        let bb =  abs(b.iOwe.values.reduce(0) { c, d in
+            c+d
+        } - b.owesMe.values.reduce(0, { c, d in
+            c+d
+        }))
         return aa > bb
     })
     if sorted.count > index {
