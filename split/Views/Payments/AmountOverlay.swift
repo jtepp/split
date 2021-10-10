@@ -58,6 +58,7 @@ struct AmountOverlay: View {
                 Button {
                     if Float(text) ?? -1 != -1 {
                         amountObj.values.append(Float(text)!)
+                        text = ""
                     }
                 } label: {
                     Image(systemName: "plus.circle")
