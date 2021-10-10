@@ -12,11 +12,13 @@ struct RequestPaymentView: View {
     @Binding var house: House
     @State var showPicker = false
     @Binding var choice: [Member]
-    @State var amountText = String()
     @State var memoText = String()
     @Binding var tabSelection: Int
     @State var includeSelf = false
     @State var explainIncludeSelf = false
+    @Binding var namespace: Namespace
+    @Binding var showOverlay: Bool
+    @Binding var amountText: String
     var body: some View {
         VStack {
             HStack {
@@ -46,7 +48,9 @@ struct RequestPaymentView: View {
             })
 //            Spacer()
             VStack(alignment: .leading) {
-                AmountField(amountObj: amountObj, amountText: $amountText)
+                if !showOverlay {
+                    AmountField(namespace: $namespace, amountObj: amountObj, amountText: $amountText, showOverlay: $showOverlay)
+                }
                 Text("Total amount will be split equally between members")
                     .font(.caption)
                     .foregroundColor(.gray)

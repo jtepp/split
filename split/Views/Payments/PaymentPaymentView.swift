@@ -12,9 +12,11 @@ struct PaymentPaymentView: View {
     @Binding var house: House
     @State var showPicker = false
     @Binding var choice: [Member]
-    @State var amountText = String()
     @State var memoText = String()
     @Binding var tabSelection: Int
+    @Binding var namespace: Namespace
+    @Binding var showOverlay: Bool
+    @Binding var amountText: String
     var body: some View {
         VStack {
             HStack {
@@ -43,8 +45,10 @@ struct PaymentPaymentView: View {
                 MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: false)
             })
 //            Spacer()
-            AmountField(amountObj: amountObj, amountText: $amountText)
-            .padding()
+            if !showOverlay {
+                AmountField(namespace: $namespace, amountObj: amountObj, amountText: $amountText, showOverlay: $showOverlay)
+                    .padding()
+            }
             InputField(name: "Memo", text: $memoText)
                 .padding()
             Spacer()

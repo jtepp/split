@@ -14,60 +14,69 @@ struct PaymentView: View {
     @Binding var tabSelection: Int
     @Binding var pchoice: [Member]
     @Binding var rchoice: [Member]
-    @ObservedObject var amountObj = AmountObject()
+    @StateObject var amountObj = AmountObject()
+    @Namespace var namespace
+    @State var showOverlay = false
+    @State var amountText = ""
     var body: some View {
-        ScrollView {
-            HeaderText(text: payType == 1 ? "Request" : "Payment", clear: .constant(false))
-            Picker(selection: $payType, label: Text("Picker"), content: {
-                Text("Payment").tag(0)
-                Text("Request").tag(1)
-            })
-            .pickerStyle(SegmentedPickerStyle())
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(
-                        Color("DarkMaterial")
-                    )
-            )
-            .padding()
-            .onTapGesture {
+        ZStack {
+            ScrollView {
+                HeaderText(text: payType == 1 ? "Request" : "Payment", clear: .constant(false))
+                Picker(selection: $payType, label: Text("Picker"), content: {
+                    Text("Payment").tag(0)
+                    Text("Request").tag(1)
+                })
+                .pickerStyle(SegmentedPickerStyle())
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(
+                            Color("DarkMaterial")
+                        )
+                )
+                .padding()
+                .onTapGesture {
+                    if UIApplication.shared.isKeyboardPresented {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+                    if payType == 0 {
+                        payType = 1
+                    } else {
+                        payType = 0
+                    }
+                    amountObj.clear()
+                }
+                
+                if payType == 0 {
+                    PaymentPaymentView(amountObj: amountObj, house: $house, choice: $pchoice, tabSelection: $tabSelection, namespace: .constant(_namespace), showOverlay: $showOverlay, amountText: $amountText)
+                } else {
+                    RequestPaymentView(amountObj: amountObj, house: $house, choice: $rchoice, tabSelection: $tabSelection, namespace: .constant(_namespace), showOverlay: $showOverlay, amountText: $amountText)
+                }
+                Rectangle()
+                    .fill(Color.black)
+                    .frame(minHeight:120)
+            }.onTapGesture {
                 if UIApplication.shared.isKeyboardPresented {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }
-                if payType == 0 {
-                    payType = 1
-                } else {
-                    payType = 0
+            }
+            .onChange(of: scenePhase){ newPhase in
+                if newPhase == .active {
+                    guard let name = shortcutItemToProcess?.localizedTitle as? String else {
+                        print("else")
+                        return
+                    }
+                    switch name {
+                    case "Send payment":
+                        payType = 0
+                    case "Send request":
+                        payType = 1
+                    default:
+                        tabSelection = 0
+                    }
                 }
             }
-            
-            if payType == 0 {
-                PaymentPaymentView(amountObj: amountObj, house: $house, choice: $pchoice, tabSelection: $tabSelection)
-            } else {
-                RequestPaymentView(amountObj: amountObj, house: $house, choice: $rchoice, tabSelection: $tabSelection)
-            }
-            Rectangle()
-                .fill(Color.black)
-                .frame(minHeight:120)
-        }.onTapGesture {
-            if UIApplication.shared.isKeyboardPresented {
-                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-            }
-        }
-        .onChange(of: scenePhase){ newPhase in
-            if newPhase == .active {
-                guard let name = shortcutItemToProcess?.localizedTitle as? String else {
-                    print("else")
-                    return
-                }
-                switch name {
-                case "Send payment":
-                    payType = 0
-                case "Send request":
-                    payType = 1
-                default:
-                    tabSelection = 0
-                }
+            if showOverlay {
+                AmountOverlay(amountObj: amountObj, show: $showOverlay, namespace: .constant(_namespace), amountText: $amountText)
             }
         }
         
