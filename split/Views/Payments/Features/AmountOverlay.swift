@@ -13,12 +13,21 @@ struct AmountOverlay: View {
     @State var text = String()
     @State var showScan = false
     @State var recognizedText = ""
+    //    @State var showRecognizedText = false
     var body: some View {
         VStack {
             ScrollView {
-//                Text(recognizedText)
+//                                Text(recognizedText)
                 HStack {
                     NSHeaderText(text: "Amount", space: true, clear: .constant(false), namespace: amountObj.namespace)
+                    //                        .onLongPressGesture {
+                    //                            showRecognizedText.toggle()
+                    //                        }
+                    //                    if showRecognizedText {
+                    //                        Text(recognizedText)
+                    //                            .font(.footnote)
+                    //                        Text(matches(for: #"\d+[. •\-_,'*:]+\d\d\n"#, in: recognizedText).joined())
+                    //                    }
                     Spacer()
                     Button {
                         withAnimation {
@@ -57,7 +66,6 @@ struct AmountOverlay: View {
             HStack {
                 Button {
                     showScan = true
-                    recognizedText = ""
                 } label: {
                     Image(systemName: "camera.viewfinder")
                         .resizable()
@@ -85,9 +93,11 @@ struct AmountOverlay: View {
             .padding(.horizontal)
             .onChange(of: recognizedText) { _ in
                 if recognizedText != "" {
-                    for num in matches(for: #"\d+[. •]\d{2}"#, in: recognizedText) {
-                        if Float(num) ?? 0 != 0 {
-                            amountObj.values.append(Float(num)!)
+                    for num in matches(for: #"\d+[. •\-_,'*]+\d\d\n"#, in: recognizedText) {
+                        
+                        if Float(replaceAll(num, from: ". •-_,'*").replacingOccurrences(of: "\n", with: "")) ?? 0 != 0 {
+                            print(true)
+                            amountObj.values.append(Float(replaceAll(num, from: ". •-_,'*").replacingOccurrences(of: "\n", with: ""))!)
                         }
                     }
                 }
@@ -134,7 +144,7 @@ struct AmountOverlay_Previews: PreviewProvider {
 
 
 func matches(for regex: String, in text: String) -> [String] {
-
+    
     do {
         let regex = try NSRegularExpression(pattern: regex)
         let results = regex.matches(in: text,
@@ -146,4 +156,22 @@ func matches(for regex: String, in text: String) -> [String] {
         print("invalid regex: \(error.localizedDescription)")
         return []
     }
+}
+
+func replaceAll(_ input: String, from: String) -> String {
+    var x = ""
+    var addedDecimal = false
+    for c in input {
+        if !from.contains(c) {
+            x += "\(c)"
+        } else if !addedDecimal {
+            addedDecimal = true
+            x+="."
+        }
+        if c == "\n" {
+            addedDecimal = false
+        }
+    }
+    
+    return x
 }

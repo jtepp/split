@@ -66,8 +66,7 @@ struct SplashView: View {
                 }
                 
                 SplashDetailsView(title: "Bulk split", text: "Tap the new Bulk split button to make multiple payments or requests", image: "person.3.fill", color: .green)
-
-                SplashDetailsView(title: "Receipt mode", text: "Tap the new Receipt mode button to easily add up your numbers", image: "list.bullet", color: .blue)
+                SplashDetailsView(title: "Receipt mode", text: "Tap the Receipt mode button to easily add up your numbers, and scan with your camera", image: "camera.viewfinder", color: .blue)
 
                 
             }
@@ -99,7 +98,7 @@ struct SplashView: View {
                 HStack {
                     Spacer()
                     Text("Continue")
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.white)
                     Spacer()
                 }
                 .padding()
