@@ -20,6 +20,7 @@ struct BulkCell: View {
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(radius: 4)
             Text(m.name)
+                .foregroundColor(.white)
             Spacer()
             TextField("0.00", text: $txt)
                 .keyboardType(.decimalPad)

@@ -164,7 +164,7 @@ func replaceAll(_ input: String, from: String) -> String {
     for c in input {
         if !from.contains(c) {
             x += "\(c)"
-        } else if !addedDecimal {
+        } else if !addedDecimal && c != "," {
             addedDecimal = true
             x+="."
         }

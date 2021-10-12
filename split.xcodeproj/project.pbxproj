@@ -468,7 +468,6 @@
 				0CBF09FC265D8F730016CA92 /* PaymentView.swift */,
 				0C97E85527154D580051584F /* Features */,
 				0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */,
-				0CAB4EF4271280A300B2E049 /* AmountField.swift */,
 				0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */,
 				0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */,
 				0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */,
@@ -628,6 +627,7 @@
 				0C7737DE27152D1C00B1DA05 /* BulkCell.swift */,
 				0CAB4EF8271294E500B2E049 /* AmountCell.swift */,
 				0C97E85627154D860051584F /* ScanDocumentView.swift */,
+				0CAB4EF4271280A300B2E049 /* AmountField.swift */,
 				0C3061D626FFE7E200C228A8 /* QuickSettleView.swift */,
 			);
 			path = Features;
@@ -1088,7 +1088,7 @@
 				CODE_SIGN_ENTITLEMENTS = split/split.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"split/Preview Content\"";
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				ENABLE_PREVIEWS = YES;
@@ -1117,7 +1117,7 @@
 				CODE_SIGN_ENTITLEMENTS = split/split.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"split/Preview Content\"";
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				ENABLE_PREVIEWS = YES;
@@ -1145,7 +1145,7 @@
 				CODE_SIGN_ENTITLEMENTS = spllitWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
@@ -1171,7 +1171,7 @@
 				CODE_SIGN_ENTITLEMENTS = spllitWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
