@@ -10,8 +10,9 @@ import SwiftUI
 class AmountObject: ObservableObject {
     @Published var values = [Float]()
     @Published var showOverlay = false
-    var namespace: Namespace
-    init(_ namespace: Namespace) {
+    @Published var showBulk = false
+    var namespace: Namespace.ID
+    init(_ namespace: Namespace.ID) {
         self.namespace = namespace
     }
     func total() -> Float {
@@ -23,7 +24,7 @@ class AmountObject: ObservableObject {
         self.values = [Float]()
     }
     func placeholder() -> AmountObject {
-        let x = AmountObject(Namespace())
+        let x = AmountObject(Namespace().wrappedValue)
         x.values = [10,20,30]
         return x
     }

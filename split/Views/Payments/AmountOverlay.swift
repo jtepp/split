@@ -9,14 +9,13 @@ import SwiftUI
 
 struct AmountOverlay: View {
     @ObservedObject var amountObj: AmountObject
-    var namespace: Namespace.ID
     @Binding var amountText: String
     @State var text = String()
     var body: some View {
         VStack {
             ScrollView {
                 HStack {
-                    NSHeaderText(text: "Amount", space: true, clear: .constant(false), namespace: namespace)
+                    NSHeaderText(text: "Amount", space: true, clear: .constant(false), namespace: amountObj.namespace)
                     Spacer()
                     Button {
                         amountObj.showOverlay = false
@@ -32,7 +31,7 @@ struct AmountOverlay: View {
                                         Color.white                                        )
                             )
                     }
-                    .matchedGeometryEffect(id: "button", in: namespace)
+                    .matchedGeometryEffect(id: "receiptbutton", in: amountObj.namespace)
                     .padding(.trailing, 10)
                 }
                 VStack {
@@ -53,7 +52,7 @@ struct AmountOverlay: View {
                     .opacity(0.5)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
-                    .matchedGeometryEffect(id: "Amountbox", in: namespace)
+                    .matchedGeometryEffect(id: "Amountbox", in: amountObj.namespace)
                 Spacer()
                 Button {
                     if Float(text) ?? 0 != 0 {
@@ -87,10 +86,10 @@ struct AmountOverlay: View {
             })
         }
         .background(Color("DarkMaterial").cornerRadius(10)
-                        .matchedGeometryEffect(id: "background", in: namespace))
+                        .matchedGeometryEffect(id: "background", in: amountObj.namespace))
         .padding()
         .padding(.bottom, 90)
-        .matchedGeometryEffect(id: "whole", in: namespace)
+        .matchedGeometryEffect(id: "whole", in: amountObj.namespace)
     }
 }
 
@@ -98,7 +97,7 @@ struct AmountOverlay_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            AmountOverlay(amountObj: AmountObject().placeholder(), namespace: Namespace().wrappedValue, amountText: .constant("0.00"))
+            AmountOverlay(amountObj: AmountObject(Namespace().wrappedValue).placeholder(), amountText: .constant("0.00"))
         }
     }
 }

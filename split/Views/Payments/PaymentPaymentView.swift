@@ -14,7 +14,6 @@ struct PaymentPaymentView: View {
     @Binding var choice: [Member]
     @State var memoText = String()
     @Binding var tabSelection: Int
-    var namespace: Namespace.ID
     @Binding var amountText: String
     var body: some View {
         VStack {
@@ -45,7 +44,7 @@ struct PaymentPaymentView: View {
             })
 //            Spacer()
             if !amountObj.showOverlay {
-                AmountField(namespace: namespace, amountObj: amountObj, amountText: $amountText)
+                AmountField(amountObj: amountObj, amountText: $amountText)
                     .padding()
             } else {
                 Rectangle().fill(Color.clear).frame(height:95)
