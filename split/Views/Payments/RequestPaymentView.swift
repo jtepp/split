@@ -19,35 +19,37 @@ struct RequestPaymentView: View {
     @Binding var amountText: String
     var body: some View {
         VStack {
-            HStack {
-                Text("From:")
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(.white)
-                Spacer()
-                Button(action: {
-                    showPicker = true
-                }, label: {
-                    PickerButton(text: "Tap to Select", choice: $choice)
-                        .padding(10)
+            if !amountObj.showBulk {
+                HStack {
+                    Text("From:")
+                        .font(.title)
+                        .bold()
                         .foregroundColor(.white)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(
-                                    Color("Material")
-                                )
-                        )
-                })
-                Spacer()
-            }
-            .padding()
-            .sheet(isPresented: $showPicker, content: {
-                MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: true)
+                    Spacer()
+                    Button(action: {
+                        showPicker = true
+                    }, label: {
+                        PickerButton(text: "Tap to Select", choice: $choice)
+                            .padding(10)
+                            .foregroundColor(.white)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(
+                                        Color("Material")
+                                    )
+                            )
+                    })
+                    Spacer()
+                }
+                .padding()
+                .sheet(isPresented: $showPicker, content: {
+                    MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: true)
             })
+            }
 //            Spacer()
             VStack(alignment: .leading) {
                 if !amountObj.showOverlay {
-                    AmountField(amountObj: amountObj, amountText: $amountText)
+                    AmountField(house: $house, amountObj: amountObj, amountText: $amountText)
                 } else {
                     Rectangle().fill(Color.clear).frame(height:95)
                 }

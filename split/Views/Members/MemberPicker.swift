@@ -43,6 +43,42 @@ struct MemberPicker: View {
     }
 }
 
+struct BulkMemberPicker: View {
+    @Binding var show: Bool
+    @Binding var house: House
+    @ObservedObject var amountObj: AmountObject
+    var multiple: Bool = false
+    var body: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            ScrollView {
+                HeaderText(text: "Choose \(multiple ? "members" : "a member")", clear: .constant(false))
+                ForEach (house.members.filter({ (m) -> Bool in
+                    return m.id != UserDefaults.standard.string(forKey: "myId")
+                })) { member in
+                    BulkimgButton(show: $show, member: .constant(member), amountObj: amountObj, multiple: multiple)
+                }
+                Spacer()
+                Button(action: {show = false}, label: {
+                    HStack {
+                        Spacer()
+                        Text("Done")
+                            .foregroundColor(amountObj.bulkPeople.isEmpty ? .clear : .white)
+                        Spacer()
+                    }
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(amountObj.bulkPeople.isEmpty ? .clear : Color.blue)
+                        )
+                        .padding()
+                })
+                .allowsHitTesting(!amountObj.bulkPeople.isEmpty)
+            }
+        }
+    }
+}
+
 struct PickerButton: View {
     var text: String
     @Binding var choice: [Member]
@@ -134,6 +170,76 @@ struct imgButton: View {
         }
         .onAppear(){
             selected = choice.contains(where: { (m) -> Bool in
+                return m.name == member.name
+            })
+        }
+        
+    }
+}
+
+struct BulkimgButton: View {
+    @Binding var show: Bool
+    @Binding var member: Member
+    @State var selected: Bool = false
+    @ObservedObject var amountObj: AmountObject
+    var multiple: Bool
+    var body: some View {
+        HStack {
+            b64toimg(b64: member.image)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 40, height: 40)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
+                .shadow(radius: 4)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(selected ? Color.blue : Color.clear)
+                        .frame(width: 40, height: 40)
+                        .overlay(
+                            Image(systemName: "checkmark")
+                                .foregroundColor(selected ? Color.white : Color.clear)
+                        )
+                )
+                .onChange(of: amountObj.bulkPeople.first?.name, perform: { _ in
+                    selected = amountObj.bulkPeople.contains(where: { (m) -> Bool in
+                        return m.name == member.name
+                    })
+                })
+            Spacer()
+            VStack(alignment: .trailing) {
+                Text(member.name)
+                    .bold()
+            }
+        }
+        .foregroundColor(.primary)
+        .padding(.horizontal)
+        .padding(.vertical, 10)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(
+                    Color("Material")
+                )
+        )
+        .padding(.horizontal)
+        .padding(.top, 10)
+        .onTapGesture {
+            withAnimation(Animation.easeOut.speed(3)) {
+                if selected {
+                    selected = false
+                    amountObj.bulkPeople.removeAll { (m) -> Bool in
+                        m.name == member.name
+                    }
+                } else {
+                    selected = true
+                    amountObj.bulkPeople.append(member)
+                    if !multiple {
+                        amountObj.bulkPeople = [member]
+                    }
+                }
+            }
+        }
+        .onAppear(){
+            selected = amountObj.bulkPeople.contains(where: { (m) -> Bool in
                 return m.name == member.name
             })
         }

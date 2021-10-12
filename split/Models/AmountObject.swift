@@ -9,6 +9,8 @@ import SwiftUI
 
 class AmountObject: ObservableObject {
     @Published var values = [Float]()
+    @Published var bulkValues = [String: Float]()
+    @Published var bulkPeople = [Member]()
     @Published var showOverlay = false
     @Published var showBulk = false
     var namespace: Namespace.ID
@@ -20,8 +22,17 @@ class AmountObject: ObservableObject {
             a+b
         }
     }
+    func clearBulk() {
+        self.bulkValues = [String: Float]()
+        self.bulkPeople = [Member]()
+    }
+    
     func clear() {
         self.values = [Float]()
+        self.bulkValues = [String: Float]()
+        self.bulkPeople = [Member]()
+        self.showBulk = false
+        self.showOverlay = false
     }
     func placeholder() -> AmountObject {
         let x = AmountObject(Namespace().wrappedValue)

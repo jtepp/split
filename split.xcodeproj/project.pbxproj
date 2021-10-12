@@ -68,6 +68,7 @@
 		0C6A7458269392D900275A9B /* ActivityRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C64FED2265ED9F4009B0C3C /* ActivityRequestCell.swift */; };
 		0C6A7459269392D900275A9B /* ActivityAnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA80362661860600A3081B /* ActivityAnnouncementCell.swift */; };
 		0C6A745A269392D900275A9B /* ActivityPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */; };
+		0C7737DF27152D1C00B1DA05 /* BulkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7737DE27152D1C00B1DA05 /* BulkCell.swift */; };
 		0C7C87F726851F6A0040BFA7 /* AlternateIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */; };
 		0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */; };
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
@@ -234,6 +235,7 @@
 		0C6A7452269392D300275A9B /* ActivityWidgetAnnouncementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidgetAnnouncementCell.swift; sourceTree = "<group>"; };
 		0C6A7453269392D300275A9B /* ActivityWidgetPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidgetPaymentCell.swift; sourceTree = "<group>"; };
 		0C6A7454269392D300275A9B /* ActivityWidgetRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidgetRequestCell.swift; sourceTree = "<group>"; };
+		0C7737DE27152D1C00B1DA05 /* BulkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulkCell.swift; sourceTree = "<group>"; };
 		0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconButton.swift; sourceTree = "<group>"; };
 		0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+timeAgo.swift"; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				0CAB4EF62712880E00B2E049 /* AmountOverlay.swift */,
 				0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */,
 				0CAB4EF4271280A300B2E049 /* AmountField.swift */,
+				0C7737DE27152D1C00B1DA05 /* BulkCell.swift */,
 				0CAB4EF8271294E500B2E049 /* AmountCell.swift */,
 				0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */,
 				0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */,
@@ -857,6 +860,7 @@
 				0CBF09F7265D8F370016CA92 /* MembersView.swift in Sources */,
 				0C2A05A0265CB17D002BD46D /* House.swift in Sources */,
 				0C625972265EA868002E58A3 /* Payment.swift in Sources */,
+				0C7737DF27152D1C00B1DA05 /* BulkCell.swift in Sources */,
 				0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */,
 				0C210D6D26812AE7008220B6 /* MailView.swift in Sources */,
 				0CAB4EF72712880E00B2E049 /* AmountOverlay.swift in Sources */,

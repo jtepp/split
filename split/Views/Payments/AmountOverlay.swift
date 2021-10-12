@@ -18,7 +18,9 @@ struct AmountOverlay: View {
                     NSHeaderText(text: "Amount", space: true, clear: .constant(false), namespace: amountObj.namespace)
                     Spacer()
                     Button {
-                        amountObj.showOverlay = false
+                        withAnimation {
+                            amountObj.showOverlay = false
+                        }
                         amountText = amountObj.total() == 0 ? "" : String(format: "%.2f", amountObj.total())
                     } label: {
                         Image(systemName: "xmark")
