@@ -11,6 +11,7 @@ class AmountObject: ObservableObject {
     @Published var values = [Float]()
     @Published var bulkValues = [String: Float]()
     @Published var bulkPeople = [Member]()
+    @Published var canCloseOverlay = false
     @Published var showOverlay = false
     @Published var showBulk = false
     var namespace: Namespace.ID
@@ -33,6 +34,7 @@ class AmountObject: ObservableObject {
         self.bulkPeople = [Member]()
         self.showBulk = false
         self.showOverlay = false
+        self.canCloseOverlay = false
     }
     func placeholder() -> AmountObject {
         let x = AmountObject(Namespace().wrappedValue)

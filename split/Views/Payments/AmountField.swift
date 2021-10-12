@@ -73,6 +73,10 @@ struct AmountField: View {
                 Spacer()
                 Button {
                     amountObj.showOverlay = true
+                    amountObj.canCloseOverlay = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        amountObj.canCloseOverlay = true
+                    }
                 } label: {
                     Image(systemName: "list.bullet")
                         .foregroundColor(.white)

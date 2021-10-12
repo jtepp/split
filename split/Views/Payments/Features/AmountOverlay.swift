@@ -16,12 +16,15 @@ struct AmountOverlay: View {
     var body: some View {
         VStack {
             ScrollView {
+//                Text(recognizedText)
                 HStack {
                     NSHeaderText(text: "Amount", space: true, clear: .constant(false), namespace: amountObj.namespace)
                     Spacer()
                     Button {
                         withAnimation {
-                            amountObj.showOverlay = false
+                            if amountObj.canCloseOverlay {
+                                amountObj.showOverlay = false
+                            }
                         }
                         amountText = amountObj.total() == 0 ? "" : String(format: "%.2f", amountObj.total())
                     } label: {
@@ -54,6 +57,7 @@ struct AmountOverlay: View {
             HStack {
                 Button {
                     showScan = true
+                    recognizedText = ""
                 } label: {
                     Image(systemName: "camera.viewfinder")
                         .resizable()
@@ -79,9 +83,20 @@ struct AmountOverlay: View {
                 }
             }
             .padding(.horizontal)
+            .onChange(of: recognizedText) { _ in
+                if recognizedText != "" {
+                    for num in matches(for: #"\d+[. •]\d{2}"#, in: recognizedText) {
+                        if Float(num) ?? 0 != 0 {
+                            amountObj.values.append(Float(num)!)
+                        }
+                    }
+                }
+            }
             Button(action: {
-                amountObj.showOverlay = false
-                amountText = amountObj.total() == 0 ? "" : String(format: "%.2f", amountObj.total())
+                if amountObj.canCloseOverlay {
+                    amountObj.showOverlay = false
+                    amountText = amountObj.total() == 0 ? "" : String(format: "%.2f", amountObj.total())
+                }
             }, label: {
                 HStack {
                     Spacer()
@@ -102,6 +117,9 @@ struct AmountOverlay: View {
         .padding()
         .padding(.bottom, 90)
         .matchedGeometryEffect(id: "whole", in: amountObj.namespace)
+        .sheet(isPresented: $showScan, content: {
+            ScanDocumentView(recognizedText: $recognizedText)
+        })
     }
 }
 
@@ -111,5 +129,21 @@ struct AmountOverlay_Previews: PreviewProvider {
             Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             AmountOverlay(amountObj: AmountObject(Namespace().wrappedValue).placeholder(), amountText: .constant("0.00"))
         }
+    }
+}
+
+
+func matches(for regex: String, in text: String) -> [String] {
+
+    do {
+        let regex = try NSRegularExpression(pattern: regex)
+        let results = regex.matches(in: text,
+                                    range: NSRange(text.startIndex..., in: text))
+        return results.map {
+            String(text[Range($0.range, in: text)!])
+        }
+    } catch let error {
+        print("invalid regex: \(error.localizedDescription)")
+        return []
     }
 }
