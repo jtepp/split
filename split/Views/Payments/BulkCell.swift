@@ -27,15 +27,15 @@ struct BulkCell: View {
                 .foregroundColor(.primary)
                 .frame(maxWidth: 82)
                 .onAppear {
-                    if amountObj.bulkValues[m.name] ?? 0 != 0 {
-                        txt = String(format: "%.2f", amountObj.bulkValues[m.name]!)
+                    if amountObj.bulkValues[m.id] ?? 0 != 0 {
+                        txt = String(format: "%.2f", amountObj.bulkValues[m.id]!)
                     } else {
                         txt = ""
                     }
                 }
                 .onChange(of: txt, perform: { _ in
-                    if Float(txt) ?? 0 != 0 {
-                        amountObj.bulkValues[m.name] = Float(txt)!
+                    if Float(txt) ?? -1 != -1 {
+                        amountObj.bulkValues[m.id] = Float(txt)!
                     }
                     fixBulkGhosts(amountObj)
                 })
@@ -59,7 +59,7 @@ struct BulkCell_Previews: PreviewProvider {
 func fixBulkGhosts(_ amountObj: AmountObject) {
     for k in amountObj.bulkValues.keys {
         if !amountObj.bulkPeople.contains(where: { m in
-            m.name == k
+            m.id == k
         }) {
             amountObj.bulkValues.removeValue(forKey: k)
         }

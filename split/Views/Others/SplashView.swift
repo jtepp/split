@@ -22,7 +22,7 @@ struct SplashView: View {
                     VStack {
                         Spacer()
                         HStack {
-                            Text("v2.5.0")
+                            Text("v2.6.0")
                                 .foregroundColor(.white)
                                 .font(Font.subheadline.bold())
                                 //                            .padding()
@@ -65,8 +65,10 @@ struct SplashView: View {
                     showCore.toggle()
                 }
                 
-                SplashDetailsView(title: "Receipt Mode", text: "Tap the new Receipt Mode button to easily add up your numbers", image: "list.bullet", color: .blue)
-                SplashDetailsView(title: "Balance Widget", text: "The new balance tile widget now shows overall balance, rather than balance relative to yourself", image: "square.grid.2x2.fill", color: .green)
+                SplashDetailsView(title: "Bulk split", text: "Tap the new Bulk split button to make multiple payments or requests", image: "person.3.fill", color: .green)
+
+                SplashDetailsView(title: "Receipt mode", text: "Tap the new Receipt mode button to easily add up your numbers", image: "list.bullet", color: .blue)
+
                 
             }
             Spacer()
@@ -109,7 +111,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "2.5.0")
+            UserDefaults.standard.setValue(true, forKey: "2.6.0")
         }
         .sheet(isPresented: $isShowingMailView) {
             MailView(result: self.$result)
