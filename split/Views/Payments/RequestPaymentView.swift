@@ -16,7 +16,7 @@ struct RequestPaymentView: View {
     @Binding var tabSelection: Int
     @State var includeSelf = false
     @State var explainIncludeSelf = false
-    @Binding var namespace: Namespace
+    var namespace: Namespace.ID
     @Binding var showOverlay: Bool
     @Binding var amountText: String
     var body: some View {
@@ -49,7 +49,9 @@ struct RequestPaymentView: View {
 //            Spacer()
             VStack(alignment: .leading) {
                 if !showOverlay {
-                    AmountField(namespace: $namespace, amountObj: amountObj, amountText: $amountText, showOverlay: $showOverlay)
+                    AmountField(namespace: namespace, amountObj: amountObj, amountText: $amountText, showOverlay: $showOverlay)
+                } else {
+                    Rectangle().fill(Color.clear).frame(height:90)
                 }
                 Text("Total amount will be split equally between members")
                     .font(.caption)

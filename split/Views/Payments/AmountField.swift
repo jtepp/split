@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct AmountField: View {
-    @Binding var namespace: Namespace
+    var namespace: Namespace.ID
     @ObservedObject var amountObj: AmountObject
     @Binding var amountText: String
     @Binding var showOverlay: Bool
     var body: some View {
         HStack {
-            InputField(name: "Amount", text: $amountText)
+            NSInputField(name: "Amount", text: $amountText, namespace: namespace)
             Spacer()
             Button {
-                showOverlay = true
+                withAnimation {
+                    showOverlay = true
+                }
             } label: {
                 Image(systemName: "list.bullet")
                     .foregroundColor(.white)
@@ -30,12 +32,12 @@ struct AmountField: View {
             }
         }
         .padding()
-        .background(Color("DarkMaterial").cornerRadius(10))
+        .background(Color("DarkMaterial").cornerRadius(10).matchedGeometryEffect(id: "amount", in: namespace))
 //        .onLongPressGesture {
 //            showOverlay = true
 //            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 //        }
-        .matchedGeometryEffect(id: "amount", in: namespace.wrappedValue)
+        
     }
 }
 

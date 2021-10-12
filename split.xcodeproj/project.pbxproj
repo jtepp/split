@@ -377,7 +377,6 @@
 		0C2A057A265CAA44002BD46D = {
 			isa = PBXGroup;
 			children = (
-				0CAB4EF8271294E500B2E049 /* AmountCell.swift */,
 				0C6A741E26927CB600275A9B /* spllitWidgetExtension.entitlements */,
 				0C2A0585265CAA44002BD46D /* split */,
 				0C6A741126927C7400275A9B /* Widgets */,
@@ -466,6 +465,7 @@
 				0CAB4EF62712880E00B2E049 /* AmountOverlay.swift */,
 				0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */,
 				0CAB4EF4271280A300B2E049 /* AmountField.swift */,
+				0CAB4EF8271294E500B2E049 /* AmountCell.swift */,
 				0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */,
 				0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */,
 				0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */,

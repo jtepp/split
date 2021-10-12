@@ -47,9 +47,9 @@ struct PaymentView: View {
                 }
                 
                 if payType == 0 {
-                    PaymentPaymentView(amountObj: amountObj, house: $house, choice: $pchoice, tabSelection: $tabSelection, namespace: .constant(_namespace), showOverlay: $showOverlay, amountText: $amountText)
+                    PaymentPaymentView(amountObj: amountObj, house: $house, choice: $pchoice, tabSelection: $tabSelection, namespace: namespace, showOverlay: $showOverlay, amountText: $amountText)
                 } else {
-                    RequestPaymentView(amountObj: amountObj, house: $house, choice: $rchoice, tabSelection: $tabSelection, namespace: .constant(_namespace), showOverlay: $showOverlay, amountText: $amountText)
+                    RequestPaymentView(amountObj: amountObj, house: $house, choice: $rchoice, tabSelection: $tabSelection, namespace: namespace, showOverlay: $showOverlay, amountText: $amountText)
                 }
                 Rectangle()
                     .fill(Color.black)
@@ -76,7 +76,7 @@ struct PaymentView: View {
                 }
             }
             if showOverlay {
-                AmountOverlay(amountObj: amountObj, show: $showOverlay, namespace: .constant(_namespace), amountText: $amountText)
+                AmountOverlay(amountObj: amountObj, show: $showOverlay, namespace: namespace, amountText: $amountText)
             }
         }
         

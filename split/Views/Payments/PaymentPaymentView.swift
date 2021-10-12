@@ -14,7 +14,7 @@ struct PaymentPaymentView: View {
     @Binding var choice: [Member]
     @State var memoText = String()
     @Binding var tabSelection: Int
-    @Binding var namespace: Namespace
+    var namespace: Namespace.ID
     @Binding var showOverlay: Bool
     @Binding var amountText: String
     var body: some View {
@@ -46,8 +46,10 @@ struct PaymentPaymentView: View {
             })
 //            Spacer()
             if !showOverlay {
-                AmountField(namespace: $namespace, amountObj: amountObj, amountText: $amountText, showOverlay: $showOverlay)
+                AmountField(namespace: namespace, amountObj: amountObj, amountText: $amountText, showOverlay: $showOverlay)
                     .padding()
+            } else {
+                Rectangle().fill(Color.clear).frame(height:90)
             }
             InputField(name: "Memo", text: $memoText)
                 .padding()
@@ -95,6 +97,29 @@ struct InputField: View {
                 .font(.title)
                 .bold()
                 .foregroundColor(.white)
+            Spacer()
+            TextField(name, text: $text)
+                .opacity(0.5)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(name.lowercased() == "amount" ? .decimalPad : .default)
+                
+            Spacer()
+        }.scaleEffect(small ? 0.8 : 1)
+    }
+}
+
+struct NSInputField: View {
+    var name: String
+    @Binding var text: String
+    var small: Bool = false
+    var namespace: Namespace.ID
+    var body: some View {
+        HStack {
+            Text("\(name):")
+                .font(.title)
+                .bold()
+                .foregroundColor(.white)
+                .matchedGeometryEffect(id: "\(name)", in: namespace)
             Spacer()
             TextField(name, text: $text)
                 .opacity(0.5)

@@ -10,7 +10,7 @@ import SwiftUI
 struct AmountOverlay: View {
     @ObservedObject var amountObj: AmountObject
     @Binding var show: Bool
-    @Binding var namespace: Namespace
+    var namespace: Namespace.ID
     @Binding var amountText: String
     @State var text = String()
     var body: some View {
@@ -86,9 +86,8 @@ struct AmountOverlay: View {
                 .padding()
             })
         }
-        .background(Color("DarkMaterial").cornerRadius(10))
+        .background(Color("DarkMaterial").cornerRadius(10).matchedGeometryEffect(id: "amount", in: namespace))
         .padding()
-        .matchedGeometryEffect(id: "amount", in: namespace.wrappedValue)
         .padding(.bottom, 90)
     }
 }
@@ -97,7 +96,7 @@ struct AmountOverlay_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            AmountOverlay(amountObj: AmountObject().placeholder(), show: .constant(true), namespace: .constant(Namespace()), amountText: .constant("0.00"))
+            AmountOverlay(amountObj: AmountObject().placeholder(), show: .constant(true), namespace: Namespace().wrappedValue, amountText: .constant("0.00"))
         }
     }
 }
