@@ -37,7 +37,7 @@ struct AmountCell_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            AmountOverlay(amountObj: AmountObject().placeholder(), show: .constant(true), namespace: Namespace().wrappedValue, amountText: .constant("0.00"))
+            AmountOverlay(amountObj: AmountObject().placeholder(), namespace: Namespace().wrappedValue, amountText: .constant("0.00"))
         }
         
         

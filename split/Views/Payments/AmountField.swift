@@ -11,14 +11,13 @@ struct AmountField: View {
     var namespace: Namespace.ID
     @ObservedObject var amountObj: AmountObject
     @Binding var amountText: String
-    @Binding var showOverlay: Bool
     var body: some View {
         HStack {
             NSInputField(name: "Amount", text: $amountText, namespace: namespace)
             Spacer()
             Button {
                 withAnimation {
-                    showOverlay = true
+                    amountObj.showOverlay = true
                 }
             } label: {
                 Image(systemName: "list.bullet")

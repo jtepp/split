@@ -17,7 +17,6 @@ struct RequestPaymentView: View {
     @State var includeSelf = false
     @State var explainIncludeSelf = false
     var namespace: Namespace.ID
-    @Binding var showOverlay: Bool
     @Binding var amountText: String
     var body: some View {
         VStack {
@@ -48,8 +47,8 @@ struct RequestPaymentView: View {
             })
 //            Spacer()
             VStack(alignment: .leading) {
-                if !showOverlay {
-                    AmountField(namespace: namespace, amountObj: amountObj, amountText: $amountText, showOverlay: $showOverlay)
+                if !amountObj.showOverlay {
+                    AmountField(namespace: namespace, amountObj: amountObj, amountText: $amountText)
                 } else {
                     Rectangle().fill(Color.clear).frame(height:95)
                 }

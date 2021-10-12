@@ -14,9 +14,7 @@ struct PaymentView: View {
     @Binding var tabSelection: Int
     @Binding var pchoice: [Member]
     @Binding var rchoice: [Member]
-    @StateObject var amountObj = AmountObject()
-    @Namespace var namespace
-    @State var showOverlay = false
+    @StateObject var amountObj = AmountObject(Namespace())
     @State var amountText = ""
     var body: some View {
         ZStack {
@@ -48,9 +46,9 @@ struct PaymentView: View {
                 }
                 
                 if payType == 0 {
-                    PaymentPaymentView(amountObj: amountObj, house: $house, choice: $pchoice, tabSelection: $tabSelection, namespace: namespace, showOverlay: $showOverlay, amountText: $amountText)
+                    PaymentPaymentView(amountObj: amountObj, house: $house, choice: $pchoice, tabSelection: $tabSelection, namespace: namespace, amountText: $amountText)
                 } else {
-                    RequestPaymentView(amountObj: amountObj, house: $house, choice: $rchoice, tabSelection: $tabSelection, namespace: namespace, showOverlay: $showOverlay, amountText: $amountText)
+                    RequestPaymentView(amountObj: amountObj, house: $house, choice: $rchoice, tabSelection: $tabSelection, namespace: namespace, amountText: $amountText)
                 }
                 Rectangle()
                     .fill(Color.black)
@@ -76,8 +74,8 @@ struct PaymentView: View {
                     }
                 }
             }
-            if showOverlay {
-                AmountOverlay(amountObj: amountObj, show: $showOverlay, namespace: namespace, amountText: $amountText)
+            if amountObj.showOverlay {
+                AmountOverlay(amountObj: amountObj, namespace: namespace, amountText: $amountText)
             }
         }
         

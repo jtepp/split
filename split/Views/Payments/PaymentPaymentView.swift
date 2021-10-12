@@ -15,7 +15,6 @@ struct PaymentPaymentView: View {
     @State var memoText = String()
     @Binding var tabSelection: Int
     var namespace: Namespace.ID
-    @Binding var showOverlay: Bool
     @Binding var amountText: String
     var body: some View {
         VStack {
@@ -45,8 +44,8 @@ struct PaymentPaymentView: View {
                 MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: false)
             })
 //            Spacer()
-            if !showOverlay {
-                AmountField(namespace: namespace, amountObj: amountObj, amountText: $amountText, showOverlay: $showOverlay)
+            if !amountObj.showOverlay {
+                AmountField(namespace: namespace, amountObj: amountObj, amountText: $amountText)
                     .padding()
             } else {
                 Rectangle().fill(Color.clear).frame(height:95)

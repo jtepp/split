@@ -9,6 +9,7 @@ import Foundation
 
 struct Payment: Identifiable, Codable {
     var id: String?
+    var bulkid: String = ""
     var to: String = ""
     var from: String = String()
     var reqfrom: [String] = [String]()

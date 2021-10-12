@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AmountOverlay: View {
     @ObservedObject var amountObj: AmountObject
-    @Binding var show: Bool
     var namespace: Namespace.ID
     @Binding var amountText: String
     @State var text = String()
@@ -20,7 +19,7 @@ struct AmountOverlay: View {
                     NSHeaderText(text: "Amount", space: true, clear: .constant(false), namespace: namespace)
                     Spacer()
                     Button {
-                        show = false
+                        amountObj.showOverlay = false
                         amountText = amountObj.total() == 0 ? "" : String(format: "%.2f", amountObj.total())
                     } label: {
                         Image(systemName: "xmark")
@@ -70,7 +69,7 @@ struct AmountOverlay: View {
             }
             .padding(.horizontal)
             Button(action: {
-                show = false
+                amountObj.showOverlay = false
                 amountText = amountObj.total() == 0 ? "" : String(format: "%.2f", amountObj.total())
             }, label: {
                 HStack {
@@ -99,7 +98,7 @@ struct AmountOverlay_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            AmountOverlay(amountObj: AmountObject().placeholder(), show: .constant(true), namespace: Namespace().wrappedValue, amountText: .constant("0.00"))
+            AmountOverlay(amountObj: AmountObject().placeholder(), namespace: Namespace().wrappedValue, amountText: .constant("0.00"))
         }
     }
 }
