@@ -22,6 +22,7 @@ struct BulkCell: View {
             Text(m.name)
             Spacer()
             TextField("0.00", text: $txt)
+                .keyboardType(.decimalPad)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .opacity(0.5)
                 .foregroundColor(.primary)

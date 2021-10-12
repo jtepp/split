@@ -464,15 +464,12 @@
 			isa = PBXGroup;
 			children = (
 				0CBF09FC265D8F730016CA92 /* PaymentView.swift */,
-				0CAB4EF62712880E00B2E049 /* AmountOverlay.swift */,
+				0C97E85527154D580051584F /* Features */,
 				0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */,
 				0CAB4EF4271280A300B2E049 /* AmountField.swift */,
-				0C7737DE27152D1C00B1DA05 /* BulkCell.swift */,
-				0CAB4EF8271294E500B2E049 /* AmountCell.swift */,
 				0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */,
 				0C64FECC265EC57F009B0C3C /* GeneralPaymentCell.swift */,
 				0C64FED5265EDA9E009B0C3C /* GeneralRequestCell.swift */,
-				0C3061D626FFE7E200C228A8 /* QuickSettleView.swift */,
 			);
 			path = Payments;
 			sourceTree = "<group>";
@@ -620,6 +617,17 @@
 				0CC2A2CF2702925B00646EDF /* Etan@3x.png */,
 			);
 			path = icons;
+			sourceTree = "<group>";
+		};
+		0C97E85527154D580051584F /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				0CAB4EF62712880E00B2E049 /* AmountOverlay.swift */,
+				0C7737DE27152D1C00B1DA05 /* BulkCell.swift */,
+				0CAB4EF8271294E500B2E049 /* AmountCell.swift */,
+				0C3061D626FFE7E200C228A8 /* QuickSettleView.swift */,
+			);
+			path = Features;
 			sourceTree = "<group>";
 		};
 		0CA0E9BF266037FE002876CF /* Profiles */ = {

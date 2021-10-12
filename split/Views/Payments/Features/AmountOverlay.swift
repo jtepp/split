@@ -11,6 +11,8 @@ struct AmountOverlay: View {
     @ObservedObject var amountObj: AmountObject
     @Binding var amountText: String
     @State var text = String()
+    @State var showScan = false
+    @State var recognizedText = ""
     var body: some View {
         VStack {
             ScrollView {
@@ -50,6 +52,14 @@ struct AmountOverlay: View {
                 
             }
             HStack {
+                Button {
+                    showScan = true
+                } label: {
+                    Image(systemName: "camera.viewfinder")
+                        .resizable()
+                        .foregroundColor(Color.white.opacity(0.5))
+                        .frame(width: 30, height: 30)
+                }
                 TextField("Add...", text: $text)
                     .opacity(0.5)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
