@@ -17,11 +17,11 @@ struct AmountOverlay: View {
         VStack {
             ScrollView {
                 HStack {
-                    HeaderText(text: "Amount", space: true, clear: .constant(false))
+                    NSHeaderText(text: "Amount", space: true, clear: .constant(false), namespace: namespace)
                     Spacer()
                     Button {
                         show = false
-                        amountText = String(format: "%.2f", amountObj.total())
+                        amountText = amountObj.total() == 0 ? "" : String(format: "%.2f", amountObj.total())
                     } label: {
                         Image(systemName: "xmark")
                             .foregroundColor(.black)
@@ -33,6 +33,7 @@ struct AmountOverlay: View {
                                         Color.white                                        )
                             )
                     }
+                    .matchedGeometryEffect(id: "button", in: namespace)
                     .padding(.trailing, 10)
                 }
                 VStack {
@@ -52,11 +53,11 @@ struct AmountOverlay: View {
                 TextField("Add...", text: $text)
                     .opacity(0.5)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.decimalPad
-                    )
+                    .keyboardType(.decimalPad)
+                    .matchedGeometryEffect(id: "Amountbox", in: namespace)
                 Spacer()
                 Button {
-                    if Float(text) ?? -1 != -1 {
+                    if Float(text) ?? 0 != 0 {
                         amountObj.values.append(Float(text)!)
                         text = ""
                     }
@@ -70,7 +71,7 @@ struct AmountOverlay: View {
             .padding(.horizontal)
             Button(action: {
                 show = false
-                amountText = String(format: "%.2f", amountObj.total())
+                amountText = amountObj.total() == 0 ? "" : String(format: "%.2f", amountObj.total())
             }, label: {
                 HStack {
                     Spacer()
@@ -86,9 +87,11 @@ struct AmountOverlay: View {
                 .padding()
             })
         }
-        .background(Color("DarkMaterial").cornerRadius(10).matchedGeometryEffect(id: "amount", in: namespace))
+        .background(Color("DarkMaterial").cornerRadius(10)
+                        .matchedGeometryEffect(id: "background", in: namespace))
         .padding()
         .padding(.bottom, 90)
+        .matchedGeometryEffect(id: "whole", in: namespace)
     }
 }
 

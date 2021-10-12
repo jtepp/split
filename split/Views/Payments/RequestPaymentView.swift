@@ -51,7 +51,7 @@ struct RequestPaymentView: View {
                 if !showOverlay {
                     AmountField(namespace: namespace, amountObj: amountObj, amountText: $amountText, showOverlay: $showOverlay)
                 } else {
-                    Rectangle().fill(Color.clear).frame(height:90)
+                    Rectangle().fill(Color.clear).frame(height:95)
                 }
                 Text("Total amount will be split equally between members")
                     .font(.caption)

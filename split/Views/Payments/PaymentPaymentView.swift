@@ -49,7 +49,7 @@ struct PaymentPaymentView: View {
                 AmountField(namespace: namespace, amountObj: amountObj, amountText: $amountText, showOverlay: $showOverlay)
                     .padding()
             } else {
-                Rectangle().fill(Color.clear).frame(height:90)
+                Rectangle().fill(Color.clear).frame(height:95)
             }
             InputField(name: "Memo", text: $memoText)
                 .padding()
@@ -116,15 +116,15 @@ struct NSInputField: View {
     var body: some View {
         HStack {
             Text("\(name):")
-                .font(.title)
-                .bold()
+                .matchedGeometryEffect(id: "\(name)field", in: namespace)
+                .font(.title.bold())
                 .foregroundColor(.white)
-                .matchedGeometryEffect(id: "\(name)", in: namespace)
             Spacer()
             TextField(name, text: $text)
                 .opacity(0.5)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(name.lowercased() == "amount" ? .decimalPad : .default)
+                .matchedGeometryEffect(id: "\(name)box", in: namespace)
                 
             Spacer()
         }.scaleEffect(small ? 0.8 : 1)

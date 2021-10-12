@@ -30,9 +30,12 @@ struct AmountField: View {
                             .stroke(Color.white, lineWidth: 1)
                     )
             }
+            .matchedGeometryEffect(id: "button", in: namespace)
         }
         .padding()
-        .background(Color("DarkMaterial").cornerRadius(10).matchedGeometryEffect(id: "amount", in: namespace))
+        .background(Color("DarkMaterial").cornerRadius(10)
+                        .matchedGeometryEffect(id: "background", in: namespace))
+        .matchedGeometryEffect(id: "whole", in: namespace)
 //        .onLongPressGesture {
 //            showOverlay = true
 //            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
