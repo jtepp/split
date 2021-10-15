@@ -135,7 +135,7 @@ struct NSInputField: View {
                 .opacity(0.5)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(name.lowercased() == "amount" ? .decimalPad : .default)
-                .matchedGeometryEffect(id: "\(name)box", in: namespace)
+                .matchedGeometryEffect(id: "\(name)box", in: namespace, isSource: false)
                 
             Spacer()
         }.scaleEffect(small ? 0.8 : 1)

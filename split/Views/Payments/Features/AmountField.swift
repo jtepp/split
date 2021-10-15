@@ -53,7 +53,7 @@ struct AmountField: View {
                 NSInputField(name: "Amount", text: $amountText, namespace: amountObj.namespace)
                 } else {
                     Text("Amount:")
-                        .matchedGeometryEffect(id: "Amountfield", in: amountObj.namespace)
+                        .matchedGeometryEffect(id: "Amountfield", in: amountObj.namespace, isSource: false)
                         .font(.title.bold())
                         .foregroundColor(.white)
                     GeometryReader { proxy in
@@ -90,7 +90,7 @@ struct AmountField: View {
                 .frame(width: 28, height: 28)
                 .opacity(amountObj.showBulk ? 0.5 : 1)
                 .disabled(amountObj.showBulk)
-                .matchedGeometryEffect(id: "receiptbutton", in: amountObj.namespace)
+//                .matchedGeometryEffect(id: "receiptbutton", in: amountObj.namespace)
                 Button {
                     withAnimation {
                         amountObj.showBulk.toggle()

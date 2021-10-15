@@ -41,8 +41,8 @@ struct PaymentView: View {
                     } else {
                         payType = 0
                     }
-                    amountObj.clear()
-                    amountText = ""
+//                    amountObj.clear()
+//                    amountText = ""
                 }
                 
                 if payType == 0 {

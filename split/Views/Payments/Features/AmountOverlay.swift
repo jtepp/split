@@ -47,7 +47,7 @@ struct AmountOverlay: View {
                                         Color.white                                        )
                             )
                     }
-                    .matchedGeometryEffect(id: "receiptbutton", in: amountObj.namespace)
+//                    .matchedGeometryEffect(id: "receiptbutton", in: amountObj.namespace)
                     .padding(.trailing, 10)
                 }
                 VStack {
@@ -76,7 +76,7 @@ struct AmountOverlay: View {
                     .opacity(0.5)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
-                    .matchedGeometryEffect(id: "Amountbox", in: amountObj.namespace)
+                    .matchedGeometryEffect(id: "Amountbox", in: amountObj.namespace, isSource: false)
                 Spacer()
                 Button {
                     if Float(text) ?? 0 != 0 {
@@ -123,10 +123,10 @@ struct AmountOverlay: View {
             })
         }
         .background(Color("DarkMaterial").cornerRadius(10)
-                        .matchedGeometryEffect(id: "background", in: amountObj.namespace))
+                        .matchedGeometryEffect(id: "background", in: amountObj.namespace, isSource: true))
         .padding()
         .padding(.bottom, 90)
-        .matchedGeometryEffect(id: "whole", in: amountObj.namespace)
+        .matchedGeometryEffect(id: "whole", in: amountObj.namespace, isSource: false)
         .sheet(isPresented: $showScan, content: {
             ScanDocumentView(recognizedText: $recognizedText)
         })
