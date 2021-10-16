@@ -8,7 +8,7 @@
 import SwiftUI
 
 class AmountObject: ObservableObject {
-    @Published var values = [Float]()
+    @Published var values = [IdentifiableFloat]()
     @Published var bulkValues = [String: Float]()
     @Published var bulkPeople = [Member]()
     @Published var canCloseOverlay = false
@@ -20,7 +20,7 @@ class AmountObject: ObservableObject {
     }
     func total() -> Float {
         return self.values.reduce(0) { a, b in
-            a+b
+            a + b.value
         }
     }
     func clearBulk() {
@@ -29,7 +29,7 @@ class AmountObject: ObservableObject {
     }
     
     func clear() {
-        self.values = [Float]()
+        self.values = [IdentifiableFloat]()
         self.bulkValues = [String: Float]()
         self.bulkPeople = [Member]()
         self.showBulk = false
@@ -38,7 +38,12 @@ class AmountObject: ObservableObject {
     }
     func placeholder() -> AmountObject {
         let x = AmountObject(Namespace().wrappedValue)
-        x.values = [10,20,30]
+        x.values = [IdentifiableFloat(value: 10),IdentifiableFloat(value: 20),IdentifiableFloat(value: 30)]
         return x
     }
+}
+
+struct IdentifiableFloat: Identifiable {
+    let id = UUID()
+    var value: Float
 }

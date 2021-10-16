@@ -15,10 +15,13 @@ struct AlternateIconRow: View {
         VStack(alignment: .leading){
             Text(title)
                 .font(Font.title2.weight(.semibold))
-            HStack{
+            ScrollView(.horizontal){
+                HStack {
                 ForEach(names, id: \.self) { name in
                     AlternateIconButton(choice: $choice, name: name)
                 }
+                }
+                .padding(.vertical, 8)
             }
             .padding(.bottom)
         }

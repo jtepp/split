@@ -9,21 +9,29 @@ import SwiftUI
 
 struct AmountCell: View {
     @ObservedObject var amountObj: AmountObject
-    var v: Float
+    var v: IdentifiableFloat
     var body: some View {
         HStack {
             Button {
-                amountObj.values.insert(v, at: amountObj.values.firstIndex(of: v)!)
+                amountObj.values.insert(v, at: amountObj.values.firstIndex(where: { i in
+                    i.id == v.id
+                })!)
             } label: {
                 Image(systemName: "plus.circle")
                     .foregroundColor(.secondary)
             }
             Spacer()
-            Text("\(v, specifier: "%.2f")")
+            Text("\(v.value, specifier: "%.2f")")
                 .font(.system(size: 18))
                 .bold()
             Button {
-                amountObj.values.remove(at: amountObj.values.firstIndex(of: v)!)
+//                if amountObj.values.firstIndex(where: { i in
+//                    i.id == v.id
+//                }) ?? -1  != -1 {
+                    amountObj.values.removeAll { i in
+                        i.id == v.id
+                    }
+//                }
             } label: {
                 Image(systemName: "trash.fill")
                     .foregroundColor(.secondary)

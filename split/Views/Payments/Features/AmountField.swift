@@ -127,7 +127,7 @@ struct AmountField: View {
         .padding()
         .background(Color("DarkMaterial").cornerRadius(10)
                         .matchedGeometryEffect(id: "background", in: amountObj.namespace))
-        .matchedGeometryEffect(id: "whole", in: amountObj.namespace)
+        .matchedGeometryEffect(id: "whole", in: amountObj.namespace, isSource: false)
         .sheet(isPresented: $showSheet, content: {
             BulkMemberPicker(show: $showSheet, house: $house, amountObj: amountObj, multiple: true)
         })

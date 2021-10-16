@@ -51,7 +51,7 @@ struct AmountOverlay: View {
                     .padding(.trailing, 10)
                 }
                 VStack {
-                    ForEach(amountObj.values, id: \.self) { v in
+                    ForEach(amountObj.values) { v in
                         AmountCell(amountObj: amountObj, v: v)
                     }
                 }
@@ -80,7 +80,7 @@ struct AmountOverlay: View {
                 Spacer()
                 Button {
                     if Float(text) ?? 0 != 0 {
-                        amountObj.values.append(Float(text)!)
+                        amountObj.values.append(IdentifiableFloat(value:Float(text)!))
                         text = ""
                     }
                 } label: {
@@ -97,7 +97,7 @@ struct AmountOverlay: View {
                         
                         if Float(replaceAll(num, from: ". •-_,'*").replacingOccurrences(of: "\n", with: "")) ?? 0 != 0 {
                             print(true)
-                            amountObj.values.append(Float(replaceAll(num, from: ". •-_,'*").replacingOccurrences(of: "\n", with: ""))!)
+                            amountObj.values.append(IdentifiableFloat(value: Float(replaceAll(num, from: ". •-_,'*").replacingOccurrences(of: "\n", with: ""))!))
                         }
                     }
                 }
