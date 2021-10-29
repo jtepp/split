@@ -44,6 +44,11 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
 
     }
 
+    if (!event.after.get("isAn") && !event.after.get("isGM")) {
+        if ((event.after.get("memo") || "") != "") {
+            body += " for " + event.after.get("memo")
+        }
+    }
 
     event.after.get("fcm").forEach(async tkn => {
         let message = {
