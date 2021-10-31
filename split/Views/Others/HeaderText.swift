@@ -29,7 +29,7 @@ struct NSHeaderText: View {
     let text: String
     var space: Bool = true
     @Binding var clear: Bool
-    var namespace: Namespace.ID
+//    var namespace: Namespace.ID
     var body: some View {
         HStack {
             Text(text+"   ")

@@ -50,7 +50,7 @@ struct AmountField: View {
             }
             HStack {
                 if !amountObj.showBulk {
-                    NSInputField(name: "Amount", text: $amountText, namespace: amountObj.namespace)
+                    NSInputField(name: "Amount", text: $amountText)//, namespace: amountObj.namespace)
                 } else {
                     Text("Amount:")
 //                        .matchedGeometryEffect(id: "Amountfield", in: amountObj.namespace, isSource: false)

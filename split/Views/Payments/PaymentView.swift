@@ -14,7 +14,7 @@ struct PaymentView: View {
     @Binding var tabSelection: Int
     @Binding var pchoice: [Member]
     @Binding var rchoice: [Member]
-    @ObservedObject var amountObj = AmountObject(Namespace().wrappedValue)
+    @ObservedObject var amountObj = AmountObject()//Namespace().wrappedValue)
     @State var amountText = ""
     var body: some View {
         ZStack {

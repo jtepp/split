@@ -123,11 +123,11 @@ struct NSInputField: View {
     var name: String
     @Binding var text: String
     var small: Bool = false
-    var namespace: Namespace.ID
+    //var namespace: Namespace.ID
     var body: some View {
         HStack {
             Text("\(name):")
-                .matchedGeometryEffect(id: "\(name)field", in: namespace)
+//                .matchedGeometryEffect(id: "\(name)field"), in: namespace)
                 .font(.title.bold())
                 .foregroundColor(.white)
             Spacer()
@@ -135,7 +135,7 @@ struct NSInputField: View {
                 .opacity(0.5)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(name.lowercased() == "amount" ? .decimalPad : .default)
-                .matchedGeometryEffect(id: "\(name)box", in: namespace, isSource: false)
+//                .matchedGeometryEffect(id: "\(name)box", in: namespace, isSource: false)
                 
             Spacer()
         }.scaleEffect(small ? 0.8 : 1)

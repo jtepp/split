@@ -17,10 +17,10 @@ class AmountObject: ObservableObject {
     @Published var showBulk = false
     @Published var receiptToShow = ""
     @Published var refresh = 0
-    var namespace: Namespace.ID
-    init(_ namespace: Namespace.ID) {
-        self.namespace = namespace
-    }
+//    var namespace: Namespace.ID
+//    init(_ namespace: Namespace.ID) {
+//        self.namespace = namespace
+//    }
     func total() -> Float {
         return self.values.reduce(0) { a, b in
             a + b.value
@@ -40,7 +40,7 @@ class AmountObject: ObservableObject {
         self.canCloseOverlay = false
     }
     func placeholder() -> AmountObject {
-        let x = AmountObject(Namespace().wrappedValue)
+        let x = AmountObject()//Namespace().wrappedValue)
         x.values = [IdentifiableFloat(value: 10),IdentifiableFloat(value: 20),IdentifiableFloat(value: 30)]
         return x
     }

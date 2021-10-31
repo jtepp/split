@@ -19,7 +19,7 @@ struct AmountOverlay: View {
             ScrollView {
                 //                                Text(recognizedText)
                 HStack {
-                    NSHeaderText(text: "Amount", space: true, clear: .constant(false), namespace: amountObj.namespace)
+                    NSHeaderText(text: "Amount", space: true, clear: .constant(false))//, namespace: amountObj.namespace)
                     //                        .onLongPressGesture {
                     //                            showRecognizedText.toggle()
                     //                        }
@@ -152,7 +152,8 @@ struct AmountOverlay_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            AmountOverlay(amountObj: AmountObject(Namespace().wrappedValue).placeholder(), amountText: .constant("0.00"))
+            AmountOverlay(amountObj: AmountObject()//Namespace().wrappedValue)
+                .placeholder(), amountText: .constant("0.00"))
         }
     }
 }
