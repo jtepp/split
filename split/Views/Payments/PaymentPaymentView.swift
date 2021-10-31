@@ -47,12 +47,12 @@ struct PaymentPaymentView: View {
                 }
             }
 //            Spacer()
-            if !amountObj.showOverlay {
+//            if !amountObj.showOverlay {
                 AmountField(house: $house, amountObj: amountObj, amountText: $amountText)
                     .padding()
-            } else {
-                Rectangle().fill(Color.clear).frame(height:95)
-            }
+//            } else {
+//                Rectangle().fill(Color.clear).frame(height:95)
+//            }
             InputField(name: "Memo", text: $memoText)
                 .padding()
             Spacer()

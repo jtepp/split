@@ -11,6 +11,7 @@ struct BulkCell: View {
     @ObservedObject var amountObj: AmountObject
     var m: Member
     @State var txt = ""
+    @State var lastChange = "-1"
     var body: some View {
         HStack {
             b64toimg(b64: m.image)
@@ -28,14 +29,14 @@ struct BulkCell: View {
                 .opacity(0.5)
                 .foregroundColor(.primary)
                 .frame(maxWidth: 82)
-                .onChange(of: amountObj.refresh) { n in
-                    print(n)
-                    if amountObj.bulkReceipts[m.id]!.reduce(0, { a, b in
+                .onReceive(amountObj.bulkReceipts[m.id].publisher) { _ in
+                    let red = amountObj.bulkReceipts[m.id]!.reduce(0, { a, b in
                         a + b.value
-                    }) != 0 {
-                        txt = String(format: "%.2f", amountObj.bulkReceipts[m.id]!.reduce(0, { a, b in
-                            a + b.value
-                        }))
+                    })
+                    
+                    if String(format: "%.2f", red) != lastChange {
+                        txt = String(format: "%.2f", red)
+                        lastChange = String(format: "%.2f", red)
                     }
                 }
             Button {
@@ -45,6 +46,7 @@ struct BulkCell: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     amountObj.canCloseOverlay = true
                 }
+                lastChange = "-1"
             } label: {
                 Image(systemName: "list.bullet")
                     .foregroundColor(.white)

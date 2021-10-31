@@ -48,11 +48,11 @@ struct RequestPaymentView: View {
             }
 //            Spacer()
             VStack(alignment: .leading) {
-                if !amountObj.showOverlay {
+//                if !amountObj.showOverlay {
                     AmountField(house: $house, amountObj: amountObj, amountText: $amountText)
-                } else {
-                    Rectangle().fill(Color.clear).frame(height:95)
-                }
+//                } else {
+//                    Rectangle().fill(Color.clear).frame(height:95)
+//                }
                 Text("Total amount will be split equally between members")
                     .font(.caption)
                     .foregroundColor(.gray)

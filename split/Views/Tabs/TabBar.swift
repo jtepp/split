@@ -12,6 +12,7 @@ struct TabBar: View {
     let halfLeft = -UIScreen.main.bounds.width/2
     @Binding var engaged: Bool
     @Binding var watch: Int
+    @ObservedObject var refresh: RefreshObject
     var body: some View {
             VStack {
                 Spacer()
@@ -21,10 +22,10 @@ struct TabBar: View {
                     .shadow(color: .black, radius: 10)
                     .overlay(
                         HStack(spacing: 60) {
-                            TabButton(tabSelection: $tabSelection, index: 0, name: "rectangle.grid.1x2", engaged: .constant(false), watch: .constant(0))
-                            TabButton(tabSelection: $tabSelection, index: 1, name: "person.2", engaged: .constant(false), watch: .constant(0))
-                            TabButton(tabSelection: $tabSelection, index: 2, name: "dollarsign.square", engaged: .constant(false), watch: .constant(0))
-                            TabButton(tabSelection: $tabSelection, index: 3, name: "person.crop.square", engaged: $engaged, watch: $watch)
+                            TabButton(tabSelection: $tabSelection, index: 0, name: "rectangle.grid.1x2", engaged: .constant(false), watch: .constant(0), refresh: refresh)
+                            TabButton(tabSelection: $tabSelection, index: 1, name: "person.2", engaged: .constant(false), watch: .constant(0), refresh: refresh)
+                            TabButton(tabSelection: $tabSelection, index: 2, name: "dollarsign.square", engaged: .constant(false), watch: .constant(0), refresh: refresh)
+                            TabButton(tabSelection: $tabSelection, index: 3, name: "person.crop.square", engaged: $engaged, watch: $watch, refresh: refresh)
                         }
 //                        .scaleEffect(1.6)
                         .foregroundColor(.white)
@@ -58,12 +59,16 @@ struct TabButton: View {
     let name: String
     @Binding var engaged: Bool
     @Binding var watch: Int
+    @ObservedObject var refresh: RefreshObject
     var body: some View {
         Image(systemName: "\(name)\(tabSelection == index ? ".fill" : "")")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 30, height: 30)
             .onTapGesture {
+                if tabSelection == 0 && index == 0 {
+                    refresh.activityScroll += 1
+                }
                 tabSelection = index
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 if index == 3 {

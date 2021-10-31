@@ -65,7 +65,9 @@ struct AmountOverlay: View {
                 .padding(10)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color("Material").opacity(amountObj.values.count > 0 ? 1 : 0))
+                        .fill(Color("Material").opacity(
+                            amountObj.receiptToShow == "" ?
+                            (amountObj.values.count > 0 ? 1 : 0) : (amountObj.bulkReceipts[amountObj.receiptToShow]!.count > 0 ? 1 : 0)))
                 )
                 .padding(.horizontal)
                 

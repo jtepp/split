@@ -30,11 +30,12 @@ struct TabsView: View {
     @State var showMessagePopover = false
     @State var GMmsg = ""
     @State var focus: String? = ""
+    @ObservedObject var refresh: RefreshObject
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
                     ZStack {
-                        ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member, showMessagePopover: $showMessagePopover, GMmsg: $GMmsg)
+                        ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member, showMessagePopover: $showMessagePopover, GMmsg: $GMmsg, refresh: refresh)
                             .blur(radius: FMBopen || showMessagePopover ? 8 : 0)
                         if FMBopen {
                             Rectangle()

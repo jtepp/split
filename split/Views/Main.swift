@@ -18,13 +18,14 @@ struct Main: View {
     @State var tabSelection = 0
     @State var dontSplash = UserDefaults.standard.bool(forKey: "dontSplash")
     @State var engaged = false
-    @State var watch = 0
+    @State var watch = 0 //profile
+    @ObservedObject var refresh = RefreshObject()
     var body: some View {
         ZStack {
-            TabsView(tabSelection: $tabSelection, house: $h, member: $m, myId: $myId, inWR: $inWR, noProf: $noProf, engaged: $engaged, watch: $watch)
+            TabsView(tabSelection: $tabSelection, house: $h, member: $m, myId: $myId, inWR: $inWR, noProf: $noProf, engaged: $engaged, watch: $watch, refresh: refresh)
                 .animation(.easeOut)
 
-            TabBar(tabSelection: $tabSelection, engaged: $engaged, watch: $watch)
+            TabBar(tabSelection: $tabSelection, engaged: $engaged, watch: $watch, refresh: refresh)
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{

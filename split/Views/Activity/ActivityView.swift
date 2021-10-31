@@ -21,8 +21,11 @@ struct ActivityView: View {
     @State var incAn = true
     @State var incGM = true
     @State var TrayButtonOpen = false
+    @ObservedObject var refresh: RefreshObject
+    @State var lastScroll = -1
     var body: some View {
         ScrollView {
+            ScrollViewReader { svr in
             HStack {
                 HeaderText(text: "Activity", space: false, clear: $TrayButtonOpen)
                 TrayButton(open: $TrayButtonOpen, incPay: $incPay, incReq: $incReq, incAn: $incAn, incGM: $incGM)
@@ -49,6 +52,15 @@ struct ActivityView: View {
                 .animation(.easeOut), alignment: .trailing
             )
             .padding(.top)
+            .id("top")
+            .onReceive(refresh.$activityScroll) { _ in
+                if refresh.activityScroll != lastScroll {
+                    withAnimation() {
+                        svr.scrollTo("top")
+                    }
+                    lastScroll = refresh.activityScroll
+                }
+            }
             if house.payments.isEmpty || !house.payments.contains { pp in
                 return !pp.isAn
             } {
@@ -212,7 +224,7 @@ struct ActivityView: View {
                 .frame(minHeight:120)
                 .padding(.top, 20)
             
-        }
+        }}
         .foregroundColor(.white)
         
         .onAppear {

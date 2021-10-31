@@ -98,6 +98,7 @@
 		0C7737DF27152D1C00B1DA05 /* BulkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7737DE27152D1C00B1DA05 /* BulkCell.swift */; };
 		0C7C87F726851F6A0040BFA7 /* AlternateIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */; };
 		0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */; };
+		0C94C36A272F61C2006CD05A /* RefreshObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94C369272F61C2006CD05A /* RefreshObject.swift */; };
 		0C951305265DAE6D005398CF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C951304265DAE6D005398CF /* Member.swift */; };
 		0C95131E265DB7C0005398CF /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C95131D265DB7C0005398CF /* MemberCell.swift */; };
 		0C97E85727154D860051584F /* ScanDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C97E85627154D860051584F /* ScanDocumentView.swift */; };
@@ -293,6 +294,7 @@
 		0C7737DE27152D1C00B1DA05 /* BulkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulkCell.swift; sourceTree = "<group>"; };
 		0C7C87F626851F6A0040BFA7 /* AlternateIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconButton.swift; sourceTree = "<group>"; };
 		0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+timeAgo.swift"; sourceTree = "<group>"; };
+		0C94C369272F61C2006CD05A /* RefreshObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshObject.swift; sourceTree = "<group>"; };
 		0C951304265DAE6D005398CF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		0C95131D265DB7C0005398CF /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		0C9570C62670A61800831D17 /* split.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = split.entitlements; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 			children = (
 				0C2A059C265CB123002BD46D /* Fetch.swift */,
 				0CAB4EF227127C9D00B2E049 /* AmountObject.swift */,
+				0C94C369272F61C2006CD05A /* RefreshObject.swift */,
 				0C625971265EA868002E58A3 /* Payment.swift */,
 				0C951304265DAE6D005398CF /* Member.swift */,
 				0C2A059F265CB17D002BD46D /* House.swift */,
@@ -995,6 +998,7 @@
 				0CA0E9C126603809002876CF /* WaitingRoomView.swift in Sources */,
 				0C0CA77E265F01BE0062FDDD /* PaymentPaymentView.swift in Sources */,
 				0CAB4EF327127C9D00B2E049 /* AmountObject.swift in Sources */,
+				0C94C36A272F61C2006CD05A /* RefreshObject.swift in Sources */,
 				0C0CA784265F08CD0062FDDD /* MemberPicker.swift in Sources */,
 				0CAB4EF9271294E500B2E049 /* AmountCell.swift in Sources */,
 				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,
