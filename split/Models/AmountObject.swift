@@ -9,11 +9,14 @@ import SwiftUI
 
 class AmountObject: ObservableObject {
     @Published var values = [IdentifiableFloat]()
-    @Published var bulkValues = [String: Float]()
+    @Published var bulkValues = [String: Float]() //id
+    @Published var bulkReceipts = [String : [IdentifiableFloat]]()
     @Published var bulkPeople = [Member]()
     @Published var canCloseOverlay = false
     @Published var showOverlay = false
     @Published var showBulk = false
+    @Published var receiptToShow = ""
+    @Published var refresh = 0
     var namespace: Namespace.ID
     init(_ namespace: Namespace.ID) {
         self.namespace = namespace

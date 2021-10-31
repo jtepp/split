@@ -28,22 +28,50 @@ struct BulkCell: View {
                 .opacity(0.5)
                 .foregroundColor(.primary)
                 .frame(maxWidth: 82)
-                .onAppear {
-                    if amountObj.bulkValues[m.id] ?? 0 != 0 {
-                        txt = String(format: "%.2f", amountObj.bulkValues[m.id]!)
-                    } else {
-                        txt = ""
+                .onChange(of: amountObj.refresh) { n in
+                    print(n)
+                    if amountObj.bulkReceipts[m.id]!.reduce(0, { a, b in
+                        a + b.value
+                    }) != 0 {
+                        txt = String(format: "%.2f", amountObj.bulkReceipts[m.id]!.reduce(0, { a, b in
+                            a + b.value
+                        }))
                     }
                 }
-                .onChange(of: txt, perform: { _ in
-                    if Float(txt) ?? -1 != -1 {
-                        amountObj.bulkValues[m.id] = Float(txt)!
-                    }
-                    fixBulkGhosts(amountObj)
-                })
-                .onChange(of: amountObj.bulkPeople, perform: { _ in
-                    fixBulkGhosts(amountObj)
-                })
+            Button {
+                amountObj.receiptToShow = m.id
+                amountObj.showOverlay = true
+                amountObj.canCloseOverlay = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    amountObj.canCloseOverlay = true
+                }
+            } label: {
+                Image(systemName: "list.bullet")
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 2)
+                    .padding(.vertical, 6)
+                    .background(
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.white, lineWidth: 1)
+                    )
+            }
+            .frame(width: 28, height: 28)
+            .onAppear {
+                if amountObj.bulkValues[m.id] ?? 0 != 0 {
+                    txt = String(format: "%.2f", amountObj.bulkValues[m.id]!)
+                } else {
+                    txt = ""
+                }
+            }
+            .onChange(of: txt, perform: { _ in
+                if Float(txt) ?? -1 != -1 {
+                    amountObj.bulkValues[m.id] = Float(txt)!
+                }
+                fixBulkGhosts(amountObj)
+            })
+            .onChange(of: amountObj.bulkPeople, perform: { _ in
+                fixBulkGhosts(amountObj)
+            })
         }
         
     }

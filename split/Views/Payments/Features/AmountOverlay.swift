@@ -17,7 +17,7 @@ struct AmountOverlay: View {
     var body: some View {
         VStack {
             ScrollView {
-//                                Text(recognizedText)
+                //                                Text(recognizedText)
                 HStack {
                     NSHeaderText(text: "Amount", space: true, clear: .constant(false), namespace: amountObj.namespace)
                     //                        .onLongPressGesture {
@@ -47,12 +47,19 @@ struct AmountOverlay: View {
                                         Color.white                                        )
                             )
                     }
-//                    .matchedGeometryEffect(id: "receiptbutton", in: amountObj.namespace)
+                    //                    .matchedGeometryEffect(id: "receiptbutton", in: amountObj.namespace)
                     .padding(.trailing, 10)
                 }
                 VStack {
-                    ForEach(amountObj.values) { v in
-                        AmountCell(amountObj: amountObj, v: v)
+                    if amountObj.receiptToShow != "" {
+                        ForEach(amountObj.bulkReceipts[amountObj.receiptToShow]!) { v in
+                            AmountCell(amountObj: amountObj, v: v)
+                        }
+                        
+                    } else {
+                        ForEach(amountObj.values) { v in
+                            AmountCell(amountObj: amountObj, v: v)
+                        }
                     }
                 }
                 .padding(10)
@@ -76,13 +83,19 @@ struct AmountOverlay: View {
                     .opacity(0.5)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
-                    .matchedGeometryEffect(id: "Amountbox", in: amountObj.namespace, isSource: false)
+//                    .matchedGeometryEffect(id: "Amountbox", in: amountObj.namespace, isSource: false)
                 Spacer()
                 Button {
                     if Float(text) ?? 0 != 0 {
-                        amountObj.values.append(IdentifiableFloat(value:Float(text)!))
+                        if amountObj.receiptToShow == "" {
+                            amountObj.values.append(IdentifiableFloat(value:Float(text)!))
+                        } else {
+                            amountObj.bulkReceipts[amountObj.receiptToShow]!.append(IdentifiableFloat(value:Float(text)!))
+                        }
+                        
                         text = ""
                     }
+                    amountObj.refresh += 1
                 } label: {
                     Image(systemName: "plus.circle")
                         .resizable()
@@ -107,6 +120,7 @@ struct AmountOverlay: View {
                     amountObj.showOverlay = false
                     amountText = amountObj.total() == 0 ? "" : String(format: "%.2f", amountObj.total())
                 }
+                amountObj.refresh += 1
             }, label: {
                 HStack {
                     Spacer()
@@ -123,10 +137,11 @@ struct AmountOverlay: View {
             })
         }
         .background(Color("DarkMaterial").cornerRadius(10)
-                        .matchedGeometryEffect(id: "background", in: amountObj.namespace, isSource: true))
+//                        .matchedGeometryEffect(id: "background", in: amountObj.namespace, isSource: true)
+        )
         .padding()
         .padding(.bottom, 90)
-        .matchedGeometryEffect(id: "whole", in: amountObj.namespace, isSource: false)
+//        .matchedGeometryEffect(id: "whole", in: amountObj.namespace, isSource: false)
         .sheet(isPresented: $showScan, content: {
             ScanDocumentView(recognizedText: $recognizedText)
         })

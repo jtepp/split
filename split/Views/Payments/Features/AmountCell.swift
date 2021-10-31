@@ -13,9 +13,15 @@ struct AmountCell: View {
     var body: some View {
         HStack {
             Button {
-                amountObj.values.insert(v, at: amountObj.values.firstIndex(where: { i in
-                    i.id == v.id
-                })!)
+                if amountObj.receiptToShow == "" {
+                    amountObj.values.insert(v, at: amountObj.values.firstIndex(where: { i in
+                        i.id == v.id
+                    })!)
+                } else {
+                    amountObj.bulkReceipts[amountObj.receiptToShow]!.insert(v, at: amountObj.bulkReceipts[amountObj.receiptToShow]!.firstIndex(where: { i in
+                        i.id == v.id
+                    })!)
+                }
             } label: {
                 Image(systemName: "plus.circle")
                     .foregroundColor(.secondary)
@@ -25,13 +31,16 @@ struct AmountCell: View {
                 .font(.system(size: 18))
                 .bold()
             Button {
-//                if amountObj.values.firstIndex(where: { i in
-//                    i.id == v.id
-//                }) ?? -1  != -1 {
+                if amountObj.receiptToShow == "" {
                     amountObj.values.removeAll { i in
                         i.id == v.id
                     }
-//                }
+                } else {
+                    amountObj.bulkReceipts[amountObj.receiptToShow]!.removeAll { i in
+                        i.id == v.id
+                    }
+                }
+                
             } label: {
                 Image(systemName: "trash.fill")
                     .foregroundColor(.secondary)

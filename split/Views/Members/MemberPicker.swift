@@ -232,6 +232,7 @@ struct BulkimgButton: View {
                 } else {
                     selected = true
                     amountObj.bulkPeople.append(member)
+                    amountObj.bulkReceipts[member.id] = [IdentifiableFloat]()
                     if !multiple {
                         amountObj.bulkPeople = [member]
                     }

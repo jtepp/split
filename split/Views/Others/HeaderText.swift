@@ -33,7 +33,7 @@ struct NSHeaderText: View {
     var body: some View {
         HStack {
             Text(text+"   ")
-                .matchedGeometryEffect(id: "\(text)field", in: namespace)
+//                .matchedGeometryEffect(id: "\(text)field", in: namespace)
                 .foregroundColor(.white)
                 .font(.title.bold())
                 .opacity(clear ? 0 : 1)

@@ -50,10 +50,10 @@ struct AmountField: View {
             }
             HStack {
                 if !amountObj.showBulk {
-                NSInputField(name: "Amount", text: $amountText, namespace: amountObj.namespace)
+                    NSInputField(name: "Amount", text: $amountText, namespace: amountObj.namespace)
                 } else {
                     Text("Amount:")
-                        .matchedGeometryEffect(id: "Amountfield", in: amountObj.namespace, isSource: false)
+//                        .matchedGeometryEffect(id: "Amountfield", in: amountObj.namespace, isSource: false)
                         .font(.title.bold())
                         .foregroundColor(.white)
                     GeometryReader { proxy in
@@ -77,6 +77,7 @@ struct AmountField: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         amountObj.canCloseOverlay = true
                     }
+                    amountObj.receiptToShow = ""
                 } label: {
                     Image(systemName: "list.bullet")
                         .foregroundColor(.white)
@@ -126,8 +127,9 @@ struct AmountField: View {
         }
         .padding()
         .background(Color("DarkMaterial").cornerRadius(10)
-                        .matchedGeometryEffect(id: "background", in: amountObj.namespace))
-        .matchedGeometryEffect(id: "whole", in: amountObj.namespace, isSource: false)
+//                        .matchedGeometryEffect(id: "background", in: amountObj.namespace)
+        )
+//        .matchedGeometryEffect(id: "whole", in: amountObj.namespace, isSource: false)
         .sheet(isPresented: $showSheet, content: {
             BulkMemberPicker(show: $showSheet, house: $house, amountObj: amountObj, multiple: true)
         })
