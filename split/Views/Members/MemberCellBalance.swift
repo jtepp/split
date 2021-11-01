@@ -45,6 +45,7 @@ struct MemberCellBalance: View {
                     Color("Material")
                 )
         )
+        .frame(height: 40)
     }
 }
 

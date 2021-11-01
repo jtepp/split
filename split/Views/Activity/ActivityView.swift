@@ -67,7 +67,7 @@ struct ActivityView: View {
                 if showSearch {
                     TextField("Search", text: $searchText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .padding(.horizontal)
                         .padding(.top, 10)
                         .opacity(0.5)

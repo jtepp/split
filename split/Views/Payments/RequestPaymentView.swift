@@ -100,6 +100,7 @@ struct RequestPaymentView: View {
                     }), amount: includeSelf ? Float(amountText)! * Float(choice.count) / Float(choice.count + 1) : Float(amountText)!, time: Int(NSDate().timeIntervalSince1970), memo: memoText, isRequest: true), h: house)
                 }
                 //clear
+                includeSelf = false
                 choice = [Member]()
                 amountText = ""
                 amountObj.clear()
