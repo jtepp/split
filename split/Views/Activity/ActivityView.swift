@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MbSwiftUIFirstResponder
 
 struct ActivityView: View {
     @Binding var house: House
@@ -23,12 +24,14 @@ struct ActivityView: View {
     @State var TrayButtonOpen = false
     @ObservedObject var refresh: RefreshObject
     @State var lastScroll = -1
+    @State var searchText = ""
+    @State var showSearch = false
     var body: some View {
         ScrollView {
             ScrollViewReader { svr in
             HStack {
                 HeaderText(text: "Activity", space: false, clear: $TrayButtonOpen)
-                TrayButton(open: $TrayButtonOpen, incPay: $incPay, incReq: $incReq, incAn: $incAn, incGM: $incGM)
+                TrayButton(open: $TrayButtonOpen, incPay: $incPay, incReq: $incReq, incAn: $incAn, incGM: $incGM, showSearch: $showSearch)
                 Spacer()
             }
             .frame(height:46)
@@ -61,6 +64,14 @@ struct ActivityView: View {
                     lastScroll = refresh.activityScroll
                 }
             }
+                if showSearch {
+                    TextField("Search", text: $searchText)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .foregroundColor(.black)
+                        .padding(.horizontal)
+                        .padding(.top, 10)
+                        .opacity(0.5)
+                }
             if house.payments.isEmpty || !house.payments.contains { pp in
                 return !pp.isAn
             } {
@@ -93,6 +104,8 @@ struct ActivityView: View {
             })
             .filter({p in
                 return incGM ? true : !p.isGM
+            }).filter({ p in
+                return searchText == "" ? true : p.toString().contains(searchText)
             }).isEmpty {
                 VStack {
                     Spacer()
@@ -126,6 +139,8 @@ struct ActivityView: View {
             })
             .filter({p in
                 return incGM ? true : !p.isGM
+            }).filter({ p in
+                return searchText == "" ? true : p.toString().contains(searchText)
             })
             ) { payment in
                 if house.members.contains(where: { (m) -> Bool in

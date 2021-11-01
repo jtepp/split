@@ -13,11 +13,21 @@ struct TrayButton: View {
     @Binding var incReq: Bool
     @Binding var incAn: Bool
     @Binding var incGM: Bool
+    @Binding var showSearch: Bool
     var body: some View {
         
         HStack {
             if open {
                 HStack {
+                    Button{
+                        showSearch.toggle()
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.white)
+                    }
+                    Rectangle()
+                        .fill(Color("Material"))
+                        .frame(width: 2)
                     TrayItem(on: $incPay)
                     Rectangle()
                         .fill(Color("Material"))
@@ -77,7 +87,7 @@ struct TrayButton: View {
                 HStack {
                     HeaderText(text: "Activity", space: false, clear: .constant(false))
                         .opacity(open ? 0 : 1)
-                    TrayButton(open: $open, incPay: .constant(true), incReq: .constant(true), incAn: .constant(true), incGM: .constant(true))
+                    TrayButton(open: $open, incPay: .constant(true), incReq: .constant(true), incAn: .constant(true), incGM: .constant(true), showSearch: .constant(true))
                     Spacer()
                 }
                 .frame(height:46)
