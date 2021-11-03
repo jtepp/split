@@ -18,7 +18,7 @@ struct RequestPaymentView: View {
     @State var explainIncludeSelf = false
     @Binding var amountText: String
     @State var includeTax = false
-    @State var taxRate = "0"
+    @State var taxRate = String(format: "%.0f", UserDefaults.standard.float(forKey: "taxRate"))
     var body: some View {
         VStack {
             if !amountObj.showBulk {
@@ -93,8 +93,12 @@ struct RequestPaymentView: View {
                     TextField("0", text: $taxRate)
                         .frame(width: 60)
                         .foregroundColor(.primary)
+                        .keyboardType(.decimalPad)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .opacity(0.5)
+                        .onChange(of: taxRate) { _ in
+                            UserDefaults.standard.set(Float(taxRate) ?? 0, forKey: "taxRate")
+                        }
                     Text("%")
                         .padding(.trailing)
                 }
