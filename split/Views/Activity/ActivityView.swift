@@ -106,7 +106,7 @@ struct ActivityView: View {
             .filter({p in
                 return incGM ? true : !p.isGM
             }).filter({ p in
-                return searchText == "" ? true : p.toString().contains(searchText)
+                return searchText == "" ? true : p.toString().lowercased().contains(searchText.lowercased())
             }).isEmpty {
                 VStack {
                     Spacer()
