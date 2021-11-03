@@ -26,6 +26,7 @@ struct ActivityView: View {
     @State var lastScroll = -1
     @State var searchText = ""
     @State var showSearch = false
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         ScrollView {
             ScrollViewReader { svr in
@@ -70,7 +71,7 @@ struct ActivityView: View {
                         .foregroundColor(.primary)
                         .padding(.horizontal)
                         .padding(.top, 10)
-                        .opacity(0.5)
+                        .opacity(colorScheme == .light ? 0.5 : 1)
                 }
             if house.payments.isEmpty || !house.payments.contains { pp in
                 return !pp.isAn
@@ -244,9 +245,9 @@ struct ActivityView: View {
         
         .onAppear {
             //show splash for update
-            if UserDefaults.standard.bool(forKey: "2.6.0") == false {
+            if UserDefaults.standard.bool(forKey: "2.7.0") == false {
                 showSplash = true
-                UserDefaults.standard.setValue(true, forKey: "2.6.0")
+                UserDefaults.standard.setValue(true, forKey: "2.7.0")
             }
         }
         .sheet(isPresented: $showSplash, content: {

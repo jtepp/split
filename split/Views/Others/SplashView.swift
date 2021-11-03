@@ -22,7 +22,7 @@ struct SplashView: View {
                     VStack {
                         Spacer()
                         HStack {
-                            Text("v2.6.1")
+                            Text("v2.7.1")
                                 .foregroundColor(.white)
                                 .font(Font.subheadline.bold())
                                 //                            .padding()
@@ -40,6 +40,7 @@ struct SplashView: View {
                             SplashDetailsView(title: "Invite your friends", text: "Use the link button on the members page to copy an invitation to your group", image: "person.3.fill", color: .blue)
                             SplashDetailsView(title: "Post payments or requests", text: "Post payments to one person or requests from multiple people", image: "dollarsign.square", color: .green)
                             SplashDetailsView(title: "Track who owes who", text: "Check a member's page to see who they owe and who owes them", image: "note.text", color: .yellow)
+                            SplashDetailsView(title: "Dynamic Widgets", text: "See your members' balances or recent payments right on your homescreen", image: "rectangle.grid.2x2.fill", color: .purple)
                         } else {
                             HStack {
                                 Text("Show main features")
@@ -65,8 +66,9 @@ struct SplashView: View {
                     showCore.toggle()
                 }
                 
-                SplashDetailsView(title: "Bulk split", text: "Tap the new Bulk split button to make multiple payments or requests", image: "person.3.fill", color: .green)
-                SplashDetailsView(title: "Receipt mode", text: "Tap the Receipt mode button to easily add up your numbers, and scan with your camera", image: "camera.viewfinder", color: .blue)
+                SplashDetailsView(title: "Bulk receipts", text: "Now you can use receipt mode to sum individual receipts for multiple people", image: "list.bullet", color: .green)
+                SplashDetailsView(title: "Include tax", text: "Easily add tax with custom rates in payments or requests", image: "percent", color: .red)
+                SplashDetailsView(title: "Search filter", text: "Use the new search filter option to filter activity by keywords", image: "magnifyingglass", color: .blue)
 
                 
             }
@@ -110,7 +112,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "2.6.0")
+            UserDefaults.standard.setValue(true, forKey: "2.7.0")
         }
         .sheet(isPresented: $isShowingMailView) {
             MailView(result: self.$result)

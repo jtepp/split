@@ -82,6 +82,7 @@ struct PaymentView: View {
             }
             if amountObj.showOverlay {
                 AmountOverlay(amountObj: amountObj, amountText: $amountText)
+                    .shadow(radius: 4)
             }
         }
         
