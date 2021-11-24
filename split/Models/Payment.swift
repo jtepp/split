@@ -27,7 +27,7 @@ struct Payment: Identifiable, Codable {
     static let placeholderr = Payment(id: "3463", to: "Jacob T", reqfrom: ["Praw", "Schaffer", "Ethan"], amount: 5.6, time: 1620044000, memo: "mem", isRequest: true)
     static let placeholderx = Payment(id: "63", to: "Jacob T", reqfrom: ["Name", "2"], amount: 57.6, time: 1620084000, memo: "m7em", isRequest: true)
     func toString() -> String {
-        return "\(id ?? "") \(to) \(from) \(reqfrom.description) \(amount) \(time) \(memo)"
+        return "\(id ?? "") \(to) \(from) \(reqfrom.description) \(amount) \(time) \(memo)".lowercased()
         
     }
 }

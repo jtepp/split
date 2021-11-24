@@ -66,12 +66,21 @@ struct ActivityView: View {
                 }
             }
                 if showSearch {
-                    TextField("Search", text: $searchText)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .foregroundColor(.primary)
-                        .padding(.horizontal)
-                        .padding(.top, 10)
+                    HStack {
+                        TextField("Search", text: $searchText)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .foregroundColor(.primary)
+                            .padding(.leading)
+                            .padding(.top, 10)
                         .opacity(colorScheme == .light ? 0.5 : 1)
+                        Button("Cancel") {
+                            searchText = ""
+                            showSearch = false;
+                        }
+                        .foregroundColor(.blue)
+                        .padding(.trailing)
+                        .padding(.top, 5)
+                    }
                 }
             if house.payments.isEmpty || !house.payments.contains { pp in
                 return !pp.isAn
@@ -106,7 +115,7 @@ struct ActivityView: View {
             .filter({p in
                 return incGM ? true : !p.isGM
             }).filter({ p in
-                return searchText == "" ? true : p.toString().lowercased().contains(searchText.lowercased())
+                return searchText == "" ? true : p.toString().range(of: searchText, options: .caseInsensitive) != nil
             }).isEmpty {
                 VStack {
                     Spacer()
