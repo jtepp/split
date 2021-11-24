@@ -78,7 +78,7 @@ struct RequestPaymentView: View {
                     .foregroundColor(.white)
                 }
                 if includeSelf && !validateFloatString(str: $amountText) && !choice.isEmpty {
-                    Text("Total request amount subtracting your share: \(Float(amountText)! * Float(choice.count) / Float(choice.count + 1), specifier: "%.2f")")
+                    Text("Amount to be requested: \(Float(amountText)! * Float(choice.count) / Float(choice.count + 1), specifier: "%.2f")")
                         .foregroundColor(.white)
                 }
             }

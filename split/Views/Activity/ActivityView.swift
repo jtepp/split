@@ -79,7 +79,7 @@ struct ActivityView: View {
                         }
                         .foregroundColor(.blue)
                         .padding(.trailing)
-                        .padding(.top, 5)
+                        .padding(.top, 8)
                     }
                 }
             if house.payments.isEmpty || !house.payments.contains { pp in
