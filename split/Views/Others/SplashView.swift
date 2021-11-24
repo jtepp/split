@@ -22,7 +22,7 @@ struct SplashView: View {
                     VStack {
                         Spacer()
                         HStack {
-                            Text("v2.7.1")
+                            Text("v2.7.2")
                                 .foregroundColor(.white)
                                 .font(Font.subheadline.bold())
                                 //                            .padding()

@@ -14,11 +14,11 @@ struct AmountCell: View {
         HStack {
             Button {
                 if amountObj.receiptToShow == "" {
-                    amountObj.values.insert(v, at: amountObj.values.firstIndex(where: { i in
+                    amountObj.values.insert(IdentifiableFloat(value: v.value), at: amountObj.values.firstIndex(where: { i in
                         i.id == v.id
                     })!)
                 } else {
-                    amountObj.bulkReceipts[amountObj.receiptToShow]!.insert(v, at: amountObj.bulkReceipts[amountObj.receiptToShow]!.firstIndex(where: { i in
+                    amountObj.bulkReceipts[amountObj.receiptToShow]!.insert(IdentifiableFloat(value: v.value), at: amountObj.bulkReceipts[amountObj.receiptToShow]!.firstIndex(where: { i in
                         i.id == v.id
                     })!)
                 }
