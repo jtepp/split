@@ -76,7 +76,7 @@ struct ActivityRequestCell_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            ActivityRequestCell(payment: .constant(.placeholder))
+            ActivityRequestCell(payment: .constant(.placeholderr))
         }
         
     }

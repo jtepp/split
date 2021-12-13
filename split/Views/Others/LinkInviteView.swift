@@ -192,7 +192,7 @@ struct LinkInviteView: View {
         .onAppear{
             tapped = false
             print("LINKPEAR\(m.name)\n\n")
-            Fetch().returnMembers(hId: newGroup, nm: $newMembers, msg: $msg, showAlert: $showAlert)
+            Fetch().returnMembers(hId: newGroup, nm: $newMembers)
         }
         .onChange(of: newName, perform: { _ in
             if newName == "err" {

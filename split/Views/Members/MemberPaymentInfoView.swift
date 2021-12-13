@@ -105,7 +105,7 @@ struct MemberPaymentInfoView: View {
         )
         .padding()
         .onAppear {
-            Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers, msg: .constant(""), showAlert: .constant(false))
+            Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers)
         }
     }
 }

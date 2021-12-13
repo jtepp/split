@@ -44,7 +44,7 @@ struct MembersView: View {
                         withAnimation {
                         showSettle = true
                         }
-                        Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers, msg: .constant(""), showAlert: .constant(false))
+                        Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers)
                         
                     } label: {
                         Image(systemName: "arrowshape.bounce.right")

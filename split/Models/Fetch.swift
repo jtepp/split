@@ -861,7 +861,7 @@ class Fetch: ObservableObject {
         }
     }
     
-    func returnMembers(hId: String, nm: Binding<[Member]>, msg: Binding<String>, showAlert: Binding<Bool>) {
+    func returnMembers(hId: String, nm: Binding<[Member]>) {
         db.collection("houses/\(hId)/members").getDocuments { querySnapshot, err in
             guard let docs = querySnapshot?.documents else {
                 print(err.debugDescription)
