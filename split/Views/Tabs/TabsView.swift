@@ -44,6 +44,7 @@ struct TabsView: View {
                                 )
                                 .onTapGesture {
                                     FMBopen = false
+                                    print("\n\nTAPTPATPTPTAPTPTAP\n\n")
                                 }
                         }
                         VStack {

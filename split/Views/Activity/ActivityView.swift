@@ -72,6 +72,9 @@ struct ActivityView: View {
                             .foregroundColor(.primary)
                             .padding(.leading)
                             .padding(.top, 10)
+                            .onChange(of: searchText, perform: { _ in
+                                searchText = searchText.lowercased()
+                            })
                         .opacity(colorScheme == .light ? 0.5 : 1)
                         Button("Cancel") {
                             searchText = ""
@@ -115,7 +118,7 @@ struct ActivityView: View {
             .filter({p in
                 return incGM ? true : !p.isGM
             }).filter({ p in
-                return searchText == "" ? true : p.toString().range(of: searchText, options: .caseInsensitive) != nil
+                return searchText == "" ? true : p.toString().range(of: searchText.lowercased(), options: .caseInsensitive) != nil
             }).isEmpty {
                 VStack {
                     Spacer()
