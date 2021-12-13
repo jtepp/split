@@ -11,6 +11,15 @@ struct MemberCell: View {
     @Binding var m: Member
     var body: some View {
         HStack {
+            if m.id == "everyone" {
+                Image(systemName: "person.3")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40, height: 40)
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .shadow(radius: 4)
+                    .foregroundColor(.primary)
+            } else {
             b64toimg(b64: m.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -24,6 +33,7 @@ struct MemberCell: View {
                         .rotationEffect(.degrees(-30))
                         .foregroundColor(Color.white.opacity(m.admin ? 1 : 0))
                 )
+            }
             Spacer()
             VStack(alignment: .trailing) {
                 Text(m.name)

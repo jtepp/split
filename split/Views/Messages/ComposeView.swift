@@ -59,33 +59,15 @@ struct ComposeView: View {
                 .foregroundColor(canTap ? .blue : .gray)
                 .disabled(!canTap)
                 .onChange(of: msg, perform: { v in
-//                    let cp = msg.components(separatedBy: " ")
-                    
-//                    if cp.last == "" && msg != "" {
-//                        if cp.count > 1 {
-//
-//                            if cp[cp.count - 2].contains("@") && members.contains(where: { m in
-//                                return m.name.lowercased().contains(cp[cp.count - 2].replacingOccurrences(of: "@", with: "").lowercased())
-//                            }) {
-//                                var fixedcp = cp
-//                                fixedcp.removeLast()
-//                                var ls = fixedcp.last
-//                                fixedcp.removeLast()
-//                                ls = members.filter( { m in
-//                                    return m.name.lowercased().contains(cp[cp.count - 2].replacingOccurrences(of: "@", with: "").lowercased())
-//                                })[0].name
-//
-//                                msg = fixedcp.joined(separator: " ") + " @" + ls! + " "
-//
-//
-//                            }
-//                        }
-//                    }
-                    
-                    if ((msg.components(separatedBy: " ").last ?? "").contains("@") && members.contains(where: { mem in
-                        return mem.id != UserDefaults.standard.string(forKey: "myId") && mem.name.lowercased().contains((msg.components(separatedBy: " ").last ?? "").replacingOccurrences(of: "@", with: "").lowercased())
-                    })) {
-                        tagmsg = msg.components(separatedBy: " ").last!
+
+                    if ((msg.components(separatedBy: " ").last ?? "").contains("@")) {
+                        if members.contains(where: { mem in
+                            return mem.id != UserDefaults.standard.string(forKey: "myId") && mem.name.lowercased().contains((msg.components(separatedBy: " ").last ?? "").replacingOccurrences(of: "@", with: "").lowercased())
+                        }) {
+                            tagmsg = msg.components(separatedBy: " ").last!
+                        } else {
+                            tagmsg = ""
+                        }
                         showTagged = true
                     } else {
                         tagmsg = ""
@@ -139,6 +121,14 @@ struct TaggedView: View {
                     MemberCell(m: .constant(m))
                 }
             }
+                Button {
+                    var words = msg.components(separatedBy: " ")
+                    words.remove(at: words.count - 1)
+                    msg = words.joined(separator: " ") + " @" + "everyone" + " "
+                }
+                label: {
+                    MemberCell(m: .constant(.everyone))
+                }
         }
         .frame(minWidth: 200)
         .padding()

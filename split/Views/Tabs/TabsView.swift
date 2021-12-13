@@ -153,8 +153,8 @@ struct TabsView: View {
                     engaged = false
                 }
                 FMBopen = false
-                Fetch().updateStatus(status: true)
-                WidgetCenter.shared.reloadAllTimelines()
+//                Fetch().updateStatus(status: true)
+//                WidgetCenter.shared.reloadAllTimelines()
             }
         
     }
