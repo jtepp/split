@@ -211,6 +211,9 @@ struct ActivityView: View {
                                     )
                                 }
                             })
+                            .onDrag {
+                                NSItemProvider(object: ActivityRequestCell(payment: .constant(payment)).snapshot())
+                            }
                     } else {
                         
                         
