@@ -43,9 +43,9 @@ struct ActivityWidgetView: View {
             
             
             )) { payment in
-                if payment.isAn {
+                if payment.type == .announcement {
                     ActivityWidgetAnnouncementCell(payment: .constant(payment))
-                } else if payment.isRequest {
+                } else if payment.type == .request {
                     ActivityWidgetRequestCell(payment: .constant(payment))
                 } else {
                     ActivityWidgetPaymentCell(payment: .constant(payment))

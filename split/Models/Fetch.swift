@@ -231,12 +231,10 @@ class Fetch: ObservableObject {
                 let reqfrom = data["reqfrom"] as? [String] ?? [""]
                 let amount = data["amount"] as? NSNumber ?? 0
                 let memo = data["memo"] as? String ?? ""
-                let isRequest = data["isRequest"] as? Bool ?? false
-                let isAn = data["isAn"] as? Bool ?? false
-                let isGM = data["isGM"] as? Bool ?? false
+                let type = data["type"] as? String ?? "unknown"
                 let by = data["by"] as? String ?? ""
                 
-                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, isAn: isAn, isGM: isGM, by: by)
+                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, type: stringToPT(type), by: by)
             })
             for member in h.wrappedValue.members {
                 self.updateBalances(h: h.wrappedValue, m: member)
@@ -261,7 +259,7 @@ class Fetch: ObservableObject {
             }
 //            print("STARTED3")
             var fcms = [String]()
-            if p.isAn {
+            if p.type == .announcement {
                 docs.forEach { qds in
                     let d = qds.data()
                     let f = d["fcm"] as? String ?? ""
@@ -270,7 +268,7 @@ class Fetch: ObservableObject {
                     }
                 }
                 
-            } else if p.isGM {
+            } else if p.type == .groupmessage {
                 docs.forEach { qds in
                     let d = qds.data()
                     let f = d["fcm"] as? String ?? ""
@@ -282,7 +280,7 @@ class Fetch: ObservableObject {
                     }
                 }
                 
-            }else if p.isRequest {
+            }else if p.type == .request {
                 docs.forEach { qds in
                     let d = qds.data()
                     let f = d["fcm"] as? String ?? ""
@@ -292,7 +290,7 @@ class Fetch: ObservableObject {
                     }
                 }
                 
-            } else {
+            } else if p.type == .payment {
                 docs.forEach { qds in
                     let d = qds.data()
                     let f = d["fcm"] as? String ?? ""
@@ -308,7 +306,7 @@ class Fetch: ObservableObject {
 //            print("STARTED4")
             
             self.db.collection("houses/\(h.id)/payments").addDocument(data:
-                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "isRequest":p.isRequest, "isGM": p.isGM, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "isAn":p.isAn, "fcm":fcms]
+                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "type":ptToString(p.type), "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "fcm":fcms]
             ){ _ in
             //            .documentID
 //                print("STARTED 5")
@@ -336,10 +334,10 @@ class Fetch: ObservableObject {
             
             for payment in h.payments
                 .filter({ (p) -> Bool in //iterate thru all payments
-                    return !p.isAn && !p.isGM //exclude announcments and group messages
+                    return p.type != .announcement && p.type != .groupmessage //exclude announcments and group messages
                 })
             {
-                if payment.isRequest {
+                if payment.type == .request {
                     //                    print("WASREQ\(payment)")
                     if payment.to == m.name {
                         for member in payment.reqfrom {
@@ -358,7 +356,7 @@ class Fetch: ObservableObject {
                             iOwe[payment.to]! += payment.amount / Float(payment.reqfrom.count)
                         }
                     }
-                } else { //its a payment
+                } else if payment.type == .payment { //its a payment
                     //                    print("WASPAY\(payment)")
                     if payment.to == m.name {
                         //paid to me
@@ -430,7 +428,7 @@ class Fetch: ObservableObject {
                         }
                     }
                     docRef.delete()
-                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the group", isAn: true), h: h.wrappedValue)
+                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was removed from the group", type: .announcement), h: h.wrappedValue)
                 })
             }
             
@@ -445,7 +443,7 @@ class Fetch: ObservableObject {
                 let id = doc.documentID
                 self.db.document("houses/\(h.id)/members/\(id)").updateData(["admin": id == m.id ? true : false])
                 if m.id == id {
-                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was made the Group Admin", isAn: true), h: h)
+                    self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was made the Group Admin", type: .announcement), h: h)
                     completion()
                 }
             }
@@ -626,7 +624,7 @@ class Fetch: ObservableObject {
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(doc.documentID, forKey: "houseId")
                                         inWR.wrappedValue = false
                                         self.db.document("waitingRoom/\(mm.id)").delete()
-                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", type: .announcement), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                         self.getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
                                         showInvite.wrappedValue = false
                                     }
@@ -724,7 +722,7 @@ class Fetch: ObservableObject {
                                         UserDefaults.standard.set(house, forKey: "houseId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(house, forKey: "houseId")
                                         inWR.wrappedValue = false
-                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the group", isAn: true), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
+                                        self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "\(forceAdmin ? "created" : "joined") the group", type: .announcement), h: House(id: h.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                     }
                                     //
                                     
@@ -764,7 +762,7 @@ class Fetch: ObservableObject {
         h.wrappedValue.members = [m.wrappedValue]
         db.document("houses/\(newGroup)/members/\(m.wrappedValue.id)").setData(m.wrappedValue.dictimg(), merge: true){ _ in
             h.wrappedValue.id = newGroup
-            self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", isAn: true), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
+            self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", type: .announcement), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
             showInvite.wrappedValue = false
             self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false), showInvite: showInvite)
             self.maid(m: m, h: h)
@@ -816,7 +814,7 @@ class Fetch: ObservableObject {
                 if erase {
                     self.db.document("houses/\(m.wrappedValue.home)").delete()
                 } else {
-                    self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", isAn: true), h: House(id: m.wrappedValue.home, name: "", members: [Member](), payments: [Payment](), password: ""))
+                    self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", type: .announcement), h: House(id: m.wrappedValue.home, name: "", members: [Member](), payments: [Payment](), password: ""))
                 }
                 if !transfer {
                     m.wrappedValue = .empty
@@ -944,7 +942,7 @@ class Fetch: ObservableObject {
                                     //send payment
                                     var hhh = House.empty
                                     hhh.id = houseq.documentID
-                                    self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", isAn: true), h: hhh)
+                                    self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", type: .announcement), h: hhh)
                                 }
                                 self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
                             }
@@ -1077,12 +1075,10 @@ class Fetch: ObservableObject {
                     let reqfrom = data["reqfrom"] as? [String] ?? [""]
                     let amount = data["amount"] as? NSNumber ?? 0
                     let memo = data["memo"] as? String ?? ""
-                    let isRequest = data["isRequest"] as? Bool ?? false
-                    let isAn = data["isAn"] as? Bool ?? false
-                    let isGM = data["isGM"] as? Bool ?? false
+                    let type = data["type"] as? String ?? ""
                     let by = data["by"] as? String ?? ""
                     
-                    return Payment(id: queryDocumentSnapshot.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, isRequest: isRequest, isAn: isAn, isGM: isGM, by: by)
+                    return Payment(id: queryDocumentSnapshot.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, type:stringToPT(type), by: by)
                 }))
             }
         } else {
@@ -1129,6 +1125,38 @@ class Fetch: ObservableObject {
             bm.wrappedValue = Member(id: id, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0)
         }
     }
+        
+//    func updatePayments3() {
+//        db.collectionGroup("payments")
+//            .getDocuments { qs, err in
+//                guard let docs = qs?.documents else {return}
+//                docs.forEach({ qds in
+//                    let data = qds.data()
+//                    
+//                    let an = data["isAn"] as? Bool ?? false
+//                    let gm = data["isGM"] as? Bool ?? false
+//                    let rq = data["isRequest"] as? Bool ?? false
+//                    
+//                    let id = qds.reference
+//                    
+//                    var t: paymentType = .unknown
+//                    if an {
+//                        t = .announcement
+//                    }
+//                    if gm {
+//                        t = .groupmessage
+//                    }
+//                    if rq {
+//                        t = .request
+//                    }
+//                    if !an && !gm && !rq {
+//                        t = .payment
+//                    }
+//                    id.updateData(["type" : ptToString(t)])
+//                    
+//                })
+//            }
+//    }
     
 }
 
@@ -1173,7 +1201,7 @@ func settlePayments(_ mems: [Member]) -> [Payment] {
             let to = members[j]
             if (from.balance > 0 && to.balance < 0) {
                 let amount = min(from.balance, -to.balance)
-                ps.append(Payment(id: UUID().uuidString, to: from.name, from: to.name, amount: amount, time: Int(NSDate().timeIntervalSince1970), memo: "Generated by Quick settle", isRequest: false, isAn: false, isGM: false, by: UserDefaults.standard.string(forKey: "myId") ?? "Quick settle"))
+                ps.append(Payment(id: UUID().uuidString, to: from.name, from: to.name, amount: amount, time: Int(NSDate().timeIntervalSince1970), memo: "Generated by Quick settle", type: .payment, by: UserDefaults.standard.string(forKey: "myId") ?? "Quick settle"))
                 members[i].balance -= amount
                 members[j].balance += amount
             }

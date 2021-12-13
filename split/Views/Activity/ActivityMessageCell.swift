@@ -207,7 +207,7 @@ func nextMessageIsSameSender(_ payments: [Payment], id: String, from: String) ->
     
     if (payments.count - 1) > i {
         let pn = payments[i+1]
-        if pn.isGM {
+        if pn.type == .groupmessage {
             if pn.from == from {
                 return true
             } else {

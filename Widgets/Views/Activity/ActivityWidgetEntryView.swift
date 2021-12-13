@@ -13,7 +13,7 @@ struct ActivityWidgetEntryView: View {
     @Environment(\.widgetFamily) var family
     var body: some View {
         ActivityWidgetView(payments: entry.payments.filter({ p in
-            return !p.isGM
+            return p.type != .groupmessage
         }), limit: family == .systemMedium ? 2 : 5)
             .background(Color.black.edgesIgnoringSafeArea(.all))
     }

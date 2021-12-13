@@ -36,4 +36,26 @@ enum paymentType: Codable {
     case request
     case announcement
     case groupmessage
+    case unknown
+}
+
+
+func stringToPT(_ s:String)-> paymentType {
+    switch (s) {
+    case "payment": return .payment
+    case "request": return .request
+    case "groupmessage": return .groupmessage
+    case "announcement": return .announcement
+    default: return .unknown
+    }
+}
+
+func ptToString(_ p:paymentType)-> String {
+    switch(p) {
+    case .payment: return "payment"
+    case .request: return "request"
+    case .announcement: return "announcement"
+    case .groupmessage: return "groupmessage"
+    case .unknown: return "unknown"
+    }
 }

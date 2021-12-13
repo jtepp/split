@@ -39,6 +39,7 @@ struct ActivityView: View {
             .overlay(
                 Button(action: {
                     showSplash = true
+//                    Fetch().updatePayments3()
                 }, label:{
                     Image(systemName: "questionmark")
                         .font(Font.body.bold())
@@ -86,7 +87,7 @@ struct ActivityView: View {
                     }
                 }
             if house.payments.isEmpty || !house.payments.contains { pp in
-                return !pp.isAn
+                return pp.type != .announcement
             } {
                 VStack {
                     Spacer()
@@ -107,16 +108,16 @@ struct ActivityView: View {
                     
                 }
             } else if house.payments.filter({p in
-                return incPay ? true :(p.isAn || p.isRequest || p.isGM)
+                return incPay ? true : p.type != .payment
             })
             .filter({p in
-                return incReq ? true : !p.isRequest
+                return incReq ? true : p.type != .request
             })
             .filter({p in
-                return incAn ? true : !p.isAn
+                return incAn ? true : p.type != .announcement
             })
             .filter({p in
-                return incGM ? true : !p.isGM
+                return incGM ? true : p.type != .groupmessage
             }).filter({ p in
                 return searchText == "" ? true : p.toString().range(of: searchText.lowercased(), options: .caseInsensitive) != nil
             }).isEmpty {
@@ -142,16 +143,16 @@ struct ActivityView: View {
             ForEach(house.payments.sorted(by: { a, b in
                 return a.time > b.time
             }).filter({p in
-                return incPay ? true :(p.isAn || p.isRequest || p.isGM)
+                return incPay ? true : p.type != .payment
             })
             .filter({p in
-                return incReq ? true : !p.isRequest
+                return incReq ? true : p.type != .request
             })
             .filter({p in
-                return incAn ? true : !p.isAn
+                return incAn ? true : p.type != .announcement
             })
             .filter({p in
-                return incGM ? true : !p.isGM
+                return incGM ? true : p.type != .groupmessage
             }).filter({ p in
                 return searchText == "" ? true : p.toString().contains(searchText)
             })
@@ -159,7 +160,7 @@ struct ActivityView: View {
                 if house.members.contains(where: { (m) -> Bool in
                     return m.id == UserDefaults.standard.string(forKey: "myId")
                 }){
-                    if payment.isAn {
+                    if payment.type == .announcement {
                             ActivityAnnouncementCell(payment: .constant(payment))
                                 .contextMenu(menuItems: {
                                     if m.admin {
@@ -175,12 +176,12 @@ struct ActivityView: View {
                                     )
                                     }
                                 })
-                    } else if payment.isGM {
+                    } else if payment.type == .groupmessage {
                         ActivityMessageCell(allPayments: .constant(house.payments.sorted(by: { a, b in
                             return a.time > b.time
                         })), payment: .constant(payment), member: $m, GMmsg: $GMmsg, showMessagePopover: $showMessagePopover)
                             
-                    } else if payment.isRequest {
+                    } else if payment.type == .request {
                         
                         ActivityRequestCell(payment: .constant(payment))
                             .contextMenu(menuItems: {
@@ -190,7 +191,7 @@ struct ActivityView: View {
                                     Button(action: {
                                         Fetch().sendPayment(p: Payment(to: payment.to, from: house.members.first(where: { (m) -> Bool in
                                             return m.id == UserDefaults.standard.string(forKey: "myId")
-                                        })!.name, amount: payment.amount / Float(payment.reqfrom.count), time: Int(NSDate().timeIntervalSince1970), isRequest: false, isAn: false, by: UserDefaults.standard.string(forKey: "myId")!), h: house)
+                                        })!.name, amount: payment.amount / Float(payment.reqfrom.count), time: Int(NSDate().timeIntervalSince1970), type: .payment, by: UserDefaults.standard.string(forKey: "myId")!), h: house)
                                         print("quickpay")
                                     }, label: {
                                         Text("Pay")
@@ -214,7 +215,7 @@ struct ActivityView: View {
                                     )
                                 }
                             })
-                    } else {
+                    } else if payment.type == .payment {
                         
                         
                             
