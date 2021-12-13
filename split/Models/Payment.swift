@@ -16,18 +16,24 @@ struct Payment: Identifiable, Codable {
     var amount: Float = 0
     let time: Int
     var memo: String = ""
-    var isRequest: Bool = false
-    var isAn: Bool = false
-    var isGM: Bool = false//group message
+    var includedSelf: Bool = false
+    var type: paymentType
     var by: String = ""
-    static let empty = Payment(id: "", to: "", from: "", amount: 0, time: 0)
-    static let placeholder = Payment(id: "34f43", to: "Jacob T", from: "Praw", amount: 5.6, time: 1622044000, memo: "mem")
-    static let placeholdera = Payment(id: "343", to: "Jacob T", from: "Praw", amount: 5.6, time: 1621044000, memo: "mem", isAn: true)
-    static let placeholderm = Payment(id: "34443", to: "", from: "Praw", time: 1621044000, memo: "mem", isGM: true)
-    static let placeholderr = Payment(id: "3463", to: "Jacob T", reqfrom: ["Praw", "Schaffer", "Ethan"], amount: 5.6, time: 1620044000, memo: "mem", isRequest: true)
-    static let placeholderx = Payment(id: "63", to: "Jacob T", reqfrom: ["Name", "2"], amount: 57.6, time: 1620084000, memo: "m7em", isRequest: true)
+    static let empty = Payment(id: "", to: "", from: "", amount: 0, time: 0, type: .payment)
+    static let placeholder = Payment(id: "34f43", to: "Jacob T", from: "Praw", amount: 5.6, time: 1622044000, memo: "mem", type: .payment)
+    static let placeholdera = Payment(id: "343", to: "Jacob T", from: "Praw", amount: 5.6, time: 1621044000, memo: "mem", type: .announcement)
+    static let placeholderm = Payment(id: "34443", to: "", from: "Praw", time: 1621044000, memo: "mem", type: .groupmessage)
+    static let placeholderr = Payment(id: "3463", to: "Jacob T", reqfrom: ["Praw", "Schaffer", "Ethan"], amount: 5.6, time: 1620044000, memo: "mem", type: .request)
+    static let placeholderx = Payment(id: "63", to: "Jacob T", reqfrom: ["Name", "2"], amount: 57.6, time: 1620084000, memo: "m7em", type: .request)
     func toString() -> String {
         return "\(id ?? "") \(to) \(from) \(reqfrom.description) \(amount) \(time) \(memo)".lowercased()
         
     }
+}
+
+enum paymentType: Codable {
+    case payment
+    case request
+    case announcement
+    case groupmessage
 }
