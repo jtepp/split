@@ -13,6 +13,7 @@ struct GeneralRequestCell: View {
     @Binding var m: Member
     @State var showEach = false
     var hId: String
+    var mems: [Member]
     var body: some View {
         HStack {
             HStack {
@@ -40,7 +41,7 @@ struct GeneralRequestCell: View {
 //                                .minimumScaleFactor(0.1)
 //                        }
 //                    }
-                    ReqFromView(reqfrom: payment.reqfrom, id: hId)
+                    ReqFromView(reqfrom: payment.reqfrom, id: hId, mems: mems)
                         .padding(4)
                         .background(
                             RoundedRectangle(cornerRadius: 4)

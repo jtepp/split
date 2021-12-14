@@ -10,15 +10,12 @@ import SwiftUI
 struct ReqFromView: View {
     var reqfrom: [String]
     var id: String
-    @State var mems = [Member]()
+    var mems: [Member]
     var body: some View {
         ForEach(reqfrom, id: \.self) { n in
             RFMemberView(name: n, member: mems.first(where: { m in
                 m.name == n
             }) ?? .empty)
-        }
-        .onAppear {
-            Fetch().returnMembers(hId: id, nm: $mems, filter: reqfrom)
         }
     }
 }
@@ -27,7 +24,7 @@ struct ReqFromView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            ActivityRequestCell(payment: .constant(.placeholderr), hId: "placeholder")
+            ActivityRequestCell(payment: .constant(.placeholderr), hId: "placeholder", mems: [Member]())
         }
     }
 }
