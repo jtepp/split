@@ -12,6 +12,7 @@ struct GeneralRequestCell: View {
     var minimal: Bool = false
     @Binding var m: Member
     @State var showEach = false
+    var hId: String
     var body: some View {
         HStack {
             HStack {
@@ -31,14 +32,20 @@ struct GeneralRequestCell: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.1)
                 } else {
-                    VStack(alignment: .leading) {
-                        ForEach(payment.reqfrom, id: \.self) { member in
-                            Text(member)
-                                .font(.headline)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.1)
-                        }
-                    }
+//                    VStack(alignment: .leading) {
+//                        ForEach(payment.reqfrom, id: \.self) { member in
+//                            Text(member)
+//                                .font(.headline)
+//                                .lineLimit(1)
+//                                .minimumScaleFactor(0.1)
+//                        }
+//                    }
+                    ReqFromView(reqfrom: payment.reqfrom, id: hId)
+                        .padding(4)
+                        .background(
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(Color.black.opacity(0.3))
+                        )
                 }
             }
             Spacer()

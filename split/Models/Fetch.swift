@@ -861,7 +861,7 @@ class Fetch: ObservableObject {
         }
     }
     
-    func returnMembers(hId: String, nm: Binding<[Member]>) {
+    func returnMembers(hId: String, nm: Binding<[Member]>, filter: [String] = [String]()) {
         db.collection("houses/\(hId)/members").getDocuments { querySnapshot, err in
             guard let docs = querySnapshot?.documents else {
                 print(err.debugDescription)
@@ -880,7 +880,9 @@ class Fetch: ObservableObject {
                 //                let online = data["online"] as? Bool ?? false
                 //                let lastSeen = data["lastSeen"] as? NSNumber ?? 0
                 return Member(id: q.documentID, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false)
-            })
+            }).filter { mem in
+                return filter.contains(mem.name) || filter.count == 0
+            }
         }
     }
     

@@ -183,7 +183,7 @@ struct ActivityView: View {
                             
                     } else if payment.type == .request {
                         
-                        ActivityRequestCell(payment: .constant(payment))
+                        ActivityRequestCell(payment: .constant(payment), hId: house.id)
                             .contextMenu(menuItems: {
                                 if payment.reqfrom.contains(house.members.first(where: { (mm) -> Bool in
                                     return mm.id == m.id

@@ -11,9 +11,10 @@ struct ActivityRequestCell: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var payment: Payment
     @State var showMemo = false
+    var hId: String
     var body: some View {
         VStack {
-            GeneralRequestCell(payment: $payment, m: .constant(.empty))
+            GeneralRequestCell(payment: $payment, m: .constant(.empty), hId: hId)
             ScrollView {
                 HStack {
                     Text("Request")
@@ -76,7 +77,7 @@ struct ActivityRequestCell_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            ActivityRequestCell(payment: .constant(.placeholderr))
+            ActivityRequestCell(payment: .constant(.placeholderr), hId: "placeholder")
         }
         
     }

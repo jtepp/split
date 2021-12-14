@@ -112,6 +112,7 @@
 		0CAB4EF5271280A300B2E049 /* AmountField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB4EF4271280A300B2E049 /* AmountField.swift */; };
 		0CAB4EF72712880E00B2E049 /* AmountOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB4EF62712880E00B2E049 /* AmountOverlay.swift */; };
 		0CAB4EF9271294E500B2E049 /* AmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB4EF8271294E500B2E049 /* AmountCell.swift */; };
+		0CB2AC71276802380073AB82 /* ReqFromView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB2AC70276802380073AB82 /* ReqFromView.swift */; };
 		0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F3265D8F140016CA92 /* ActivityView.swift */; };
 		0CBF09F7265D8F370016CA92 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F6265D8F370016CA92 /* MembersView.swift */; };
 		0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F9265D8F510016CA92 /* ProfileView.swift */; };
@@ -310,6 +311,7 @@
 		0CAB4EF4271280A300B2E049 /* AmountField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountField.swift; sourceTree = "<group>"; };
 		0CAB4EF62712880E00B2E049 /* AmountOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountOverlay.swift; sourceTree = "<group>"; };
 		0CAB4EF8271294E500B2E049 /* AmountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountCell.swift; sourceTree = "<group>"; };
+		0CB2AC70276802380073AB82 /* ReqFromView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReqFromView.swift; sourceTree = "<group>"; };
 		0CBF09F3265D8F140016CA92 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		0CBF09F6265D8F370016CA92 /* MembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersView.swift; sourceTree = "<group>"; };
 		0CBF09F9265D8F510016CA92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -711,6 +713,7 @@
 				0C7737DE27152D1C00B1DA05 /* BulkCell.swift */,
 				0CAB4EF8271294E500B2E049 /* AmountCell.swift */,
 				0C97E85627154D860051584F /* ScanDocumentView.swift */,
+				0CB2AC70276802380073AB82 /* ReqFromView.swift */,
 				0CAB4EF4271280A300B2E049 /* AmountField.swift */,
 				0C3061D626FFE7E200C228A8 /* QuickSettleView.swift */,
 			);
@@ -1029,6 +1032,7 @@
 				0C64FECD265EC57F009B0C3C /* GeneralPaymentCell.swift in Sources */,
 				0CD16879269BA8BE00CFD7C2 /* ActivityMessageCell.swift in Sources */,
 				0CEE382E265E1CE00013BB12 /* MemberPaymentInfoView.swift in Sources */,
+				0CB2AC71276802380073AB82 /* ReqFromView.swift in Sources */,
 				0C64FED0265ECB87009B0C3C /* TimeBar.swift in Sources */,
 				0CD1687C269BC17F00CFD7C2 /* ComposeView.swift in Sources */,
 				0C210D6F26813075008220B6 /* LinkInviteView.swift in Sources */,
