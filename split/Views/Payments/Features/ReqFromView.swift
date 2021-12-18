@@ -11,11 +11,23 @@ struct ReqFromView: View {
     var reqfrom: [String]
     var id: String
     var mems: [Member]
+    @State var expanded = false
     var body: some View {
-        ForEach(reqfrom, id: \.self) { n in
-            RFMemberView(name: n, member: mems.first(where: { m in
-                m.name == n
-            }) ?? .empty)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(0..<reqfrom.count) { i in
+                    RFMemberView(name: reqfrom[i], member: mems.first(where: { m in
+                        m.name == reqfrom[i]
+                    }) ?? .empty, expanded: reqfrom.count > 2 ? $expanded : .constant(true), index: i)
+                }
+            }
+        }
+        .onTapGesture {
+            withAnimation(.easeOut) {
+                if reqfrom.count > 2 {
+                    expanded.toggle()
+                }
+            }
         }
     }
 }
@@ -24,7 +36,7 @@ struct ReqFromView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            ActivityRequestCell(payment: .constant(.placeholderr), hId: "placeholder", mems: [Member]())
+            ActivityRequestCell(payment: .constant(.placeholderr), hId: "placeholder", mems: [Member(id: "a", home: "", name: "Devon", image: "", admin: true)])
         }
     }
 }
@@ -32,23 +44,30 @@ struct ReqFromView_Previews: PreviewProvider {
 struct RFMemberView: View {
     var name: String
     var member: Member
+    @Binding var expanded: Bool
+    var index: Int
     var body: some View {
         HStack {
             b64toimg(b64: member.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 20, height: 20)
+                .frame(width: 25, height: 25)
+                .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
-                .shadow(radius: 6)
-                .overlay(
-                    Image(systemName: "crown.fill")
-                        .offset(x: -3, y: -15)
-                        .scaleEffect(x:1.8)
-                        .rotationEffect(.degrees(-30))
-                        .foregroundColor(Color.white.opacity(member.admin ? 1 : 0))
-            )
-            Text(name)
-                .foregroundColor(.white)
+                .shadow(color: Color.black.opacity(expanded ? 0 : 0.4), radius: 5, x: -10, y: 0)
+//                .overlay(
+//                    Image(systemName: "crown.fill")
+//                        .offset(x: -3, y: -20)
+//                        .scaleEffect(0.6)
+//                        .rotationEffect(.degrees(-30))
+//                        .foregroundColor(Color.white.opacity(member.admin ? 1 : 0))
+//                )
+                .padding(.trailing, expanded ? 0 : -18)
+                .scaleEffect(expanded ? 1 : (1 + CGFloat(index)*0.03))
+            if expanded {
+                Text(name)
+                    .foregroundColor(.white)
+            }
         }
     }
 }

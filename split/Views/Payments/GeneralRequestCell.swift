@@ -17,6 +17,20 @@ struct GeneralRequestCell: View {
     var body: some View {
         HStack {
             HStack {
+                b64toimg(b64: m.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 25, height: 25)
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .shadow(radius: 6)
+                    .overlay(
+                        Image(systemName: "crown.fill")
+                            .offset(x: -3, y: -20)
+                            .scaleEffect(0.6)
+                            .rotationEffect(.degrees(-30))
+                            .foregroundColor(Color.white.opacity(m.admin ? 1 : 0))
+                )
+                    .padding(.trailing, -5)
                 Text(payment.to)
                     .font(.headline)
                     .lineLimit(1)
