@@ -161,7 +161,10 @@ struct AmountOverlay: View {
         .padding(.bottom, 90)
 //        .matchedGeometryEffect(id: "whole", in: amountObj.namespace, isSource: false)
         .sheet(isPresented: $showScan, content: {
-            ScanDocumentView(recognizedText: $recognizedText)
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
+                ScanDocumentView(recognizedText: $recognizedText)
+            }
         })
     }
 }

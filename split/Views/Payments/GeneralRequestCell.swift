@@ -20,10 +20,7 @@ struct GeneralRequestCell: View {
                 singleMemberPhotoView(member: mems.first(where: { m in
                     m.name == payment.to
                 }) ?? .empty)
-                //                if payment.reqfrom.count > 1 {
-                //                    Image(systemName: "arrow.triangle.merge")
-                //                        .rotationEffect(.degrees(-90))
-                //                } else {
+
                 Image(systemName: "arrow.left")
                 //                }
 

@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct EditPaymentView: View {
+struct ActivityEditView: View {
     @Binding var payment: Payment
     @Binding var showEdit: Bool
+    @Binding var mems: [Member]
     var body: some View {
         ScrollView {
             HStack {
-                HeaderText(text: "Edit  \(ptToString(payment.type))", space: false, clear: .constant(false))
+                HeaderText(text: "Edit  \(ptToString(payment.type).firstCap())", space: false, clear: .constant(false))
                 Spacer()
                 Button {
                     //save and close
                 } label: {
                     Text("Save")
-                        .foregroundColor(.white)
                         .font(.headline)
                         .padding(10)
                         .background(
@@ -28,7 +28,21 @@ struct EditPaymentView: View {
                         )
                 }
             }
+            HStack {
+                Text("By:")
+                    .font(.headline)
+                    .bold()
+                singleMemberPhotoView(member: mems.first(where: { m in
+                    m.id == payment.by
+                }) ?? .empty)
+            }
+            switch (payment.type) {
+            case .payment: Text("PAY")
+            case .request: Text("REQ")
+            default: Text("EMPTY")
+            }
         }
+        .foregroundColor(.white)
     }
 }
 
@@ -36,7 +50,7 @@ struct EditPaymentView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            EditPaymentView(payment: .constant(.placeholder), showEdit: .constant(true))
+            ActivityEditView(payment: .constant(.placeholder), showEdit: .constant(true), mems: .constant([Member]()))
         }
     }
 }

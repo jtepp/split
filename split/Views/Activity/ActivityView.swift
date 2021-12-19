@@ -190,6 +190,7 @@ struct ActivityView: View {
                                     .contextMenu(menuItems: {
                                         if payment.by == m.id || m.admin {
                                             Button {
+                                                paymentEditing = payment
                                                 showEdit = true
                                             } label: {
                                                 Text("Edit")
@@ -259,6 +260,7 @@ struct ActivityView: View {
                                     .contextMenu(menuItems: {
                                         if payment.by == m.id || m.admin {
                                             Button {
+                                                paymentEditing = payment
                                                 showEdit = true
                                             } label: {
                                                 Text("Edit")
@@ -316,7 +318,7 @@ struct ActivityView: View {
             })
             if showEdit {
                 Color.black.edgesIgnoringSafeArea(.all)
-                EditPaymentView(payment: $paymentEditing, showEdit: $showEdit)
+                ActivityEditView(payment: $paymentEditing, showEdit: $showEdit, mems: $house.members)
             }
         }
         

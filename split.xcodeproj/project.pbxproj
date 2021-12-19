@@ -113,7 +113,8 @@
 		0CAB4EF72712880E00B2E049 /* AmountOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB4EF62712880E00B2E049 /* AmountOverlay.swift */; };
 		0CAB4EF9271294E500B2E049 /* AmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB4EF8271294E500B2E049 /* AmountCell.swift */; };
 		0CB2AC71276802380073AB82 /* ReqFromView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB2AC70276802380073AB82 /* ReqFromView.swift */; };
-		0CB7844F276F0E0D00EF6135 /* EditPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB7844E276F0E0D00EF6135 /* EditPaymentView.swift */; };
+		0CB7844F276F0E0D00EF6135 /* ActivityEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB7844E276F0E0D00EF6135 /* ActivityEditView.swift */; };
+		0CB78451276FEB5900EF6135 /* String+firstCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB78450276FEB2C00EF6135 /* String+firstCap.swift */; };
 		0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F3265D8F140016CA92 /* ActivityView.swift */; };
 		0CBF09F7265D8F370016CA92 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F6265D8F370016CA92 /* MembersView.swift */; };
 		0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F9265D8F510016CA92 /* ProfileView.swift */; };
@@ -313,7 +314,8 @@
 		0CAB4EF62712880E00B2E049 /* AmountOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountOverlay.swift; sourceTree = "<group>"; };
 		0CAB4EF8271294E500B2E049 /* AmountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountCell.swift; sourceTree = "<group>"; };
 		0CB2AC70276802380073AB82 /* ReqFromView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReqFromView.swift; sourceTree = "<group>"; };
-		0CB7844E276F0E0D00EF6135 /* EditPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPaymentView.swift; sourceTree = "<group>"; };
+		0CB7844E276F0E0D00EF6135 /* ActivityEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityEditView.swift; sourceTree = "<group>"; };
+		0CB78450276FEB2C00EF6135 /* String+firstCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+firstCap.swift"; sourceTree = "<group>"; };
 		0CBF09F3265D8F140016CA92 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		0CBF09F6265D8F370016CA92 /* MembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersView.swift; sourceTree = "<group>"; };
 		0CBF09F9265D8F510016CA92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				0C15F8902685026E006BF2B0 /* KeyboardReadable.swift */,
 				0C6A744126935DAF00275A9B /* Image+prep.swift */,
 				0C833CEA267275F9000E2F0C /* Date+timeAgo.swift */,
+				0CB78450276FEB2C00EF6135 /* String+firstCap.swift */,
 				0C9D26CE265F263E006A7AF6 /* String+isNumeric.swift */,
 			);
 			path = Extensions;
@@ -527,7 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				0CBF09FC265D8F730016CA92 /* PaymentView.swift */,
-				0CB7844E276F0E0D00EF6135 /* EditPaymentView.swift */,
+				0CB7844E276F0E0D00EF6135 /* ActivityEditView.swift */,
 				0C97E85527154D580051584F /* Features */,
 				0C0CA780265F01F10062FDDD /* RequestPaymentView.swift */,
 				0C0CA77D265F01BE0062FDDD /* PaymentPaymentView.swift */,
@@ -1024,6 +1027,7 @@
 				0CA0E9CA26603A32002876CF /* EditProfileView.swift in Sources */,
 				0C5C0E2D269CA14E00BD092F /* TrayButton.swift in Sources */,
 				0C833CEB267275F9000E2F0C /* Date+timeAgo.swift in Sources */,
+				0CB78451276FEB5900EF6135 /* String+firstCap.swift in Sources */,
 				0C95131E265DB7C0005398CF /* MemberCell.swift in Sources */,
 				0C5C0E30269CB16200BD092F /* TrayItem.swift in Sources */,
 				0CA0E9CD26604315002876CF /* View+allowAutoDismiss.swift in Sources */,
@@ -1031,7 +1035,7 @@
 				0C2A0587265CAA44002BD46D /* splitApp.swift in Sources */,
 				0C7C87F726851F6A0040BFA7 /* AlternateIconButton.swift in Sources */,
 				0CBF0A03265D91B00016CA92 /* TabBar.swift in Sources */,
-				0CB7844F276F0E0D00EF6135 /* EditPaymentView.swift in Sources */,
+				0CB7844F276F0E0D00EF6135 /* ActivityEditView.swift in Sources */,
 				0C951305265DAE6D005398CF /* Member.swift in Sources */,
 				0C64FECD265EC57F009B0C3C /* GeneralPaymentCell.swift in Sources */,
 				0CD16879269BA8BE00CFD7C2 /* ActivityMessageCell.swift in Sources */,
