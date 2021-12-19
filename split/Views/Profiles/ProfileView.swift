@@ -143,10 +143,15 @@ struct ProfileView: View, KeyboardReadable {
                                 if keyboardOpen {
                                     Button(action: {
                                         print(newName)
-                                        Fetch().changeName(m: $m, newName: $newName){
-                                            Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
-                                        }
-                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+//                                        if !house.members.map({ m in
+//                                            return m.name
+//                                        }).contains(newName) {
+                                            Fetch().changeName(m: $m, newName: $newName){
+                                                Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+                                            }
+//                                        }
+                                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                        
                                     }, label: {
                                         Image(systemName: "checkmark")
                                             .foregroundColor(.black)

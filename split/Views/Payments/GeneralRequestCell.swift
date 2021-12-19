@@ -29,7 +29,7 @@ struct GeneralRequestCell: View {
                             .scaleEffect(0.6)
                             .rotationEffect(.degrees(-30))
                             .foregroundColor(Color.white.opacity(m.admin ? 1 : 0))
-                )
+                    )
                     .padding(.trailing, -5)
                 Text(payment.to)
                     .font(.headline)
@@ -47,14 +47,14 @@ struct GeneralRequestCell: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.1)
                 } else {
-//                    VStack(alignment: .leading) {
-//                        ForEach(payment.reqfrom, id: \.self) { member in
-//                            Text(member)
-//                                .font(.headline)
-//                                .lineLimit(1)
-//                                .minimumScaleFactor(0.1)
-//                        }
-//                    }
+                    //                    VStack(alignment: .leading) {
+                    //                        ForEach(payment.reqfrom, id: \.self) { member in
+                    //                            Text(member)
+                    //                                .font(.headline)
+                    //                                .lineLimit(1)
+                    //                                .minimumScaleFactor(0.1)
+                    //                        }
+                    //                    }
                     ReqFromView(reqfrom: payment.reqfrom, id: hId, mems: mems)
                         .padding(4)
                         .background(
@@ -74,7 +74,7 @@ struct GeneralRequestCell: View {
                                 .fill(
                                     Color("whiteblack")
                                 )
-                    )
+                        )
                 } else {
                     moneyText(b: (minimal && payment.to != m.name) ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
                         .foregroundColor(.primary)
@@ -84,14 +84,35 @@ struct GeneralRequestCell: View {
                                 .fill(
                                     Color("whiteblack")
                                 )
-                    )
+                        )
                 }
             }
             .onTapGesture {
                 if !minimal && payment.reqfrom.count > 1 {
                     showEach.toggle()
                 }
+            }
+            .overlay(
+                HStack {
+                    if payment.includedSelf {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .foregroundColor(.white)
+                    .frame(width: 16, height: 16)
+                    }
+                }.offset(x: 13, y: -12)
+                , alignment: .topTrailing
+            )
         }
+    }
+}
+
+
+struct GeneralRequestCell_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            ActivityRequestCell(payment: .constant(.placeholderr), hId: "placeholder", mems: [Member(id: "a", home: "", name: "Devon", image: "", admin: true)])
         }
     }
 }

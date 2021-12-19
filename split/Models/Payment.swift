@@ -23,7 +23,7 @@ struct Payment: Identifiable, Codable {
     static let placeholder = Payment(id: "34f43", to: "Jacob T", from: "Praw", amount: 5.6, time: 1622044000, memo: "mem", type: .payment)
     static let placeholdera = Payment(id: "343", to: "Jacob T", from: "Praw", amount: 5.6, time: 1621044000, memo: "mem", type: .announcement)
     static let placeholderm = Payment(id: "34443", to: "", from: "Praw", time: 1621044000, memo: "mem", type: .groupmessage)
-    static let placeholderr = Payment(id: "3463", to: "Jacob T", reqfrom: ["Devon", "Sarah", "George"], amount: 5.6, time: 1620044000, memo: "mem", type: .request)
+    static let placeholderr = Payment(id: "3463", to: "Jacob T", reqfrom: ["Devon", "Sarah", "George"], amount: 5.6, time: 1620044000, memo: "mem", includedSelf: true, type: .request)
     static let placeholderx = Payment(id: "63", to: "Jacob T", reqfrom: ["Name", "2"], amount: 57.6, time: 1620084000, memo: "m7em", type: .request)
     func toString() -> String {
         return "\(id ?? "") \(to) \(from) \(reqfrom.description) \(amount) \(time) \(memo)".lowercased()

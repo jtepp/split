@@ -307,7 +307,7 @@ class Fetch: ObservableObject {
 //            print("STARTED4")
             
             self.db.collection("houses/\(h.id)/payments").addDocument(data:
-                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "type":ptToString(p.type), "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "fcm":fcms]
+                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "includedSelf" : p.includedSelf, "type":ptToString(p.type), "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "fcm":fcms]
             ){ _ in
             //            .documentID
 //                print("STARTED 5")
@@ -419,8 +419,8 @@ class Fetch: ObservableObject {
                             let to = (d["to"] ?? "") as! String
                             let from = (d["from"] ?? "") as! String
                             let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
-                            let isAn = d["isAn"] as? Bool ?? false
-                            return (to.contains(m.name) || from.contains(m.name) || reqfrom.contains(m.name)) && !isAn
+                            let type = d["type"] as? String ?? "unknown"
+                            return (to.contains(m.name) || from.contains(m.name) || reqfrom.contains(m.name)) && type != "announcement"
                         }) {
                             self.db.document("houses/\(h.wrappedValue.id)/payments/\(doc.documentID)").delete()
                             h.wrappedValue.members.removeAll { (m) -> Bool in
@@ -804,8 +804,8 @@ class Fetch: ObservableObject {
                         let to = (d["to"] ?? "") as! String
                         let from = (d["from"] ?? "") as! String
                         let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
-                        let isAn = d["isAn"] as? Bool ?? false
-                        return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && !isAn
+                        let type = d["type"] as? String ?? ""
+                        return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && type != "announcement"
                     }) {
                         self.db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
                     }
@@ -936,8 +936,8 @@ class Fetch: ObservableObject {
                                             let to = (d["to"] ?? "") as! String
                                             let from = (d["from"] ?? "") as! String
                                             let reqfrom = (d["reqfrom"] ?? [""]) as! [String]
-                                            let isAn = d["isAn"] as? Bool ?? false
-                                            return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && !isAn
+                                            let type = d["type"] as? String ?? ""
+                                            return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && type != "announcement"
                                         }).forEach { payeach in
                                             self.db.document("houses/\(houseq.documentID)/payments/\(payeach.documentID)").delete()
                                         }

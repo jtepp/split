@@ -14,9 +14,11 @@ struct AmountOverlay: View {
     @State var showScan = false
     @State var recognizedText = ""
     //    @State var showRecognizedText = false
+    @State var scrollTarget = ""
     var body: some View {
         VStack {
             ScrollView {
+                ScrollViewReader { reader in
                 //                                Text(recognizedText)
                 HStack {
                     NSHeaderText(text: "Amount", space: true, clear: .constant(false))//, namespace: amountObj.namespace)
@@ -54,11 +56,13 @@ struct AmountOverlay: View {
                     if amountObj.receiptToShow != "" {
                         ForEach(amountObj.bulkReceipts[amountObj.receiptToShow]!) { v in
                             AmountCell(amountObj: amountObj, v: v)
+                                .id(v.id.uuidString)
                         }
                         
                     } else {
                         ForEach(amountObj.values) { v in
                             AmountCell(amountObj: amountObj, v: v)
+                                .id(v.id.uuidString)
                         }
                     }
                 }
@@ -70,8 +74,15 @@ struct AmountOverlay: View {
                             (amountObj.values.count > 0 ? 1 : 0) : (amountObj.bulkReceipts[amountObj.receiptToShow]!.count > 0 ? 1 : 0)))
                 )
                 .padding(.horizontal)
-                
-            }
+                .onChange(of: scrollTarget) { _ in
+                    if scrollTarget != "" {
+                        withAnimation {
+                            reader.scrollTo(scrollTarget)
+                        }
+                    }
+                }
+                    
+            }}
             HStack {
                 Button {
                     showScan = true
@@ -90,14 +101,19 @@ struct AmountOverlay: View {
                 Button {
                     if Float(text) ?? 0 != 0 {
                         if amountObj.receiptToShow == "" {
-                            amountObj.values.append(IdentifiableFloat(value:Float(text)!))
+                            let newIF = IdentifiableFloat(value:Float(text)!)
+                            amountObj.values.append(newIF)
+                            scrollTarget = newIF.id.uuidString
                         } else {
-                            amountObj.bulkReceipts[amountObj.receiptToShow]!.append(IdentifiableFloat(value:Float(text)!))
+                            let newIF = IdentifiableFloat(value:Float(text)!)
+                            amountObj.bulkReceipts[amountObj.receiptToShow]!.append(newIF)
+                            scrollTarget = newIF.id.uuidString
                         }
                         
                         text = ""
                     }
                     amountObj.refresh += 1
+                    print(scrollTarget)
                 } label: {
                     Image(systemName: "plus.circle")
                         .resizable()

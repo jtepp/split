@@ -60,7 +60,7 @@ struct RFMemberView: View {
                 .frame(width: 25, height: 25)
                 .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
-                .shadow(color: Color.black.opacity(expanded ? 0 : 0.4), radius: 5, x: -10, y: 0)
+                .shadow(color: Color.black.opacity(expanded || index == 0 ? 0 : 0.4), radius: 5, x: -10, y: 0)
 //                .overlay(
 //                    Image(systemName: "crown.fill")
 //                        .offset(x: -3, y: -20)
