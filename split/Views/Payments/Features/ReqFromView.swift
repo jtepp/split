@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ReqFromView: View {
-    var reqfrom: [String]
+    @Binding var reqfrom: [String]
     var id: String
     var mems: [Member]
     let rfmax = 1
@@ -16,13 +16,13 @@ struct ReqFromView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(0..<reqfrom.count) { i in
-                    RFMemberView(name: reqfrom[i], member: mems.first(where: { m in
-                        m.name == reqfrom[i]
-                    }) ?? .empty, expanded: reqfrom.count > rfmax ? $expanded : .constant(true), index: i)
+                ForEach(reqfrom, id: \.self) { n in
+                    RFMemberView(name: n, member: mems.first(where: { m in
+                        m.name == n
+                    }) ?? .empty, expanded: reqfrom.count > rfmax ? $expanded : .constant(true), index: reqfrom.firstIndex(of: n) ?? 0)
                 }
                 if !expanded && reqfrom.count > rfmax {
-                    Text("\(reqfrom.first!) + \(reqfrom.count - 1)")
+                    Text("\(reqfrom.last!) + \(reqfrom.count - 1)")
                         .foregroundColor(.white)
                         .padding(.leading, 18)
                 }

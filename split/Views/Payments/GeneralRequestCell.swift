@@ -55,7 +55,7 @@ struct GeneralRequestCell: View {
                     //                                .minimumScaleFactor(0.1)
                     //                        }
                     //                    }
-                    ReqFromView(reqfrom: payment.reqfrom, id: hId, mems: mems)
+                    ReqFromView(reqfrom: $payment.reqfrom, id: hId, mems: mems)
                         .padding(4)
                         .background(
                             RoundedRectangle(cornerRadius: 4)
