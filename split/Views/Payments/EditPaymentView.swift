@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EditPaymentView: View {
     @Binding var payment: Payment
+    @Binding var showEdit: Bool
     var body: some View {
         ScrollView {
             HStack {
@@ -35,7 +36,7 @@ struct EditPaymentView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            EditPaymentView(payment: .constant(.placeholder))
+            EditPaymentView(payment: .constant(.placeholder), showEdit: .constant(true))
         }
     }
 }

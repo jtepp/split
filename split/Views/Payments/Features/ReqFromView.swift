@@ -63,15 +63,8 @@ struct RFMemberView: View {
                 .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(color: Color.black.opacity(expanded || index == 0 ? 0 : 0.4), radius: 5, x: -10, y: 0)
-//                .overlay(
-//                    Image(systemName: "crown.fill")
-//                        .offset(x: -3, y: -20)
-//                        .scaleEffect(0.6)
-//                        .rotationEffect(.degrees(-30))
-//                        .foregroundColor(Color.white.opacity(member.admin ? 1 : 0))
-//                )
-                .padding(.trailing, expanded ? 0 : -18)
-                .scaleEffect(expanded ? 1 : (1 + CGFloat(index)*0.03))
+                .padding(.trailing, expanded ? 0 : -20)
+                .scaleEffect(expanded ? 1 : (0.9 + CGFloat(index)*0.05))
             if expanded {
                 Text(name)
                     .font(.headline)
@@ -79,5 +72,22 @@ struct RFMemberView: View {
                     .minimumScaleFactor(0.1)
             }
         }
+    }
+}
+
+struct singleMemberPhotoView: View {
+    var member: Member
+    var body: some View {
+        b64toimg(b64: member.image)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 25, height: 25)
+            .clipShape(RoundedRectangle(cornerRadius: 5))
+            .shadow(radius: 6)
+            .padding(.trailing, -5)
+        Text(member.name)
+            .font(.headline)
+            .lineLimit(1)
+            .minimumScaleFactor(0.1)
     }
 }

@@ -188,7 +188,7 @@ struct ActivityView: View {
                                 
                                 ActivityRequestCell(payment: .constant(payment), hId: house.id, mems: house.members)
                                     .contextMenu(menuItems: {
-                                        if payment.by == m.id {
+                                        if payment.by == m.id || m.admin {
                                             Button {
                                                 showEdit = true
                                             } label: {
@@ -258,6 +258,14 @@ struct ActivityView: View {
                                 ActivityPaymentCell(payment: .constant(payment), mems: house.members)
                                     .contextMenu(menuItems: {
                                         if payment.by == m.id || m.admin {
+                                            Button {
+                                                showEdit = true
+                                            } label: {
+                                                Text("Edit")
+                                                Image(systemName: "square.and.pencil")
+                                            }
+                                        }
+                                        if payment.by == m.id || m.admin {
                                             Button(action: {
                                                 Fetch().deletePayment(p: payment, h: house)
                                             }, label: {
@@ -307,7 +315,8 @@ struct ActivityView: View {
                     .animation(Animation.easeIn.speed(3))
             })
             if showEdit {
-                EditPaymentView(payment: $paymentEditing)
+                Color.black.edgesIgnoringSafeArea(.all)
+                EditPaymentView(payment: $paymentEditing, showEdit: $showEdit)
             }
         }
         
