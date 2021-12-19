@@ -82,6 +82,7 @@ struct singleMemberPhotoView: View {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 25, height: 25)
+            .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 5))
             .shadow(radius: 6)
             .padding(.trailing, -5)

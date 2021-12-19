@@ -17,19 +17,9 @@ struct GeneralRequestCell: View {
     var body: some View {
         HStack {
             HStack {
-                b64toimg(b64: (mems.first(where: { m in
-                    m.id == payment.by
-                }) ?? .empty).image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 25, height: 25)
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                    .shadow(radius: 6)
-                    .padding(.trailing, -5)
-                Text(payment.to)
-                    .font(.headline)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.1)
+                singleMemberPhotoView(member: mems.first(where: { m in
+                    m.name == payment.to
+                }) ?? .empty)
                 //                if payment.reqfrom.count > 1 {
                 //                    Image(systemName: "arrow.triangle.merge")
                 //                        .rotationEffect(.degrees(-90))
