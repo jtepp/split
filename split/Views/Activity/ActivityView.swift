@@ -203,13 +203,14 @@ struct ActivityView: View {
                                     )
                                 }
                                 
-                                if !payment.reqfrom.contains(m.name) {
+                                if payment.to != m.name /*payment.by != m.id*/ {
+                                    if !payment.reqfrom.contains(m.name) {
                                     //opt in
                                     Button {
                                         Fetch().optRequest(true, payment: payment, name: m.name)
                                     } label: {
                                         Text("Opt in")
-                                        Image(systemName: "person.badge.plus")
+                                        Image(systemName: "person.crop.circle.badge.plus")
                                     }
                                     
                                 
@@ -219,8 +220,10 @@ struct ActivityView: View {
                                         Fetch().optRequest(false, payment: payment, name: m.name)
                                     } label: {
                                         Text("Opt out")
-                                        Image(systemName: "person.badge.xmark")
+                                        Image(systemName: "person.crop.circle.badge.xmark")
                                     }
+                                }
+                                    
                                 }
                                 
                                 if m.admin || payment.by == m.id {
