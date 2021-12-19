@@ -2,73 +2,74 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 
-exports.sendNotificationOnPayment = functions.firestore.document("houses/{houseid}/payments/{paymentid}").onCreate(async (event, context) => { // use onUpdate for opting
-
-    var title;
-    var body;
-    var snd = "default"
-
-    if (event.after.get("isAn")) {
-        let memo = event.after.get("memo")
-        title = "Announcement"
-        body = event.after.get("from") + " " + memo
-        if (memo.includes("join") || memo.includes("create")) {
-            snd = "join.mp3"
-        } else if (memo.includes("left") || memo.includes("remove")) {
-            snd = "leave.mp3"
-        } else if (memo.includes("Admin")) {
-            snd = "admin.mp3"
-        }
-
-    } else if (event.after.get("isGM")) {
-        snd = "pay.mp3"
-        title = "from " + event.after.get("from")
-        body = event.after.get("memo")
-
-    } else if (event.after.get("isRequest")) {
-        snd = "req.mp3"
-        title = "Request received"
-        let reqFrom = event.after.get("reqfrom")
-        console.log("REQFROM: " + reqFrom.toString())
-        if (reqFrom.length == 1) {
-            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + " from you"
-        } else if (reqFrom.length == 2) {
-            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + ", split between you and " + (reqFrom.length - 1) + " other"
+exports.sendNotificationOnPayment = functions.firestore.document("houses/{houseid}/payments/{paymentid}").onCreate(async (documentSnapshot, context) => { // use onUpdate for opting
+    try {
+        var title;
+        var body;
+        var snd = "default"
+        const type = documentSnapshot.get("type")
+        if (documentSnapshot.get("isAn") || type == "announcement") {
+            let memo = documentSnapshot.get("memo")
+            title = "Announcement"
+            body = documentSnapshot.get("from") + " " + memo
+            if (memo.includes("join") || memo.includes("create")) {
+                snd = "join.mp3"
+            } else if (memo.includes("left") || memo.includes("remove")) {
+                snd = "leave.mp3"
+            } else if (memo.includes("Admin")) {
+                snd = "admin.mp3"
+            }
+        } else if (documentSnapshot.get("isGM") || type == "groupmessage") {
+            snd = "pay.mp3"
+            title = "from " + documentSnapshot.get("from")
+            body = documentSnapshot.get("memo")
+        } else if (documentSnapshot.get("isRequest") || type == "request") {
+            snd = "req.mp3"
+            title = "Request received"
+            let reqFrom = documentSnapshot.get("reqfrom")
+            console.log("REQFROM: " + reqFrom.toString())
+            if (reqFrom.length == 1) {
+                body = documentSnapshot.get("to") + " requested $" + documentSnapshot.get("amount").toFixed(2) + " from you"
+            } else if (reqFrom.length == 2) {
+                body = documentSnapshot.get("to") + " requested $" + documentSnapshot.get("amount").toFixed(2) + " ($" + Number(documentSnapshot.get("amount") / reqFrom.length).toFixed(2) + " each), split between you and 1 other"
+            } else {
+                body = documentSnapshot.get("to") + " requested $" + documentSnapshot.get("amount").toFixed(2) + " ($" + Number(documentSnapshot.get("amount") / reqFrom.length).toFixed(2) + " each), split between you and " + (reqFrom.length - 1) + " others"
+                // body = documentSnapshot.get("to") + " requested $" + documentSnapshot.get("amount").toFixed(2) + ", split between you and " + (reqFrom.length - 1) + " others"
+            }
         } else {
-            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + ", split between you and " + (reqFrom.length - 1) + " others"
+            snd = "pay.mp3"
+            title = "Payment received"
+            body = documentSnapshot.get("from") + " sent you $" + documentSnapshot.get("amount").toFixed(2)
+
         }
-    } else {
-        snd = "pay.mp3"
-        title = "Payment received"
-        body = event.after.get("from") + " sent you $" + event.after.get("amount").toFixed(2)
 
-    }
-
-    if (!event.after.get("isAn") && !event.after.get("isGM")) {
-        if ((event.after.get("memo") || "") != "") {
-            body += " for " + event.after.get("memo")
+        if (!documentSnapshot.get("isAn") && !documentSnapshot.get("isGM")) {
+            if ((documentSnapshot.get("memo") || "") != "") {
+                body += " for " + documentSnapshot.get("memo")
+            }
         }
-    }
 
-    event.after.get("fcm").forEach(async tkn => {
-        let message = {
-            notification: {
-                title: title,
-                body: body
-            },
-            token: tkn,
-            apns: {
-                payload: {
-                    aps: {
-                        sound: snd,
+        documentSnapshot.get("fcm").forEach(async tkn => {
+            let message = {
+                notification: {
+                    title: title,
+                    body: body
+                },
+                token: tkn,
+                apns: {
+                    payload: {
+                        aps: {
+                            sound: snd,
+                        }
                     }
                 }
             }
-        }
-        let response = await admin.messaging().send(message)
-        console.log(response)
-    });
+            let response = await admin.messaging().send(message)
+            console.log(response)
+        });
 
-
+    } catch (e) {
+        console.log(e)
+    }
 
 })
