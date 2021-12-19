@@ -34,9 +34,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         if (reqFrom.length == 1) {
             body = event.after.get("to") + " requested $" + amount + " from you"
         } else if (reqFrom.length == 2) {
-            body = event.after.get("to") + " requested $" + amount + " ($ " + Number(amount / reqFrom.length).toFixed(2) + " each), split between you and 1 other"
+            body = event.after.get("to") + " requested $" + amount + " ($" + Number(amount / reqFrom.length).toFixed(2) + " each), split between you and 1 other"
         } else {
-            body = event.after.get("to") + " requested $" + amount + " ($ " + Number(amount / reqFrom.length).toFixed(2) + " each), split between you and " + (reqFrom.length - 1) + " others"
+            body = event.after.get("to") + " requested $" + amount + " ($" + Number(amount / reqFrom.length).toFixed(2) + " each), split between you and " + (reqFrom.length - 1) + " others"
         }
     } else if (type != "unknown") {
         snd = "pay.mp3"
