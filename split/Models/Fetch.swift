@@ -773,7 +773,7 @@ class Fetch: ObservableObject {
     }
     
     func createHouse(hh: Binding<House>, m: Binding<Member>, name: String, password: String, tapped: Binding<Bool>, inWR: Binding<Bool>) {
-        let id = db.collection("houses").addDocument(data: ["name" : name, "password" : password]).documentID
+        let id = db.collection("houses").addDocument(data: ["name" : name, "password" : password, "created": Int(NSDate().timeIntervalSince1970)]).documentID
         m.wrappedValue.home = id
         m.wrappedValue.admin = true
         hh.wrappedValue.members = [m.wrappedValue]
