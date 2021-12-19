@@ -19,7 +19,7 @@ struct ReqFromView: View {
                 ForEach(reqfrom, id: \.self) { n in
                     RFMemberView(name: n, member: mems.first(where: { m in
                         m.name == n
-                    }) ?? .empty, expanded: reqfrom.count > rfmax ? $expanded : .constant(true), index: reqfrom.firstIndex(of: n) ?? 0)
+                    }) ?? .empty, expanded: reqfrom.count > rfmax ? $expanded : .constant(true), index: reqfrom.firstIndex(of: n) ?? 0, maxIndex: reqfrom.count)
                 }
                 if !expanded && reqfrom.count > rfmax {
                     Text("\(reqfrom.last!) + \(reqfrom.count - 1)")
@@ -54,6 +54,7 @@ struct RFMemberView: View {
     var member: Member
     @Binding var expanded: Bool
     var index: Int
+    var maxIndex: Int
     var body: some View {
         HStack {
             b64toimg(b64: member.image)
@@ -63,8 +64,8 @@ struct RFMemberView: View {
                 .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(color: Color.black.opacity(expanded || index == 0 ? 0 : 0.4), radius: 5, x: -10, y: 0)
-                .padding(.trailing, expanded ? 0 : -20)
-                .scaleEffect(expanded ? 1 : (0.9 + CGFloat(index)*0.05))
+                .padding(.trailing, expanded ? 0 : -24)
+                .scaleEffect(expanded ? 1 : scaleCalc(index, maxIndex))
             if expanded {
                 Text(name)
                     .font(.headline)
@@ -91,4 +92,10 @@ struct singleMemberPhotoView: View {
             .lineLimit(1)
             .minimumScaleFactor(0.1)
     }
+}
+
+func scaleCalc(_ index: Int, _ maxIndex: Int) -> CGFloat {
+    let ci = CGFloat(index + 1)
+    let cmi = CGFloat(maxIndex + 1)
+    return 1 - (cmi - ci) * 0.05
 }
