@@ -11,6 +11,7 @@ struct ReqFromView: View {
     var reqfrom: [String]
     var id: String
     var mems: [Member]
+    let rfmax = 1
     @State var expanded = false
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -18,13 +19,18 @@ struct ReqFromView: View {
                 ForEach(0..<reqfrom.count) { i in
                     RFMemberView(name: reqfrom[i], member: mems.first(where: { m in
                         m.name == reqfrom[i]
-                    }) ?? .empty, expanded: reqfrom.count > 2 ? $expanded : .constant(true), index: i)
+                    }) ?? .empty, expanded: reqfrom.count > rfmax ? $expanded : .constant(true), index: i)
+                }
+                if !expanded && reqfrom.count > rfmax {
+                    Text("\(reqfrom.first!) + \(reqfrom.count - 1)")
+                        .foregroundColor(.white)
+                        .padding(.leading, 18)
                 }
             }
         }
         .onTapGesture {
             withAnimation(.easeOut) {
-                if reqfrom.count > 2 {
+                if reqfrom.count > rfmax {
                     expanded.toggle()
                 }
             }

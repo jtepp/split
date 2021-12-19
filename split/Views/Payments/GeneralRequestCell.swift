@@ -59,7 +59,7 @@ struct GeneralRequestCell: View {
                         .padding(4)
                         .background(
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(Color.black.opacity(0.3))
+                                .fill(Color.black.opacity(0.2))
                         )
                 }
             }
