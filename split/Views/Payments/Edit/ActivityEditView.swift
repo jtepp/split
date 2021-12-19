@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ActivityEditView: View {
     @Binding var payment: Payment
-    @Binding var showEdit: Bool
     @Binding var mems: [Member]
+    @Binding var showEdit: Bool
     var body: some View {
         ScrollView {
             HStack {
@@ -46,7 +46,7 @@ struct ActivityEditView: View {
     }
 }
 
-struct EditPaymentView_Previews: PreviewProvider {
+struct ActivityEditView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)

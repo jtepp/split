@@ -318,7 +318,7 @@ struct ActivityView: View {
             })
             if showEdit {
                 Color.black.edgesIgnoringSafeArea(.all)
-                ActivityEditView(payment: $paymentEditing, showEdit: $showEdit, mems: $house.members)
+                ActivityEditView(payment: $paymentEditing, mems: $house.members, showEdit: $showEdit)
             }
         }
         
