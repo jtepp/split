@@ -30,12 +30,13 @@ struct TabsView: View {
     @State var showMessagePopover = false
     @State var GMmsg = ""
     @State var focus: String? = ""
+    @State var showEdit = false
     @ObservedObject var refresh: RefreshObject
     var body: some View {
         TabView(selection: $tabSelection,
                 content:  {
                     ZStack {
-                        ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member, showMessagePopover: $showMessagePopover, GMmsg: $GMmsg, refresh: refresh)
+                        ActivityView(house: $house, tabSelection: $tabSelection, inWR: $inWR, noProf: $noProf, m: $member, showMessagePopover: $showMessagePopover, GMmsg: $GMmsg, refresh: refresh, showEdit: $showEdit)
                             .blur(radius: FMBopen || showMessagePopover ? 8 : 0)
                         if FMBopen {
                             Rectangle()
@@ -69,9 +70,9 @@ struct TabsView: View {
                                                     }], image: "plus")
                                     .offset(x: 60, y: needsMoreOffset() ? -100 : -60)
                                     .opacity(showMessagePopover ? 0 : 1)
-                                    .allowsHitTesting(showMessagePopover ? false : true)
+                                    .allowsHitTesting(showMessagePopover || showEdit ? false : true)
                             }
-                        }
+                        }.opacity(showEdit ? 0 : 1)
                         
                         if showMessagePopover {
                             Rectangle()

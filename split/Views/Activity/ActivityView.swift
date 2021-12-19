@@ -26,7 +26,7 @@ struct ActivityView: View {
     @State var lastScroll = -1
     @State var searchText = ""
     @State var showSearch = false
-    @State var showEdit = false
+    @Binding var showEdit: Bool
     @State var paymentEditing = Payment.empty
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
@@ -318,7 +318,7 @@ struct ActivityView: View {
             })
             if showEdit {
                 Color.black.edgesIgnoringSafeArea(.all)
-                ActivityEditView(payment: paymentEditing, mems: $house.members, showEdit: $showEdit)
+                ActivityEditView(house: $house, member: m, payment: paymentEditing, mems: $house.members, showEdit: $showEdit)
             }
         }
         

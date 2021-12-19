@@ -57,10 +57,7 @@ struct ActivityMessageCell: View {
                                     .frame(width: 40, height: 40)
                                     .clipShape(RoundedRectangle(cornerRadius: 5))
                                     .shadow(radius: 4)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .fill(Color("Material"))
-                                    )
+                                    .background(Color.white)
                                     .onAppear {
                                         Fetch().imgFromId(id: payment.by, img: $img)
                                     }
@@ -128,10 +125,7 @@ struct ActivityMessageCell: View {
                                         .frame(width: 40, height: 40)
                                         .clipShape(RoundedRectangle(cornerRadius: 5))
                                         .shadow(radius: 4)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 5)
-                                                .fill(Color("Material"))
-                                        )
+                                        .background(Color.white)
                                         .onAppear {
                                             Fetch().imgFromId(id: payment.by, img: $img)
                                         }

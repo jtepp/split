@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EditRequestView: View {
+    @Binding var house: House
+    var member: Member
     var payment: Payment
     @Binding var mems: [Member]
     var body: some View {
@@ -17,6 +19,9 @@ struct EditRequestView: View {
 
 struct EditRequestView_Previews: PreviewProvider {
     static var previews: some View {
-        EditRequestView(payment: .placeholder, mems: .constant([Member]()))
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            ActivityEditView(house: .constant(.placeholder), member: .empty, payment: .placeholderr, mems: .constant([Member]()), showEdit: .constant(true))
+        }
     }
 }

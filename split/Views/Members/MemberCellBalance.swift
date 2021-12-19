@@ -16,6 +16,7 @@ struct MemberCellBalance: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 20, height: 20)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
+                .background(Color.white)
                 .shadow(radius: 4)
                 .overlay(
                     Image(systemName: "crown.fill")

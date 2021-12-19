@@ -19,6 +19,7 @@ struct BulkCell: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 40, height: 40)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
+                .background(Color.white)
                 .shadow(radius: 4)
             Text(m.name)
                 .foregroundColor(.white)

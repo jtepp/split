@@ -26,10 +26,7 @@ struct EditProfileView: View {
                     .frame(width: 200, height: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .shadow(radius: 4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(Color("Material"))
-                    )
+                    .background(Color.white)
                     .overlay(
                         Menu(content: {
                             Button(action: {

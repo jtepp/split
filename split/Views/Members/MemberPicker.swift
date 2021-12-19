@@ -99,10 +99,11 @@ struct BulkMemberPicker: View {
 struct PickerButton: View {
     var text: String
     @Binding var choice: [Member]
+    var whiteText: Bool = false
     var body: some View {
         if choice.isEmpty {
             Text(text)
-                .foregroundColor(.primary)
+                .foregroundColor(whiteText ? .white : .primary)
         } else {
             VStack (alignment: .leading) {
                 ForEach(choice) { m in
@@ -112,10 +113,11 @@ struct PickerButton: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 40, height: 40)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .background(Color.white)
                             .shadow(radius: 4)
                         Text(m.name)
                     }
-                    .foregroundColor(.primary)
+                    .foregroundColor(whiteText ? .white : .primary)
                 }
             }
         }
@@ -137,6 +139,7 @@ struct imgButton: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 40, height: 40)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
+                .background(Color.white)
                 .shadow(radius: 4)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
@@ -207,6 +210,7 @@ struct BulkimgButton: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 40, height: 40)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
+                .background(Color.white)
                 .shadow(radius: 4)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
