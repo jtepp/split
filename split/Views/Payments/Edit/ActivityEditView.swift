@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ActivityEditView: View {
-    @Binding var payment: Payment
+    var payment: Payment
     @Binding var mems: [Member]
     @Binding var showEdit: Bool
     var body: some View {
         ScrollView {
             HStack {
-                HeaderText(text: "Edit  \(ptToString(payment.type).firstCap())", space: false, clear: .constant(false))
+                HeaderText(text: "Edit \(ptToString(payment.type).firstCap())", space: false, clear: .constant(false))
                 Spacer()
                 Button {
                     //save and close
@@ -50,7 +50,7 @@ struct ActivityEditView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            ActivityEditView(payment: .constant(.placeholder), showEdit: .constant(true), mems: .constant([Member]()))
+            ActivityEditView(payment: .placeholder, mems: .constant([Member]()), showEdit: .constant(true))
         }
     }
 }

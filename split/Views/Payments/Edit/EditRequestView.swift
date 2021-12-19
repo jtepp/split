@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditRequestView: View {
-    @Binding var payment: Payment
+    var payment: Payment
     @Binding var mems: [Member]
     var body: some View {
         Text("Hello, World!")
@@ -17,6 +17,6 @@ struct EditRequestView: View {
 
 struct EditRequestView_Previews: PreviewProvider {
     static var previews: some View {
-        EditRequestView(payment: .constant(.placeholder), mems: .constant([Member]()))
+        EditRequestView(payment: .placeholder, mems: .constant([Member]()))
     }
 }

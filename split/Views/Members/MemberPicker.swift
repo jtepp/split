@@ -15,15 +15,31 @@ struct MemberPicker: View {
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            ScrollView {
-                HeaderText(text: "Choose \(multiple ? "members" : "a member")", clear: .constant(false))
-                ForEach (house.members.filter({ (m) -> Bool in
-                    return m.id != UserDefaults.standard.string(forKey: "myId")
-                })) { member in
-                    imgButton(show: $show, member: .constant(member), choice: $choice, multiple: multiple)
+            VStack {
+                ScrollView {
+                    HeaderText(text: "Choose \(multiple ? "members" : "a member")", clear: .constant(false))
+                    ForEach (house.members.filter({ (m) -> Bool in
+                        return m.id != UserDefaults.standard.string(forKey: "myId")
+                    })) { member in
+                        imgButton(show: $show, member: .constant(member), choice: $choice, multiple: multiple)
+                    }
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Text("Done")
+                            .foregroundColor(choice.isEmpty ? .clear : .white)
+                        Spacer()
+                    }
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(choice.isEmpty ? .clear : Color.blue)
+                        )
+                        .padding()
+                        .opacity(0)
                 }
-                Spacer()
-                Button(action: {show = false}, label: {
+                if !choice.isEmpty {
+                    Button(action: {show = false}, label: {
                     HStack {
                         Spacer()
                         Text("Done")
@@ -37,7 +53,8 @@ struct MemberPicker: View {
                         )
                         .padding()
                 })
-                .allowsHitTesting(!choice.isEmpty)
+                        .allowsHitTesting(!choice.isEmpty)
+                }
             }
         }
     }
