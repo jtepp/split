@@ -10,26 +10,21 @@ import SwiftUI
 struct GeneralRequestCell: View {
     @Binding var payment: Payment
     var minimal: Bool = false
-    @Binding var m: Member
+//    @Binding var m: Member
     @State var showEach = false
     var hId: String
     var mems: [Member]
     var body: some View {
         HStack {
             HStack {
-                b64toimg(b64: m.image)
+                b64toimg(b64: (mems.first(where: { m in
+                    m.id == payment.by
+                }) ?? .empty).image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 25, height: 25)
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                     .shadow(radius: 6)
-                    .overlay(
-                        Image(systemName: "crown.fill")
-                            .offset(x: -3, y: -20)
-                            .scaleEffect(0.6)
-                            .rotationEffect(.degrees(-30))
-                            .foregroundColor(Color.white.opacity(m.admin ? 1 : 0))
-                    )
                     .padding(.trailing, -5)
                 Text(payment.to)
                     .font(.headline)
@@ -41,12 +36,7 @@ struct GeneralRequestCell: View {
                 //                } else {
                 Image(systemName: "arrow.left")
                 //                }
-                if minimal && payment.to != m.name {
-                    Text(m.name)
-                        .font(.headline)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.1)
-                } else {
+
                     //                    VStack(alignment: .leading) {
                     //                        ForEach(payment.reqfrom, id: \.self) { member in
                     //                            Text(member)
@@ -61,12 +51,12 @@ struct GeneralRequestCell: View {
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(Color.black.opacity(0.2))
                         )
-                }
+                
             }
             Spacer()
             HStack {
                 if showEach {
-                    moneyText(b: (minimal && payment.to != m.name) ? .constant(payment.amount / Float(payment.reqfrom.count)) : .constant($payment.wrappedValue.amount / Float($payment.wrappedValue.reqfrom.count)), post: showEach ? " each" : "")
+                    moneyText(b: (minimal) ? .constant(payment.amount / Float(payment.reqfrom.count)) : .constant($payment.wrappedValue.amount / Float($payment.wrappedValue.reqfrom.count)), post: showEach ? " each" : "")
                         .foregroundColor(.primary)
                         .padding(6)
                         .background(
@@ -76,7 +66,7 @@ struct GeneralRequestCell: View {
                                 )
                         )
                 } else {
-                    moneyText(b: (minimal && payment.to != m.name) ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
+                    moneyText(b: (minimal) ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
                         .foregroundColor(.primary)
                         .padding(6)
                         .background(

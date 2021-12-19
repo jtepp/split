@@ -15,7 +15,7 @@ struct ActivityRequestCell: View {
     var mems: [Member]
     var body: some View {
         VStack {
-            GeneralRequestCell(payment: $payment, m: .constant(.empty), hId: hId, mems: mems)
+            GeneralRequestCell(payment: $payment, hId: hId, mems: mems)
             ScrollView {
                 HStack {
                     Text("Request")

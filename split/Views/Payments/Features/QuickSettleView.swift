@@ -72,7 +72,7 @@ struct QuickSettleView: View {
                             }
                             ForEach(paymentList) { p in
                                 
-                                ActivityPaymentCell(payment: .constant(p), showMemoEver: false)
+                                ActivityPaymentCell(payment: .constant(p), showMemoEver: false, mems: h.members.wrappedValue)
                                 
                             }
                             .padding(.horizontal, 10)

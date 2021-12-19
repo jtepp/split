@@ -243,7 +243,7 @@ struct ActivityView: View {
                         
                         
                             
-                            ActivityPaymentCell(payment: .constant(payment))
+                        ActivityPaymentCell(payment: .constant(payment), mems: house.members)
                                 .contextMenu(menuItems: {
                                     if payment.by == m.id || m.admin {
                                     Button(action: {
@@ -294,6 +294,7 @@ struct ActivityView: View {
                 )
                 .animation(Animation.easeIn.speed(3))
         })
+        
     }
 }
 

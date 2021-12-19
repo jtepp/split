@@ -23,7 +23,9 @@ struct ReqFromView: View {
                 }
                 if !expanded && reqfrom.count > rfmax {
                     Text("\(reqfrom.last!) + \(reqfrom.count - 1)")
-                        .foregroundColor(.white)
+                        .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.1)
                         .padding(.leading, 18)
                 }
             }
@@ -72,7 +74,9 @@ struct RFMemberView: View {
                 .scaleEffect(expanded ? 1 : (1 + CGFloat(index)*0.03))
             if expanded {
                 Text(name)
-                    .foregroundColor(.white)
+                    .font(.headline)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.1)
             }
         }
     }

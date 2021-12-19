@@ -24,15 +24,15 @@ struct TimeBar: View {
     }
 }
 
-struct TimeBar_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-            ActivityPaymentCell(payment: .constant(.placeholder))
-        }
-            
-    }
-}
+//struct TimeBar_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ZStack {
+//            Color.black.edgesIgnoringSafeArea(.all)
+//            ActivityPaymentCell(payment: .constant(.placeholder))
+//        }
+//            
+//    }
+//}
 
 
 

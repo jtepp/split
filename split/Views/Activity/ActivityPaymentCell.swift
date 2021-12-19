@@ -12,9 +12,10 @@ struct ActivityPaymentCell: View {
     @Binding var payment: Payment
     @State var showMemo = false
     var showMemoEver: Bool = true
+    var mems: [Member]
     var body: some View {
         VStack {
-            GeneralPaymentCell(payment: $payment)
+            GeneralPaymentCell(payment: $payment, mems: mems)
             ScrollView {
                 HStack {
                     Text("Payment")
@@ -80,7 +81,7 @@ struct ActivityPaymentCell_Previews: PreviewProvider {
             Color.black.edgesIgnoringSafeArea(.all)
             ScrollView {
                 ForEach(Range(0...10)) { _ in
-                    ActivityPaymentCell(payment: .constant(.placeholder))
+                    ActivityPaymentCell(payment: .constant(.placeholder), mems: [Member]())
                 }
             }
         }
