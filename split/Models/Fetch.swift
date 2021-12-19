@@ -707,11 +707,11 @@ class Fetch: ObservableObject {
                                     print(err.debugDescription)
                                     return
                                 }
-                                if docs.contains(where: { doc in
+                                if !docs.contains(where: { doc in
                                     let data = doc.data()
                                     let name = data["name"] ?? ""
-                                    return name as! String != m.wrappedValue.name
-                                    
+                                    return name as! String == m.wrappedValue.name
+
                                 }) || forceAdmin {
                                     //
                                     self.db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "online": true, "showStatus": (UserDefaults.standard.bool(forKey: "statusSet")) ? UserDefaults.standard.bool(forKey: "showStatus") : true]) { _ in

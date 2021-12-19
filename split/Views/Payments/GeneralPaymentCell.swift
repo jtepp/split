@@ -17,10 +17,20 @@ struct GeneralPaymentCell: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.1)
                 Image(systemName: "arrow.right")
-                Text(payment.to)
-                    .font(.headline)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.1)
+                HStack {
+                    Text(payment.to)
+                        .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.1)
+                    Spacer(minLength: 0)
+                }
+                .padding(4)
+                .background(
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color.black.opacity(0.2))
+                    
+                )
+                
             }
             Spacer()
             moneyText(b: $payment.amount)
