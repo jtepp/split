@@ -202,6 +202,27 @@ struct ActivityView: View {
                                     }
                                     )
                                 }
+                                
+                                if !payment.reqfrom.contains(m.name) {
+                                    //opt in
+                                    Button {
+                                        Fetch().optRequest(true, payment: payment, name: m.name)
+                                    } label: {
+                                        Text("Opt in")
+                                        Image(systemName: "person.badge.plus")
+                                    }
+                                    
+                                
+                                } else if payment.reqfrom.count > 1 {
+                                    //opt out
+                                    Button {
+                                        Fetch().optRequest(false, payment: payment, name: m.name)
+                                    } label: {
+                                        Text("Opt out")
+                                        Image(systemName: "person.badge.xmark")
+                                    }
+                                }
+                                
                                 if m.admin || payment.by == m.id {
                                     Button(action: {
                                         Fetch().deletePayment(p: payment, h: house)

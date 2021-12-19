@@ -7,8 +7,8 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
     var title;
     var body;
     var snd = "default"
-
-    if (event.after.get("isAn")) {
+    const type = event.after.get("type");
+    if (event.after.get("isAn") || type == "an") {
         let memo = event.after.get("memo")
         title = "Announcement"
         body = event.after.get("from") + " " + memo
@@ -20,24 +20,25 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             snd = "admin.mp3"
         }
 
-    } else if (event.after.get("isGM")) {
+    } else if (event.after.get("isGM") || type == "groupmessage") {
         snd = "pay.mp3"
         title = "from " + event.after.get("from")
         body = event.after.get("memo")
 
-    } else if (event.after.get("isRequest")) {
+    } else if (event.after.get("isRequest") || type == "request") {
         snd = "req.mp3"
         title = "Request received"
         let reqFrom = event.after.get("reqfrom")
+        let amount = event.after.get("amount").toFixed(2)
         console.log("REQFROM: " + reqFrom.toString())
         if (reqFrom.length == 1) {
-            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + " from you"
+            body = event.after.get("to") + " requested $" + amount + " from you"
         } else if (reqFrom.length == 2) {
-            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + ", split between you and " + (reqFrom.length - 1) + " other"
+            body = event.after.get("to") + " requested $" + amount + " ($ " + Number(amount / reqFrom.length).toFixed(2) + " each), split between you and 1 other"
         } else {
-            body = event.after.get("to") + " requested $" + event.after.get("amount").toFixed(2) + ", split between you and " + (reqFrom.length - 1) + " others"
+            body = event.after.get("to") + " requested $" + amount + " ($ " + Number(amount / reqFrom.length).toFixed(2) + " each), split between you and " + (reqFrom.length - 1) + " others"
         }
-    } else {
+    } else if (type != "unknown") {
         snd = "pay.mp3"
         title = "Payment received"
         body = event.after.get("from") + " sent you $" + event.after.get("amount").toFixed(2)
@@ -65,8 +66,10 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                 }
             }
         }
-        let response = await admin.messaging().send(message)
-        console.log(response)
+        if (event.after.get("mute") != true) {
+            let response = await admin.messaging().send(message)
+            console.log(response)
+        }
     });
 
 

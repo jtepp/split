@@ -537,9 +537,9 @@
 		0C625976265EAE58002E58A3 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				0CBF09F3265D8F140016CA92 /* ActivityView.swift */,
 				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
 				0C5C0E2E269CB15500BD092F /* Filter */,
-				0CBF09F3265D8F140016CA92 /* ActivityView.swift */,
 				0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */,
 				0CAA80362661860600A3081B /* ActivityAnnouncementCell.swift */,
 				0CD16878269BA8BE00CFD7C2 /* ActivityMessageCell.swift */,

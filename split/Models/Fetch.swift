@@ -1129,6 +1129,29 @@ class Fetch: ObservableObject {
             bm.wrappedValue = Member(id: id, home: home, name: name, owesMe: owesMe, iOwe: iOwe, image: image, admin: admin, showStatus: false, online: false, lastSeen: 0)
         }
     }
+    
+    func optRequest(_ inOrOut: Bool, payment: Payment, name: String) {
+        db.collectionGroup("payments")
+            .getDocuments { qs, err in
+                guard let docs = qs?.documents else {return}
+                docs.forEach({ qds in
+                    
+                    let ref = qds.reference
+                    let data = qds.data()
+                    var reqfrom = data["reqfrom"] as? [String] ?? [String]()
+                    if ref.documentID == payment.id {
+                        if inOrOut {
+                            reqfrom.append(name)
+                        } else {
+                            reqfrom.removeAll { n in
+                                n == name
+                            }
+                        }
+                        ref.updateData(["reqfrom": reqfrom, "mute":true])
+                    }
+                })
+            }
+    }
         
 //    func updatePayments3() {
 //        db.collectionGroup("payments")
@@ -1156,7 +1179,7 @@ class Fetch: ObservableObject {
 //                    if !an && !gm && !rq {
 //                        t = .payment
 //                    }
-//                    id.updateData(["type" : ptToString(t)])
+//                    id.updateData(["mute": true, "type" : ptToString(t)])
 //                    
 //                })
 //            }
