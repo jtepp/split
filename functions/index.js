@@ -7,11 +7,14 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         var title;
         var body;
         var snd = "default"
-        const type = documentSnapshot.get("type")
-        if (documentSnapshot.get("isAn") || type == "announcement") {
-            let memo = documentSnapshot.get("memo")
+        const dataObject = documentSnapshot.data();
+        console.log("Payment created");
+        const type = dataObject["type"]
+        console.log("data fine");
+        if (dataObject["isAn"] || type == "announcement") {
+            let memo = dataObject["memo"]
             title = "Announcement"
-            body = documentSnapshot.get("from") + " " + memo
+            body = dataObject["from"] + " " + memo
             if (memo.includes("join") || memo.includes("create")) {
                 snd = "join.mp3"
             } else if (memo.includes("left") || memo.includes("remove")) {
@@ -19,37 +22,37 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             } else if (memo.includes("Admin")) {
                 snd = "admin.mp3"
             }
-        } else if (documentSnapshot.get("isGM") || type == "groupmessage") {
+        } else if (dataObject["isGM"] || type == "groupmessage") {
             snd = "pay.mp3"
-            title = "from " + documentSnapshot.get("from")
-            body = documentSnapshot.get("memo")
-        } else if (documentSnapshot.get("isRequest") || type == "request") {
+            title = "from " + dataObject["from"]
+            body = dataObject["memo"]
+        } else if (dataObject["isRequest"] || type == "request") {
             snd = "req.mp3"
             title = "Request received"
-            let reqFrom = documentSnapshot.get("reqfrom")
+            let reqFrom = dataObject["reqfrom"]
             console.log("REQFROM: " + reqFrom.toString())
             if (reqFrom.length == 1) {
-                body = documentSnapshot.get("to") + " requested $" + documentSnapshot.get("amount").toFixed(2) + " from you"
+                body = dataObject["to"] + " requested $" + Number(dataObject["amount"]).toFixed(2) + " from you"
             } else if (reqFrom.length == 2) {
-                body = documentSnapshot.get("to") + " requested $" + documentSnapshot.get("amount").toFixed(2) + " ($" + Number(documentSnapshot.get("amount") / reqFrom.length).toFixed(2) + " each), split between you and 1 other"
+                body = dataObject["to"] + " requested $" + Number(dataObject["amount"]).toFixed(2) + " ($" + Number(dataObject["amount"] / reqFrom.length).toFixed(2) + " each), split between you and 1 other"
             } else {
-                body = documentSnapshot.get("to") + " requested $" + documentSnapshot.get("amount").toFixed(2) + " ($" + Number(documentSnapshot.get("amount") / reqFrom.length).toFixed(2) + " each), split between you and " + (reqFrom.length - 1) + " others"
-                // body = documentSnapshot.get("to") + " requested $" + documentSnapshot.get("amount").toFixed(2) + ", split between you and " + (reqFrom.length - 1) + " others"
+                body = dataObject["to"] + " requested $" + Number(dataObject["amount"]).toFixed(2) + " ($" + Number(dataObject["amount"] / reqFrom.length).toFixed(2) + " each), split between you and " + (reqFrom.length - 1) + " others"
+                // body = dataObject["to"] + " requested $" + Number(dataObject["amount"]).toFixed(2) + ", split between you and " + (reqFrom.length - 1) + " others"
             }
         } else {
             snd = "pay.mp3"
             title = "Payment received"
-            body = documentSnapshot.get("from") + " sent you $" + documentSnapshot.get("amount").toFixed(2)
+            body = dataObject["from"] + " sent you $" + Number(dataObject["amount"]).toFixed(2)
 
         }
 
-        if (!documentSnapshot.get("isAn") && !documentSnapshot.get("isGM")) {
-            if ((documentSnapshot.get("memo") || "") != "") {
-                body += " for " + documentSnapshot.get("memo")
+        if (!dataObject["isAn"] && !dataObject["isGM"]) {
+            if ((dataObject["memo"] || "") != "") {
+                body += " for " + dataObject["memo"]
             }
         }
 
-        documentSnapshot.get("fcm").forEach(async tkn => {
+        dataObject["fcm"].forEach(async tkn => {
             let message = {
                 notification: {
                     title: title,
@@ -67,9 +70,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             let response = await admin.messaging().send(message)
             console.log(response)
         });
-
     } catch (e) {
         console.log(e)
+        console.log("ERROR: " + e)
     }
 
 })
