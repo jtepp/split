@@ -112,8 +112,8 @@ struct PickerButton: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 40, height: 40)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
                             .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
                             .shadow(radius: 4)
                         Text(m.name)
                     }
@@ -138,8 +138,8 @@ struct imgButton: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 40, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(radius: 4)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
@@ -209,8 +209,8 @@ struct BulkimgButton: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 40, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(radius: 4)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)

@@ -24,9 +24,9 @@ struct EditProfileView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 200, height: 200)
+                    .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .shadow(radius: 4)
-                    .background(Color.white)
                     .overlay(
                         Menu(content: {
                             Button(action: {

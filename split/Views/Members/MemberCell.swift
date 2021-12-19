@@ -24,8 +24,8 @@ struct MemberCell: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 40, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(radius: 4)
                 .overlay(
                     Image(systemName: "crown.fill")

@@ -55,9 +55,9 @@ struct ActivityMessageCell: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 40, height: 40)
+                                    .background(Color.white)
                                     .clipShape(RoundedRectangle(cornerRadius: 5))
                                     .shadow(radius: 4)
-                                    .background(Color.white)
                                     .onAppear {
                                         Fetch().imgFromId(id: payment.by, img: $img)
                                     }
@@ -123,9 +123,9 @@ struct ActivityMessageCell: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 40, height: 40)
+                                        .background(Color.white)
                                         .clipShape(RoundedRectangle(cornerRadius: 5))
                                         .shadow(radius: 4)
-                                        .background(Color.white)
                                         .onAppear {
                                             Fetch().imgFromId(id: payment.by, img: $img)
                                         }
