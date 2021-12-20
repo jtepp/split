@@ -19,9 +19,9 @@ struct Payment: Identifiable, Codable {
     var includedSelf: Bool = false
     var type: paymentType
     var by: String = ""
-    var editLog: [Int: String] = [Int: String]()
+    var editLog: [String: String] = [String: String]()
     static let empty = Payment(id: "", to: "", from: "", amount: 0, time: 0, type: .payment)
-    static let placeholder = Payment(id: "34f43", to: "Jacob T", from: "Praw", amount: 5.6, time: 1622044000, memo: "mem", type: .payment, editLog: [1639966355: "A changed amount from 2.36 to 3.26"])
+    static let placeholder = Payment(id: "34f43", to: "Jacob T", from: "Praw", amount: 5.6, time: 1622044000, memo: "mem", type: .payment, editLog: ["1639966355": "A changed amount from 2.36 to 3.26", "1639967355": "Xxxxx sfdfd changed To from Jfsdfasd to ksfk"])
     static let placeholdera = Payment(id: "343", to: "Jacob T", from: "Praw", amount: 5.6, time: 1621044000, memo: "mem", type: .announcement)
     static let placeholderm = Payment(id: "34443", to: "", from: "Praw", time: 1621044000, memo: "mem", type: .groupmessage)
     static let placeholderr = Payment(id: "3463", to: "Jacob T", reqfrom: ["Devon", "Sarah", "George"], amount: 5.6, time: 1620044000, memo: "mem", includedSelf: true, type: .request)

@@ -18,7 +18,7 @@ struct EditPaymentView: View {
     @Binding var choiceTo: [Member]
     @State var choiceALL = [Member]()
     @Binding var amountText: String
-    @State var memoText = ""
+    @Binding var memoText: String
     var body: some View {
         VStack {
             HStack {
@@ -81,7 +81,8 @@ struct EditPaymentView: View {
             InputField(name: "Memo", text: $memoText)
                 .padding(.horizontal)
             
-//            EditLogView(payment: payment)
+            EditLogView(payment: payment)
+                .padding(10)
             
             
         }
@@ -123,5 +124,6 @@ struct EditPaymentView_Previews: PreviewProvider {
             Color.black.edgesIgnoringSafeArea(.all)
             ActivityEditView(house: .constant(.placeholder), member: .empty, payment: .placeholder, mems: .constant([Member]()), showEdit: .constant(true))
         }
+        .preferredColorScheme(.dark)
     }
 }

@@ -234,7 +234,7 @@ class Fetch: ObservableObject {
                 let includedSelf = data["includedSelf"] as? Bool ?? false
                 let type = data["type"] as? String ?? "unknown"
                 let by = data["by"] as? String ?? ""
-                let editLog = data["edits"] as? [Int: String] ?? [Int: String]()
+                let editLog = data["edits"] as? [String: String] ?? [String: String]()
                 
                 
                 return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, includedSelf: includedSelf, type: stringToPT(type), by: by, editLog: editLog)
@@ -1153,6 +1153,61 @@ class Fetch: ObservableObject {
                     }
                 })
             }
+    }
+    
+    func updatePaymentSave(payment: Payment, member: Member, nAmount: Float, nMemo: String, nTo: String, nFrom: String) {
+        //find differences, log edits, update data
+        var msg = ""
+        var edits = [AnyHashable: Any]()
+        var editCount = 0
+        if payment.amount == nAmount && payment.memo == nMemo && payment.to == nTo && payment.from == nFrom {
+            // nothing changed
+        } else {
+            msg = "\(member.name) changed "
+            
+            if payment.amount != nAmount {
+                msg += "Amount from \(String(format: "%.2f", payment.amount)) to \(String(format: "%.2f",nAmount))"
+                editCount += 1
+                edits["amount"] = nAmount
+            }
+            
+            if payment.memo != nMemo {
+                if editCount > 0 {
+                    msg += ", "
+                }
+                msg += "Memo from \(payment.memo) to \(nMemo)"
+                editCount += 1
+                edits["memo"] = nMemo
+            }
+            
+            if payment.to != nTo {
+                if editCount > 0 {
+                    msg += ", "
+                }
+                msg += "To from \(payment.to) to \(nTo)"
+                editCount += 1
+                edits["to"] = nTo
+            }
+            
+            if payment.from != nFrom {
+                if editCount > 0 {
+                    msg += ", "
+                }
+                msg += "From from \(payment.from) to \(nFrom)"
+                edits["from"] = nFrom
+            }
+            var el = payment.editLog
+            el[String(Date().timeIntervalSince1970)] = msg
+            
+            edits["edits"] = el
+            
+//            print(edits)
+//            print("houses/\(member.home)/payments/\(payment.id ?? "ERROR")")
+            self.db.document("houses/\(member.home)/payments/\(payment.id ?? "ERROR")").updateData(edits) { err in
+                print(err.debugDescription)
+            }
+            
+        }
     }
         
 //    func updatePayments3() {

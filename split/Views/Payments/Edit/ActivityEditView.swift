@@ -14,6 +14,7 @@ struct ActivityEditView: View {
     @Binding var mems: [Member]
     @Binding var showEdit: Bool
     @State var amountText = ""
+    @State var memoText = ""
     @State var editType: EditPickerType = .from
     @State var choiceFrom = [Member]()
     @State var choiceTo = [Member]()
@@ -25,6 +26,9 @@ struct ActivityEditView: View {
                     Spacer()
                     Button {
                         //save and close
+                        if payment.type == .payment {
+                            Fetch().updatePaymentSave(payment: payment, member: member, nAmount: Float(amountText)!, nMemo: memoText, nTo: choiceTo.first!.name, nFrom: choiceFrom.first!.name)
+                        }
                         showEdit = false
                     } label: {
                         Text("Save")
@@ -50,7 +54,7 @@ struct ActivityEditView: View {
                     }) ?? .empty)
                 }
                 switch (payment.type) {
-                case .payment: EditPaymentView(house: $house, member: member, payment: payment, mems: $mems, pickerFrom: $editType, choiceFrom: $choiceFrom, choiceTo: $choiceTo, amountText: $amountText)
+                case .payment: EditPaymentView(house: $house, member: member, payment: payment, mems: $mems, pickerFrom: $editType, choiceFrom: $choiceFrom, choiceTo: $choiceTo, amountText: $amountText, memoText: $memoText)
                 case .request: EditRequestView(house: $house, member: member, payment: payment, mems: $mems, amountText: $amountText)
                 default: EmptyView()
                 }
