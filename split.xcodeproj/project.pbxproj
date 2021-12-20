@@ -124,6 +124,9 @@
 		0CB78462277058C200EF6135 /* XmasClassic.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB7845F277058C200EF6135 /* XmasClassic.png */; };
 		0CB78463277058C200EF6135 /* XmasClassic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB78460277058C200EF6135 /* XmasClassic@2x.png */; };
 		0CB78464277058C200EF6135 /* XmasClassic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB78461277058C200EF6135 /* XmasClassic@3x.png */; };
+		0CB78468277059D700EF6135 /* XmasRed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB78465277059D700EF6135 /* XmasRed@3x.png */; };
+		0CB78469277059D700EF6135 /* XmasRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB78466277059D700EF6135 /* XmasRed.png */; };
+		0CB7846A277059D700EF6135 /* XmasRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB78467277059D700EF6135 /* XmasRed@2x.png */; };
 		0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F3265D8F140016CA92 /* ActivityView.swift */; };
 		0CBF09F7265D8F370016CA92 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F6265D8F370016CA92 /* MembersView.swift */; };
 		0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F9265D8F510016CA92 /* ProfileView.swift */; };
@@ -334,6 +337,9 @@
 		0CB7845F277058C200EF6135 /* XmasClassic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XmasClassic.png; sourceTree = "<group>"; };
 		0CB78460277058C200EF6135 /* XmasClassic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XmasClassic@2x.png"; sourceTree = "<group>"; };
 		0CB78461277058C200EF6135 /* XmasClassic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XmasClassic@3x.png"; sourceTree = "<group>"; };
+		0CB78465277059D700EF6135 /* XmasRed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XmasRed@3x.png"; sourceTree = "<group>"; };
+		0CB78466277059D700EF6135 /* XmasRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XmasRed.png; sourceTree = "<group>"; };
+		0CB78467277059D700EF6135 /* XmasRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XmasRed@2x.png"; sourceTree = "<group>"; };
 		0CBF09F3265D8F140016CA92 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		0CBF09F6265D8F370016CA92 /* MembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersView.swift; sourceTree = "<group>"; };
 		0CBF09F9265D8F510016CA92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -732,6 +738,9 @@
 				0CB7845F277058C200EF6135 /* XmasClassic.png */,
 				0CB78460277058C200EF6135 /* XmasClassic@2x.png */,
 				0CB78461277058C200EF6135 /* XmasClassic@3x.png */,
+				0CB78466277059D700EF6135 /* XmasRed.png */,
+				0CB78467277059D700EF6135 /* XmasRed@2x.png */,
+				0CB78465277059D700EF6135 /* XmasRed@3x.png */,
 			);
 			path = icons;
 			sourceTree = "<group>";
@@ -916,6 +925,7 @@
 				0CD117A62687ACCC0093426F /* Depth.png in Resources */,
 				0CD117862687AC800093426F /* Shadow-black@2x.png in Resources */,
 				0CD1179E2687AC800093426F /* Neon-blue@2x.png in Resources */,
+				0CB7846A277059D700EF6135 /* XmasRed@2x.png in Resources */,
 				0C747E65271A6FE600F49433 /* Yellow@3x.png in Resources */,
 				0CD117912687AC800093426F /* Shadow-white@3x.png in Resources */,
 				0C747E74271A6FE600F49433 /* Orange@3x.png in Resources */,
@@ -943,6 +953,7 @@
 				0CD1179D2687AC800093426F /* Name@2x.png in Resources */,
 				0CD117B22687ACF20093426F /* Rainbow-angle.png in Resources */,
 				0CD1178A2687AC800093426F /* Name-inverse@2x.png in Resources */,
+				0CB78468277059D700EF6135 /* XmasRed@3x.png in Resources */,
 				0CC2A2D22702925B00646EDF /* Etan@3x.png in Resources */,
 				0CD117A42687ACC60093426F /* Default-inverse.png in Resources */,
 				0CD1177E2687AC800093426F /* Rainbow-vertical@2x.png in Resources */,
@@ -960,6 +971,7 @@
 				0C747E75271A6FE600F49433 /* Purple@2x.png in Resources */,
 				0C747E63271A6FE600F49433 /* Blue@2x.png in Resources */,
 				0CD117902687AC800093426F /* Rainbow@3x.png in Resources */,
+				0CB78469277059D700EF6135 /* XmasRed.png in Resources */,
 				0CCC9A132694E13700940E93 /* GoogleService-Info.plist in Resources */,
 				0CCC9A162694E15500940E93 /* GoogleService-Info.plist in Resources */,
 				0CD117B42687ACF70093426F /* Rainbow-vertical.png in Resources */,

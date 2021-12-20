@@ -314,7 +314,7 @@ struct AppIconsView: View {
                     
                     AlternateIconRow(title: "Colors", names: ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Pink"], choice: $alternateIcon)
                     
-                    AlternateIconRow(title: "Holidays", names: ["XmasClassic", "CandyCane"], choice: $alternateIcon)
+                    AlternateIconRow(title: "Holidays", names: ["XmasClassic", "XmasRed", "CandyCane"], choice: $alternateIcon)
                     
                     AlternateIconRow(title: "Insects", names: ["Bee", "Ladybug"], choice: $alternateIcon)
                 }

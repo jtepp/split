@@ -261,6 +261,15 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
+			<key>XmasRed</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>XmasRed</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
 		</dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
