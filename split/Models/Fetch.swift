@@ -1148,7 +1148,10 @@ class Fetch: ObservableObject {
                                 n == name
                             }
                         }
-                        ref.updateData(["reqfrom": reqfrom, "mute":true])
+                        var edits = data["edits"] as? [String: String] ?? [String: String]()
+                        edits[String(Date().timeIntervalSince1970)] = "\(name) opted \(inOrOut ? "in" : "out")"
+                        
+                        ref.updateData(["reqfrom": reqfrom, "mute":true, "edits":edits])
                     }
                 })
             }
@@ -1194,6 +1197,63 @@ class Fetch: ObservableObject {
                 }
                 msg += "From from \(payment.from) to \(nFrom)"
                 edits["from"] = nFrom
+            }
+            var el = payment.editLog
+            el[String(Date().timeIntervalSince1970)] = msg
+            
+            edits["edits"] = el
+            
+            edits["mute"] = true
+            
+//            print(edits)
+//            print("houses/\(member.home)/payments/\(payment.id ?? "ERROR")")
+            self.db.document("houses/\(member.home)/payments/\(payment.id ?? "ERROR")").updateData(edits) { err in
+                print(err.debugDescription)
+            }
+            
+        }
+    }
+    
+    func updateRequestSave(payment: Payment, member: Member, nAmount: Float, nMemo: String, nTo: String, nFrom: [String]) {
+        //find differences, log edits, update data
+        var msg = ""
+        var edits = [AnyHashable: Any]()
+        var editCount = 0
+        if payment.amount == nAmount && payment.memo == nMemo && payment.to == nTo && payment.reqfrom == nFrom {
+            // nothing changed
+        } else {
+            msg = "\(member.name) changed: "
+            
+            if payment.amount != nAmount {
+                msg += "Amount from \(String(format: "%.2f", payment.amount)) to \(String(format: "%.2f",nAmount))"
+                editCount += 1
+                edits["amount"] = nAmount
+            }
+            
+            if payment.memo != nMemo {
+                if editCount > 0 {
+                    msg += ", "
+                }
+                msg += "Memo from \(payment.memo) to \(nMemo)"
+                editCount += 1
+                edits["memo"] = nMemo
+            }
+            
+            if payment.to != nTo {
+                if editCount > 0 {
+                    msg += ", "
+                }
+                msg += "To from \(payment.to) to \(nTo)"
+                editCount += 1
+                edits["to"] = nTo
+            }
+            
+            if payment.reqfrom != nFrom {
+                if editCount > 0 {
+                    msg += ", "
+                }
+                msg += "From \(findChanges(old: payment.reqfrom, new: nFrom))"
+                edits["reqfrom"] = nFrom
             }
             var el = payment.editLog
             el[String(Date().timeIntervalSince1970)] = msg
@@ -1295,4 +1355,38 @@ func settlePayments(_ mems: [Member]) -> [Payment] {
     
     
     return ps
+}
+
+
+func findChanges(old: [String], new: [String]) -> String {
+    var added = [String]()
+    var removed = [String]()
+    
+    old.forEach { o in
+        if !new.contains(o) {
+            removed.append(o)
+        }
+    }
+    
+    new.forEach { n in
+        if !old.contains(n) {
+            added.append(n)
+        }
+    }
+    
+    var msg = "by "
+    
+    if !added.isEmpty {
+        msg += "adding " + added.joined(separator: ", ")
+    }
+    
+    if !removed.isEmpty {
+        if !added.isEmpty {
+            msg += ", and "
+        }
+        msg += "removing " + removed.joined(separator: ", ")
+    }
+    
+    return msg
+    
 }

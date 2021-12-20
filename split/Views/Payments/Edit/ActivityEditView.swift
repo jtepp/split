@@ -28,8 +28,14 @@ struct ActivityEditView: View {
                         //save and close
                         if payment.type == .payment {
                             Fetch().updatePaymentSave(payment: payment, member: member, nAmount: Float(amountText)!, nMemo: memoText, nTo: choiceTo.first!.name, nFrom: choiceFrom.first!.name)
+                        } else if payment.type == .request {
+                            Fetch().updateRequestSave(payment: payment, member: member, nAmount: Float(amountText)!, nMemo: memoText, nTo: choiceTo.first!.name, nFrom: choiceFrom.map({ m in
+                                return m.name
+                            }))
                         }
-                        showEdit = false
+                        withAnimation {
+                            showEdit = false
+                        }
                     } label: {
                         Text("Save")
                             .font(.headline)
@@ -54,14 +60,16 @@ struct ActivityEditView: View {
                     }) ?? .empty)
                 }
                 switch (payment.type) {
-                case .payment: EditPaymentView(house: $house, member: member, payment: payment, mems: $mems, pickerFrom: $editType, choiceFrom: $choiceFrom, choiceTo: $choiceTo, amountText: $amountText, memoText: $memoText)
-                case .request: EditRequestView(house: $house, member: member, payment: payment, mems: $mems, amountText: $amountText)
+                case .payment: EditPaymentView(house: $house, member: member, payment: payment, mems: $mems, editType: $editType, choiceFrom: $choiceFrom, choiceTo: $choiceTo, amountText: $amountText, memoText: $memoText)
+                case .request: EditRequestView(house: $house, member: member, payment: payment, mems: $mems, editType: $editType, choiceFrom: $choiceFrom, choiceTo: $choiceTo, amountText: $amountText, memoText: $memoText)
                 default: EmptyView()
                 }
             }
             .foregroundColor(.white)
             Button {
-                showEdit = false
+                withAnimation {
+                    showEdit = false
+                }
             } label: {
                 HStack {
                     Spacer()

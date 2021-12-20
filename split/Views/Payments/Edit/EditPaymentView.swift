@@ -13,12 +13,13 @@ struct EditPaymentView: View {
     var payment: Payment
     @Binding var mems: [Member]
     @State var showPicker = false
-    @Binding var pickerFrom: EditPickerType
+    @Binding var editType: EditPickerType
     @Binding var choiceFrom: [Member]
     @Binding var choiceTo: [Member]
     @State var choiceALL = [Member]()
     @Binding var amountText: String
     @Binding var memoText: String
+
     var body: some View {
         VStack {
             HStack {
@@ -29,12 +30,12 @@ struct EditPaymentView: View {
                 Spacer()
                 Button(action: {
                     if member.admin {
-                        pickerFrom = .from
+                        editType = .from
                         choiceALL = choiceFrom
                         showPicker = true
                     }
                 }, label: {
-                    PickerButton(text: "Loading Member...", choice: $choiceFrom, whiteText: true)
+                    PickerButton(text: "Loading Member...", choice: $choiceFrom, whiteText: !member.admin)
                         .padding(10)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
@@ -57,12 +58,12 @@ struct EditPaymentView: View {
                 Spacer()
                 Button(action: {
                     if member.admin || member.name == payment.from {
-                        pickerFrom = .to
+                        editType = .to
                         choiceALL = choiceTo
                         showPicker = true
                     }
                 }, label: {
-                    PickerButton(text: "Loading Member...", choice: $choiceTo, whiteText: true)
+                    PickerButton(text: "Loading Member...", choice: $choiceTo, whiteText: !(member.admin || member.name == payment.from))
                         .padding(10)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
@@ -107,9 +108,9 @@ struct EditPaymentView: View {
             memoText = payment.memo
         })
         .sheet(isPresented: $showPicker, onDismiss: {
-            if pickerFrom == .from {
+            if editType == .from {
                 choiceFrom = choiceALL
-            } else if pickerFrom == .to {
+            } else if editType == .to {
                 choiceTo = choiceALL
             }
         }, content: {
