@@ -188,7 +188,7 @@ struct ActivityView: View {
                                 
                                 ActivityRequestCell(payment: .constant(payment), hId: house.id, mems: house.members)
                                     .contextMenu(menuItems: {
-                                        if payment.by == m.id || m.admin {
+                                        if payment.to == m.name || m.admin {
                                             Button {
                                                 paymentEditing = payment
                                                 showEdit = true
@@ -258,7 +258,7 @@ struct ActivityView: View {
                                 
                                 ActivityPaymentCell(payment: .constant(payment), mems: house.members)
                                     .contextMenu(menuItems: {
-                                        if payment.by == m.id || m.admin {
+                                        if payment.from == m.name || m.admin {
                                             Button {
                                                 paymentEditing = payment
                                                 showEdit = true
