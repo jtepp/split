@@ -118,6 +118,12 @@
 		0CB78454276FEDE200EF6135 /* EditPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB78453276FEDE200EF6135 /* EditPaymentView.swift */; };
 		0CB78456276FEE9500EF6135 /* EditRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB78455276FEE9500EF6135 /* EditRequestView.swift */; };
 		0CB7845827701C3900EF6135 /* EditLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB7845727701C3900EF6135 /* EditLogView.swift */; };
+		0CB7845A2770490600EF6135 /* CandyCane.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB784592770490500EF6135 /* CandyCane.png */; };
+		0CB7845C2770490A00EF6135 /* CandyCane@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB7845B2770490A00EF6135 /* CandyCane@2x.png */; };
+		0CB7845E2770490E00EF6135 /* CandyCane@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB7845D2770490E00EF6135 /* CandyCane@3x.png */; };
+		0CB78462277058C200EF6135 /* XmasClassic.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB7845F277058C200EF6135 /* XmasClassic.png */; };
+		0CB78463277058C200EF6135 /* XmasClassic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB78460277058C200EF6135 /* XmasClassic@2x.png */; };
+		0CB78464277058C200EF6135 /* XmasClassic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CB78461277058C200EF6135 /* XmasClassic@3x.png */; };
 		0CBF09F4265D8F140016CA92 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F3265D8F140016CA92 /* ActivityView.swift */; };
 		0CBF09F7265D8F370016CA92 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F6265D8F370016CA92 /* MembersView.swift */; };
 		0CBF09FA265D8F510016CA92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF09F9265D8F510016CA92 /* ProfileView.swift */; };
@@ -322,6 +328,12 @@
 		0CB78453276FEDE200EF6135 /* EditPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPaymentView.swift; sourceTree = "<group>"; };
 		0CB78455276FEE9500EF6135 /* EditRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRequestView.swift; sourceTree = "<group>"; };
 		0CB7845727701C3900EF6135 /* EditLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLogView.swift; sourceTree = "<group>"; };
+		0CB784592770490500EF6135 /* CandyCane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CandyCane.png; sourceTree = "<group>"; };
+		0CB7845B2770490A00EF6135 /* CandyCane@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CandyCane@2x.png"; sourceTree = "<group>"; };
+		0CB7845D2770490E00EF6135 /* CandyCane@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CandyCane@3x.png"; sourceTree = "<group>"; };
+		0CB7845F277058C200EF6135 /* XmasClassic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XmasClassic.png; sourceTree = "<group>"; };
+		0CB78460277058C200EF6135 /* XmasClassic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XmasClassic@2x.png"; sourceTree = "<group>"; };
+		0CB78461277058C200EF6135 /* XmasClassic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XmasClassic@3x.png"; sourceTree = "<group>"; };
 		0CBF09F3265D8F140016CA92 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		0CBF09F6265D8F370016CA92 /* MembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersView.swift; sourceTree = "<group>"; };
 		0CBF09F9265D8F510016CA92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -714,6 +726,12 @@
 				0CC2A2D02702925B00646EDF /* Etan.png */,
 				0CC2A2D12702925B00646EDF /* Etan@2x.png */,
 				0CC2A2CF2702925B00646EDF /* Etan@3x.png */,
+				0CB784592770490500EF6135 /* CandyCane.png */,
+				0CB7845B2770490A00EF6135 /* CandyCane@2x.png */,
+				0CB7845D2770490E00EF6135 /* CandyCane@3x.png */,
+				0CB7845F277058C200EF6135 /* XmasClassic.png */,
+				0CB78460277058C200EF6135 /* XmasClassic@2x.png */,
+				0CB78461277058C200EF6135 /* XmasClassic@3x.png */,
 			);
 			path = icons;
 			sourceTree = "<group>";
@@ -902,12 +920,14 @@
 				0CD117912687AC800093426F /* Shadow-white@3x.png in Resources */,
 				0C747E74271A6FE600F49433 /* Orange@3x.png in Resources */,
 				0CD117AC2687ACDE0093426F /* Neon-blue.png in Resources */,
+				0CB78464277058C200EF6135 /* XmasClassic@3x.png in Resources */,
 				0CD117AF2687ACE60093426F /* Neon-pink.png in Resources */,
 				0C747E76271A6FE600F49433 /* Red@2x.png in Resources */,
 				0C747E64271A6FE600F49433 /* Pink@2x.png in Resources */,
 				0CD117BA2687AD060093426F /* Shadow-white.png in Resources */,
 				0CD1178C2687AC800093426F /* Default-inverse@3x.png in Resources */,
 				0CD117892687AC800093426F /* Depth@2x.png in Resources */,
+				0CB7845A2770490600EF6135 /* CandyCane.png in Resources */,
 				0CD1179B2687AC800093426F /* Name@3x.png in Resources */,
 				0CC2A2D32702925B00646EDF /* Etan.png in Resources */,
 				0CD117972687AC800093426F /* Shadow-white@2x.png in Resources */,
@@ -929,10 +949,12 @@
 				0CD1179A2687AC800093426F /* Name-inverse@3x.png in Resources */,
 				0C210D6826811F42008220B6 /* admin.mp3 in Resources */,
 				0CD117B92687AD060093426F /* Shadow-black.png in Resources */,
+				0CB78462277058C200EF6135 /* XmasClassic.png in Resources */,
 				0C210D6926811F42008220B6 /* pay.mp3 in Resources */,
 				0CD117C02687D7FD0093426F /* Launch Screen.storyboard in Resources */,
 				0CD117762687AC800093426F /* Rainbow-angle@2x.png in Resources */,
 				0C210D6A26811F42008220B6 /* req.mp3 in Resources */,
+				0CB7845C2770490A00EF6135 /* CandyCane@2x.png in Resources */,
 				0CD117922687AC800093426F /* Soft-black@3x.png in Resources */,
 				0C747E67271A6FE600F49433 /* Bee.png in Resources */,
 				0C747E75271A6FE600F49433 /* Purple@2x.png in Resources */,
@@ -961,6 +983,7 @@
 				0CD1178E2687AC800093426F /* Rainbow-vertical@3x.png in Resources */,
 				0C747E68271A6FE600F49433 /* Ladybug.png in Resources */,
 				0CD117BD2687AD110093426F /* Soft-white.png in Resources */,
+				0CB78463277058C200EF6135 /* XmasClassic@2x.png in Resources */,
 				0CD1178D2687AC800093426F /* Rainbow-angle@3x.png in Resources */,
 				0CD117782687AC800093426F /* Rainbow@2x.png in Resources */,
 				0C747E69271A6FE600F49433 /* Pink@3x.png in Resources */,
@@ -974,6 +997,7 @@
 				0C747E62271A6FE600F49433 /* Yellow.png in Resources */,
 				0CD117A02687ACAE0093426F /* Depth-inverse.png in Resources */,
 				0CD1177A2687AC800093426F /* Depth-inverse@2x.png in Resources */,
+				0CB7845E2770490E00EF6135 /* CandyCane@3x.png in Resources */,
 				0CD1177D2687AC800093426F /* Default@3x.png in Resources */,
 				0C747E70271A6FE600F49433 /* Orange@2x.png in Resources */,
 				0CD117B02687ACE60093426F /* Neon-green.png in Resources */,

@@ -243,6 +243,24 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
+			<key>CandyCane</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>CandyCane</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>XmasClassic</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>XmasClassic</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
 		</dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>

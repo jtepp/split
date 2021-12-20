@@ -8,6 +8,8 @@
 import SwiftUI
 import MessageUI
 
+let currentVersion = "3.0.0"
+
 struct SplashView: View {
     @Binding var dontSplash: Bool
     @Binding var showSplash: Bool
@@ -22,7 +24,7 @@ struct SplashView: View {
                     VStack {
                         Spacer()
                         HStack {
-                            Text("v2.7.3")
+                            Text("v"+currentVersion)
                                 .foregroundColor(.white)
                                 .font(Font.subheadline.bold())
                                 //                            .padding()
@@ -66,9 +68,10 @@ struct SplashView: View {
                     showCore.toggle()
                 }
                 
-                SplashDetailsView(title: "Bulk receipts", text: "Now you can use receipt mode to sum individual receipts for multiple people", image: "list.bullet", color: .green)
-                SplashDetailsView(title: "Include tax", text: "Easily add tax with custom rates in payments or requests", image: "percent", color: .red)
-                SplashDetailsView(title: "Search filter", text: "Use the new search filter option to filter activity by keywords", image: "magnifyingglass", color: .blue)
+                SplashDetailsView(title: "Edit Payments and Requests", text: "Fix a payment or request with a long press", image: "square.and.pencil", color: .yellow)
+                SplashDetailsView(title: "New Look", text: "Payment and request cells have been updated with a cleaner look", image: "ellipsis.rectangle", color: .blue)
+                SplashDetailsView(title: "Request Opting", text: "Decide what you want to pay for by opting in or out of a request", image: "person.crop.circle.badge.questionmark", color: .green)
+                SplashDetailsView(title: "Much More", text: "Owed by each in notifications, @everyone, and more in the App Store change log ", image: "ellipsis.circle", color: .white)
 
                 
             }
@@ -112,7 +115,7 @@ struct SplashView: View {
             })
         }
         .onAppear(){
-            UserDefaults.standard.setValue(true, forKey: "2.7.0")
+            UserDefaults.standard.setValue(true, forKey: currentVersion)
         }
         .sheet(isPresented: $isShowingMailView) {
             MailView(result: self.$result)

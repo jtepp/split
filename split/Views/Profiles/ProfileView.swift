@@ -126,7 +126,7 @@ struct ProfileView: View, KeyboardReadable {
                                             )
                                     )
                             })
-                            .offset(y: 100)
+                                .offset(y: 100)
                         )
                     
                     TextField("Name", text: $newName)
@@ -140,14 +140,14 @@ struct ProfileView: View, KeyboardReadable {
                                 if keyboardOpen {
                                     Button(action: {
                                         print(newName)
-//                                        if !house.members.map({ m in
-//                                            return m.name
-//                                        }).contains(newName) {
-                                            Fetch().changeName(m: $m, newName: $newName){
-                                                Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
-                                            }
-//                                        }
-                                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                        //                                        if !house.members.map({ m in
+                                        //                                            return m.name
+                                        //                                        }).contains(newName) {
+                                        Fetch().changeName(m: $m, newName: $newName){
+                                            Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+                                        }
+                                        //                                        }
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                                         
                                     }, label: {
                                         Image(systemName: "checkmark")
@@ -192,28 +192,28 @@ struct ProfileView: View, KeyboardReadable {
                             )
                             .padding()
                         })
-                        .alert(isPresented: $showSignOut, content: {
-                            if m.admin {
-                                if house.members.count > 1 {
-                                    return Alert(title: Text("Set a new admin"), message: Text("You have to choose a new Group admin before you can delete this account"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
-                                        showAdminPicker = true
-                                        showSheet = true
-                                    }), secondaryButton: Alert.Button.cancel())
+                            .alert(isPresented: $showSignOut, content: {
+                                if m.admin {
+                                    if house.members.count > 1 {
+                                        return Alert(title: Text("Set a new admin"), message: Text("You have to choose a new Group admin before you can delete this account"), primaryButton: Alert.Button.destructive(Text("Choose admin"), action: {
+                                            showAdminPicker = true
+                                            showSheet = true
+                                        }), secondaryButton: Alert.Button.cancel())
+                                    } else {
+                                        return Alert(title: Text("Erase Group"), message: Text("Deleting this account will erase this group from the database"), primaryButton: Alert.Button.destructive(Text("Erase"), action: {
+                                            Fetch().deleteAccount(m: $m, erase: true, inWR: $inWR){
+                                                Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+                                            }
+                                        }), secondaryButton: Alert.Button.cancel())
+                                    }
                                 } else {
-                                    return Alert(title: Text("Erase Group"), message: Text("Deleting this account will erase this group from the database"), primaryButton: Alert.Button.destructive(Text("Erase"), action: {
-                                        Fetch().deleteAccount(m: $m, erase: true, inWR: $inWR){
+                                    return Alert(title: Text("Delete account"), message: Text("Are you sure you want to delete this acount?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
+                                        Fetch().deleteAccount(m: $m, inWR: $inWR){
                                             Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                                         }
                                     }), secondaryButton: Alert.Button.cancel())
                                 }
-                            } else {
-                                return Alert(title: Text("Delete account"), message: Text("Are you sure you want to delete this acount?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                                    Fetch().deleteAccount(m: $m, inWR: $inWR){
-                                        Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
-                                    }
-                                }), secondaryButton: Alert.Button.cancel())
-                            }
-                        })
+                            })
                     }
                     Text("ID: \(m.id)")
                         .font(.caption)
@@ -269,57 +269,15 @@ struct ProfileView: View, KeyboardReadable {
                     //                            print("NOOO \(err?.localizedDescription)")
                     //                        }
                     //                    }
-                    HeaderText(text: "App icons", clear: .constant(false))
-                    HStack {
-                        VStack(alignment: .leading) {
-                            
-                            AlternateIconRow(title: "Default", names: ["Default", "Default-inverse"], choice: $alternateIcon)
-                            
-                            AlternateIconRow(title: "Name", names: ["Name", "Name-inverse"], choice: $alternateIcon)
-                            
-                            AlternateIconRow(title: "Shadow", names: ["Shadow-black", "Shadow-white"], choice: $alternateIcon)
-                            
-                            AlternateIconRow(title: "Colors", names: ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Pink"], choice: $alternateIcon)
-                            
-                            AlternateIconRow(title: "Insects", names: ["Bee", "Ladybug"], choice: $alternateIcon)
-                            
-                            AlternateIconRow(title: "Depth", names: ["Depth", "Depth-inverse"], choice: $alternateIcon)
-                            
-                            AlternateIconRow(title: "Soft", names: ["Soft-black", "Soft-white"], choice: $alternateIcon)
-                            
-                            AlternateIconRow(title: "Neon", names: ["Neon-pink", "Neon-blue", "Neon-green"], choice: $alternateIcon)
-                            
-                            AlternateIconRow(title: "Rainbow", names: ["Rainbow", "Rainbow-vertical", "Rainbow-angle"], choice: $alternateIcon)
-                            
-                            if house.id == "kTSIezexeHvrudPleaxY" || house.id == "L2NV1nSXDvXtcu5eZ0eM" || house.id == "PirpSX548mU7d2hacQ1W" {
-                                AlternateIconRow(title: "Special", names: ["Etan"], choice: $alternateIcon)
+                    AppIconsView(alternateIcon: $alternateIcon, hid: house.id)
+                        .onChange(of: watch, perform: { _ in
+                            withAnimation {
+                                switch(engaged) {
+                                case false: svr.scrollTo("icons")
+                                case true: svr.scrollTo("top")
+                                }
                             }
-                            
-                            
-                            
-                            //                            Text("more coming soon...")
-                            //                                .font(.subheadline)
-                            //                                .padding(.top)
-                            
-                        }
-                        .foregroundColor(.white)
-                        .animation(.easeOut)
-                        Spacer()
-                    }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(Color("DarkMaterial"))
-                    )
-                    .padding(.horizontal)
-                    .onChange(of: watch, perform: { _ in
-                        withAnimation {
-                            switch(engaged) {
-                            case false: svr.scrollTo("icons")
-                            case true: svr.scrollTo("top")
-                            }
-                        }
-                    })
+                        })
                 }
                 
                 
@@ -336,5 +294,63 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(house: .constant(.placeholder), m: .constant(.placeholder), inWR: .constant(false), noProf: .constant(false), showStatus: .constant(true), newName: .constant(""), watch: .constant(0), engaged: .constant(false))
             .background(Color.black.edgesIgnoringSafeArea(.all))
+    }
+}
+
+struct AppIconsView: View {
+    @Binding var alternateIcon: String
+    var hid: String
+    var body: some View {
+        HeaderText(text: "App icons", clear: .constant(false))
+        HStack {
+            VStack(alignment: .leading) {
+                
+                Group {
+                    AlternateIconRow(title: "Default", names: ["Default", "Default-inverse"], choice: $alternateIcon)
+                    
+                    AlternateIconRow(title: "Name", names: ["Name", "Name-inverse"], choice: $alternateIcon)
+                    
+                    AlternateIconRow(title: "Shadow", names: ["Shadow-black", "Shadow-white"], choice: $alternateIcon)
+                    
+                    AlternateIconRow(title: "Colors", names: ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Pink"], choice: $alternateIcon)
+                    
+                    AlternateIconRow(title: "Holidays", names: ["XmasClassic", "CandyCane"], choice: $alternateIcon)
+                    
+                    AlternateIconRow(title: "Insects", names: ["Bee", "Ladybug"], choice: $alternateIcon)
+                }
+                
+                Group {
+                    
+                    AlternateIconRow(title: "Depth", names: ["Depth", "Depth-inverse"], choice: $alternateIcon)
+                    
+                    AlternateIconRow(title: "Soft", names: ["Soft-black", "Soft-white"], choice: $alternateIcon)
+                    
+                    AlternateIconRow(title: "Neon", names: ["Neon-pink", "Neon-blue", "Neon-green"], choice: $alternateIcon)
+                    
+                    AlternateIconRow(title: "Rainbow", names: ["Rainbow", "Rainbow-vertical", "Rainbow-angle"], choice: $alternateIcon)
+                    
+                    
+                    
+                    if (hid == "kTSIezexeHvrudPleaxY" || hid == "L2NV1nSXDvXtcu5eZ0eM" || hid == "PirpSX548mU7d2hacQ1W") {
+                        AlternateIconRow(title: "Special", names: ["Etan"], choice: $alternateIcon)
+                    }
+                }
+                
+                
+                //                            Text("more coming soon...")
+                //                                .font(.subheadline)
+                //                                .padding(.top)
+                
+            }
+            .foregroundColor(.white)
+            .animation(.easeOut)
+            Spacer()
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 25)
+                .fill(Color("DarkMaterial"))
+        )
+        .padding(.horizontal)
     }
 }
