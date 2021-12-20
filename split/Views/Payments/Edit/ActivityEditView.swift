@@ -14,6 +14,9 @@ struct ActivityEditView: View {
     @Binding var mems: [Member]
     @Binding var showEdit: Bool
     @State var amountText = ""
+    @State var editType: EditPickerType = .from
+    @State var choiceFrom = [Member]()
+    @State var choiceTo = [Member]()
     var body: some View {
         VStack {
             ScrollView {
@@ -30,24 +33,24 @@ struct ActivityEditView: View {
                             .background(
                                 RoundedRectangle(cornerRadius: 15)
                                             .fill(
-                                                (Float(amountText) ?? nil != nil) ?
+                                                (Float(amountText) ?? nil != nil && !choiceFrom.isEmpty && !choiceTo.isEmpty) ?
                                                 Color.blue :
                                                     Color.gray
                                             )
                             )
-                            .disabled(Float(amountText) ?? nil != nil)
                     }
+                    .disabled(!(Float(amountText) ?? nil != nil && !choiceFrom.isEmpty && !choiceTo.isEmpty))
                 }
                 HStack {
                     Text("By:")
                         .font(.headline)
                         .bold()
-                    singleMemberPhotoView(member: mems.first(where: { m in
+                    SingleMemberPhotoView(member: mems.first(where: { m in
                         m.id == payment.by
                     }) ?? .empty)
                 }
                 switch (payment.type) {
-                case .payment: EditPaymentView(house: $house, member: member, payment: payment, mems: $mems, amountText: $amountText)
+                case .payment: EditPaymentView(house: $house, member: member, payment: payment, mems: $mems, pickerFrom: $pickerFrom, choiceFrom: $choiceFrom, choiceTo: $choiceTo, amountText: $amountText)
                 case .request: EditRequestView(house: $house, member: member, payment: payment, mems: $mems, amountText: $amountText)
                 default: EmptyView()
                 }
@@ -83,4 +86,10 @@ struct ActivityEditView_Previews: PreviewProvider {
             ActivityEditView(house: .constant(.placeholder), member: .empty, payment: .placeholder, mems: .constant([Member]()), showEdit: .constant(true))
         }
     }
+}
+
+
+enum EditPickerType {
+    case .to
+    case .from
 }

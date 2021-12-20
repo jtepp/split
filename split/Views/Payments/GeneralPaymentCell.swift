@@ -13,12 +13,12 @@ struct GeneralPaymentCell: View {
     var body: some View {
         HStack {
             HStack {
-                singleMemberPhotoView(member: mems.first(where: { m in
+                SingleMemberPhotoView(member: mems.first(where: { m in
                     m.name == payment.from
                 }) ?? .empty)
                 Image(systemName: "arrow.right")
                 HStack {
-                    singleMemberPhotoView(member: mems.first(where: { m in
+                    SingleMemberPhotoView(member: mems.first(where: { m in
                         m.name == payment.to
                     }) ?? .empty)
                     Spacer(minLength: 0)

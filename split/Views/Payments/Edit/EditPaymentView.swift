@@ -13,9 +13,10 @@ struct EditPaymentView: View {
     var payment: Payment
     @Binding var mems: [Member]
     @State var showPicker = false
-    @State var pickerFrom = true
-    @State var choiceFrom = [Member]()
-    @State var choiceTo = [Member]()
+    @Binding var pickerFrom: EditPickerType
+    @Binding var choiceFrom: [Member]
+    @Binding var choiceTo: [Member]
+    @State var choiceALL = [Member]()
     @Binding var amountText: String
     var body: some View {
         VStack {
@@ -27,7 +28,8 @@ struct EditPaymentView: View {
                 Spacer()
                 Button(action: {
                     if member.admin {
-                        pickerFrom = true
+                        pickerFrom = .from
+                        choiceALL = choiceFrom
                         showPicker = true
                     }
                 }, label: {
@@ -54,7 +56,8 @@ struct EditPaymentView: View {
                 Spacer()
                 Button(action: {
                     if member.admin || member.name == payment.from {
-                        pickerFrom = false
+                        pickerFrom = .to
+                        choiceALL = choiceTo
                         showPicker = true
                     }
                 }, label: {
@@ -96,12 +99,14 @@ struct EditPaymentView: View {
             
             amountText = String(format: "%.2f", payment.amount)
         })
-        .sheet(isPresented: $showPicker, content: {
-            if !pickerFrom {
-                MemberPicker(show: $showPicker, house: $house, choice: $choiceFrom, multiple: false)
-            } else {
-                MemberPicker(show: $showPicker, house: $house, choice: $choiceTo, multiple: false)
+        .sheet(isPresented: $showPicker, onDismiss: {
+            if pickerFrom == "from" {
+                choiceFrom = choiceALL
+            } else if pickerFrom == "to" {
+                choiceTo = choiceALL
             }
+        }, content: {
+                MemberPicker(show: $showPicker, house: $house, choice: $choiceALL, multiple: false)
         })
     }
 }

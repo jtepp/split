@@ -17,7 +17,7 @@ struct GeneralRequestCell: View {
     var body: some View {
         HStack {
             HStack {
-                singleMemberPhotoView(member: mems.first(where: { m in
+                SingleMemberPhotoView(member: mems.first(where: { m in
                     m.name == payment.to
                 }) ?? .empty)
 

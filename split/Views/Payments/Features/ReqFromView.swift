@@ -76,7 +76,7 @@ struct RFMemberView: View {
     }
 }
 
-struct singleMemberPhotoView: View {
+struct SingleMemberPhotoView: View {
     var member: Member
     var body: some View {
         b64toimg(b64: member.image)
