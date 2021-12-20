@@ -16,6 +16,7 @@ struct EditPaymentView: View {
     @State var pickerFrom = true
     @State var choiceFrom = [Member]()
     @State var choiceTo = [Member]()
+    @Binding var amountText: String
     var body: some View {
         VStack {
             HStack {
@@ -70,6 +71,11 @@ struct EditPaymentView: View {
                 Spacer()
             }
             .padding()
+            
+            InputField(name: "Amount", text: $amountText)
+                .padding()
+            
+            
         }
         .onAppear(perform: {
             let memF = mems.first { m in
@@ -87,6 +93,8 @@ struct EditPaymentView: View {
             if memT != nil {
                 choiceTo = [memT!]
             }
+            
+            amountText = String(format: "%.2f", payment.amount)
         })
         .sheet(isPresented: $showPicker, content: {
             if !pickerFrom {

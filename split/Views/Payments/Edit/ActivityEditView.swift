@@ -13,6 +13,7 @@ struct ActivityEditView: View {
     var payment: Payment
     @Binding var mems: [Member]
     @Binding var showEdit: Bool
+    @State var amountText = ""
     var body: some View {
         VStack {
             ScrollView {
@@ -28,8 +29,13 @@ struct ActivityEditView: View {
                             .padding(10)
                             .background(
                                 RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color.blue)
+                                            .fill(
+                                                (Float(amountText) ?? nil != nil) ?
+                                                Color.blue :
+                                                    Color.gray
+                                            )
                             )
+                            .disabled(Float(amountText) ?? nil != nil)
                     }
                 }
                 HStack {
@@ -41,8 +47,8 @@ struct ActivityEditView: View {
                     }) ?? .empty)
                 }
                 switch (payment.type) {
-                case .payment: EditPaymentView(house: $house, member: member, payment: payment, mems: $mems)
-                case .request: EditRequestView(house: $house, member: member, payment: payment, mems: $mems)
+                case .payment: EditPaymentView(house: $house, member: member, payment: payment, mems: $mems, amountText: $amountText)
+                case .request: EditRequestView(house: $house, member: member, payment: payment, mems: $mems, amountText: $amountText)
                 default: EmptyView()
                 }
             }
@@ -53,7 +59,8 @@ struct ActivityEditView: View {
                 HStack {
                     Spacer()
                     Text("Cancel")
-                        .font(.system(size: 20, weight: .bold))
+                        .font(.system(size: 20))
+                        .bold()
                         .padding(.vertical, 0)
                         .foregroundColor(.white)
                     Spacer()

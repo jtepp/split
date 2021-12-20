@@ -135,6 +135,7 @@ struct InputField: View {
                 .foregroundColor(.white)
             Spacer()
             TextField(name, text: $text)
+                .foregroundColor(.primary)
                 .opacity(0.5)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(name.lowercased() == "amount" ? .decimalPad : .default)

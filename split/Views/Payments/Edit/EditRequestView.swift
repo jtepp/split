@@ -12,6 +12,7 @@ struct EditRequestView: View {
     var member: Member
     var payment: Payment
     @Binding var mems: [Member]
+    @Binding var amountText: String
     var body: some View {
         Text("Hello, World!")
     }
