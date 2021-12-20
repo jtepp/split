@@ -13,44 +13,88 @@ struct EditPaymentView: View {
     var payment: Payment
     @Binding var mems: [Member]
     @State var showPicker = false
-    @State var choice = [Member]()
+    @State var pickerFrom = true
+    @State var choiceFrom = [Member]()
+    @State var choiceTo = [Member]()
     var body: some View {
-        HStack {
-        Text("From:")
-            .font(.title)
-            .bold()
-            .foregroundColor(.white)
-        Spacer()
-        Button(action: {
-            if member.admin {
-                showPicker = true
-            }
-        }, label: {
-            PickerButton(text: "Loading Member...", choice: $choice, whiteText: true)
-                .padding(10)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(
-                            member.admin ?
-                            Color("Material") : Color.black
+        VStack {
+            HStack {
+                Text("From:")
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(.white)
+                Spacer()
+                Button(action: {
+                    if member.admin {
+                        pickerFrom = true
+                        showPicker = true
+                    }
+                }, label: {
+                    PickerButton(text: "Loading Member...", choice: $choiceFrom, whiteText: true)
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(
+                                    member.admin ?
+                                    Color("Material") : Color.black
+                                )
                         )
-                )
+                })
+                Spacer()
+            }
+            .padding()
+            
+            
+            HStack {
+                Text("To:")
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(.white)
+                Spacer()
+                Button(action: {
+                    if member.admin || member.name == payment.from {
+                        pickerFrom = false
+                        showPicker = true
+                    }
+                }, label: {
+                    PickerButton(text: "Loading Member...", choice: $choiceTo, whiteText: true)
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(
+                                    member.admin || member.name == payment.from ?
+                                    Color("Material") : Color.black
+                                )
+                        )
+                })
+                Spacer()
+            }
+            .padding()
+        }
+        .onAppear(perform: {
+            let memF = mems.first { m in
+                m.name == payment.from
+            }
+            
+            if memF != nil {
+                choiceFrom = [memF!]
+            }
+            
+            let memT = mems.first { m in
+                m.name == payment.to
+            }
+            
+            if memT != nil {
+                choiceTo = [memT!]
+            }
         })
-        Spacer()
-    }
-    .padding()
-    .onAppear(perform: {
-        let mem = mems.first { m in
-            m.name == payment.from
-        }
-        
-        if mem != nil {
-            choice = [mem!]
-        }
-    })
-    .sheet(isPresented: $showPicker, content: {
-        MemberPicker(show: $showPicker, house: $house, choice: $choice, multiple: false)
-})
+        .sheet(isPresented: $showPicker, content: {
+            if !pickerFrom {
+                MemberPicker(show: $showPicker, house: $house, choice: $choiceFrom, multiple: false)
+            } else {
+                MemberPicker(show: $showPicker, house: $house, choice: $choiceTo, multiple: false)
+            }
+        })
     }
 }
 
