@@ -234,7 +234,7 @@ class Fetch: ObservableObject {
                 let includedSelf = data["includedSelf"] as? Bool ?? false
                 let type = data["type"] as? String ?? "unknown"
                 let by = data["by"] as? String ?? ""
-                let editLog = data["edits"] as? [String] ?? [String]()
+                let editLog = data["edits"] as? [Int: String] ?? [Int: String]()
                 
                 
                 return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, includedSelf: includedSelf, type: stringToPT(type), by: by, editLog: editLog)
