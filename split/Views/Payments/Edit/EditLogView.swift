@@ -10,7 +10,7 @@ import SwiftUI
 struct EditLogView: View {
     var payment: Payment
     var body: some View {
-        ScrollView {
+        VStack {
             HStack {
                 Text("Edits:")
                     .bold()
@@ -42,7 +42,7 @@ struct EditLogCell: View {
         HStack {
             
             VStack {
-                Text("\(unixtodate(unix: Int(time) ?? 0))")
+                Text("\(unixtodate(unix: Int(Float(time) ?? 0)))")
                     .font(.caption2)
                     .foregroundColor(.primary)
                     .padding(4)

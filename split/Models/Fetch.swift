@@ -236,7 +236,6 @@ class Fetch: ObservableObject {
                 let by = data["by"] as? String ?? ""
                 let editLog = data["edits"] as? [String: String] ?? [String: String]()
                 
-                
                 return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, includedSelf: includedSelf, type: stringToPT(type), by: by, editLog: editLog)
             })
             for member in h.wrappedValue.members {
@@ -1163,7 +1162,7 @@ class Fetch: ObservableObject {
         if payment.amount == nAmount && payment.memo == nMemo && payment.to == nTo && payment.from == nFrom {
             // nothing changed
         } else {
-            msg = "\(member.name) changed "
+            msg = "\(member.name) changed: "
             
             if payment.amount != nAmount {
                 msg += "Amount from \(String(format: "%.2f", payment.amount)) to \(String(format: "%.2f",nAmount))"
@@ -1200,6 +1199,8 @@ class Fetch: ObservableObject {
             el[String(Date().timeIntervalSince1970)] = msg
             
             edits["edits"] = el
+            
+            edits["mute"] = true
             
 //            print(edits)
 //            print("houses/\(member.home)/payments/\(payment.id ?? "ERROR")")
