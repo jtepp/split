@@ -228,14 +228,16 @@ class Fetch: ObservableObject {
                 let to = data["to"] as? String ?? ""
                 let time = data["time"] as? NSNumber ?? 0
                 let from = data["from"] as? String ?? ""
-                let reqfrom = data["reqfrom"] as? [String] ?? [""]
+                let reqfrom = data["reqfrom"] as? [String] ?? [String]()
                 let amount = data["amount"] as? NSNumber ?? 0
                 let memo = data["memo"] as? String ?? ""
+                let includedSelf = data["includedSelf"] as? Bool ?? false
                 let type = data["type"] as? String ?? "unknown"
                 let by = data["by"] as? String ?? ""
-                let includedSelf = data["includedSelf"] as? Bool ?? false
+                let editLog = data["edits"] as? [String] ?? [String]()
                 
-                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, includedSelf: includedSelf, type: stringToPT(type), by: by)
+                
+                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, includedSelf: includedSelf, type: stringToPT(type), by: by, editLog: editLog)
             })
             for member in h.wrappedValue.members {
                 self.updateBalances(h: h.wrappedValue, m: member)

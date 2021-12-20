@@ -50,7 +50,7 @@ struct ActivityEditView: View {
                     }) ?? .empty)
                 }
                 switch (payment.type) {
-                case .payment: EditPaymentView(house: $house, member: member, payment: payment, mems: $mems, pickerFrom: $pickerFrom, choiceFrom: $choiceFrom, choiceTo: $choiceTo, amountText: $amountText)
+                case .payment: EditPaymentView(house: $house, member: member, payment: payment, mems: $mems, pickerFrom: $editType, choiceFrom: $choiceFrom, choiceTo: $choiceTo, amountText: $amountText)
                 case .request: EditRequestView(house: $house, member: member, payment: payment, mems: $mems, amountText: $amountText)
                 default: EmptyView()
                 }
@@ -90,6 +90,6 @@ struct ActivityEditView_Previews: PreviewProvider {
 
 
 enum EditPickerType {
-    case .to
-    case .from
+    case to
+    case from
 }

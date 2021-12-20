@@ -18,6 +18,7 @@ struct EditPaymentView: View {
     @Binding var choiceTo: [Member]
     @State var choiceALL = [Member]()
     @Binding var amountText: String
+    @State var memoText = ""
     var body: some View {
         VStack {
             HStack {
@@ -45,7 +46,7 @@ struct EditPaymentView: View {
                 })
                 Spacer()
             }
-            .padding()
+            .padding(.horizontal)
             
             
             HStack {
@@ -73,10 +74,14 @@ struct EditPaymentView: View {
                 })
                 Spacer()
             }
-            .padding()
+            .padding(.horizontal)
             
             InputField(name: "Amount", text: $amountText)
-                .padding()
+                .padding(.horizontal)
+            InputField(name: "Memo", text: $memoText)
+                .padding(.horizontal)
+            
+//            EditLogView(payment: payment)
             
             
         }
@@ -98,11 +103,12 @@ struct EditPaymentView: View {
             }
             
             amountText = String(format: "%.2f", payment.amount)
+            memoText = payment.memo
         })
         .sheet(isPresented: $showPicker, onDismiss: {
-            if pickerFrom == "from" {
+            if pickerFrom == .from {
                 choiceFrom = choiceALL
-            } else if pickerFrom == "to" {
+            } else if pickerFrom == .to {
                 choiceTo = choiceALL
             }
         }, content: {
