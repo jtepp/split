@@ -42,7 +42,7 @@ struct ActivityView: View {
                     .overlay(
                         Button(action: {
                             showSplash = true
-                            //                    Fetch().updatePayments3()
+//                                                Fetch().updatePayments3()
                         }, label:{
                             Image(systemName: "questionmark")
                                 .font(Font.body.bold())

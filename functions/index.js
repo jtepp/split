@@ -8,7 +8,12 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
     var body;
     var snd = "default"
     const type = event.after.get("type");
-    if (event.after.get("isAn") || type == "an") {
+
+    var typeFix = "unknown"
+    if (event.after.get("isAn") || type == "announcement") {
+        typeFix = "announcement"
+        event.after.get("id")
+
         let memo = event.after.get("memo")
         title = "Announcement"
         body = event.after.get("from") + " " + memo
@@ -21,11 +26,13 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         }
 
     } else if (event.after.get("isGM") || type == "groupmessage") {
+        typeFix = "groupmessage"
         snd = "pay.mp3"
         title = "from " + event.after.get("from")
         body = event.after.get("memo")
 
     } else if (event.after.get("isRequest") || type == "request") {
+        typeFix = "request"
         snd = "req.mp3"
         title = "Request received"
         let reqFrom = event.after.get("reqfrom")
@@ -39,6 +46,7 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             body = event.after.get("to") + " requested $" + amount + " ($" + Number(amount / reqFrom.length).toFixed(2) + " each), split between you and " + (reqFrom.length - 1) + " others"
         }
     } else if (type != "unknown") {
+        typeFix = "payment"
         snd = "pay.mp3"
         title = "Payment received"
         body = event.after.get("from") + " sent you $" + event.after.get("amount").toFixed(2)
@@ -50,6 +58,8 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
             body += " for " + event.after.get("memo")
         }
     }
+
+
 
     event.after.get("fcm").forEach(async tkn => {
         let message = {
@@ -72,6 +82,9 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         }
     });
 
-
+    admin.firestore().doc("houses/" + context.params.houseid + "/payments/" + context.params.paymentid).update({
+        "type": type || typeFix,
+        "mute": true
+    })
 
 })

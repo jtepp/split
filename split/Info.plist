@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>com.jtepp.spllit</string>
@@ -32,6 +30,15 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Blue</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>CandyCane</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>CandyCane</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -234,24 +241,6 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>Yellow</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Yellow</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>CandyCane</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>CandyCane</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
 			<key>XmasClassic</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -266,6 +255,15 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>XmasRed</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Yellow</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Yellow</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -379,5 +377,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

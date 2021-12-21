@@ -1277,13 +1277,13 @@ class Fetch: ObservableObject {
 //                guard let docs = qs?.documents else {return}
 //                docs.forEach({ qds in
 //                    let data = qds.data()
-//                    
+////
 //                    let an = data["isAn"] as? Bool ?? false
 //                    let gm = data["isGM"] as? Bool ?? false
 //                    let rq = data["isRequest"] as? Bool ?? false
-//                    
+//
 //                    let id = qds.reference
-//                    
+////
 //                    var t: paymentType = .unknown
 //                    if an {
 //                        t = .announcement
@@ -1297,7 +1297,9 @@ class Fetch: ObservableObject {
 //                    if !an && !gm && !rq {
 //                        t = .payment
 //                    }
-//                    id.updateData(["mute": true, "type" : ptToString(t)])
+//                    id.updateData(["type":ptToString(t)]) { err in
+//                        print(err.debugDescription)
+//                    }
 //                    
 //                })
 //            }
