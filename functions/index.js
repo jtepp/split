@@ -82,9 +82,11 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
         }
     });
 
-    admin.firestore().doc("houses/" + context.params.houseid + "/payments/" + context.params.paymentid).update({
-        "type": type || typeFix,
-        "mute": true
-    })
+    if (type == undefined) {
+        admin.firestore().doc("houses/" + context.params.houseid + "/payments/" + context.params.paymentid).update({
+            "type": typeFix,
+            "mute": true
+        })
+    }
 
 })
