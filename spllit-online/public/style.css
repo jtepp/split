@@ -1,0 +1,153 @@
+:root {
+    /* Colors */
+    --blue-light: #0071eb;
+    --blue-dark: #2c4b99;
+    --light-grey: #808080;
+    --mid-grey: #323232;
+    --dark-grey: #1d1d1d;
+    --red-light: #eb5545;
+    --red-dark: #dc5142;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    background-color: #0f0f0f;
+    color: white;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#corner-logo {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+}
+
+.h1 {
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.h2 {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.h3 {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+header {
+    padding: 10px;
+    background-color: black;
+    user-select: none;
+}
+
+#login-container {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-block: 100px;
+    padding: 10px;
+    width: 50%;
+    background-color: var(--light-grey);
+    border-radius: 10px;
+
+}
+
+.text-field {
+    width: 200px;
+    height: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background-color: white;
+    color: black;
+    text-align: left;
+    padding-top: 2px;
+    padding-left: 4px;
+}
+
+[contentEditable]:empty:not(:focus):before {
+    content: attr(name);
+    opacity: 0.3;
+}
+
+.button {
+    background-color: var(--blue-light);
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#login-button {
+    color: white;
+}
+
+#download-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--light-grey);
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 100px
+}
+
+#download-container .h3 {
+    color: black;
+}
+
+#download-icon-container {
+    position: relative;
+}
+
+#download-icon-over {
+    position: absolute;
+    width: 40px;
+    margin-block: 10px;
+    top: 0;
+    pointer-events: none;
+    left: 0;
+    border-radius: 7px;
+    transition: all 0.2s ease-out;
+    /* box-shadow: 0px #000; */
+}
+
+#download-icon {
+    width: 40px;
+    margin-block: 10px;
+    opacity: 0;
+}
+
+#download-icon-container:hover #download-icon-over {
+    top: -3px;
+    box-shadow: 0px 4px 3px #00000040;
+}

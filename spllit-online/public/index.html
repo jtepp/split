@@ -1,32 +1,40 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset=“UTF-8”>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="res/icon.png" type="image/x-icon">
 
-  <title>Welcome to Firebase Hosting</title>
-
-  <!-- update the version number as needed -->
-  <script defer src="/__/firebase/9.6.1/firebase-app-compat.js"></script>
-  <!-- include only the Firebase features as you need -->
-  <script defer src="/__/firebase/9.6.1/firebase-firestore-compat.js"></script>
-  <script defer src="/__/firebase/9.6.1/firebase-functions-compat.js"></script>
-  <script defer src="/__/firebase/9.6.1/firebase-performance-compat.js"></script>
-  <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-  <link rel="stylesheet" href="style.css">
+    <title>spllit - Coming soon...</title>
 </head>
 
 <body>
+    <header>
+        <img src="res/logo.png" id="corner-logo" draggable="false" alt="" srcset="">
+    </header>
 
-  <h1>spllit</h1>
+    <div id="main-container">
+        <center style="margin-block: 35vh;">Coming soon...</center>
 
-  <script src="firebase.js">
-  </script>
+        <footer>
+            <div id="download-container"
+                onclick="window.location.href = 'https://apps.apple.com/ca/app/spllit/id1569941609'">
+                <div class="h3">Create an account</div>
+                <div id="download-icon-container">
+                    <img src="res/icon.png" draggable=false alt="" id="download-icon">
+                    <img src="res/icon.png" alt="" id="download-icon-over">
+                </div>
+                <div class="h3">
+                    Download spllit<br>on the App Store
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
