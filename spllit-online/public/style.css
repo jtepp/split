@@ -54,6 +54,10 @@ header {
     user-select: none;
 }
 
+#login-button {
+    color: white;
+}
+
 #login-container {
     color: black;
     display: flex;
@@ -62,8 +66,8 @@ header {
     justify-content: center;
     text-align: center;
     margin-block: 100px;
-    padding: 10px;
-    width: 50%;
+    padding: 10px 20px;
+    width: fit-content;
     background-color: var(--light-grey);
     border-radius: 10px;
 
@@ -100,10 +104,6 @@ header {
     border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-#login-button {
-    color: white;
 }
 
 #download-container {
