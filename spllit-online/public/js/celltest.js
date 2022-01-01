@@ -10,36 +10,36 @@ class Post {
 }
 
 class Payment {
-    constructor(post) {
-        Post.call(this, post)
-        this.amount = post.amount;
-        this.from = post.from;
-        this.to = post.to;
-        this.edits = post.edits;
+    constructor(data) {
+        Post.call(this, data)
+        this.amount = data.amount;
+        this.from = data.from;
+        this.to = data.to;
+        this.edits = data.edits;
     }
-
 }
 
 class Request {
-    constructor(post) {
-        Post.call(this, post)
-        this.amount = post.amount;
-        this.reqfrom = post.reqfrom;
-        this.to = post.to;
-        this.edits = post.edits;
+    constructor(data) {
+        Post.call(this, data)
+        this.amount = data.amount;
+        this.reqfrom = data.reqfrom;
+        this.to = data.to;
+        this.edits = data.edits;
+        this.includeSelf = data.includeSelf;
     }
 }
 
 class Announcement {
-    constructor(post) {
-        Post.call(this, post)
-        this.from = post.from;
+    constructor(data) {
+        Post.call(this, data)
+        this.from = data.from;
     }
 }
 
 class Groupmessage {
-    constructor(post) {
-        Post.call(this, post)
-        this.from = post.from;
+    constructor(data) {
+        Post.call(this, data)
+        this.from = data.from;
     }
 }
