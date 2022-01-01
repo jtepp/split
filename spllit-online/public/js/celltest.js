@@ -58,14 +58,3 @@ const testData = [
         edits: ["aaa changed: Amount from 1.00 to 6.30"]
     })
 ]
-
-/*
-<div class="post-cell" id="1">
-        <!-- before is time and after is date -->
-        <div class="cell-inner-left"></div>
-        <!-- after is arrow -->
-        <div class="cell-inner-right"></div>
-        <div class="cell-inner-amount"></div>
-        <div class="cell-inner-memo"></div>
-    </div>
-*/

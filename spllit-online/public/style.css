@@ -4,20 +4,33 @@
     --blue-dark: #2c4b99;
     --light-grey: #808080;
     --mid-grey: #323232;
+    --mid-dark-grey: #00000033;
     --dark-grey: #1d1d1d;
     --red-light: #eb5545;
     --red-dark: #dc5142;
+    --white-black: #fff;
+    --black-white: #000;
+}
 
+/* dark mode media query */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --white-black: #000;
+        --black-white: #fff;
+        --blue-light: var(--blue-dark);
+        --red-light: var(--red-dark);
+        --light-grey: var(--dark-grey);
+    }
 }
 
 * {
     margin: 0;
     padding: 0;
-    font-family: Helvetica, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
 
 body {
-    background-color: #0f0f0f;
+    background-color: #000;
     color: white;
 }
 
@@ -59,7 +72,7 @@ header {
 }
 
 #login-container {
-    color: black;
+    color: var(--black-white);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,6 +120,7 @@ header {
 }
 
 #download-container {
+    color: var(--black-white);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,9 +135,6 @@ header {
     margin-bottom: 100px
 }
 
-#download-container .h3 {
-    color: black;
-}
 
 #download-icon-container {
     position: relative;
