@@ -19,7 +19,16 @@
         --black-white: #fff;
         --blue-light: var(--blue-dark);
         --red-light: var(--red-dark);
-        --light-grey: var(--dark-grey);
+        --light-grey: var(--mid-grey);
+    }
+
+    img.sfs {
+        filter: invert(1);
+    }
+
+    .post-cell::before,
+    .post-cell::after {
+        opacity: 0.2 !important;
     }
 }
 

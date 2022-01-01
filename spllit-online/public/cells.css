@@ -15,8 +15,8 @@
     left: 5px;
     font-size: 12px;
     font-weight: 500;
-    opacity: 0.8;
-    color: var(--mid-grey);
+    opacity: 0.4;
+    color: var(--black-white);
 }
 
 .post-cell::after {
@@ -27,8 +27,8 @@
     right: 3px;
     font-size: 12px;
     font-weight: 500;
-    opacity: 0.8;
-    color: var(--mid-grey);
+    opacity: 0.4;
+    color: var(--black-white);
 }
 
 .single-member {
@@ -70,7 +70,7 @@ img.member-img {
     width: 140px;
 }
 
-img.sfs-arrow {
+img.sfs.arrow {
     width: 20px;
     margin-inline: 10px;
     height: auto;
