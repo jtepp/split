@@ -17,9 +17,7 @@ function findHome(name, id) {
     // find home in firestore that has a member with the name and id
     const member = db.collectionGroup('members')
         .where('name', '==', name)
-        .where('id', '==', id)
         .get()
-    console.log(member)
     // if found, set name, id, and houseId in local storage
     // then redirect to home page
     // if not found, show alert
