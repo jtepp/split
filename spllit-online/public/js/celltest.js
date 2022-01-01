@@ -10,8 +10,8 @@ class Post {
 }
 
 class Payment {
-    constructor(data) {
-        Post.call(this, data)
+    function (data) {
+        Post.prototype.constructor.call(this, data);
         this.amount = data.amount;
         this.from = data.from;
         this.to = data.to;
@@ -21,7 +21,7 @@ class Payment {
 
 class Request {
     constructor(data) {
-        Post.call(this, data)
+        Post.prototype.constructor.call(this, data)
         this.amount = data.amount;
         this.reqfrom = data.reqfrom;
         this.to = data.to;
@@ -32,14 +32,40 @@ class Request {
 
 class Announcement {
     constructor(data) {
-        Post.call(this, data)
+        Post.prototype.constructor.call(this, data)
         this.from = data.from;
     }
 }
 
 class Groupmessage {
     constructor(data) {
-        Post.call(this, data)
+        Post.prototype.constructor.call(this, data)
         this.from = data.from;
     }
 }
+
+const testData = [
+    new Payment({
+        id: 1,
+        by: "aaa",
+        fcm: ["bbb"],
+        time: 1641071000,
+        type: "payment",
+        memo: "test",
+        amount: 6.3,
+        from: "aaa",
+        to: "bbb",
+        edits: ["aaa changed: Amount from 1.00 to 6.30"]
+    })
+]
+
+/*
+<div class="post-cell" id="1">
+        <!-- before is time and after is date -->
+        <div class="cell-inner-left"></div>
+        <!-- after is arrow -->
+        <div class="cell-inner-right"></div>
+        <div class="cell-inner-amount"></div>
+        <div class="cell-inner-memo"></div>
+    </div>
+*/
