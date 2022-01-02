@@ -36,19 +36,34 @@
     transition: all 0.2s ease-out;
 }
 
+.single-member-container:not(:last-of-type) {
+    width: 25px;
+    margin-right: -14px;
+}
+
+
 .single-member {
     display: flex;
     flex-direction: row;
 }
 
 img.member-img {
+    position: relative;
     width: 25px;
     height: 25px;
     border-radius: 5px;
     box-shadow: 0 0 8px #00000070;
     object-fit: cover;
-    transform: scale(1);
     transition: transform 0.2s ease-out;
+}
+
+.single-member-container:not(:last-of-type) .member-img {
+    z-index: 1;
+    transform: scale(0.9);
+}
+
+.single-member-container:last-of-type .member-img {
+    z-index: 2;
 }
 
 .vertical-center,
@@ -79,7 +94,7 @@ img.member-img {
     flex-grow: 1;
     display: flex;
     flex-direction: row;
-    column-gap: 10px;
+    column-gap: 0px;
 }
 
 /* hide scroll indicators for .cell-inner-right */
@@ -89,17 +104,19 @@ img.member-img {
 
 /* compacting cells */
 
-.cell-inner-right:hover>.single-member-container:not(:last-child) {
-    width: 25px;
-    margin-right: -10px;
+.cell-inner-right:hover>.single-member-container {
+    width: auto;
+    overflow: visible;
+    margin-right: 0px;
 }
 
-.cell-inner-right:hover>.single-member-container:not(:last-child)>.single-member>img {
-    transform: scale(0.9);
+
+.cell-inner-right:hover>.single-member-container:not(:last-of-type)>.single-member>.member-img {
+    transform: scale(1);
 }
 
 .cell-inner-right:hover {
-    column-gap: 0px;
+    column-gap: 10px;
 }
 
 
@@ -118,7 +135,19 @@ img.sfs.arrow {
     color: var(--black-white);
     padding-inline: 6px;
     border-radius: 10px;
-    float: right;
+}
+
+[includeSelf].cell-inner-amount::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 15px;
+    height: 15px;
+    filter: invert(1);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("https://github.com/cyanzhong/sf-symbols-online/blob/master/glyphs/person.circle.png?raw=true");
 }
 
 .cell-inner-memo {
@@ -150,6 +179,11 @@ img.sfs.chevron {
     transition: transform 0.2s ease-out;
 }
 
+img.sfs,
+.sfs-after::after {
+    filter: invert(var(--invert-dark));
+}
+
 .post-cell:hover img.sfs.chevron {
     transform: translateX(-50%) rotate(180deg);
 }
@@ -157,4 +191,10 @@ img.sfs.chevron {
 .post-cell:hover .cell-inner-memo {
     height: 60px;
     overflow-y: scroll;
+}
+
+.cell-inner-right:not(:hover) [more-tag]::after {
+    content: attr(more-tag);
+    width: max-content;
+    white-space: pre;
 }

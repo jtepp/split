@@ -10,6 +10,7 @@
     --red-dark: #dc5142;
     --white-black: #fff;
     --black-white: #000;
+    --invert-dark: 0;
 }
 
 /* dark mode media query */
@@ -20,10 +21,7 @@
         --blue-light: var(--blue-dark);
         --red-light: var(--red-dark);
         --light-grey: var(--mid-grey);
-    }
-
-    img.sfs {
-        filter: invert(1);
+        --invert-dark: 1;
     }
 
     .post-cell::before,
