@@ -9,9 +9,9 @@ class Post {
     }
 }
 
-class Payment {
-    function (data) {
-        Post.prototype.constructor.call(this, data);
+class Payment extends Post {
+    constructor(data) {
+        super(data)
         this.amount = data.amount;
         this.from = data.from;
         this.to = data.to;
@@ -19,9 +19,9 @@ class Payment {
     }
 }
 
-class Request {
+class Request extends Post {
     constructor(data) {
-        Post.prototype.constructor.call(this, data)
+        super(data)
         this.amount = data.amount;
         this.reqfrom = data.reqfrom;
         this.to = data.to;
@@ -30,31 +30,32 @@ class Request {
     }
 }
 
-class Announcement {
+class Announcement extends Post {
     constructor(data) {
-        Post.prototype.constructor.call(this, data)
+        super(data)
         this.from = data.from;
     }
 }
 
-class Groupmessage {
+class Groupmessage extends Post {
     constructor(data) {
-        Post.prototype.constructor.call(this, data)
+        super(data)
         this.from = data.from;
+        this.reqfrom = data.reqfrom;
     }
 }
-
+const dd = {
+    id: 1,
+    by: "aaa",
+    fcm: ["bbb"],
+    time: 1641071000,
+    type: "payment",
+    memo: "test",
+    amount: 6.3,
+    from: "aaa",
+    to: "bbb",
+    edits: ["aaa changed: Amount from 1.00 to 6.30"]
+}
 const testData = [
-    new Payment({
-        id: 1,
-        by: "aaa",
-        fcm: ["bbb"],
-        time: 1641071000,
-        type: "payment",
-        memo: "test",
-        amount: 6.3,
-        from: "aaa",
-        to: "bbb",
-        edits: ["aaa changed: Amount from 1.00 to 6.30"]
-    })
+    new Payment(dd)
 ]
