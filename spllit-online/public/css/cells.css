@@ -1,35 +1,55 @@
 .post-cell {
     position: relative;
-    padding: 12px 12px 20px 12px;
     border-radius: 10px;
-    background-color: var(--light-grey);
-    /* width: min-content; */
     width: 320px;
 }
 
-.post-cell::before {
-    /* time */
-    content: attr(time);
+.basic-post-cell {
+    padding: 12px 12px 20px 12px;
+    background-color: var(--light-grey);
+}
+
+.announcement-post-cell {
+    padding-inline: 12px;
+    background-color: var(--dark-grey);
+    padding-top: 6px;
+    padding-bottom: 10px;
+}
+
+.announcement-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.announcement-inner-left {
+    font-weight: 700;
+}
+
+.announcement-inner-right {
+    font-weight: 400;
+}
+
+.post-cell::before,
+.post-cell::after {
     position: absolute;
     bottom: 1px;
-    left: 5px;
     font-size: 12px;
     font-weight: 500;
     opacity: 0.4;
     color: var(--black-white);
 }
 
-.post-cell::after {
-    /* date */
-    content: attr(date);
-    position: absolute;
-    bottom: 1px;
-    right: 3px;
-    font-size: 12px;
-    font-weight: 500;
-    opacity: 0.4;
-    color: var(--black-white);
+.post-cell::before {
+    left: 5px;
+    content: attr(time);
 }
+
+.post-cell::after {
+    right: 3px;
+    content: attr(date);
+}
+
 
 .single-member-container {
     overflow: hidden;
