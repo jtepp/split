@@ -255,9 +255,27 @@ const testData = [
 ]
 
 function unixToTime(unix) {
-    return "09:25 PM"
+    const d = new Date(1641112010 * 1000);
+
+    const options = {
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    const time = new Intl.DateTimeFormat('en-US', options).format;
+
+    return time(d); // 07/16/14, 5:00 PM PDT
 }
 
 function unixToDate(unix) {
-    return "12/12/2021"
+    const d = new Date(1641112010 * 1000);
+
+    const options = {
+        month: 'numeric',
+        day: 'numeric',
+        year: '2-digit'
+    };
+
+    const date = new Intl.DateTimeFormat('en-US', options).format;
+
+    return date(d); // 07/16/14, 5:00 PM PDT
 }
