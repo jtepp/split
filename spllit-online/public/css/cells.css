@@ -42,6 +42,11 @@
     color: var(--black-white);
 }
 
+.gm-inner-right::before,
+.gm-inner-right::after {
+    color: white
+}
+
 .post-cell::before,
 .gm-inner-right::before {
     left: 5px;
@@ -237,6 +242,10 @@ img.sfs,
     column-gap: 20px;
 }
 
+[me].groupmessage-post-cell {
+    flex-direction: row-reverse;
+}
+
 .gm-inner-left {
     position: relative;
     margin-top: auto;
@@ -266,6 +275,19 @@ img.sfs,
     border-radius: 10px 10px 10px 0;
     flex-grow: 1;
     padding: 10px 10px 18px 10px;
+}
+
+[me]:not([consecutive])>.gm-inner-right {
+    border-radius: 10px 10px 0 10px;
+}
+
+[consecutive]>.gm-inner-right {
+    border-radius: 10px;
+}
+
+[me]>.gm-inner-right {
+    background-color: var(--blue-light);
+    color: white;
 }
 
 .gm-member-img {
