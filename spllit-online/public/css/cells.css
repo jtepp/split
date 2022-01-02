@@ -31,23 +31,33 @@
 }
 
 .post-cell::before,
-.post-cell::after {
+.post-cell::after,
+.gm-inner-right::before,
+.gm-inner-right::after {
     position: absolute;
     bottom: 1px;
     font-size: 12px;
     font-weight: 500;
-    opacity: 0.4;
+    opacity: var(--post-cell-opacity);
     color: var(--black-white);
 }
 
-.post-cell::before {
+.post-cell::before,
+.gm-inner-right::before {
     left: 5px;
     content: attr(time);
 }
 
-.post-cell::after {
+.post-cell::after,
+.gm-inner-right::after {
     right: 3px;
     content: attr(date);
+}
+
+.announcement-post-cell::before,
+.announcement-post-cell::after {
+    opacity: 0.2;
+    color: white;
 }
 
 
@@ -217,4 +227,50 @@ img.sfs,
     content: attr(more-tag);
     width: max-content;
     white-space: pre;
+}
+
+.groupmessage-post-cell {
+    width: 344px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 20px;
+}
+
+.gm-inner-left {
+    position: relative;
+    margin-top: auto;
+}
+
+[sender].gm-inner-left::after {
+    content: attr(sender);
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    max-width: 40px;
+    word-wrap: break-word;
+    font-size: 10px;
+    color: var(--alt-mid-dark-grey);
+    transform: translate(-50%, 100%);
+}
+
+[consecutive]>.gm-inner-left {
+    opacity: 0;
+}
+
+.gm-inner-right {
+    word-wrap: break-word;
+    position: relative;
+    background-color: var(--silver-light);
+    color: black;
+    border-radius: 10px 10px 10px 0;
+    flex-grow: 1;
+    padding: 10px 10px 18px 10px;
+}
+
+.gm-member-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 5px;
 }

@@ -5,12 +5,16 @@
     --light-grey: #808080;
     --mid-grey: #323232;
     --mid-dark-grey: #00000033;
+    --alt-mid-dark-grey: #666;
     --dark-grey: #1d1d1d;
     --red-light: #eb5545;
     --red-dark: #dc5142;
+    --silver-light: #eee;
+    --silver-dark: #ccc;
     --white-black: #fff;
     --black-white: #000;
     --invert-dark: 0;
+    --post-cell-opacity: 0.4;
 }
 
 /* dark mode media query */
@@ -21,12 +25,9 @@
         --blue-light: var(--blue-dark);
         --red-light: var(--red-dark);
         --light-grey: var(--mid-grey);
+        --silver-light: var(--silver-dark);
         --invert-dark: 1;
-    }
-
-    .post-cell::before,
-    .post-cell::after {
-        opacity: 0.2 !important;
+        --post-cell-opacity: 0.2;
     }
 }
 
