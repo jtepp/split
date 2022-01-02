@@ -3,8 +3,8 @@
     padding: 12px 12px 20px 12px;
     border-radius: 10px;
     background-color: var(--light-grey);
-    /* max-width: 600px; */
-    width: min-content;
+    /* width: min-content; */
+    width: 320px;
 }
 
 .post-cell::before {
@@ -31,6 +31,11 @@
     color: var(--black-white);
 }
 
+.single-member-container {
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+}
+
 .single-member {
     display: flex;
     flex-direction: row;
@@ -42,10 +47,14 @@ img.member-img {
     border-radius: 5px;
     box-shadow: 0 0 8px #00000070;
     object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.2s ease-out;
 }
 
 .vertical-center,
-.cell-inner>* {
+.single-member-container,
+.cell-inner-amount,
+.cell-inner-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -55,7 +64,6 @@ img.member-img {
     color: var(--black-white);
     font-weight: 500;
     margin-left: 4px;
-    /* font-size: 18px; */
 }
 
 .cell-inner {
@@ -67,8 +75,34 @@ img.member-img {
     background-color: var(--mid-dark-grey);
     border-radius: 4px;
     padding: 4px;
-    width: 140px;
+    overflow-x: scroll;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
 }
+
+/* hide scroll indicators for .cell-inner-right */
+.cell-inner-right::-webkit-scrollbar {
+    display: none;
+}
+
+/* compacting cells */
+
+.cell-inner-right:hover>.single-member-container:not(:last-child) {
+    width: 25px;
+    margin-right: -10px;
+}
+
+.cell-inner-right:hover>.single-member-container:not(:last-child)>.single-member>img {
+    transform: scale(0.9);
+}
+
+.cell-inner-right:hover {
+    column-gap: 0px;
+}
+
+
 
 img.sfs.arrow {
     width: 20px;
@@ -84,6 +118,7 @@ img.sfs.arrow {
     color: var(--black-white);
     padding-inline: 6px;
     border-radius: 10px;
+    float: right;
 }
 
 .cell-inner-memo {
