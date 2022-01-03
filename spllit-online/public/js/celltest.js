@@ -61,7 +61,7 @@ class Payment extends Post {
 
         let arrowImg = document.createElement('img');
         arrowImg.setAttribute('draggable', 'false');
-        arrowImg.setAttribute('src', "https://raw.githubusercontent.com/cyanzhong/sf-symbols-online/master/glyphs/arrow.right.png?raw=true");
+        arrowImg.setAttribute('src', "res/sfs/arrow.right.png");
         arrowImg.classList.add('sfs');
         arrowImg.classList.add('arrow');
         arrowCont.appendChild(arrowImg);
@@ -105,7 +105,7 @@ class Payment extends Post {
 
         let chevronImg = document.createElement('img');
         chevronImg.setAttribute('draggable', 'false');
-        chevronImg.setAttribute('src', "https://github.com/cyanzhong/sf-symbols-online/blob/master/glyphs/chevron.down.png?raw=true");
+        chevronImg.setAttribute('src', "res/sfs/chevron.down.png");
         chevronImg.classList.add('sfs');
         chevronImg.classList.add('chevron');
 
@@ -128,99 +128,99 @@ class Request extends Post {
     }
 
     cell() {
-        // let postCell = document.createElement('div');
-        // postCell.classList.add('post-cell');
-        // postCell.classList.add('basic-post-cell');
-        // postCell.setAttribute('id', this.id);
-        // postCell.setAttribute('time', unixToTime(this.time));
-        // postCell.setAttribute('date', unixToDate(this.time));
+        let postCell = document.createElement('div');
+        postCell.classList.add('post-cell');
+        postCell.classList.add('basic-post-cell');
+        postCell.setAttribute('id', this.id);
+        postCell.setAttribute('time', unixToTime(this.time));
+        postCell.setAttribute('date', unixToDate(this.time));
 
-        // let cellInner = document.createElement('div');
-        // cellInner.classList.add('cell-inner');
+        let cellInner = document.createElement('div');
+        cellInner.classList.add('cell-inner');
 
-        // let cellInnerLeft = document.createElement('div');
-        // cellInnerLeft.classList.add('cell-inner-left');
+        let cellInnerLeft = document.createElement('div');
+        cellInnerLeft.classList.add('cell-inner-left');
 
-        // let singleMemberLeft = document.createElement('div');
-        // singleMemberLeft.classList.add('single-member');
+        let singleMemberLeft = document.createElement('div');
+        singleMemberLeft.classList.add('single-member');
 
-        // let memberImgLeft = document.createElement('img');
-        // memberImgLeft.setAttribute('draggable', 'false');
-        // memberImgLeft.setAttribute('src', "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200");
-        // memberImgLeft.classList.add('member-img');
-        // singleMemberLeft.appendChild(memberImgLeft);
+        let memberImgLeft = document.createElement('img');
+        memberImgLeft.setAttribute('draggable', 'false');
+        memberImgLeft.setAttribute('src', "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200");
+        memberImgLeft.classList.add('member-img');
+        singleMemberLeft.appendChild(memberImgLeft);
 
-        // let nameTextLeft = document.createElement('div');
-        // nameTextLeft.classList.add('name-text');
-        // nameTextLeft.classList.add('vertical-center');
+        let nameTextLeft = document.createElement('div');
+        nameTextLeft.classList.add('name-text');
+        nameTextLeft.classList.add('vertical-center');
 
-        // let nameTextLeftP = document.createElement('p');
-        // nameTextLeftP.innerText = this.from;
-        // nameTextLeft.appendChild(nameTextLeftP);
+        let nameTextLeftP = document.createElement('p');
+        nameTextLeftP.innerText = this.from;
+        nameTextLeft.appendChild(nameTextLeftP);
 
-        // singleMemberLeft.appendChild(nameTextLeft);
-        // cellInnerLeft.appendChild(singleMemberLeft);
+        singleMemberLeft.appendChild(nameTextLeft);
+        cellInnerLeft.appendChild(singleMemberLeft);
 
-        // cellInner.appendChild(cellInnerLeft);
+        cellInner.appendChild(cellInnerLeft);
 
-        // let arrowCont = document.createElement('div');
-        // arrowCont.classList.add('vertical-center');
+        let arrowCont = document.createElement('div');
+        arrowCont.classList.add('vertical-center');
 
-        // let arrowImg = document.createElement('img');
-        // arrowImg.setAttribute('draggable', 'false');
-        // arrowImg.setAttribute('src', "https://raw.githubusercontent.com/cyanzhong/sf-symbols-online/master/glyphs/arrow.right.png?raw=true");
-        // arrowImg.classList.add('sfs');
-        // arrowImg.classList.add('arrow');
-        // arrowCont.appendChild(arrowImg);
-        // cellInner.appendChild(arrowCont);
+        let arrowImg = document.createElement('img');
+        arrowImg.setAttribute('draggable', 'false');
+        arrowImg.setAttribute('src', "res/sfs/arrow.left.png");
+        arrowImg.classList.add('sfs');
+        arrowImg.classList.add('arrow');
+        arrowCont.appendChild(arrowImg);
+        cellInner.appendChild(arrowCont);
 
-        // let cellInnerRight = document.createElement('div');
-        // cellInnerRight.classList.add('cell-inner-right');
+        let cellInnerRight = document.createElement('div');
+        cellInnerRight.classList.add('cell-inner-right');
 
-        // let singleMemberRight = document.createElement('div');
-        // singleMemberRight.classList.add('single-member');
+        let singleMemberRight = document.createElement('div');
+        singleMemberRight.classList.add('single-member');
 
-        // let memberImgRight = document.createElement('img');
-        // memberImgRight.setAttribute('draggable', 'false');
-        // memberImgRight.setAttribute('src', "https://www.gravatar.com/avatar");
-        // memberImgRight.classList.add('member-img');
-        // singleMemberRight.appendChild(memberImgRight);
+        let memberImgRight = document.createElement('img');
+        memberImgRight.setAttribute('draggable', 'false');
+        memberImgRight.setAttribute('src', "https://www.gravatar.com/avatar");
+        memberImgRight.classList.add('member-img');
+        singleMemberRight.appendChild(memberImgRight);
 
-        // let nameTextRight = document.createElement('div');
-        // nameTextRight.classList.add('name-text');
-        // nameTextRight.classList.add('vertical-center');
+        let nameTextRight = document.createElement('div');
+        nameTextRight.classList.add('name-text');
+        nameTextRight.classList.add('vertical-center');
 
-        // let nameTextRightP = document.createElement('p');
-        // nameTextRightP.innerText = this.to;
-        // nameTextRight.appendChild(nameTextRightP);
+        let nameTextRightP = document.createElement('p');
+        nameTextRightP.innerText = this.to;
+        nameTextRight.appendChild(nameTextRightP);
 
-        // singleMemberRight.appendChild(nameTextRight);
-        // cellInnerRight.appendChild(singleMemberRight);
+        singleMemberRight.appendChild(nameTextRight);
+        cellInnerRight.appendChild(singleMemberRight);
 
-        // let cellInnerAmount = document.createElement('div');
-        // cellInnerAmount.classList.add('cell-inner-amount');
-        // cellInnerAmount.innerText = "$" + this.amount.toFixed(2);
+        let cellInnerAmount = document.createElement('div');
+        cellInnerAmount.classList.add('cell-inner-amount');
+        cellInnerAmount.innerText = "$" + this.amount.toFixed(2);
 
-        // cellInner.appendChild(cellInnerRight);
+        cellInner.appendChild(cellInnerRight);
 
-        // cellInner.appendChild(cellInnerAmount);
+        cellInner.appendChild(cellInnerAmount);
 
-        // let cellInnerMemo = document.createElement('div');
-        // cellInnerMemo.classList.add('cell-inner-memo');
-        // cellInnerMemo.setAttribute('type', this.type);
-        // cellInnerMemo.innerText = this.memo;
+        let cellInnerMemo = document.createElement('div');
+        cellInnerMemo.classList.add('cell-inner-memo');
+        cellInnerMemo.setAttribute('type', this.type);
+        cellInnerMemo.innerText = this.memo;
 
-        // let chevronImg = document.createElement('img');
-        // chevronImg.setAttribute('draggable', 'false');
-        // chevronImg.setAttribute('src', "https://github.com/cyanzhong/sf-symbols-online/blob/master/glyphs/chevron.down.png?raw=true");
-        // chevronImg.classList.add('sfs');
-        // chevronImg.classList.add('chevron');
+        let chevronImg = document.createElement('img');
+        chevronImg.setAttribute('draggable', 'false');
+        chevronImg.setAttribute('src', "res/sfs/chevron.down.png");
+        chevronImg.classList.add('sfs');
+        chevronImg.classList.add('chevron');
 
-        // postCell.appendChild(cellInner);
-        // postCell.appendChild(cellInnerMemo);
-        // postCell.appendChild(chevronImg);
+        postCell.appendChild(cellInner);
+        postCell.appendChild(cellInnerMemo);
+        postCell.appendChild(chevronImg);
 
-        // return postCell;
+        return postCell;
     }
 }
 
@@ -263,7 +263,7 @@ function unixToTime(unix) {
     };
     const time = new Intl.DateTimeFormat('en-US', options).format;
 
-    return time(d); // 07/16/14, 5:00 PM PDT
+    return time(d);
 }
 
 function unixToDate(unix) {
@@ -277,5 +277,9 @@ function unixToDate(unix) {
 
     const date = new Intl.DateTimeFormat('en-US', options).format;
 
-    return date(d); // 07/16/14, 5:00 PM PDT
+    return date(d);
 }
+
+testData.forEach(post => {
+    document.body.appendChild(post.cell())
+})
