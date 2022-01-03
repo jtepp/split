@@ -27,12 +27,16 @@ class Payment extends Post {
         postCell.setAttribute('id', this.id);
         postCell.setAttribute('time', unixToTime(this.time));
         postCell.setAttribute('date', unixToDate(this.time));
+        postCell.setAttribute('type', this.type);
 
         let cellInner = document.createElement('div');
         cellInner.classList.add('cell-inner');
 
         let cellInnerLeft = document.createElement('div');
         cellInnerLeft.classList.add('cell-inner-left');
+
+        let singleMemberContLeft = document.createElement('div');
+        singleMemberContLeft.classList.add('single-member-container');
 
         let singleMemberLeft = document.createElement('div');
         singleMemberLeft.classList.add('single-member');
@@ -52,7 +56,8 @@ class Payment extends Post {
         nameTextLeft.appendChild(nameTextLeftP);
 
         singleMemberLeft.appendChild(nameTextLeft);
-        cellInnerLeft.appendChild(singleMemberLeft);
+        singleMemberContLeft.appendChild(singleMemberLeft);
+        cellInnerLeft.appendChild(singleMemberContLeft);
 
         cellInner.appendChild(cellInnerLeft);
 
@@ -69,6 +74,10 @@ class Payment extends Post {
 
         let cellInnerRight = document.createElement('div');
         cellInnerRight.classList.add('cell-inner-right');
+
+
+        let singleMemberContRight = document.createElement('div');
+        singleMemberContRight.classList.add('single-member-container');
 
         let singleMemberRight = document.createElement('div');
         singleMemberRight.classList.add('single-member');
@@ -88,10 +97,12 @@ class Payment extends Post {
         nameTextRight.appendChild(nameTextRightP);
 
         singleMemberRight.appendChild(nameTextRight);
-        cellInnerRight.appendChild(singleMemberRight);
+        singleMemberContRight.appendChild(singleMemberRight);
+        cellInnerRight.appendChild(singleMemberContRight);
 
         let cellInnerAmount = document.createElement('div');
         cellInnerAmount.classList.add('cell-inner-amount');
+        cellInnerAmount.setAttribute('amount', this.amount);
         cellInnerAmount.innerText = "$" + this.amount.toFixed(2);
 
         cellInner.appendChild(cellInnerRight);
@@ -134,12 +145,16 @@ class Request extends Post {
         postCell.setAttribute('id', this.id);
         postCell.setAttribute('time', unixToTime(this.time));
         postCell.setAttribute('date', unixToDate(this.time));
+        postCell.setAttribute('type', this.type);
 
         let cellInner = document.createElement('div');
         cellInner.classList.add('cell-inner');
 
         let cellInnerLeft = document.createElement('div');
         cellInnerLeft.classList.add('cell-inner-left');
+
+        let singleMemberContLeft = document.createElement('div');
+        singleMemberContLeft.classList.add('single-member-container');
 
         let singleMemberLeft = document.createElement('div');
         singleMemberLeft.classList.add('single-member');
@@ -155,11 +170,12 @@ class Request extends Post {
         nameTextLeft.classList.add('vertical-center');
 
         let nameTextLeftP = document.createElement('p');
-        nameTextLeftP.innerText = this.from;
+        nameTextLeftP.innerText = this.to;
         nameTextLeft.appendChild(nameTextLeftP);
 
         singleMemberLeft.appendChild(nameTextLeft);
-        cellInnerLeft.appendChild(singleMemberLeft);
+        singleMemberContLeft.appendChild(singleMemberLeft);
+        cellInnerLeft.appendChild(singleMemberContLeft);
 
         cellInner.appendChild(cellInnerLeft);
 
@@ -177,31 +193,42 @@ class Request extends Post {
         let cellInnerRight = document.createElement('div');
         cellInnerRight.classList.add('cell-inner-right');
 
-        let singleMemberRight = document.createElement('div');
-        singleMemberRight.classList.add('single-member');
+        this.reqfrom.forEach(name => {
+            let singleMemberContRight = document.createElement('div');
+            singleMemberContRight.classList.add('single-member-container');
 
-        let memberImgRight = document.createElement('img');
-        memberImgRight.setAttribute('draggable', 'false');
-        memberImgRight.setAttribute('src', "https://www.gravatar.com/avatar");
-        memberImgRight.classList.add('member-img');
-        singleMemberRight.appendChild(memberImgRight);
+            let singleMemberRight = document.createElement('div');
+            singleMemberRight.classList.add('single-member');
 
-        let nameTextRight = document.createElement('div');
-        nameTextRight.classList.add('name-text');
-        nameTextRight.classList.add('vertical-center');
+            let memberImgRight = document.createElement('img');
+            memberImgRight.setAttribute('draggable', 'false');
+            memberImgRight.setAttribute('src', "https://www.gravatar.com/avatar");
+            memberImgRight.classList.add('member-img');
+            singleMemberRight.appendChild(memberImgRight);
 
-        let nameTextRightP = document.createElement('p');
-        nameTextRightP.innerText = this.to;
-        nameTextRight.appendChild(nameTextRightP);
+            let nameTextRight = document.createElement('div');
+            nameTextRight.classList.add('name-text');
+            nameTextRight.classList.add('vertical-center');
 
-        singleMemberRight.appendChild(nameTextRight);
-        cellInnerRight.appendChild(singleMemberRight);
+            let nameTextRightP = document.createElement('p');
+            nameTextRightP.innerText = name;
+            if (this.reqfrom.lastIndexOf(name) == this.reqfrom.length - 1) {
+                nameTextRightP.setAttribute("more-tag", " + " + (this.reqfrom.length - 1) + " more");
+            }
+            nameTextRight.appendChild(nameTextRightP);
+
+            singleMemberRight.appendChild(nameTextRight);
+            singleMemberContRight.appendChild(singleMemberRight);
+            cellInnerRight.appendChild(singleMemberContRight);
+        })
+
+        cellInner.appendChild(cellInnerRight);
 
         let cellInnerAmount = document.createElement('div');
         cellInnerAmount.classList.add('cell-inner-amount');
+        cellInnerAmount.setAttribute('amount', this.amount);
         cellInnerAmount.innerText = "$" + this.amount.toFixed(2);
 
-        cellInner.appendChild(cellInnerRight);
 
         cellInner.appendChild(cellInnerAmount);
 
@@ -251,7 +278,20 @@ const testData = [
         from: "aaa",
         to: "bbb",
         edits: ["aaa changed: Amount from 1.00 to 6.30"]
+    }),
+    new Request({
+        id: 12,
+        by: "aaa",
+        fcm: ["bbb"],
+        time: 1641071000,
+        type: "request",
+        memo: "test",
+        amount: 22,
+        reqfrom: ["aaa", "bbb"],
+        to: "ccc",
+        edits: ["aaa changed: Amount from 1.00 to 22.00"]
     })
+
 ]
 
 function unixToTime(unix) {
@@ -283,3 +323,23 @@ function unixToDate(unix) {
 testData.forEach(post => {
     document.body.appendChild(post.cell())
 })
+
+document.body.onclick = (e) => {
+    if (e.target.classList.contains('chevron')) { // click on chevron to toggle memo
+        e.target.parentElement.classList.toggle('open-memo');
+    } else if (e.target.classList.contains('cell-inner-amount') && e.target.parentElement.parentElement.getAttribute('type') == "request") { // click on amount to toggle show each
+        e.target.classList.toggle('show-each');
+        updateShowEach(e.target);
+
+    }
+}
+
+function updateShowEach(element) {
+    let amount = element.getAttribute('amount');
+    let members = element.parentElement.querySelector(".cell-inner-right").children.length;
+    if (element.classList.contains('show-each')) {
+        element.innerText = "$" + (amount / members).toFixed(2) + " each";
+    } else {
+        element.innerText = "$" + (amount * 1).toFixed(2);
+    }
+}

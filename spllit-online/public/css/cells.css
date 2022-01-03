@@ -176,6 +176,11 @@ img.sfs.arrow {
     color: var(--black-white);
     padding-inline: 6px;
     border-radius: 10px;
+    white-space: nowrap;
+}
+
+[type="request"] .cell-inner-amount {
+    cursor: pointer;
 }
 
 [includeSelf].cell-inner-amount::after {
@@ -215,9 +220,12 @@ img.sfs.chevron {
     transform: translateX(-50%) rotate(0deg);
     left: 50%;
     bottom: 12px;
-    width: 20px;
+    width: 60px;
+    height: 10px;
+    object-fit: contain;
     opacity: 0.8;
     transition: transform 0.2s ease-out;
+    cursor: pointer;
 }
 
 img.sfs,
@@ -225,11 +233,11 @@ img.sfs,
     filter: invert(var(--invert-dark));
 }
 
-.post-cell:hover img.sfs.chevron {
+.post-cell.open-memo img.sfs.chevron {
     transform: translateX(-50%) rotate(180deg);
 }
 
-.post-cell:hover .cell-inner-memo {
+.post-cell.open-memo .cell-inner-memo {
     height: 60px;
     overflow-y: scroll;
 }

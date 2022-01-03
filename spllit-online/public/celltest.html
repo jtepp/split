@@ -12,14 +12,17 @@
 <body>
 
     <!-- payment -->
-    <div class="post-cell basic-post-cell" id="1" time="09:25 PM" date="12/12/2021">
+    <div class="post-cell basic-post-cell" id="1" time="09:25 PM" date="12/12/2021" type="payment">
         <div class="cell-inner">
             <div class="cell-inner-left">
-                <div class="single-member">
-                    <img draggable=false src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-                        class="member-img">
-                    <div class="name-text vertical-center">
-                        <p>Teppy</p>
+                <div class="single-member-container">
+                    <div class="single-member">
+                        <img draggable=false
+                            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+                            class="member-img">
+                        <div class="name-text vertical-center">
+                            <p>Teppy</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,10 +33,12 @@
                     class="sfs arrow">
             </div>
             <div class="cell-inner-right">
-                <div class="single-member">
-                    <img draggable=false src="https://www.gravatar.com/avatar" class="member-img">
-                    <div class="name-text vertical-center">
-                        <p>Julian</p>
+                <div class="single-member-container">
+                    <div class="single-member">
+                        <img draggable=false src="https://www.gravatar.com/avatar" class="member-img">
+                        <div class="name-text vertical-center">
+                            <p>Julian</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,7 +56,7 @@
     <br>
 
     <!-- request -->
-    <div class="post-cell basic-post-cell" id="2" time="09:25 PM" date="12/12/2021">
+    <div class="post-cell basic-post-cell" id="2" time="09:25 PM" date="12/12/2021" type="request">
         <div class="cell-inner">
             <div class="cell-inner-left">
                 <div class="single-member-container">
@@ -100,7 +105,7 @@
                 </div>
                 <!-- <p class="more-tag">+ 1 more</p> -->
             </div>
-            <div class="cell-inner-amount" includeSelf>
+            <div class="cell-inner-amount" includeSelf amount="20">
                 $20.00
             </div>
         </div>
@@ -113,7 +118,7 @@
 
     <br>
 
-    <div class="post-cell announcement-post-cell" id="3" time="09:25 PM" date="12/12/2021">
+    <div class="post-cell announcement-post-cell" id="3" time="09:25 PM" date="12/12/2021" type="announcement">
         <div class="announcement-inner">
             <span class="announcement-inner-left">Praw</span>
             <span class="announcement-inner-right">&nbsp;joined the group</span>
@@ -122,7 +127,7 @@
 
     <br>
 
-    <div class="groupmessage-post-cell" consecutive>
+    <div class="groupmessage-post-cell" consecutive type="groupmessage">
         <div class="gm-inner-left" sender="Person">
             <img draggable=false src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
                 class="gm-member-img">
@@ -135,7 +140,7 @@
 
     <br>
 
-    <div class="groupmessage-post-cell" me>
+    <div class="groupmessage-post-cell" me type="groupmessage">
         <div class="gm-inner-left" sender="Person">
             <img draggable=false src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
                 class="gm-member-img">
