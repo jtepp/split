@@ -67,13 +67,15 @@
 
 
 .single-member-container {
-    overflow: hidden;
     transition: all 0.2s ease-out;
 }
 
 .single-member-container:not(:last-of-type) {
-    width: 25px;
     margin-right: -14px;
+}
+
+.single-member-container:not(:last-of-type)>.single-member>.name-text {
+    display: none;
 }
 
 
@@ -89,12 +91,13 @@ img.member-img {
     border-radius: 5px;
     box-shadow: 0 0 8px #00000070;
     object-fit: cover;
-    transition: transform 0.2s ease-out;
+    transition: all 0.2s ease-out;
 }
 
 .single-member-container:not(:last-of-type) .member-img {
     z-index: 1;
     transform: scale(0.9);
+    filter: brightness(0.7);
 }
 
 .single-member-container:last-of-type .member-img {
@@ -140,14 +143,17 @@ img.member-img {
 /* compacting cells */
 
 .cell-inner-right:hover>.single-member-container {
-    width: auto;
-    overflow: visible;
     margin-right: 0px;
+}
+
+.cell-inner-right:hover>.single-member-container:not(:last-of-type)>.single-member>.name-text {
+    display: flex;
 }
 
 
 .cell-inner-right:hover>.single-member-container:not(:last-of-type)>.single-member>.member-img {
     transform: scale(1);
+    filter: brightness(1);
 }
 
 .cell-inner-right:hover {
