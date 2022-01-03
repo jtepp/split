@@ -1,5 +1,8 @@
 // in main there will be an array of members where image data is available
 
+const myId = "xxx"
+
+
 class Post {
     constructor(data) {
         this.id = data.id;
@@ -256,6 +259,35 @@ class Announcement extends Post {
         super(data)
         this.from = data.from;
     }
+
+    cell() {
+        let postCell = document.createElement('div');
+        postCell.classList.add('post-cell');
+        postCell.classList.add('announcement-post-cell');
+        postCell.setAttribute('id', this.id);
+        postCell.setAttribute('time', unixToTime(this.time));
+        postCell.setAttribute('date', unixToDate(this.time));
+        postCell.setAttribute('type', this.type);
+
+        let announcementInner = document.createElement('div');
+        announcementInner.classList.add('announcement-inner');
+
+        let announcementInnerLeft = document.createElement('span');
+        announcementInnerLeft.classList.add('announcement-inner-left');
+        announcementInnerLeft.innerText = this.from;
+
+        announcementInner.appendChild(announcementInnerLeft);
+
+        let announcementInnerRight = document.createElement('span');
+        announcementInnerRight.classList.add('announcement-inner-right');
+        announcementInnerRight.innerHTML = "&nbsp;" + this.memo;
+
+        announcementInner.appendChild(announcementInnerRight);
+
+        postCell.appendChild(announcementInner);
+
+        return postCell;
+    }
 }
 
 class Groupmessage extends Post {
@@ -263,6 +295,44 @@ class Groupmessage extends Post {
         super(data)
         this.from = data.from;
         this.reqfrom = data.reqfrom;
+    }
+
+    cell() {
+        let gmPostCell = document.createElement('div');
+        gmPostCell.classList.add('groupmessage-post-cell');
+        gmPostCell.setAttribute('type', this.type);
+        gmPostCell.setAttribute('senderId', this.by);
+
+        //me
+        if (this.by == myId) {
+            gmPostCell.setAttribute('me', '');
+        }
+
+        let gmInnerLeft = document.createElement('div');
+        gmInnerLeft.classList.add('gm-inner-left');
+        gmInnerLeft.setAttribute('sender', this.from);
+
+        let gmMemberImg = document.createElement('img');
+        gmMemberImg.classList.add('gm-member-img');
+        gmMemberImg.setAttribute('draggable', 'false');
+        gmMemberImg.setAttribute('src', "https://www.gravatar.com/avatar");
+
+        gmInnerLeft.appendChild(gmMemberImg);
+        gmPostCell.appendChild(gmInnerLeft);
+
+        let gmInnerRight = document.createElement('div');
+        gmInnerRight.classList.add('gm-inner-right');
+        gmInnerRight.setAttribute('id', this.id);
+        gmInnerRight.setAttribute('time', unixToTime(this.time));
+        gmInnerRight.setAttribute('date', unixToDate(this.time));
+
+        let gmInnerRightP = document.createElement('p');
+        gmInnerRightP.innerText = this.memo;
+
+        gmInnerRight.appendChild(gmInnerRightP);
+        gmPostCell.appendChild(gmInnerRight);
+
+        return gmPostCell;
     }
 }
 
@@ -290,7 +360,39 @@ const testData = [
         reqfrom: ["aaa", "bbb"],
         to: "ccc",
         edits: ["aaa changed: Amount from 1.00 to 22.00"]
+    }),
+    new Announcement({
+        id: 13,
+        by: "aaa",
+        fcm: ["bbb"],
+        time: 1641071000,
+        type: "announcement",
+        memo: "joined the group",
+        from: "aaa"
+    }),
+    new Groupmessage({
+        id: 14,
+        by: "xxx",
+        fcm: ["aaa", "bbb"],
+        time: 1641071000,
+        type: "groupmessage",
+        memo: "@aaa @bbb test",
+        from: "xxx",
+        reqfrom: ["aaa", "bbb"]
+    }),
+
+    new Groupmessage({
+        id: 15,
+        by: "xxx",
+        fcm: ["ccc"],
+        time: 1641071000,
+        type: "groupmessage",
+        memo: "@ccc another test",
+        from: "xxx",
+        reqfrom: ["ccc"]
     })
+
+
 
 ]
 
@@ -323,6 +425,15 @@ function unixToDate(unix) {
 testData.forEach(post => {
     document.body.appendChild(post.cell())
 })
+
+// replace body w activity container
+for (child of document.body.children) {
+    if (child.getAttribute('type') == 'groupmessage') {
+        if (child.nextElementSibling && child.getAttribute('senderId') && child.nextElementSibling.getAttribute('senderId') && child.getAttribute('senderId') == child.nextElementSibling.getAttribute('senderId')) {
+            child.nextElementSibling.setAttribute('consecutive', '')
+        }
+    }
+}
 
 document.body.onclick = (e) => {
     if (e.target.classList.contains('chevron')) { // click on chevron to toggle memo
