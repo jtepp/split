@@ -16,7 +16,7 @@ var paymentArray
 
 if (!(myId && name && houseId)) { // if not logged in
     // show popup to go back to login page
-    window.location.href = 'login'
+    boot()
 }
 
 
@@ -58,12 +58,15 @@ document.addEventListener('DOMContentLoaded', function () {
             fixConsecAddClick()
         }, err => {
             console.log(err)
+            boot()
         })
 
     db.collection(`houses/${houseId}/members`).onSnapshot(snapshot => {
         memberArray = []
         snapshot.forEach(doc => {
             memberArray.push(doc.data())
+        }, err => {
+            boot()
         })
     })
 
@@ -97,4 +100,8 @@ function fixConsecAddClick() {
 
         }
     }
+}
+
+function boot() {
+    window.location.href = 'login'
 }
