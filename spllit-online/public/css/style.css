@@ -46,12 +46,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-#corner-logo {
-    width: 100px;
-    height: auto;
-    cursor: pointer;
+    filter: blur(0px);
+    transition: filter 0.2s ease-out;
 }
 
 .h1 {
@@ -71,15 +67,43 @@ body {
 
 #sidebar {
     position: fixed;
-    padding: 10px;
     background-color: var(--dark-grey);
     user-select: none;
-    width: 200px;
+    width: 0px;
     height: 100vh;
+    overflow: hidden;
+    transition: width 0.2s ease-out;
+    z-index: 1;
+}
+
+#sidebar-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    padding: 10px;
+    height: 100%;
+}
+
+#corner-logo:hover+#sidebar,
+#sidebar:hover {
+    width: 120px;
+}
+
+#corner-logo:hover+#sidebar+#main-container,
+#sidebar:hover+#main-container {
+    filter: blur(5px);
+}
+
+
+#corner-logo {
+    position: fixed;
+    width: 100px;
+    top: 10px;
+    left: 10px;
+    height: auto;
+    cursor: pointer;
+    z-index: 2;
 }
 
 #sign-out-button {
@@ -94,6 +118,7 @@ body {
     cursor: pointer;
     border-radius: 5px;
     margin-bottom: 20px;
+    width: max-content;
 }
 
 #login-button {

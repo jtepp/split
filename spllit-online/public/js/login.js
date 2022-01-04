@@ -9,9 +9,11 @@ document.addEventListener('DOMContentLoaded', function () {
     db = firebase.firestore()
 })
 
-demoButton.addEventListener('click', () => {
-    findHome('demo', 'demo')
-})
+if (demoButton) {
+    demoButton.addEventListener('click', () => {
+        findHome('demo', 'demo')
+    })
+}
 
 loginButton.addEventListener('click', () => {
     findHome(nameField.textContent, idField.textContent)

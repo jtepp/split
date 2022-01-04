@@ -111,7 +111,7 @@ function fixPayments() {
 }
 
 function boot() {
-    window.location.href = 'login'
+    window.location.href = '/'
     window.localStorage.removeItem('myId')
     window.localStorage.removeItem('name')
     window.localStorage.removeItem('houseId')
