@@ -16,6 +16,21 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
     let from = event.after.get("from") || ""
     var typeFix = "unknown"
 
+    // log to log collection
+    await admin.firestore().collection("log").add({
+        id: event.after.id,
+        type: type,
+        lastEdit: lastEdit,
+        by: event.after.get("by"),
+        to: to,
+        from: from,
+        reqFrom: reqFrom,
+    })
+
+
+
+
+
     if (Object.keys(edits).length > 0) { // announce edits
         let fcms = []
         await admin.firestore().collection("houses/" + context.params.houseid + "/members").get().then(function (querySnapshot) {

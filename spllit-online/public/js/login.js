@@ -23,15 +23,14 @@ function findHome(name, id) {
     // if not found, show alert
 
     member.then(snapshot => {
-        console.log(snapshot)
         if (snapshot.empty) {
             alert('Member not found')
         } else {
             const data = snapshot.docs[0].data()
             localStorage.setItem('name', data.name)
-            localStorage.setItem('id', data.id)
+            localStorage.setItem('myId', data.id)
             localStorage.setItem('houseId', data.home)
-            console.log(data)
+            window.location.href = 'main'
         }
     })
 

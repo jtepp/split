@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
             'analytics',
             'performance',
         ].filter(feature => typeof app[feature] === 'function');
-
     } catch (e) {
         console.error(e);
     }
