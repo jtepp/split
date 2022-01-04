@@ -1,3 +1,4 @@
+const myId = localStorage.getItem('myId') || ""
 export default class Post {
     constructor(data) {
         this.id = data.id;

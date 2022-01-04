@@ -260,6 +260,11 @@ img.sfs,
     flex-direction: row-reverse;
 }
 
+.groupmessage-post-cell:not([me])>.gm-inner-right::after,
+.groupmessage-post-cell:not([me])>.gm-inner-right::before {
+    color: black;
+}
+
 .gm-inner-left {
     position: relative;
     margin-top: auto;
