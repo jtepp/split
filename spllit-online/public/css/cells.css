@@ -275,11 +275,12 @@ img.sfs,
     position: absolute;
     left: 50%;
     bottom: -4px;
-    max-width: 40px;
+    width: 40px;
     word-wrap: break-word;
     font-size: 10px;
     color: var(--alt-mid-dark-grey);
     transform: translate(-50%, 100%);
+    text-align: center;
 }
 
 [consecutive]>.gm-inner-left {

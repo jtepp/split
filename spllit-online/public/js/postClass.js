@@ -111,7 +111,11 @@ export class Payment extends Post {
         let cellInnerMemo = document.createElement('div');
         cellInnerMemo.classList.add('cell-inner-memo');
         cellInnerMemo.setAttribute('type', this.type);
+        if (this.memo == "") {
+            cellInnerMemo.setAttribute('no-memo', '')
+        }
         cellInnerMemo.innerText = this.memo;
+
 
         let chevronImg = document.createElement('img');
         chevronImg.setAttribute('draggable', 'false');
@@ -211,7 +215,7 @@ export class Request extends Post {
 
             let nameTextRightP = document.createElement('p');
             nameTextRightP.innerText = name;
-            if (this.reqfrom.lastIndexOf(name) == this.reqfrom.length - 1) {
+            if (this.reqfrom.lastIndexOf(name) == this.reqfrom.length - 1 && this.reqfrom.length > 1) {
                 nameTextRightP.setAttribute("more-tag", " + " + (this.reqfrom.length - 1) + " more");
             }
             nameTextRight.appendChild(nameTextRightP);
@@ -234,6 +238,9 @@ export class Request extends Post {
         let cellInnerMemo = document.createElement('div');
         cellInnerMemo.classList.add('cell-inner-memo');
         cellInnerMemo.setAttribute('type', this.type);
+        if (this.memo == "") {
+            cellInnerMemo.setAttribute('no-memo', '')
+        }
         cellInnerMemo.innerText = this.memo;
 
         let chevronImg = document.createElement('img');
@@ -333,7 +340,7 @@ export class Groupmessage extends Post {
 }
 
 function unixToTime(unix) {
-    const d = new Date(1641112010 * 1000);
+    const d = new Date(unix * 1000);
 
     const options = {
         hour: '2-digit',
@@ -345,11 +352,11 @@ function unixToTime(unix) {
 }
 
 function unixToDate(unix) {
-    const d = new Date(1641112010 * 1000);
+    const d = new Date(unix * 1000);
 
     const options = {
         month: 'numeric',
-        day: 'numeric',
+        day: '2-digit',
         year: '2-digit'
     };
 

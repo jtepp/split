@@ -32,36 +32,52 @@ if (!(myId && name && houseId)) { // if not logged in
 document.addEventListener('DOMContentLoaded', function () {
     db = firebase.firestore()
 
-    db.collection(`houses/${houseId}/payments`).onSnapshot(snapshot => {
-        paymentArray = []
-        activityContainer.innerHTML = ''
-        snapshot.docs.forEach(doc => {
-            switch (doc.data().type) {
-                case 'payment':
-                    paymentArray.push(new Payment(doc.data()))
-                    break;
-                case 'request':
-                    paymentArray.push(new Request(doc.data()))
-                    break;
-                case 'announcement':
-                    paymentArray.push(new Announcement(doc.data()))
-                    break;
-                case 'groupmessage':
-                    paymentArray.push(new Groupmessage(doc.data()))
-                    break;
-                default:
-                    break;
+    db.collection(`houses/${houseId}/payments`).orderBy('time', 'asc')
+        .onSnapshot(snapshot => {
+            paymentArray = []
+            activityContainer.innerHTML = ''
+            snapshot.docs.forEach(doc => {
+                switch (doc.data().type) {
+                    case 'payment':
+                        paymentArray.push(new Payment(doc.data()))
+                        break;
+                    case 'request':
+                        paymentArray.push(new Request(doc.data()))
+                        break;
+                    case 'announcement':
+                        paymentArray.push(new Announcement(doc.data()))
+                        break;
+                    case 'groupmessage':
+                        paymentArray.push(new Groupmessage(doc.data()))
+                        break;
+                    default:
+                        break;
 
-            }
+                }
 
+            })
+            paymentArray.forEach(payment => {
+                activityContainer.prepend(payment.cell())
+            })
+            fixConsecAddClick()
+        }, err => {
+            console.log(err)
         })
-        paymentArray.forEach(payment => {
-            activityContainer.appendChild(payment.cell())
-        })
-    }, err => {
-        console.log(err)
-    })
 
+
+})
+
+function updateShowEach(element) {
+    let amount = element.getAttribute('amount');
+    let members = element.parentElement.querySelector(".cell-inner-right").children.length;
+    if (element.classList.contains('show-each') && members > 1) {
+        element.innerText = "$" + (amount / members).toFixed(2) + " each";
+    } else {
+        element.innerText = "$" + (amount * 1).toFixed(2);
+    }
+}
+
+function fixConsecAddClick() {
     for (let child of document.body.children) {
         if (child.getAttribute('type') == 'groupmessage') {
             if (child.nextElementSibling && child.getAttribute('senderId') && child.nextElementSibling.getAttribute('senderId') && child.getAttribute('senderId') == child.nextElementSibling.getAttribute('senderId')) {
@@ -78,15 +94,5 @@ document.addEventListener('DOMContentLoaded', function () {
             updateShowEach(e.target);
 
         }
-    }
-})
-
-function updateShowEach(element) {
-    let amount = element.getAttribute('amount');
-    let members = element.parentElement.querySelector(".cell-inner-right").children.length;
-    if (element.classList.contains('show-each')) {
-        element.innerText = "$" + (amount / members).toFixed(2) + " each";
-    } else {
-        element.innerText = "$" + (amount * 1).toFixed(2);
     }
 }
