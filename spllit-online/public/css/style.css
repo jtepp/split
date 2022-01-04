@@ -151,6 +151,7 @@ body {
     text-align: left;
     padding-top: 2px;
     padding-left: 4px;
+    overflow: scroll;
 }
 
 [contentEditable]:empty:not(:focus):before {

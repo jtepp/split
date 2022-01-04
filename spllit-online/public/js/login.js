@@ -19,6 +19,18 @@ loginButton.addEventListener('click', () => {
     findHome(nameField.textContent, idField.textContent)
 })
 
+nameField.onkeydown = function (e) {
+    if (e.keyCode == 13) {
+        idField.focus()
+    }
+}
+
+idField.onkeydown = function (e) {
+    if (e.keyCode == 13) {
+        loginButton.click()
+    }
+}
+
 
 function findHome(name, id) {
     // find home in firestore that has a member with the name and id
