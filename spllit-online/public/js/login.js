@@ -21,12 +21,14 @@ loginButton.addEventListener('click', () => {
 
 nameField.onkeydown = function (e) {
     if (e.keyCode == 13) {
+        e.preventDefault()
         idField.focus()
     }
 }
 
 idField.onkeydown = function (e) {
     if (e.keyCode == 13) {
+        e.preventDefault()
         loginButton.click()
     }
 }
