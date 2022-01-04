@@ -9,22 +9,28 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
     var snd = "default"
     const type = event.after.get("type");
     const edits = event.after.get("edits") || {}
-    const lastEdit = edits[Object.keys(edits).reverse()[0]]
-    let composer = lastEdit.match(/(.+?) (changed:|opted)/)[1]
+    let lastEdit = edits[Object.keys(edits).reverse()[0]] || ""
+    let composer;
+    if (lastEdit) composer = lastEdit.match(/(.+?) (changed:|opted)/)[1]
     let reqFrom = event.after.get("reqfrom")
     let to = event.after.get("to") || ""
     let from = event.after.get("from") || ""
     var typeFix = "unknown"
 
     // log to log collection
-    await admin.firestore().collection("log").add({
-        id: event.after.id,
+    await admin.firestore().doc("log/" + event.after.get('time') + "-" + context.params.houseid).set({
+        docID: event.after.id,
         type: type,
         lastEdit: lastEdit,
         by: event.after.get("by"),
         to: to,
         from: from,
         reqFrom: reqFrom,
+        memo: event.after.get("memo"),
+        time: event.after.get("time"),
+        home: context.params.houseid
+    }).catch(err => {
+        console.log(err)
     })
 
 
