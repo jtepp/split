@@ -43,9 +43,9 @@ struct MemberDetailsView: View {
                 Spacer()
                 MemberPaymentInfoView(member: $member, house: $house)
                 Spacer()
-                Text("ID: \(member.id)")
-                    .font(.caption)
-                    .foregroundColor(Color("Secondary"))
+//                Text("ID: \(member.id)")
+//                    .font(.caption)
+//                    .foregroundColor(Color("Secondary"))
             }
             .padding(.vertical, 40)
             .alert(isPresented: $showRemove, content: {

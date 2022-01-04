@@ -136,6 +136,8 @@
 		0CC2A2D22702925B00646EDF /* Etan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC2A2CF2702925B00646EDF /* Etan@3x.png */; };
 		0CC2A2D32702925B00646EDF /* Etan.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC2A2D02702925B00646EDF /* Etan.png */; };
 		0CC2A2D42702925B00646EDF /* Etan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC2A2D12702925B00646EDF /* Etan@2x.png */; };
+		0CC3276A2784CE680059D02B /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC327682784CCEA0059D02B /* UIDevice+modelName.swift */; };
+		0CC3276B2784CE7F0059D02B /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC327682784CCEA0059D02B /* UIDevice+modelName.swift */; };
 		0CCC9A132694E13700940E93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC9A122694E13700940E93 /* GoogleService-Info.plist */; };
 		0CCC9A142694E13700940E93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC9A122694E13700940E93 /* GoogleService-Info.plist */; };
 		0CCC9A162694E15500940E93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC9A152694E15500940E93 /* GoogleService-Info.plist */; };
@@ -349,6 +351,7 @@
 		0CC2A2CF2702925B00646EDF /* Etan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Etan@3x.png"; sourceTree = "<group>"; };
 		0CC2A2D02702925B00646EDF /* Etan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Etan.png; sourceTree = "<group>"; };
 		0CC2A2D12702925B00646EDF /* Etan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Etan@2x.png"; sourceTree = "<group>"; };
+		0CC327682784CCEA0059D02B /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		0CCC9A122694E13700940E93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CCC9A152694E15500940E93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "Widgets/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		0CD1173D2687A4E40093426F /* AlternateIconRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconRow.swift; sourceTree = "<group>"; };
@@ -443,6 +446,7 @@
 				0C0CA779265EF4D20062FDDD /* UIImage+resized.swift */,
 				0CD16874269B829800CFD7C2 /* CustomRoundedRect.swift */,
 				0C016A9C2687E72700EFFC3E /* UIImage+rotate.swift */,
+				0CC327682784CCEA0059D02B /* UIDevice+modelName.swift */,
 				0CA0E9CC26604315002876CF /* View+allowAutoDismiss.swift */,
 				0C15F8902685026E006BF2B0 /* KeyboardReadable.swift */,
 				0C6A744126935DAF00275A9B /* Image+prep.swift */,
@@ -1068,6 +1072,7 @@
 				0CAB4EF9271294E500B2E049 /* AmountCell.swift in Sources */,
 				0CBF09FD265D8F730016CA92 /* PaymentView.swift in Sources */,
 				0CEE3827265E16700013BB12 /* MemberDetailsView.swift in Sources */,
+				0CC3276A2784CE680059D02B /* UIDevice+modelName.swift in Sources */,
 				0C15F8912685026E006BF2B0 /* KeyboardReadable.swift in Sources */,
 				0C3061D926FFE8D100C228A8 /* MemberCellBalance.swift in Sources */,
 				0C5C0E32269CBEDE00BD092F /* VerticalToggle.swift in Sources */,
@@ -1126,6 +1131,7 @@
 				0C6A742B2692860B00275A9B /* Payment.swift in Sources */,
 				0CE5F5232693985C00DAD578 /* WidgetTimeBar.swift in Sources */,
 				0C6A74312692882800275A9B /* BalanceWidgetEntryView.swift in Sources */,
+				0CC3276B2784CE7F0059D02B /* UIDevice+modelName.swift in Sources */,
 				0C6A7457269392D300275A9B /* ActivityWidgetPaymentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

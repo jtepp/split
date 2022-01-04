@@ -215,9 +215,20 @@ struct ProfileView: View, KeyboardReadable {
                                 }
                             })
                     }
-                    Text("ID: \(m.id)")
-                        .font(.caption)
-                        .foregroundColor(Color("Secondary"))
+                    Menu {
+                        Button {
+                            UIPasteboard.general.string = m.id
+                        }
+                    label: {
+                        Text("Copy ID")
+                        Image(systemName: "doc.on.doc")
+                    }
+                    } label: {
+                        Text("ID: \(m.id)")
+                            .font(.caption)
+                            .foregroundColor(Color("Secondary"))
+                    }
+
                     Spacer(minLength: 40)
                 }
                 .padding(.vertical, 40)

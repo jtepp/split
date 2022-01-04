@@ -308,7 +308,7 @@ class Fetch: ObservableObject {
 //            print("STARTED4")
             
             self.db.collection("houses/\(h.id)/payments").addDocument(data:
-                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "includedSelf" : p.includedSelf, "type":ptToString(p.type), "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "fcm":fcms]
+                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "includedSelf" : p.includedSelf, "type":ptToString(p.type), "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "fcm":fcms, "device":UIDevice.modelName]
             ){ _ in
             //            .documentID
 //                print("STARTED 5")
