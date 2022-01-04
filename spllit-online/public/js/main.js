@@ -2,8 +2,9 @@ import {
     Payment,
     Request,
     Announcement,
-    Groupmessage
-} from "/js/postClass.js"
+    Groupmessage,
+    Member
+} from "/js/classes.js"
 
 const myId = localStorage.getItem('myId') || null
 const name = localStorage.getItem('name') || null
@@ -18,19 +19,14 @@ if (!(myId && name && houseId)) { // if not logged in
     window.location.href = 'login'
 }
 
-// db.collection(`houses/${houseId}/members`).onSnapshot(snapshot => {
-//     memberArray = []
-//     snapshot.forEach(doc => {
-//         memberArray.push(doc.data())
-//     })
-//     console.log(memberArray)
-// })
+
 
 
 
 // once the page is loaded, set up firebase
 document.addEventListener('DOMContentLoaded', function () {
     db = firebase.firestore()
+
 
     db.collection(`houses/${houseId}/payments`).orderBy('time', 'asc')
         .onSnapshot(snapshot => {
@@ -39,16 +35,16 @@ document.addEventListener('DOMContentLoaded', function () {
             snapshot.docs.forEach(doc => {
                 switch (doc.data().type) {
                     case 'payment':
-                        paymentArray.push(new Payment(doc.data()))
+                        paymentArray.push(new Payment(doc.data(), doc.id))
                         break;
                     case 'request':
-                        paymentArray.push(new Request(doc.data()))
+                        paymentArray.push(new Request(doc.data(), doc.id))
                         break;
                     case 'announcement':
-                        paymentArray.push(new Announcement(doc.data()))
+                        paymentArray.push(new Announcement(doc.data(), doc.id))
                         break;
                     case 'groupmessage':
-                        paymentArray.push(new Groupmessage(doc.data()))
+                        paymentArray.push(new Groupmessage(doc.data(), doc.id))
                         break;
                     default:
                         break;
@@ -64,6 +60,12 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(err)
         })
 
+    db.collection(`houses/${houseId}/members`).onSnapshot(snapshot => {
+        memberArray = []
+        snapshot.forEach(doc => {
+            memberArray.push(doc.data())
+        })
+    })
 
 })
 

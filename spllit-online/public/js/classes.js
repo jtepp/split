@@ -1,7 +1,7 @@
 const myId = localStorage.getItem('myId') || ""
 export default class Post {
-    constructor(data) {
-        this.id = data.id;
+    constructor(data, id) {
+        this.id = id;
         this.by = data.by;
         this.fcm = data.fcm;
         this.time = data.time;
@@ -11,8 +11,8 @@ export default class Post {
 }
 
 export class Payment extends Post {
-    constructor(data) {
-        super(data)
+    constructor(data, id) {
+        super(data, id)
         this.amount = data.amount;
         this.from = data.from;
         this.to = data.to;
@@ -42,9 +42,14 @@ export class Payment extends Post {
 
         let memberImgLeft = document.createElement('img');
         memberImgLeft.setAttribute('draggable', 'false');
-        memberImgLeft.setAttribute('src', "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200");
+        // memberImgLeft.setAttribute('src', "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200");
         memberImgLeft.classList.add('member-img');
-        singleMemberLeft.appendChild(memberImgLeft);
+
+        let memberImgLeftCont = document.createElement('div');
+        memberImgLeftCont.classList.add('member-img-container');
+        memberImgLeftCont.appendChild(memberImgLeft);
+
+        singleMemberLeft.appendChild(memberImgLeftCont);
 
         let nameTextLeft = document.createElement('div');
         nameTextLeft.classList.add('name-text');
@@ -83,9 +88,14 @@ export class Payment extends Post {
 
         let memberImgRight = document.createElement('img');
         memberImgRight.setAttribute('draggable', 'false');
-        memberImgRight.setAttribute('src', "https://www.gravatar.com/avatar");
+        // memberImgRight.setAttribute('src', "https://www.gravatar.com/avatar");
         memberImgRight.classList.add('member-img');
-        singleMemberRight.appendChild(memberImgRight);
+
+        let memberImgRightCont = document.createElement('div');
+        memberImgRightCont.classList.add('member-img-container');
+        memberImgRightCont.appendChild(memberImgRight);
+
+        singleMemberRight.appendChild(memberImgRightCont);
 
         let nameTextRight = document.createElement('div');
         nameTextRight.classList.add('name-text');
@@ -132,7 +142,7 @@ export class Payment extends Post {
 }
 
 export class Request extends Post {
-    constructor(data) {
+    constructor(data, id) {
         super(data)
         this.amount = data.amount;
         this.reqfrom = data.reqfrom;
@@ -164,9 +174,14 @@ export class Request extends Post {
 
         let memberImgLeft = document.createElement('img');
         memberImgLeft.setAttribute('draggable', 'false');
-        memberImgLeft.setAttribute('src', "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200");
+        // memberImgLeft.setAttribute('src', "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200");
         memberImgLeft.classList.add('member-img');
-        singleMemberLeft.appendChild(memberImgLeft);
+
+        let memberImgLeftCont = document.createElement('div');
+        memberImgLeftCont.classList.add('member-img-container');
+        memberImgLeftCont.appendChild(memberImgLeft);
+
+        singleMemberLeft.appendChild(memberImgLeftCont);
 
         let nameTextLeft = document.createElement('div');
         nameTextLeft.classList.add('name-text');
@@ -205,9 +220,13 @@ export class Request extends Post {
 
             let memberImgRight = document.createElement('img');
             memberImgRight.setAttribute('draggable', 'false');
-            memberImgRight.setAttribute('src', "https://www.gravatar.com/avatar");
+            // memberImgRight.setAttribute('src', "https://www.gravatar.com/avatar");
             memberImgRight.classList.add('member-img');
-            singleMemberRight.appendChild(memberImgRight);
+            let memberImgRightCont = document.createElement('div');
+            memberImgRightCont.classList.add('member-img-container');
+            memberImgRightCont.appendChild(memberImgRight);
+
+            singleMemberRight.appendChild(memberImgRightCont);
 
             let nameTextRight = document.createElement('div');
             nameTextRight.classList.add('name-text');
@@ -258,7 +277,7 @@ export class Request extends Post {
 }
 
 export class Announcement extends Post {
-    constructor(data) {
+    constructor(data, id) {
         super(data)
         this.from = data.from;
     }
@@ -294,7 +313,7 @@ export class Announcement extends Post {
 }
 
 export class Groupmessage extends Post {
-    constructor(data) {
+    constructor(data, id) {
         super(data)
         this.from = data.from;
         this.reqfrom = data.reqfrom;
@@ -318,9 +337,14 @@ export class Groupmessage extends Post {
         let gmMemberImg = document.createElement('img');
         gmMemberImg.classList.add('gm-member-img');
         gmMemberImg.setAttribute('draggable', 'false');
-        gmMemberImg.setAttribute('src', "https://www.gravatar.com/avatar");
+        // gmMemberImg.setAttribute('src', "https://www.gravatar.com/avatar");
 
-        gmInnerLeft.appendChild(gmMemberImg);
+        let gmMemberImgCont = document.createElement('div');
+        gmMemberImgCont.classList.add('member-img-container');
+        gmMemberImgCont.classList.add('gm-member-img-container');
+        gmMemberImgCont.appendChild(gmMemberImg);
+
+        gmInnerLeft.appendChild(gmMemberImgCont);
         gmPostCell.appendChild(gmInnerLeft);
 
         let gmInnerRight = document.createElement('div');
@@ -363,4 +387,14 @@ function unixToDate(unix) {
     const date = new Intl.DateTimeFormat('en-US', options).format;
 
     return date(d);
+}
+
+export class Member {
+    constructor(data, id) {
+        this.name = data.name;
+        this.id = id;
+        this.image = data.image;
+        this.admin = data.admin;
+        this.home = data.home;
+    }
 }
