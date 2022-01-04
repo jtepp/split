@@ -28,6 +28,15 @@ document.addEventListener('DOMContentLoaded', function () {
     db = firebase.firestore()
 
 
+    db.collection(`houses/${houseId}/members`).onSnapshot(snapshot => {
+        memberArray = []
+        snapshot.forEach(doc => {
+            memberArray.push(new Member(doc.data(), doc.id))
+        })
+
+    }, err => {
+        boot()
+    })
     db.collection(`houses/${houseId}/payments`).orderBy('time', 'asc')
         .onSnapshot(snapshot => {
             paymentArray = []
@@ -55,20 +64,11 @@ document.addEventListener('DOMContentLoaded', function () {
             paymentArray.forEach(payment => {
                 activityContainer.prepend(payment.cell())
             })
-            fixConsecAddClick()
+            fixPayments()
         }, err => {
             console.log(err)
             boot()
         })
-
-    db.collection(`houses/${houseId}/members`).onSnapshot(snapshot => {
-        memberArray = []
-        snapshot.forEach(doc => {
-            memberArray.push(doc.data())
-        }, err => {
-            boot()
-        })
-    })
 
 })
 
@@ -82,14 +82,22 @@ function updateShowEach(element) {
     }
 }
 
-function fixConsecAddClick() {
-    for (let child of document.body.children) {
+function fixPayments() {
+    for (let child of activityContainer.children) {
         if (child.getAttribute('type') == 'groupmessage') {
-            if (child.nextElementSibling && child.getAttribute('senderId') && child.nextElementSibling.getAttribute('senderId') && child.getAttribute('senderId') == child.nextElementSibling.getAttribute('senderId')) {
-                child.nextElementSibling.setAttribute('consecutive', '')
+            if (child.previousElementSibling && child.getAttribute('senderId') && child.previousElementSibling.getAttribute('senderId') && child.getAttribute('senderId') == child.previousElementSibling.getAttribute('senderId')) {
+                child.previousElementSibling.setAttribute('consecutive', '')
             }
         }
     }
+    document.querySelectorAll('.member-img-container+.name-text').forEach(name => {
+        if (memberArray) {
+            let indexOfMember = memberArray.map(m => m.name).indexOf(name.textContent)
+            if (indexOfMember != -1 && name.previousSibling && memberArray[indexOfMember].image != "") {
+                name.previousSibling.querySelector('img').setAttribute('src', "data:image/jpeg;base64, " + memberArray[indexOfMember].image)
+            }
+        }
+    })
 
     document.body.onclick = (e) => {
         if (e.target.classList.contains('chevron')) { // click on chevron to toggle memo
@@ -104,4 +112,8 @@ function fixConsecAddClick() {
 
 function boot() {
     window.location.href = 'login'
+    window.localStorage.removeItem('myId')
+    window.localStorage.removeItem('name')
+    window.localStorage.removeItem('houseId')
 }
+document.getElementById('sign-out-button').onclick = boot

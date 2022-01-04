@@ -130,6 +130,10 @@ img.member-img {
 }
 
 .name-text {
+    width: max-content;
+}
+
+.name-text:not(.gm-name-text) {
     color: var(--black-white);
     font-weight: 500;
     margin-left: 4px;
@@ -286,8 +290,20 @@ img.sfs,
     margin-top: auto;
 }
 
-[sender].gm-inner-left::after {
+/* [sender].gm-inner-left::after {
     content: attr(sender);
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 40px;
+    word-wrap: break-word;
+    font-size: 10px;
+    color: var(--alt-mid-dark-grey);
+    transform: translate(-50%, 100%);
+    text-align: center;
+} */
+
+[sender].gm-inner-left>.name-text.gm-name-text {
     position: absolute;
     left: 50%;
     bottom: -4px;

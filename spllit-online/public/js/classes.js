@@ -334,6 +334,12 @@ export class Groupmessage extends Post {
         gmInnerLeft.classList.add('gm-inner-left');
         gmInnerLeft.setAttribute('sender', this.from);
 
+        let gmName = document.createElement('div');
+        gmName.classList.add('name-text');
+        gmName.classList.add('gm-name-text');
+        gmName.innerText = this.from;
+
+
         let gmMemberImg = document.createElement('img');
         gmMemberImg.classList.add('gm-member-img');
         gmMemberImg.setAttribute('draggable', 'false');
@@ -345,6 +351,8 @@ export class Groupmessage extends Post {
         gmMemberImgCont.appendChild(gmMemberImg);
 
         gmInnerLeft.appendChild(gmMemberImgCont);
+        gmInnerLeft.appendChild(gmName);
+
         gmPostCell.appendChild(gmInnerLeft);
 
         let gmInnerRight = document.createElement('div');
