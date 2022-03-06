@@ -23,7 +23,7 @@ struct Main: View {
     var body: some View {
         ZStack {
             TabsView(tabSelection: $tabSelection, house: $h, member: $m, myId: $myId, inWR: $inWR, noProf: $noProf, engaged: $engaged, watch: $watch, refresh: refresh)
-                .animation(.easeOut)
+//                .animation(.easeOut)
 
             TabBar(tabSelection: $tabSelection, engaged: $engaged, watch: $watch, refresh: refresh)
         }

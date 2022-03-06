@@ -1011,7 +1011,7 @@ class Fetch: ObservableObject {
                         from = newName.wrappedValue
                     }
                     
-                    self.db.document("houses/\(m.wrappedValue.home)/payments/\(paymentSnapshot.documentID)").updateData(["reqfrom": reqfrom, "to": to, "from": from])
+                    self.db.document("houses/\(m.wrappedValue.home)/payments/\(paymentSnapshot.documentID)").updateData(["reqfrom": reqfrom, "to": to, "from": from, "mute":true])
                     
                     m.wrappedValue.name = newName.wrappedValue
                     completion()

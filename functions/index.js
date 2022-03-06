@@ -7,12 +7,12 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
     var title;
     var body;
     var snd = "default"
-    const type = event.after.get("type");
+    const type = event.after.get("type") || ""
     const edits = event.after.get("edits") || {}
     let lastEdit = edits[Object.keys(edits).reverse()[0]] || ""
     let composer;
     if (lastEdit) composer = lastEdit.match(/(.+?) (changed:|opted)/)[1]
-    let reqFrom = event.after.get("reqfrom")
+    let reqFrom = event.after.get("reqfrom") || []
     let to = event.after.get("to") || ""
     let from = event.after.get("from") || ""
     var typeFix = "unknown"
