@@ -47,6 +47,7 @@ struct GeneralPaymentCell: View {
             GeneralPaymentSymbol(payment: payment)
             , alignment: .topLeading
         )
+        
     }
 }
 

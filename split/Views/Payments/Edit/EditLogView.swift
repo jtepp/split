@@ -21,7 +21,9 @@ struct EditLogView: View {
                 .frame(height: 2)
                 .padding(.top, -4)
             ForEach(Array(payment.editLog.keys), id: \.self) { key in
-                EditLogCell(time: key, edit: payment.editLog[key]!)
+                if key.isNumeric {
+                    EditLogCell(time: key, edit: payment.editLog[key]!)
+                }
             }
         }
         .padding(10)

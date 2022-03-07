@@ -116,7 +116,7 @@ struct EditRequestView: View {
                 choiceTo = choiceALL
             }
         }, content: {
-            MemberPicker(show: $showPicker, house: $house, choice: $choiceALL, multiple: editType == .from)
+            MemberPicker(show: $showPicker, house: $house, choice: $choiceALL, multiple: editType == .from, showSelf: member.admin)
         })
     }
 }

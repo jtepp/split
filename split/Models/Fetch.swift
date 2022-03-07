@@ -235,9 +235,8 @@ class Fetch: ObservableObject {
                 let type = data["type"] as? String ?? "unknown"
                 let by = data["by"] as? String ?? ""
                 let editLog = data["edits"] as? [String: String] ?? [String: String]()
-                let reactions = data["reactions"] as? [String: String] ?? [String: String]()
                 
-                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, type: stringToPT(type), special: special, by: by, editLog: editLog, reactions: reactions)
+                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, type: stringToPT(type), special: special, by: by, editLog: editLog)
             })
             for member in h.wrappedValue.members {
                 self.updateBalances(h: h.wrappedValue, m: member)
@@ -1286,6 +1285,22 @@ class Fetch: ObservableObject {
                 print(err.debugDescription)
             }
             
+        }
+    }
+    
+    func updateReactions(payment: Payment, member: Member, reaction: String) {
+        var newData = [AnyHashable: Any]()
+        var el = payment.editLog
+        el[member.id] = reaction
+        
+        newData["edits"] = el
+        
+        newData["mute"] = true
+        
+//            print(edits)
+//            print("houses/\(member.home)/payments/\(payment.id ?? "ERROR")")
+        self.db.document("houses/\(member.home)/payments/\(payment.id ?? "ERROR")").updateData(newData) { err in
+            print(err.debugDescription)
         }
     }
         

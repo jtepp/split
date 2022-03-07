@@ -72,6 +72,10 @@ struct ActivityPaymentCell: View {
                 }
             }
         }
+        .overlay(
+            ReactionsView(payment: payment)
+            , alignment: .topTrailing
+        )
     }
 }
 

@@ -12,6 +12,7 @@ struct MemberPicker: View {
     @Binding var house: House
     @Binding var choice: [Member]
     var multiple: Bool = false
+    var showSelf: Bool = false
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
@@ -19,7 +20,11 @@ struct MemberPicker: View {
                 ScrollView {
                     HeaderText(text: "Choose \(multiple ? "members" : "a member")", clear: .constant(false))
                     ForEach (house.members.filter({ (m) -> Bool in
-                        return m.id != UserDefaults.standard.string(forKey: "myId")
+                        if showSelf {
+                            return true
+                        } else {
+                            return m.id != UserDefaults.standard.string(forKey: "myId")
+                        }
                     })) { member in
                         imgButton(show: $show, member: .constant(member), choice: $choice, multiple: multiple)
                     }

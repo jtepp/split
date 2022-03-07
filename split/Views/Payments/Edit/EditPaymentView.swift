@@ -114,7 +114,7 @@ struct EditPaymentView: View {
                 choiceTo = choiceALL
             }
         }, content: {
-                MemberPicker(show: $showPicker, house: $house, choice: $choiceALL, multiple: false)
+            MemberPicker(show: $showPicker, house: $house, choice: $choiceALL, multiple: false, showSelf: member.admin)
         })
     }
 }
