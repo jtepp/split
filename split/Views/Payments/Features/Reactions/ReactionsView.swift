@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ReactionsView: View {
     @Binding var payment: Payment
+    var reactionOptionsPresentTense = ["like", "dislike", "question"]
     var reactionOptions = ["liked", "disliked", "questioned"]
     var body: some View {
         HStack(spacing:0) {
@@ -33,18 +34,27 @@ struct ReactionsView: View {
                 })) > 0 {
                     ReactionsCompactLabel(title: String(countReaction(reactionOption, reactions: payment.editLog.filter({ (key: String, _: String) in
                         return !key.isNumeric
-                    }))), systemName: reactionToImageName(reactionOption))
-                        .scaleEffect(0.75)
+                    }))), systemName: reactionToImageName(reactionOption), selected: .constant(yourReaction(reactions: payment.editLog.filter({ (key: String, _: String) in
+                        return !key.isNumeric
+                    }), memberID: (UserDefaults.standard.string(forKey: "myId") ?? "")) == reactionOption))
+                        .scaleEffect(0.7)
                 }
             }
         }
-        .font(.caption2)
+        .font(.caption)
         .foregroundColor(.white)
         .padding(.horizontal, 2)
         .background(
             Capsule()
                 .fill(Color("DarkMaterial"))
         )
+        .contextMenu(menuItems: {
+            ForEach(reactionOptionsPresentTense, id: \.self) { reactionOption in
+                ReactionQuickAction(title: reactionOption, reactions: $payment.editLog, selected: .constant(yourReaction(reactions: payment.editLog.filter({ (key: String, _: String) in
+                    return !key.isNumeric
+                }), memberID: (UserDefaults.standard.string(forKey: "myId") ?? "")).contains(reactionOption))) //NOTE: checking if past tense contains present tense, not if reaction is equal to selected
+            }
+        })
         .padding(2)
     }
 }
@@ -75,9 +85,12 @@ func yourReaction(reactions: [String: String], memberID: String) -> String {
 
 func reactionToImageName(_ reaction: String) -> String {
     switch(reaction) {
-    case "liked": return "heart.fill"
-    case "disliked": return "hand.thumbsdown.fill"
-    case "questioned": return "questionmark"
+    case "liked": fallthrough
+    case "like": return "heart.fill"
+    case "disliked": fallthrough
+    case "dislike": return "hand.thumbsdown.fill"
+    case "questioned": fallthrough
+    case "question": return "questionmark"
     default: return ""
     }
 }

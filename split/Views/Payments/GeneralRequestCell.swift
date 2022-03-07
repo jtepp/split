@@ -45,7 +45,7 @@ struct GeneralRequestCell: View {
                 if showEach {
                     moneyText(b: (minimal) ? .constant(payment.amount / Float(payment.reqfrom.count)) : .constant($payment.wrappedValue.amount / Float($payment.wrappedValue.reqfrom.count)), post: showEach ? " each" : "")
                         .foregroundColor(.primary)
-                        .padding(6)
+                        .padding(4)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(
@@ -55,7 +55,7 @@ struct GeneralRequestCell: View {
                 } else {
                     moneyText(b: (minimal) ? .constant(payment.amount / Float(payment.reqfrom.count)) : $payment.amount)
                         .foregroundColor(.primary)
-                        .padding(6)
+                        .padding(4)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(
