@@ -1241,7 +1241,7 @@ class Fetch: ObservableObject {
         } else {
             msg = "\(member.name) changed: "
             
-            if payment.amount != nAmount {
+            if String(format: "%.2f", payment.amount) != String(format: "%.2f", nAmount) {
                 msg += "Amount from \(String(format: "%.2f", payment.amount)) to \(String(format: "%.2f",nAmount))"
                 editCount += 1
                 edits["amount"] = nAmount

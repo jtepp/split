@@ -90,7 +90,11 @@ struct CompactorView: View {
                             state = .prePost
                         }
                     } else if state == .prePost {
+                        if (paymentList.count > 0) {
                         showCompactAlert = true
+                        } else {
+                            showSheet = false
+                        }
                     }
                     
                 } label: {
