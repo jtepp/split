@@ -34,7 +34,7 @@ struct GeneralPaymentCell: View {
             Spacer()
             moneyText(b: $payment.amount)
                 .foregroundColor(.primary)
-                .padding(6)
+                .padding(4)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .fill(

@@ -15,7 +15,7 @@ struct GeneralPaymentSymbol: View {
                 Image(systemName: specialImgName(payment.special))
                     .resizable()
                     .foregroundColor(.white)
-            .frame(width: 16, height: 16)
+            .frame(width: 14, height: 14)
             }
         }.offset(x: -13, y: -12)
     }
