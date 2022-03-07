@@ -11,8 +11,9 @@ struct CompactorView: View {
     var h: Binding<House>
     @Binding var compactMembers: [Member]
     @Binding var showSheet: Bool
+    @State var showCompactAlert = false
     func upCount() -> Int {
-        return Int(ceil(Float(settleMembers.count)/2))
+        return Int(ceil(Float(compactMembers.count)/2))
     }
     @State var paymentList = [Payment]()
     @State var state: compactState = .preCalculate
@@ -41,15 +42,15 @@ struct CompactorView: View {
                 ScrollView {
                     if state == .preCalculate {
                         LazyVGrid(columns: [GridItem(spacing: 8), GridItem()], content: {
-                            ForEach(settleMembers.sorted(by: { a, b in
+                            ForEach(compactMembers.sorted(by: { a, b in
                                 memberBalanceFloat(m: a) > memberBalanceFloat(m: b)
                             })) {member in
                                 MemberCellBalance(m: .constant(member))
                             }
                             
-//                            .padding(.bottom, 5)
+                            //                            .padding(.bottom, 5)
                         })
-                        .padding()
+                            .padding()
                     } else if state == .prePost {
                         VStack {
                             if paymentList.count == 0 {
@@ -72,7 +73,7 @@ struct CompactorView: View {
                             }
                             ForEach(paymentList) { p in
                                 
-                                ActivityPaymentCell(payment: .constant(p), showMemoEver: false, mems: h.members.wrappedValue)
+                                ActivityRequestCell(payment: .constant(p), showMemoEver: false, hId: h.wrappedValue.id, mems: h.members.wrappedValue)
                                 
                             }
                             .padding(.horizontal, 10)
@@ -89,11 +90,7 @@ struct CompactorView: View {
                             state = .prePost
                         }
                     } else if state == .prePost {
-                        Fetch().deleteAllPayments(h: h.wrappedValue)
-                        for p in paymentList {
-                            Fetch().sendPayment(p: p, h: h.wrappedValue)
-                        }
-                        showSheet = false
+                        showCompactAlert = true
                     }
                     
                 } label: {
@@ -111,12 +108,23 @@ struct CompactorView: View {
                         .fill(state == .preCalculate ? Color.blue : paymentList.count > 0 ? Color.green : Color.gray)
                 )
                 .padding(.bottom, 90)
+                .alert(isPresented: $showCompactAlert) {
+                    Alert(title: Text("Confirm Compact"), message: Text("Compacting will delete all payments and requests and replace them with the smallest possible amount of requests."), primaryButton: Alert.Button.default(Text("Confirm"), action: {
+                        
+                        Fetch().deleteAllPayments(h: h.wrappedValue)
+                        for p in paymentList {
+                            Fetch().sendPayment(p: p, h: h.wrappedValue)
+                        }
+                        showSheet = false
+                    }), secondaryButton: Alert.Button.destructive(Text("Cancel")))
+                }
+                
             }
         }
     }
 }
 
-struct QuickSettleView_Previews: PreviewProvider {
+struct CompactorView_Previews: PreviewProvider {
     static var previews: some View {
         MembersView(house: .constant(House.placeholder), payType: .constant(0), tabSelection: .constant(0), pchoice: .constant([.empty]), rchoice: .constant([.empty]))
             .background(Color.black.edgesIgnoringSafeArea(.all))

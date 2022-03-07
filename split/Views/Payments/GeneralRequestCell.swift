@@ -71,7 +71,7 @@ struct GeneralRequestCell: View {
             }
             .overlay(
                 HStack {
-                    if payment.includedSelf {
+                    if payment.special == "includeself" {
                         Image(systemName: "person.circle")
                             .resizable()
                             .foregroundColor(.white)

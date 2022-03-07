@@ -11,6 +11,7 @@ struct ActivityRequestCell: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var payment: Payment
     @State var showMemo = false
+    var showMemoEver: Bool = true
     var hId: String
     var mems: [Member]
     var body: some View {
@@ -53,7 +54,7 @@ struct ActivityRequestCell: View {
                             .rotationEffect(.degrees(showMemo ? 180 : 0))
                             .padding()
                             .foregroundColor(.black)
-                            .opacity(0.6)
+                            .opacity(showMemoEver ? 0.6 : 0)
                     }
                     Spacer()
                 }
@@ -66,7 +67,7 @@ struct ActivityRequestCell: View {
         )
         .onTapGesture {
             withAnimation {
-                if payment.memo != "" {
+                if payment.memo != "" && showMemoEver {
                     showMemo.toggle()
                 }
             }

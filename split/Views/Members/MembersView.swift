@@ -44,7 +44,7 @@ struct MembersView: View {
                     
                     Button {
                         withAnimation {
-                        showSettle = true
+                        showCompactor = true
                         }
                         Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $compactMembers)
                         
