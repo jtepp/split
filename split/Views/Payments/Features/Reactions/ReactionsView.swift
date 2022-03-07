@@ -15,7 +15,7 @@ struct ReactionsView: View {
     var body: some View {
         Menu {
             ForEach(reactionOptionsPresentTense, id: \.self) { reactionOption in
-                ReactionQuickAction(title: reactionOption, reactions: $payment.editLog, selected: .constant(yourReaction(reactions: payment.editLog.filter({ (key: String, _: String) in
+                ReactionQuickAction(title: reactionOption, payment: $payment, reactions: $payment.editLog, selected: .constant(yourReaction(reactions: payment.editLog.filter({ (key: String, _: String) in
                     return !key.isNumeric
                 }), memberID: (UserDefaults.standard.string(forKey: "myId") ?? "")).contains(reactionOption))) //NOTE: checking if past tense contains present tense, not if reaction is equal to selected
             }
@@ -111,4 +111,14 @@ func nameFromMemberID(_ id: String, members: [Member]) -> String {
     return (members.first { m in
         m.id == id
     } ?? .empty).name
+}
+
+func presentToPastReaction(_ present: String) -> String {
+    switch(present) {
+    case "like": return "liked"
+    case "dislike": return "disliked"
+    case "question": return "questioned"
+    default: return ""
+    }
+
 }
