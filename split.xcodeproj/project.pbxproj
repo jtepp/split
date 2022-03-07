@@ -113,6 +113,7 @@
 		0CAB4EF72712880E00B2E049 /* AmountOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB4EF62712880E00B2E049 /* AmountOverlay.swift */; };
 		0CAB4EF9271294E500B2E049 /* AmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB4EF8271294E500B2E049 /* AmountCell.swift */; };
 		0CB2AC71276802380073AB82 /* ReqFromView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB2AC70276802380073AB82 /* ReqFromView.swift */; };
+		0CB4F99D27D5A38B00189A62 /* CompactorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB4F99C27D5A38B00189A62 /* CompactorView.swift */; };
 		0CB7844F276F0E0D00EF6135 /* ActivityEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB7844E276F0E0D00EF6135 /* ActivityEditView.swift */; };
 		0CB78451276FEB5900EF6135 /* String+firstCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB78450276FEB2C00EF6135 /* String+firstCap.swift */; };
 		0CB78454276FEDE200EF6135 /* EditPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB78453276FEDE200EF6135 /* EditPaymentView.swift */; };
@@ -328,6 +329,7 @@
 		0CAB4EF62712880E00B2E049 /* AmountOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountOverlay.swift; sourceTree = "<group>"; };
 		0CAB4EF8271294E500B2E049 /* AmountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountCell.swift; sourceTree = "<group>"; };
 		0CB2AC70276802380073AB82 /* ReqFromView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReqFromView.swift; sourceTree = "<group>"; };
+		0CB4F99C27D5A38B00189A62 /* CompactorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactorView.swift; sourceTree = "<group>"; };
 		0CB7844E276F0E0D00EF6135 /* ActivityEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityEditView.swift; sourceTree = "<group>"; };
 		0CB78450276FEB2C00EF6135 /* String+firstCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+firstCap.swift"; sourceTree = "<group>"; };
 		0CB78453276FEDE200EF6135 /* EditPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPaymentView.swift; sourceTree = "<group>"; };
@@ -758,6 +760,7 @@
 				0C97E85627154D860051584F /* ScanDocumentView.swift */,
 				0CB2AC70276802380073AB82 /* ReqFromView.swift */,
 				0CAB4EF4271280A300B2E049 /* AmountField.swift */,
+				0CB4F99C27D5A38B00189A62 /* CompactorView.swift */,
 				0C3061D626FFE7E200C228A8 /* QuickSettleView.swift */,
 			);
 			path = Features;
@@ -1060,6 +1063,7 @@
 				0CB78456276FEE9500EF6135 /* EditRequestView.swift in Sources */,
 				0CD1173E2687A4E40093426F /* AlternateIconRow.swift in Sources */,
 				0C9D26CF265F263E006A7AF6 /* String+isNumeric.swift in Sources */,
+				0CB4F99D27D5A38B00189A62 /* CompactorView.swift in Sources */,
 				0C0CA77A265EF4D20062FDDD /* UIImage+resized.swift in Sources */,
 				0C625991265EB440002E58A3 /* HeaderText.swift in Sources */,
 				0C3061D726FFE7E200C228A8 /* QuickSettleView.swift in Sources */,

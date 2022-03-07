@@ -12,6 +12,7 @@ struct MembersView: View {
     @Binding var house: House
     @State var showDetails = false
     @State var showSettle = false
+    @State var showCompactor = false
     @State var tappedMember = Member.empty
     @Binding var payType: Int
     @Binding var tabSelection: Int
@@ -20,6 +21,7 @@ struct MembersView: View {
     @Binding var pchoice: [Member]
     @Binding var rchoice: [Member]
     @State var settleMembers = [Member]()
+    @State var compactMembers = [Member]()
     var body: some View {
         ZStack {
             ScrollView {
@@ -39,6 +41,26 @@ struct MembersView: View {
                         .padding()
                     
                     Spacer()
+                    
+                    Button {
+                        withAnimation {
+                        showSettle = true
+                        }
+                        Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $compactMembers)
+                        
+                    } label: {
+                        Image(systemName: "arrow.3.trianglepath")
+                            .font(Font.body.bold())
+                            .foregroundColor(.white)
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .fill(
+                                        Color.gray.opacity(0.2)
+                                    )
+                            )
+                        
+                    }
                     
                     Button {
                         withAnimation {
@@ -207,6 +229,8 @@ struct MembersView: View {
         })
             if showSettle {
                 QuickSettleView(h: $house, settleMembers: $settleMembers, showSheet: $showSettle)
+            } else if showCompactor {
+                CompactorView(h: $house, compactMembers: $compactMembers, showSheet: $showCompactor)
             }
         }
         
