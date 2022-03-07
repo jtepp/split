@@ -73,7 +73,7 @@ struct ActivityRequestCell: View {
             }
         }
         .overlay(
-            ReactionsView(payment: $payment)
+            ReactionsView(payment: $payment, mems: mems)
             , alignment: .topTrailing
         )
     }

@@ -11,7 +11,25 @@ struct ReactionsView: View {
     @Binding var payment: Payment
     var reactionOptionsPresentTense = ["like", "dislike", "question"]
     var reactionOptions = ["liked", "disliked", "questioned"]
+    var mems: [Member]
     var body: some View {
+        Menu {
+            ForEach(reactionOptionsPresentTense, id: \.self) { reactionOption in
+                ReactionQuickAction(title: reactionOption, reactions: $payment.editLog, selected: .constant(yourReaction(reactions: payment.editLog.filter({ (key: String, _: String) in
+                    return !key.isNumeric
+                }), memberID: (UserDefaults.standard.string(forKey: "myId") ?? "")).contains(reactionOption))) //NOTE: checking if past tense contains present tense, not if reaction is equal to selected
+            }
+            if !payment.editLog.filter({ (key: String, _: String) in
+                return !key.isNumeric
+            }).isEmpty {
+                Text(payment.editLog.filter({ (key: String, _: String) in
+                    return !key.isNumeric
+                }).map({ key, value in
+                    nameFromMemberID(key, members: mems) + " " + value
+                }).joined(separator: ", "))
+            }
+        }
+    label: {
         HStack(spacing:0) {
             //            ReactionsCompactLabel(title: "1", systemName: "heart.fill")
             HStack(spacing: 0) {
@@ -48,14 +66,8 @@ struct ReactionsView: View {
             Capsule()
                 .fill(Color("DarkMaterial"))
         )
-        .contextMenu(menuItems: {
-            ForEach(reactionOptionsPresentTense, id: \.self) { reactionOption in
-                ReactionQuickAction(title: reactionOption, reactions: $payment.editLog, selected: .constant(yourReaction(reactions: payment.editLog.filter({ (key: String, _: String) in
-                    return !key.isNumeric
-                }), memberID: (UserDefaults.standard.string(forKey: "myId") ?? "")).contains(reactionOption))) //NOTE: checking if past tense contains present tense, not if reaction is equal to selected
-            }
-        })
         .padding(2)
+    }
     }
 }
 
@@ -93,4 +105,10 @@ func reactionToImageName(_ reaction: String) -> String {
     case "question": return "questionmark"
     default: return ""
     }
+}
+
+func nameFromMemberID(_ id: String, members: [Member]) -> String {
+    return (members.first { m in
+        m.id == id
+    } ?? .empty).name
 }
