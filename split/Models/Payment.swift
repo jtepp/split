@@ -20,6 +20,7 @@ struct Payment: Identifiable, Codable {
     var special: String = ""
     var by: String = ""
     var editLog: [String: String] = [String: String]()
+    var reactions: [String: String] = [String: String]()
     static let empty = Payment(id: "", to: "", from: "", amount: 0, time: 0, type: .payment)
     static let placeholder = Payment(id: "34f43", to: "Jacob T", from: "Praw", amount: 5.6, time: 1622044000, memo: "mem", type: .payment, editLog: ["1639966355": "A changed amount from 2.36 to 3.26", "1639967355": "Xxxxx sfdfd changed To from Jfsdfasd to ksfk"])
     static let placeholdera = Payment(id: "343", to: "Jacob T", from: "Praw", amount: 5.6, time: 1621044000, memo: "mem", type: .announcement)

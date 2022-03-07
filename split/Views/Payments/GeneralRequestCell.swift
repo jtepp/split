@@ -69,18 +69,12 @@ struct GeneralRequestCell: View {
                     showEach.toggle()
                 }
             }
-            .overlay(
-                HStack {
-                    if payment.special != "" {
-                        Image(systemName: specialImgName(payment.special))
-                            .resizable()
-                            .foregroundColor(.white)
-                    .frame(width: 16, height: 16)
-                    } 
-                }.offset(x: 13, y: -12)
-                , alignment: .topTrailing
-            )
+            
         }
+        .overlay(
+            GeneralPaymentSymbol(payment: payment)
+            , alignment: .topLeading
+        )
     }
 }
 
@@ -94,11 +88,9 @@ struct GeneralRequestCell_Previews: PreviewProvider {
     }
 }
 
-func specialImgName(_ special: String) -> String{
-    switch (special) {
-    case "includeself": return "person.circle"
-    case "quicksettle": return "arrowshape.bounce.right"
-    case "compactor": return "arrow.3.trianglepath"
-    default: return ""
-    }
+
+func paymentPlusSelfTotal(_ payment: Payment) -> String {
+    let mc: Float = Float(payment.reqfrom.count)
+    let total: Float = payment.amount * (mc + 1) / mc
+    return String(format: "$%.2f", arguments: [total])
 }

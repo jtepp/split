@@ -41,18 +41,12 @@ struct GeneralPaymentCell: View {
                             Color("whiteblack")
                         )
                 )
-                .overlay(
-                    HStack {
-                        if payment.special != "" {
-                            Image(systemName: specialImgName(payment.special))
-                                .resizable()
-                                .foregroundColor(.white)
-                        .frame(width: 16, height: 16)
-                        }
-                    }.offset(x: 13, y: -12)
-                    , alignment: .topTrailing
-                )
+                
         }
+        .overlay(
+            GeneralPaymentSymbol(payment: payment)
+            , alignment: .topLeading
+        )
     }
 }
 

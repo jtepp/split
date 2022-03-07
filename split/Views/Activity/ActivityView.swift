@@ -251,6 +251,9 @@ struct ActivityView: View {
                                             }
                                             )
                                         }
+                                        if payment.special == "includeself" {
+                                            Text("Total: " + paymentPlusSelfTotal(payment))
+                                        }
                                     })
                             } else if payment.type == .payment {
                                 

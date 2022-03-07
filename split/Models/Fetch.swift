@@ -235,8 +235,9 @@ class Fetch: ObservableObject {
                 let type = data["type"] as? String ?? "unknown"
                 let by = data["by"] as? String ?? ""
                 let editLog = data["edits"] as? [String: String] ?? [String: String]()
+                let reactions = data["reactions"] as? [String: String] ?? [String: String]()
                 
-                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, type: stringToPT(type), special: special, by: by, editLog: editLog)
+                return Payment(id: q.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, type: stringToPT(type), special: special, by: by, editLog: editLog, reactions: reactions)
             })
             for member in h.wrappedValue.members {
                 self.updateBalances(h: h.wrappedValue, m: member)
@@ -1100,7 +1101,7 @@ class Fetch: ObservableObject {
                     let by = data["by"] as? String ?? ""
                     let special = data["special"] as? String ?? ""
                     
-                    return Payment(id: queryDocumentSnapshot.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, type:stringToPT(type), special: "special", by: by)
+                    return Payment(id: queryDocumentSnapshot.documentID, to: to, from: from, reqfrom: reqfrom, amount: Float(truncating: amount), time: Int(truncating: time), memo: memo, type:stringToPT(type), special: special, by: by)
                 }))
             }
         } else {
