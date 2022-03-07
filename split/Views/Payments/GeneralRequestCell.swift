@@ -71,12 +71,12 @@ struct GeneralRequestCell: View {
             }
             .overlay(
                 HStack {
-                    if payment.special == "includeself" {
-                        Image(systemName: "person.circle")
+                    if payment.special != "" {
+                        Image(systemName: specialImgName(payment.special))
                             .resizable()
                             .foregroundColor(.white)
                     .frame(width: 16, height: 16)
-                    }
+                    } 
                 }.offset(x: 13, y: -12)
                 , alignment: .topTrailing
             )
@@ -91,5 +91,14 @@ struct GeneralRequestCell_Previews: PreviewProvider {
             Color.black.edgesIgnoringSafeArea(.all)
             ActivityRequestCell(payment: .constant(.placeholderr), hId: "placeholder", mems: [Member(id: "a", home: "", name: "Devon", image: "", admin: true)])
         }
+    }
+}
+
+func specialImgName(_ special: String) -> String{
+    switch (special) {
+    case "includeself": return "person.circle"
+    case "quicksettle": return "arrowshape.bounce.right"
+    case "compactor": return "arrow.3.trianglepath"
+    default: return ""
     }
 }
