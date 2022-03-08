@@ -67,10 +67,6 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                             } else if (to == data.name) {
                                 fcms.push(data.fcm)
                             }
-                            // remove composer of edit
-                            if (data.name.trim() == composer.trim()) {
-                                fcms = removeItemOnce(fcms, data.fcm)
-                            }
                         }
 
                     } else if (type == "payment") { // payment edit
@@ -93,12 +89,13 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                             } else if (from == data.name) {
                                 fcms.push(data.fcm)
                             }
-                            // remove composer of edit
-                            if (data.name.trim() == composer.trim()) {
-                                fcms = removeItemOnce(fcms, data.fcm)
-                            }
+
                         }
 
+                    }
+                    // remove composer of edit
+                    if (data.name.trim() == composer.trim()) {
+                        fcms = removeItemOnce(fcms, data.fcm)
                     }
 
                 })
