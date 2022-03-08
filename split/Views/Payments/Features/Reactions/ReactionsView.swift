@@ -17,13 +17,15 @@ struct ReactionsView: View {
             ForEach(reactionOptionsPresentTense, id: \.self) { reactionOption in
                 ReactionQuickAction(title: reactionOption, payment: $payment, reactions: $payment.editLog, selected: .constant(yourReaction(reactions: payment.editLog.filter({ (key: String, _: String) in
                     return !key.isNumeric
-                }), memberID: (UserDefaults.standard.string(forKey: "myId") ?? "")).contains(reactionOption))) //NOTE: checking if past tense contains present tense, not if reaction is equal to selected
+                }), memberID: (UserDefaults.standard.string(forKey: "myId") ?? "ABCNOID")) == presentToPastReaction(reactionOption)), member: mems.first(where: { m in
+                    m.id == (UserDefaults.standard.string(forKey: "myId") ?? "")
+                }) ?? .empty)
             }
-            if !payment.editLog.filter({ (key: String, _: String) in
-                return !key.isNumeric
+            if !payment.editLog.filter({ (key: String, value: String) in
+                return !key.isNumeric && value != "none"
             }).isEmpty {
-                Text(payment.editLog.filter({ (key: String, _: String) in
-                    return !key.isNumeric
+                Text(payment.editLog.filter({ (key: String, value: String) in
+                    return !key.isNumeric && value != "none"
                 }).map({ key, value in
                     nameFromMemberID(key, members: mems) + " " + value
                 }).joined(separator: ", "))
@@ -37,8 +39,8 @@ struct ReactionsView: View {
                     return !key.isNumeric
                 }), memberID: (UserDefaults.standard.string(forKey: "myId") ?? "")) == "none" {
                     Text("+")
-                    if payment.editLog.contains(where: { (key: String, _: String) in
-                        return !key.isNumeric
+                    if payment.editLog.contains(where: { (key: String, value: String) in
+                        return !key.isNumeric && value != "none"
                     }) {
                         Text("|")
                             .padding(.leading, 2)
@@ -55,7 +57,7 @@ struct ReactionsView: View {
                     }))), systemName: reactionToImageName(reactionOption), selected: .constant(yourReaction(reactions: payment.editLog.filter({ (key: String, _: String) in
                         return !key.isNumeric
                     }), memberID: (UserDefaults.standard.string(forKey: "myId") ?? "")) == reactionOption))
-                        .scaleEffect(0.7)
+//                        .scaleEffect(0.7)
                 }
             }
         }
@@ -87,6 +89,18 @@ struct ReactionsView_Previews: PreviewProvider {
 
 func countReaction(_ reactionName: String, reactions: [String: String]) -> Int {
     return reactions.reduce(0) { $0 + ($1.value == reactionName ? 1 : 0)}
+}
+
+func reactionsMade(reactions: [String: String], pastTenseArray: [String]) -> [String] {
+    var output = [String]()
+    
+    pastTenseArray.forEach { rx in
+        if reactions.values.contains(rx) && !output.contains(rx) {
+            output.append(rx)
+        }
+    }
+    
+    return output
 }
 
 func yourReaction(reactions: [String: String], memberID: String) -> String {

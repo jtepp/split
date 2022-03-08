@@ -15,8 +15,11 @@ struct ReactionsCompactLabel: View {
         HStack(spacing: 0) {
             Image(systemName: systemName)
                 .foregroundColor(selected ? reactionImageToColor(systemName) : .white)
-//                .scaleEffect(0.8)
-            Text(title)
+                .scaleEffect(0.6)
+            Text(title+" ")
+                .font(.system(size: 8))
+                .padding(.trailing, 2)
+
         }
     }
 }
