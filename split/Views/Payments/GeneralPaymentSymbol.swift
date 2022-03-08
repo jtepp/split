@@ -14,8 +14,9 @@ struct GeneralPaymentSymbol: View {
             if payment.special != "" {
                 Image(systemName: specialImgName(payment.special))
                     .resizable()
+                    .scaledToFit()
+                    .frame(height: 14)
                     .foregroundColor(.white)
-            .frame(width: 14, height: 14)
             }
         }.offset(x: -13, y: -12)
     }
