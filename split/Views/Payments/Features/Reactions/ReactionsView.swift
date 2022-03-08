@@ -27,7 +27,7 @@ struct ReactionsView: View {
                 Text(payment.editLog.filter({ (key: String, value: String) in
                     return !key.isNumeric && value.components(separatedBy: "|").last ?? "none" != "none"
                 }).map({ key, value in
-                    nameFromMemberID(key, members: mems) + " " + value
+                    nameFromMemberID(key, members: mems) + " " + (value.components(separatedBy: "|").last ?? "none")
                 }).joined(separator: ", "))
             }
         }

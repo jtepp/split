@@ -68,10 +68,9 @@ struct SplashView: View {
                     showCore.toggle()
                 }
                 
-                SplashDetailsView(title: "Edit Payments and Requests", text: "Fix a payment or request with a long press", image: "square.and.pencil", color: .yellow)
-                SplashDetailsView(title: "New Look", text: "Payment and request cells have been updated with a cleaner look", image: "ellipsis.rectangle", color: .blue)
-                SplashDetailsView(title: "Request Opting", text: "Decide what you want to pay for by opting in or out of a request", image: "person.crop.circle.badge.questionmark", color: .green)
-                SplashDetailsView(title: "Much More", text: "Owed by each in notifications, @everyone, and more in the App Store change log ", image: "ellipsis.circle", color: .white)
+                SplashDetailsView(title: "Compactor", text: "Use the new compactor to compress group activity into the minimum number of requests and boost app performance", image: "arrow.3.trianglepath", color: .blue)
+                SplashDetailsView(title: "Reactions", text: "React to payments and requests by tapping on the new reactions button", image: "heart.circle", color: .red)
+                SplashDetailsView(title: "Performance boost", text: "Use spllit at faster speeds than ever before", image: "gauge.badge.plus", color: .green)
 
                 
             }
