@@ -33,7 +33,7 @@ struct ActivityMessageCell: View {
 //            Button {
 //                var house = House.empty
 //                house.id = member.home
-//                Fetch().deletePayment(p: payment, h: house)
+//                Fetch.deletePayment(p: payment, h: house)
 //            } label: {
 //                Text("Delete")
 //                    .foregroundColor(.red)
@@ -59,7 +59,7 @@ struct ActivityMessageCell: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 5))
                                     .shadow(radius: 4)
                                     .onAppear {
-                                        Fetch().imgFromId(id: payment.by, img: $img)
+                                        Fetch.imgFromId(id: payment.by, img: $img)
                                     }
                                 Text(payment.from)
                                     .font(.caption2)
@@ -127,7 +127,7 @@ struct ActivityMessageCell: View {
                                         .clipShape(RoundedRectangle(cornerRadius: 5))
                                         .shadow(radius: 4)
                                         .onAppear {
-                                            Fetch().imgFromId(id: payment.by, img: $img)
+                                            Fetch.imgFromId(id: payment.by, img: $img)
                                         }
                                     Text(payment.from)
                                         .font(.caption2)
@@ -166,7 +166,7 @@ struct ActivityMessageCell: View {
                 Button {
                     var house = House.empty
                     house.id = member.home
-                    Fetch().deletePayment(p: payment, h: house)
+                    Fetch.deletePayment(p: payment, h: house)
                 } label: {
                     Text("Delete")
                         .foregroundColor(.red)

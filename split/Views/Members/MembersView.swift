@@ -46,7 +46,7 @@ struct MembersView: View {
                         withAnimation {
                         showCompactor = true
                         }
-                        Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $compactMembers)
+                        Fetch.returnMembers(hId: $house.wrappedValue.id, nm: $compactMembers)
                         
                     } label: {
                         Image(systemName: "arrow.3.trianglepath")
@@ -66,7 +66,7 @@ struct MembersView: View {
                         withAnimation {
                         showSettle = true
                         }
-                        Fetch().returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers)
+                        Fetch.returnMembers(hId: $house.wrappedValue.id, nm: $settleMembers)
                         
                     } label: {
                         Image(systemName: "arrowshape.bounce.right")
@@ -160,7 +160,7 @@ struct MembersView: View {
                                 
                             })
                             .onTapGesture {
-                                //                                Fetch().getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
+                                //                                Fetch.getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
                                 tappedMember = member
                                 print(tappedMember)
                                 if tappedMember.id == UserDefaults.standard.string(forKey: "myId")  {
@@ -196,7 +196,7 @@ struct MembersView: View {
                                 }
                             })
                             .onTapGesture {
-                                //                                Fetch().getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
+                                //                                Fetch.getHouse(h: $house, inWR: .constant(false), noProf: .constant(false))
                                 tappedMember = member
                                 print(tappedMember)
                                 if member.id == UserDefaults.standard.string(forKey: "myId")  {
@@ -217,13 +217,13 @@ struct MembersView: View {
             .alert(isPresented: $showAlert, content: {
                 if showRemove {
                     return Alert(title: Text("Remove \(tappedMember.name)"), message: Text("Are you sure you want to remove \(tappedMember.name) from this group?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                        Fetch().removeMember(m: tappedMember, h: $house)
-                        Fetch().getHouse(h: $house, m: .constant(tappedMember), inWR: .constant(false), noProf: .constant(false))
+                        Fetch.removeMember(m: tappedMember, h: $house)
+                        Fetch.getHouse(h: $house, m: .constant(tappedMember), inWR: .constant(false), noProf: .constant(false))
                     }), secondaryButton: Alert.Button.cancel())
                     
                 } else {
                     return Alert(title: Text("Set \(tappedMember.name) as Group admin"), message: Text("Are you sure you want to set \(tappedMember.name) as the new Group admin? This change can only be reverted by the new admin"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                        Fetch().swapAdmin(m: tappedMember, h: house)
+                        Fetch.swapAdmin(m: tappedMember, h: house)
                     }), secondaryButton: Alert.Button.cancel())
                 }
         })

@@ -26,7 +26,7 @@ struct ActivityProvider: TimelineProvider {
 //            }
 //        }
         
-        Fetch().activityWidgetPayments(houseId: houseId) { loadedPayments in
+        Fetch.activityWidgetPayments(houseId: houseId) { loadedPayments in
             print("Lp \(loadedPayments.count)")
             let entry = spllitEntry(myId: myId, houseId: houseId, members: [.empty], payments: loadedPayments)
             completion(entry)
@@ -42,7 +42,7 @@ struct ActivityProvider: TimelineProvider {
         let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "acttime"
 
 
-        Fetch().activityWidgetPayments(houseId: houseId) { loadedPayments in
+        Fetch.activityWidgetPayments(houseId: houseId) { loadedPayments in
             print("Lp \(loadedPayments.count)")
             let entry = spllitEntry(myId: myId, houseId: houseId, members: [.empty], payments: loadedPayments)
             let curD = Date()

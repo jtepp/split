@@ -43,9 +43,9 @@ struct WaitingRoomView: View {
                                 Button(action: {
                                     tapped = true
                                     if showPanel == 1 {
-                                        Fetch().joinHouse(hh: $h, m: $member, hId: hId, password: hPw, showAlert: $showWrongPassAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
+                                        Fetch.joinHouse(hh: $h, m: $member, hId: hId, password: hPw, showAlert: $showWrongPassAlert, tapped: $tapped, msg: $msg, inWR: $inWR)
                                     } else if showPanel == 2 {
-                                        Fetch().createHouse(hh: $h, m: $member, name: hId, password: hPw, tapped: $tapped, inWR: $inWR)
+                                        Fetch.createHouse(hh: $h, m: $member, name: hId, password: hPw, tapped: $tapped, inWR: $inWR)
                                     }
                                 }, label: {
                                     HStack {
@@ -121,7 +121,7 @@ struct WaitingRoomView: View {
             
             Spacer()
             Button{
-                Fetch().removeFromWr(id: UserDefaults.standard.string(forKey: "myId")!)
+                Fetch.removeFromWr(id: UserDefaults.standard.string(forKey: "myId")!)
                 UserDefaults.standard.set("", forKey: "houseId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set("", forKey: "houseId")
                 UserDefaults.standard.set("", forKey: "myId")

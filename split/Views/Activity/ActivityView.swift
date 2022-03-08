@@ -42,7 +42,7 @@ struct ActivityView: View {
                     .overlay(
                         Button(action: {
                             showSplash = true
-//                                                Fetch().updatePayments3()
+//                                                Fetch.updatePayments3()
                         }, label:{
                             Image(systemName: "questionmark")
                                 .font(Font.body.bold())
@@ -168,7 +168,7 @@ struct ActivityView: View {
                                     .contextMenu(menuItems: {
                                         if m.admin {
                                             Button(action: {
-                                                Fetch().deletePayment(p: payment, h: house)
+                                                Fetch.deletePayment(p: payment, h: house)
                                             }, label: {
                                                 Text("Delete")
                                                 //                                            .foregroundColor(.red)
@@ -202,7 +202,7 @@ struct ActivityView: View {
                                             return mm.id == m.id
                                         })?.name ?? "") {
                                             Button(action: {
-                                                Fetch().sendPayment(p: Payment(to: payment.to, from: house.members.first(where: { (m) -> Bool in
+                                                Fetch.sendPayment(p: Payment(to: payment.to, from: house.members.first(where: { (m) -> Bool in
                                                     return m.id == UserDefaults.standard.string(forKey: "myId")
                                                 })!.name, amount: payment.amount / Float(payment.reqfrom.count), time: Int(NSDate().timeIntervalSince1970), type: .payment, by: UserDefaults.standard.string(forKey: "myId")!), h: house)
                                                 print("quickpay")
@@ -220,7 +220,7 @@ struct ActivityView: View {
                                             if !payment.reqfrom.contains(m.name) {
                                                 //opt in
                                                 Button {
-                                                    Fetch().optRequest(true, payment: payment, name: m.name)
+                                                    Fetch.optRequest(true, payment: payment, name: m.name)
                                                 } label: {
                                                     Text("Opt in")
                                                     Image(systemName: "person.crop.circle.badge.plus")
@@ -230,7 +230,7 @@ struct ActivityView: View {
                                             } else if payment.reqfrom.count > 1 {
                                                 //opt out
                                                 Button {
-                                                    Fetch().optRequest(false, payment: payment, name: m.name)
+                                                    Fetch.optRequest(false, payment: payment, name: m.name)
                                                 } label: {
                                                     Text("Opt out")
                                                     Image(systemName: "person.crop.circle.badge.xmark")
@@ -241,7 +241,7 @@ struct ActivityView: View {
                                         
                                         if m.admin || payment.by == m.id {
                                             Button(action: {
-                                                Fetch().deletePayment(p: payment, h: house)
+                                                Fetch.deletePayment(p: payment, h: house)
                                             }, label: {
                                                 Text("Delete")
                                                     .foregroundColor(.red)
@@ -272,7 +272,7 @@ struct ActivityView: View {
                                         }
                                         if payment.by == m.id || m.admin {
                                             Button(action: {
-                                                Fetch().deletePayment(p: payment, h: house)
+                                                Fetch.deletePayment(p: payment, h: house)
                                             }, label: {
                                                 Text("Delete")
                                                 Image(systemName: "trash")
@@ -283,7 +283,7 @@ struct ActivityView: View {
                                 
                             }
                         } else {
-                            Fetch().checkThere(m: $m, h:$house){ has in
+                            Fetch.checkThere(m: $m, h:$house){ has in
                                 if has {
                                     getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                                 } else {
@@ -345,7 +345,7 @@ func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) {//-> E
 }
 
 func getHouse(h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>) {//-> EmptyView {
-    Fetch().getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
+    Fetch.getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
     print("gotgot\(h.wrappedValue.id)\(m.wrappedValue.home)")
     //    return EmptyView()
 }

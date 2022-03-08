@@ -28,7 +28,7 @@ struct MembersProvider: TimelineProvider {
 //            }
 //        }
         
-        Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId){ loadedMembers in
+        Fetch.balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId){ loadedMembers in
             print("LM \(loadedMembers.count)")
             let entry = spllitEntry(myId: myId, houseId: houseId, members: loadedMembers, payments: [.empty])
             completion(entry)
@@ -45,7 +45,7 @@ struct MembersProvider: TimelineProvider {
         let houseId = UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.string(forKey: "houseId") ?? "memtime"
 
 
-        Fetch().balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId){ loadedMembers in
+        Fetch.balanceWidgetMembers(myName: myName, myId: myId, houseId: houseId){ loadedMembers in
             print("LM \(loadedMembers.count)")
             let entry = spllitEntry(myId: myId, houseId: houseId, members: loadedMembers, payments: [.empty])
             let curD = Date()

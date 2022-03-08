@@ -115,9 +115,9 @@ struct CompactorView: View {
                 .alert(isPresented: $showCompactAlert) {
                     Alert(title: Text("Confirm Compact"), message: Text("Compacting will delete all payments and requests and replace them with the smallest possible amount of requests."), primaryButton: Alert.Button.default(Text("Confirm"), action: {
                         
-                        Fetch().deleteAllPayments(h: h.wrappedValue)
+                        Fetch.deleteAllPayments(h: h.wrappedValue)
                         for p in paymentList {
-                            Fetch().sendPayment(p: p, h: h.wrappedValue)
+                            Fetch.sendPayment(p: p, h: h.wrappedValue)
                         }
                         showSheet = false
                     }), secondaryButton: Alert.Button.destructive(Text("Cancel")))

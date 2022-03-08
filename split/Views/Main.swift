@@ -29,20 +29,20 @@ struct Main: View {
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear{
-            Fetch().getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
+            Fetch.getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
         }
         .onChange(of: h.id, perform: { _ in
-            Fetch().getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
+            Fetch.getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
         })
         .onChange(of: scenePhase) { newPhase in
             
             if (UserDefaults.standard.string(forKey: "myId") ?? "") != "" {
                 if newPhase == .inactive {
-                    Fetch().updateStatus(status: false)
-//                    Fetch().balanceWidgetMembers(myName: m.name, myId: m.id, houseId: h.id)
+                    Fetch.updateStatus(status: false)
+//                    Fetch.balanceWidgetMembers(myName: m.name, myId: m.id, houseId: h.id)
                     WidgetCenter.shared.reloadAllTimelines()
                 } else if newPhase == .active {
-                    Fetch().updateStatus(status: true)
+                    Fetch.updateStatus(status: true)
                     guard let name = shortcutItemToProcess?.localizedTitle else {
                         print("else")
                         return
@@ -56,14 +56,14 @@ struct Main: View {
                         tabSelection = 0
                     }
                 } else if newPhase == .background {
-                    Fetch().updateStatus(status: false)
-//                    Fetch().balanceWidgetMembers(myName: m.name, myId: m.id, houseId: h.id)
+                    Fetch.updateStatus(status: false)
+//                    Fetch.balanceWidgetMembers(myName: m.name, myId: m.id, houseId: h.id)
                     WidgetCenter.shared.reloadAllTimelines()
                 }
             }
         }
         .sheet(isPresented: $inWR, onDismiss: {
-            Fetch().getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
+            Fetch.getHouse(h: $h, m: $m, inWR: $inWR, noProf: $noProf)
         }) {
             if (dontSplash) {
             if (noProf) {

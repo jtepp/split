@@ -27,9 +27,9 @@ struct ActivityEditView: View {
                     Button {
                         //save and close
                         if payment.type == .payment {
-                            Fetch().updatePaymentSave(payment: payment, member: member, nAmount: Float(amountText)!, nMemo: memoText, nTo: choiceTo.first!.name, nFrom: choiceFrom.first!.name)
+                            Fetch.updatePaymentSave(payment: payment, member: member, nAmount: Float(amountText)!, nMemo: memoText, nTo: choiceTo.first!.name, nFrom: choiceFrom.first!.name)
                         } else if payment.type == .request {
-                            Fetch().updateRequestSave(payment: payment, member: member, nAmount: Float(amountText)!, nMemo: memoText, nTo: choiceTo.first!.name, nFrom: choiceFrom.map({ m in
+                            Fetch.updateRequestSave(payment: payment, member: member, nAmount: Float(amountText)!, nMemo: memoText, nTo: choiceTo.first!.name, nFrom: choiceFrom.map({ m in
                                 return m.name
                             }))
                         }

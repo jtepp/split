@@ -90,7 +90,7 @@ struct QuickSettleView: View {
                         }
                     } else if state == .prePost {
                         for p in paymentList {
-                            Fetch().sendPayment(p: p, h: h.wrappedValue)
+                            Fetch.sendPayment(p: p, h: h.wrappedValue)
                         }
                         showSheet = false
                     }

@@ -17,9 +17,9 @@ struct ReactionQuickAction: View {
         Button {
             withAnimation {
                 if selected {
-                    Fetch().updateReactions(payment: payment, member: member, reaction: "none")
+                    Fetch.updateReactions(payment: payment, member: member, reaction: "none")
                 } else {
-                    Fetch().updateReactions(payment: payment, member: member, reaction: presentToPastReaction(title))
+                    Fetch.updateReactions(payment: payment, member: member, reaction: presentToPastReaction(title))
                 }
             }
         } label: {

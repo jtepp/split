@@ -53,7 +53,7 @@ struct EditProfileView: View {
                                 Image(systemName: "rotate.right")
                             })
                                 Button(action: {
-//                                    Fetch().removePhoto(m: $m)
+//                                    Fetch.removePhoto(m: $m)
                                     m.image = ""
                                     
                                 }, label: {

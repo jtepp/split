@@ -21,7 +21,7 @@ struct MemberDetailsView: View {
                 MenuButton(member: $member, showRemove: $showRemove, showAdminAlert: $showAdminAlert)
                     .alert(isPresented: $showAdminAlert, content: {
                         Alert(title: Text("Set \(member.name) as Group admin"), message: Text("Are you sure you want to set \(member.name) as the new Group admin? This change can only be reverted by the new admin"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                            Fetch().swapAdmin(m: member, h: house)
+                            Fetch.swapAdmin(m: member, h: house)
                             showView = false
                         }), secondaryButton: Alert.Button.cancel())
                     })
@@ -50,8 +50,8 @@ struct MemberDetailsView: View {
             .padding(.vertical, 40)
             .alert(isPresented: $showRemove, content: {
                 Alert(title: Text("Remove \(member.name)"), message: Text("Are you sure you want to remove \(member.name) from this group?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                    Fetch().removeMember(m: member, h: $house)
-                    Fetch().getHouse(h: $house, m: $member, inWR: .constant(false), noProf: .constant(false))
+                    Fetch.removeMember(m: member, h: $house)
+                    Fetch.getHouse(h: $house, m: $member, inWR: .constant(false), noProf: .constant(false))
                     showView = false
                 }), secondaryButton: Alert.Button.cancel())
             })

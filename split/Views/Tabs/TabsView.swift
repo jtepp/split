@@ -108,7 +108,7 @@ struct TabsView: View {
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .background(Color.black.edgesIgnoringSafeArea(.all))
             .onAppear(){
-                Fetch().getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
+                Fetch.getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
             }
             .onChange(of: inWR, perform: { (_) in
                 //                print("WAITING ROOM CHANGED \n\n\(member)\n\n\n\n\n")
@@ -126,7 +126,7 @@ struct TabsView: View {
                     
                     newGroup = String(link.split(separator: "$")[0])
                     newPass = String(link.split(separator: "$")[1])
-                    Fetch().groupNameFromId(id: String(newGroup), nn:$newName)
+                    Fetch.groupNameFromId(id: String(newGroup), nn:$newName)
                     if newGroup == house.id {
                         //ALREADY
                         showInviteAlert = true
@@ -138,14 +138,14 @@ struct TabsView: View {
             .alert(isPresented: $showInviteAlert, content: {
                 Alert(title: Text("Already in this group"), message: Text("You are already a member of the group you are trying to join"), dismissButton: Alert.Button.default(Text("Ok")))
             })
-            .sheet(isPresented: $showInviteSheet, onDismiss: {Fetch().getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)}, content: {
+            .sheet(isPresented: $showInviteSheet, onDismiss: {Fetch.getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)}, content: {
                 LinkInviteView(inWR: $inWR, noProf: $noProf, showInvite: $showInviteSheet, h: $house, m: $member, myId: $myId, newGroup: $newGroup, newPass: $newPass, newName: $newName)
                     .background(
                         Color.black.edgesIgnoringSafeArea(.all)
                     )
             })
             .onChange(of: tabSelection) { (_) in
-//                Fetch().getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
+//                Fetch.getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
 //                print("PEARL\(member.dict())")
                 newMemberName = member.name
                 if tabSelection == 3 {
@@ -154,7 +154,7 @@ struct TabsView: View {
                     engaged = false
                 }
                 FMBopen = false
-//                Fetch().updateStatus(status: true)
+//                Fetch.updateStatus(status: true)
 //                WidgetCenter.shared.reloadAllTimelines()
             }
         

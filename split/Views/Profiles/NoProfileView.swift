@@ -24,7 +24,7 @@ struct NoProfileView: View {
             Button(action: {
                 if name.replacingOccurrences(of: " ", with: "") != "" && !newMembers.contains(name) {
                     show = false
-                    Fetch().addToWR(m: $m, myId: $myId, h: $house, {})
+                    Fetch.addToWR(m: $m, myId: $myId, h: $house, {})
                 } else {
                     msg = name.replacingOccurrences(of: " ", with: "") == "" ? "Name cannot be empty" : "There is already another member in your group with this name"
                     showAlert = true
@@ -72,7 +72,7 @@ struct NoProfileView: View {
                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(md, forKey: "myId")
                         myId = md!
                         show = false
-                        Fetch().bindingMemberFromIdsWR(id: myId, bm: $m)
+                        Fetch.bindingMemberFromIdsWR(id: myId, bm: $m)
                     }
                 }
         }

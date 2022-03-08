@@ -38,10 +38,10 @@ struct ProfileView: View, KeyboardReadable {
                     //                        Button {
                     //                            if showStatus {
                     //                                showStatus = false
-                    //                                Fetch().toggleShowStatus(s: false)
+                    //                                Fetch.toggleShowStatus(s: false)
                     //                            } else {
                     //                                showStatus = true
-                    //                                Fetch().toggleShowStatus(s: true)
+                    //                                Fetch.toggleShowStatus(s: true)
                     //                            }
                     //                            UserDefaults.standard.setValue(showStatus, forKey: "status")
                     //                            UserDefaults.standard.setValue(true, forKey: "statusSet")
@@ -100,13 +100,13 @@ struct ProfileView: View, KeyboardReadable {
                                 if m.image != "" {
                                     Button(action: {
                                         img = b64touiimg(b64: m.image)!.rotate(radians: Float(Double.pi/2))
-                                        Fetch().updateImg(img: img!, hId: house.id, myId: m.id)
+                                        Fetch.updateImg(img: img!, hId: house.id, myId: m.id)
                                     }, label: {
                                         Text("Rotate photo")
                                         Image(systemName: "rotate.right")
                                     })
                                     Button(action: {
-                                        Fetch().removePhoto(m: $m)
+                                        Fetch.removePhoto(m: $m)
                                         
                                         
                                     }, label: {
@@ -143,8 +143,8 @@ struct ProfileView: View, KeyboardReadable {
                                         //                                        if !house.members.map({ m in
                                         //                                            return m.name
                                         //                                        }).contains(newName) {
-                                        Fetch().changeName(m: $m, newName: $newName){
-                                            Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+                                        Fetch.changeName(m: $m, newName: $newName){
+                                            Fetch.getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                                         }
                                         //                                        }
                                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -201,15 +201,15 @@ struct ProfileView: View, KeyboardReadable {
                                         }), secondaryButton: Alert.Button.cancel())
                                     } else {
                                         return Alert(title: Text("Erase Group"), message: Text("Deleting this account will erase this group from the database"), primaryButton: Alert.Button.destructive(Text("Erase"), action: {
-                                            Fetch().deleteAccount(m: $m, erase: true, inWR: $inWR){
-                                                Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+                                            Fetch.deleteAccount(m: $m, erase: true, inWR: $inWR){
+                                                Fetch.getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                                             }
                                         }), secondaryButton: Alert.Button.cancel())
                                     }
                                 } else {
                                     return Alert(title: Text("Delete account"), message: Text("Are you sure you want to delete this acount?"), primaryButton: Alert.Button.destructive(Text("Confirm"), action: {
-                                        Fetch().deleteAccount(m: $m, inWR: $inWR){
-                                            Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+                                        Fetch.deleteAccount(m: $m, inWR: $inWR){
+                                            Fetch.getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                                         }
                                     }), secondaryButton: Alert.Button.cancel())
                                 }
@@ -236,24 +236,24 @@ struct ProfileView: View, KeyboardReadable {
                 .background(Color.black.edgesIgnoringSafeArea(.all))
                 .onChange(of: img, perform: { _ in
                     if img != nil {
-                        Fetch().updateImg(img: img!, hId: house.id, myId: m.id)
+                        Fetch.updateImg(img: img!, hId: house.id, myId: m.id)
                         showSheet = false
                     }
                 })
                 .onChange(of: m, perform: { _ in
                     newName = m.name
-                    Fetch().getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+                    Fetch.getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
                 })
                 .onAppear{
                     UserDefaults.standard.set(m.id, forKey: "myId")
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.id, forKey: "myId")
                     UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.name, forKey: "myName")
                     newName = m.name
-                    //                Fetch().updateMember(m: $m)
+                    //                Fetch.updateMember(m: $m)
                 }
                 .sheet(isPresented: $showSheet, onDismiss: {
                     if !adminChoice.isEmpty {
-                        Fetch().swapAdmin(m: adminChoice.first!, h: house)
+                        Fetch.swapAdmin(m: adminChoice.first!, h: house)
                     }
                     showImagePicker = false
                     showAdminPicker = false
