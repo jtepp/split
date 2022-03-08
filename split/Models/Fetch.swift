@@ -1291,7 +1291,7 @@ class Fetch: ObservableObject {
     func updateReactions(payment: Payment, member: Member, reaction: String) {
         var newData = [AnyHashable: Any]()
         var el = payment.editLog
-        el[member.id] = reaction
+        el[member.id] = member.name + "|" + reaction
         
         newData["edits"] = el
         

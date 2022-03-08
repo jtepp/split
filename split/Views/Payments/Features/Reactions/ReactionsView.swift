@@ -22,10 +22,10 @@ struct ReactionsView: View {
                 }) ?? .empty)
             }
             if !payment.editLog.filter({ (key: String, value: String) in
-                return !key.isNumeric && value != "none"
+                return !key.isNumeric && value.components(separatedBy: "|").last ?? "none" != "none"
             }).isEmpty {
                 Text(payment.editLog.filter({ (key: String, value: String) in
-                    return !key.isNumeric && value != "none"
+                    return !key.isNumeric && value.components(separatedBy: "|").last ?? "none" != "none"
                 }).map({ key, value in
                     nameFromMemberID(key, members: mems) + " " + value
                 }).joined(separator: ", "))
@@ -40,7 +40,7 @@ struct ReactionsView: View {
                 }), memberID: (UserDefaults.standard.string(forKey: "myId") ?? "")) == "none" {
                     Text("+")
                     if payment.editLog.contains(where: { (key: String, value: String) in
-                        return !key.isNumeric && value != "none"
+                        return !key.isNumeric && value.components(separatedBy: "|").last ?? "none" != "none"
                     }) {
                         Text("|")
                             .padding(.leading, 2)
@@ -88,14 +88,16 @@ struct ReactionsView_Previews: PreviewProvider {
 
 
 func countReaction(_ reactionName: String, reactions: [String: String]) -> Int {
-    return reactions.reduce(0) { $0 + ($1.value == reactionName ? 1 : 0)}
+    return reactions.reduce(0) { $0 + ($1.value.components(separatedBy: "|").last ?? "none" == reactionName ? 1 : 0)}
 }
 
 func reactionsMade(reactions: [String: String], pastTenseArray: [String]) -> [String] {
     var output = [String]()
     
     pastTenseArray.forEach { rx in
-        if reactions.values.contains(rx) && !output.contains(rx) {
+        if reactions.values.map({ val in
+            return val.components(separatedBy: "|").last ?? "none"
+        }).contains(rx) && !output.contains(rx) {
             output.append(rx)
         }
     }
@@ -104,13 +106,13 @@ func reactionsMade(reactions: [String: String], pastTenseArray: [String]) -> [St
 }
 
 func yourReaction(reactions: [String: String], memberID: String) -> String {
-    return reactions.first { (key: String, _: String) in
+    return (reactions.first { (key: String, _: String) in
         key == memberID
-    }?.value ?? "none"
+    }?.value ?? "none").components(separatedBy: "|").last ?? "none"
 }
 
 func reactionToImageName(_ reaction: String) -> String {
-    switch(reaction) {
+    switch(reaction.components(separatedBy: "|").last ?? "none") {
     case "liked": fallthrough
     case "like": return "heart.fill"
     case "disliked": fallthrough
