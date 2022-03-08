@@ -52,6 +52,10 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                             title = "Request " + lastEdit.split("|")[1]
                             body = lastEdit.split("|").join(" ") + " your request"
                             if (event.after.get("memo")) body += " for " + event.after.get("memo")
+
+                            if (to == data.name) { // only send to person request is to
+                                fcms.push(data.fcm)
+                            }
                         } else {
                             title = "Request Edited"
                             body = lastEdit
@@ -74,6 +78,10 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                             title = "Payment " + lastEdit.split("|")[1]
                             body = lastEdit.split("|").join(" ") + " your payment"
                             if (event.after.get("memo")) body += " for " + event.after.get("memo")
+
+                            if (from == data.name) { // only send to person payment is from
+                                fcms.push(data.fcm)
+                            }
                         } else {
                             title = "Payment Edited"
                             body = lastEdit
