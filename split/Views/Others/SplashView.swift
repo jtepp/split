@@ -8,7 +8,7 @@
 import SwiftUI
 import MessageUI
 
-let currentVersion = "3.0.0"
+let currentVersion = "3.1.0"
 
 struct SplashView: View {
     @Binding var dontSplash: Bool
