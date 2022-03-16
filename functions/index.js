@@ -49,12 +49,15 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                     if (type == "request") { // request edit
 
                         if (!isNumeric(Object.keys(edits).reverse()[0])) { // if not numeric, then it's a reaction
-                            title = "Request " + lastEdit.split("|")[1]
-                            body = lastEdit.split("|").join(" ") + " your request"
-                            if (event.after.get("memo")) body += " for " + event.after.get("memo")
+                            // dont show if reaction is none
+                            if (lastEdit.split("|")[1] != "none") {
+                                title = "Request " + lastEdit.split("|")[1]
+                                body = lastEdit.split("|").join(" ") + " your request"
+                                if (event.after.get("memo")) body += " for " + event.after.get("memo")
 
-                            if (to == data.name) { // only send to person request is to
-                                fcms.push(data.fcm)
+                                if (to == data.name) { // only send to person request is to
+                                    fcms.push(data.fcm)
+                                }
                             }
                         } else {
                             title = "Request Edited"
