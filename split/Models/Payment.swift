@@ -8,7 +8,7 @@
 import Foundation
 
 struct Payment: Identifiable, Codable {
-    var id: String?
+    var id: String = UUID().uuidString
     var bulkid: String = ""
     var to: String = ""
     var from: String = String()

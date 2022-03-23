@@ -38,7 +38,7 @@ class Fetch: ObservableObject {
                 }
                 
                 
-                db.document("houses/"+id).addSnapshotListener { (querySnapshot, error) in
+                db.collection("houses").document(id).addSnapshotListener { (querySnapshot, error) in
                     if (querySnapshot?.exists ?? false) {
                         guard let doc = querySnapshot else {
                             print("no house by id %s", id)
@@ -165,7 +165,7 @@ class Fetch: ObservableObject {
     
     static func getMembers(h: Binding<House>, id: String) {
         let db = Firestore.firestore()
-        db.collection("houses/"+id+"/members").addSnapshotListener { (querySnapshot, error) in
+        db.collection("houses").document(id).collection("members").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("no house by id %s, or maybe no members..?", id)
                 return
@@ -193,7 +193,7 @@ class Fetch: ObservableObject {
     }
     
     //    static func updateMember(m: Binding<Member>) {
-//    let db = Firestore.firestore()
+    //    let db = Firestore.firestore()
     //        let hid = UserDefaults.standard.string(forKey: "houseId")
     //        db.document("houses/\(hid)/members/\(m.wrappedValue.id)").addSnapshotListener { (documentSnapshot, err) in
     //            guard let data = documentSnapshot?.data() else {
@@ -219,7 +219,7 @@ class Fetch: ObservableObject {
     
     static func getPayments(h: Binding<House>, id: String) {
         let db = Firestore.firestore()
-        db.collection("houses/"+id+"/payments").addSnapshotListener { (querySnapshot, error) in
+        db.collection("houses").document(id).collection("payments").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("no house by id %s, or maybe no payments..?", id)
                 return
@@ -249,15 +249,14 @@ class Fetch: ObservableObject {
     
     static func updateImg(img: UIImage, hId: String, myId: String) {
         let db = Firestore.firestore()
-        let id = UserDefaults.standard.string(forKey: "myId")
         print("UPDATEIMG")
-        db.document("houses/\(hId)/members/\(id ?? "EMPTYIMG")").updateData(["image":imgtob64(img: img.resized(toWidth: 600)!)])
+        db.collection("houses").document(hId).collection("members").document(myId).updateData(["image":imgtob64(img: img.resized(toWidth: 600)!)])
     }
     
     static func sendPayment(p: Payment, h: House, _ completion: @escaping () -> Void = {}) {
         let db = Firestore.firestore()
         //        print("STARTED")
-        db.collection("houses/\(h.id)/members").getDocuments { querySnapshot, err in
+        db.collection("houses").document(h.id).collection("members").getDocuments { querySnapshot, err in
             //            print("STARTED2")
             guard let docs = querySnapshot?.documents else {
                 print("STARTED22")
@@ -312,8 +311,8 @@ class Fetch: ObservableObject {
             
             //            print("STARTED4")
             
-            db.collection("houses/\(h.id)/payments").addDocument(data:
-                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "type":ptToString(p.type), "special" : p.special, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "fcm":fcms, "device":UIDevice.modelName]
+            db.collection("houses").document(h.id).collection("payments").addDocument(data:
+                                                                                        ["amount":p.amount, "from":p.from, "reqfrom":p.reqfrom, "type":ptToString(p.type), "special" : p.special, "to":p.to, "time":p.time, "memo":p.memo, "by":UserDefaults.standard.string(forKey: "myId") ?? "noID", "fcm":fcms, "device":UIDevice.modelName]
             ){ _ in
                 //            .documentID
                 //                print("STARTED 5")
@@ -391,7 +390,7 @@ class Fetch: ObservableObject {
                     owesMe[key] = 0
                 }
             }
-            db.document("houses/\(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSEUPDATEBAL")/members/\(m.id)").updateData(["owesMe":owesMe, "iOwe":iOwe])
+            db.collection("houses").document(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSEUPDATEBAL").collection("members").document(m.id).updateData(["owesMe":owesMe, "iOwe":iOwe])
             
         } else {
             print("\n\n\(UserDefaults.standard.string(forKey: "houseId") ?? "HEREEOVERHER")\n\nBALBALBALBAL\n")
@@ -401,7 +400,7 @@ class Fetch: ObservableObject {
     
     static func deletePayment(p: Payment, h: House) {
         let db = Firestore.firestore()
-        db.document("houses/\(h.id)/payments/\(p.id!)").delete()
+        db.collection("houses").document(h.id).collection("payments").document(p.id).delete()
         for member in h.members {
             self.updateBalances(h: h, m: member)
         }
@@ -409,7 +408,7 @@ class Fetch: ObservableObject {
     
     static func deleteAllPayments(h: House) {
         let db = Firestore.firestore()
-        db.collection("houses/\(h.id)/payments").getDocuments { querySnapshot, err in
+        db.collection("houses").document(h.id).collection("payments").getDocuments { querySnapshot, err in
             guard let documents = querySnapshot?.documents else {
                 return
             }
@@ -428,15 +427,15 @@ class Fetch: ObservableObject {
     static func removeMember(m: Member, h: Binding<House>) {
         let db = Firestore.firestore()
         if (UserDefaults.standard.string(forKey: "houseId") ?? "") != "" {
-            let docRef = db.document("houses/\(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSERMMEMBER")/members/\(m.id)")
+            let docRef = db.collection("houses").document(UserDefaults.standard.string(forKey: "houseId") ?? "BADHOUSERMMEMBER").collection("members").document(m.id)
             docRef.getDocument { (documentSnapshot, err) in
                 guard let doc = documentSnapshot else {
                     print("couldn't get doc \(String(describing: err))")
                     return
                 }
-                db.document("waitingRoom/\(m.id)").setData(doc.data()!)
-                db.document("waitingRoom/\(m.id)").updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
-                    db.collection("houses/\(h.wrappedValue.id)/payments").getDocuments { (querySnapshot, err) in
+                db.collection("waitingRoom").document(m.id).setData(doc.data()!)
+                db.collection("waitingRoom").document(m.id).updateData(["iOwe" : [String:Float](), "owesMe": [String:Float]()], completion: { (err) in
+                    db.collection("houses").document(h.wrappedValue.id).collection("payments").getDocuments { (querySnapshot, err) in
                         guard let documents = querySnapshot?.documents else {
                             print("remove member no payments or something")
                             return
@@ -449,7 +448,7 @@ class Fetch: ObservableObject {
                             let type = d["type"] as? String ?? "unknown"
                             return (to.contains(m.name) || from.contains(m.name) || reqfrom.contains(m.name)) && type != "announcement"
                         }) {
-                            db.document("houses/\(h.wrappedValue.id)/payments/\(doc.documentID)").delete()
+                            db.collection("houses").document(h.wrappedValue.id).collection("payments").document(doc.documentID).delete()
                             h.wrappedValue.members.removeAll { (m) -> Bool in
                                 return m.id == doc.documentID
                             }
@@ -463,14 +462,14 @@ class Fetch: ObservableObject {
         }}
     static func swapAdmin(m:Member, h:House, completion: @escaping () -> Void = {}) {
         let db = Firestore.firestore()
-        db.collection("houses/"+h.id+"/members").getDocuments{ (querySnapshot, error) in
+        db.collection("houses").document(h.id).collection("members").getDocuments{ (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("no house by id %s, or maybe no members..?", h.id)
                 return
             }
             documents.forEach { (doc) in
                 let id = doc.documentID
-                db.document("houses/\(h.id)/members/\(id)").updateData(["admin": id == m.id ? true : false])
+                db.collection("houses").document(h.id).collection("members").document(id).updateData(["admin": id == m.id ? true : false])
                 if m.id == id {
                     self.sendPayment(p: Payment(from: m.name, time: Int(NSDate().timeIntervalSince1970), memo: "was made the Group Admin", type: .announcement), h: h)
                     completion()
@@ -493,7 +492,7 @@ class Fetch: ObservableObject {
                 UserDefaults.standard.setValue("waitingRoom", forKey: "houseId")
             }
         } else {
-            db.document("waitingRoom/\(myId.wrappedValue)").updateData(["name":m.wrappedValue.name, "image":m.wrappedValue.image]){ (err) in
+            db.collection("waitingRoom").document(myId.wrappedValue).updateData(["name":m.wrappedValue.name, "image":m.wrappedValue.image]){ (err) in
                 UserDefaults.standard.set(myId.wrappedValue, forKey: "myId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(myId.wrappedValue, forKey: "myId")
                 UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(m.wrappedValue.name, forKey: "myName")
@@ -538,7 +537,7 @@ class Fetch: ObservableObject {
                         //                                    UserDefaults.standard.set(mm.id, forKey: "myId")
                         
                         
-                        db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
+                        db.collection("houses").document(house).collection("members").getDocuments { querySnapshot, err in
                             guard let docs = querySnapshot?.documents else {
                                 print(err.debugDescription)
                                 completion(false)
@@ -633,7 +632,7 @@ class Fetch: ObservableObject {
                             UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.name, forKey: "myName")
                             
                             
-                            db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
+                            db.collection("houses").document(house).collection("members").getDocuments { querySnapshot, err in
                                 guard let docs = querySnapshot?.documents else {
                                     print(err.debugDescription)
                                     return
@@ -645,7 +644,7 @@ class Fetch: ObservableObject {
                                     
                                 }) {
                                     //
-                                    db.document("houses/\(doc.documentID)/members/\("\(m.wrappedValue.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
+                                    db.collection("houses").document(doc.documentID).collection("members").document(m.wrappedValue.id).setData(["name" : mm.name, "image" : mm.image, "home" : doc.documentID, "showStatus": mm.showStatus]) { _ in
                                         h.wrappedValue.id = doc.documentID
                                         h.wrappedValue.members.append(m.wrappedValue)
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
@@ -655,7 +654,7 @@ class Fetch: ObservableObject {
                                         UserDefaults.standard.set(doc.documentID, forKey: "houseId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(doc.documentID, forKey: "houseId")
                                         inWR.wrappedValue = false
-                                        db.document("waitingRoom/\(mm.id)").delete()
+                                        db.collection("waitingRoom").document(mm.id).delete()
                                         self.sendPayment(p: Payment(from: mm.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", type: .announcement), h: House(id: doc.documentID, name: "", members: [Member](), payments: [Payment](), password: ""))
                                         self.getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
                                         showInvite.wrappedValue = false
@@ -734,7 +733,7 @@ class Fetch: ObservableObject {
                             print("\n\n\n\n\(mm)\n\n\n\n")
                         } else {
                             
-                            db.collection("houses/\(house)/members/").getDocuments { querySnapshot, err in
+                            db.collection("houses").document(house).collection("members").getDocuments { querySnapshot, err in
                                 guard let docs = querySnapshot?.documents else {
                                     print(err.debugDescription)
                                     return
@@ -746,9 +745,9 @@ class Fetch: ObservableObject {
                                     
                                 }) || forceAdmin {
                                     //
-                                    db.document("houses/\(house)/members/\("\(mm.id)")").setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "online": true, "showStatus": (UserDefaults.standard.bool(forKey: "statusSet")) ? UserDefaults.standard.bool(forKey: "showStatus") : true]) { _ in
+                                    db.collection("houses").document(house).collection("members").document(mm.id).setData(["name" : mm.name, "image" : mm.image, "home" : h.documentID, "admin": forceAdmin, "online": true, "showStatus": (UserDefaults.standard.bool(forKey: "statusSet")) ? UserDefaults.standard.bool(forKey: "showStatus") : true]) { _ in
                                         self.getHouse(h: hh, m: m, inWR: inWR, noProf: .constant(false))
-                                        db.document("waitingRoom/\(mm.id)").delete()
+                                        db.collection("waitingRoom").document(mm.id).delete()
                                         UserDefaults.standard.set(mm.id, forKey: "myId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.id, forKey: "myId")
                                         UserDefaults.init(suiteName: "group.com.jtepp.spllit")!.set(mm.name, forKey: "myName")
@@ -794,7 +793,7 @@ class Fetch: ObservableObject {
         UserDefaults.standard.setValue(newGroup, forKey: "houseId")
         m.wrappedValue.home = newGroup
         h.wrappedValue.members = [m.wrappedValue]
-        db.document("houses/\(newGroup)/members/\(m.wrappedValue.id)").setData(m.wrappedValue.dictimg(), merge: true){ _ in
+        db.collection("houses").document(newGroup).collection("members").document(m.wrappedValue.id).setData(m.wrappedValue.dictimg(), merge: true){ _ in
             h.wrappedValue.id = newGroup
             self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "joined the group", type: .announcement), h: House(id: newGroup, name: "", members: [Member](), payments: [Payment](), password: ""))
             showInvite.wrappedValue = false
@@ -824,14 +823,14 @@ class Fetch: ObservableObject {
     static func deleteAccount(m: Binding<Member>, erase: Bool = false, inWR: Binding<Bool>, transfer: Bool = false, _ completion: @escaping () -> Void = {}) {
         let db = Firestore.firestore()
         if m.wrappedValue.home != "" {
-            db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { (querySnapshot, err) in
+            db.collection("houses").document(m.wrappedValue.home).collection("payments").getDocuments { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
                     print("remove member no payments or something")
                     return
                 }
                 if erase {
                     for doc in documents {
-                        db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+                        db.collection("houses").document(m.wrappedValue.home).collection("payments").document(doc.documentID).delete()
                     }
                 } else {
                     for doc in documents.filter({ (doc) -> Bool in
@@ -842,13 +841,13 @@ class Fetch: ObservableObject {
                         let type = d["type"] as? String ?? ""
                         return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && type != "announcement"
                     }) {
-                        db.document("houses/\(m.wrappedValue.home)/payments/\(doc.documentID)").delete()
+                        db.collection("houses").document(m.wrappedValue.home).collection("payments").document(doc.documentID).delete()
                     }
                 }
             }
-            db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").delete { (err) in
+            db.collection("houses").document(m.wrappedValue.home).collection("members").document(m.wrappedValue.id).delete { (err) in
                 if erase {
-                    db.document("houses/\(m.wrappedValue.home)").delete()
+                    db.collection("houses").document(m.wrappedValue.home).delete()
                 } else {
                     self.sendPayment(p: Payment(from: m.wrappedValue.name, time: Int(NSDate().timeIntervalSince1970), memo: "left the group", type: .announcement), h: House(id: m.wrappedValue.home, name: "", members: [Member](), payments: [Payment](), password: ""))
                 }
@@ -870,7 +869,7 @@ class Fetch: ObservableObject {
     
     static func placeToken(h: Binding<House>, id: String, token: String) {
         let db = Firestore.firestore()
-        db.document("houses/\(h.wrappedValue.id)/members/\(id)").updateData(["fcm" : token])
+        db.collection("houses").document(h.wrappedValue.id).collection("members").document(id).updateData(["fcm" : token])
     }
     
     static func updateStatus(status: Bool) {
@@ -886,12 +885,12 @@ class Fetch: ObservableObject {
         let id = UserDefaults.standard.string(forKey: "houseId") ?? ""
         let myId = UserDefaults.standard.string(forKey: "myId") ?? ""
         print("Status: \(id) \(myId)")
-        db.document("houses/\(id)/members/\(myId)/").updateData(["showStatus":s])
+        db.collection("houses").document(id).collection("members").document(myId).updateData(["showStatus":s])
     }
     
     static func groupNameFromId(id: String, nn: Binding<String>) {
         let db = Firestore.firestore()
-        db.document("houses/\(id)").getDocument { docSnap, err in
+        db.collection("houses").document(id).getDocument { docSnap, err in
             guard let doc = docSnap?.get("name") else {
                 nn.wrappedValue = "err"
                 return
@@ -902,7 +901,7 @@ class Fetch: ObservableObject {
     
     static func returnMembers(hId: String, nm: Binding<[Member]>, filter: [String] = [String]()) {
         let db = Firestore.firestore()
-        db.collection("houses/\(hId)/members").getDocuments { querySnapshot, err in
+        db.collection("houses").document(hId).collection("members").getDocuments { querySnapshot, err in
             guard let docs = querySnapshot?.documents else {
                 print(err.debugDescription)
                 return
@@ -937,7 +936,7 @@ class Fetch: ObservableObject {
                 //if needed, here would be where to add delete all empty houses
                 //                print("\(qds.documentID) - \(newGroup) -> \(qds.documentID == newGroup)")
                 if houseq.documentID != (UserDefaults.standard.string(forKey: "houseId") ?? "") {
-                    db.collection("houses/\(houseq.documentID)/members").getDocuments { documentSnapshot, err in
+                    db.collection("houses").document(houseq.documentID).collection("members").getDocuments { documentSnapshot, err in
                         guard let doc = documentSnapshot?.documents else {
                             print("mainDocError")
                             return
@@ -950,25 +949,25 @@ class Fetch: ObservableObject {
                                 
                                 if empt {
                                     self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false))
-                                    db.collection("houses/\(houseq.documentID)/members").getDocuments { qs, e in
+                                    db.collection("houses").document(houseq.documentID).collection("members").getDocuments { qs, e in
                                         qs?.documents.forEach({ qqq in
-                                            db.document("houses/\(houseq.documentID)/members/\(qqq.documentID)").delete()
+                                            db.collection("houses").document(houseq.documentID).collection("members").document(qqq.documentID).delete()
                                         })
                                     }
-                                    db.collection("houses/\(houseq.documentID)/payments").getDocuments { qs, e in
+                                    db.collection("houses").document(houseq.documentID).collection("payments").getDocuments { qs, e in
                                         qs?.documents.forEach({ qqq in
-                                            db.document("houses/\(houseq.documentID)/payments/\(qqq.documentID)").delete()
+                                            db.collection("houses").document(houseq.documentID).collection("payments").document(qqq.documentID).delete()
                                         })
-                                        db.document("houses/\(houseq.documentID)").delete()
+                                        db.collection("houses").document(houseq.documentID).delete()
                                     }
                                 } else {
                                     self.getHouse(h: h, m: m, inWR: .constant(false), noProf: .constant(false)){
                                         print("delete time \(houseq.documentID) \(m.wrappedValue.home) \(UserDefaults.standard.string(forKey: "houseId"))")
-                                        db.document("houses/\(houseq.documentID)/members/\(memberq.documentID)").delete()
+                                        db.collection("houses").document(houseq.documentID).collection("members").document(memberq.documentID).delete()
                                     }
                                     //delete member
                                     //delete payments
-                                    db.collection("houses/\(houseq.documentID)/payments").getDocuments { payq, err in
+                                    db.collection("houses").document(houseq.documentID).collection("payments").getDocuments { payq, err in
                                         guard let pays = payq?.documents else {
                                             return
                                         }
@@ -980,7 +979,7 @@ class Fetch: ObservableObject {
                                             let type = d["type"] as? String ?? ""
                                             return (to.contains(m.wrappedValue.name) || from.contains(m.wrappedValue.name) || reqfrom.contains(m.wrappedValue.name)) && type != "announcement"
                                         }).forEach { payeach in
-                                            db.document("houses/\(houseq.documentID)/payments/\(payeach.documentID)").delete()
+                                            db.collection("houses").document(houseq.documentID).collection("payments").document(payeach.documentID).delete()
                                         }
                                     }
                                     //send payment
@@ -1000,7 +999,7 @@ class Fetch: ObservableObject {
     }
     static func checkThere(m: Binding<Member>, h: Binding<House>, completion: @escaping (Bool) -> Void) -> EmptyView {
         let db = Firestore.firestore()
-        db.collection("houses/\(m.wrappedValue.home)/members").getDocuments { memberListSnapshot, err in
+        db.collection("houses").document(m.wrappedValue.home).collection("members").getDocuments { memberListSnapshot, err in
             guard let members = memberListSnapshot?.documents else {
                 completion(false)
                 return
@@ -1018,7 +1017,7 @@ class Fetch: ObservableObject {
     }
     static func removePhoto(m: Binding<Member>) {
         let db = Firestore.firestore()
-        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["image":""]){ _ in
+        db.collection("houses").document(m.wrappedValue.home).collection("members").document(m.wrappedValue.id).updateData(["image":""]){ _ in
             m.wrappedValue.image = ""
         }
     }
@@ -1026,10 +1025,10 @@ class Fetch: ObservableObject {
         let db = Firestore.firestore()
         let deadname = m.wrappedValue.name
         newName.wrappedValue = newName.wrappedValue.trimmingCharacters(in: .whitespacesAndNewlines)
-        db.document("houses/\(m.wrappedValue.home)/members/\(m.wrappedValue.id)").updateData(["name":newName.wrappedValue]){ _ in
+        db.collection("houses").document(m.wrappedValue.home).collection("members").document(m.wrappedValue.id).updateData(["name":newName.wrappedValue]){ _ in
             //change the name
             //replace all payment names
-            db.collection("houses/\(m.wrappedValue.home)/payments").getDocuments { allPaymentSnapshot, err in
+            db.collection("houses").document(m.wrappedValue.home).collection("payments").getDocuments { allPaymentSnapshot, err in
                 guard let allPayments = allPaymentSnapshot?.documents else {
                     return
                 }
@@ -1054,7 +1053,7 @@ class Fetch: ObservableObject {
                         from = newName.wrappedValue
                     }
                     
-                    db.document("houses/\(m.wrappedValue.home)/payments/\(paymentSnapshot.documentID)").updateData(["reqfrom": reqfrom, "to": to, "from": from, "mute":true, "snooze":String(Date().timeIntervalSince1970)])
+                    db.collection("houses").document(m.wrappedValue.home).collection("payments").document(paymentSnapshot.documentID).updateData(["reqfrom": reqfrom, "to": to, "from": from, "mute":true, "snooze":String(Date().timeIntervalSince1970)])
                     
                     m.wrappedValue.name = newName.wrappedValue
                     completion()
@@ -1071,7 +1070,7 @@ class Fetch: ObservableObject {
         let db = Firestore.firestore()
         if myName != "" && myId != "" && houseId != "" && houseId != "waitingRoom" {
             print("WIDGETSET")
-            db.collection("houses/\(houseId)/members").getDocuments { querySnapshot, err in
+            db.collection("houses").document(houseId).collection("members").getDocuments { querySnapshot, err in
                 guard let docs = querySnapshot?.documents else {
                     return
                 }
@@ -1111,7 +1110,7 @@ class Fetch: ObservableObject {
         let db = Firestore.firestore()
         if houseId != "" && houseId != "waitingRoom" {
             print("WIDGETSET2")
-            db.collection("houses/\(houseId)/payments").getDocuments { querySnapshot, err in
+            db.collection("houses").document(houseId).collection("payments").getDocuments { querySnapshot, err in
                 guard let docs = querySnapshot?.documents else {
                     return
                 }
@@ -1139,7 +1138,7 @@ class Fetch: ObservableObject {
     static func removeFromWr(id: String) {
         let db = Firestore.firestore()
         if id != "" {
-            db.document("waitingRoom/\(id)").delete()
+            db.collection("waitingRoom").document(id).delete()
         } else {
             print("removed empty id from wr")
         }
@@ -1150,7 +1149,7 @@ class Fetch: ObservableObject {
         let house = UserDefaults.standard.string(forKey: "houseId") ?? ""
         
         if house != "" {
-            db.document("houses/\(house)/members/\(id)").getDocument { ds, err in
+            db.collection("houses").document(house).collection("members").document(id).getDocument { ds, err in
                 guard let data = ds?.data() else {
                     return
                 }
@@ -1164,7 +1163,7 @@ class Fetch: ObservableObject {
     
     static func bindingMemberFromIdsWR(id: String, bm:Binding<Member>) {
         let db = Firestore.firestore()
-        db.document("waitingRoom/\(id)").getDocument { ds, error in
+        db.collection("waitingRoom").document(id).getDocument { ds, error in
             guard let data = ds?.data() else {
                 print(error)
                 return
@@ -1257,7 +1256,7 @@ class Fetch: ObservableObject {
             
             //            print(edits)
             //            print("houses/\(member.home)/payments/\(payment.id ?? "ERROR")")
-            db.document("houses/\(member.home)/payments/\(payment.id ?? "ERROR")").updateData(edits) { err in
+            db.collection("houses").document(member.home).collection("payments").document(payment.id).updateData(edits) { err in
                 print(err.debugDescription)
             }
             
@@ -1315,7 +1314,7 @@ class Fetch: ObservableObject {
             
             //            print(edits)
             //            print("houses/\(member.home)/payments/\(payment.id ?? "ERROR")")
-            db.document("houses/\(member.home)/payments/\(payment.id ?? "ERROR")").updateData(edits) { err in
+            db.collection("houses").document(member.home).collection("payments").document(payment.id).updateData(edits) { err in
                 print(err.debugDescription)
             }
             
@@ -1334,13 +1333,13 @@ class Fetch: ObservableObject {
         
         //            print(edits)
         //            print("houses/\(member.home)/payments/\(payment.id ?? "ERROR")")
-        db.document("houses/\(member.home)/payments/\(payment.id ?? "ERROR")").updateData(newData) { err in
+        db.collection("houses").document(member.home).collection("payments").document(payment.id).updateData(newData) { err in
             print(err.debugDescription)
         }
     }
     
     //    static func updatePayments3() {
-//    let db = Firestore.firestore()
+    //    let db = Firestore.firestore()
     //        db.collectionGroup("payments")
     //            .getDocuments { qs, err in
     //                guard let docs = qs?.documents else {return}
