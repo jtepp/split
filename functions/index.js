@@ -63,6 +63,8 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                             title = "Request Edited"
                             body = lastEdit
 
+                            if (event.after.get("memo")) body += " for " + event.after.get("memo")
+
                             // fcms should be everyone in reqfrom
                             if (reqFrom.includes(data.name)) {
                                 fcms.push(data.fcm)
@@ -84,6 +86,8 @@ exports.sendNotificationOnPayment = functions.firestore.document("houses/{housei
                         } else {
                             title = "Payment Edited"
                             body = lastEdit
+
+                            if (event.after.get("memo")) body += " for " + event.after.get("memo")
 
                             // fcms should be to
                             if (to == data.name) {
