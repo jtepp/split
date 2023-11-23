@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ReactionsView: View {
     @Binding var payment: Payment
-    var reactionOptionsPresentTense = ["like", "dislike", "question"]
-    var reactionOptions = ["liked", "disliked", "questioned"]
+    var reactionOptionsPresentTense = ["like", "dislike", "appreciate", "emphasize", "question"]
+    var reactionOptions = ["liked", "disliked", "appreciated", "emphasized", "questioned"]
     var mems: [Member]
     var body: some View {
         Menu {
@@ -117,6 +117,10 @@ func reactionToImageName(_ reaction: String) -> String {
     case "like": return "heart.fill"
     case "disliked": fallthrough
     case "dislike": return "hand.thumbsdown.fill"
+    case "appreciated": fallthrough
+    case "appreciate": return "hands.clap.fill"
+    case "emphasized": fallthrough
+    case "emphasize": return "exclamationmark.2"
     case "questioned": fallthrough
     case "question": return "questionmark"
     default: return ""
@@ -133,6 +137,8 @@ func presentToPastReaction(_ present: String) -> String {
     switch(present) {
     case "like": return "liked"
     case "dislike": return "disliked"
+    case "appreciate": return "appreciated"
+    case "emphasize": return "emphasized"
     case "question": return "questioned"
     default: return ""
     }
