@@ -1196,10 +1196,19 @@ class Fetch: ObservableObject {
                                 n == name
                             }
                         }
+                        
+                        var newTotal = payment.amount
+                        
+                        if payment.special == "includeself" {
+                            let memCount = Float(payment.reqfrom.count)
+                            let fullTotal = payment.amount * (memCount + 1) / memCount
+                            newTotal = fullTotal * Float(reqfrom.count) / Float(reqfrom.count + 1)
+                        }
+                        
                         var edits = data["edits"] as? [String: String] ?? [String: String]()
                         edits[String(Date().timeIntervalSince1970)] = "\(name) opted \(inOrOut ? "in" : "out")"
                         
-                        ref.updateData(["reqfrom": reqfrom, "mute":true, "edits":edits])
+                        ref.updateData(["reqfrom": reqfrom, "mute":true, "edits":edits, "amount": newTotal])
                     }
                 })
             }
