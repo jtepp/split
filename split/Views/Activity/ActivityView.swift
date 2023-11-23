@@ -154,6 +154,9 @@ struct ActivityView: View {
                     
                 }
             }
+            .refreshable(action: {
+                Fetch.getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
+            })
             .foregroundColor(.white)
             
             .onAppear {
