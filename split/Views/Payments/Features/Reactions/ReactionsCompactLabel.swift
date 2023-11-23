@@ -30,7 +30,7 @@ func reactionImageToColor(_ reaction: String) -> Color {
     case "heart.fill": return .red
     case "hand.thumbsdown.fill": return .blue
     case "exclamationmark.2": return .yellow
-    case "hands.clap.2": return .cyan
+    case "hands.clap.2": return .white
     case "questionmark": return .orange
     default: return .white
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Member: Identifiable, Equatable {
+struct Member: Identifiable, Equatable, Hashable {
     var id: String
     var home: String
     var name: String

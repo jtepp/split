@@ -11,6 +11,8 @@ struct MemberPicker: View {
     @Binding var show: Bool
     @Binding var house: House
     @Binding var choice: [Member]
+    @State var allMembers: [Member] = []
+    @State var chooseEveryone = false
     var multiple: Bool = false
     var showSelf: Bool = false
     var body: some View {
@@ -19,14 +21,17 @@ struct MemberPicker: View {
             VStack {
                 ScrollView {
                     HeaderText(text: "Choose \(multiple ? "members" : "a member")", clear: .constant(false))
+                    if multiple {
+                        EveryMemberButton(chooseEveryone: $chooseEveryone, choice: $choice, allMembers: $allMembers)
+                    }
                     ForEach (house.members.filter({ (m) -> Bool in
-                        if showSelf {
-                            return true
-                        } else {
-                            return m.id != UserDefaults.standard.string(forKey: "myId")
-                        }
+                        return showSelf || m.id != UserDefaults.standard.string(forKey: "myId")
                     })) { member in
                         imgButton(show: $show, member: .constant(member), choice: $choice, multiple: multiple)
+                            .onAppear(perform: {
+                                allMembers.append(member)
+                                chooseEveryone = allMembers.count == choice.count
+                            })
                     }
                     Spacer()
                     HStack {
@@ -35,34 +40,93 @@ struct MemberPicker: View {
                             .foregroundColor(choice.isEmpty ? .clear : .white)
                         Spacer()
                     }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(choice.isEmpty ? .clear : Color.blue)
-                        )
-                        .padding()
-                        .opacity(0)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(choice.isEmpty ? .clear : Color.blue)
+                    )
+                    .padding()
+                    .opacity(0)
                 }
                 if !choice.isEmpty {
                     Button(action: {show = false}, label: {
-                    HStack {
-                        Spacer()
-                        Text("Done")
-                            .foregroundColor(choice.isEmpty ? .clear : .white)
-                        Spacer()
-                    }
+                        HStack {
+                            Spacer()
+                            Text("Done")
+                                .foregroundColor(choice.isEmpty ? .clear : .white)
+                            Spacer()
+                        }
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(choice.isEmpty ? .clear : Color.blue)
                         )
                         .padding()
-                })
-                        .allowsHitTesting(!choice.isEmpty)
+                    })
+                    .allowsHitTesting(!choice.isEmpty)
                 }
             }
         }
     }
+}
+
+struct EveryMemberButton: View {
+    @Binding var chooseEveryone: Bool
+    @Binding var choice: [Member]
+    @Binding var allMembers: [Member]
+    @State var oldList: [Member] = []
+    var body: some View {
+        HStack {
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(lineWidth: 2)
+                .foregroundColor(.white)
+                .frame(width: 40, height: 40)
+                .shadow(radius: 4)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(chooseEveryone ? Color.blue : Color.clear)
+                        .frame(width: 40, height: 40)
+                        .overlay(
+                            Image(systemName: "checkmark")
+                                .foregroundColor(chooseEveryone ? Color.white : Color.clear)
+                        )
+                )
+            Spacer()
+            VStack(alignment: .trailing) {
+                Text("Everyone")
+                    .bold()
+            }
+        }
+        .foregroundColor(.white)
+        .padding(.horizontal)
+        .padding(.vertical, 10)
+        .background(
+            Rectangle()
+                .fill(.black)
+                .overlay(content: {
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color("AccentGray"), lineWidth: 2)
+                })
+        )
+        .padding(.horizontal)
+        .padding(.top, 10)
+        .onTapGesture {
+            withAnimation(Animation.easeOut.speed(3)) {
+                chooseEveryone.toggle()
+                if chooseEveryone {
+                    oldList = choice
+                    choice = Array(allMembers)
+                } else {
+                    choice = oldList
+                }
+                
+            }
+        }
+        .onChange(of: choice) { _ in
+            chooseEveryone = allMembers.count == choice.count
+        }
+    
+}
 }
 
 struct BulkMemberPicker: View {
@@ -88,12 +152,12 @@ struct BulkMemberPicker: View {
                             .foregroundColor(amountObj.bulkPeople.isEmpty ? .clear : .white)
                         Spacer()
                     }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(amountObj.bulkPeople.isEmpty ? .clear : Color.blue)
-                        )
-                        .padding()
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(amountObj.bulkPeople.isEmpty ? .clear : Color.blue)
+                    )
+                    .padding()
                 })
                 .allowsHitTesting(!amountObj.bulkPeople.isEmpty)
             }
