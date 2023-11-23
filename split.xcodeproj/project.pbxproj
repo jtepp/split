@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -139,6 +139,8 @@
 		0CC2A2D42702925B00646EDF /* Etan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC2A2D12702925B00646EDF /* Etan@2x.png */; };
 		0CC3276A2784CE680059D02B /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC327682784CCEA0059D02B /* UIDevice+modelName.swift */; };
 		0CC3276B2784CE7F0059D02B /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC327682784CCEA0059D02B /* UIDevice+modelName.swift */; };
+		0CC914292B0F0FD80019FEAE /* ActivityContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC914282B0F0FD80019FEAE /* ActivityContentView.swift */; };
+		0CC9142B2B0F138D0019FEAE /* ActivityRequestCellContextMenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC9142A2B0F138D0019FEAE /* ActivityRequestCellContextMenuItems.swift */; };
 		0CCC9A132694E13700940E93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC9A122694E13700940E93 /* GoogleService-Info.plist */; };
 		0CCC9A142694E13700940E93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC9A122694E13700940E93 /* GoogleService-Info.plist */; };
 		0CCC9A162694E15500940E93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC9A152694E15500940E93 /* GoogleService-Info.plist */; };
@@ -358,6 +360,8 @@
 		0CC2A2D02702925B00646EDF /* Etan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Etan.png; sourceTree = "<group>"; };
 		0CC2A2D12702925B00646EDF /* Etan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Etan@2x.png"; sourceTree = "<group>"; };
 		0CC327682784CCEA0059D02B /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
+		0CC914282B0F0FD80019FEAE /* ActivityContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityContentView.swift; sourceTree = "<group>"; };
+		0CC9142A2B0F138D0019FEAE /* ActivityRequestCellContextMenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRequestCellContextMenuItems.swift; sourceTree = "<group>"; };
 		0CCC9A122694E13700940E93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CCC9A152694E15500940E93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "Widgets/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		0CD1173D2687A4E40093426F /* AlternateIconRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateIconRow.swift; sourceTree = "<group>"; };
@@ -583,6 +587,8 @@
 			isa = PBXGroup;
 			children = (
 				0CBF09F3265D8F140016CA92 /* ActivityView.swift */,
+				0CC914282B0F0FD80019FEAE /* ActivityContentView.swift */,
+				0CC9142A2B0F138D0019FEAE /* ActivityRequestCellContextMenuItems.swift */,
 				0C64FECF265ECB87009B0C3C /* TimeBar.swift */,
 				0C5C0E2E269CB15500BD092F /* Filter */,
 				0C625978265EAF07002E58A3 /* ActivityPaymentCell.swift */,
@@ -1108,6 +1114,7 @@
 				0C6A745A269392D900275A9B /* ActivityPaymentCell.swift in Sources */,
 				0CAB4EF5271280A300B2E049 /* AmountField.swift in Sources */,
 				0CBF0A00265D91640016CA92 /* TabsView.swift in Sources */,
+				0CC914292B0F0FD80019FEAE /* ActivityContentView.swift in Sources */,
 				0C0CA781265F01F10062FDDD /* RequestPaymentView.swift in Sources */,
 				0CD16875269B829800CFD7C2 /* CustomRoundedRect.swift in Sources */,
 				0CD117C22687DBD40093426F /* ImageCroppingView.swift in Sources */,
@@ -1125,6 +1132,7 @@
 				0C7C87F726851F6A0040BFA7 /* AlternateIconButton.swift in Sources */,
 				0CBF0A03265D91B00016CA92 /* TabBar.swift in Sources */,
 				0CB7844F276F0E0D00EF6135 /* ActivityEditView.swift in Sources */,
+				0CC9142B2B0F138D0019FEAE /* ActivityRequestCellContextMenuItems.swift in Sources */,
 				0C951305265DAE6D005398CF /* Member.swift in Sources */,
 				0C64FECD265EC57F009B0C3C /* GeneralPaymentCell.swift in Sources */,
 				0CD16879269BA8BE00CFD7C2 /* ActivityMessageCell.swift in Sources */,
@@ -1441,7 +1449,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.2.0;
+				minimumVersion = 10.0.0;
 			};
 		};
 		0CD1687D269BD56600CFD7C2 /* XCRemoteSwiftPackageReference "MbSwiftUIFirstResponder" */ = {

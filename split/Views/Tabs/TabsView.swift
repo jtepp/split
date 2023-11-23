@@ -145,7 +145,7 @@ struct TabsView: View {
                     )
             })
             .onChange(of: tabSelection) { (_) in
-                Fetch.getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
+//                Fetch.getHouse(h: $house, m: $member, inWR: $inWR, noProf: $noProf)
 //                print("PEARL\(member.dict())")
                 newMemberName = member.name
                 if tabSelection == 3 {

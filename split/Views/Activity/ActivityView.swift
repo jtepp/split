@@ -42,7 +42,7 @@ struct ActivityView: View {
                     .overlay(
                         Button(action: {
                             showSplash = true
-//                                                Fetch.updatePayments3()
+                            //                                                Fetch.updatePayments3()
                         }, label:{
                             Image(systemName: "questionmark")
                                 .font(Font.body.bold())
@@ -55,9 +55,9 @@ struct ActivityView: View {
                                         )
                                 )
                         })
-                            .padding()
-                            .offset(x: TrayButtonOpen ? 100 : 0)
-                            .animation(.easeOut), alignment: .trailing
+                        .padding()
+                        .offset(x: TrayButtonOpen ? 100 : 0)
+                        .animation(.easeOut), alignment: .trailing
                     )
                     .padding(.top)
                     .id("top")
@@ -113,12 +113,12 @@ struct ActivityView: View {
                     } else if house.payments.filter({p in
                         return incPay ? true : p.type != .payment
                     })
-                                .filter({p in
-                                    return incReq ? true : p.type != .request
-                                })
-                                .filter({p in
-                                    return incAn ? true : p.type != .announcement
-                                })
+                        .filter({p in
+                            return incReq ? true : p.type != .request
+                        })
+                            .filter({p in
+                                return incAn ? true : p.type != .announcement
+                            })
                                 .filter({p in
                                     return incGM ? true : p.type != .groupmessage
                                 }).filter({ p in
@@ -143,157 +143,7 @@ struct ActivityView: View {
                             
                         }
                     }
-                    ForEach(house.payments.sorted(by: { a, b in
-                        return a.time > b.time
-                    }).filter({p in
-                        return incPay ? true : p.type != .payment
-                    })
-                                .filter({p in
-                        return incReq ? true : p.type != .request
-                    })
-                                .filter({p in
-                        return incAn ? true : p.type != .announcement
-                    })
-                                .filter({p in
-                        return incGM ? true : p.type != .groupmessage
-                    }).filter({ p in
-                        return searchText == "" ? true : p.toString().contains(searchText)
-                    })
-                    ) { payment in
-                        if house.members.contains(where: { (m) -> Bool in
-                            return m.id == UserDefaults.standard.string(forKey: "myId")
-                        }){
-                            if payment.type == .announcement {
-                                ActivityAnnouncementCell(payment: .constant(payment))
-                                    .contextMenu(menuItems: {
-                                        if m.admin {
-                                            Button(action: {
-                                                Fetch.deletePayment(p: payment, h: house)
-                                            }, label: {
-                                                Text("Delete")
-                                                //                                            .foregroundColor(.red)
-                                                Image(systemName: "trash")
-                                                //                                            .foregroundColor(.red)
-                                                
-                                            }
-                                            )
-                                        }
-                                    })
-                            } else if payment.type == .groupmessage {
-                                ActivityMessageCell(allPayments: .constant(house.payments.sorted(by: { a, b in
-                                    return a.time > b.time
-                                })), payment: .constant(payment), member: $m, GMmsg: $GMmsg, showMessagePopover: $showMessagePopover)
-                                
-                            } else if payment.type == .request {
-                                
-                                ActivityRequestCell(payment: .constant(payment), hId: house.id, mems: house.members)
-                                    .contextMenu(menuItems: {
-                                        if payment.to == m.name || m.admin {
-                                            Button {
-                                                paymentEditing = payment
-                                                showEdit = true
-                                            } label: {
-                                                Text("Edit")
-                                                Image(systemName: "square.and.pencil")
-                                            }
-                                        }
-                                        
-                                        if payment.reqfrom.contains(house.members.first(where: { (mm) -> Bool in
-                                            return mm.id == m.id
-                                        })?.name ?? "") {
-                                            Button(action: {
-                                                Fetch.sendPayment(p: Payment(to: payment.to, from: house.members.first(where: { (m) -> Bool in
-                                                    return m.id == UserDefaults.standard.string(forKey: "myId")
-                                                })!.name, amount: payment.amount / Float(payment.reqfrom.count), time: Int(NSDate().timeIntervalSince1970), type: .payment, by: UserDefaults.standard.string(forKey: "myId")!), h: house)
-                                                print("quickpay")
-                                            }, label: {
-                                                Text("Pay")
-                                                    .foregroundColor(.red)
-                                                Image(systemName: "arrow.right.circle")
-                                                    .foregroundColor(.red)
-                                                
-                                            }
-                                            )
-                                        }
-                                        
-                                        if payment.to != m.name /*payment.by != m.id*/ {
-                                            if !payment.reqfrom.contains(m.name) {
-                                                //opt in
-                                                Button {
-                                                    Fetch.optRequest(true, payment: payment, name: m.name)
-                                                } label: {
-                                                    Text("Opt in")
-                                                    Image(systemName: "person.crop.circle.badge.plus")
-                                                }
-                                                
-                                                
-                                            } else if payment.reqfrom.count > 1 {
-                                                //opt out
-                                                Button {
-                                                    Fetch.optRequest(false, payment: payment, name: m.name)
-                                                } label: {
-                                                    Text("Opt out")
-                                                    Image(systemName: "person.crop.circle.badge.xmark")
-                                                }
-                                            }
-                                            
-                                        }
-                                        
-                                        if m.admin || payment.by == m.id {
-                                            Button(action: {
-                                                Fetch.deletePayment(p: payment, h: house)
-                                            }, label: {
-                                                Text("Delete")
-                                                    .foregroundColor(.red)
-                                                Image(systemName: "trash")
-                                                    .foregroundColor(.red)
-                                                
-                                            }
-                                            )
-                                        }
-                                        if payment.special == "includeself" {
-                                            Text("Total: " + paymentPlusSelfTotal(payment))
-                                        }
-                                    })
-                            } else if payment.type == .payment {
-                                
-                                
-                                
-                                ActivityPaymentCell(payment: .constant(payment), mems: house.members)
-                                    .contextMenu(menuItems: {
-                                        if payment.from == m.name || m.admin {
-                                            Button {
-                                                paymentEditing = payment
-                                                showEdit = true
-                                            } label: {
-                                                Text("Edit")
-                                                Image(systemName: "square.and.pencil")
-                                            }
-                                        }
-                                        if payment.by == m.id || m.admin {
-                                            Button(action: {
-                                                Fetch.deletePayment(p: payment, h: house)
-                                            }, label: {
-                                                Text("Delete")
-                                                Image(systemName: "trash")
-                                            }
-                                            )
-                                        }
-                                    })
-                                
-                            }
-                        } else {
-                            Fetch.checkThere(m: $m, h:$house){ has in
-                                if has {
-                                    getHouse(h: $house, m: $m, inWR: $inWR, noProf: $noProf)
-                                } else {
-                                    if UserDefaults.standard.string(forKey: "houseId") != "waitingRoom" {
-                                        wrStuff(inWR: $inWR, h: $house, m: $m)
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    ActivityContentView(house: $house, inWR: $inWR, noProf: $noProf, incPay: $incPay, incReq: $incReq, incAn: $incAn, incGM: $incGM, searchText: $searchText, m: $m, GMmsg: $GMmsg, showMessagePopover: $showMessagePopover, paymentEditing: $paymentEditing, showEdit: $showEdit)
                     
                     .padding()
                     .padding(.bottom, -20)
@@ -302,7 +152,8 @@ struct ActivityView: View {
                         .frame(minHeight:120)
                         .padding(.top, 20)
                     
-                }}
+                }
+            }
             .foregroundColor(.white)
             
             .onAppear {
@@ -344,8 +195,3 @@ func wrStuff(inWR: Binding<Bool>, h: Binding<House>, m: Binding<Member>) {//-> E
     //    return EmptyView()
 }
 
-func getHouse(h: Binding<House>, m: Binding<Member>, inWR: Binding<Bool>, noProf: Binding<Bool>) {//-> EmptyView {
-    Fetch.getHouse(h: h, m: m, inWR: inWR, noProf: noProf)
-    print("gotgot\(h.wrappedValue.id)\(m.wrappedValue.home)")
-    //    return EmptyView()
-}
