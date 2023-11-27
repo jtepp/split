@@ -68,9 +68,9 @@ struct SplashView: View {
                     showCore.toggle()
                 }
                 
-                SplashDetailsView(title: "Optimized Refresh", text: "The activity feed now refreshes less often, but you can manually pull to refresh whenever something might need updating", image: "arrow.clockwise", color: .blue)
+                SplashDetailsView(title: "Optimized Refresh", text: "The activity feed now refreshes less often, but you can manually pull to refresh whenever something might need updating", image: "arrow.clockwise", color: .blue, lineLimit: 3)
                 SplashDetailsView(title: "More Reactions", text: "Now you can appreciate and emphasize posts too!", image: "hands.clap.fill", color: .yellow)
-                SplashDetailsView(title: "More features", text: "More quality of life features added, like a request from everyone toggle, better math for opting in/out of a self-included post, fixed compactor math, etc.", image: "sparkles", color: .pink)
+                SplashDetailsView(title: "More features", text: "More quality of life features added, like a request from everyone toggle, better math for opting in/out of a self-included post, fixed compactor math, etc.", image: "sparkles", color: .pink, lineLimit: 3)
 
                 
             }
@@ -128,6 +128,7 @@ struct SplashDetailsView: View {
     let text: String
     let image: String
     var color: Color = .white
+    var lineLimit: Int = 2
     var body: some View {
         HStack {
             if image == "funnel" {
@@ -161,7 +162,7 @@ struct SplashDetailsView: View {
             .frame(maxWidth: 250)
             
         }
-        .lineLimit(2)
+        .lineLimit(lineLimit)
         .minimumScaleFactor(0.4)
         .padding(.bottom, 10)
     }
