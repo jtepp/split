@@ -68,9 +68,9 @@ struct SplashView: View {
                     showCore.toggle()
                 }
                 
-                SplashDetailsView(title: "Compactor", text: "Use the new compactor to compress group activity into the minimum number of requests and boost app performance", image: "arrow.3.trianglepath", color: .blue)
-                SplashDetailsView(title: "Reactions", text: "React to payments and requests by tapping on the new reactions button", image: "heart.circle", color: .red)
-                SplashDetailsView(title: "Performance boost", text: "Use spllit at faster speeds than ever before", image: "gauge.badge.plus", color: .green)
+                SplashDetailsView(title: "Optimized Refresh", text: "The activity feed now refreshes less often, but you can manually pull to refresh whenever something might need updating", image: "arrow.clockwise", color: .blue)
+                SplashDetailsView(title: "More Reactions", text: "Now you can appreciate and emphasize posts too!", image: "hands.clap.fill", color: .yellow)
+                SplashDetailsView(title: "More features", text: "More quality of life features added, like a request from everyone toggle, better math for opting in/out of a self-included post, fixed compactor math, etc.", image: "sparkles", color: .pink)
 
                 
             }
